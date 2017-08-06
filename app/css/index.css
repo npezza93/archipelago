@@ -1,6 +1,6 @@
 body {
   margin: 0px;
-  background: black;
+  background-color: var(--background-color);
 }
 
 ::-webkit-scrollbar {
@@ -16,4 +16,30 @@ body {
   line-height: 18px !important;
   margin-left: 15px;
   margin-top: 25px;
+}
+
+
+
+
+:root {
+  --cursor-color: #fff;
+  --background-color: #000;
+}
+.terminal:not(.focus) .terminal-cursor {
+    outline: 1px solid var(--cursor-color);
+}
+
+.terminal.xterm-cursor-style-block.focus:not(.xterm-cursor-blink-on) .terminal-cursor {
+    background-color: var(--cursor-color);
+}
+
+.terminal.focus.xterm-cursor-style-bar:not(.xterm-cursor-blink-on) .terminal-cursor::before,
+.terminal.focus.xterm-cursor-style-underline:not(.xterm-cursor-blink-on) .terminal-cursor::before {
+    background-color: var(--cursor-color);
+}
+.terminal {
+  background-color: transparent;
+}
+.terminal .xterm-viewport {
+  background-color: transparent;
 }
