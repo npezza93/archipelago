@@ -1,0 +1,20 @@
+{
+  "name": "quark",
+  "version": "0.1.0",
+  "main": "main.js",
+  "dependencies": {
+    "default-shell": "^1.0.1",
+    "electron-prebuilt": "^1.4.13",
+    "express": "^4.15.3",
+    "express-ws": "^3.0.0",
+    "node-pty": "^0.6.10",
+    "xterm": "^2.9.0"
+  },
+  "description": "A terminal built on electron",
+  "repository": "https://github.com/npezza93/quark",
+  "author": "npezza93 <npezza93@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "electron-rebuild": "^1.6.0"
+  }
+}
