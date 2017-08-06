@@ -17,7 +17,14 @@ body {
   margin-left: 15px;
   margin-top: 25px;
 }
-
+#titlebar {
+  height: 25px;
+  width: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  -webkit-app-region: drag;
+}
 
 
 
