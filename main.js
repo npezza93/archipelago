@@ -17,7 +17,8 @@ function createWindow () {
   win = new BrowserWindow({
     width: 1000,
     height: 600,
-    titleBarStyle: "hidden"
+    titleBarStyle: "hidden",
+    vibrancy: 'ultra-dark'
   })
 
   win.loadURL('http://localhost:3000/');
