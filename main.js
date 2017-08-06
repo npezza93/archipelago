@@ -1,7 +1,4 @@
-const electron = require('electron');
-const app = electron.app;
-const BrowserWindow = electron.BrowserWindow;
-const webContents =electron.webContents;
+const {app, BrowserWindow, webContents} = require('electron');
 const path = require('path');
 const url = require('url');
 const express = require('express');
