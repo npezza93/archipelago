@@ -23,10 +23,6 @@ function createWindow () {
     titleBarStyle: "hidden"
   })
 
-  // win.loadURL('file://' + __dirname + '/app/index.html');
-
-  // Open the DevTools.
-  win.webContents.openDevTools()
   win.loadURL('http://localhost:3000/');
   win.focus();
 
