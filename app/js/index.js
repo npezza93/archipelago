@@ -1,32 +1,32 @@
-let socket;
-let terminalContainer = document.getElementById('terminal');
+const {ipcRenderer} = require("electron")
+const Terminal      = require("xterm")
 
 let term = new Terminal({
   cursorBlink: true,
   // block | underline | bar
   cursorStyle: "block",
   rows: Math.floor((window.innerHeight - 25) / 18)
-});
+})
 
-protocol = (location.protocol === 'https:') ? 'wss://' : 'ws://';
-socketURL = protocol + location.hostname + ((location.port) ? (':' + location.port) : '') + '/terminals/';
+term.open(document.getElementById("terminal"), true)
+term.element.classList["add"]("fullscreen")
+ipcRenderer.send("create-terminal")
 
-term.open(terminalContainer);
-term.toggleFullscreen();
-
-fetch('/terminals', {method: 'POST'}).then(function (res) {
-  res.text().then(function (pid) {
-    window.pid = pid;
-    socketURL += pid;
-    socket = new WebSocket(socketURL);
-    socket.onopen = runRealTerminal;
-  });
-});
-
-function runRealTerminal() {
-  term.attach(socket);
+ipcRenderer.on("created-terminal", (event, pid) => {
+  window.pid = pid;
   term._initialized = true;
-}
+})
 
-document.documentElement.style.setProperty(`--cursor-color`, 'rgba(171, 178, 191, 0.8)');
-document.documentElement.style.setProperty(`--background-color`, 'rgba(40, 44, 52, 0.1)');
+ipcRenderer.on("updated-terminal", (event, arg) => {
+  term.write(arg)
+})
+
+term.on("data", function(data) {
+  ipcRenderer.send("update-terminal", {
+    pid: window.pid,
+    data: data
+  });
+})
+
+document.documentElement.style.setProperty(`--cursor-color`, 'rgba(171, 178, 191, 0.8)')
+document.documentElement.style.setProperty(`--background-color`, 'rgba(40, 44, 52, 0.1)')
