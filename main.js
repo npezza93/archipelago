@@ -1,17 +1,10 @@
-const {app, BrowserWindow, webContents, ipcMain} = require('electron');
+const {app, BrowserWindow} = require('electron');
 const path = require('path');
 const url  = require('url');
-const pty = require('node-pty');
-const defaultShell = require('default-shell');
 
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is garbage collected.
 let win
-let terminals = {};
-let logs = {};
 
 function createWindow () {
-  // Create the browser window.
   win = new BrowserWindow({
     width: 1000,
     height: 600,
@@ -28,42 +21,12 @@ function createWindow () {
   win.focus();
   win.webContents.openDevTools();
 
-  ipcMain.on('create-terminal', (event, arg) => {
-    // generate a pty terminal
-    var term = pty.spawn(defaultShell, [], {
-      name: 'xterm-256color',
-      cwd: process.env.PWD,
-      env: process.env
-    });
-
-    // save the terminal to the terminals hash
-    terminals[term.pid] = term;
-    // initialize the terminals log
-    logs[term.pid] = '';
-    // once we get data back update the log and send a response
-    term.on('data', function(data) {
-      logs[term.pid] += data;
-      event.sender.send('updated-terminal', data);
-    });
-
-    event.sender.send('created-terminal', term.pid.toString());
-  });
-
-  ipcMain.on('update-terminal', (event, params) => {
-    terminals[parseInt(params.pid)].write(params.data);
-  });
-
   // Emitted when the window is closed.
   win.on('closed', () => {
     // Dereference the window object, usually you would store windows
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     win = null
-
-    // term.kill();
-    // Clean things up
-    // delete terminals[term.pid];
-    // delete logs[term.pid];
   })
 }
 
@@ -84,13 +47,3 @@ app.on('activate', () => {
     createWindow()
   }
 })
-
-// server.post('/terminals/:pid/size', function (req, res) {
-//   var pid = parseInt(req.params.pid),
-//       cols = parseInt(req.query.cols),
-//       rows = parseInt(req.query.rows),
-//       term = terminals[pid];
-//
-//   term.resize(cols, rows);
-//   res.end();
-// });
