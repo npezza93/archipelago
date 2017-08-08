@@ -59,3 +59,23 @@ body {
   height: auto;
   z-index: 255;
 }
+
+
+.terminal .xterm-color-12, .terminal .xterm-color-14 {
+  color: #5fcbd8;
+}
+.terminal .xterm-color-5, .terminal .xterm-color-13 {
+  color: #e39ef7;
+}
+.terminal .xterm-color-2, .terminal .xterm-color-10 {
+  color: #A4EFA1;
+}
+.terminal .xterm-color-8 {
+  color: #808080;
+}
+.terminal .xterm-color-9, .terminal .xterm-color-1 {
+  color: #e06c75;
+}
+.terminal .xterm-color-3 {
+  color: #EDDC96;
+}
