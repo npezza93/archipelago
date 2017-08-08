@@ -14,8 +14,7 @@ body {
   font-family: Menlo, "DejaVu Sans Mono", "Lucida Console", monospace !important;
   font-size: 15px !important;
   line-height: 18px !important;
-  margin-left: 15px;
-  margin-top: 25px;
+  margin: 25px 15px 0px 15px;
 }
 #titlebar {
   height: 25px;
