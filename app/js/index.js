@@ -11,7 +11,7 @@ window.addEventListener('resize', function() {
   var cols = Math.floor(terminalElement.offsetWidth / 9);
   var pids = Object.keys(terminals);
 
-  for(pid of pids) {
+  for(var pid of pids) {
     terminals[pid].resize(cols, rows);
   }
 });
