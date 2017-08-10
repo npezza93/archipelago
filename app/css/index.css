@@ -10,9 +10,14 @@ body {
   background: #666;
 }
 
+.tab {
+  font-family: var(--tab-font-family);
+  font-size: var(--tab-font-size);
+  line-height: 18px !important;
+}
 .terminal {
-  font-family: Menlo, "DejaVu Sans Mono", "Lucida Console", monospace !important;
-  font-size: 15px !important;
+  font-family: var(--terminal-font-family);
+  font-size: var(--terminal-font-size);
   line-height: 18px !important;
   margin: 25px 15px 0px 15px;
 }
@@ -32,6 +37,10 @@ body {
 :root {
   --cursor-color: #fff;
   --background-color: #000;
+  --terminal-font-family: "Menlo", "DejaVu Sans Mono", "Lucida Console", monospace;
+  --tab-font-family: "Menlo", "DejaVu Sans Mono", "Lucida Console", monospace;
+  --terminal-font-family: 15px;
+  --tab-font-size: 12px;
 }
 
 .terminal:not(.focus) .terminal-cursor {
