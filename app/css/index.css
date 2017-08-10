@@ -23,11 +23,23 @@ body {
 }
 #titlebar {
   height: 25px;
-  width: 100%;
+  width: calc(100% - 70px);
   position: absolute;
   top: 0px;
   left: 0px;
   -webkit-app-region: drag;
+  display: flex;
+  flex-direction: row;
+  margin-left: 70px;
+}
+#titlebar .tab {
+  height: 100%;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
 }
 
 .hidden {
