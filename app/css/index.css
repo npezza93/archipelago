@@ -87,7 +87,7 @@ body {
   margin-right: -15px;
 }
 
-.terminal .xterm-color-12, .terminal .xterm-color-14 {
+.terminal .xterm-color-12, .terminal .xterm-color-14, .terminal .xterm-color-4 {
   color: #5fcbd8;
 }
 .terminal .xterm-color-5, .terminal .xterm-color-13 {
