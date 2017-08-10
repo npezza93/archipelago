@@ -25,7 +25,9 @@ body {
   -webkit-app-region: drag;
 }
 
-
+.hidden {
+  display: none;
+}
 
 :root {
   --cursor-color: #fff;
