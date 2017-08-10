@@ -6,7 +6,7 @@ const Terminal      = require(__dirname + '/js/terminal');
 let terminals = {};
 
 window.addEventListener('resize', function() {
-  var terminalElement = document.getElementsByClassName('terminal')[0];
+  var terminalElement = document.querySelector('.terminal');
   var rows = Math.floor(terminalElement.offsetHeight / 18);
   var cols = Math.floor(terminalElement.offsetWidth / 9);
   var pids = Object.keys(terminals);
