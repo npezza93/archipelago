@@ -76,6 +76,14 @@ body {
 .terminal .xterm-color-9, .terminal .xterm-color-1 {
   color: #e06c75;
 }
-.terminal .xterm-color-3 {
+.terminal .xterm-color-3, .terminal .xterm-color-11 {
   color: #EDDC96;
+}
+
+
+.terminal .xterm-bg-color-2 {
+  background-color: #A4EFA1;
+}
+.terminal .xterm-bg-color-3 {
+  background-color: #EDDC96;
 }
