@@ -19,7 +19,7 @@ body {
   font-family: var(--terminal-font-family);
   font-size: var(--terminal-font-size);
   line-height: 18px !important;
-  margin: 25px 15px 0px 15px;
+  margin: 25px 15px 10px 15px;
 }
 #titlebar {
   height: 25px;
