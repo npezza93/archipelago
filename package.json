@@ -4,8 +4,9 @@
   "main": "main.js",
   "dependencies": {
     "default-shell": "^1.0.1",
+    "keymaster": "^1.6.2",
     "node-pty": "^0.6.10",
-    "xterm": "^2.9.1"
+    "xterm": "^2.9.2"
   },
   "description": "A terminal built on electron",
   "repository": "https://github.com/npezza93/quark",
