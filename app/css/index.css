@@ -71,6 +71,9 @@ body {
   z-index: 255;
 }
 
+.xterm-viewport {
+  margin-right: -15px;
+}
 
 .terminal .xterm-color-12, .terminal .xterm-color-14 {
   color: #5fcbd8;
