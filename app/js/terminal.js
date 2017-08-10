@@ -3,7 +3,7 @@
 const Pty          = require('node-pty')
 const defaultShell = require('default-shell')
 const XTerm        = require('xterm')
-const Tab          = require(__dirname + "/tab");
+const Tab          = require(__dirname + '/tab');
 
 class Terminal {
   constructor() {
