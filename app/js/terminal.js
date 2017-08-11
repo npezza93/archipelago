@@ -19,6 +19,7 @@ class Terminal {
     this.xterm.element.classList['add']('fullscreen');
     this.tab = new Tab(this);
     this.tab.create();
+    this.tab.activate();
     this.fit();
   }
 

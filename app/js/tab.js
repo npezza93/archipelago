@@ -13,6 +13,15 @@ class Tab {
     document.querySelector('#titlebar').appendChild(this.tabElement);
   }
 
+  activate() {
+    for(var terminal of document.querySelectorAll('.qterminal')) {
+      terminal.classList.add('hidden');
+    }
+
+    document.querySelector(".qterminal[data-pid='" + this.terminal.pty.pid + "']").classList.remove('hidden');
+    this.terminal.xterm.focus();
+  }
+
   _setTabElement() {
     this.tabElement = document.createElement('div');
     this.tabElement.classList += 'tab';
