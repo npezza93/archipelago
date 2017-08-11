@@ -19,9 +19,13 @@ class Terminal {
     this.xterm.element.classList['add']('fullscreen');
     this.tab = new Tab(this);
     this.tab.create();
+    this.fit();
   }
 
-  resize(cols, rows) {
+  fit() {
+    var rows = Math.floor(this.xterm.element.offsetHeight / 18);
+    var cols = Math.floor(this.xterm.element.offsetWidth / 9);
+
     this.xterm.resize(cols, rows);
     this.pty.resize(cols, rows);
   }
@@ -30,9 +34,7 @@ class Terminal {
     this.pty = Pty.spawn(defaultShell, [], {
       name: 'xterm-256color',
       cwd: process.env.PWD,
-      env: process.env,
-      rows: this._rows(),
-      cols: this._cols()
+      env: process.env
     });
   }
 
@@ -41,19 +43,9 @@ class Terminal {
       cursorBlink: true,
       // block | underline | bar
       cursorStyle: 'block',
-      rows: this._rows(),
-      cols: this._cols(),
       visualBell: true,
       popOnBell: true
     });
-  }
-
-  _rows() {
-    Math.floor((window.innerHeight - 35) / 18)
-  }
-
-  _cols() {
-    Math.floor((window.innerWidth - 30) / 9)
   }
 
   _setDataListeners() {
