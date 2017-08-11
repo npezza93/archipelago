@@ -17,14 +17,18 @@ class Tab {
     for(var terminal of document.querySelectorAll('.qterminal')) {
       terminal.classList.add('hidden');
     }
+    for(var tab of document.querySelectorAll('.tab')) {
+      tab.classList.remove('active');
+    }
 
     document.querySelector(".qterminal[data-pid='" + this.terminal.pty.pid + "']").classList.remove('hidden');
     this.terminal.xterm.focus();
+    this.tabElement.classList.add('active');
   }
 
   _setTabElement() {
     this.tabElement = document.createElement('div');
-    this.tabElement.classList += 'tab';
+    this.tabElement.classList.add('tab');
     this.tabElement.dataset['pid'] = this.terminal.pty.pid;
     this.tabElement.innerText = this.terminal.xterm.title;
   }
@@ -34,8 +38,12 @@ class Tab {
       for(var terminal of document.querySelectorAll('.qterminal')) {
         terminal.classList.add('hidden');
       }
+      for(var tab of document.querySelectorAll('.tab')) {
+        tab.classList.remove('active');
+      }
 
       document.querySelector(".qterminal[data-pid='" + event.target.dataset.pid + "']").classList.remove('hidden');
+      event.target.classList.add("active");
     });
   }
 

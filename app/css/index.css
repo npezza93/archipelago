@@ -34,12 +34,16 @@ body {
 }
 #titlebar .tab {
   height: 100%;
-  color: #fff;
+  color: #b7b7b7;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   flex: 1;
+  transition: all 0.3s ease;
+}
+#titlebar .tab.active {
+  color: #fff;
 }
 
 .hidden {
