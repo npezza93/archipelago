@@ -3,23 +3,21 @@
 const Pty          = require('node-pty')
 const defaultShell = require('default-shell')
 const XTerm        = require('xterm')
-const Tab          = require(__dirname + '/tab');
+const QuarkTab          = require(__dirname + '/quark_tab');
 
-class Terminal {
-  constructor() {
+class QuarkTerminal extends HTMLElement {
+  connectedCallback() {
     this._setPty();
     this._setXTerm();
-    this._setTerminalElement();
+    this.open();
   }
 
   open() {
-    document.querySelector('body').appendChild(this.terminalElement);
-    this.xterm.open(this.terminalElement, true);
-    this._setDataListeners();
-    this.xterm.element.classList['add']('fullscreen');
-    this.tab = new Tab(this);
-    this.tab.create();
-    this.tab.activate();
+    this.xterm.open(this, true);
+    this._bindDataListeners();
+    this.xterm.element.classList.add('fullscreen');
+    this.tab = new QuarkTab(this);
+    document.querySelector('#titlebar').appendChild(this.tab);
     this.fit();
   }
 
@@ -29,6 +27,11 @@ class Terminal {
 
     this.xterm.resize(cols, rows);
     this.pty.resize(cols, rows);
+  }
+
+  hide() {
+    this.classList.add('hidden');
+    this.tab.classList.remove('active');
   }
 
   _setPty() {
@@ -42,14 +45,13 @@ class Terminal {
   _setXTerm() {
     this.xterm = new XTerm({
       cursorBlink: true,
-      // block | underline | bar
-      cursorStyle: 'block',
+      cursorStyle: 'block', // block | underline | bar
       visualBell: true,
       popOnBell: true
     });
   }
 
-  _setDataListeners() {
+  _bindDataListeners() {
     this.xterm.on('data', (data) => {
       this.pty.write(data);
     });
@@ -57,12 +59,7 @@ class Terminal {
       this.xterm.write(data)
     });
   }
-
-  _setTerminalElement() {
-    this.terminalElement = document.createElement('div');
-    this.terminalElement.classList += 'qterminal';
-    this.terminalElement.dataset['pid'] = this.pty.pid;
-  }
 };
 
-module.exports = Terminal;
+module.exports = QuarkTerminal;
+window.customElements.define('quark-terminal', QuarkTerminal);

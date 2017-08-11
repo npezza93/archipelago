@@ -10,7 +10,7 @@ body {
   background: #666;
 }
 
-.tab {
+quark-tab {
   font-family: var(--tab-font-family);
   font-size: var(--tab-font-size);
   line-height: 18px !important;
@@ -32,7 +32,7 @@ body {
   flex-direction: row;
   margin-left: 70px;
 }
-#titlebar .tab {
+#titlebar quark-tab {
   height: 100%;
   color: #b7b7b7;
   display: flex;
@@ -42,7 +42,7 @@ body {
   flex: 1;
   transition: all 0.3s ease;
 }
-#titlebar .tab.active {
+#titlebar quark-tab.active {
   color: #fff;
 }
 

@@ -1,22 +1,22 @@
 'use strict';
 
-const key      = require('keymaster');
-const Terminal = require(__dirname + '/js/terminal');
-
-let terminals = [];
+const key           = require('keymaster');
+const QuarkTerminal = require(__dirname + '/js/quark_terminal');
 
 window.addEventListener('resize', function() {
-  for(var terminal of terminals) {
+  for(var terminal of document.querySelectorAll('quark-terminal')) {
     terminal.fit();
-  }
+  };
 });
-
-function makeTerminal() {
-  terminals[terminals.push(new Terminal()) - 1].open();
-}
 
 makeTerminal();
 document.documentElement.style.setProperty('--cursor-color', 'rgba(171, 178, 191, 0.8)');
 document.documentElement.style.setProperty('--background-color', 'rgba(40, 44, 52, 0.1)');
 
 key('⌘+t', makeTerminal);
+
+function makeTerminal() {
+  document.querySelector("body").appendChild(
+    document.createElement('quark-terminal')
+  );
+}
