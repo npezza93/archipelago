@@ -35,6 +35,18 @@ class QuarkTab extends HTMLElement {
   _setTitleHandler() {
     this.terminal.xterm.on('title', (title) => {
       this.innerText = title
+      this._addExit();
+    });
+  }
+
+  _addExit() {
+    var exitSymbol = document.createElement('div');
+    exitSymbol.innerHTML = '&times;'
+    this.appendChild(exitSymbol)
+
+    exitSymbol.addEventListener('click', () => {
+      this.terminal.remove();
+      this.remove();
     });
   }
 };
