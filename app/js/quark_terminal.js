@@ -12,6 +12,11 @@ class QuarkTerminal extends HTMLElement {
     this.open();
   }
 
+  disconnectedCallback() {
+    this.xterm.destroy();
+    this.pty.kill();
+  }
+
   open() {
     this.xterm.open(this, true);
     this._bindDataListeners();
@@ -57,6 +62,11 @@ class QuarkTerminal extends HTMLElement {
     });
     this.pty.on('data', (data) => {
       this.xterm.write(data)
+    });
+    this.pty.on('exit',() => {
+      this.remove();
+      this.tab.remove();
+      document.querySelector('quark-tab').activate();
     });
   }
 };
