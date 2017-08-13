@@ -6,6 +6,9 @@ body {
 ::-webkit-scrollbar {
   width: 5px;
 }
+::-webkit-scrollbar:hover, ::-webkit-scrollbar:active {
+  width: 10px;
+}
 ::-webkit-scrollbar-thumb {
   background: #666;
 }
