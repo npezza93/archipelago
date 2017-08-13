@@ -14,6 +14,11 @@ quark-tab {
   font-family: var(--tab-font-family);
   font-size: var(--tab-font-size);
   line-height: 18px !important;
+  position: relative;
+}
+quark-tab div {
+  position: absolute;
+  right: 10px;
 }
 .terminal {
   font-family: var(--terminal-font-family);
