@@ -26,7 +26,7 @@ class QuarkTab extends HTMLElement {
 
   _setClickHandler() {
     this.addEventListener('click', function(event) {
-      if (event.target.localName == "quark-tab") {
+      if (event.target.localName == 'quark-tab') {
         event.target.activate();
       }
     });
