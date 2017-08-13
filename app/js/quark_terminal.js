@@ -3,7 +3,7 @@
 const Pty          = require('node-pty')
 const defaultShell = require('default-shell')
 const XTerm        = require('xterm')
-const QuarkTab          = require(__dirname + '/quark_tab');
+const QuarkTab     = require(__dirname + '/quark_tab');
 
 class QuarkTerminal extends HTMLElement {
   connectedCallback() {
