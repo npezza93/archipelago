@@ -9,7 +9,6 @@ window.addEventListener('resize', function() {
   };
 });
 
-makeTerminal();
 document.documentElement.style.setProperty('--cursor-color', 'rgba(171, 178, 191, 0.8)');
 document.documentElement.style.setProperty('--background-color', 'rgba(40, 44, 52, 0.1)');
 
