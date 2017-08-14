@@ -27,8 +27,8 @@ class QuarkTerminal extends HTMLElement {
   }
 
   fit() {
-    var rows = Math.floor(this.xterm.element.offsetHeight / 18);
-    var cols = Math.floor(this.xterm.element.offsetWidth / 9);
+    var rows = Math.floor(this.xterm.element.offsetHeight / this.xterm.height);
+    var cols = Math.floor(this.xterm.element.offsetWidth / this.xterm.width);
 
     this.xterm.resize(cols, rows);
     this.pty.resize(cols, rows);
