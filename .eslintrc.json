@@ -23,7 +23,8 @@
   "globals": {
     "document": true,
     "window": true,
-    "HTMLElement": true
+    "HTMLElement": true,
+    "Event": true
   },
 
   "rules": {
