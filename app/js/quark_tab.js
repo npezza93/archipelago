@@ -1,55 +1,68 @@
-'use strict';
+'use strict'
 
 class QuarkTab extends HTMLElement {
-  constructor(terminal) {
-    super();
-    this.terminal = terminal;
-  }
-
   connectedCallback() {
-    this.innerText = this.terminal.xterm.title;
-    this._setClickHandler();
-    this._setTitleHandler();
-    document.querySelector('#titlebar').appendChild(this);
-    this.activate();
+    let terminal = document.createElement('quark-terminal')
+    this.container = document.createElement('div')
+    this.titleContainer = document.createElement('span')
+    this.appendChild(this.titleContainer)
+
+    document.querySelector('body').appendChild(this.container)
+    this.container.appendChild(terminal)
+    this.container.classList.add('tab-container')
+    terminal.tab = this
+    terminal.open()
+    terminal._bindDataListeners()
+    this._bindClickHandler()
+    this.focus()
+    terminal.fit()
+    this._addExit()
   }
 
-  activate() {
-    for(var terminal of document.querySelectorAll('quark-terminal')) {
-      terminal.hide();
-    };
-
-    this.terminal.classList.remove('hidden');
-    this.terminal.xterm.focus();
-    this.classList.add('active');
+  disconnectedCallback() {
+    this.container.remove()
   }
 
-  _setClickHandler() {
+  focus() {
+    for (var tab of document.querySelectorAll('quark-tab')) {
+      tab.container.classList.add('hidden')
+      tab.classList.remove('active')
+    }
+
+    this.container.classList.remove('hidden')
+    this.terminals[0].xterm.focus()
+    this.classList.add('active')
+  }
+
+  get terminals() {
+    return this.container.querySelectorAll('quark-terminal')
+  }
+
+  set title(title) {
+    this.titleContainer.innerText = title
+  }
+
+  _bindClickHandler() {
     this.addEventListener('click', function(event) {
-      if (event.target.localName == 'quark-tab') {
-        event.target.activate();
+      if (event.target.localName === 'quark-tab') {
+        event.target.focus()
       }
-    });
-  }
-
-  _setTitleHandler() {
-    this.terminal.xterm.on('title', (title) => {
-      this.innerText = title
-      this._addExit();
-    });
+      if (event.target.localName === 'span') {
+        event.target.parentElement.focus()
+      }
+    })
   }
 
   _addExit() {
-    var exitSymbol = document.createElement('div');
-    exitSymbol.innerHTML = '&times;'
+    var exitSymbol = document.createElement('div')
+    exitSymbol.innerHTML = '&times'
     this.appendChild(exitSymbol)
 
     exitSymbol.addEventListener('click', () => {
-      this.terminal.remove();
-      this.remove();
-    });
+      this.remove()
+    })
   }
-};
+}
 
-module.exports = QuarkTab;
-window.customElements.define('quark-tab', QuarkTab);
+module.exports = QuarkTab
+window.customElements.define('quark-tab', QuarkTab)
