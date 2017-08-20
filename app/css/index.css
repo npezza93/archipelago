@@ -1,3 +1,9 @@
+@media (min-resolution: 2dppx) {
+  * {
+      text-rendering: geometricPrecision;
+  }
+}
+
 html, body {
   height: 100%;
 }
@@ -17,7 +23,7 @@ body {
   background: #666;
 }
 
-quark-terminal {
+archipelago-terminal {
   display: flex;
   flex: 1;
   height: 100%;
@@ -39,13 +45,13 @@ quark-terminal {
 .terminal-container.vertical {
   flex-direction: column;
 }
-quark-tab {
+archipelago-tab {
   font-family: var(--tab-font-family);
   font-size: var(--tab-font-size);
   line-height: 18px !important;
   position: relative;
 }
-quark-tab div {
+archipelago-tab div {
   position: absolute;
   right: 10px;
 }
@@ -67,7 +73,7 @@ quark-tab div {
   flex-direction: row;
   margin-left: 70px;
 }
-#titlebar quark-tab {
+#titlebar archipelago-tab {
   height: 100%;
   color: #b7b7b7;
   display: flex;
@@ -77,7 +83,7 @@ quark-tab div {
   flex: 1;
   transition: all 0.3s ease;
 }
-#titlebar quark-tab.active {
+#titlebar archipelago-tab.active {
   color: #fff;
 }
 

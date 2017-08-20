@@ -47,7 +47,7 @@ class Split {
   get originalTerminal() {
     if (this._originalTerminal) return this._originalTerminal
 
-    this._originalTerminal = document.createElement('quark-terminal')
+    this._originalTerminal = document.createElement('archipelago-terminal')
     this._originalTerminal.tab = this._tab
     this._originalTerminal.xterm = this._xterm
     this._originalTerminal.pty = this._pty
@@ -58,7 +58,7 @@ class Split {
   get newTerminal() {
     if (this._newTerminal) return this._newTerminal
 
-    this._newTerminal = document.createElement('quark-terminal')
+    this._newTerminal = document.createElement('archipelago-terminal')
     this._newTerminal.tab = this._tab
 
     return this._newTerminal
@@ -70,12 +70,12 @@ class Split {
     let focusedTerminal = document.activeElement
     let body = document.querySelector('body')
 
-    while (focusedTerminal !== body && focusedTerminal.tagName !== 'QUARK-TERMINAL') {
+    while (focusedTerminal !== body && focusedTerminal.tagName !== 'ARCHIPELAGO-TERMINAL') {
       focusedTerminal = focusedTerminal.parentElement
     }
 
     if (focusedTerminal === body) {
-      let terminals = document.querySelector('quark-tab.active').terminals
+      let terminals = document.querySelector('archipelago-tab.active').terminals
 
       this._focusedTerminal = terminals[terminals.length - 1]
     } else {

@@ -1,8 +1,8 @@
 'use strict'
 
-class QuarkTab extends HTMLElement {
+class ArchipelagoTab extends HTMLElement {
   connectedCallback() {
-    let terminal = document.createElement('quark-terminal')
+    let terminal = document.createElement('archipelago-terminal')
     this.container = document.createElement('div')
     this.titleContainer = document.createElement('span')
     this.appendChild(this.titleContainer)
@@ -24,7 +24,7 @@ class QuarkTab extends HTMLElement {
   }
 
   focus() {
-    for (var tab of document.querySelectorAll('quark-tab')) {
+    for (var tab of document.querySelectorAll('archipelago-tab')) {
       tab.container.classList.add('hidden')
       tab.classList.remove('active')
     }
@@ -35,7 +35,7 @@ class QuarkTab extends HTMLElement {
   }
 
   get terminals() {
-    return this.container.querySelectorAll('quark-terminal')
+    return this.container.querySelectorAll('archipelago-terminal')
   }
 
   set title(title) {
@@ -44,7 +44,7 @@ class QuarkTab extends HTMLElement {
 
   _bindClickHandler() {
     this.addEventListener('click', function(event) {
-      if (event.target.localName === 'quark-tab') {
+      if (event.target.localName === 'archipelago-tab') {
         event.target.focus()
       }
       if (event.target.localName === 'span') {
@@ -64,5 +64,5 @@ class QuarkTab extends HTMLElement {
   }
 }
 
-module.exports = QuarkTab
-window.customElements.define('quark-tab', QuarkTab)
+module.exports = ArchipelagoTab
+window.customElements.define('archipelago-tab', ArchipelagoTab)

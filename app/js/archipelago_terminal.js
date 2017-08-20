@@ -4,7 +4,7 @@ const Pty = require('node-pty')
 const defaultShell = require('default-shell')
 const XTerm = require('xterm')
 
-class QuarkTerminal extends HTMLElement {
+class ArchipelagoTerminal extends HTMLElement {
   disconnectedCallback() {
     if (this.preserveState) return
 
@@ -80,10 +80,10 @@ class QuarkTerminal extends HTMLElement {
   bindExit() {
     this.pty.on('exit', () => {
       this.remove()
-      if (document.querySelector('quark-tab') == null) {
+      if (document.querySelector('archipelago-tab') == null) {
         window.close()
       } else {
-        document.querySelector('quark-tab').focus()
+        document.querySelector('archipelago-tab').focus()
       }
     })
   }
@@ -107,5 +107,5 @@ class QuarkTerminal extends HTMLElement {
   }
 };
 
-module.exports = QuarkTerminal
-window.customElements.define('quark-terminal', QuarkTerminal)
+module.exports = ArchipelagoTerminal
+window.customElements.define('archipelago-terminal', ArchipelagoTerminal)

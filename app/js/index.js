@@ -3,13 +3,13 @@
 const path = require('path')
 const Split = require(path.join(__dirname, '/js/split'))
 
-require(path.join(__dirname, '/js/quark_tab'))
-require(path.join(__dirname, '/js/quark_terminal'))
+require(path.join(__dirname, '/js/archipelago_tab'))
+require(path.join(__dirname, '/js/archipelago_terminal'))
 
 let pressedKeys = []
 
 window.addEventListener('resize', function() {
-  for (var terminal of document.querySelectorAll('.tab-container:not(.hidden) quark-terminal')) {
+  for (var terminal of document.querySelectorAll('.tab-container:not(.hidden) archipelago-terminal')) {
     terminal.fit()
   }
 })
@@ -35,5 +35,5 @@ function shortcutTriggered(shortcut) {
 }
 
 function newTab() {
-  document.querySelector('#titlebar').appendChild(document.createElement('quark-tab'))
+  document.querySelector('#titlebar').appendChild(document.createElement('archipelago-tab'))
 }

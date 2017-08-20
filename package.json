@@ -1,5 +1,5 @@
 {
-  "name": "quark",
+  "name": "Archipelago",
   "version": "0.1.0",
   "main": "main.js",
   "dependencies": {
@@ -10,7 +10,7 @@
     "xterm": "^2.9.2"
   },
   "description": "A terminal built on electron",
-  "repository": "https://github.com/npezza93/quark",
+  "repository": "https://github.com/npezza93/archipelago",
   "author": "npezza93 <npezza93@gmail.com>",
   "license": "MIT",
   "devDependencies": {
