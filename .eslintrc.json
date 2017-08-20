@@ -24,7 +24,8 @@
     "document": true,
     "window": true,
     "HTMLElement": true,
-    "Event": true
+    "Event": true,
+    "Terminal": true
   },
 
   "rules": {

@@ -2,7 +2,6 @@
 
 const Pty = require('node-pty')
 const defaultShell = require('default-shell')
-const XTerm = require('xterm')
 
 class ArchipelagoTerminal extends HTMLElement {
   disconnectedCallback() {
@@ -48,10 +47,11 @@ class ArchipelagoTerminal extends HTMLElement {
   get xterm() {
     if (this._xterm) return this._xterm
 
-    this._xterm = new XTerm({
+    this._xterm = new Terminal({
       cursorBlink: true,
       cursorStyle: 'block', // block | underline | bar
-      visualBell: true,
+      bellStyle: 'visual',
+      bellSound: 'https://raw.githubusercontent.com/chromium/hterm/master/audio/bell.ogg',
       popOnBell: true
     })
     return this._xterm
