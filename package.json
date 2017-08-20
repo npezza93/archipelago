@@ -14,8 +14,8 @@
   "author": "npezza93 <npezza93@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^1.7.5",
-    "eslint": "^4.4.1",
+    "electron": "^1.7.6",
+    "eslint": "^4.5.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-node": "^5.1.1",
     "eslint-plugin-promise": "^3.5.0",
