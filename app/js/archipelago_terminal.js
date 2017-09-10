@@ -17,11 +17,12 @@ class ArchipelagoTerminal extends HTMLElement {
   open() {
     if (this.pty && this.xterm) {
       this.xterm.open(this, true)
+      this.xterm.setOption('bellStyle', 'both')
     }
   }
 
   fit () {
-    this.xterm.charMeasure.measure()
+    this.xterm.charMeasure.measure(this.xterm.options)
     var rows = Math.floor(this.xterm.element.offsetHeight / this.xterm.charMeasure.height)
     var cols = Math.floor(this.xterm.element.offsetWidth / this.xterm.charMeasure.width)
 
@@ -52,7 +53,31 @@ class ArchipelagoTerminal extends HTMLElement {
       cursorStyle: 'block', // block | underline | bar
       bellStyle: 'visual',
       bellSound: 'https://raw.githubusercontent.com/chromium/hterm/master/audio/bell.ogg',
-      popOnBell: true
+      fontSize: 15,
+      fontFamily: 'firaCode-retina',
+      scrollback: 4000,
+      theme: {
+        foreground: '#ffffff',
+        background: 'transparent',
+        cursor: '#ffffff',
+        selection: 'rgba(255, 255, 255, 0.3)',
+        black: '#000000',
+        red: '#e06c75',
+        brightRed: '#e06c75',
+        green: '#A4EFA1',
+        brightGreen: '#A4EFA1',
+        brightYellow: '#EDDC96',
+        yellow: '#EDDC96',
+        magenta: '#e39ef7',
+        brightMagenta: '#e39ef7',
+        cyan: '#5fcbd8',
+        brightBlue: '#5fcbd8',
+        brightCyan: '#5fcbd8',
+        blue: '#5fcbd8',
+        white: '#d0d0d0',
+        brightBlack: '#808080',
+        brightWhite: '#ffffff'
+      }
     })
     return this._xterm
   }
