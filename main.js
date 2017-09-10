@@ -18,6 +18,7 @@ function createWindow () {
     slashes: true
   }))
 
+  win.webContents.openDevTools()
   win.focus()
 
   // Emitted when the window is closed.
