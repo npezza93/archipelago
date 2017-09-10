@@ -17,12 +17,13 @@ class Split {
       this._wrapOriginalTerminalAndReopen()
     }
 
+    this.splitContainer.appendChild(this.separator)
     this.splitContainer.appendChild(this.newTerminal)
     this.newTerminal.open()
     this.newTerminal._bindDataListeners()
     this.newTerminal.fit()
-    setTimeout(() => { this.newTerminal.xterm.focus() }, 100)
-    setTimeout(() => { window.dispatchEvent(new Event('resize')) }, 200)
+    this.newTerminal.xterm.focus()
+    window.dispatchEvent(new Event('resize'))
   }
 
   _saveState() {
@@ -34,8 +35,32 @@ class Split {
   _wrapOriginalTerminalAndReopen() {
     this.splitContainer.appendChild(this.originalTerminal)
     this.focusedTerminal.replaceWith(this.splitContainer)
-    setTimeout(() => { this.originalTerminal.open() }, 100)
+    this.originalTerminal.open()
     this.originalTerminal.bindExit()
+    setTimeout(() => {
+      this.originalTerminal.xterm.setOption('theme', {
+        foreground: '#ffffff',
+        background: 'transparent',
+        cursor: '#ffffff',
+        selection: 'rgba(255, 255, 255, 0.3)',
+        black: '#000000',
+        red: '#e06c75',
+        brightRed: '#e06c75',
+        green: '#A4EFA1',
+        brightGreen: '#A4EFA1',
+        brightYellow: '#EDDC96',
+        yellow: '#EDDC96',
+        magenta: '#e39ef7',
+        brightMagenta: '#e39ef7',
+        cyan: '#5fcbd8',
+        brightBlue: '#5fcbd8',
+        brightCyan: '#5fcbd8',
+        blue: '#5fcbd8',
+        white: '#d0d0d0',
+        brightBlack: '#808080',
+        brightWhite: '#ffffff'
+      })
+    }, 100)
   }
 
   _existingContainer() {
@@ -98,6 +123,18 @@ class Split {
 
   set splitContainer(splitContainer) {
     this._splitContainer = splitContainer
+  }
+
+  get separator() {
+    if (this._separator) return this._separator
+
+    this._separator = document.createElement('div')
+    this._separator.classList.add('separator')
+
+    this._separator.addEventListener('mousedown', function(ev) {
+      console.log(ev)
+    })
+    return this._separator
   }
 }
 
