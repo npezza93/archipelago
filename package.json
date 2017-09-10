@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "main": "main.js",
   "dependencies": {
-    "coffeescript": "next",
+    "coffeescript": "^2.0.0-beta5",
     "default-shell": "^1.0.1",
+    "electron-packager": "^9.0.1",
     "keymaster": "^1.6.2",
-    "node-pty": "^0.6.10",
+    "node-pty": "^0.7.0",
     "xterm": "^2.9.2"
   },
   "description": "A terminal built on electron",
@@ -14,11 +15,14 @@
   "author": "npezza93 <npezza93@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^1.7.6",
-    "eslint": "^4.5.0",
+    "electron": "^1.8.0",
+    "eslint": "^4.6.1",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-node": "^5.1.1",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1"
+  },
+  "scripts": {
+    "packmac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icon.icns --prune=true --out=release-builds"
   }
 }
