@@ -58,7 +58,7 @@ class ArchipelagoTerminal extends HTMLElement {
       scrollback: 4000,
       theme: {
         foreground: '#ffffff',
-        background: 'transparent',
+        background: 'none',
         cursor: '#ffffff',
         selection: 'rgba(255, 255, 255, 0.3)',
         black: '#000000',
