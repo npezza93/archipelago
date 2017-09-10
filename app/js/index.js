@@ -14,8 +14,12 @@ window.addEventListener('resize', function() {
   }
 })
 
+// theme 1
 document.documentElement.style.setProperty('--cursor-color', 'rgba(171, 178, 191, 0.8)')
 document.documentElement.style.setProperty('--background-color', 'rgba(40, 44, 52, 0.1)')
+// theme 2
+// document.documentElement.style.setProperty('--cursor-color', '#fff')
+// document.documentElement.style.setProperty('--background-color', '#EEEEEE')
 
 newTab()
 

@@ -6,6 +6,7 @@
 
 html, body {
   height: 100%;
+  -webkit-font-feature-settings: "liga" off, "calt" off;
 }
 
 body {
@@ -33,6 +34,7 @@ archipelago-terminal {
   display: flex;
   flex: 1;
   flex-direction: row;
+  overflow-y: hidden;
 }
 .terminal-container {
   height: 100%;
@@ -54,16 +56,15 @@ archipelago-tab {
 archipelago-tab div {
   position: absolute;
   right: 10px;
+  top: 8px;
+  font-size: 20px;
 }
 .terminal {
-  font-family: var(--terminal-font-family);
-  font-size: var(--terminal-font-size);
-  line-height: 18px !important;
-  margin: 25px 15px 10px 15px;
+  margin: 40px 15px 10px 15px;
   width: 100%;
 }
 #titlebar {
-  height: 25px;
+  height: 40px;
   width: calc(100% - 70px);
   position: absolute;
   top: 0px;
@@ -75,7 +76,7 @@ archipelago-tab div {
 }
 #titlebar archipelago-tab {
   height: 100%;
-  color: #b7b7b7;
+  color: #757575;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -94,10 +95,10 @@ archipelago-tab div {
 :root {
   --cursor-color: #fff;
   --background-color: #000;
-  --terminal-font-family: "Menlo", "DejaVu Sans Mono", "Lucida Console", monospace;
-  --tab-font-family: "Menlo", "DejaVu Sans Mono", "Lucida Console", monospace;
+  --terminal-font-family: "firaCode-retina";
+  --tab-font-family: "firaCode-light";
   --terminal-font-size: 15px;
-  --tab-font-size: 12px;
+  --tab-font-size: 14px;
 }
 
 .terminal:not(.focus) .terminal-cursor {
@@ -117,34 +118,20 @@ archipelago-tab div {
 .terminal .xterm-viewport {
   background-color: transparent;
 }
+.terminal-container.horizontal > .separator {
+  width: 1px;
+  height: 100%;
+  background-color: black;
+  margin-top: 40px;
+  cursor: col-resize;
+}
+.terminal-container.vertical > .separator {
+  height: 1px;
+  width: 100%;
+  background-color: black;
+  cursor: row-resize;
+}
 
 .xterm-viewport {
   margin-right: -15px;
-}
-
-.terminal .xterm-color-12, .terminal .xterm-color-14, .terminal .xterm-color-4 {
-  color: #5fcbd8;
-}
-.terminal .xterm-color-5, .terminal .xterm-color-13 {
-  color: #e39ef7;
-}
-.terminal .xterm-color-2, .terminal .xterm-color-10 {
-  color: #A4EFA1;
-}
-.terminal .xterm-color-8 {
-  color: #808080;
-}
-.terminal .xterm-color-9, .terminal .xterm-color-1 {
-  color: #e06c75;
-}
-.terminal .xterm-color-3, .terminal .xterm-color-11 {
-  color: #EDDC96;
-}
-
-
-.terminal .xterm-bg-color-2 {
-  background-color: #A4EFA1;
-}
-.terminal .xterm-bg-color-3 {
-  background-color: #EDDC96;
 }
