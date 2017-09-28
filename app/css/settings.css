@@ -1,0 +1,95 @@
+:root {
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-size: 14px;
+}
+
+@media (min-resolution: 2dppx) {
+  * {
+      text-rendering: geometricPrecision;
+  }
+}
+html, body {
+  -webkit-font-feature-settings: "liga" off, "calt" off;
+  font-family: var(--font-family) !important;
+}
+
+body {
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#titlebar {
+  height: 40px;
+  width: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  -webkit-app-region: drag;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  cursor: default;
+  font-size: var(--font-size);
+}
+
+input, label {
+  font-size: var(--font-size);
+  font-family: var(--font-family) !important;
+}
+
+
+input[type="color"] {
+	-webkit-appearance: none;
+	border: 1px solid black;
+	width: 24px;
+	height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+	padding: 0;
+  border: 0;
+  border-radius: 50%;
+}
+input[type="color"]::-webkit-color-swatch {
+	border: 0;
+  border-radius: 50%;
+}
+input[type="color" i] {
+  padding: 0;
+  border-radius: 50%;
+}
+
+form {
+  width: 450px;
+  margin-bottom: 50px;
+}
+form .standardSettingsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+form .standardSettings {
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+}
+.switch-container {
+  display: flex;
+  flex-direction: row;
+}
+.switch-container label {
+  flex: 1;
+}
+
+.theme input[type="text"] {
+  border: 0;
+  text-align: end;
+}
+.theme {
+  display: flex;
+  flex-direction: column;
+}

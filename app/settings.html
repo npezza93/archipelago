@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <meta charset="UTF-8">
+   <title>Archipelago</title>
+   <link  href="css/settings.css" rel="stylesheet" type="text/css"/>
+   <link rel="stylesheet" href="../node_modules/material-components-web/dist/material-components-web.css">
+ </head>
+ <body>
+   <div id="titlebar">Settings</div>
+
+   <form>
+     <div class="standardSettingsContainer">
+       <div class="standardSettings">
+         <div style="padding-top: 75px;padding-bottom: 25px;">
+           <select name="cursorStyle" id="cursorStyle" class="mdc-select" style="width:100%;">
+             <option value="" selected>Cursor Style</option>
+             <option value="block">Block</option>
+             <option value="underline">Underline</option>
+             <option value="bar">Bar</option>
+           </select>
+         </div>
+
+        <div class="switch-container">
+          <label for="cursorBlink" class="mdc-switch-label">Blink cursor</label>
+          <div class="mdc-switch">
+            <input type="checkbox" id="cursorBlink" value=true class="mdc-switch__native-control" />
+            <div class="mdc-switch__background">
+              <div class="mdc-switch__knob"></div>
+            </div>
+          </div>
+        </div>
+
+         <div class="mdc-textfield mdc-textfield--upgraded" style="width: 100%;">
+           <input type="text" id="fontFamily" class="mdc-textfield__input">
+           <label class="mdc-textfield__label mdc-textfield__label--float-above" for="fontFamily">Font Family</label>
+         </div>
+
+         <div class="mdc-textfield mdc-textfield--upgraded" style="width: 100%;">
+           <input type="text" id="fontSize" class="mdc-textfield__input">
+           <label class="mdc-textfield__label mdc-textfield__label--float-above" for="fontSize">Font Size</label>
+         </div>
+
+         <div class="mdc-textfield mdc-textfield--upgraded" style="width: 100%;">
+           <input type="text" id="scrollback" class="mdc-textfield__input">
+           <label class="mdc-textfield__label mdc-textfield__label--float-above" for="scrollback">Scrollback</label>
+         </div>
+
+         <div style="padding-top: 25px;">
+           <select name="bellStyle" id="bellStyle" class="mdc-select" style="width:100%;">
+             <option value="" selected>Bell Style</option>
+             <option value="none">None</option>
+             <option value="visual">Visual</option>
+             <option value="sound">Sound</option>
+             <option value="both">Both</option>
+           </select>
+         </div>
+
+         <div style="padding-top: 25px;">
+           <select name="vibrancy" id="vibrancy" class="mdc-select" style="width:100%;">
+             <option value="" selected>Vibrancy</option>
+             <option value="appearance-based">appearance-based</option>
+             <option value="light">light</option>
+             <option value="dark">dark</option>
+             <option value="titlebar">titlebar</option>
+             <option value="selection">selection</option>
+             <option value="menu">menu</option>
+             <option value="popover">popover</option>
+             <option value="sidebar">sidebar</option>
+             <option value="medium-light">medium-light</option>
+             <option value="ultra-dark">ultra-dark</option>
+           </select>
+         </div>
+       </div>
+     </div>
+
+     <div class="theme">
+       <h4 style="padding-top:25px;text-align:center;width:100%;">Theme</h4>
+
+       <div style="padding-top: 10px;display:flex;flex-direction:row;align-items:center;">
+         <label for="foreground" style="flex:1;">Foreground: </label>
+         <input type="text" name="foreground" id="foreground" value="#ffffff">
+       </div>
+       <div style="padding-top:10px;display:flex;flex-direction:row;align-items:center;">
+         <label for="background" style="flex:1;">Background: </label>
+         <input type="text" name="background" id="background" value="#000000">
+       </div>
+       <div style="padding-top:10px;display:flex;flex-direction:row;align-items:center;">
+         <label for="selection" style="flex:1;">Selection: </label>
+         <input type="text" name="selection" id="selection" value="rgba(255, 255, 255, 0.3)">
+       </div>
+       <div style="padding-top:10px;display:flex;flex-direction:row;align-items:center;">
+         <label for="cursor" style="flex:1;">Cursor: </label>
+         <input type="text" name="cursor" id="cursor" value="#ffffff">
+       </div>
+       <div style="padding-top:10px;display:flex;flex-direction:row;align-items:center;">
+         <label for="cursorAccent" style="flex:1;">Cursor Accent: </label>
+         <input type="text" name="cursorAccent" id="cursorAccent" value="#000000">
+       </div>
+
+       <div style="padding-top:10px;display:flex;flex-direction:row;align-items:center;">
+         <label for="red" style="flex:1;">Red: </label>
+         <input type="text" name="red" id="red" value="#cc0000">
+       </div>
+       <div style="padding-top:10px;display:flex;flex-direction:row;align-items:center;">
+         <label for="brightRed" style="flex:1;">Bright Red: </label>
+         <input type="text" name="brightRed" id="brightRed" value="#ef2929">
+       </div>
+
+       <div style="padding-top:10px;display:flex;flex-direction:row;align-items:center;">
+         <label for="green" style="flex:1;">Green: </label>
+         <input type="text" name="green" id="green" value="#4e9a06">
+       </div>
+       <div style="padding-top:10px;display:flex;flex-direction:row;align-items:center;">
+         <label for="brightGreen" style="flex:1;">Bright Green: </label>
+         <input type="text" name="brightGreen" id="brightGreen" value="#8ae234">
+       </div>
+
+       <div style="padding-top:10px;display:flex;flex-direction:row;align-items:center;">
+         <label for="yellow" style="flex:1;">Yellow: </label>
+         <input type="text" name="yellow" id="yellow" value="#c4a000">
+       </div>
+       <div style="padding-top:10px;display:flex;flex-direction:row;align-items:center;">
+         <label for="brightYellow" style="flex:1;">Bright Yellow: </label>
+         <input type="text" name="brightYellow" id="brightYellow" value="#fce94f">
+       </div>
+
+       <div style="padding-top:10px;display:flex;flex-direction:row;align-items:center;">
+         <label for="magenta" style="flex:1;">Magenta: </label>
+         <input type="text" name="magenta" id="magenta" value="#75507b">
+       </div>
+       <div style="padding-top:10px;display:flex;flex-direction:row;align-items:center;">
+         <label for="brightMagenta" style="flex:1;">Bright Magenta: </label>
+         <input type="text" name="brightMagenta" id="brightMagenta" value="#ad7fa8">
+       </div>
+
+       <div style="padding-top:10px;display:flex;flex-direction:row;align-items:center;">
+         <label for="cyan" style="flex:1;">Cyan: </label>
+         <input type="text" name="cyan" id="cyan" value="#06989a">
+       </div>
+       <div style="padding-top:10px;display:flex;flex-direction:row;align-items:center;">
+         <label for="brightCyan" style="flex:1;">Bright Cyan: </label>
+         <input type="text" name="brightCyan" id="brightCyan" value="#34e2e2">
+       </div>
+
+       <div style="padding-top:10px;display:flex;flex-direction:row;align-items:center;">
+         <label for="blue" style="flex:1;">Blue: </label>
+         <input type="text" name="blue" id="blue" value="#3465a4">
+       </div>
+       <div style="padding-top:10px;display:flex;flex-direction:row;align-items:center;">
+         <label for="brightBlue" style="flex:1;">Bright Blue: </label>
+         <input type="text" name="brightBlue" id="brightBlue" value="#729fcf">
+       </div>
+
+       <div style="padding-top:10px;display:flex;flex-direction:row;align-items:center;">
+         <label for="white" style="flex:1;">White: </label>
+         <input type="text" name="white" id="white" value="#d3d7cf">
+       </div>
+       <div style="padding-top:10px;display:flex;flex-direction:row;align-items:center;">
+         <label for="brightWhite" style="flex:1;">Bright White: </label>
+         <input type="text" name="brightWhite" id="brightWhite" value="#eeeeec">
+       </div>
+
+       <div style="padding-top:10px;display:flex;flex-direction:row;align-items:center;">
+         <label for="black" style="flex:1;">Black: </label>
+         <input type="text" name="black" id="black" value="#2e3436">
+       </div>
+       <div style="padding-top:10px;display:flex;flex-direction:row;align-items:center;">
+         <label for="brightBlack" style="flex:1;">Bright Black: </label>
+         <input type="text" name="brightBlack" id="brightBlack" value="#555753">
+       </div>
+     </div>
+   </form>
+
+   <script src="../node_modules/material-components-web/dist/material-components-web.js"></script>
+   <script>mdc.autoInit()</script>
+   <script src="js/settings.js" defer></script>
+   <script type="text/javascript" src="js/color_picker/jqColorPicker.min.js"></script>
+ </body>
+</html>
