@@ -1,10 +1,10 @@
 'use strict'
 
-const path = require('path')
-const Split = require(path.join(__dirname, '/js/split'))
+const { join } = require('path')
+const Split = require(join(__dirname, '/js/split'))
 
-require(path.join(__dirname, '/js/archipelago_tab'))
-require(path.join(__dirname, '/js/archipelago_terminal'))
+require(join(__dirname, '/js/archipelago_tab'))
+require(join(__dirname, '/js/archipelago_terminal'))
 
 let pressedKeys = []
 
