@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "main": "main.js",
   "dependencies": {
+    "chokidar": "^1.7.0",
     "coffeescript": "^2.0.0-beta5",
     "default-shell": "^1.0.1",
     "electron-packager": "^9.0.1",
     "keymaster": "^1.6.2",
+    "material-components-web": "^0.21.1",
     "node-pty": "^0.7.0",
     "xterm": "^2.9.2"
   },
@@ -16,6 +18,7 @@
   "license": "MIT",
   "devDependencies": {
     "electron": "^1.8.0",
+    "electron-rebuild": "^1.6.0",
     "eslint": "^4.6.1",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-node": "^5.1.1",
