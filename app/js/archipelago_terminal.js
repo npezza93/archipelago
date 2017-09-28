@@ -2,6 +2,9 @@
 
 const Pty = require('node-pty')
 const defaultShell = require('default-shell')
+const { join } = require('path')
+
+const ConfigFile = require(join(__dirname, '/config_file'))
 
 class ArchipelagoTerminal extends HTMLElement {
   disconnectedCallback() {
@@ -32,8 +35,8 @@ class ArchipelagoTerminal extends HTMLElement {
 
   get pty() {
     if (this._pty) return this._pty
-
-    this._pty = Pty.spawn(defaultShell, [], {
+    console.log(defaultShell)
+    this._pty = Pty.spawn(defaultShell, ['--login'], {
       name: 'xterm-256color',
       cwd: process.env.PWD,
       env: process.env
@@ -49,35 +52,34 @@ class ArchipelagoTerminal extends HTMLElement {
     if (this._xterm) return this._xterm
 
     this._xterm = new Terminal({
-      cursorBlink: true,
-      cursorStyle: 'block', // block | underline | bar
-      bellStyle: 'visual',
+      cursorBlink: this.settings.cursorBlink || undefined,
+      cursorStyle: this.settings.cursorStyle || undefined,
+      bellStyle: this.settings.bellStyle || undefined,
       bellSound: 'https://raw.githubusercontent.com/chromium/hterm/master/audio/bell.ogg',
-      fontSize: 15,
-      fontFamily: 'firaCode-retina',
-      scrollback: 4000,
-      theme: {
-        foreground: '#ffffff',
-        background: 'none',
-        cursor: '#ffffff',
-        selection: 'rgba(255, 255, 255, 0.3)',
-        black: '#000000',
-        red: '#e06c75',
-        brightRed: '#e06c75',
-        green: '#A4EFA1',
-        brightGreen: '#A4EFA1',
-        brightYellow: '#EDDC96',
-        yellow: '#EDDC96',
-        magenta: '#e39ef7',
-        brightMagenta: '#e39ef7',
-        cyan: '#5fcbd8',
-        brightBlue: '#5fcbd8',
-        brightCyan: '#5fcbd8',
-        blue: '#5fcbd8',
-        white: '#d0d0d0',
-        brightBlack: '#808080',
-        brightWhite: '#ffffff'
-      }
+      fontSize: this.settings.fontSize || undefined,
+      fontFamily: this.settings.fontFamily || undefined,
+      scrollback: this.settings.scrollback || undefined,
+      theme: this.settings.theme || undefined
+      // // foreground: '#ffffff',
+      // background: 'none',
+      // // cursor: '#ffffff',
+      // // selection: 'rgba(255, 255, 255, 0.3)',
+      // // black: '#000000',
+      // // red: '#e06c75',
+      // // brightRed: '#e06c75',
+      // // green: '#A4EFA1',
+      // // brightGreen: '#A4EFA1',
+      // // brightYellow: '#EDDC96',
+      // // yellow: '#EDDC96',
+      // // magenta: '#e39ef7',
+      // // brightMagenta: '#e39ef7',
+      // // cyan: '#5fcbd8',
+      // // brightBlue: '#5fcbd8',
+      // // brightCyan: '#5fcbd8',
+      // // blue: '#5fcbd8',
+      // // white: '#d0d0d0',
+      // // brightBlack: '#808080',
+      // // brightWhite: '#ffffff'
     })
     return this._xterm
   }
@@ -102,6 +104,18 @@ class ArchipelagoTerminal extends HTMLElement {
     this._preserve_state = preserveState
   }
 
+  get settings() {
+    return this.configFile.contents
+  }
+
+  get configFile() {
+    if (this._configFile) return this._configFile
+
+    this._configFile = new ConfigFile()
+
+    return this._configFile
+  }
+
   bindExit() {
     this.pty.on('exit', () => {
       this.remove()
@@ -114,6 +128,21 @@ class ArchipelagoTerminal extends HTMLElement {
   }
 
   _bindDataListeners () {
+    this._configFile.on('change', () => {
+      let element = document.documentElement
+
+      element.style.setProperty(`--font-family`, this.settings.fontFamily)
+
+      let fields = ['cursorStyle', 'cursorBlink', 'fontFamily', 'fontSize', 'scrollback', 'bellStyle', 'theme']
+
+      fields.forEach((field) => {
+        if (this.xterm[field] !== this.settings[field]) {
+          this.xterm.setOption(field, this.settings[field])
+          this.fit()
+        }
+      })
+    })
+
     this.xterm.on('data', (data) => {
       this.pty.write(data)
     })
