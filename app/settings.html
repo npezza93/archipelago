@@ -14,7 +14,7 @@
        <div class="standardSettings">
          <div style="padding-top: 75px;padding-bottom: 25px;">
            <select name="cursorStyle" id="cursorStyle" class="mdc-select" style="width:100%;">
-             <option value="" selected>Cursor Style</option>
+             <option value="" selected>Choose a cursor style</option>
              <option value="block">Block</option>
              <option value="underline">Underline</option>
              <option value="bar">Bar</option>
@@ -42,18 +42,33 @@
          </div>
 
          <div class="mdc-textfield mdc-textfield--upgraded" style="width: 100%;">
+           <input type="number" id="lineHeight" class="mdc-textfield__input" value=1, step="0.1" min=0>
+           <label class="mdc-textfield__label mdc-textfield__label--float-above" for="lineHeight">Line Height</label>
+         </div>
+
+         <div class="mdc-textfield mdc-textfield--upgraded" style="width: 100%;">
            <input type="text" id="scrollback" class="mdc-textfield__input">
            <label class="mdc-textfield__label mdc-textfield__label--float-above" for="scrollback">Scrollback</label>
          </div>
 
+         <div class="mdc-textfield mdc-textfield--upgraded" style="width: 100%;">
+           <input type="number" id="tabStopWidth" class="mdc-textfield__input", value=8>
+           <label class="mdc-textfield__label mdc-textfield__label--float-above" for="tabStopWidth">Tab Stop Width</label>
+         </div>
+
          <div style="padding-top: 25px;">
            <select name="bellStyle" id="bellStyle" class="mdc-select" style="width:100%;">
-             <option value="" selected>Bell Style</option>
+             <option value="" selected>Choose a bell style</option>
              <option value="none">None</option>
              <option value="visual">Visual</option>
              <option value="sound">Sound</option>
              <option value="both">Both</option>
            </select>
+         </div>
+
+         <div class="mdc-textfield mdc-textfield--upgraded" style="width: 100%;">
+           <input type="text" id="bellSound" class="mdc-textfield__input">
+           <label class="mdc-textfield__label mdc-textfield__label--float-above" for="bellSound">Bell sound (url or uri)</label>
          </div>
 
          <div style="padding-top: 25px;">

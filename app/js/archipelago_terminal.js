@@ -52,16 +52,16 @@ class ArchipelagoTerminal extends HTMLElement {
     if (this._xterm) return this._xterm
 
     this._xterm = new Terminal({
-      cursorBlink: this.settings.cursorBlink || undefined,
-      cursorStyle: this.settings.cursorStyle || undefined,
-      bellStyle: this.settings.bellStyle || undefined,
-      bellSound: 'https://raw.githubusercontent.com/chromium/hterm/master/audio/bell.ogg',
-      fontSize: this.settings.fontSize || undefined,
-      fontFamily: this.settings.fontFamily || undefined,
-      scrollback: this.settings.scrollback || undefined,
-      theme: this.settings.theme || undefined
+      cursorBlink: this.settings.cursorBlink,
+      cursorStyle: this.settings.cursorStyle,
+      bellStyle: this.settings.bellStyle,
+      bellSound: this.settings.bellSound,
+      fontSize: this.settings.fontSize,
+      fontFamily: this.settings.fontFamily,
+      scrollback: this.settings.scrollback,
+      theme: this.settings.theme
       // // foreground: '#ffffff',
-      // background: 'none',
+      // // background: 'none',
       // // cursor: '#ffffff',
       // // selection: 'rgba(255, 255, 255, 0.3)',
       // // black: '#000000',

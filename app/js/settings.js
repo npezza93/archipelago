@@ -1,7 +1,7 @@
 const { join } = require('path')
 const ConfigFile = require(join(__dirname, '/js/config_file'))
 
-const fields = ['fontFamily', 'fontSize', 'scrollback', 'bellStyle', 'cursorStyle', 'vibrancy']
+const fields = ['fontFamily', 'fontSize', 'lineHeight', 'tabStopWidth', 'scrollback', 'bellStyle', 'bellSound', 'cursorStyle', 'vibrancy']
 const colors = ['foreground', 'background', 'cursor', 'cursorAccent', 'selection', 'red', 'brightRed', 'green', 'brightGreen', 'yellow', 'brightYellow', 'magenta', 'brightMagenta', 'cyan', 'brightCyan', 'blue', 'brightBlue', 'white', 'brightWhite', 'black', 'brightBlack']
 const configFile = new ConfigFile()
 
