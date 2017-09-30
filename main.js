@@ -16,6 +16,17 @@ function createWindow () {
   })
   const template = [
     {
+      label: 'Shell',
+      submenu: [
+        { label: 'New Window', accelerator: 'CmdOrCtrl+N' },
+        { type: 'separator' },
+        { label: 'Split Vertically', accelerator: 'Shift+CmdOrCtrl+S', },
+        { label: 'Split Horizontally', accelerator: 'CmdOrCtrl+S', },
+        { type: 'separator' },
+        { label: 'New Tab', accelerator: 'CmdOrCtrl+T', }
+      ]
+    },
+    {
       label: 'Edit',
       submenu: [
         {role: 'undo'},
@@ -99,7 +110,7 @@ function createWindow () {
     })
 
     // Window menu
-    template[3].submenu = [
+    template[4].submenu = [
       {role: 'close'},
       {role: 'minimize'},
       {role: 'zoom'},
