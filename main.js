@@ -52,10 +52,6 @@ function createWindow () {
       role: 'help',
       submenu: [
         {
-          label: 'Repo',
-          click () { shell.openExternal('https://github.com/npezza93/archipelago') }
-        },
-        {
           label: 'Report Issue',
           click() { shell.openExternal('https://github.com/npezza93/archipelago/issues/new') }
         }
@@ -91,6 +87,8 @@ function createWindow () {
             settings.focus()
           }
         },
+        {type: 'separator'},
+        {role: 'services', submenu: []},
         {type: 'separator'},
         {role: 'hide'},
         {role: 'hideothers'},
