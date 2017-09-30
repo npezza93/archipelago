@@ -5,6 +5,7 @@
    <title>Archipelago</title>
    <link  href="css/settings.css" rel="stylesheet" type="text/css"/>
    <link rel="stylesheet" href="../node_modules/material-components-web/dist/material-components-web.css">
+   <script type="text/javascript" src="js/color_picker/jqColorPicker.min.js"></script>
  </head>
  <body>
    <div id="titlebar">Settings</div>
@@ -92,96 +93,100 @@
      <div class="theme">
        <h4 style="padding-top:25px;text-align:center;width:100%;">Theme</h4>
 
-       <div style="padding-top: 10px;display:flex;flex-direction:row;align-items:center;">
-         <label for="foreground" style="flex:1;">Foreground: </label>
+       <div class="color-field">
+         <label for="foreground">Foreground: </label>
          <input type="text" name="foreground" id="foreground" value="#ffffff">
        </div>
-       <div style="padding-top:10px;display:flex;flex-direction:row;align-items:center;">
-         <label for="background" style="flex:1;">Background: </label>
+       <div class="color-field">
+         <label for="background">Terminal Background: </label>
          <input type="text" name="background" id="background" value="#000000">
        </div>
-       <div style="padding-top:10px;display:flex;flex-direction:row;align-items:center;">
-         <label for="selection" style="flex:1;">Selection: </label>
+       <div class="color-field">
+         <label for="windowBackground">Window Background: </label>
+         <input type="text" name="windowBackground" id="windowBackground" value="#000000">
+       </div>
+       <div class="color-field">
+         <label for="selection">Selection: </label>
          <input type="text" name="selection" id="selection" value="rgba(255, 255, 255, 0.3)">
        </div>
-       <div style="padding-top:10px;display:flex;flex-direction:row;align-items:center;">
-         <label for="cursor" style="flex:1;">Cursor: </label>
+       <div class="color-field">
+         <label for="cursor">Cursor: </label>
          <input type="text" name="cursor" id="cursor" value="#ffffff">
        </div>
-       <div style="padding-top:10px;display:flex;flex-direction:row;align-items:center;">
-         <label for="cursorAccent" style="flex:1;">Cursor Accent: </label>
+       <div class="color-field">
+         <label for="cursorAccent">Cursor Accent: </label>
          <input type="text" name="cursorAccent" id="cursorAccent" value="#000000">
        </div>
 
-       <div style="padding-top:10px;display:flex;flex-direction:row;align-items:center;">
-         <label for="red" style="flex:1;">Red: </label>
+       <div class="color-field">
+         <label for="red">Red: </label>
          <input type="text" name="red" id="red" value="#cc0000">
        </div>
-       <div style="padding-top:10px;display:flex;flex-direction:row;align-items:center;">
-         <label for="brightRed" style="flex:1;">Bright Red: </label>
+       <div class="color-field">
+         <label for="brightRed">Bright Red: </label>
          <input type="text" name="brightRed" id="brightRed" value="#ef2929">
        </div>
 
-       <div style="padding-top:10px;display:flex;flex-direction:row;align-items:center;">
-         <label for="green" style="flex:1;">Green: </label>
+       <div class="color-field">
+         <label for="green">Green: </label>
          <input type="text" name="green" id="green" value="#4e9a06">
        </div>
-       <div style="padding-top:10px;display:flex;flex-direction:row;align-items:center;">
-         <label for="brightGreen" style="flex:1;">Bright Green: </label>
+       <div class="color-field">
+         <label for="brightGreen">Bright Green: </label>
          <input type="text" name="brightGreen" id="brightGreen" value="#8ae234">
        </div>
 
-       <div style="padding-top:10px;display:flex;flex-direction:row;align-items:center;">
-         <label for="yellow" style="flex:1;">Yellow: </label>
+       <div class="color-field">
+         <label for="yellow">Yellow: </label>
          <input type="text" name="yellow" id="yellow" value="#c4a000">
        </div>
-       <div style="padding-top:10px;display:flex;flex-direction:row;align-items:center;">
-         <label for="brightYellow" style="flex:1;">Bright Yellow: </label>
+       <div class="color-field">
+         <label for="brightYellow">Bright Yellow: </label>
          <input type="text" name="brightYellow" id="brightYellow" value="#fce94f">
        </div>
 
-       <div style="padding-top:10px;display:flex;flex-direction:row;align-items:center;">
-         <label for="magenta" style="flex:1;">Magenta: </label>
+       <div class="color-field">
+         <label for="magenta">Magenta: </label>
          <input type="text" name="magenta" id="magenta" value="#75507b">
        </div>
-       <div style="padding-top:10px;display:flex;flex-direction:row;align-items:center;">
-         <label for="brightMagenta" style="flex:1;">Bright Magenta: </label>
+       <div class="color-field">
+         <label for="brightMagenta">Bright Magenta: </label>
          <input type="text" name="brightMagenta" id="brightMagenta" value="#ad7fa8">
        </div>
 
-       <div style="padding-top:10px;display:flex;flex-direction:row;align-items:center;">
-         <label for="cyan" style="flex:1;">Cyan: </label>
+       <div class="color-field">
+         <label for="cyan">Cyan: </label>
          <input type="text" name="cyan" id="cyan" value="#06989a">
        </div>
-       <div style="padding-top:10px;display:flex;flex-direction:row;align-items:center;">
-         <label for="brightCyan" style="flex:1;">Bright Cyan: </label>
+       <div class="color-field">
+         <label for="brightCyan">Bright Cyan: </label>
          <input type="text" name="brightCyan" id="brightCyan" value="#34e2e2">
        </div>
 
-       <div style="padding-top:10px;display:flex;flex-direction:row;align-items:center;">
-         <label for="blue" style="flex:1;">Blue: </label>
+       <div class="color-field">
+         <label for="blue">Blue: </label>
          <input type="text" name="blue" id="blue" value="#3465a4">
        </div>
-       <div style="padding-top:10px;display:flex;flex-direction:row;align-items:center;">
-         <label for="brightBlue" style="flex:1;">Bright Blue: </label>
+       <div class="color-field">
+         <label for="brightBlue">Bright Blue: </label>
          <input type="text" name="brightBlue" id="brightBlue" value="#729fcf">
        </div>
 
-       <div style="padding-top:10px;display:flex;flex-direction:row;align-items:center;">
-         <label for="white" style="flex:1;">White: </label>
+       <div class="color-field">
+         <label for="white">White: </label>
          <input type="text" name="white" id="white" value="#d3d7cf">
        </div>
-       <div style="padding-top:10px;display:flex;flex-direction:row;align-items:center;">
-         <label for="brightWhite" style="flex:1;">Bright White: </label>
+       <div class="color-field">
+         <label for="brightWhite">Bright White: </label>
          <input type="text" name="brightWhite" id="brightWhite" value="#eeeeec">
        </div>
 
-       <div style="padding-top:10px;display:flex;flex-direction:row;align-items:center;">
-         <label for="black" style="flex:1;">Black: </label>
+       <div class="color-field">
+         <label for="black">Black: </label>
          <input type="text" name="black" id="black" value="#2e3436">
        </div>
-       <div style="padding-top:10px;display:flex;flex-direction:row;align-items:center;">
-         <label for="brightBlack" style="flex:1;">Bright Black: </label>
+       <div class="color-field">
+         <label for="brightBlack">Bright Black: </label>
          <input type="text" name="brightBlack" id="brightBlack" value="#555753">
        </div>
      </div>
@@ -190,6 +195,5 @@
    <script src="../node_modules/material-components-web/dist/material-components-web.js"></script>
    <script>mdc.autoInit()</script>
    <script src="js/settings.js" defer></script>
-   <script type="text/javascript" src="js/color_picker/jqColorPicker.min.js"></script>
  </body>
 </html>

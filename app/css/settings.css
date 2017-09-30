@@ -93,3 +93,13 @@ form .standardSettings {
   display: flex;
   flex-direction: column;
 }
+
+.color-field {
+  padding-top: 10px;
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+}
+.color-field label {
+  flex:1;
+}
