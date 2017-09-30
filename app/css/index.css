@@ -93,24 +93,10 @@ archipelago-tab div {
 }
 
 :root {
-  /*--cursor-color: #fff;
   --background-color: #000;*/
-  --cursor-color: #000;
   --background-color: rgb(234, 234, 234);
   --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  --terminal-font-size: 15px;
   --tab-font-size: 14px;
-}
-
-.terminal:not(.focus) .terminal-cursor {
-    outline: 1px solid var(--cursor-color);
-}
-.terminal.xterm-cursor-style-block.focus:not(.xterm-cursor-blink-on) .terminal-cursor {
-    background-color: var(--cursor-color);
-}
-.terminal.focus.xterm-cursor-style-bar:not(.xterm-cursor-blink-on) .terminal-cursor::before,
-.terminal.focus.xterm-cursor-style-underline:not(.xterm-cursor-blink-on) .terminal-cursor::before {
-    background-color: var(--cursor-color);
 }
 
 .terminal {

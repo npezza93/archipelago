@@ -12,16 +12,11 @@ class ArchipelagoTerminal extends HTMLElement {
 
     this.xterm.destroy()
     this.pty.kill()
-    if (this.tab.terminals.length === 0) {
-      this.tab.remove()
-    }
+    if (this.tab.terminals.length === 0) this.tab.remove()
   }
 
   open() {
-    if (this.pty && this.xterm) {
-      this.xterm.open(this, true)
-      this.xterm.setOption('bellStyle', 'both')
-    }
+    if (this.pty && this.xterm) this.xterm.open(this, true)
   }
 
   fit () {
