@@ -49,6 +49,6 @@ function newTab() {
 configFile.on('change', () => {
   let element = document.documentElement
 
-  element.style.setProperty(`--font-family`, this.fontFamily)
-  element.style.setProperty(`--background-color`, this.windowBackground)
+  element.style.setProperty('--font-family', this.fontFamily)
+  element.style.setProperty('--background-color', this.windowBackground)
 })

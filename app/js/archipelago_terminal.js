@@ -37,9 +37,7 @@ class ArchipelagoTerminal extends HTMLElement {
     } else {
       args = ['--login']
     }
-    this._pty = Pty.spawn(this.configFile.shell ||defaultShell, args, {
-      name: 'xterm'
-    })
+    this._pty = Pty.spawn(this.configFile.shell ||defaultShell, args)
     return this._pty
   }
 
@@ -130,7 +128,7 @@ class ArchipelagoTerminal extends HTMLElement {
     this._configFile.on('change', () => {
       let element = document.documentElement
 
-      element.style.setProperty(`--font-family`, this.settings.fontFamily)
+      element.style.setProperty('--font-family', this.settings.fontFamily)
 
       let fields = ['cursorStyle', 'cursorBlink', 'fontFamily', 'fontSize', 'scrollback', 'bellStyle', 'theme']
 
