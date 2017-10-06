@@ -1,6 +1,8 @@
 :root {
   --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --font-size: 14px;
+  /*--mdc-theme-primary: #fff !important;*/
+  /*--mdc-theme-text-primary-on-primary-light: #fff !important;*/
 }
 
 @media (min-resolution: 2dppx) {
@@ -11,6 +13,8 @@
 html, body {
   -webkit-font-feature-settings: "liga" off, "calt" off;
   font-family: var(--font-family) !important;
+  background-color: #fff;
+  color: #000;
 }
 
 body {
@@ -38,29 +42,6 @@ body {
 input, label {
   font-size: var(--font-size);
   font-family: var(--font-family) !important;
-}
-
-
-input[type="color"] {
-	-webkit-appearance: none;
-	border: 1px solid black;
-	width: 24px;
-	height: 24px;
-  border-radius: 50%;
-  cursor: pointer;
-}
-input[type="color"]::-webkit-color-swatch-wrapper {
-	padding: 0;
-  border: 0;
-  border-radius: 50%;
-}
-input[type="color"]::-webkit-color-swatch {
-	border: 0;
-  border-radius: 50%;
-}
-input[type="color" i] {
-  padding: 0;
-  border-radius: 50%;
 }
 
 form {

@@ -2,11 +2,13 @@
 
 const { join } = require('path')
 const Split = require(join(__dirname, '/js/split'))
+const ConfigFile = require(join(__dirname, '/js/config_file'))
 
 require(join(__dirname, '/js/archipelago_tab'))
 require(join(__dirname, '/js/archipelago_terminal'))
 
 let pressedKeys = []
+let configFile  = new ConfigFile()
 
 window.addEventListener('resize', function() {
   for (var terminal of document.querySelectorAll('.tab-container:not(.hidden) archipelago-terminal')) {
@@ -14,14 +16,16 @@ window.addEventListener('resize', function() {
   }
 })
 
-// theme 1
-document.documentElement.style.setProperty('--cursor-color', 'rgba(171, 178, 191, 0.8)')
-document.documentElement.style.setProperty('--background-color', 'rgba(40, 44, 52, 0.1)')
-// theme 2
-// document.documentElement.style.setProperty('--cursor-color', '#fff')
-// document.documentElement.style.setProperty('--background-color', '#EEEEEE')
+document.addEventListener('DOMContentLoaded', () => {
+  document.documentElement.style.setProperty('--background-color', configFile.windowBackground)
+  document.documentElement.style.setProperty('--font-family', configFile.fontFamily)
+  // theme 1
+  // document.documentElement.style.setProperty('--background-color', 'rgba(40, 44, 52, 0.1)')
+  // theme 2
+  // document.documentElement.style.setProperty('--background-color', '#EEEEEE')
 
-newTab()
+  newTab()
+})
 
 document.addEventListener('keydown', (keyboardEvent) => {
   pressedKeys.push(keyboardEvent.keyCode)
@@ -41,3 +45,10 @@ function shortcutTriggered(shortcut) {
 function newTab() {
   document.querySelector('#titlebar').appendChild(document.createElement('archipelago-tab'))
 }
+
+configFile.on('change', () => {
+  let element = document.documentElement
+
+  element.style.setProperty(`--font-family`, this.fontFamily)
+  element.style.setProperty(`--background-color`, this.windowBackground)
+})

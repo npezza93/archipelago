@@ -1,7 +1,7 @@
 const { join } = require('path')
 const ConfigFile = require(join(__dirname, '/js/config_file'))
 
-const fields = ['fontFamily', 'fontSize', 'lineHeight', 'tabStopWidth', 'scrollback', 'bellStyle', 'bellSound', 'cursorStyle', 'vibrancy']
+const fields = ['fontFamily', 'fontSize', 'lineHeight', 'tabStopWidth', 'scrollback', 'bellStyle', 'bellSound', 'cursorStyle', 'vibrancy', 'windowBackground', 'shell', 'shellArgs']
 const colors = ['foreground', 'background', 'cursor', 'cursorAccent', 'selection', 'red', 'brightRed', 'green', 'brightGreen', 'yellow', 'brightYellow', 'magenta', 'brightMagenta', 'cyan', 'brightCyan', 'blue', 'brightBlue', 'white', 'brightWhite', 'black', 'brightBlack']
 const configFile = new ConfigFile()
 
@@ -50,7 +50,6 @@ fields.forEach((field) => {
 
 colors.forEach((color) => {
   document.querySelector('#' + color).addEventListener('change', () => {
-    console.log('triggered');
     updateTheme(color, document.querySelector('#' + color).value)
   })
 })

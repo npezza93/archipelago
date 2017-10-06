@@ -30,11 +30,15 @@ class ArchipelagoTerminal extends HTMLElement {
 
   get pty() {
     if (this._pty) return this._pty
-    console.log(defaultShell)
-    this._pty = Pty.spawn(defaultShell, ['--login'], {
-      name: 'xterm-256color',
-      cwd: process.env.PWD,
-      env: process.env
+    let args
+
+    if (this.configFile.shellArgs) {
+      args = this.configFile.shellArgs.split(",")
+    } else {
+      args = ['--login']
+    }
+    this._pty = Pty.spawn(this.configFile.shell ||defaultShell, args, {
+      name: 'xterm'
     })
     return this._pty
   }
