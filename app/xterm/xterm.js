@@ -132,32 +132,45 @@ var Buffer = (function () {
         if (startCol === void 0) { startCol = 0; }
         if (endCol === void 0) { endCol = null; }
         var lineString = '';
-        var widthAdjustedStartCol = startCol;
-        var widthAdjustedEndCol = endCol;
         var line = this.lines.get(lineIndex);
+        if (!line) {
+            return '';
+        }
+        var startIndex = startCol;
+        endCol = endCol || line.length;
+        var endIndex = endCol;
         for (var i = 0; i < line.length; i++) {
             var char = line[i];
             lineString += char[exports.CHAR_DATA_CHAR_INDEX];
             if (char[exports.CHAR_DATA_WIDTH_INDEX] === 0) {
                 if (startCol >= i) {
-                    widthAdjustedStartCol--;
+                    startIndex--;
                 }
                 if (endCol >= i) {
-                    widthAdjustedEndCol--;
+                    endIndex--;
+                }
+            }
+            else {
+                if (char[exports.CHAR_DATA_CHAR_INDEX].length > 1) {
+                    if (startCol > i) {
+                        startIndex += char[exports.CHAR_DATA_CHAR_INDEX].length - 1;
+                    }
+                    if (endCol > i) {
+                        endIndex += char[exports.CHAR_DATA_CHAR_INDEX].length - 1;
+                    }
                 }
             }
         }
-        var finalEndCol = widthAdjustedEndCol || line.length;
         if (trimRight) {
             var rightWhitespaceIndex = lineString.search(/\s+$/);
             if (rightWhitespaceIndex !== -1) {
-                finalEndCol = Math.min(finalEndCol, rightWhitespaceIndex);
+                endIndex = Math.min(endIndex, rightWhitespaceIndex);
             }
-            if (finalEndCol <= widthAdjustedStartCol) {
+            if (endIndex <= startIndex) {
                 return '';
             }
         }
-        return lineString.substring(widthAdjustedStartCol, finalEndCol);
+        return lineString.substring(startIndex, endIndex);
     };
     Buffer.prototype.setupTabStops = function (i) {
         if (i != null) {
@@ -1666,7 +1679,7 @@ var Linkifier = (function (_super) {
         }
         else {
             this._rowsToLinkify.start = this._rowsToLinkify.start < start ? this._rowsToLinkify.start : start;
-            this._rowsToLinkify.end = this._rowsToLinkify.end < end ? this._rowsToLinkify.end : end;
+            this._rowsToLinkify.end = this._rowsToLinkify.end > end ? this._rowsToLinkify.end : end;
         }
         this._mouseZoneManager.clearAll(start, end);
         if (this._rowsTimeoutId) {
@@ -1750,7 +1763,7 @@ var Linkifier = (function (_super) {
         var uri = match[typeof matcher.matchIndex !== 'number' ? 0 : matcher.matchIndex];
         var index = text.indexOf(uri);
         if (matcher.validationCallback) {
-            matcher.validationCallback(text, function (isValid) {
+            matcher.validationCallback(uri, function (isValid) {
                 if (_this._rowsTimeoutId) {
                     return;
                 }
@@ -2311,7 +2324,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var Mouse = require("./utils/Mouse");
+var MouseHelper_1 = require("./utils/MouseHelper");
 var Browser = require("./utils/Browser");
 var EventEmitter_1 = require("./EventEmitter");
 var SelectionModel_1 = require("./SelectionModel");
@@ -2451,7 +2464,7 @@ var SelectionManager = (function (_super) {
         }
     };
     SelectionManager.prototype._getMouseBufferCoords = function (event) {
-        var coords = Mouse.getCoords(event, this._terminal.element, this._charMeasure, this._terminal.options.lineHeight, this._terminal.cols, this._terminal.rows, true);
+        var coords = this._terminal.mouseHelper.getCoords(event, this._terminal.element, this._charMeasure, this._terminal.options.lineHeight, this._terminal.cols, this._terminal.rows, true);
         if (!coords) {
             return null;
         }
@@ -2461,7 +2474,7 @@ var SelectionManager = (function (_super) {
         return coords;
     };
     SelectionManager.prototype._getMouseEventScrollAmount = function (event) {
-        var offset = Mouse.getCoordsRelativeToElement(event, this._terminal.element)[1];
+        var offset = MouseHelper_1.MouseHelper.getCoordsRelativeToElement(event, this._terminal.element)[1];
         var terminalHeight = this._terminal.rows * Math.ceil(this._charMeasure.height * this._terminal.options.lineHeight);
         if (offset >= 0 && offset <= terminalHeight) {
             return 0;
@@ -2618,6 +2631,9 @@ var SelectionManager = (function (_super) {
             if (char[Buffer_1.CHAR_DATA_WIDTH_INDEX] === 0) {
                 charIndex--;
             }
+            else if (char[Buffer_1.CHAR_DATA_CHAR_INDEX].length > 1 && coords[0] !== i) {
+                charIndex += char[Buffer_1.CHAR_DATA_CHAR_INDEX].length - 1;
+            }
         }
         return charIndex;
     };
@@ -2634,11 +2650,13 @@ var SelectionManager = (function (_super) {
             return null;
         }
         var line = this._buffer.translateBufferLineToString(coords[1], false);
-        var endIndex = this._convertViewportColToCharacterIndex(bufferLine, coords);
-        var startIndex = endIndex;
+        var startIndex = this._convertViewportColToCharacterIndex(bufferLine, coords);
+        var endIndex = startIndex;
         var charOffset = coords[0] - startIndex;
         var leftWideCharCount = 0;
         var rightWideCharCount = 0;
+        var leftLongCharOffset = 0;
+        var rightLongCharOffset = 0;
         if (line.charAt(startIndex) === ' ') {
             while (startIndex > 0 && line.charAt(startIndex - 1) === ' ') {
                 startIndex--;
@@ -2658,25 +2676,48 @@ var SelectionManager = (function (_super) {
                 rightWideCharCount++;
                 endCol++;
             }
-            while (startIndex > 0 && !this._isCharWordSeparator(line.charAt(startIndex - 1))) {
-                if (bufferLine[startCol - 1][Buffer_1.CHAR_DATA_WIDTH_INDEX] === 0) {
+            if (bufferLine[endCol][Buffer_1.CHAR_DATA_CHAR_INDEX].length > 1) {
+                rightLongCharOffset += bufferLine[endCol][Buffer_1.CHAR_DATA_CHAR_INDEX].length - 1;
+                endIndex += bufferLine[endCol][Buffer_1.CHAR_DATA_CHAR_INDEX].length - 1;
+            }
+            while (startCol > 0 && startIndex > 0 && !this._isCharWordSeparator(bufferLine[startCol - 1])) {
+                var char = bufferLine[startCol - 1];
+                if (char[Buffer_1.CHAR_DATA_WIDTH_INDEX] === 0) {
                     leftWideCharCount++;
                     startCol--;
+                }
+                else if (char[Buffer_1.CHAR_DATA_CHAR_INDEX].length > 1) {
+                    leftLongCharOffset += char[Buffer_1.CHAR_DATA_CHAR_INDEX].length - 1;
+                    startIndex -= char[Buffer_1.CHAR_DATA_CHAR_INDEX].length - 1;
                 }
                 startIndex--;
                 startCol--;
             }
-            while (endIndex + 1 < line.length && !this._isCharWordSeparator(line.charAt(endIndex + 1))) {
-                if (bufferLine[endCol + 1][Buffer_1.CHAR_DATA_WIDTH_INDEX] === 2) {
+            while (endCol < bufferLine.length && endIndex + 1 < line.length && !this._isCharWordSeparator(bufferLine[endCol + 1])) {
+                var char = bufferLine[endCol + 1];
+                if (char[Buffer_1.CHAR_DATA_WIDTH_INDEX] === 2) {
                     rightWideCharCount++;
                     endCol++;
+                }
+                else if (char[Buffer_1.CHAR_DATA_CHAR_INDEX].length > 1) {
+                    rightLongCharOffset += char[Buffer_1.CHAR_DATA_CHAR_INDEX].length - 1;
+                    endIndex += char[Buffer_1.CHAR_DATA_CHAR_INDEX].length - 1;
                 }
                 endIndex++;
                 endCol++;
             }
         }
-        var start = startIndex + charOffset - leftWideCharCount;
-        var length = Math.min(endIndex - startIndex + leftWideCharCount + rightWideCharCount + 1, this._terminal.cols);
+        endIndex++;
+        var start = startIndex
+            + charOffset
+            - leftWideCharCount
+            + leftLongCharOffset;
+        var length = Math.min(this._terminal.cols, endIndex
+            - startIndex
+            + leftWideCharCount
+            + rightWideCharCount
+            - leftLongCharOffset
+            - rightLongCharOffset);
         return { start: start, length: length };
     };
     SelectionManager.prototype._selectWordAt = function (coords) {
@@ -2692,8 +2733,11 @@ var SelectionManager = (function (_super) {
             this._model.selectionEnd = [this._model.areSelectionValuesReversed() ? wordPosition.start : (wordPosition.start + wordPosition.length), coords[1]];
         }
     };
-    SelectionManager.prototype._isCharWordSeparator = function (char) {
-        return WORD_SEPARATORS.indexOf(char) >= 0;
+    SelectionManager.prototype._isCharWordSeparator = function (charData) {
+        if (charData[Buffer_1.CHAR_DATA_WIDTH_INDEX] === 0) {
+            return false;
+        }
+        return WORD_SEPARATORS.indexOf(charData[Buffer_1.CHAR_DATA_CHAR_INDEX]) >= 0;
     };
     SelectionManager.prototype._selectLineAt = function (line) {
         this._model.selectionStart = [0, line];
@@ -2705,7 +2749,7 @@ exports.SelectionManager = SelectionManager;
 
 
 
-},{"./Buffer":1,"./EventEmitter":6,"./SelectionModel":11,"./utils/Browser":28,"./utils/Mouse":32}],11:[function(require,module,exports){
+},{"./Buffer":1,"./EventEmitter":6,"./SelectionModel":11,"./utils/Browser":28,"./utils/MouseHelper":32}],11:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var SelectionModel = (function () {
@@ -2756,6 +2800,9 @@ var SelectionModel = (function () {
     SelectionModel.prototype.areSelectionValuesReversed = function () {
         var start = this.selectionStart;
         var end = this.selectionEnd;
+        if (!start || !end) {
+            return false;
+        }
         return start[1] > end[1] || (start[1] === end[1] && start[0] > end[0]);
     };
     SelectionModel.prototype.onTrim = function (amount) {
@@ -2807,7 +2854,7 @@ var Linkifier_1 = require("./Linkifier");
 var SelectionManager_1 = require("./SelectionManager");
 var CharMeasure_1 = require("./utils/CharMeasure");
 var Browser = require("./utils/Browser");
-var Mouse_1 = require("./utils/Mouse");
+var MouseHelper_1 = require("./utils/MouseHelper");
 var Sounds_1 = require("./utils/Sounds");
 var ColorManager_1 = require("./renderer/ColorManager");
 var MouseZoneManager_1 = require("./input/MouseZoneManager");
@@ -3159,6 +3206,7 @@ var Terminal = (function (_super) {
             _this.selectionManager.refresh();
         });
         this.viewportElement.addEventListener('scroll', function () { return _this.selectionManager.refresh(); });
+        this.mouseHelper = new MouseHelper_1.MouseHelper(this.renderer);
         this.charMeasure.measure(this.options);
         this.refresh(0, this.rows - 1);
         this.initGlobal();
@@ -3191,7 +3239,7 @@ var Terminal = (function (_super) {
             var button;
             var pos;
             button = getButton(ev);
-            pos = Mouse_1.getRawByteCoords(ev, self.element, self.charMeasure, self.options.lineHeight, self.cols, self.rows);
+            pos = self.mouseHelper.getRawByteCoords(ev, self.element, self.charMeasure, self.options.lineHeight, self.cols, self.rows);
             if (!pos)
                 return;
             sendEvent(button, pos);
@@ -3208,7 +3256,7 @@ var Terminal = (function (_super) {
         }
         function sendMove(ev) {
             var button = pressed;
-            var pos = Mouse_1.getRawByteCoords(ev, self.element, self.charMeasure, self.options.lineHeight, self.cols, self.rows);
+            var pos = self.mouseHelper.getRawByteCoords(ev, self.element, self.charMeasure, self.options.lineHeight, self.cols, self.rows);
             if (!pos)
                 return;
             button += 32;
@@ -4246,7 +4294,7 @@ function matchColor_(r1, g1, b1) {
 
 
 
-},{"./BufferSet":2,"./CompositionHelper":4,"./EscapeSequences":5,"./EventEmitter":6,"./InputHandler":7,"./Linkifier":8,"./Parser":9,"./SelectionManager":10,"./Viewport":14,"./handlers/AltClickHandler":15,"./handlers/Clipboard":16,"./input/MouseZoneManager":17,"./renderer/CharAtlas":19,"./renderer/ColorManager":20,"./renderer/Renderer":24,"./utils/Browser":28,"./utils/CharMeasure":29,"./utils/Mouse":32,"./utils/Sounds":33}],13:[function(require,module,exports){
+},{"./BufferSet":2,"./CompositionHelper":4,"./EscapeSequences":5,"./EventEmitter":6,"./InputHandler":7,"./Linkifier":8,"./Parser":9,"./SelectionManager":10,"./Viewport":14,"./handlers/AltClickHandler":15,"./handlers/Clipboard":16,"./input/MouseZoneManager":17,"./renderer/CharAtlas":19,"./renderer/ColorManager":20,"./renderer/Renderer":24,"./utils/Browser":28,"./utils/CharMeasure":29,"./utils/MouseHelper":32,"./utils/Sounds":33}],13:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var LinkHoverEventTypes;
@@ -4355,11 +4403,11 @@ exports.Viewport = Viewport;
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var EscapeSequences_1 = require("../EscapeSequences");
-var Mouse = require("../utils/Mouse");
+var MouseHelper = require("../utils/MouseHelper");
 var AltClickHandler = (function () {
     function AltClickHandler(mouseEvent, terminal) {
         this._terminal = terminal;
-        _a = Mouse.getCoords((this._mouseEvent = mouseEvent), this._terminal.element, this._terminal.charMeasure, this._terminal.options.lineHeight, this._terminal.cols, this._terminal.rows, true).map(function (coordinate) {
+        _a = MouseHelper.getCoords((this._mouseEvent = mouseEvent), this._terminal.element, this._terminal.charMeasure, this._terminal.options.lineHeight, this._terminal.cols, this._terminal.rows, true).map(function (coordinate) {
             return coordinate - 1;
         }), this._mouseCol = _a[0], this._mouseRow = _a[1];
         var _a;
@@ -4455,7 +4503,7 @@ exports.AltClickHandler = AltClickHandler;
 
 
 
-},{"../EscapeSequences":5,"../utils/Mouse":32}],16:[function(require,module,exports){
+},{"../EscapeSequences":5,"../utils/MouseHelper":32}],16:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function prepareTextForTerminal(text, isMSWindows) {
@@ -4529,7 +4577,6 @@ exports.rightClickHandler = rightClickHandler;
 },{}],17:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var Mouse_1 = require("../utils/Mouse");
 var HOVER_DURATION = 500;
 var MouseZoneManager = (function () {
     function MouseZoneManager(_terminal) {
@@ -4540,6 +4587,7 @@ var MouseZoneManager = (function () {
         this._tooltipTimeout = null;
         this._currentZone = null;
         this._lastHoverCoords = [null, null];
+        this._terminal.element.addEventListener('mousedown', function (e) { return _this._onMouseDown(e); });
         this._mouseMoveListener = function (e) { return _this._onMouseMove(e); };
         this._clickListener = function (e) { return _this._onClick(e); };
     }
@@ -4553,9 +4601,13 @@ var MouseZoneManager = (function () {
         if (this._zones.length === 0) {
             return;
         }
+        if (!end) {
+            start = 0;
+            end = this._terminal.rows - 1;
+        }
         for (var i = 0; i < this._zones.length; i++) {
             var zone = this._zones[i];
-            if (zone.y >= start && zone.y <= end) {
+            if (zone.y > start && zone.y <= end + 1) {
                 if (this._currentZone && this._currentZone === zone) {
                     this._currentZone.leaveCallback();
                     this._currentZone = null;
@@ -4616,15 +4668,26 @@ var MouseZoneManager = (function () {
             zone.tooltipCallback(e);
         }
     };
+    MouseZoneManager.prototype._onMouseDown = function (e) {
+        if (!this._areZonesActive) {
+            return;
+        }
+        var zone = this._findZoneEventAt(e);
+        if (zone) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+        }
+    };
     MouseZoneManager.prototype._onClick = function (e) {
         var zone = this._findZoneEventAt(e);
         if (zone) {
             zone.clickCallback(e);
             e.preventDefault();
+            e.stopImmediatePropagation();
         }
     };
     MouseZoneManager.prototype._findZoneEventAt = function (e) {
-        var coords = Mouse_1.getCoords(e, this._terminal.element, this._terminal.charMeasure, this._terminal.options.lineHeight, this._terminal.cols, this._terminal.rows);
+        var coords = this._terminal.mouseHelper.getCoords(e, this._terminal.element, this._terminal.charMeasure, this._terminal.options.lineHeight, this._terminal.cols, this._terminal.rows);
         for (var i = 0; i < this._zones.length; i++) {
             var zone = this._zones[i];
             if (zone.y === coords[1] && zone.x1 <= coords[0] && zone.x2 > coords[0]) {
@@ -4653,7 +4716,7 @@ exports.MouseZone = MouseZone;
 
 
 
-},{"../utils/Mouse":32}],18:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var CharAtlas_1 = require("./CharAtlas");
@@ -4666,7 +4729,7 @@ var BaseRenderLayer = (function () {
         this._canvas = document.createElement('canvas');
         this._canvas.id = "xterm-" + id + "-layer";
         this._canvas.style.zIndex = zIndex.toString();
-        this._ctx = this._canvas.getContext('2d', { _alpha: _alpha });
+        this._ctx = this._canvas.getContext('2d', { alpha: _alpha });
         this._ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
         if (!_alpha) {
             this.clearAll();
@@ -4684,6 +4747,9 @@ var BaseRenderLayer = (function () {
     };
     BaseRenderLayer.prototype._refreshCharAtlas = function (terminal, colorSet) {
         var _this = this;
+        if (this._scaledCharWidth <= 0 && this._scaledCharHeight <= 0) {
+            return;
+        }
         this._charAtlas = null;
         var result = CharAtlas_1.acquireCharAtlas(terminal, this._colors, this._scaledCharWidth, this._scaledCharHeight);
         if (result instanceof HTMLCanvasElement) {
@@ -4709,25 +4775,19 @@ var BaseRenderLayer = (function () {
             this._refreshCharAtlas(terminal, this._colors);
         }
     };
-    BaseRenderLayer.prototype._getCellLeft = function (x) {
-        return Math.round(x * this._scaledCharWidth);
-    };
     BaseRenderLayer.prototype.fillCells = function (x, y, width, height) {
-        var cellLeft = this._getCellLeft(x);
-        this._ctx.fillRect(cellLeft, y * this._scaledLineHeight, this._getCellLeft(x + width) - cellLeft, height * this._scaledLineHeight);
+        this._ctx.fillRect(x * this._scaledCharWidth, y * this._scaledLineHeight, width * this._scaledCharWidth, height * this._scaledLineHeight);
     };
     BaseRenderLayer.prototype.fillBottomLineAtCells = function (x, y, width) {
         if (width === void 0) { width = 1; }
-        var cellLeft = this._getCellLeft(x);
-        this._ctx.fillRect(cellLeft, (y + 1) * this._scaledLineHeight - window.devicePixelRatio - 1, this._getCellLeft(x + width) - cellLeft, window.devicePixelRatio);
+        this._ctx.fillRect(x * this._scaledCharWidth, (y + 1) * this._scaledLineHeight - window.devicePixelRatio - 1, width * this._scaledCharWidth, window.devicePixelRatio);
     };
     BaseRenderLayer.prototype.fillLeftLineAtCell = function (x, y) {
-        this._ctx.fillRect(this._getCellLeft(x), y * this._scaledLineHeight, window.devicePixelRatio, this._scaledLineHeight);
+        this._ctx.fillRect(x * this._scaledCharWidth, y * this._scaledLineHeight, window.devicePixelRatio, this._scaledLineHeight);
     };
     BaseRenderLayer.prototype.strokeRectAtCell = function (x, y, width, height) {
-        var cellLeft = this._getCellLeft(x);
         this._ctx.lineWidth = window.devicePixelRatio;
-        this._ctx.strokeRect(cellLeft + window.devicePixelRatio / 2, y * this._scaledLineHeight + (window.devicePixelRatio / 2), this._getCellLeft(x + width) - cellLeft - window.devicePixelRatio, (height * this._scaledLineHeight) - window.devicePixelRatio);
+        this._ctx.strokeRect(x * this._scaledCharWidth + window.devicePixelRatio / 2, y * this._scaledLineHeight + (window.devicePixelRatio / 2), width * this._scaledCharWidth - window.devicePixelRatio, (height * this._scaledLineHeight) - window.devicePixelRatio);
     };
     BaseRenderLayer.prototype.clearAll = function () {
         if (this._alpha) {
@@ -4739,13 +4799,12 @@ var BaseRenderLayer = (function () {
         }
     };
     BaseRenderLayer.prototype.clearCells = function (x, y, width, height) {
-        var cellLeft = this._getCellLeft(x);
         if (this._alpha) {
-            this._ctx.clearRect(cellLeft, y * this._scaledLineHeight, this._getCellLeft(x + width) - cellLeft, height * this._scaledLineHeight);
+            this._ctx.clearRect(x * this._scaledCharWidth, y * this._scaledLineHeight, width * this._scaledCharWidth, height * this._scaledLineHeight);
         }
         else {
             this._ctx.fillStyle = this._colors.background;
-            this._ctx.fillRect(cellLeft, y * this._scaledLineHeight, this._getCellLeft(x + width) - cellLeft, height * this._scaledLineHeight);
+            this._ctx.fillRect(x * this._scaledCharWidth, y * this._scaledLineHeight, width * this._scaledCharWidth, height * this._scaledLineHeight);
         }
     };
     BaseRenderLayer.prototype.fillCharTrueColor = function (terminal, charData, x, y) {
@@ -4757,9 +4816,6 @@ var BaseRenderLayer = (function () {
         this._ctx.fillText(charData[Buffer_1.CHAR_DATA_CHAR_INDEX], x * this._scaledCharWidth, y * this._scaledCharHeight);
     };
     BaseRenderLayer.prototype.drawChar = function (terminal, char, code, width, x, y, fg, bg, bold) {
-        if (width === 2) {
-            this.clearCells(x + 1, y, 1, 1);
-        }
         var colorIndex = 0;
         if (fg < 256) {
             colorIndex = fg + 2;
@@ -4773,10 +4829,10 @@ var BaseRenderLayer = (function () {
         var isBasicColor = (colorIndex > 1 && fg < 16);
         var isDefaultColor = fg >= 256;
         var isDefaultBackground = bg >= 256;
-        if (isAscii && (isBasicColor || isDefaultColor) && isDefaultBackground) {
+        if (this._charAtlas && isAscii && (isBasicColor || isDefaultColor) && isDefaultBackground) {
             var charAtlasCellWidth = this._scaledCharWidth + CharAtlas_1.CHAR_ATLAS_CELL_SPACING;
             var charAtlasCellHeight = this._scaledCharHeight + CharAtlas_1.CHAR_ATLAS_CELL_SPACING;
-            this._ctx.drawImage(this._charAtlas, code * charAtlasCellWidth, colorIndex * charAtlasCellHeight, this._scaledCharWidth, this._scaledCharHeight, x * this._scaledCharWidth, y * this._scaledLineHeight + this._scaledLineDrawY, this._scaledCharWidth, this._scaledCharHeight);
+            this._ctx.drawImage(this._charAtlas, code * charAtlasCellWidth, colorIndex * charAtlasCellHeight, charAtlasCellWidth, this._scaledCharHeight, x * this._scaledCharWidth, y * this._scaledLineHeight + this._scaledLineDrawY, this._scaledCharWidth, this._scaledCharHeight);
         }
         else {
             this._drawUncachedChar(terminal, char, width, fg, x, y, bold);
@@ -4799,7 +4855,7 @@ var BaseRenderLayer = (function () {
             this._ctx.fillStyle = this._colors.foreground;
         }
         this._ctx.beginPath();
-        this._ctx.rect(x * this._scaledCharWidth, y * this._scaledLineHeight + this._scaledLineDrawY, width * this._scaledCharWidth, this._scaledCharHeight);
+        this._ctx.rect(0, y * this._scaledLineHeight + this._scaledLineDrawY, terminal.cols * this._scaledCharWidth, this._scaledCharHeight);
         this._ctx.clip();
         this._ctx.fillText(char, x * this._scaledCharWidth, y * this._scaledLineHeight + this._scaledLineDrawY);
         this._ctx.restore();
@@ -4908,12 +4964,22 @@ var CharAtlasGenerator = (function () {
         this._ctx.font = fontSize * window.devicePixelRatio + "px " + fontFamily;
         this._ctx.textBaseline = 'top';
         for (var i = 0; i < 256; i++) {
+            this._ctx.save();
+            this._ctx.beginPath();
+            this._ctx.rect(i * cellWidth, 0, cellWidth, cellHeight);
+            this._ctx.clip();
             this._ctx.fillText(String.fromCharCode(i), i * cellWidth, 0);
+            this._ctx.restore();
         }
         this._ctx.save();
         this._ctx.font = "bold " + this._ctx.font;
         for (var i = 0; i < 256; i++) {
+            this._ctx.save();
+            this._ctx.beginPath();
+            this._ctx.rect(i * cellWidth, cellHeight, cellWidth, cellHeight);
+            this._ctx.clip();
             this._ctx.fillText(String.fromCharCode(i), i * cellWidth, cellHeight);
+            this._ctx.restore();
         }
         this._ctx.restore();
         this._ctx.font = fontSize * window.devicePixelRatio + "px " + fontFamily;
@@ -4923,12 +4989,16 @@ var CharAtlasGenerator = (function () {
             }
             var y = (colorIndex + 2) * cellHeight;
             for (var i = 0; i < 256; i++) {
+                this._ctx.save();
+                this._ctx.beginPath();
+                this._ctx.rect(i * cellWidth, y, cellWidth, cellHeight);
+                this._ctx.clip();
                 this._ctx.fillStyle = ansiColors[colorIndex];
                 this._ctx.fillText(String.fromCharCode(i), i * cellWidth, y);
+                this._ctx.restore();
             }
         }
         this._ctx.restore();
-        var charAtlasImageData = this._ctx.getImageData(0, 0, this._canvas.width, this._canvas.height);
         if (!('createImageBitmap' in window) || Browser_1.isFirefox) {
             var result = this._canvas;
             this._canvas = this._document.createElement('canvas');
@@ -4936,9 +5006,23 @@ var CharAtlasGenerator = (function () {
             this._ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
             return result;
         }
+        var charAtlasImageData = this._ctx.getImageData(0, 0, this._canvas.width, this._canvas.height);
+        var r = parseInt(background.substr(1, 2), 16);
+        var g = parseInt(background.substr(3, 2), 16);
+        var b = parseInt(background.substr(5, 2), 16);
+        this._clearColor(charAtlasImageData, r, g, b);
         var promise = window.createImageBitmap(charAtlasImageData);
         this._ctx.clearRect(0, 0, this._canvas.width, this._canvas.height);
         return promise;
+    };
+    CharAtlasGenerator.prototype._clearColor = function (imageData, r, g, b) {
+        for (var offset = 0; offset < imageData.data.length; offset += 4) {
+            if (imageData.data[offset] === r &&
+                imageData.data[offset + 1] === g &&
+                imageData.data[offset + 2] === b) {
+                imageData.data[offset + 3] = 0;
+            }
+        }
     };
     return CharAtlasGenerator;
 }());
@@ -5003,7 +5087,7 @@ var ColorManager = (function () {
     }
     ColorManager.prototype.setTheme = function (theme) {
         this.colors.foreground = theme.foreground || DEFAULT_FOREGROUND;
-        this.colors.background = theme.background || DEFAULT_BACKGROUND;
+        this.colors.background = this._validateColor(theme.background, DEFAULT_BACKGROUND);
         this.colors.cursor = theme.cursor || DEFAULT_CURSOR;
         this.colors.cursorAccent = theme.cursorAccent || DEFAULT_CURSOR_ACCENT;
         this.colors.selection = theme.selection || DEFAULT_SELECTION;
@@ -5023,6 +5107,18 @@ var ColorManager = (function () {
         this.colors.ansi[13] = theme.brightMagenta || exports.DEFAULT_ANSI_COLORS[13];
         this.colors.ansi[14] = theme.brightCyan || exports.DEFAULT_ANSI_COLORS[14];
         this.colors.ansi[15] = theme.brightWhite || exports.DEFAULT_ANSI_COLORS[15];
+    };
+    ColorManager.prototype._validateColor = function (color, fallback) {
+        if (color.length === 7 && color.charAt(0) === '#') {
+            return color;
+        }
+        if (color.length === 4 && color.charAt(0) === '#') {
+            var r = color.charAt(1);
+            var g = color.charAt(2);
+            var b = color.charAt(3);
+            return "#" + r + r + g + g + b + b;
+        }
+        return fallback;
     };
     return ColorManager;
 }());
@@ -5135,6 +5231,9 @@ var CursorRenderLayer = (function (_super) {
             return;
         }
         var charData = terminal.buffer.lines.get(cursorY)[terminal.buffer.x];
+        if (!charData) {
+            return;
+        }
         if (!terminal.isFocused) {
             this._clearCursor();
             this._ctx.save();
@@ -5440,7 +5539,9 @@ var Renderer = (function (_super) {
             scaledCanvasWidth: null,
             scaledCanvasHeight: null,
             canvasWidth: null,
-            canvasHeight: null
+            canvasHeight: null,
+            actualCellWidth: null,
+            actualCellHeight: null
         };
         _this._devicePixelRatio = window.devicePixelRatio;
         return _this;
@@ -5474,6 +5575,8 @@ var Renderer = (function (_super) {
         this.dimensions.scaledCanvasWidth = this._terminal.cols * this.dimensions.scaledCharWidth;
         this.dimensions.canvasHeight = Math.round(this.dimensions.scaledCanvasHeight / window.devicePixelRatio);
         this.dimensions.canvasWidth = Math.round(this.dimensions.scaledCanvasWidth / window.devicePixelRatio);
+        this.dimensions.actualCellHeight = this.dimensions.canvasHeight / this._terminal.rows;
+        this.dimensions.actualCellWidth = this.dimensions.canvasWidth / this._terminal.cols;
         this._renderLayers.forEach(function (l) { return l.resize(_this._terminal, _this.dimensions, didCharSizeChange); });
         this._terminal.refresh(0, this._terminal.rows - 1);
         this.emit('resize', {
@@ -5669,6 +5772,7 @@ var TextRenderLayer = (function (_super) {
         for (var y = startRow; y <= endRow; y++) {
             var row = y + terminal.buffer.ydisp;
             var line = terminal.buffer.lines.get(row);
+            this.clearCells(0, y, terminal.cols, 1);
             for (var x = 0; x < terminal.cols; x++) {
                 var charData = line[x];
                 var code = charData[Buffer_1.CHAR_DATA_CODE_INDEX];
@@ -5676,7 +5780,6 @@ var TextRenderLayer = (function (_super) {
                 var attr = charData[Buffer_1.CHAR_DATA_ATTR_INDEX];
                 var width = charData[Buffer_1.CHAR_DATA_WIDTH_INDEX];
                 if (width === 0) {
-                    this._state.cache[x][y] = null;
                     continue;
                 }
                 if (code === 32) {
@@ -5687,16 +5790,6 @@ var TextRenderLayer = (function (_super) {
                         }
                     }
                 }
-                var state = this._state.cache[x][y];
-                if (state && state[Buffer_1.CHAR_DATA_CHAR_INDEX] === char && state[Buffer_1.CHAR_DATA_ATTR_INDEX] === attr) {
-                    this._state.cache[x][y] = charData;
-                    continue;
-                }
-                var wasInverted = !!(state && state[Buffer_1.CHAR_DATA_ATTR_INDEX] && state[Buffer_1.CHAR_DATA_ATTR_INDEX] >> 18 & Types_1.FLAGS.INVERSE);
-                if (state && !(state[Buffer_1.CHAR_DATA_CODE_INDEX] === 32 && (state[Buffer_1.CHAR_DATA_ATTR_INDEX] & 0x1ff) >= 256 && !wasInverted)) {
-                    this._clearChar(x, y);
-                }
-                this._state.cache[x][y] = charData;
                 var flags = attr >> 18;
                 var bg = attr & 0x1ff;
                 var isDefaultBackground = bg >= 256;
@@ -5706,11 +5799,8 @@ var TextRenderLayer = (function (_super) {
                     continue;
                 }
                 if (width !== 0 && this._isOverlapping(charData)) {
-                    this._state.cache[x][y] = OVERLAP_OWNED_CHAR_DATA;
-                    if (x < line.length && line[x + 1][Buffer_1.CHAR_DATA_CODE_INDEX] === 32) {
+                    if (x < line.length - 1 && line[x + 1][Buffer_1.CHAR_DATA_CODE_INDEX] === 32) {
                         width = 2;
-                        this._clearChar(x + 1, y);
-                        this._state.cache[x + 1][y] = OVERLAP_OWNED_CHAR_DATA;
                     }
                 }
                 var fg = (attr >> 9) & 0x1ff;
@@ -5724,6 +5814,8 @@ var TextRenderLayer = (function (_super) {
                     if (bg === 257) {
                         bg = BaseRenderLayer_1.INVERTED_DEFAULT_COLOR;
                     }
+                }
+                if (width === 2) {
                 }
                 if (bg < 256) {
                     this._ctx.save();
@@ -5756,6 +5848,9 @@ var TextRenderLayer = (function (_super) {
         }
     };
     TextRenderLayer.prototype._isOverlapping = function (charData) {
+        if (charData[Buffer_1.CHAR_DATA_WIDTH_INDEX] !== 1) {
+            return false;
+        }
         var code = charData[Buffer_1.CHAR_DATA_CODE_INDEX];
         if (code < 256) {
             return false;
@@ -5830,7 +5925,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var EventEmitter_js_1 = require("../EventEmitter.js");
+var EventEmitter_1 = require("../EventEmitter");
 var CharMeasure = (function (_super) {
     __extends(CharMeasure, _super);
     function CharMeasure(document, parentElement) {
@@ -5884,12 +5979,12 @@ var CharMeasure = (function (_super) {
         }
     };
     return CharMeasure;
-}(EventEmitter_js_1.EventEmitter));
+}(EventEmitter_1.EventEmitter));
 exports.CharMeasure = CharMeasure;
 
 
 
-},{"../EventEmitter.js":6}],30:[function(require,module,exports){
+},{"../EventEmitter":6}],30:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -6073,44 +6168,55 @@ exports.contains = contains;
 },{}],32:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-function getCoordsRelativeToElement(event, element) {
-    if (event.pageX == null) {
-        return null;
+var MouseHelper = (function () {
+    function MouseHelper(_renderer) {
+        this._renderer = _renderer;
     }
-    var x = event.pageX;
-    var y = event.pageY;
-    while (element) {
-        x -= element.offsetLeft;
-        y -= element.offsetTop;
-        element = 'offsetParent' in element ? element.offsetParent : element.parentElement;
-    }
-    return [x, y];
-}
-exports.getCoordsRelativeToElement = getCoordsRelativeToElement;
-function getCoords(event, element, charMeasure, lineHeight, colCount, rowCount, isSelection) {
-    if (!charMeasure.width || !charMeasure.height) {
-        return null;
-    }
-    var coords = getCoordsRelativeToElement(event, element);
-    if (!coords) {
-        return null;
-    }
-    coords[0] = Math.ceil((coords[0] + (isSelection ? charMeasure.width / 2 : 0)) / charMeasure.width);
-    coords[1] = Math.ceil(coords[1] / Math.ceil(charMeasure.height * lineHeight));
-    coords[0] = Math.min(Math.max(coords[0], 1), colCount);
-    coords[1] = Math.min(Math.max(coords[1], 1), rowCount);
-    return coords;
-}
-exports.getCoords = getCoords;
-function getRawByteCoords(event, element, charMeasure, lineHeight, colCount, rowCount) {
-    var coords = getCoords(event, element, charMeasure, lineHeight, colCount, rowCount);
-    var x = coords[0];
-    var y = coords[1];
-    x += 32;
-    y += 32;
-    return { x: x, y: y };
-}
-exports.getRawByteCoords = getRawByteCoords;
+    MouseHelper.getCoordsRelativeToElement = function (event, element) {
+        if (event.pageX == null) {
+            return null;
+        }
+        var originalElement = element;
+        var x = event.pageX;
+        var y = event.pageY;
+        while (element) {
+            x -= element.offsetLeft;
+            y -= element.offsetTop;
+            element = 'offsetParent' in element ? element.offsetParent : element.parentElement;
+        }
+        element = originalElement;
+        while (element && element !== element.ownerDocument.body) {
+            x += element.scrollLeft;
+            y += element.scrollTop;
+            element = element.parentElement;
+        }
+        return [x, y];
+    };
+    MouseHelper.prototype.getCoords = function (event, element, charMeasure, lineHeight, colCount, rowCount, isSelection) {
+        if (!charMeasure.width || !charMeasure.height) {
+            return null;
+        }
+        var coords = MouseHelper.getCoordsRelativeToElement(event, element);
+        if (!coords) {
+            return null;
+        }
+        coords[0] = Math.ceil((coords[0] + (isSelection ? this._renderer.dimensions.actualCellWidth / 2 : 0)) / this._renderer.dimensions.actualCellWidth);
+        coords[1] = Math.ceil(coords[1] / this._renderer.dimensions.actualCellHeight);
+        coords[0] = Math.min(Math.max(coords[0], 1), colCount);
+        coords[1] = Math.min(Math.max(coords[1], 1), rowCount);
+        return coords;
+    };
+    MouseHelper.prototype.getRawByteCoords = function (event, element, charMeasure, lineHeight, colCount, rowCount) {
+        var coords = this.getCoords(event, element, charMeasure, lineHeight, colCount, rowCount);
+        var x = coords[0];
+        var y = coords[1];
+        x += 32;
+        y += 32;
+        return { x: x, y: y };
+    };
+    return MouseHelper;
+}());
+exports.MouseHelper = MouseHelper;
 
 
 
