@@ -9,7 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
   let settings = configFile.contents
 
   fields.forEach((field) => {
-    document.querySelector('#' + field).value = settings[field]
+    if (settings[field]) {
+      document.querySelector('#' + field).value = settings[field]
+    }
   })
   colors.forEach((color) => {
     if (settings['theme'][color]) {

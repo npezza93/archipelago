@@ -11,97 +11,100 @@
    <div id="titlebar">Settings</div>
 
    <form>
-     <div class="standardSettingsContainer">
-       <div class="standardSettings">
-         <div style="padding-top: 75px;padding-bottom: 25px;">
-           <select name="cursorStyle" id="cursorStyle" class="mdc-select" style="width:100%;">
-             <option value="" selected>Choose a cursor style</option>
-             <option value="block">Block</option>
-             <option value="underline">Underline</option>
-             <option value="bar">Bar</option>
-           </select>
-         </div>
+     <div class="standardSettings">
+       <h4 style="margin-bottom:10px;padding-top:50px;text-align:center;width:100%;">General</h4>
 
-        <div class="switch-container">
-          <label for="cursorBlink" class="mdc-switch-label">Blink cursor</label>
-          <div class="mdc-switch">
-            <input type="checkbox" id="cursorBlink" value=true class="mdc-switch__native-control" />
-            <div class="mdc-switch__background">
-              <div class="mdc-switch__knob"></div>
-            </div>
+       <div style="padding-top: 25px;padding-bottom: 25px;">
+         <select name="cursorStyle" id="cursorStyle" class="mdc-select" style="width:100%;">
+           <option value="" selected>Choose a cursor style</option>
+           <option value="block">Block</option>
+           <option value="underline">Underline</option>
+           <option value="bar">Bar</option>
+         </select>
+       </div>
+
+      <div class="switch-container">
+        <label for="cursorBlink" class="mdc-switch-label">Blink cursor</label>
+        <div class="mdc-switch">
+          <input type="checkbox" id="cursorBlink" value=true class="mdc-switch__native-control" />
+          <div class="mdc-switch__background">
+            <div class="mdc-switch__knob"></div>
           </div>
         </div>
+      </div>
 
-         <div class="mdc-textfield mdc-textfield--upgraded" style="width: 100%;">
-           <input type="text" id="fontFamily" class="mdc-textfield__input">
-           <label class="mdc-textfield__label mdc-textfield__label--float-above" for="fontFamily">Font Family</label>
-         </div>
+       <div class="mdc-textfield mdc-textfield--upgraded" style="width: 100%;">
+         <input type="text" id="fontFamily" class="mdc-textfield__input">
+         <label class="mdc-textfield__label mdc-textfield__label--float-above" for="fontFamily">Font Family</label>
+       </div>
 
-         <div class="mdc-textfield mdc-textfield--upgraded" style="width: 100%;">
-           <input type="text" id="fontSize" class="mdc-textfield__input">
-           <label class="mdc-textfield__label mdc-textfield__label--float-above" for="fontSize">Font Size</label>
-         </div>
+       <div class="mdc-textfield mdc-textfield--upgraded" style="width: 100%;">
+         <input type="text" id="fontSize" class="mdc-textfield__input">
+         <label class="mdc-textfield__label mdc-textfield__label--float-above" for="fontSize">Font Size</label>
+       </div>
 
-         <div class="mdc-textfield mdc-textfield--upgraded" style="width: 100%;">
-           <input type="number" id="lineHeight" class="mdc-textfield__input" value=1 step="0.1" min=0>
-           <label class="mdc-textfield__label mdc-textfield__label--float-above" for="lineHeight">Line Height</label>
-         </div>
+       <div class="mdc-textfield mdc-textfield--upgraded" style="width: 100%;">
+         <input type="number" id="lineHeight" class="mdc-textfield__input" value=1 step="0.1" min=0>
+         <label class="mdc-textfield__label mdc-textfield__label--float-above" for="lineHeight">Line Height</label>
+       </div>
 
-         <div class="mdc-textfield mdc-textfield--upgraded" style="width: 100%;">
-           <input type="text" id="scrollback" class="mdc-textfield__input">
-           <label class="mdc-textfield__label mdc-textfield__label--float-above" for="scrollback">Scrollback</label>
-         </div>
+       <div class="mdc-textfield mdc-textfield--upgraded" style="width: 100%;">
+         <input type="text" id="scrollback" class="mdc-textfield__input">
+         <label class="mdc-textfield__label mdc-textfield__label--float-above" for="scrollback">Scrollback</label>
+       </div>
 
-         <div class="mdc-textfield mdc-textfield--upgraded" style="width: 100%;">
-           <input type="number" id="tabStopWidth" class="mdc-textfield__input" value=8>
-           <label class="mdc-textfield__label mdc-textfield__label--float-above" for="tabStopWidth">Tab Stop Width</label>
-         </div>
+       <div class="mdc-textfield mdc-textfield--upgraded" style="width: 100%;">
+         <input type="number" id="tabStopWidth" class="mdc-textfield__input" value=8>
+         <label class="mdc-textfield__label mdc-textfield__label--float-above" for="tabStopWidth">Tab Stop Width</label>
+       </div>
 
-         <div class="mdc-textfield mdc-textfield--upgraded" style="width: 100%;">
-           <input type="text" id="shell" class="mdc-textfield__input">
-           <label class="mdc-textfield__label mdc-textfield__label--float-above" for="shell">Shell (your system's login shell will be used by default)</label>
-         </div>
+       <div class="mdc-textfield mdc-textfield--upgraded" style="width: 100%;">
+         <input type="text" id="shell" class="mdc-textfield__input">
+         <label class="mdc-textfield__label mdc-textfield__label--float-above" for="shell">Shell</label>
+         <div class="mdc-textfield__bottom-line"></div>
+       </div>
+       <p class="mdc-textfield-helptext mdc-textfield-helptext--persistent">Your system's login shell will be used by default</p>
 
-         <div class="mdc-textfield mdc-textfield--upgraded" style="width: 100%;">
-           <input type="text" id="shellArgs" class="mdc-textfield__input" value="--login">
-           <label class="mdc-textfield__label mdc-textfield__label--float-above" for="shellArgs">Shell Arguments</label>
-         </div>
+       <div class="mdc-textfield mdc-textfield--upgraded" style="width: 100%;">
+         <input type="text" id="shellArgs" class="mdc-textfield__input" value="--login">
+         <label class="mdc-textfield__label mdc-textfield__label--float-above" for="shellArgs">Shell Arguments</label>
+       </div>
+       <p class="mdc-textfield-helptext mdc-textfield-helptext--persistent">Comma seperated</p>
 
-         <div style="padding-top: 25px;">
-           <select name="bellStyle" id="bellStyle" class="mdc-select" style="width:100%;">
-             <option value="" selected>Choose a bell style</option>
-             <option value="none">None</option>
-             <option value="visual">Visual</option>
-             <option value="sound">Sound</option>
-             <option value="both">Both</option>
-           </select>
-         </div>
+       <div style="padding-top: 25px;">
+         <select name="bellStyle" id="bellStyle" class="mdc-select" style="width:100%;">
+           <option value="" selected>Choose a bell style</option>
+           <option value="none">None</option>
+           <option value="visual">Visual</option>
+           <option value="sound">Sound</option>
+           <option value="both">Both</option>
+         </select>
+       </div>
 
-         <div class="mdc-textfield mdc-textfield--upgraded" style="width: 100%;">
-           <input type="text" id="bellSound" class="mdc-textfield__input">
-           <label class="mdc-textfield__label mdc-textfield__label--float-above" for="bellSound">Bell sound (url or uri)</label>
-         </div>
+       <div class="mdc-textfield mdc-textfield--upgraded" style="width: 100%;">
+         <input type="text" id="bellSound" class="mdc-textfield__input">
+         <label class="mdc-textfield__label mdc-textfield__label--float-above" for="bellSound">Bell sound (url or uri)</label>
+       </div>
 
-         <div style="padding-top: 25px;">
-           <select name="vibrancy" id="vibrancy" class="mdc-select" style="width:100%;">
-             <option value="" selected>Vibrancy</option>
-             <option value="appearance-based">appearance-based</option>
-             <option value="light">light</option>
-             <option value="dark">dark</option>
-             <option value="titlebar">titlebar</option>
-             <option value="selection">selection</option>
-             <option value="menu">menu</option>
-             <option value="popover">popover</option>
-             <option value="sidebar">sidebar</option>
-             <option value="medium-light">medium-light</option>
-             <option value="ultra-dark">ultra-dark</option>
-           </select>
-         </div>
+       <div style="padding-top: 25px;">
+         <select name="vibrancy" id="vibrancy" class="mdc-select" style="width:100%;">
+           <option value="" selected>Vibrancy</option>
+           <option value="appearance-based">appearance-based</option>
+           <option value="light">light</option>
+           <option value="dark">dark</option>
+           <option value="titlebar">titlebar</option>
+           <option value="selection">selection</option>
+           <option value="menu">menu</option>
+           <option value="popover">popover</option>
+           <option value="sidebar">sidebar</option>
+           <option value="medium-light">medium-light</option>
+           <option value="ultra-dark">ultra-dark</option>
+         </select>
        </div>
      </div>
 
      <div class="theme">
-       <h4 style="padding-top:25px;text-align:center;width:100%;">Theme</h4>
+       <h4 style="padding-top:50px;text-align:center;width:100%;">Theme</h4>
 
        <div class="color-field">
          <label for="foreground">Foreground: </label>

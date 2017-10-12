@@ -81,7 +81,7 @@ function createWindow () {
           click: function() {
             if (settings === undefined || settings.isDestroyed()) {
               settings = new BrowserWindow({
-                width: 550,
+                width: 1100,
                 height: 600,
                 show: true,
                 titleBarStyle: 'hidden-inset',

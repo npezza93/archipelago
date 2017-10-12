@@ -19,9 +19,6 @@ html, body {
 
 body {
   margin: 0px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 #titlebar {
   height: 40px;
@@ -45,13 +42,11 @@ input, label {
 }
 
 form {
-  width: 450px;
   margin-bottom: 50px;
-}
-form .standardSettingsContainer {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 form .standardSettings {
   width: 250px;
@@ -73,6 +68,7 @@ form .standardSettings {
 .theme {
   display: flex;
   flex-direction: column;
+  width: 450px;
 }
 
 .color-field {
