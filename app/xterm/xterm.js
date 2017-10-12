@@ -683,6 +683,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var EscapeSequences_1 = require("./EscapeSequences");
 var Charsets_1 = require("./Charsets");
 var Buffer_1 = require("./Buffer");
+var Types_1 = require("./renderer/Types");
 var InputHandler = (function () {
     function InputHandler(_terminal) {
         this._terminal = _terminal;
@@ -1317,34 +1318,38 @@ var InputHandler = (function () {
                 bg = this._terminal.defAttr & 0x1ff;
             }
             else if (p === 1) {
-                flags |= 1;
+                flags |= Types_1.FLAGS.BOLD;
             }
             else if (p === 4) {
-                flags |= 2;
+                flags |= Types_1.FLAGS.UNDERLINE;
             }
             else if (p === 5) {
-                flags |= 4;
+                flags |= Types_1.FLAGS.BLINK;
             }
             else if (p === 7) {
-                flags |= 8;
+                flags |= Types_1.FLAGS.INVERSE;
             }
             else if (p === 8) {
-                flags |= 16;
+                flags |= Types_1.FLAGS.INVISIBLE;
+            }
+            else if (p === 2) {
+                flags |= Types_1.FLAGS.DIM;
             }
             else if (p === 22) {
-                flags &= ~1;
+                flags &= ~Types_1.FLAGS.BOLD;
+                flags &= ~Types_1.FLAGS.DIM;
             }
             else if (p === 24) {
-                flags &= ~2;
+                flags &= ~Types_1.FLAGS.UNDERLINE;
             }
             else if (p === 25) {
-                flags &= ~4;
+                flags &= ~Types_1.FLAGS.BLINK;
             }
             else if (p === 27) {
-                flags &= ~8;
+                flags &= ~Types_1.FLAGS.INVERSE;
             }
             else if (p === 28) {
-                flags &= ~16;
+                flags &= ~Types_1.FLAGS.INVISIBLE;
             }
             else if (p === 39) {
                 fg = (this._terminal.defAttr >> 9) & 0x1ff;
@@ -1616,7 +1621,7 @@ exports.wcwidth = (function (opts) {
 
 
 
-},{"./Buffer":1,"./Charsets":3,"./EscapeSequences":5}],8:[function(require,module,exports){
+},{"./Buffer":1,"./Charsets":3,"./EscapeSequences":5,"./renderer/Types":27}],8:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -4403,11 +4408,10 @@ exports.Viewport = Viewport;
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var EscapeSequences_1 = require("../EscapeSequences");
-var MouseHelper = require("../utils/MouseHelper");
 var AltClickHandler = (function () {
     function AltClickHandler(mouseEvent, terminal) {
         this._terminal = terminal;
-        _a = MouseHelper.getCoords((this._mouseEvent = mouseEvent), this._terminal.element, this._terminal.charMeasure, this._terminal.options.lineHeight, this._terminal.cols, this._terminal.rows, true).map(function (coordinate) {
+        _a = this._terminal.mouseHelper.getCoords((this._mouseEvent = mouseEvent), this._terminal.element, this._terminal.charMeasure, this._terminal.options.lineHeight, this._terminal.cols, this._terminal.rows, true).map(function (coordinate) {
             return coordinate - 1;
         }), this._mouseCol = _a[0], this._mouseRow = _a[1];
         var _a;
@@ -4415,61 +4419,62 @@ var AltClickHandler = (function () {
     AltClickHandler.prototype.move = function () {
         if (!this._mouseEvent.altKey)
             return;
+        var keyboardArrows;
         if (this._terminal.buffer === this._terminal.buffers.normal) {
-            this._terminal.send(Array(this.horizontalCharCount()).join(this.horizontalCursorDirection));
+            keyboardArrows = this.buildArrowSequence(this.normalCharCount(), this.horizontalCursorCommand(this.normalMoveForward()));
         }
         else {
-            var str = Array(this.verticalCharCount() + 1).join(this.verticalCursorDirection);
-            str += Array(this.horizontalCharCount(false)).join(this.horizontalCursorDirection);
-            this._terminal.send(str);
+            keyboardArrows = this.buildArrowSequence(this.altVerticalCharCount(), this.verticalCursorCommand(this.altMoveUpward()));
+            keyboardArrows += this.buildArrowSequence(this.altHorizontalCharCount(), this.horizontalCursorCommand(this.altMoveForward()));
         }
+        this._terminal.send(keyboardArrows);
     };
-    Object.defineProperty(AltClickHandler.prototype, "horizontalCursorDirection", {
-        get: function () {
-            var mod = this._terminal.applicationCursor ? 'O' : '[';
-            if (this.moveForward()) {
-                return EscapeSequences_1.C0.ESC + mod + 'C';
-            }
-            else {
-                return EscapeSequences_1.C0.ESC + mod + 'D';
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(AltClickHandler.prototype, "verticalCursorDirection", {
-        get: function () {
-            var mod = this._terminal.applicationCursor ? 'O' : '[';
-            if (this.moveUpward()) {
-                return EscapeSequences_1.C0.ESC + mod + 'A';
-            }
-            else {
-                return EscapeSequences_1.C0.ESC + mod + 'B';
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    AltClickHandler.prototype.moveForward = function () {
+    AltClickHandler.prototype.buildArrowSequence = function (count, sequence) {
+        return Array(count).join(sequence);
+    };
+    AltClickHandler.prototype.altMoveUpward = function () {
+        return this._terminal.buffer.y > this._mouseRow;
+    };
+    AltClickHandler.prototype.altMoveForward = function () {
+        return this._terminal.buffer.x < this._mouseCol;
+    };
+    AltClickHandler.prototype.normalMoveForward = function () {
         return (this._terminal.buffer.x < this._mouseCol &&
             this._terminal.buffer.y <= this._mouseRow) ||
             (this._terminal.buffer.x >= this._mouseCol &&
                 this._terminal.buffer.y < this._mouseRow);
     };
-    AltClickHandler.prototype.moveUpward = function () {
-        return this._terminal.buffer.y > this._mouseRow;
+    AltClickHandler.prototype.horizontalCursorCommand = function (moveForward) {
+        var mod = this._terminal.applicationCursor ? 'O' : '[';
+        if (moveForward) {
+            return EscapeSequences_1.C0.ESC + mod + 'C';
+        }
+        else {
+            return EscapeSequences_1.C0.ESC + mod + 'D';
+        }
     };
-    AltClickHandler.prototype.verticalCharCount = function () {
-        return Math.abs(this._terminal.buffer.y - this._mouseRow);
+    AltClickHandler.prototype.verticalCursorCommand = function (moveUp) {
+        var mod = this._terminal.applicationCursor ? 'O' : '[';
+        if (moveUp) {
+            return EscapeSequences_1.C0.ESC + mod + 'A';
+        }
+        else {
+            return EscapeSequences_1.C0.ESC + mod + 'B';
+        }
     };
-    AltClickHandler.prototype.horizontalCharCount = function (measureRows) {
-        if (measureRows === void 0) { measureRows = true; }
+    AltClickHandler.prototype.altVerticalCharCount = function () {
+        return Math.abs(this._terminal.buffer.y - this._mouseRow) + 1;
+    };
+    AltClickHandler.prototype.altHorizontalCharCount = function () {
+        return Math.abs(this._terminal.buffer.x - this._mouseCol) + 1;
+    };
+    AltClickHandler.prototype.normalCharCount = function () {
         var currentX = this._terminal.buffer.x;
         var currentY = this._terminal.buffer.y;
         var startCol = this._terminal.buffer.x;
         var bufferStr = '';
-        while (currentX !== this._mouseCol || (currentY !== this._mouseRow && measureRows)) {
-            if (this.moveForward()) {
+        while (currentX !== this._mouseCol || (currentY !== this._mouseRow)) {
+            if (this.normalMoveForward()) {
                 currentX++;
                 if (currentX > this._terminal.cols - 1) {
                     bufferStr += this._terminal.buffer.translateBufferLineToString(currentY, false, startCol, currentX);
@@ -4488,7 +4493,7 @@ var AltClickHandler = (function () {
                 }
             }
         }
-        if (this.moveForward()) {
+        if (this.normalMoveForward()) {
             currentX++;
         }
         else {
@@ -4503,7 +4508,7 @@ exports.AltClickHandler = AltClickHandler;
 
 
 
-},{"../EscapeSequences":5,"../utils/MouseHelper":32}],16:[function(require,module,exports){
+},{"../EscapeSequences":5}],16:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function prepareTextForTerminal(text, isMSWindows) {
@@ -4722,6 +4727,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var CharAtlas_1 = require("./CharAtlas");
 var Buffer_1 = require("../Buffer");
 exports.INVERTED_DEFAULT_COLOR = -1;
+var DIM_OPACITY = 0.5;
 var BaseRenderLayer = (function () {
     function BaseRenderLayer(container, id, zIndex, _alpha, _colors) {
         this._alpha = _alpha;
@@ -4815,7 +4821,7 @@ var BaseRenderLayer = (function () {
         this._ctx.clip();
         this._ctx.fillText(charData[Buffer_1.CHAR_DATA_CHAR_INDEX], x * this._scaledCharWidth, y * this._scaledCharHeight);
     };
-    BaseRenderLayer.prototype.drawChar = function (terminal, char, code, width, x, y, fg, bg, bold) {
+    BaseRenderLayer.prototype.drawChar = function (terminal, char, code, width, x, y, fg, bg, bold, dim) {
         var colorIndex = 0;
         if (fg < 256) {
             colorIndex = fg + 2;
@@ -4826,19 +4832,22 @@ var BaseRenderLayer = (function () {
             }
         }
         var isAscii = code < 256;
-        var isBasicColor = (colorIndex > 1 && fg < 16);
+        var isBasicColor = (colorIndex > 1 && fg < 16) && (fg < 8 || bold);
         var isDefaultColor = fg >= 256;
         var isDefaultBackground = bg >= 256;
         if (this._charAtlas && isAscii && (isBasicColor || isDefaultColor) && isDefaultBackground) {
             var charAtlasCellWidth = this._scaledCharWidth + CharAtlas_1.CHAR_ATLAS_CELL_SPACING;
             var charAtlasCellHeight = this._scaledCharHeight + CharAtlas_1.CHAR_ATLAS_CELL_SPACING;
-            this._ctx.drawImage(this._charAtlas, code * charAtlasCellWidth, colorIndex * charAtlasCellHeight, charAtlasCellWidth, this._scaledCharHeight, x * this._scaledCharWidth, y * this._scaledLineHeight + this._scaledLineDrawY, this._scaledCharWidth, this._scaledCharHeight);
+            if (dim) {
+                this._ctx.globalAlpha = DIM_OPACITY;
+            }
+            this._ctx.drawImage(this._charAtlas, code * charAtlasCellWidth, colorIndex * charAtlasCellHeight, charAtlasCellWidth, this._scaledCharHeight, x * this._scaledCharWidth, y * this._scaledLineHeight + this._scaledLineDrawY, charAtlasCellWidth, this._scaledCharHeight);
         }
         else {
-            this._drawUncachedChar(terminal, char, width, fg, x, y, bold);
+            this._drawUncachedChar(terminal, char, width, fg, x, y, bold, dim);
         }
     };
-    BaseRenderLayer.prototype._drawUncachedChar = function (terminal, char, width, fg, x, y, bold) {
+    BaseRenderLayer.prototype._drawUncachedChar = function (terminal, char, width, fg, x, y, bold, dim) {
         this._ctx.save();
         this._ctx.font = terminal.options.fontSize * window.devicePixelRatio + "px " + terminal.options.fontFamily;
         if (bold) {
@@ -4857,6 +4866,9 @@ var BaseRenderLayer = (function () {
         this._ctx.beginPath();
         this._ctx.rect(0, y * this._scaledLineHeight + this._scaledLineDrawY, terminal.cols * this._scaledCharWidth, this._scaledCharHeight);
         this._ctx.clip();
+        if (dim) {
+            this._ctx.globalAlpha = DIM_OPACITY;
+        }
         this._ctx.fillText(char, x * this._scaledCharWidth, y * this._scaledLineHeight + this._scaledLineDrawY);
         this._ctx.restore();
     };
@@ -5842,7 +5854,7 @@ var TextRenderLayer = (function (_super) {
                     }
                     this.fillBottomLineAtCells(x, y);
                 }
-                this.drawChar(terminal, char, code, width, x, y, fg, bg, !!(flags & Types_1.FLAGS.BOLD));
+                this.drawChar(terminal, char, code, width, x, y, fg, bg, !!(flags & Types_1.FLAGS.BOLD), !!(flags & Types_1.FLAGS.DIM));
                 this._ctx.restore();
             }
         }
@@ -5890,6 +5902,7 @@ var FLAGS;
     FLAGS[FLAGS["BLINK"] = 4] = "BLINK";
     FLAGS[FLAGS["INVERSE"] = 8] = "INVERSE";
     FLAGS[FLAGS["INVISIBLE"] = 16] = "INVISIBLE";
+    FLAGS[FLAGS["DIM"] = 32] = "DIM";
 })(FLAGS = exports.FLAGS || (exports.FLAGS = {}));
 ;
 
