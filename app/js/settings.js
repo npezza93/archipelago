@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })
   document.documentElement.style.setProperty('--font-family', settings.fontFamily)
-  document.documentElement.style.setProperty('--font-size', settings.fontSize)
+  document.documentElement.style.setProperty('--font-size', settings.fontSize + 'px')
 
   document.querySelector('form #cursorBlink').checked = settings.cursorBlink
 
