@@ -38,7 +38,7 @@ class SelectField extends HTMLElement {
   attachListeners() {
     this.mdcSelect.listen('MDCSelect:change', () => {
       let configContents = this.currentSettings()
-      nestedProperty.set(configContents, this.valueKey, this.mdcSelect.value)
+      nestedProperty.set(configContents, this.dataset.valueKey, this.mdcSelect.value)
       configFile.write(JSON.stringify(configContents))
     });
   }
