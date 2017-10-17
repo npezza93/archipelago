@@ -16,7 +16,10 @@ class ArchipelagoTerminal extends HTMLElement {
   }
 
   open() {
-    if (this.pty && this.xterm) this.xterm.open(this, true)
+    if (this.pty && this.xterm) {
+      this.xterm.open(this, true)
+      this.xterm.setOption('bellStyle', this.settings.bellStyle)
+    }
   }
 
   fit () {
@@ -54,7 +57,6 @@ class ArchipelagoTerminal extends HTMLElement {
     this._xterm = new Terminal({
       cursorBlink: this.settings.cursorBlink,
       cursorStyle: this.settings.cursorStyle,
-      bellStyle: this.settings.bellStyle,
       bellSound: this.settings.bellSound,
       fontSize: this.settings.fontSize,
       fontFamily: this.settings.fontFamily,
