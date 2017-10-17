@@ -9,6 +9,7 @@
     "electron-packager": "^9.0.1",
     "keymaster": "^1.6.2",
     "material-components-web": "^0.21.1",
+    "nested-property": "0.0.7",
     "node-pty": "^0.7.0",
     "xterm": "^2.9.2"
   },

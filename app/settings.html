@@ -11,19 +11,31 @@
    <div id="titlebar">Settings</div>
 
    <form>
+     <div class="profilesContainer">
+       <h4 style="margin-bottom:10px;padding-top:50px;text-align:center;width:100%;">Profiles</h4>
+       <div class="profiles"></div>
+       <a class="newProfile" href="#!" style="width: 100%;color: #000;">+</a>
+     </div>
+
      <div class="standardSettings">
        <h4 style="margin-bottom:10px;padding-top:50px;text-align:center;width:100%;">General</h4>
 
-       <div style="padding-top: 25px;padding-bottom: 25px;">
-         <select name="cursorStyle" id="cursorStyle" class="mdc-select" style="max-width:100%;width:100%;">
-           <option value="" selected>Choose a cursor style</option>
-           <option value="block">Block</option>
-           <option value="underline">Underline</option>
-           <option value="bar">Bar</option>
-         </select>
-       </div>
+       <text-field data-id="fontFamily"   data-label="Font Family"     data-value-key="fontFamily"></text-field>
+       <text-field data-id="fontSize"     data-label="Font Size"       data-value-key="fontSize"></text-field>
+       <text-field data-id="lineHeight"   data-label="Line Height"     data-value-key="lineHeight"></text-field>
+       <text-field data-id="tabStopWidth" data-label="Tab Stop Width"  data-value-key="tabStopWidth"></text-field>
+       <text-field data-id="scrollback"   data-label="Scrollback"      data-value-key="scrollback"></text-field>
+       <text-field data-id="shell"        data-label="Shell"           data-value-key="shell" data-help-text="Your system's login shell will be used by default"></text-field>
+       <text-field data-id="shellArgs"    data-label="Shell Arguments" data-value-key="shellArgs" data-value= "--login" data-help-text="Comma seperated"></text-field>
+       <text-field data-id="bellSound"   data-label="Bell sound"      data-value-key="bellSound" data-help-text="URL or URI"></text-field>
 
-      <div class="switch-container">
+       <select-field data-options='[["none", "None"], ["visual", "Visual"], ["sound", "Sound"], ["both", "Both"]]' data-label="Choose a bell style" data-value-key="bellStyle" data-id="bellStyle"></select-field>
+
+       <select-field data-options='[["appearance-based", "appearance-based"], ["light", "light"], ["dark", "dark"], ["titlebar", "titlebar"], ["selection", "selection"], ["menu", "menu"], ["popover", "popover"], ["sidebar", "sidebar"], ["medium-light", "medium-light"], ["ultra-dark", "ultra-dark"]]' data-label="Vibrancy" data-value-key="vibrancy" data-id="vibrancy"></select-field>
+
+       <select-field data-options='[["block", "Block"], ["underline", "Underline"], ["bar", "Bar"]]' data-label="Choose a cursor style" data-value-key="cursorStyle" data-id="cursorStyle"></select-field>
+
+      <div class="switch-container" style='margin-top:25px;'>
         <label for="cursorBlink" class="mdc-switch-label">Blink cursor</label>
         <div class="mdc-switch">
           <input type="checkbox" id="cursorBlink" value=true class="mdc-switch__native-control" />
@@ -32,176 +44,33 @@
           </div>
         </div>
       </div>
-
-       <div class="mdc-textfield mdc-textfield--upgraded" style="width: 100%;">
-         <input type="text" id="fontFamily" class="mdc-textfield__input">
-         <label class="mdc-textfield__label mdc-textfield__label--float-above" for="fontFamily">Font Family</label>
-       </div>
-
-       <div class="mdc-textfield mdc-textfield--upgraded" style="width: 100%;">
-         <input type="text" id="fontSize" class="mdc-textfield__input">
-         <label class="mdc-textfield__label mdc-textfield__label--float-above" for="fontSize">Font Size</label>
-       </div>
-
-       <div class="mdc-textfield mdc-textfield--upgraded" style="width: 100%;">
-         <input type="number" id="lineHeight" class="mdc-textfield__input" value=1 step="0.1" min=0>
-         <label class="mdc-textfield__label mdc-textfield__label--float-above" for="lineHeight">Line Height</label>
-       </div>
-
-       <div class="mdc-textfield mdc-textfield--upgraded" style="width: 100%;">
-         <input type="text" id="scrollback" class="mdc-textfield__input">
-         <label class="mdc-textfield__label mdc-textfield__label--float-above" for="scrollback">Scrollback</label>
-       </div>
-
-       <div class="mdc-textfield mdc-textfield--upgraded" style="width: 100%;">
-         <input type="number" id="tabStopWidth" class="mdc-textfield__input" value=8>
-         <label class="mdc-textfield__label mdc-textfield__label--float-above" for="tabStopWidth">Tab Stop Width</label>
-       </div>
-
-       <div class="mdc-textfield mdc-textfield--upgraded" style="width: 100%;">
-         <input type="text" id="shell" class="mdc-textfield__input">
-         <label class="mdc-textfield__label mdc-textfield__label--float-above" for="shell">Shell</label>
-         <div class="mdc-textfield__bottom-line"></div>
-       </div>
-       <p class="mdc-textfield-helptext mdc-textfield-helptext--persistent">Your system's login shell will be used by default</p>
-
-       <div class="mdc-textfield mdc-textfield--upgraded" style="width: 100%;">
-         <input type="text" id="shellArgs" class="mdc-textfield__input" value="--login">
-         <label class="mdc-textfield__label mdc-textfield__label--float-above" for="shellArgs">Shell Arguments</label>
-       </div>
-       <p class="mdc-textfield-helptext mdc-textfield-helptext--persistent">Comma seperated</p>
-
-       <div style="padding-top: 25px;">
-         <select name="bellStyle" id="bellStyle" class="mdc-select" style="max-width:100%;width:100%;">
-           <option value="" selected>Choose a bell style</option>
-           <option value="none">None</option>
-           <option value="visual">Visual</option>
-           <option value="sound">Sound</option>
-           <option value="both">Both</option>
-         </select>
-       </div>
-
-       <div class="mdc-textfield mdc-textfield--upgraded" style="width: 100%;">
-         <input type="text" id="bellSound" class="mdc-textfield__input">
-         <label class="mdc-textfield__label mdc-textfield__label--float-above" for="bellSound">Bell sound (url or uri)</label>
-       </div>
-
-       <div style="padding-top: 25px;">
-         <select name="vibrancy" id="vibrancy" class="mdc-select" style="max-width:100%;width:100%;">
-           <option value="" selected>Vibrancy</option>
-           <option value="appearance-based">appearance-based</option>
-           <option value="light">light</option>
-           <option value="dark">dark</option>
-           <option value="titlebar">titlebar</option>
-           <option value="selection">selection</option>
-           <option value="menu">menu</option>
-           <option value="popover">popover</option>
-           <option value="sidebar">sidebar</option>
-           <option value="medium-light">medium-light</option>
-           <option value="ultra-dark">ultra-dark</option>
-         </select>
-       </div>
      </div>
 
      <div class="theme">
        <h4 style="padding-top:50px;text-align:center;width:100%;">Theme</h4>
 
-       <div class="color-field">
-         <label for="foreground">Foreground: </label>
-         <input type="text" name="foreground" id="foreground" value="#ffffff">
-       </div>
-       <div class="color-field">
-         <label for="background">Terminal Background: </label>
-         <input type="text" name="background" id="background" value="#000000">
-       </div>
-       <div class="color-field">
-         <label for="windowBackground">Window Background: </label>
-         <input type="text" name="windowBackground" id="windowBackground" value="#000000">
-       </div>
-       <div class="color-field">
-         <label for="selection">Selection: </label>
-         <input type="text" name="selection" id="selection" value="rgba(255, 255, 255, 0.3)">
-       </div>
-       <div class="color-field">
-         <label for="cursor">Cursor: </label>
-         <input type="text" name="cursor" id="cursor" value="#ffffff">
-       </div>
-       <div class="color-field">
-         <label for="cursorAccent">Cursor Accent: </label>
-         <input type="text" name="cursorAccent" id="cursorAccent" value="#000000">
-       </div>
-
-       <div class="color-field">
-         <label for="red">Red: </label>
-         <input type="text" name="red" id="red" value="#cc0000">
-       </div>
-       <div class="color-field">
-         <label for="brightRed">Bright Red: </label>
-         <input type="text" name="brightRed" id="brightRed" value="#ef2929">
-       </div>
-
-       <div class="color-field">
-         <label for="green">Green: </label>
-         <input type="text" name="green" id="green" value="#4e9a06">
-       </div>
-       <div class="color-field">
-         <label for="brightGreen">Bright Green: </label>
-         <input type="text" name="brightGreen" id="brightGreen" value="#8ae234">
-       </div>
-
-       <div class="color-field">
-         <label for="yellow">Yellow: </label>
-         <input type="text" name="yellow" id="yellow" value="#c4a000">
-       </div>
-       <div class="color-field">
-         <label for="brightYellow">Bright Yellow: </label>
-         <input type="text" name="brightYellow" id="brightYellow" value="#fce94f">
-       </div>
-
-       <div class="color-field">
-         <label for="magenta">Magenta: </label>
-         <input type="text" name="magenta" id="magenta" value="#75507b">
-       </div>
-       <div class="color-field">
-         <label for="brightMagenta">Bright Magenta: </label>
-         <input type="text" name="brightMagenta" id="brightMagenta" value="#ad7fa8">
-       </div>
-
-       <div class="color-field">
-         <label for="cyan">Cyan: </label>
-         <input type="text" name="cyan" id="cyan" value="#06989a">
-       </div>
-       <div class="color-field">
-         <label for="brightCyan">Bright Cyan: </label>
-         <input type="text" name="brightCyan" id="brightCyan" value="#34e2e2">
-       </div>
-
-       <div class="color-field">
-         <label for="blue">Blue: </label>
-         <input type="text" name="blue" id="blue" value="#3465a4">
-       </div>
-       <div class="color-field">
-         <label for="brightBlue">Bright Blue: </label>
-         <input type="text" name="brightBlue" id="brightBlue" value="#729fcf">
-       </div>
-
-       <div class="color-field">
-         <label for="white">White: </label>
-         <input type="text" name="white" id="white" value="#d3d7cf">
-       </div>
-       <div class="color-field">
-         <label for="brightWhite">Bright White: </label>
-         <input type="text" name="brightWhite" id="brightWhite" value="#eeeeec">
-       </div>
-
-       <div class="color-field">
-         <label for="black">Black: </label>
-         <input type="text" name="black" id="black" value="#2e3436">
-       </div>
-       <div class="color-field">
-         <label for="brightBlack">Bright Black: </label>
-         <input type="text" name="brightBlack" id="brightBlack" value="#555753">
-       </div>
+       <color-field data-id="foreground" data-label="Foreground: " data-value="#ffffff"></color-field>
+       <color-field data-id="background" data-label="Terminal Background: " data-value="#000000"></color-field>
+       <color-field data-id="windowBackground" data-label="Window Background: " data-value="#000000" data-value-key="windowBackground"></color-field>
+       <color-field data-id="selection" data-label="Selection: " data-value="rgba(255, 255, 255, 0.3)"></color-field>
+       <color-field data-id="cursor" data-label="Cursor: " data-value="#ffffff"></color-field>
+       <color-field data-id="cursorAccent" data-label="Cursor Accent: " data-value="#000000"></color-field>
+       <color-field data-id="red" data-label="Red: " data-value="#cc0000"></color-field>
+       <color-field data-id="brightRed" data-label="Bright Red: " data-value="#ef2929"></color-field>
+       <color-field data-id="green" data-label="Green: " data-value="#4e9a06"></color-field>
+       <color-field data-id="brightGreen" data-label="Bright Green: " data-value="#8ae234"></color-field>
+       <color-field data-id="yellow" data-label="Yellow: " data-value="#c4a000"></color-field>
+       <color-field data-id="brightYellow" data-label="Bright Yellow: " data-value="#fce94f"></color-field>
+       <color-field data-id="magenta" data-label="Magenta: " data-value="#75507b"></color-field>
+       <color-field data-id="brightMagenta" data-label="Bright Magenta: " data-value="#ad7fa8"></color-field>
+       <color-field data-id="cyan" data-label="Cyan: " data-value="#06989a"></color-field>
+       <color-field data-id="brightCyan" data-label="Bright Cyan: " data-value="#34e2e2"></color-field>
+       <color-field data-id="blue" data-label="Blue: " data-value="#3465a4"></color-field>
+       <color-field data-id="brightBlue" data-label="Bright Blue: " data-value="#729fcf"></color-field>
+       <color-field data-id="white" data-label="White: " data-value="#d3d7cf"></color-field>
+       <color-field data-id="brightWhite" data-label="Bright White: " data-value="#eeeeec"></color-field>
+       <color-field data-id="black" data-label="Black: " data-value="#2e3436"></color-field>
+       <color-field data-id="brightBlack" data-label="Bright Black: " data-value="#555753"></color-field>
      </div>
    </form>
 

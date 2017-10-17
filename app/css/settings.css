@@ -48,7 +48,7 @@ form {
   justify-content: space-around;
   flex-wrap: wrap;
 }
-form .standardSettings {
+form .standardSettings, form .profilesContainer {
   width: 250px;
   display: flex;
   flex-direction: column;
@@ -79,4 +79,27 @@ form .standardSettings {
 }
 .color-field label {
   flex:1;
+}
+
+::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+  background: rgb(248, 248, 248);
+}
+::-webkit-scrollbar-thumb:hover, ::-webkit-scrollbar-thumb:active {
+  background: rgb(106, 106, 106);
+  transition: background-color 0.3s ease;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(180, 180, 180);
+  -webkit-border-radius: 1ex;
+  transition: background-color 0.3s ease;
+}
+::-webkit-scrollbar-corner {
+  background: rgb(248, 248, 248);
+}
+
+
+select-field .mdc-select {
+  width: 100% !important;
 }

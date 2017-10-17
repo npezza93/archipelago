@@ -1,23 +1,12 @@
 const { join } = require('path')
 const ConfigFile = require(join(__dirname, '/js/config_file'))
+const Profile = require(join(__dirname, '/js/profile'))
 
-const fields = ['fontFamily', 'fontSize', 'lineHeight', 'tabStopWidth', 'scrollback', 'bellStyle', 'bellSound', 'cursorStyle', 'vibrancy', 'windowBackground', 'shell', 'shellArgs']
-const colors = ['foreground', 'background', 'cursor', 'cursorAccent', 'selection', 'red', 'brightRed', 'green', 'brightGreen', 'yellow', 'brightYellow', 'magenta', 'brightMagenta', 'cyan', 'brightCyan', 'blue', 'brightBlue', 'white', 'brightWhite', 'black', 'brightBlack']
 const configFile = new ConfigFile()
 
 document.addEventListener('DOMContentLoaded', () => {
   let settings = configFile.contents
 
-  fields.forEach((field) => {
-    if (settings[field]) {
-      document.querySelector('#' + field).value = settings[field]
-    }
-  })
-  colors.forEach((color) => {
-    if (settings['theme'][color]) {
-      document.querySelector('#' + color).value = settings['theme'][color]
-    }
-  })
   document.documentElement.style.setProperty('--font-family', settings.fontFamily)
   document.documentElement.style.setProperty('--font-size', settings.fontSize + 'px')
 
@@ -35,6 +24,12 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   })
+
+  document.querySelector('.newProfile').addEventListener('click', () => {
+    Profile.create()
+  })
+
+  Profile.loadAll()
 })
 
 configFile.on('change', () => {
@@ -42,18 +37,6 @@ configFile.on('change', () => {
 
   element.style.setProperty('--font-family', configFile.contents.fontFamily)
   element.style.setProperty('--font-size', configFile.contents.fontSize + 'px')
-})
-
-fields.forEach((field) => {
-  document.querySelector('#' + field).addEventListener('change', () => {
-    updateSetting(field, document.querySelector('#' + field).value)
-  })
-})
-
-colors.forEach((color) => {
-  document.querySelector('#' + color).addEventListener('change', () => {
-    updateTheme(color, document.querySelector('#' + color).value)
-  })
 })
 
 document.querySelector('#cursorBlink').addEventListener('change', () => {
@@ -67,18 +50,3 @@ function updateSetting(key, value) {
 
   configFile.write(JSON.stringify(currentSettings))
 }
-
-function updateTheme(color, value) {
-  let currentSettings = configFile.contents
-
-  if (currentSettings['theme'] === undefined) {
-    currentSettings['theme'] = {}
-  }
-  currentSettings['theme'][color] = value
-
-  configFile.write(JSON.stringify(currentSettings))
-}
-
-document.querySelectorAll('.mdc-textfield').forEach((field) => {
-  mdc.textfield.MDCTextfield.attachTo(field)
-})
