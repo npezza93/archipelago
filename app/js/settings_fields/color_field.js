@@ -23,7 +23,8 @@ class ColorField extends HTMLElement {
 
   setInnerHTML() {
     this.mdcElement = document.createElement('div')
-    this.mdcElement.classList = 'color-field'
+    this.mdcElement.classList = 'd-flex'
+    this.mdcElement.style.paddingTop = '8px'
 
     this.mdcElement.innerHTML = this._label() + this._inputField()
 
@@ -54,6 +55,7 @@ class ColorField extends HTMLElement {
     let element = document.createElement('input')
     element.type = 'text'
     element.id = this.dataset.id
+    element.setAttribute('style', 'padding:0;font-size:16px;border:0;text-align: end;')
     if (this.dataset.value) element.setAttribute('value', this.dataset.value)
 
     return element.outerHTML
@@ -62,6 +64,7 @@ class ColorField extends HTMLElement {
   _label() {
     let element = document.createElement('label')
     element.for = this.dataset.id
+    element.style.flex = 1
     element.innerText = this.dataset.label
 
     return element.outerHTML

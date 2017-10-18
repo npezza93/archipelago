@@ -1,18 +1,8 @@
 const { join } = require('path')
-const ConfigFile = require(join(__dirname, '/js/config_file'))
 const Profile = require(join(__dirname, '/js/profile'))
 
-const configFile = new ConfigFile()
-
 document.addEventListener('DOMContentLoaded', () => {
-  let settings = configFile.contents
-
-  document.documentElement.style.setProperty('--font-family', settings.fontFamily)
-  document.documentElement.style.setProperty('--font-size', settings.fontSize + 'px')
-
-  document.querySelector('form #cursorBlink').checked = settings.cursorBlink
-
-  jsColorPicker('.theme input[type="text"]', {
+  jsColorPicker('#theme input[type="text"]', {
     customBG: '#fff',
     init: function(elm, colors) {
       elm.style.backgroundColor = elm.value
@@ -32,21 +22,26 @@ document.addEventListener('DOMContentLoaded', () => {
   Profile.loadAll()
 })
 
-configFile.on('change', () => {
-  let element = document.documentElement
+let tabBar = new mdc.tabs.MDCTabBar(document.querySelector('.mdc-tab-bar'));
+var panels = document.querySelector('.panels');
 
-  element.style.setProperty('--font-family', configFile.contents.fontFamily)
-  element.style.setProperty('--font-size', configFile.contents.fontSize + 'px')
-})
+tabBar.tabs.forEach(function(tab) {
+  tab.preventDefaultOnClick = true;
+});
 
-document.querySelector('#cursorBlink').addEventListener('change', () => {
-  updateSetting('cursorBlink', document.querySelector('#cursorBlink').checked)
-})
-
-function updateSetting(key, value) {
-  let currentSettings = configFile.contents
-
-  currentSettings[key] = value
-
-  configFile.write(JSON.stringify(currentSettings))
+function updatePanel(index) {
+  var activePanel = panels.querySelector('.panel.active');
+  if (activePanel) {
+    activePanel.classList.remove('active');
+  }
+  var newActivePanel = panels.querySelector('.panel:nth-child(' + (index + 1) + ')');
+  if (newActivePanel) {
+    newActivePanel.classList.add('active');
+  }
 }
+
+tabBar.listen('MDCTabBar:change', function ({detail: tabs}) {
+  var nthChildIndex = tabs.activeTabIndex;
+
+  updatePanel(nthChildIndex);
+});

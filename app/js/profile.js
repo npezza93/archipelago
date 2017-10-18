@@ -1,8 +1,10 @@
 const ConfigFile = require(join(__dirname, '/config_file'))
 const defaultProfile = require(join(__dirname, '/default_profile.json'))
+
 const TextField = require(join(__dirname, '/settings_fields/text_field'))
 const ColorField = require(join(__dirname, '/settings_fields/color_field'))
 const SelectField = require(join(__dirname, '/settings_fields/select_field'))
+const SwitchField = require(join(__dirname, '/settings_fields/switch_field'))
 
 class Profile {
   constructor(profile_values) {

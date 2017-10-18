@@ -27,6 +27,7 @@ class SelectField extends HTMLElement {
     this.style.paddingTop = '15px'
     this.mdcElement = document.createElement('div')
     this.mdcElement.classList = 'mdc-select'
+    this.mdcElement.style.width = '100% !important'
     this.mdcElement.setAttribute('role', 'listbox')
     this.mdcElement.setAttribute('tabindex', '0')
 
