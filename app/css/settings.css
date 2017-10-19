@@ -60,6 +60,9 @@ form text-field, form select-field, form switch-field, form .profilesContainer {
 .panels .panel.active {
   display: flex !important;
 }
+.newProfile {
+  margin-top: 16px;
+}
 
 .d-flex                 { display: flex;                 }
 .flex-column            { flex-direction: column;        }
