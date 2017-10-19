@@ -42,13 +42,18 @@ html, body {
 form #standardSettings .container {
   max-width: 550px;
 }
+section {
+  width: 550px;
+}
 form text-field, form select-field, form switch-field, form .profilesContainer {
   width: 250px;
 }
 #theme {
-  width: 450px;
+  width: 400px;
 }
-
+.mdc-select {
+  width: 100% !important
+}
 .panels .panel {
   display: none !important;
 }

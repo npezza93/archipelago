@@ -13,9 +13,10 @@
 
     <form class="wrap flex-row d-flex justify-content-around mb-6">
       <div class="profilesContainer d-flex flex-column">
-        <h4 style="margin-bottom:10px;padding-top:50px;text-align:center;width:100%;">Profiles</h4>
+        <div class="mdc-typography--title mt-6 d-flex flex-row justify-content-center">Profiles</div>
+
         <div class="profiles"></div>
-        <a class="newProfile" href="#!" style="width: 100%;color: #000;">+</a>
+        <a class="newProfile" href="#!" style="color: #000;">+</a>
       </div>
 
       <section class="mt-6">
@@ -43,13 +44,13 @@
             </div>
 
             <h5 class="mb-0 mt-6 mdc-typography--body2">Bell</h5>
-            <div class="d-flex flex-row wrap justify-content-around align-items-base" style="max-width: 550px;">
+            <div class="d-flex flex-row wrap justify-content-around align-items-base container">
               <text-field data-id="bellSound"   data-label="Bell sound"      data-value-key="bellSound" data-help-text="URL or URI"></text-field>
               <select-field data-options='[["none", "None"], ["visual", "Visual"], ["sound", "Sound"], ["both", "Both"]]' data-label="Choose a bell style" data-value-key="bellStyle" data-id="bellStyle"></select-field>
             </div>
 
             <h5 class="mb-0 mt-6 mdc-typography--body2">Shell</h5>
-            <div class="d-flex flex-row wrap justify-content-around align-items-base" style="max-width: 550px;">
+            <div class="d-flex flex-row wrap justify-content-around align-items-base container">
               <text-field data-id="shell"        data-label="Shell"           data-value-key="shell" data-help-text="The shell to run when spawning a new session (i.e. /usr/local/bin/fish)"></text-field>
               <text-field data-id="shellArgs"    data-label="Shell Arguments" data-value-key="shellArgs" data-value= "--login" data-help-text="for setting shell arguments (comma seperated)"></text-field>
               <text-field data-id="scrollback"   data-label="Scrollback"      data-value-key="scrollback"></text-field>
@@ -57,7 +58,7 @@
             </div>
 
             <h5 class="mb-0 mt-6 mdc-typography--body2">Vibrancy</h5>
-            <div class="d-flex flex-row wrap justify-content-around align-items-base" style="max-width: 550px;">
+            <div class="d-flex flex-row wrap justify-content-around align-items-base container">
               <select-field data-options='[["appearance-based", "appearance-based"], ["light", "light"], ["dark", "dark"], ["titlebar", "titlebar"], ["selection", "selection"], ["menu", "menu"], ["popover", "popover"], ["sidebar", "sidebar"], ["medium-light", "medium-light"], ["ultra-dark", "ultra-dark"]]' data-label="Vibrancy" data-value-key="vibrancy" data-id="vibrancy"></select-field>
             </div>
           </div>

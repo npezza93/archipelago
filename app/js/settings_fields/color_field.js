@@ -1,7 +1,7 @@
-const ConfigFile = require(join(__dirname, '../config_file'))
+const BaseField = require(join(__dirname, '/base_field'))
 const nestedProperty = require('nested-property')
 
-class ColorField extends HTMLElement {
+class ColorField extends BaseField {
   constructor(id, label, value = undefined) {
     super()
     this.dataset['id'] = this.dataset.id || id
@@ -11,14 +11,6 @@ class ColorField extends HTMLElement {
       this.dataset.value || value || ''
 
     this.setInnerHTML()
-  }
-
-  connectedCallback() {
-    if (!this.innerHTML) {
-      this.setInnerHTML()
-    }
-
-    this.attachListeners()
   }
 
   setInnerHTML() {
@@ -33,29 +25,15 @@ class ColorField extends HTMLElement {
 
   attachListeners() {
     this.mdcElement.addEventListener('change', () => {
-      let configContents = this.currentSettings()
-      nestedProperty.set(configContents, this.dataset.valueKey, this.querySelector('input').value)
-      configFile.write(JSON.stringify(configContents))
+      this.updateSetting(this.dataset.valueKey, this.querySelector('input').value)
     })
-  }
-
-  get configFile() {
-    if (this._configFile) return this._configFile
-
-    this._configFile = new ConfigFile()
-
-    return this._configFile
-  }
-
-  currentSettings () {
-    return this.configFile.contents
   }
 
   _inputField() {
     let element = document.createElement('input')
     element.type = 'text'
     element.id = this.dataset.id
-    element.setAttribute('style', 'padding:0;font-size:16px;border:0;text-align: end;')
+    element.setAttribute('style', 'width:200px;padding:0;font-size:16px;border:0;text-align: end;')
     if (this.dataset.value) element.setAttribute('value', this.dataset.value)
 
     return element.outerHTML

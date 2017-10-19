@@ -1,7 +1,7 @@
-const ConfigFile = require(join(__dirname, '../config_file'))
+const BaseField = require(join(__dirname, '/base_field'))
 const nestedProperty = require('nested-property')
 
-class TextField extends HTMLElement {
+class TextField extends BaseField {
   constructor(id, valueKey, label, value = undefined, helpText = undefined) {
     super()
     this.dataset['id'] = this.dataset.id || id
@@ -14,13 +14,8 @@ class TextField extends HTMLElement {
     this.setInnerHTML()
   }
 
-  connectedCallback() {
-    if (!this.innerHTML) {
-      this.setInnerHTML()
-    }
-
+  initializeMdcElement() {
     mdc.textfield.MDCTextfield.attachTo(this.mdcElement)
-    this.attachListeners()
   }
 
   setInnerHTML() {
@@ -37,22 +32,8 @@ class TextField extends HTMLElement {
 
   attachListeners() {
     this.mdcElement.addEventListener('change', () => {
-      let configContents = this.currentSettings()
-      nestedProperty.set(configContents, this.dataset.valueKey, this.querySelector('input').value)
-      configFile.write(JSON.stringify(configContents))
+      this.updateSetting(this.dataset.valueKey, this.querySelector('input').value)
     })
-  }
-
-  get configFile() {
-    if (this._configFile) return this._configFile
-
-    this._configFile = new ConfigFile()
-
-    return this._configFile
-  }
-
-  currentSettings () {
-    return this.configFile.contents
   }
 
   _inputField() {

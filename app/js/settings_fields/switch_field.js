@@ -1,7 +1,7 @@
-const ConfigFile = require(join(__dirname, '../config_file'))
+const BaseField = require(join(__dirname, '/base_field'))
 const nestedProperty = require('nested-property')
 
-class SwitchField extends HTMLElement {
+class SwitchField extends BaseField {
   constructor(id, valueKey, label, value = undefined) {
     super()
     this.dataset['id'] = this.dataset.id || id
@@ -13,14 +13,6 @@ class SwitchField extends HTMLElement {
     this.setInnerHTML()
   }
 
-  connectedCallback() {
-    if (!this.innerHTML) {
-      this.setInnerHTML()
-    }
-
-    this.attachListeners()
-  }
-
   setInnerHTML() {
     this.setAttribute('style', 'margin-top:25px;display:flex;flex-direction:row;')
 
@@ -30,22 +22,8 @@ class SwitchField extends HTMLElement {
 
   attachListeners() {
     this.input.addEventListener('change', () => {
-      let configContents = this.currentSettings()
-      nestedProperty.set(configContents, this.dataset.valueKey, this.input.checked)
-      configFile.write(JSON.stringify(configContents))
+      this.updateSetting(this.dataset.valueKey, this.input.checked)
     })
-  }
-
-  get configFile() {
-    if (this._configFile) return this._configFile
-
-    this._configFile = new ConfigFile()
-
-    return this._configFile
-  }
-
-  currentSettings () {
-    return this.configFile.contents
   }
 
   _switch() {

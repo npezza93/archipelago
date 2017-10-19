@@ -5,6 +5,7 @@ const TextField = require(join(__dirname, '/settings_fields/text_field'))
 const ColorField = require(join(__dirname, '/settings_fields/color_field'))
 const SelectField = require(join(__dirname, '/settings_fields/select_field'))
 const SwitchField = require(join(__dirname, '/settings_fields/switch_field'))
+const ProfileSelectorField = require(join(__dirname, '/settings_fields/profile_selector_field'))
 
 class Profile {
   constructor(profile_values) {
@@ -12,7 +13,7 @@ class Profile {
   }
 
   load() {
-    document.querySelector('.profilesContainer .profiles').appendChild(new TextField('profile_' + this.id, 'profiles.' + this.id + '.name', 'Name', this.name))
+    document.querySelector('.profilesContainer .profiles').appendChild(this.nameSelectorContainer)
     this.loadSettings()
   }
 
@@ -28,6 +29,34 @@ class Profile {
       'brightWhite', 'black', 'brightBlack'
     ]
   }
+
+  get nameField() {
+    if (this._nameField) return this._nameField
+
+    this._nameField = new TextField('profile_' + this.id, 'profiles.' + this.id + '.name', 'Name', this.name)
+
+    return this._nameField
+  }
+
+  get selectorField() {
+    if (this._selectorField) return this._selectorField
+
+    this._selectorField = new ProfileSelectorField(this.id)
+
+    return this._selectorField
+  }
+
+  get nameSelectorContainer() {
+    if (this._nameSelectorContainer) return this._nameSelectorContainer
+
+    this._nameSelectorContainer = document.createElement('div')
+    this._nameSelectorContainer.classList = 'd-flex flex-row align-items-end'
+    this._nameSelectorContainer.append(this.selectorField)
+    this._nameSelectorContainer.append(this.nameField)
+
+    return this._nameSelectorContainer
+  }
+
   static create() {
     let configFile = new ConfigFile()
     let contents = configFile.contents

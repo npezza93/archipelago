@@ -1,7 +1,7 @@
-const ConfigFile = require(join(__dirname, '../config_file'))
+const BaseField = require(join(__dirname, '/base_field'))
 const nestedProperty = require('nested-property')
 
-class SelectField extends HTMLElement {
+class SelectField extends BaseField {
   constructor(id, valueKey, label, value = undefined) {
     super()
     this.dataset['id'] = this.dataset.id || id
@@ -13,21 +13,14 @@ class SelectField extends HTMLElement {
     this.setInnerHTML()
   }
 
-  connectedCallback() {
-    if (!this.innerHTML) {
-      this.setInnerHTML()
-    }
-
+  initializeMdcElement() {
     this.mdcSelect = mdc.select.MDCSelect.attachTo(this.mdcElement)
-
-    this.attachListeners()
   }
 
   setInnerHTML() {
-    this.style.paddingTop = '15px'
     this.mdcElement = document.createElement('div')
     this.mdcElement.classList = 'mdc-select'
-    this.mdcElement.style.width = '100% !important'
+    this.mdcElement.setAttribute('style', 'margin-top:15px;')
     this.mdcElement.setAttribute('role', 'listbox')
     this.mdcElement.setAttribute('tabindex', '0')
 
@@ -38,22 +31,8 @@ class SelectField extends HTMLElement {
 
   attachListeners() {
     this.mdcSelect.listen('MDCSelect:change', () => {
-      let configContents = this.currentSettings()
-      nestedProperty.set(configContents, this.dataset.valueKey, this.mdcSelect.value)
-      configFile.write(JSON.stringify(configContents))
+      this.updateSetting(this.dataset.valueKey, this.mdcSelect.value)
     });
-  }
-
-  get configFile() {
-    if (this._configFile) return this._configFile
-
-    this._configFile = new ConfigFile()
-
-    return this._configFile
-  }
-
-  currentSettings () {
-    return this.configFile.contents
   }
 
   _menu() {
