@@ -6,8 +6,6 @@ class ProfileSelectorField extends BaseField {
   constructor(id) {
     super()
     this.dataset['id'] = this.dataset.id || id
-
-    this.setInnerHTML()
   }
 
   set profile(profile) {
