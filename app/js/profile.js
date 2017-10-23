@@ -32,7 +32,7 @@ class Profile {
   }
 
   loadSetting(settingKey, value) {
-    let element = document.querySelector('[data-value-key="' + settingKey + '"]')
+    let element = document.querySelector('[data-id="' + settingKey + '"]')
 
     if (element) {
       element.updateValue(value)

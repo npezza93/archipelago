@@ -2,31 +2,25 @@ const BaseField = require(join(__dirname, '/base_field'))
 const nestedProperty = require('nested-property')
 
 class ColorField extends BaseField {
-  constructor(id, label, value = undefined) {
+  constructor(id, label) {
     super()
     this.dataset['id'] = this.dataset.id || id
-    this.dataset['valueKey'] = this.dataset.valueKey || 'theme.' + this.dataset.id
     this.dataset['label'] = this.dataset.label || label
-    this.dataset['value'] = nestedProperty.get(this.currentSettings(), 'profiles.' + this.activeProfile() + '.' + this.dataset.valueKey) ||
-      this.dataset.value || value || ''
-
-    this.setInnerHTML()
   }
 
   setInnerHTML() {
-    this.mdcElement = document.createElement('div')
-    this.mdcElement.classList = 'd-flex'
-    this.mdcElement.style.paddingTop = '8px'
+    let element = document.createElement('div')
+    element.classList = 'd-flex'
+    element.style.paddingTop = '8px'
 
-    this.mdcElement.innerHTML = this._label() + this._inputField()
+    element.innerHTML = this._label() + this._inputField()
 
-    this.append(this.mdcElement)
+    this.append(element)
   }
 
   attachListeners() {
-    this.mdcElement.addEventListener('change', () => {
-      let profileKey = 'profiles.' + this.activeProfile() + '.'
-      this.updateSetting(profileKey + this.dataset.valueKey, this.querySelector('input').value)
+    this.querySelector('input').addEventListener('change', () => {
+      this.updateSetting(this.valueKey, this.querySelector('input').value)
     })
   }
 
@@ -43,7 +37,7 @@ class ColorField extends BaseField {
     element.type = 'text'
     element.id = this.dataset.id
 
-    if (this.dataset.value) element.setAttribute('value', this.dataset.value)
+    if (this.currentValue) element.setAttribute('value', this.currentValue)
 
     return element.outerHTML
   }
