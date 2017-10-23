@@ -2,15 +2,10 @@ const BaseField = require(join(__dirname, '/base_field'))
 const nestedProperty = require('nested-property')
 
 class SelectField extends BaseField {
-  constructor(id, valueKey, label, value = undefined) {
+  constructor(id, label) {
     super()
     this.dataset['id'] = this.dataset.id || id
-    this.dataset['valueKey'] = this.dataset.valueKey || valueKey
     this.dataset['label'] = this.dataset.label || label
-    this.dataset['value'] = nestedProperty.get(this.currentSettings(), this.dataset.valueKey) ||
-      this.dataset.value || value || ''
-
-    this.setInnerHTML()
   }
 
   initializeMdcElement() {
@@ -18,7 +13,9 @@ class SelectField extends BaseField {
   }
 
   updateValue(newValue) {
-    // this.mdcElement.setAttribute('tabindex', newValue)
+    this.mdcSelect.selectedIndex = this.mdcSelect.options.findIndex((item) => {
+      return item.id === newValue
+    })
   }
 
   setInnerHTML() {
@@ -35,7 +32,7 @@ class SelectField extends BaseField {
 
   attachListeners() {
     this.mdcSelect.listen('MDCSelect:change', () => {
-      this.updateSetting(this.dataset.valueKey, this.mdcSelect.value)
+      this.updateSetting(this.valueKey, this.mdcSelect.value)
     });
   }
 
@@ -70,7 +67,7 @@ class SelectField extends BaseField {
     menuItem.setAttribute('tabindex', '0')
     if (id) menuItem.id = id
     if (disabled) menuItem.setAttribute('aria-disabled', 'true')
-    if (id == this.dataset.value) menuItem.setAttribute('aria-selected',true)
+    if (id == this.currentValue) menuItem.setAttribute('aria-selected',true)
     menuItem.innerText = text
 
     return menuItem.outerHTML

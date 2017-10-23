@@ -39,14 +39,14 @@
 
             <h5 class="mb-0 mt-6 mdc-typography--body2">Cursor</h5>
             <div class="d-flex flex-row wrap justify-content-around align-items-end container">
-              <!-- <select-field data-options='[["block", "Block"], ["underline", "Underline"], ["bar", "Bar"]]' data-label="Choose a cursor style" data-value-key="cursorStyle" data-id="cursorStyle"></select-field> -->
+              <select-field data-id="cursorStyle" data-label="Choose a cursor style" data-options='[["block", "Block"], ["underline", "Underline"], ["bar", "Bar"]]'></select-field>
               <switch-field data-id="cursorBlink" data-label="Blink cursor"></switch-field>
             </div>
 
             <h5 class="mb-0 mt-6 mdc-typography--body2">Bell</h5>
             <div class="d-flex flex-row wrap justify-content-around align-items-base container">
-              <text-field data-id="bellSound"   data-label="Bell sound" data-help-text="URL or URI"></text-field>
-              <!-- <select-field data-options='[["none", "None"], ["visual", "Visual"], ["sound", "Sound"], ["both", "Both"]]' data-label="Choose a bell style" data-value-key="bellStyle" data-id="bellStyle"></select-field> -->
+              <text-field   data-id="bellSound" data-label="Bell sound" data-help-text="URL or URI"></text-field>
+              <select-field data-id="bellStyle" data-label="Choose a bell style" data-options='[["none", "None"], ["visual", "Visual"], ["sound", "Sound"], ["both", "Both"]]'></select-field>
             </div>
 
             <h5 class="mb-0 mt-6 mdc-typography--body2">Shell</h5>
@@ -57,10 +57,10 @@
               <text-field data-id="tabStopWidth" data-label="Tab Stop Width"></text-field>
             </div>
 
-            <!-- <h5 class="mb-0 mt-6 mdc-typography--body2">Vibrancy</h5>
+            <h5 class="mb-0 mt-6 mdc-typography--body2">Vibrancy</h5>
             <div class="d-flex flex-row wrap justify-content-around align-items-base container">
-              <select-field data-options='[["appearance-based", "appearance-based"], ["light", "light"], ["dark", "dark"], ["titlebar", "titlebar"], ["selection", "selection"], ["menu", "menu"], ["popover", "popover"], ["sidebar", "sidebar"], ["medium-light", "medium-light"], ["ultra-dark", "ultra-dark"]]' data-label="Vibrancy" data-value-key="vibrancy" data-id="vibrancy"></select-field>
-            </div> -->
+              <select-field data-id="vibrancy" data-label="Vibrancy" data-options='[["appearance-based", "appearance-based"], ["light", "light"], ["dark", "dark"], ["titlebar", "titlebar"], ["selection", "selection"], ["menu", "menu"], ["popover", "popover"], ["sidebar", "sidebar"], ["medium-light", "medium-light"], ["ultra-dark", "ultra-dark"]]'></select-field>
+            </div>
           </div>
 
           <div id="theme" class="panel mt-6 flex-column" role="tabpanel" aria-hidden="true">
