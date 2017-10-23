@@ -2,15 +2,10 @@ const BaseField = require(join(__dirname, '/base_field'))
 const nestedProperty = require('nested-property')
 
 class SwitchField extends BaseField {
-  constructor(id, valueKey, label, value = undefined) {
+  constructor(id, label) {
     super()
     this.dataset['id'] = this.dataset.id || id
-    this.dataset['valueKey'] = this.dataset.valueKey || valueKey
     this.dataset['label'] = this.dataset.label || label
-    this.dataset['value'] = nestedProperty.get(this.currentSettings(), this.dataset.valueKey) ||
-      this.dataset.value || value || ''
-
-    this.setInnerHTML()
   }
 
   setInnerHTML() {
@@ -22,12 +17,16 @@ class SwitchField extends BaseField {
 
   attachListeners() {
     this.input.addEventListener('change', () => {
-      this.updateSetting(this.dataset.valueKey, this.input.checked)
+      this.updateSetting(this.valueKey, this.input.checked)
     })
   }
 
   updateValue(newValue) {
-    this.querySelector('input').setAttribute('checked', newValue)
+    if (newValue) {
+      this.querySelector('input').setAttribute('checked', newValue)
+    } else {
+      this.querySelector('input').removeAttribute('checked')
+    }
   }
 
   _switch() {
@@ -45,7 +44,7 @@ class SwitchField extends BaseField {
     this.input.setAttribute('type', 'checkbox')
     this.input.setAttribute('id', this.dataset.id)
     this.input.setAttribute('class', 'mdc-switch__native-control')
-    this.input.setAttribute('checked', nestedProperty.get(this.currentSettings(), this.dataset.valueKey))
+    this.input.setAttribute('checked', this.currentValue)
 
     return this.input
   }
