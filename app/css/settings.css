@@ -48,6 +48,13 @@ section {
 form text-field, form select-field, form switch-field, form .profilesContainer {
   width: 250px;
 }
+color-field input {
+  width:200px;
+  padding:0;
+  font-size:16px;
+  border:0;
+  text-align: end;
+}
 #theme {
   width: 400px;
 }

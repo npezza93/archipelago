@@ -2,16 +2,11 @@ const BaseField = require(join(__dirname, '/base_field'))
 const nestedProperty = require('nested-property')
 
 class TextField extends BaseField {
-  constructor(id, valueKey, label, value = undefined, helpText = undefined) {
+  constructor(id, label, helpText = undefined) {
     super()
     this.dataset['id'] = this.dataset.id || id
-    this.dataset['valueKey'] = this.dataset.valueKey || valueKey
     this.dataset['label'] = this.dataset.label || label
-    this.dataset['value'] = this.dataset.value ||
-    nestedProperty.get(this.currentSettings(), this.dataset.valueKey) || value || ''
     this.dataset['helpText'] = this.dataset.helpText || helpText || ''
-
-    this.setInnerHTML()
   }
 
   initializeMdcElement() {
@@ -32,8 +27,19 @@ class TextField extends BaseField {
 
   attachListeners() {
     this.mdcElement.addEventListener('change', () => {
-      this.updateSetting(this.dataset.valueKey, this.querySelector('input').value)
+      this.updateSetting(this.valueKey, this.querySelector('input').value)
     })
+  }
+
+  updateValue(newValue) {
+    this.querySelector('input').setAttribute('value', newValue)
+    this.querySelector('input').value = newValue
+
+    if (newValue) {
+      this.querySelector('label').classList += ' mdc-textfield__label--float-above'
+    } else {
+      this.querySelector('label').classList = 'mdc-textfield__label'
+    }
   }
 
   _inputField() {
@@ -41,7 +47,8 @@ class TextField extends BaseField {
     element.type = 'text'
     element.id = this.dataset.id
     element.classList = 'mdc-textfield__input'
-    if (this.dataset.value) element.setAttribute('value', this.dataset.value)
+
+    if (this.currentValue) element.setAttribute('value', this.currentValue)
 
     return element.outerHTML
   }
@@ -52,7 +59,7 @@ class TextField extends BaseField {
     element.innerText = this.dataset.label
     element.classList = 'mdc-textfield__label'
 
-    if (this.dataset.value) {
+    if (this.currentValue) {
       element.classList += ' mdc-textfield__label--float-above'
     }
 

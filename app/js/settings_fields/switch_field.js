@@ -26,6 +26,10 @@ class SwitchField extends BaseField {
     })
   }
 
+  updateValue(newValue) {
+    this.querySelector('input').setAttribute('checked', newValue)
+  }
+
   _switch() {
     let mdcSwitch = document.createElement('div')
     mdcSwitch.classList = 'mdc-switch'

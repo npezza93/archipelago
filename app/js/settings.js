@@ -15,8 +15,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })
 
-  document.querySelector('.newProfile').addEventListener('click', () => {
+  document.querySelector('.newProfile').addEventListener('click', (e) => {
+    e.preventDefault()
     Profile.create()
+  })
+
+  document.querySelector('form').addEventListener('submit', (e) => {
+    e.preventDefault()
   })
 
   Profile.loadAll()

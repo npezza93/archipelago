@@ -1,5 +1,6 @@
 const BaseField = require(join(__dirname, '/base_field'))
 const nestedProperty = require('nested-property')
+const Profile = require(join(__dirname, '../profile'))
 
 class ProfileSelectorField extends BaseField {
   constructor(id) {
@@ -7,6 +8,14 @@ class ProfileSelectorField extends BaseField {
     this.dataset['id'] = this.dataset.id || id
 
     this.setInnerHTML()
+  }
+
+  set profile(profile) {
+    return this._profile = profile
+  }
+
+  get profile() {
+    return this._profile
   }
 
   setInnerHTML() {
@@ -21,8 +30,12 @@ class ProfileSelectorField extends BaseField {
 
   attachListeners() {
     this.input.addEventListener('change', () => {
-      let checked = document.querySelector('profile-selector-field input:checked').id
-      this.updateSetting('activeProfile', checked)
+      let checkedProfile = document.querySelector('profile-selector-field input:checked')
+      let profile = checkedProfile.parentElement.parentElement.profile
+
+      this.updateSetting('activeProfile', profile.id)
+
+      profile.loadSettings()
     })
   }
 

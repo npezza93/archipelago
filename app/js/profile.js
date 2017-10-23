@@ -18,22 +18,46 @@ class Profile {
   }
 
   loadSettings() {
-    // console.log('loading settings')
+    if (!this.isActive()) return
+
+    this.settingsKeys().forEach((key) => {
+      if (key !== 'theme') {
+        this.loadSetting(key, this.settings[key])
+      } else {
+        Object.keys(this.settings['theme']).forEach((color) => {
+          this.loadSetting('theme.' + color, this.settings['theme'][color])
+        })
+      }
+    })
   }
 
-  get colors() {
-    return [
-      'foreground', 'background', 'cursor', 'cursorAccent', 'selection', 'red',
-      'brightRed', 'green', 'brightGreen', 'yellow', 'brightYellow', 'magenta',
-      'brightMagenta', 'cyan', 'brightCyan', 'blue', 'brightBlue', 'white',
-      'brightWhite', 'black', 'brightBlack'
-    ]
+  loadSetting(settingKey, value) {
+    let element = document.querySelector('[data-value-key="' + settingKey + '"]')
+
+    if (element) {
+      element.updateValue(value)
+    }
+  }
+
+  settingsKeys() {
+    return Object.keys(this.settings).filter((setting) => {
+      return setting !== "id" && setting !== "name"
+    })
+  }
+
+  isActive() {
+    return (new ConfigFile()).contents.activeProfile === this.id
+  }
+
+  get settings() {
+    return (new ConfigFile()).contents.profiles[this.id]
   }
 
   get nameField() {
     if (this._nameField) return this._nameField
 
-    this._nameField = new TextField('profile_' + this.id, 'profiles.' + this.id + '.name', 'Name', this.name)
+    this._nameField = new TextField('profiles.' + this.id + '.name', 'Name')
+    this._nameField.profileField = true
 
     return this._nameField
   }
@@ -42,6 +66,7 @@ class Profile {
     if (this._selectorField) return this._selectorField
 
     this._selectorField = new ProfileSelectorField(this.id)
+    this._selectorField.profile = this
 
     return this._selectorField
   }
@@ -76,9 +101,13 @@ class Profile {
     let configFile = new ConfigFile()
     let contents = configFile.contents
 
-    Object.values(contents.profiles || []).forEach((profile) => {
-      (new Profile(profile)).load()
-    })
+    if (contents.profiles) {
+      Object.values(contents.profiles).forEach((profile) => {
+        (new Profile(profile)).load()
+      })
+    } else {
+      Profile.create()
+    }
   }
 }
 

@@ -7,7 +7,7 @@ class ColorField extends BaseField {
     this.dataset['id'] = this.dataset.id || id
     this.dataset['valueKey'] = this.dataset.valueKey || 'theme.' + this.dataset.id
     this.dataset['label'] = this.dataset.label || label
-    this.dataset['value'] = nestedProperty.get(this.currentSettings(), this.dataset.valueKey) ||
+    this.dataset['value'] = nestedProperty.get(this.currentSettings(), 'profiles.' + this.activeProfile() + '.' + this.dataset.valueKey) ||
       this.dataset.value || value || ''
 
     this.setInnerHTML()
@@ -25,15 +25,24 @@ class ColorField extends BaseField {
 
   attachListeners() {
     this.mdcElement.addEventListener('change', () => {
-      this.updateSetting(this.dataset.valueKey, this.querySelector('input').value)
+      let profileKey = 'profiles.' + this.activeProfile() + '.'
+      this.updateSetting(profileKey + this.dataset.valueKey, this.querySelector('input').value)
     })
+  }
+
+  updateValue(newValue) {
+    let input = this.querySelector('input')
+    input.setAttribute('value', newValue)
+    input.value = newValue
+
+    input.style.backgroundColor = newValue
   }
 
   _inputField() {
     let element = document.createElement('input')
     element.type = 'text'
     element.id = this.dataset.id
-    element.setAttribute('style', 'width:200px;padding:0;font-size:16px;border:0;text-align: end;')
+
     if (this.dataset.value) element.setAttribute('value', this.dataset.value)
 
     return element.outerHTML

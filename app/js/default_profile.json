@@ -9,7 +9,11 @@
    "lineHeight":"1.0",
    "tabStopWidth":"8",
    "windowBackground":"#000000",
+   "shellArgs":"--login",
+   "bellSound":"https://raw.githubusercontent.com/chromium/hterm/master/audio/bell.ogg",
+   "bellStyle":"both",
    "theme":{
+      "selection": "rgba(255, 255, 255, 0.3)",
       "foreground":"#FFFFFF",
       "background":"#000000",
       "black":"#000000",

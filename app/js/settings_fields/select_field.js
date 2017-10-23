@@ -17,6 +17,10 @@ class SelectField extends BaseField {
     this.mdcSelect = mdc.select.MDCSelect.attachTo(this.mdcElement)
   }
 
+  updateValue(newValue) {
+    // this.mdcElement.setAttribute('tabindex', newValue)
+  }
+
   setInnerHTML() {
     this.mdcElement = document.createElement('div')
     this.mdcElement.classList = 'mdc-select'

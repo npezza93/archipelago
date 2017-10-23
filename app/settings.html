@@ -16,7 +16,7 @@
         <div class="mdc-typography--title mt-6 d-flex flex-row justify-content-center">Profiles</div>
 
         <div class="profiles"></div>
-        <button class="newProfile mdc-button">Add New Profile</button>
+        <div class="newProfile mdc-button">Add New Profile</div>
       </div>
 
       <section class="mt-6">
@@ -39,53 +39,53 @@
 
             <h5 class="mb-0 mt-6 mdc-typography--body2">Cursor</h5>
             <div class="d-flex flex-row wrap justify-content-around align-items-end container">
-              <select-field data-options='[["block", "Block"], ["underline", "Underline"], ["bar", "Bar"]]' data-label="Choose a cursor style" data-value-key="cursorStyle" data-id="cursorStyle"></select-field>
-              <switch-field data-id="cursorBlink" data-value-key="cursorBlink" data-label="Blink cursor"></switch-field>
+              <!-- <select-field data-options='[["block", "Block"], ["underline", "Underline"], ["bar", "Bar"]]' data-label="Choose a cursor style" data-value-key="cursorStyle" data-id="cursorStyle"></select-field> -->
+              <!-- <switch-field data-id="cursorBlink" data-value-key="cursorBlink" data-label="Blink cursor"></switch-field> -->
             </div>
 
             <h5 class="mb-0 mt-6 mdc-typography--body2">Bell</h5>
             <div class="d-flex flex-row wrap justify-content-around align-items-base container">
               <text-field data-id="bellSound"   data-label="Bell sound"      data-value-key="bellSound" data-help-text="URL or URI"></text-field>
-              <select-field data-options='[["none", "None"], ["visual", "Visual"], ["sound", "Sound"], ["both", "Both"]]' data-label="Choose a bell style" data-value-key="bellStyle" data-id="bellStyle"></select-field>
+              <!-- <select-field data-options='[["none", "None"], ["visual", "Visual"], ["sound", "Sound"], ["both", "Both"]]' data-label="Choose a bell style" data-value-key="bellStyle" data-id="bellStyle"></select-field> -->
             </div>
 
             <h5 class="mb-0 mt-6 mdc-typography--body2">Shell</h5>
             <div class="d-flex flex-row wrap justify-content-around align-items-base container">
               <text-field data-id="shell"        data-label="Shell"           data-value-key="shell" data-help-text="The shell to run when spawning a new session (i.e. /usr/local/bin/fish)"></text-field>
-              <text-field data-id="shellArgs"    data-label="Shell Arguments" data-value-key="shellArgs" data-value= "--login" data-help-text="for setting shell arguments (comma seperated)"></text-field>
+              <text-field data-id="shellArgs"    data-label="Shell Arguments" data-value-key="shellArgs" data-help-text="for setting shell arguments (comma seperated)"></text-field>
               <text-field data-id="scrollback"   data-label="Scrollback"      data-value-key="scrollback"></text-field>
               <text-field data-id="tabStopWidth" data-label="Tab Stop Width"  data-value-key="tabStopWidth"></text-field>
             </div>
 
-            <h5 class="mb-0 mt-6 mdc-typography--body2">Vibrancy</h5>
+            <!-- <h5 class="mb-0 mt-6 mdc-typography--body2">Vibrancy</h5>
             <div class="d-flex flex-row wrap justify-content-around align-items-base container">
               <select-field data-options='[["appearance-based", "appearance-based"], ["light", "light"], ["dark", "dark"], ["titlebar", "titlebar"], ["selection", "selection"], ["menu", "menu"], ["popover", "popover"], ["sidebar", "sidebar"], ["medium-light", "medium-light"], ["ultra-dark", "ultra-dark"]]' data-label="Vibrancy" data-value-key="vibrancy" data-id="vibrancy"></select-field>
-            </div>
+            </div> -->
           </div>
 
           <div id="theme" class="panel mt-6 flex-column" role="tabpanel" aria-hidden="true">
-            <color-field data-id="foreground" data-label="Foreground: " data-value="#ffffff"></color-field>
-            <color-field data-id="background" data-label="Terminal Background: " data-value="#000000"></color-field>
-            <color-field data-id="windowBackground" data-label="Window Background: " data-value="#000000" data-value-key="windowBackground"></color-field>
-            <color-field data-id="selection" data-label="Selection: " data-value="rgba(255, 255, 255, 0.3)"></color-field>
-            <color-field data-id="cursor" data-label="Cursor: " data-value="#ffffff"></color-field>
-            <color-field data-id="cursorAccent" data-label="Cursor Accent: " data-value="#000000"></color-field>
-            <color-field data-id="red" data-label="Red: " data-value="#cc0000"></color-field>
-            <color-field data-id="brightRed" data-label="Bright Red: " data-value="#ef2929"></color-field>
-            <color-field data-id="green" data-label="Green: " data-value="#4e9a06"></color-field>
-            <color-field data-id="brightGreen" data-label="Bright Green: " data-value="#8ae234"></color-field>
-            <color-field data-id="yellow" data-label="Yellow: " data-value="#c4a000"></color-field>
-            <color-field data-id="brightYellow" data-label="Bright Yellow: " data-value="#fce94f"></color-field>
-            <color-field data-id="magenta" data-label="Magenta: " data-value="#75507b"></color-field>
-            <color-field data-id="brightMagenta" data-label="Bright Magenta: " data-value="#ad7fa8"></color-field>
-            <color-field data-id="cyan" data-label="Cyan: " data-value="#06989a"></color-field>
-            <color-field data-id="brightCyan" data-label="Bright Cyan: " data-value="#34e2e2"></color-field>
-            <color-field data-id="blue" data-label="Blue: " data-value="#3465a4"></color-field>
-            <color-field data-id="brightBlue" data-label="Bright Blue: " data-value="#729fcf"></color-field>
-            <color-field data-id="white" data-label="White: " data-value="#d3d7cf"></color-field>
-            <color-field data-id="brightWhite" data-label="Bright White: " data-value="#eeeeec"></color-field>
-            <color-field data-id="black" data-label="Black: " data-value="#2e3436"></color-field>
-            <color-field data-id="brightBlack" data-label="Bright Black: " data-value="#555753"></color-field>
+            <color-field data-id="foreground"       data-label="Foreground"></color-field>
+            <color-field data-id="background"       data-label="Terminal Background"></color-field>
+            <color-field data-id="windowBackground" data-label="Window Background" data-value-key="windowBackground"></color-field>
+            <color-field data-id="selection"        data-label="Selection"></color-field>
+            <color-field data-id="cursor"           data-label="Cursor"></color-field>
+            <color-field data-id="cursorAccent"     data-label="Cursor Accent"></color-field>
+            <color-field data-id="red"              data-label="Red"></color-field>
+            <color-field data-id="brightRed"        data-label="Bright Red"></color-field>
+            <color-field data-id="green"            data-label="Green"></color-field>
+            <color-field data-id="brightGreen"      data-label="Bright Green"></color-field>
+            <color-field data-id="yellow"           data-label="Yellow"></color-field>
+            <color-field data-id="brightYellow"     data-label="Bright Yellow"></color-field>
+            <color-field data-id="magenta"          data-label="Magenta"></color-field>
+            <color-field data-id="brightMagenta"    data-label="Bright Magenta"></color-field>
+            <color-field data-id="cyan"             data-label="Cyan"></color-field>
+            <color-field data-id="brightCyan"       data-label="Bright Cyan"></color-field>
+            <color-field data-id="blue"             data-label="Blue"></color-field>
+            <color-field data-id="brightBlue"       data-label="Bright Blue"></color-field>
+            <color-field data-id="white"            data-label="White"></color-field>
+            <color-field data-id="brightWhite"      data-label="Bright White"></color-field>
+            <color-field data-id="black"            data-label="Black"></color-field>
+            <color-field data-id="brightBlack"      data-label="Bright Black"></color-field>
          </div>
 
           <div id="keyboardShortcuts" class="panel" role="tabpanel" aria-hidden="true">

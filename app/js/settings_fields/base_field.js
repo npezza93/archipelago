@@ -16,6 +16,10 @@ class BaseField extends HTMLElement {
 
   attachListeners() {}
 
+  activeProfile() {
+    return this.currentSettings().activeProfile
+  }
+
   get configFile() {
     if (this._configFile) return this._configFile
 
@@ -32,6 +36,29 @@ class BaseField extends HTMLElement {
     let configContents = this.currentSettings()
     nestedProperty.set(configContents, valueKey, value)
     this.configFile.write(JSON.stringify(configContents))
+  }
+
+  get valueKey() {
+    let valueKey
+    if (!this.profileField) {
+      valueKey = 'profiles.' + this.activeProfile() + '.'
+    } else {
+      valueKey = ''
+    }
+
+    return valueKey + this.dataset.id
+  }
+
+  get currentValue() {
+    return nestedProperty.get(this.currentSettings(), this.valueKey) || ''
+  }
+
+  get profileField() {
+    return this._profileField
+  }
+
+  set profileField(isProfileField) {
+    return this._profileField = isProfileField
   }
 }
 
