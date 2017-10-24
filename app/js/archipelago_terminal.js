@@ -102,7 +102,6 @@ class ArchipelagoTerminal extends HTMLElement {
   updateSettings() {
     let strings = [
       'fontFamily',
-      'fontSize',
       'lineHeight',
       'letterSpacing',
       'cursorStyle',
@@ -113,7 +112,8 @@ class ArchipelagoTerminal extends HTMLElement {
       'theme'
     ]
 
-    let integers = ['tabStopWidth']
+    let integers = ['tabStopWidth', 'fontSize']
+    let floats = ['lineHeight']
 
     strings.forEach((field) => {
       if (this.xterm[field] !== this.settings[field]) {
@@ -125,6 +125,13 @@ class ArchipelagoTerminal extends HTMLElement {
     integers.forEach((field) => {
       if (this.xterm[field] !== parseInt(this.settings[field])) {
         this.xterm.setOption(field, parseInt(this.settings[field]))
+        this.fit()
+      }
+    })
+
+    floats.forEach((field) => {
+      if (this.xterm[field] !== parseFloat(this.settings[field])) {
+        this.xterm.setOption(field, parseFloat(this.settings[field]))
         this.fit()
       }
     })
