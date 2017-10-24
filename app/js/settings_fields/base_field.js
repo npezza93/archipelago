@@ -1,3 +1,5 @@
+const { join } = require('path')
+
 const ConfigFile = require(join(__dirname, '../config_file'))
 const nestedProperty = require('nested-property')
 

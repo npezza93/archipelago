@@ -1,3 +1,5 @@
+const { join } = require('path')
+
 const BaseField = require(join(__dirname, '/base_field'))
 const nestedProperty = require('nested-property')
 
