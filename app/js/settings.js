@@ -1,6 +1,12 @@
 const { join } = require('path')
 const Profile = require(join(__dirname, '/js/profile'))
 
+const TextField = require(join(__dirname, '/js/settings_fields/text_field'))
+const ColorField = require(join(__dirname, '/js/settings_fields/color_field'))
+const SelectField = require(join(__dirname, '/js/settings_fields/select_field'))
+const SwitchField = require(join(__dirname, '/js/settings_fields/switch_field'))
+const ProfileSelectorField = require(join(__dirname, '/js/settings_fields/profile_selector_field'))
+
 document.addEventListener('DOMContentLoaded', () => {
   jsColorPicker('#theme input[type="text"]', {
     customBG: '#fff',
