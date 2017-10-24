@@ -34,6 +34,10 @@ class ConfigFile {
     return this._emitter
   }
 
+  get activeSettings() {
+    return this.contents.profiles[this.contents.activeProfile]
+  }
+
   write(content) {
     fs.writeFileSync(this.filePath, content, (err) => {
       if (err) console.log(err)

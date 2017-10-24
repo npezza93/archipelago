@@ -35,12 +35,10 @@ class ArchipelagoTerminal extends HTMLElement {
     if (this._pty) return this._pty
     let args
 
-    if (this.configFile.shellArgs) {
-      args = this.configFile.shellArgs.split(",")
-    } else {
-      args = ['--login']
+    if (this.settings.shellArgs) {
+      args = this.settings.shellArgs.split(",")
     }
-    this._pty = Pty.spawn(this.configFile.shell ||defaultShell, args, {
+    this._pty = Pty.spawn(this.settings.shell ||defaultShell, args, {
       name: 'xterm-256color',
       env: process.env
     })
@@ -55,33 +53,16 @@ class ArchipelagoTerminal extends HTMLElement {
     if (this._xterm) return this._xterm
 
     this._xterm = new Terminal({
-      cursorBlink: this.settings.cursorBlink,
-      cursorStyle: this.settings.cursorStyle,
-      bellSound: this.settings.bellSound,
-      fontSize: this.settings.fontSize,
       fontFamily: this.settings.fontFamily,
+      fontSize: this.settings.fontSize,
+      lineHeight: this.settings.lineHeight,
+      letterSpacing: this.settings.letterSpacing,
+      cursorStyle: this.settings.cursorStyle,
+      cursorBlink: this.settings.cursorBlink,
+      bellSound: this.settings.bellSound,
       scrollback: this.settings.scrollback,
+      tabStopWidth: this.settings.tabStopWidth,
       theme: this.settings.theme
-      // // foreground: '#ffffff',
-      // // background: 'none',
-      // // cursor: '#ffffff',
-      // // selection: 'rgba(255, 255, 255, 0.3)',
-      // // black: '#000000',
-      // // red: '#e06c75',
-      // // brightRed: '#e06c75',
-      // // green: '#A4EFA1',
-      // // brightGreen: '#A4EFA1',
-      // // brightYellow: '#EDDC96',
-      // // yellow: '#EDDC96',
-      // // magenta: '#e39ef7',
-      // // brightMagenta: '#e39ef7',
-      // // cyan: '#5fcbd8',
-      // // brightBlue: '#5fcbd8',
-      // // brightCyan: '#5fcbd8',
-      // // blue: '#5fcbd8',
-      // // white: '#d0d0d0',
-      // // brightBlack: '#808080',
-      // // brightWhite: '#ffffff'
     })
     return this._xterm
   }
@@ -107,7 +88,7 @@ class ArchipelagoTerminal extends HTMLElement {
   }
 
   get settings() {
-    return this.configFile.contents
+    return this.configFile.activeSettings
   }
 
   get configFile() {
@@ -116,6 +97,29 @@ class ArchipelagoTerminal extends HTMLElement {
     this._configFile = new ConfigFile()
 
     return this._configFile
+  }
+
+  updateSettings() {
+    let fields = [
+      'fontFamily',
+      'fontSize',
+      'lineHeight',
+      'letterSpacing',
+      'cursorStyle',
+      'cursorBlink',
+      'bellSound',
+      'bellStyle',
+      'scrollback',
+      'tabStopWidth',
+      'theme'
+    ]
+
+    fields.forEach((field) => {
+      if (this.xterm[field] !== this.settings[field]) {
+        this.xterm.setOption(field, this.settings[field])
+        this.fit()
+      }
+    })
   }
 
   bindExit() {
@@ -131,18 +135,7 @@ class ArchipelagoTerminal extends HTMLElement {
 
   _bindDataListeners () {
     this._configFile.on('change', () => {
-      let element = document.documentElement
-
-      element.style.setProperty('--font-family', this.settings.fontFamily)
-
-      let fields = ['cursorStyle', 'cursorBlink', 'fontFamily', 'fontSize', 'scrollback', 'bellStyle', 'theme']
-
-      fields.forEach((field) => {
-        if (this.xterm[field] !== this.settings[field]) {
-          this.xterm.setOption(field, this.settings[field])
-          this.fit()
-        }
-      })
+      this.updateSettings()
     })
 
     this.xterm.on('data', (data) => {

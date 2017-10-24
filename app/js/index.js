@@ -17,12 +17,7 @@ window.addEventListener('resize', function() {
 })
 
 document.addEventListener('DOMContentLoaded', () => {
-  document.documentElement.style.setProperty('--background-color', configFile.windowBackground)
-  document.documentElement.style.setProperty('--font-family', configFile.fontFamily)
-  // theme 1
-  // document.documentElement.style.setProperty('--background-color', 'rgba(40, 44, 52, 0.1)')
-  // theme 2
-  // document.documentElement.style.setProperty('--background-color', '#EEEEEE')
+  setDocumentSettings()
 
   newTab()
 })
@@ -46,9 +41,14 @@ function newTab() {
   document.querySelector('#titlebar').appendChild(document.createElement('archipelago-tab'))
 }
 
-configFile.on('change', () => {
+function setDocumentSettings() {
   let element = document.documentElement
 
-  element.style.setProperty('--font-family', this.fontFamily)
-  element.style.setProperty('--background-color', this.windowBackground)
+  element.style.setProperty('--font-family', configFile.activeSettings.fontFamily)
+  element.style.setProperty('--font-size', configFile.activeSettings.fontSize)
+  element.style.setProperty('--background-color', configFile.activeSettings.windowBackground)
+}
+
+configFile.on('change', () => {
+  setDocumentSettings()
 })

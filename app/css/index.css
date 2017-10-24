@@ -49,7 +49,7 @@ archipelago-terminal {
 }
 archipelago-tab {
   font-family: var(--font-family);
-  font-size: var(--tab-font-size);
+  font-size: var(--font-size);
   line-height: 18px !important;
   position: relative;
 }
@@ -96,7 +96,7 @@ archipelago-tab div {
   --background-color: #000;
   /*--background-color: rgb(234, 234, 234);*/
   --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  --tab-font-size: 14px;
+  --tab-font-size: 15px;
 }
 
 .terminal {
