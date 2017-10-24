@@ -53,6 +53,16 @@ archipelago-tab {
   line-height: 18px !important;
   position: relative;
 }
+archipelago-tab span {
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 75%;
+}
+archipelago-tab.is-unread span {
+  animation: pulse 2s infinite;
+}
 archipelago-tab div {
   position: absolute;
   right: 10px;
@@ -121,4 +131,10 @@ archipelago-tab div {
 
 .xterm-viewport {
   margin-right: -15px;
+}
+
+@keyframes pulse {
+  from { opacity: 1; }
+  50% { opacity: 0.3; }
+  to { opacity: 1; }
 }

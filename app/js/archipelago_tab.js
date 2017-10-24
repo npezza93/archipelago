@@ -32,6 +32,11 @@ class ArchipelagoTab extends HTMLElement {
     this.container.classList.remove('hidden')
     this.terminals[0].xterm.focus()
     this.classList.add('active')
+    this.classList.remove('is-unread')
+  }
+
+  isActive() {
+    return this.classList.contains("active")
   }
 
   get terminals() {

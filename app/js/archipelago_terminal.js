@@ -166,6 +166,9 @@ class ArchipelagoTerminal extends HTMLElement {
 
     this.pty.on('data', (data) => {
       this.xterm.write(data)
+      if (!this.tab.isActive() && !this.tab.classList.contains('is-unread')) {
+        this.tab.classList += ' is-unread'
+      }
     })
     this.bindExit()
   }
