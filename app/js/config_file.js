@@ -1,15 +1,21 @@
-'use strict'
-
 const fs = require('fs')
 const chokidar = require('chokidar')
 const { homedir } = require('os')
 const { join } = require('path')
 const { EventEmitter } = require('events')
 
+const defaultProfile = require(join(__dirname, '/default_profile.json'))
+
 class ConfigFile {
   constructor() {
     fs.open(this.filePath, 'r', (err) => {
-      if (err) this.write('{}')
+      if (err) {
+        let profile = { 'id': 1, 'name': 'New Profile' }
+        Object.assign(profile, defaultProfile)
+        profile = { "activeProfile": 1, "profiles": { 1: profile } }
+
+        this.write(JSON.stringify(profile))
+      }
     })
 
     this._emitter = new EventEmitter()
