@@ -99,7 +99,7 @@ archipelago-tab div {
   --tab-font-size: 15px;
 }
 
-.terminal {
+.xterm {
   background-color: transparent;
 }
 .terminal .xterm-viewport {
