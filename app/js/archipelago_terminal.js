@@ -61,7 +61,7 @@ class ArchipelagoTerminal extends HTMLElement {
       cursorBlink: this.settings.cursorBlink,
       bellSound: this.settings.bellSound,
       scrollback: this.settings.scrollback,
-      tabStopWidth: this.settings.tabStopWidth,
+      tabStopWidth: parseInt(this.settings.tabStopWidth),
       theme: this.settings.theme
     })
     return this._xterm
@@ -100,7 +100,7 @@ class ArchipelagoTerminal extends HTMLElement {
   }
 
   updateSettings() {
-    let fields = [
+    let strings = [
       'fontFamily',
       'fontSize',
       'lineHeight',
@@ -110,13 +110,21 @@ class ArchipelagoTerminal extends HTMLElement {
       'bellSound',
       'bellStyle',
       'scrollback',
-      'tabStopWidth',
       'theme'
     ]
 
-    fields.forEach((field) => {
+    let integers = ['tabStopWidth']
+
+    strings.forEach((field) => {
       if (this.xterm[field] !== this.settings[field]) {
         this.xterm.setOption(field, this.settings[field])
+        this.fit()
+      }
+    })
+
+    integers.forEach((field) => {
+      if (this.xterm[field] !== parseInt(this.settings[field])) {
+        this.xterm.setOption(field, parseInt(this.settings[field]))
         this.fit()
       }
     })
