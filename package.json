@@ -4,13 +4,13 @@
   "main": "app/js/main/main.js",
   "dependencies": {
     "chokidar": "^1.7.0",
-    "coffeescript": "^2.0.0-beta5",
+    "coffeescript": "^2.0.2",
     "default-shell": "^1.0.1",
-    "electron-packager": "^9.0.1",
+    "electron-packager": "^9.1.0",
     "keymaster": "^1.6.2",
     "material-components-web": "^0.21.1",
     "nested-property": "0.0.7",
-    "node-pty": "^0.7.0",
+    "node-pty": "^0.7.2",
     "xterm": "^2.9.2"
   },
   "description": "A terminal built on electron",
@@ -18,12 +18,12 @@
   "author": "npezza93 <npezza93@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^1.8.0",
+    "electron": "^1.8.1",
     "electron-rebuild": "^1.6.0",
-    "eslint": "^4.6.1",
-    "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-node": "^5.1.1",
-    "eslint-plugin-promise": "^3.5.0",
+    "eslint": "^4.10.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-standard": "^3.0.1"
   },
   "scripts": {
