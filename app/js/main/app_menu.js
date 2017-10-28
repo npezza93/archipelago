@@ -1,8 +1,8 @@
-const { app, BrowserWindow, shell } = require('electron')
-const path = require('path')
-const url = require('url')
+import { app, BrowserWindow, shell } from 'electron'
+import path from 'path'
+import url from 'url'
 
-class AppMenu {
+export default class AppMenu {
   static menu(settings, createWindow) {
     let template = [
       this.shellMenu(createWindow),
@@ -161,5 +161,3 @@ class AppMenu {
     }
   }
 }
-
-module.exports = AppMenu

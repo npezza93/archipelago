@@ -1,8 +1,8 @@
-const fs = require('fs')
-const chokidar = require('chokidar')
-const { homedir } = require('os')
-const { join } = require('path')
-const { EventEmitter } = require('events')
+import fs from 'fs'
+import chokidar from 'chokidar'
+import { homedir } from 'os'
+import { join } from 'path'
+import { EventEmitter } from 'events'
 
 const defaultProfile = require(join(__dirname, '/default_profile.json'))
 
@@ -53,6 +53,6 @@ class ConfigFile {
   on(event, handler) {
     this.emitter.on('change', handler)
   }
-};
+}
 
 module.exports = ConfigFile

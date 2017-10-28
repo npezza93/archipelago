@@ -1,12 +1,10 @@
-'use strict'
-
 const Pty = require('node-pty')
-const defaultShell = require('default-shell')
-const { join } = require('path')
+import defaultShell from 'default-shell'
+import { join } from 'path'
 
 const ConfigFile = require(join(__dirname, '/config_file'))
 
-class ArchipelagoTerminal extends HTMLElement {
+export class ArchipelagoTerminal extends HTMLElement {
   disconnectedCallback() {
     if (this.preserveState) return
 
@@ -174,5 +172,4 @@ class ArchipelagoTerminal extends HTMLElement {
   }
 };
 
-module.exports = ArchipelagoTerminal
 window.customElements.define('archipelago-terminal', ArchipelagoTerminal)

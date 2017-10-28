@@ -1,7 +1,6 @@
-'use strict'
+import { ipcRenderer } from 'electron'
+import { join } from 'path'
 
-const { ipcRenderer } = require('electron')
-const { join } = require('path')
 const Split = require(join(__dirname, '/js/split'))
 const ConfigFile = require(join(__dirname, '/js/config_file'))
 
@@ -10,7 +9,7 @@ require(join(__dirname, '/js/archipelago_terminal'))
 
 let configFile  = new ConfigFile()
 
-window.addEventListener('resize', function() {
+window.addEventListener('resize', () => {
   for (var terminal of document.querySelectorAll('.tab-container:not(.hidden) archipelago-terminal')) {
     terminal.fit()
   }
@@ -21,14 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   newTab()
 })
-
-document.addEventListener('keyup', () => {
-  pressedKeys = []
-})
-
-function shortcutTriggered(shortcut) {
-  return pressedKeys.join(',') === shortcut.join(',')
-}
 
 function newTab() {
   document.querySelector('#titlebar').appendChild(document.createElement('archipelago-tab'))
@@ -42,9 +33,7 @@ function setDocumentSettings() {
   element.style.setProperty('--background-color', configFile.activeSettings.windowBackground)
 }
 
-configFile.on('change', () => {
-  setDocumentSettings()
-})
+configFile.on('change', setDocumentSettings)
 
 ipcRenderer.on('new-tab', newTab)
 ipcRenderer.on('split-horizontal', () => {

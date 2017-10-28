@@ -1,15 +1,16 @@
-const { app, BrowserWindow, Menu } = require('electron')
-const path = require('path')
-const url = require('url')
+import { app, BrowserWindow, Menu } from 'electron'
+import path from 'path'
+import url from 'url'
+import AppMenu from './app_menu'
+import { enableLiveReload } from 'electron-compile'
 const ConfigFile = require(path.join(__dirname, '../config_file'))
-const AppMenu = require('./app_menu')
 
 let settings
 let windows = []
 let configFile = new ConfigFile()
 
 function createWindow () {
-  win = new BrowserWindow({
+  let win = new BrowserWindow({
     width: 1000,
     height: 600,
     titleBarStyle: 'hidden-inset',
@@ -39,7 +40,8 @@ app.on('window-all-closed', () => {
 })
 
 app.on('activate', () => {
-  if (win === null) {
+  enableLiveReload()
+  if (windows.length === 0) {
     createWindow()
   }
 })
