@@ -136,11 +136,11 @@ class AppMenu {
                 height: 600,
                 show: true,
                 titleBarStyle: 'hidden-inset',
-                icon: path.join(__dirname, '/assets/png_icon.png')
+                icon: path.join(__dirname, '../../../assets/png_icon.png')
               })
 
               settings.loadURL(url.format({
-                pathname: path.join(__dirname, '../settings.html'),
+                pathname: path.join(__dirname, '../../settings.html'),
                 protocol: 'file:',
                 slashes: true
               }))

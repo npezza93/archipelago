@@ -1,8 +1,8 @@
 const { app, BrowserWindow, Menu } = require('electron')
 const path = require('path')
 const url = require('url')
-const ConfigFile = require(path.join(__dirname, '/app/js/config_file'))
-const AppMenu = require(path.join(__dirname, '/app/js/app_menu'))
+const ConfigFile = require(path.join(__dirname, '../config_file'))
+const AppMenu = require('./app_menu')
 
 let settings
 let windows = []
@@ -17,7 +17,7 @@ function createWindow () {
   })
 
   win.loadURL(url.format({
-    pathname: path.join(__dirname, '/app/index.html'),
+    pathname: path.join(__dirname, '../../index.html'),
     protocol: 'file:',
     slashes: true
   }))
