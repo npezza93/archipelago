@@ -1,5 +1,6 @@
 'use strict'
 
+const { ipcRenderer } = require('electron')
 const { join } = require('path')
 const Split = require(join(__dirname, '/js/split'))
 const ConfigFile = require(join(__dirname, '/js/config_file'))
@@ -7,7 +8,6 @@ const ConfigFile = require(join(__dirname, '/js/config_file'))
 require(join(__dirname, '/js/archipelago_tab'))
 require(join(__dirname, '/js/archipelago_terminal'))
 
-let pressedKeys = []
 let configFile  = new ConfigFile()
 
 window.addEventListener('resize', function() {
@@ -20,13 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
   setDocumentSettings()
 
   newTab()
-})
-
-document.addEventListener('keydown', (keyboardEvent) => {
-  pressedKeys.push(keyboardEvent.keyCode)
-  if (shortcutTriggered([91, 84])) newTab()
-  if (shortcutTriggered([91, 83])) (new Split('horizontal')).split()
-  if (shortcutTriggered([91, 16, 83]) || shortcutTriggered([16, 91, 83])) (new Split('vertical')).split()
 })
 
 document.addEventListener('keyup', () => {
@@ -51,4 +44,12 @@ function setDocumentSettings() {
 
 configFile.on('change', () => {
   setDocumentSettings()
+})
+
+ipcRenderer.on('new-tab', newTab)
+ipcRenderer.on('split-horizontal', () => {
+  (new Split('horizontal')).split()
+})
+ipcRenderer.on('split-vertical', () => {
+  (new Split('vertical')).split()
 })
