@@ -1,5 +1,4 @@
-'use strict'
-
+module.exports =
 class Split {
   constructor(orientation = 'horizontal') {
     this._orientation = orientation
@@ -37,30 +36,7 @@ class Split {
     this.focusedTerminal.replaceWith(this.splitContainer)
     this.originalTerminal.open()
     this.originalTerminal.bindExit()
-    setTimeout(() => {
-      this.originalTerminal.xterm.setOption('theme', {
-        foreground: '#ffffff',
-        background: 'transparent',
-        cursor: '#ffffff',
-        selection: 'rgba(255, 255, 255, 0.3)',
-        black: '#000000',
-        red: '#e06c75',
-        brightRed: '#e06c75',
-        green: '#A4EFA1',
-        brightGreen: '#A4EFA1',
-        brightYellow: '#EDDC96',
-        yellow: '#EDDC96',
-        magenta: '#e39ef7',
-        brightMagenta: '#e39ef7',
-        cyan: '#5fcbd8',
-        brightBlue: '#5fcbd8',
-        brightCyan: '#5fcbd8',
-        blue: '#5fcbd8',
-        white: '#d0d0d0',
-        brightBlack: '#808080',
-        brightWhite: '#ffffff'
-      })
-    }, 100)
+    this.originalTerminal.xterm.setOption('theme', this.originalTerminal.settings.theme)
   }
 
   _existingContainer() {
@@ -137,5 +113,3 @@ class Split {
     return this._separator
   }
 }
-
-module.exports = Split

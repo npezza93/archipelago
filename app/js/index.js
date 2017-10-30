@@ -1,11 +1,12 @@
-import { ipcRenderer } from 'electron'
-import { join } from 'path'
+require('coffeescript').register()
 
-const Split = require(join(__dirname, '/js/split'))
-const ConfigFile = require(join(__dirname, '/js/config_file'))
+const { ipcRenderer } = require('electron')
 
-require(join(__dirname, '/js/archipelago_tab'))
-require(join(__dirname, '/js/archipelago_terminal'))
+const Split = require('./js/split')
+const ConfigFile = require('./js/config_file')
+
+require('./js/archipelago_tab')
+require('./js/archipelago_terminal')
 
 let configFile  = new ConfigFile()
 
@@ -28,9 +29,9 @@ function newTab() {
 function setDocumentSettings() {
   let element = document.documentElement
 
-  element.style.setProperty('--font-family', configFile.activeSettings.fontFamily)
-  element.style.setProperty('--font-size', configFile.activeSettings.fontSize)
-  element.style.setProperty('--background-color', configFile.activeSettings.windowBackground)
+  element.style.setProperty('--font-family', configFile.activeSettings().fontFamily)
+  element.style.setProperty('--font-size', configFile.activeSettings().fontSize)
+  element.style.setProperty('--background-color', configFile.activeSettings().windowBackground)
 }
 
 configFile.on('change', setDocumentSettings)

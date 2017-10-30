@@ -31,7 +31,7 @@ class BaseField extends HTMLElement {
   }
 
   currentSettings () {
-    return this.configFile.contents
+    return this.configFile.contents()
   }
 
   updateSetting(valueKey, value) {

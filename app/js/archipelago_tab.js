@@ -1,4 +1,4 @@
-export default class ArchipelagoTab extends HTMLElement {
+class ArchipelagoTab extends HTMLElement {
   connectedCallback() {
     let terminal = document.createElement('archipelago-terminal')
     this.container = document.createElement('div')
@@ -67,4 +67,5 @@ export default class ArchipelagoTab extends HTMLElement {
   }
 }
 
+module.exports = ArchipelagoTab
 window.customElements.define('archipelago-tab', ArchipelagoTab)

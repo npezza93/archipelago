@@ -19,7 +19,6 @@
   "license": "MIT",
   "devDependencies": {
     "electron": "^1.8.1",
-    "electron-prebuilt-compile": "^1.7.9",
     "electron-rebuild": "^1.6.0",
     "eslint": "^4.10.0",
     "eslint-plugin-import": "^2.8.0",

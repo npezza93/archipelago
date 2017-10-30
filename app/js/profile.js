@@ -42,11 +42,11 @@ class Profile {
   }
 
   isActive() {
-    return (new ConfigFile()).contents.activeProfile === this.id
+    return (new ConfigFile()).contents().activeProfile === this.id
   }
 
   get settings() {
-    return (new ConfigFile()).contents.profiles[this.id]
+    return (new ConfigFile()).contents().profiles[this.id]
   }
 
   get nameField() {
@@ -80,7 +80,7 @@ class Profile {
 
   static create() {
     let configFile = new ConfigFile()
-    let contents = configFile.contents
+    let contents = configFile.contents()
     let id = Object.keys(contents.profiles || {}).length + 1
 
     contents.profiles = contents.profiles || {}
@@ -95,7 +95,7 @@ class Profile {
 
   static loadAll() {
     let configFile = new ConfigFile()
-    let contents = configFile.contents
+    let contents = configFile.contents()
 
     if (contents.profiles) {
       Object.values(contents.profiles).forEach((profile) => {

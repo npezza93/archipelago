@@ -1,10 +1,10 @@
 const Pty = require('node-pty')
-import defaultShell from 'default-shell'
-import { join } from 'path'
+const defaultShell = require('default-shell')
+const { join } = require('path')
 
-const ConfigFile = require(join(__dirname, '/config_file'))
+const ConfigFile = require('./config_file')
 
-export class ArchipelagoTerminal extends HTMLElement {
+class ArchipelagoTerminal extends HTMLElement {
   disconnectedCallback() {
     if (this.preserveState) return
 
@@ -86,7 +86,7 @@ export class ArchipelagoTerminal extends HTMLElement {
   }
 
   get settings() {
-    return this.configFile.activeSettings
+    return this.configFile.activeSettings()
   }
 
   get configFile() {
@@ -143,6 +143,10 @@ export class ArchipelagoTerminal extends HTMLElement {
       } else {
         document.querySelector('archipelago-tab').focus()
       }
+
+      if (this.parentElement.classList.contains('terminal-container')) {
+
+      }
     })
   }
 
@@ -172,4 +176,5 @@ export class ArchipelagoTerminal extends HTMLElement {
   }
 };
 
+module.exports = ArchipelagoTerminal
 window.customElements.define('archipelago-terminal', ArchipelagoTerminal)

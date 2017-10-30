@@ -1,68 +1,61 @@
-import { app, BrowserWindow, shell } from 'electron'
-import path from 'path'
-import url from 'url'
+{ app, BrowserWindow, shell } = require('electron')
+path = require('path')
+url = require('url')
 
-export default class AppMenu {
-  static menu(settings, createWindow) {
-    let template = [
-      this.shellMenu(createWindow),
+module.exports =
+class AppMenu
+  @menu: (settings, createWindow) ->
+    template = [
+      this.shellMenu(createWindow)
       this.editMenu(),
       this.viewMenu(),
       this.windowMenu(),
       this.helpMenu()
     ]
 
-    if (process.platform === 'darwin') {
+    if process.platform == 'darwin'
       template.unshift(this.aboutMenu(settings))
-    }
 
-    return template
-  }
+    template
 
-  static shellMenu(createWindow) {
-    return {
+  @shellMenu: (createWindow) ->
+    {
       label: 'Shell',
       submenu: [
         {
           label: 'New Window',
           accelerator: 'CmdOrCtrl+N',
-          click() { createWindow.call() }
+          click: () ->
+            createWindow.call()
         },
         { type: 'separator' },
         {
           label: 'Split Vertically',
           accelerator: 'CmdOrCtrl+Shift+S',
-          click(item, focusedWindow) {
-            if (focusedWindow) {
+          click: (item, focusedWindow) ->
+            if focusedWindow
               focusedWindow.send('split-vertical')
-            }
-          }
         },
         {
           label: 'Split Horizontally',
           accelerator: 'CmdOrCtrl+S',
-          click(item, focusedWindow) {
-            if (focusedWindow) {
+          click: (item, focusedWindow) ->
+            if focusedWindow
               focusedWindow.send('split-horizontal')
-            }
-          }
         },
         { type: 'separator' },
         {
           label: 'New Tab',
           accelerator: 'CmdOrCtrl+T',
-          click(item, focusedWindow) {
-            if (focusedWindow) {
+          click: (item, focusedWindow) ->
+            if focusedWindow
               focusedWindow.send('new-tab')
-            }
-          }
         }
       ]
     }
-  }
 
-  static editMenu() {
-    return {
+  @editMenu: () ->
+    {
       label: 'Edit',
       submenu: [
         { role: 'undo' },
@@ -74,10 +67,9 @@ export default class AppMenu {
         { role: 'selectall' }
       ]
     }
-  }
 
-  static viewMenu() {
-    return {
+  @viewMenu: () ->
+    {
       label: 'View',
       submenu: [
         { role: 'reload' },
@@ -91,46 +83,44 @@ export default class AppMenu {
         { role: 'togglefullscreen' }
       ]
     }
-  }
 
-  static windowMenu() {
-    let currentMenu = {
+  @windowMenu: () ->
+    currentMenu = {
       role: 'window',
       submenu: [{ role: 'minimize' }, { role: 'close' }]
     }
 
-    if (process.platform === 'darwin') {
+    if process.platform == 'darwin'
       currentMenu.submenu = [
         { role: 'close' }, { role: 'minimize' },
         { role: 'zoom' }, { type: 'separator' }, { role: 'front' }
       ]
-    }
 
-    return currentMenu
-  }
+    currentMenu
 
-  static helpMenu() {
-    return {
+  @helpMenu: () ->
+    {
       role: 'help',
       submenu: [
         {
           label: 'Report Issue',
-          click() { shell.openExternal('https://github.com/npezza93/archipelago/issues/new') }
+          click: () ->
+            shell.openExternal('https://github.com/npezza93/archipelago/issues/new')
         }
       ]
     }
-  }
 
-  static aboutMenu(settings) {
-    return {
+  @aboutMenu: (settings) ->
+    {
       label: app.getName(),
       submenu: [
         { role: 'about' },
         { type: 'separator' },
-        { label: 'Settings',
+        {
+          label: 'Settings',
           accelerator: 'CmdOrCtrl+,',
-          click: function() {
-            if (settings === undefined || settings.isDestroyed()) {
+          click: () ->
+            if settings == undefined || settings.isDestroyed()
               settings = new BrowserWindow({
                 width: 1100,
                 height: 600,
@@ -144,10 +134,8 @@ export default class AppMenu {
                 protocol: 'file:',
                 slashes: true
               }))
-            }
 
             settings.focus()
-          }
         },
         { type: 'separator' },
         { role: 'services', submenu: [] },
@@ -159,5 +147,3 @@ export default class AppMenu {
         { role: 'quit' }
       ]
     }
-  }
-}
