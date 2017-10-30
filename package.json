@@ -1,7 +1,7 @@
 {
   "name": "Archipelago",
   "version": "0.1.0",
-  "main": "app/js/main/main.js",
+  "main": "app/main/init.js",
   "dependencies": {
     "chokidar": "^1.7.0",
     "coffeescript": "^2.0.2",

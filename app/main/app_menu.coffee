@@ -6,15 +6,15 @@ module.exports =
 class AppMenu
   @menu: (settings, createWindow) ->
     template = [
-      this.shellMenu(createWindow)
-      this.editMenu(),
-      this.viewMenu(),
-      this.windowMenu(),
-      this.helpMenu()
+      @shellMenu(createWindow)
+      @editMenu(),
+      @viewMenu(),
+      @windowMenu(),
+      @helpMenu()
     ]
 
     if process.platform == 'darwin'
-      template.unshift(this.aboutMenu(settings))
+      template.unshift(@aboutMenu(settings))
 
     template
 
