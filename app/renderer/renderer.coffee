@@ -8,7 +8,8 @@ require('./archipelago_terminal')
 configFile = new ConfigFile()
 
 window.addEventListener 'resize', () =>
-  document.querySelectorAll('.tab-container:not(.hidden) archipelago-terminal').each (terminal) =>
+  selector = '.tab-container:not(.hidden) archipelago-terminal'
+  document.querySelectorAll(selector).forEach (terminal) =>
     terminal.fit()
 
 document.addEventListener 'DOMContentLoaded', () =>
@@ -17,7 +18,8 @@ document.addEventListener 'DOMContentLoaded', () =>
   newTab()
 
 newTab = ->
-  document.querySelector('#titlebar').appendChild(document.createElement('archipelago-tab'))
+  tab = document.createElement('archipelago-tab')
+  document.querySelector('#titlebar').appendChild(tab)
 
 setDocumentSettings = ->
   element = document.documentElement

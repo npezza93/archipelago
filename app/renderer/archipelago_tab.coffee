@@ -40,7 +40,9 @@ class ArchipelagoTab extends HTMLElement
     @classList.contains('active')
 
   terminals: (index) ->
-    terminals = @container.querySelectorAll('archipelago-terminal')
+    terminals = Array.prototype.slice.call(
+      @container.querySelectorAll('archipelago-terminal')
+    )
 
     if index > -1
       terminals[index]

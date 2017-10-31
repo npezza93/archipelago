@@ -28,7 +28,9 @@ createWindow = () ->
 
 app.on 'ready', () =>
   createWindow()
-  Menu.setApplicationMenu(Menu.buildFromTemplate(AppMenu.menu(settings, createWindow)))
+  Menu.setApplicationMenu(
+    Menu.buildFromTemplate(AppMenu.menu(settings, createWindow))
+  )
 
 app.on 'window-all-closed', () =>
   app.quit() if process.platform != 'darwin'
