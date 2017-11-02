@@ -2491,6 +2491,9 @@ var SelectionManager = (function (_super) {
         offset /= DRAG_SCROLL_MAX_THRESHOLD;
         return (offset / Math.abs(offset)) + Math.round(offset * (DRAG_SCROLL_MAX_SPEED - 1));
     };
+    SelectionManager.prototype.shouldForceSelection = function (event) {
+        return Browser.isMac ? event.altKey : event.shiftKey;
+    };
     SelectionManager.prototype.onMouseDown = function (event) {
         if (event.button === 2 && this.hasSelection) {
             return;
@@ -2499,8 +2502,7 @@ var SelectionManager = (function (_super) {
             return;
         }
         if (!this._enabled) {
-            var shouldForceSelection = Browser.isMac ? event.altKey : event.shiftKey;
-            if (!shouldForceSelection) {
+            if (!this.shouldForceSelection(event)) {
                 return;
             }
             event.stopPropagation();
@@ -3415,7 +3417,7 @@ var Terminal = (function (_super) {
         on(el, 'mousedown', function (ev) {
             ev.preventDefault();
             _this.focus();
-            if (!_this.mouseEvents) {
+            if (!_this.mouseEvents || _this.selectionManager.shouldForceSelection(ev)) {
                 (new AltClickHandler_1.AltClickHandler(ev, _this)).move();
                 return;
             }
@@ -3689,6 +3691,40 @@ var Terminal = (function (_super) {
         };
         var modifiers = (ev.shiftKey ? 1 : 0) | (ev.altKey ? 2 : 0) | (ev.ctrlKey ? 4 : 0) | (ev.metaKey ? 8 : 0);
         switch (ev.keyCode) {
+            case 0:
+                if (ev.key === 'UIKeyInputUpArrow') {
+                    if (this.applicationCursor) {
+                        result.key = EscapeSequences_1.C0.ESC + 'OA';
+                    }
+                    else {
+                        result.key = EscapeSequences_1.C0.ESC + '[A';
+                    }
+                }
+                else if (ev.key === 'UIKeyInputLeftArrow') {
+                    if (this.applicationCursor) {
+                        result.key = EscapeSequences_1.C0.ESC + 'OD';
+                    }
+                    else {
+                        result.key = EscapeSequences_1.C0.ESC + '[D';
+                    }
+                }
+                else if (ev.key === 'UIKeyInputRightArrow') {
+                    if (this.applicationCursor) {
+                        result.key = EscapeSequences_1.C0.ESC + 'OC';
+                    }
+                    else {
+                        result.key = EscapeSequences_1.C0.ESC + '[C';
+                    }
+                }
+                else if (ev.key === 'UIKeyInputDownArrow') {
+                    if (this.applicationCursor) {
+                        result.key = EscapeSequences_1.C0.ESC + 'OB';
+                    }
+                    else {
+                        result.key = EscapeSequences_1.C0.ESC + '[B';
+                    }
+                }
+                break;
             case 8:
                 if (ev.shiftKey) {
                     result.key = EscapeSequences_1.C0.BS;
@@ -4703,6 +4739,9 @@ var MouseZoneManager = (function () {
     };
     MouseZoneManager.prototype._findZoneEventAt = function (e) {
         var coords = this._terminal.mouseHelper.getCoords(e, this._terminal.element, this._terminal.charMeasure, this._terminal.options.lineHeight, this._terminal.cols, this._terminal.rows);
+        if (!coords) {
+            return null;
+        }
         for (var i = 0; i < this._zones.length; i++) {
             var zone = this._zones[i];
             if (zone.y === coords[1] && zone.x1 <= coords[0] && zone.x2 > coords[0]) {
@@ -4742,6 +4781,12 @@ var BaseRenderLayer = (function () {
     function BaseRenderLayer(container, id, zIndex, _alpha, _colors) {
         this._alpha = _alpha;
         this._colors = _colors;
+        this._scaledCharWidth = 0;
+        this._scaledCharHeight = 0;
+        this._scaledCellWidth = 0;
+        this._scaledCellHeight = 0;
+        this._scaledCharLeft = 0;
+        this._scaledCharTop = 0;
         this._canvas = document.createElement('canvas');
         this._canvas.id = "xterm-" + id + "-layer";
         this._canvas.style.zIndex = zIndex.toString();
@@ -5139,6 +5184,9 @@ var ColorManager = (function () {
         this.colors.ansi[15] = theme.brightWhite || exports.DEFAULT_ANSI_COLORS[15];
     };
     ColorManager.prototype._validateColor = function (color, fallback) {
+        if (!color) {
+            return fallback;
+        }
         if (color.length === 7 && color.charAt(0) === '#') {
             return color;
         }
