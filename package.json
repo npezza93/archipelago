@@ -20,7 +20,6 @@
   "devDependencies": {
     "electron": "^1.8.1",
     "electron-builder": "^19.45.0",
-    "electron-rebuild": "^1.6.0",
     "eslint": "^4.10.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-node": "^5.2.1",
@@ -56,7 +55,7 @@
     },
     "win": {
       "target": "squirrel",
-      "icon": "assets/icon.ico"
+      "icon": "build/icon.ico"
     }
   }
 }
