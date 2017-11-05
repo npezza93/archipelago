@@ -87,7 +87,7 @@ archipelago-tab div {
 #titlebar archipelago-tab {
   height: 100%;
   color: var(--tab-color);
-  filter: invert(25%);
+  filter: invert(50%);
   display: flex;
   flex-direction: column;
   justify-content: center;
