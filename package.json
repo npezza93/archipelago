@@ -9,8 +9,7 @@
     "electron-builder-squirrel-windows": "^19.45.0",
     "material-components-web": "^0.21.1",
     "nested-property": "0.0.7",
-    "node-pty": "^0.7.2",
-    "rabin-bindings": "^1.7.3"
+    "node-pty": "^0.7.2"
   },
   "description": "A terminal built on electron",
   "repository": "https://github.com/npezza93/archipelago",
@@ -24,7 +23,7 @@
     "postinstall": "electron-builder install-app-deps",
     "start": "electron .",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder -mwl"
+    "dist": "electron-builder --linux"
   },
   "build": {
     "dmg": {
