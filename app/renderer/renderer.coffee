@@ -1,6 +1,6 @@
 { ipcRenderer } = require('electron')
 Split           = require('./split')
-ConfigFile      = require('../js/config_file')
+ConfigFile      = require('../utils/config_file')
 
 require('./archipelago_tab')
 require('./archipelago_terminal')

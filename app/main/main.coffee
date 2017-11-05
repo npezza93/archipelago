@@ -2,7 +2,7 @@
 path                                = require('path')
 url                                 = require('url')
 AppMenu                             = require('./app_menu')
-ConfigFile                          = require('../js/config_file')
+ConfigFile                          = require('../utils/config_file')
 
 settings = null
 windows = []
@@ -39,5 +39,5 @@ app.on 'activate', () =>
   createWindow() if windows.length == 0
 
 configFile.on 'change', () =>
-  windows.each (win) =>
+  windows.forEach (win) =>
     win.setVibrancy(configFile.contents().vibrancy)

@@ -120,7 +120,7 @@ class AppMenu
           label: 'Settings',
           accelerator: 'CmdOrCtrl+,',
           click: () ->
-            if settings == undefined || settings.isDestroyed()
+            if !settings?
               settings = new BrowserWindow({
                 width: 1100,
                 height: 600,
@@ -130,7 +130,7 @@ class AppMenu
               })
 
               settings.loadURL(url.format({
-                pathname: path.join(__dirname, '../../settings.html'),
+                pathname: path.join(__dirname, '../settings/settings.html'),
                 protocol: 'file:',
                 slashes: true
               }))

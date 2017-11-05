@@ -3,7 +3,7 @@ chokidar         = require('chokidar')
 { homedir }      = require('os')
 { join }         = require('path')
 { EventEmitter } = require('events')
-defaultProfile   = require('./default_profile.json')
+defaultProfile   = require('../settings/default_profile.json')
 
 module.exports =
 class ConfigFile
@@ -12,7 +12,7 @@ class ConfigFile
       if err
         profile = { 'id': 1, 'name': 'New Profile' }
         Object.assign(profile, defaultProfile)
-        profile = { "activeProfile": 1, "profiles": { 1: profile } }
+        profile = { 'activeProfile': 1, 'profiles': { 1: profile } }
 
         @write(JSON.stringify(profile))
 

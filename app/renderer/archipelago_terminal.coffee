@@ -2,7 +2,7 @@ require('../utils/attr')
 
 Pty          = require('node-pty')
 defaultShell = require('default-shell')
-ConfigFile   = require('../js/config_file')
+ConfigFile   = require('../utils/config_file')
 
 class ArchipelagoTerminal extends HTMLElement
   @attr 'pty',
@@ -10,7 +10,7 @@ class ArchipelagoTerminal extends HTMLElement
       return @_pty if @_pty?
       args = undefined
 
-      args = @settings('shellArgs').split(",") if @settings('shellArgs')
+      args = @settings('shellArgs').split(',') if @settings('shellArgs')
 
       @_pty = Pty.spawn(@settings('shell') ||defaultShell, args, {
         name: 'xterm-256color',
@@ -89,7 +89,6 @@ class ArchipelagoTerminal extends HTMLElement
     [
       'fontFamily',
       'lineHeight',
-      'letterSpacing',
       'cursorStyle',
       'cursorBlink',
       'bellSound',
@@ -100,7 +99,7 @@ class ArchipelagoTerminal extends HTMLElement
       if @xterm[field] != @settings(field)
         @xterm.setOption(field, @settings(field))
 
-    ['tabStopWidth', 'fontSize'].forEach (field) =>
+    ['tabStopWidth', 'fontSize', 'letterSpacing'].forEach (field) =>
       if @xterm[field] != parseInt(@settings(field))
         @xterm.setOption(field, parseInt(@settings(field)))
 
@@ -121,7 +120,8 @@ class ArchipelagoTerminal extends HTMLElement
       # unsplit
 
   bindDataListeners: ->
-    @configFile.on('change', @updateSettings)
+    @configFile.on 'change', () =>
+      @updateSettings()
 
     @xterm.on 'data', (data) =>
       @pty.write(data)
