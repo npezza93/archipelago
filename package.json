@@ -6,7 +6,7 @@
     "chokidar": "^1.7.0",
     "coffeescript": "^2.0.2",
     "default-shell": "^1.0.1",
-    "electron-packager": "^9.1.0",
+    "electron-builder-squirrel-windows": "^19.45.0",
     "keymaster": "^1.6.2",
     "material-components-web": "^0.21.1",
     "nested-property": "0.0.7",
@@ -19,6 +19,7 @@
   "license": "MIT",
   "devDependencies": {
     "electron": "^1.8.1",
+    "electron-builder": "^19.45.0",
     "electron-rebuild": "^1.6.0",
     "eslint": "^4.10.0",
     "eslint-plugin-import": "^2.8.0",
@@ -27,7 +28,35 @@
     "eslint-plugin-standard": "^3.0.1"
   },
   "scripts": {
-    "packmac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icon.icns --prune=true --out=release-builds",
-    "start": "electron ."
+    "postinstall": "electron-builder install-app-deps",
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder -mwl"
+  },
+  "build": {
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    },
+    "win": {
+      "target": "squirrel",
+      "icon": "assets/icon.ico"
+    }
   }
 }
