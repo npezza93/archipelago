@@ -45,7 +45,8 @@
       "target": [
         "AppImage",
         "deb"
-      ]
+      ],
+      "category":"System"
     },
     "win": {
       "target": "squirrel",
