@@ -62,7 +62,8 @@ class ArchipelagoTab extends HTMLElement
     exitSymbol.innerHTML = '&times'
     @appendChild(exitSymbol)
 
-    exitSymbol.addEventListener('click', @remove)
+    exitSymbol.addEventListener 'click', () =>
+      @remove()
 
 module.exports = ArchipelagoTab
 window.customElements.define('archipelago-tab', ArchipelagoTab)
