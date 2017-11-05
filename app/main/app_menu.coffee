@@ -126,7 +126,7 @@ class AppMenu
                 height: 600,
                 show: true,
                 titleBarStyle: 'hidden-inset',
-                icon: path.join(__dirname, '../../../assets/png_icon.png')
+                icon: path.join(__dirname, '../../../build/icon.png')
               })
 
               settings.loadURL(url.format({
