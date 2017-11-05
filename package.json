@@ -23,7 +23,7 @@
     "postinstall": "electron-builder install-app-deps",
     "start": "electron .",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder -mwl --publish onTagOrDraft"
+    "dist": "electron-builder --publish onTagOrDraft"
   },
   "build": {
     "dmg": {
