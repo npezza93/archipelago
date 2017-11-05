@@ -3,6 +3,7 @@ require('../utils/attr')
 Pty          = require('node-pty')
 defaultShell = require('default-shell')
 ConfigFile   = require('../utils/config_file')
+Unsplit      = require('./unsplit')
 
 class ArchipelagoTerminal extends HTMLElement
   @attr 'pty',
@@ -58,13 +59,6 @@ class ArchipelagoTerminal extends HTMLElement
 
       @_configFile = new ConfigFile()
 
-  disconnectedCallback: ->
-    return if @preserveState
-
-    @xterm.destroy()
-    @pty.kill()
-    @tab.remove() if @tab.terminals().length == 0
-
   open: ->
     return unless @pty? && @xterm?
 
@@ -111,13 +105,18 @@ class ArchipelagoTerminal extends HTMLElement
 
   bindExit: ->
     @pty.on 'exit', () =>
+      parent = @parentElement
       @remove()
+
+      @xterm.destroy()
+      @pty.kill()
+      @tab.remove() if @tab.terminals().length == 0
+
       if document.querySelector('archipelago-tab') == null
         window.close()
       else
+        (new Unsplit(parent)).unsplit()
         document.querySelector('archipelago-tab').focus()
-
-      # unsplit
 
   bindDataListeners: ->
     @configFile.on 'change', () =>

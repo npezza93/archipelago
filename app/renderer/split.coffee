@@ -27,26 +27,6 @@ class Split
     set: (splitContainer) ->
       @_splitContainer = splitContainer
 
-  @attr 'originalTerminal',
-    get: ->
-      return @_originalTerminal if @_originalTerminal?
-
-      @_originalTerminal = document.createElement('archipelago-terminal')
-      @_originalTerminal.tab = @_tab
-      @_originalTerminal.xterm = @_xterm
-      @_originalTerminal.pty = @_pty
-
-      @_originalTerminal
-
-  @attr 'newTerminal',
-    get: ->
-      return @_newTerminal if @_newTerminal?
-
-      @_newTerminal = document.createElement('archipelago-terminal')
-      @_newTerminal.tab = @_tab
-
-      @_newTerminal
-
   @attr 'focusedTerminal',
     get: ->
       return @_focusedTerminal if @_focusedTerminal?
@@ -67,19 +47,17 @@ class Split
       @_focusedTerminal
 
   constructor: (@orientation) ->
-    @_tab = @focusedTerminal.tab
-    @_xterm = @focusedTerminal.xterm
-    @_pty = @focusedTerminal.pty
+    @newTerminal = document.createElement('archipelago-terminal')
+    @newTerminal.tab = @focusedTerminal.tab
+    @parentElement = @focusedTerminal.parentElement
 
   split: ->
-    if @existingContainer()
-      @splitContainer = @focusedTerminal.parentElement
-      @_splitContainer.classList.remove('vertical')
-      @_splitContainer.classList.remove('horizontal')
-      @_splitContainer.classList.add(@orientation)
-      @focusedTerminal.preserveState = null
+    if @firstInContainer()
+      @parentElement.insertBefore(@splitContainer, @focusedTerminal)
     else
-      @wrapOriginalTerminalAndReopen()
+      @parentElement.appendChild(@splitContainer)
+
+    @splitContainer.appendChild(@focusedTerminal)
 
     @splitContainer.appendChild(@separator)
     @splitContainer.appendChild(@newTerminal)
@@ -89,18 +67,7 @@ class Split
     @newTerminal.xterm.focus()
     window.dispatchEvent(new Event('resize'))
 
-  wrapOriginalTerminalAndReopen: ->
-    @splitContainer.appendChild(@originalTerminal)
-    @focusedTerminal.replaceWith(@splitContainer)
-    @originalTerminal.open()
-    @originalTerminal.bindExit()
-    console.log @originalTerminal.xterm
-    setTimeout (=>
-      @originalTerminal.xterm.setOption('theme', @originalTerminal.settings('theme'))
-      return
-    ), 10
+  firstInContainer: ->
+    kids = @parentElement.children
 
-  existingContainer: ->
-    parent = @focusedTerminal.parentElement
-
-    parent.childElementCount == 1 && parent.classList.contains('terminal-container')
+    Array.prototype.indexOf.call(kids, @focusedTerminal) == 0 && kids.length == 3
