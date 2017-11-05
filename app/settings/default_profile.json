@@ -12,6 +12,7 @@
    "shellArgs":"--login",
    "bellSound":"https://raw.githubusercontent.com/chromium/hterm/master/audio/bell.ogg",
    "bellStyle":"both",
+   "letterSpacing": 0,
    "theme":{
       "selection": "rgba(255, 255, 255, 0.3)",
       "foreground":"#FFFFFF",

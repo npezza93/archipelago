@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8">
     <title>Archipelago</title>
-    <link  href="css/settings.css" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" href="../node_modules/material-components-web/dist/material-components-web.css">
-    <script type="text/javascript" src="js/color_picker/jqColorPicker.min.js"></script>
-    <link rel="stylesheet" href="css/roboto.css">
+    <link rel="stylesheet" type="text/css" href="settings.css"/>
+    <link rel="stylesheet" type="text/css" href="roboto.css"/>
+    <link rel="stylesheet" type="text/css" href="../../node_modules/material-components-web/dist/material-components-web.css"/>
+    <script type="text/javascript" src="color_picker/jqColorPicker.min.js"></script>
   </head>
   <body class="m-0">
     <div id="titlebar" class="d-flex flex-row justify-content-center">Settings</div>
@@ -20,7 +20,7 @@
       </div>
 
       <section class="mt-6">
-        <nav class="mdc-tab-bar" role="tablist">
+        <nav class="mdc-tab-bar">
           <a role="tab" aria-controls="standardSettings"  class="mdc-tab mdc-tab--active" href="#standardSettings">General</a>
           <a role="tab" aria-controls="theme"             class="mdc-tab" href="#theme">Theme</a>
           <a role="tab" aria-controls="keyboardShortcuts" class="mdc-tab" href="#keyboardShortcuts">Keyboard</a>
@@ -28,7 +28,7 @@
         </nav>
 
         <div class="panels d-flex flex-row justify-content-center">
-          <div id="standardSettings" class="d-flex flex-column panel active" role="tabpanel" aria-hidden="false">
+          <div id="standardSettings" class="d-flex flex-column panel active">
             <h5 class="mb-0 mt-6 mdc-typography--body2">Font</h5>
             <div class="d-flex flex-row wrap justify-content-around container">
               <text-field data-id="fontFamily"    data-label="Font Family"></text-field>
@@ -63,7 +63,7 @@
             </div>
           </div>
 
-          <div id="theme" class="panel mt-6 flex-column" role="tabpanel" aria-hidden="true">
+          <div id="theme" class="panel mt-6 flex-column">
             <color-field data-id="theme.foreground"    data-label="Foreground"></color-field>
             <color-field data-id="theme.background"    data-label="Terminal Background"></color-field>
             <color-field data-id="windowBackground"    data-label="Window Background"></color-field>
@@ -86,17 +86,14 @@
             <color-field data-id="theme.brightWhite"   data-label="Bright White"></color-field>
             <color-field data-id="theme.black"         data-label="Black"></color-field>
             <color-field data-id="theme.brightBlack"   data-label="Bright Black"></color-field>
-         </div>
+          </div>
 
-          <div id="keyboardShortcuts" class="panel" role="tabpanel" aria-hidden="true">
+          <div id="keyboardShortcuts" class="panel">
             <div class="mt-6 mdc-typography--title">Coming Soon!</div>
           </div>
         </div>
       </section>
     </form>
-
-    <script src="../node_modules/material-components-web/dist/material-components-web.js"></script>
-    <script>mdc.autoInit()</script>
-    <script src="js/settings.js" defer></script>
+    <script type="text/javascript" src="init.js"></script>
   </body>
 </html>
