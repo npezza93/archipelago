@@ -7,11 +7,9 @@
     "coffeescript": "^2.0.2",
     "default-shell": "^1.0.1",
     "electron-builder-squirrel-windows": "^19.45.0",
-    "keymaster": "^1.6.2",
     "material-components-web": "^0.21.1",
     "nested-property": "0.0.7",
     "node-pty": "^0.7.2",
-    "rabin-bindings": "^1.7.3",
     "xterm": "^2.9.2"
   },
   "description": "A terminal built on electron",
@@ -20,12 +18,7 @@
   "license": "MIT",
   "devDependencies": {
     "electron": "^1.8.1",
-    "electron-builder": "^19.45.0",
-    "eslint": "^4.10.0",
-    "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-node": "^5.2.1",
-    "eslint-plugin-promise": "^3.6.0",
-    "eslint-plugin-standard": "^3.0.1"
+    "electron-builder": "^19.45.0"
   },
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
