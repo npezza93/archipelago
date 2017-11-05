@@ -9,7 +9,8 @@
     "electron-builder-squirrel-windows": "^19.45.0",
     "material-components-web": "^0.21.1",
     "nested-property": "0.0.7",
-    "node-pty": "^0.7.2"
+    "node-pty": "^0.7.2",
+    "rabin-bindings": "^1.7.3"
   },
   "description": "A terminal built on electron",
   "repository": "https://github.com/npezza93/archipelago",
@@ -45,11 +46,14 @@
         "AppImage",
         "deb"
       ],
-      "category":"System"
+      "category": "TerminalEmulator"
     },
     "win": {
       "target": "squirrel",
       "icon": "build/icon.ico"
+    },
+    "mac": {
+      "category": "public.app-category.developer-tools"
     }
   }
 }
