@@ -27,6 +27,7 @@ setDocumentSettings = ->
   element.style.setProperty('--font-family', configFile.activeSettings().fontFamily)
   element.style.setProperty('--font-size', configFile.activeSettings().fontSize)
   element.style.setProperty('--background-color', configFile.activeSettings().windowBackground)
+  element.style.setProperty('--tab-color', configFile.activeSettings().tabColor)
 
 configFile.on('change', setDocumentSettings)
 
