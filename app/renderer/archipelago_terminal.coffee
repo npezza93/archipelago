@@ -113,7 +113,7 @@ class ArchipelagoTerminal extends HTMLElement
       @tab.remove() if @tab.terminals().length == 0
 
       if document.querySelector('archipelago-tab') == null
-        window.close()
+        window.close() if !@windowClosing
       else
         (new Unsplit(parent)).unsplit()
         document.querySelector('archipelago-tab').focus()

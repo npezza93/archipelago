@@ -12,8 +12,9 @@ window.addEventListener 'resize', () =>
   document.querySelectorAll(selector).forEach (terminal) =>
     terminal.fit()
 
-window.onbeforeunload = ->
+window.addEventListener 'beforeunload', () =>
   document.querySelectorAll('archipelago-terminal').forEach (terminal) =>
+    terminal.windowClosing = true
     terminal.xterm.destroy()
     terminal.pty.kill()
 
