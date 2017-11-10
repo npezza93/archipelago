@@ -27,8 +27,8 @@ createWindow = () ->
 
   windows.push(win)
 
-  win.webContents.once 'did-frame-finish-load', () =>
-    if process.platform == 'darwin' || process.platform == 'win32'
+  # win.webContents.once 'did-frame-finish-load', () =>
+    # if process.platform == 'darwin' || process.platform == 'win32'
       # (new AutoUpdate()).autoCheck()
 
 app.on 'ready', () =>
