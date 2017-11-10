@@ -3,6 +3,7 @@ path                                = require('path')
 url                                 = require('url')
 AppMenu                             = require('./app_menu')
 ConfigFile                          = require('../utils/config_file')
+AutoUpdate                          = require('./auto_update')
 
 settings = null
 windows = []
@@ -25,6 +26,10 @@ createWindow = () ->
   win.focus()
 
   windows.push(win)
+
+  win.webContents.once 'did-frame-finish-load', () =>
+    if process.platform == 'darwin' || process.platform == 'win32'
+      # (new AutoUpdate()).autoCheck()
 
 app.on 'ready', () =>
   createWindow()
