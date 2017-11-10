@@ -120,7 +120,7 @@ class AppMenu
           label: 'Settings',
           accelerator: 'CmdOrCtrl+,',
           click: () ->
-            if !settings?
+            if !settings? || settings.isDestroyed()
               settings = new BrowserWindow({
                 width: 1100,
                 height: 600,
