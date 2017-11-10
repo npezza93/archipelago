@@ -72,7 +72,7 @@ var SearchHelper = (function () {
             return false;
         }
         this._terminal.selectionManager.setSelection(result.col, result.row, result.term.length);
-        this._terminal.scrollDisp(result.row - this._terminal.buffer.ydisp, false);
+        this._terminal.scrollLines(result.row - this._terminal.buffer.ydisp, false);
         return true;
     };
     return SearchHelper;
