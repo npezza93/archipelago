@@ -14,7 +14,7 @@ class ConfigFile
         Object.assign(profile, defaultProfile)
         profile = { 'activeProfile': 1, 'profiles': { 1: profile } }
 
-        @write(JSON.stringify(profile))
+        @write(profile)
 
     @emitter = new EventEmitter()
     @bindWatcher()
@@ -29,7 +29,7 @@ class ConfigFile
     @contents().profiles[@contents().activeProfile]
 
   write: (content) ->
-    fs.writeFileSync @filePath(), content, (err) =>
+    fs.writeFileSync @filePath(), JSON.stringify(content, null, 2), (err) =>
       if err
         console.log(err)
 

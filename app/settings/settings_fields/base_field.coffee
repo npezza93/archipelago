@@ -41,7 +41,7 @@ class BaseField extends HTMLElement
     configContents = @currentSettings()
     nestedProperty.set(configContents, valueKey, value)
     console.log configContents
-    @configFile.write(JSON.stringify(configContents))
+    @configFile.write(configContents)
 
   valueKey: ->
     valueKey = null

@@ -82,7 +82,7 @@ class Profile
     contents.profiles[id] = { 'id': id, 'name': 'New Profile' }
     Object.assign(contents.profiles[id], defaultProfile)
     contents.activeProfile = id
-    configFile.write(JSON.stringify(contents))
+    configFile.write(contents)
 
     (new Profile(contents.profiles[id])).load()
 
