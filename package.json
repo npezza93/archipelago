@@ -8,7 +8,8 @@
     "default-shell": "^1.0.1",
     "material-components-web": "^0.21.1",
     "nested-property": "0.0.7",
-    "node-pty": "^0.7.2"
+    "node-pty": "^0.7.2",
+    "split.js": "^1.3.5"
   },
   "description": "A terminal built on electron",
   "repository": "https://github.com/npezza93/archipelago",

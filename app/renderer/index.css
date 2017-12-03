@@ -26,7 +26,7 @@ body {
 
 archipelago-terminal {
   display: flex;
-  flex: 1;
+  width: 100%;
   height: 100%;
 }
 .tab-container {
@@ -43,6 +43,7 @@ archipelago-terminal {
 }
 .terminal-container.horizontal {
   flex-direction: row;
+  align-items: flex-end;
 }
 .terminal-container.vertical {
   flex-direction: column;
@@ -115,18 +116,18 @@ archipelago-tab div {
 .terminal .xterm-viewport {
   background-color: transparent;
 }
-.terminal-container.horizontal > .separator {
-  width: 1px;
-  height: 100%;
-  background-color: black;
-  margin-top: 40px;
-  cursor: col-resize;
+.terminal-container .gutter {
+  background-color: rgb(51, 51, 51);
+  z-index: 100;
 }
-.terminal-container.vertical > .separator {
-  height: 1px;
-  width: 100%;
-  background-color: black;
-  cursor: row-resize;
+.terminal-container .gutter-horizontal {
+  cursor: ew-resize;
+}
+.terminal-container .gutter-vertical {
+  cursor: ns-resize;
+}
+.terminal-container .gutter-horizontal {
+  height: calc(100% - 40px);
 }
 
 .xterm-viewport {

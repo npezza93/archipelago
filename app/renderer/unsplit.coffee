@@ -11,3 +11,5 @@ class Unsplit
   unsplit: ->
     if @terminalContainer? && @nodeToMove? && @terminalContainer.classList.contains("terminal-container")
       @terminalContainer.replaceWith(@nodeToMove)
+      @nodeToMove.removeAttribute('style')
+      window.dispatchEvent(new Event('resize'))

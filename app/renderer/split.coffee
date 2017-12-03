@@ -1,19 +1,8 @@
 require('../utils/attr')
+Splitjs = require('split.js')
 
 module.exports =
 class Split
-  @attr 'separator',
-    get: ->
-      return @_separator if @_separator
-
-      @_separator = document.createElement('div')
-      @_separator.classList.add('separator')
-
-      @_separator.addEventListener 'mousedown', (ev) =>
-        console.log(ev)
-
-      @_separator
-
   @attr 'splitContainer',
     get: ->
       return @_splitContainer if @_splitContainer
@@ -59,8 +48,14 @@ class Split
 
     @splitContainer.appendChild(@focusedTerminal)
 
-    @splitContainer.appendChild(@separator)
     @splitContainer.appendChild(@newTerminal)
+    Splitjs([@focusedTerminal, @newTerminal], {
+      sizes: [50, 50],
+      gutterSize: 1,
+      direction: @orientation,
+      onDrag: ->
+        window.dispatchEvent(new Event('resize'))
+    })
     @newTerminal.open()
     @newTerminal.bindDataListeners()
     @newTerminal.fit()

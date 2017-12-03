@@ -47,12 +47,6 @@ class ArchipelagoTerminal extends HTMLElement
     set: (tab) ->
       @_tab = tab
 
-  @attr 'preserveState',
-    get: ->
-      @_preserveState
-    set: (preserveState) ->
-      @_preserveState = preserveState
-
   @attr 'configFile',
     get: ->
       return @_configFile if @_configFile?
