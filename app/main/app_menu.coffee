@@ -4,6 +4,15 @@ url = require('url')
 
 module.exports =
 class AppMenu
+  @dock: (createWindow) ->
+    [
+      {
+        label: 'New Window',
+        click: () ->
+          createWindow.call()
+      }
+    ]
+
   @menu: (settings, createWindow) ->
     template = [
       @shellMenu(createWindow)

@@ -36,6 +36,8 @@ app.on 'ready', () =>
   Menu.setApplicationMenu(
     Menu.buildFromTemplate(AppMenu.menu(settings, createWindow))
   )
+  if (process.platform == 'darwin')
+    app.dock.setMenu(Menu.buildFromTemplate(AppMenu.dock(createWindow)))
 
 app.on 'window-all-closed', () =>
   app.quit() if process.platform != 'darwin'
