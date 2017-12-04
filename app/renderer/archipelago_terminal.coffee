@@ -126,6 +126,7 @@ class ArchipelagoTerminal extends HTMLElement
     @xterm.on 'focus', () =>
       @fit()
       @tab.title = @xterm.title
+      window.activeTerminal = this
 
     @xterm.on 'title', (title) =>
       @tab.title = title

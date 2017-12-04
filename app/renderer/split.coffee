@@ -18,22 +18,7 @@ class Split
 
   @attr 'focusedTerminal',
     get: ->
-      return @_focusedTerminal if @_focusedTerminal?
-
-      focusedTerminal = document.activeElement
-      body = document.querySelector('body')
-
-      while focusedTerminal != body && focusedTerminal.tagName != 'ARCHIPELAGO-TERMINAL'
-        focusedTerminal = focusedTerminal.parentElement
-
-      if focusedTerminal == body
-        @_focusedTerminal = document.querySelector('archipelago-tab.active').terminals().pop()
-      else
-        @_focusedTerminal = focusedTerminal
-
-      @_focusedTerminal.preserveState = true
-
-      @_focusedTerminal
+      window.activeTerminal
 
   constructor: (@orientation) ->
     @newTerminal = document.createElement('archipelago-terminal')

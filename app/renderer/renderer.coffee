@@ -6,6 +6,7 @@ require('./archipelago_tab')
 require('./archipelago_terminal')
 
 configFile = new ConfigFile()
+window.activeTerminal = null
 
 window.addEventListener 'resize', () =>
   selector = '.tab-container:not(.hidden) archipelago-terminal'
