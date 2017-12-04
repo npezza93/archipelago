@@ -4,6 +4,6 @@
 
 `cd archipelago`
 
-`yarn install`
+`npm install`
 
-`electron .`
+`npm start`
