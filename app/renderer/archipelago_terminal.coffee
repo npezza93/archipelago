@@ -97,6 +97,10 @@ class ArchipelagoTerminal extends HTMLElement
 
     @fit()
 
+  kill: ->
+    @xterm.destroy()
+    @pty.kill()
+
   bindExit: ->
     @pty.on 'exit', () =>
       parent = @parentElement

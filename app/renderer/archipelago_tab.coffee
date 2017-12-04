@@ -24,7 +24,14 @@ class ArchipelagoTab extends HTMLElement
     @addExit()
 
   disconnectedCallback: ->
+    @container.querySelectorAll('archipelago-terminal').forEach (terminal) =>
+      terminal.kill()
     @container.remove()
+    if document.querySelector('archipelago-tab') == null
+      window.close()
+    else
+      document.querySelector('archipelago-tab').focus()
+
 
   focus: ->
     document.querySelectorAll('archipelago-tab').forEach (tab) =>
