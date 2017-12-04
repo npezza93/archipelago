@@ -1,3 +1,4 @@
+/* normalization and helpers */
 @media (min-resolution: 2dppx) {
   * {
       text-rendering: geometricPrecision;
@@ -9,95 +10,10 @@ html, body {
   -webkit-font-feature-settings: "liga" off, "calt" off;
 }
 
-body {
-  margin: 0px;
-  background-color: var(--background-color);
-}
-
-::-webkit-scrollbar {
-  width: 5px;
-}
-::-webkit-scrollbar:hover, ::-webkit-scrollbar:active {
-  width: 10px;
-}
-::-webkit-scrollbar-thumb {
-  background: #666;
-}
-
-archipelago-terminal {
-  display: flex;
-  width: 100%;
-  height: 100%;
-}
-.tab-container {
-  height: 100%;
-  display: flex;
-  flex: 1;
-  flex-direction: row;
-  overflow-y: hidden;
-}
-.terminal-container {
-  height: 100%;
-  flex: 1;
-  display: flex;
-}
-.terminal-container.horizontal {
-  flex-direction: row;
-  align-items: flex-end;
-}
-.terminal-container.vertical {
-  flex-direction: column;
-}
-archipelago-tab {
-  font-family: var(--font-family);
-  font-size: var(--font-size);
-  line-height: 18px !important;
-  position: relative;
-}
-archipelago-tab span {
-  text-align: center;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  max-width: 75%;
-}
-archipelago-tab.is-unread span {
-  animation: pulse 2s infinite;
-}
-archipelago-tab div {
-  position: absolute;
-  right: 10px;
-  top: 8px;
-  font-size: 20px;
-}
-.terminal {
-  margin: 40px 15px 10px 15px;
-  width: 100%;
-}
-#titlebar {
-  height: 40px;
-  width: calc(100% - 70px);
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  -webkit-app-region: drag;
-  display: flex;
-  flex-direction: row;
-  margin-left: 70px;
-}
-#titlebar archipelago-tab {
-  height: 100%;
-  color: var(--tab-color);
-  filter: invert(50%);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-  transition: all 0.3s ease;
-}
-#titlebar archipelago-tab.active {
-  filter: invert(0%);
+@keyframes pulse {
+  from { opacity: 1; }
+  50% { opacity: 0.3; }
+  to { opacity: 1; }
 }
 
 .hidden {
@@ -108,6 +24,40 @@ archipelago-tab div {
   --background-color: #000;
   --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --tab-font-size: 15px;
+}
+
+
+/* scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar:hover, ::-webkit-scrollbar:active {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #666;
+}
+
+
+body {
+  margin: 0px;
+  background-color: var(--background-color);
+  display: grid;
+  grid-template-rows: 40px auto;
+  grid-template-columns: 1fr;
+}
+
+archipelago-terminal {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+.tab-container {
+  margin: 0px 0px 10px 15px;
+  overflow-y: hidden;
+}
+.terminal {
+  width: 100%;
 }
 
 .xterm {
@@ -126,16 +76,64 @@ archipelago-tab div {
 .terminal-container .gutter-vertical {
   cursor: ns-resize;
 }
+
+/* Titlebar and Tabs */
+#titlebar {
+  -webkit-app-region: drag;
+  display: flex;
+  flex-direction: row;
+  padding-left: 70px;
+  width: calc(100vw - 70px);
+}
+#titlebar archipelago-tab {
+  color: var(--tab-color);
+  filter: invert(50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  transition: all 0.3s ease;
+  min-width: 0;
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  line-height: 18px !important;
+  position: relative;
+}
+#titlebar archipelago-tab.active {
+  filter: invert(0%);
+}
+#titlebar  archipelago-tab span {
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 75%;
+}
+archipelago-tab.is-unread span {
+  animation: pulse 2s infinite;
+}
+archipelago-tab div {
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  font-size: 20px;
+}
+
+
+/* Splitting */
+.terminal-container {
+  height: 100%;
+  flex: 1;
+  display: flex;
+}
+.terminal-container.horizontal {
+  flex-direction: row;
+  align-items: flex-end;
+}
+.terminal-container.vertical {
+  flex-direction: column;
+}
 .terminal-container .gutter-horizontal {
-  height: calc(100% - 40px);
-}
-
-.xterm-viewport {
-  margin-right: -15px;
-}
-
-@keyframes pulse {
-  from { opacity: 1; }
-  50% { opacity: 0.3; }
-  to { opacity: 1; }
+  height: calc(100%);
 }

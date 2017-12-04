@@ -62,7 +62,7 @@ class ArchipelagoTerminal extends HTMLElement
   fit: ->
     @xterm.charMeasure.measure(@xterm.options)
     rows = Math.floor(@xterm.element.offsetHeight / @xterm.charMeasure.height)
-    cols = Math.floor(@xterm.element.offsetWidth / @xterm.charMeasure.width)
+    cols = Math.floor(@xterm.element.offsetWidth / @xterm.charMeasure.width) - 2
 
     @xterm.resize(cols, rows)
     @pty.resize(cols, rows)
