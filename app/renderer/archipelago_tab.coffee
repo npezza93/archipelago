@@ -1,76 +1,45 @@
-require('../utils/attr')
+etch = require('etch')
+$ = etch.dom
 
-class ArchipelagoTab extends HTMLElement
-  @attr 'title',
-    get: ->
-      @titleContainer.innerText
-    set: (title) ->
-      @titleContainer.innerText = title
+module.exports =
+class ArchipelagoTab
+  constructor: (properties) ->
+    @properties = properties || {}
 
-  connectedCallback: ->
-    terminal = document.createElement('archipelago-terminal')
-    @container = document.createElement('div')
-    @titleContainer = document.createElement('span')
-    @appendChild(@titleContainer)
+    etch.initialize(this)
 
-    document.querySelector('body').appendChild(@container)
-    @container.appendChild(terminal)
-    @container.classList.add('tab-container')
-    terminal.tab = this
-    terminal.open()
-    terminal.bindDataListeners()
-    @bindClick()
-    @focus()
-    @addExit()
+  render: ->
+    etch.dom('archipelago-tab', {
+      className: if @properties.active then 'active' else '',
+      onclick: () =>
+        @focus()
+    }, @renderTitle(), @renderExit())
 
-  disconnectedCallback: ->
-    @container.querySelectorAll('archipelago-terminal').forEach (terminal) =>
-      terminal.kill()
-    @container.remove()
-    if document.querySelector('archipelago-tab') == null
-      window.close()
-    else
-      document.querySelector('archipelago-tab').focus()
+  update: (props) ->
+    Object.assign(@properties, props)
 
+    etch.update(this)
+    @properties.tabsComponent.update()
+
+  destroy: ->
+    await etch.destroy(this)
+
+  hide: ->
+    @update({active: false})
 
   focus: ->
-    document.querySelectorAll('archipelago-tab').forEach (tab) =>
-      tab.container.classList.add('hidden')
-      tab.classList.remove('active')
+    @properties.tabsComponent.properties.tabs.forEach (tab) =>
+      tab.hide()
 
-    @container.classList.remove('hidden')
-    @classList.add('active')
-    @terminals(0).xterm.focus()
-    @classList.remove('is-unread')
+    @update({active: true})
 
-  isActive: ->
-    @classList.contains('active')
+  renderTitle: () ->
+    $.span({}, @properties.title || '')
 
-  terminals: (index) ->
-    terminals = Array.prototype.slice.call(
-      @container.querySelectorAll('archipelago-terminal')
-    )
+  renderExit: () ->
+    $.div({
+      onclick: () =>
+        @properties.tabsComponent.removeTab(this)
 
-    if index > -1
-      terminals[index]
-    else
-      terminals
-
-  bindClick: ->
-    @addEventListener 'click', (event) =>
-      if event.target.localName == 'archipelago-tab'
-        event.target.focus()
-
-      if event.target.localName == 'span'
-        event.target.parentElement.focus()
-
-  addExit: ->
-    exitSymbol = document.createElement('div')
-    exitSymbol.innerHTML = '&times'
-    @appendChild(exitSymbol)
-
-    exitSymbol.addEventListener 'click', () =>
-      @remove()
-
-module.exports = ArchipelagoTab
-window.customElements.define('archipelago-tab', ArchipelagoTab)
+        @destroy()
+    }, "\u00D7")

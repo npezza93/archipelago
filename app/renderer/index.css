@@ -78,14 +78,14 @@ archipelago-terminal {
 }
 
 /* Titlebar and Tabs */
-#titlebar {
+archipelago-tabs {
   -webkit-app-region: drag;
   display: flex;
   flex-direction: row;
   padding-left: 70px;
   width: calc(100vw - 70px);
 }
-#titlebar archipelago-tab {
+archipelago-tabs archipelago-tab {
   color: var(--tab-color);
   filter: invert(50%);
   display: flex;
@@ -100,10 +100,10 @@ archipelago-terminal {
   line-height: 18px !important;
   position: relative;
 }
-#titlebar archipelago-tab.active {
+archipelago-tabs archipelago-tab.active {
   filter: invert(0%);
 }
-#titlebar  archipelago-tab span {
+archipelago-tabs  archipelago-tab span {
   text-align: center;
   text-overflow: ellipsis;
   white-space: nowrap;

@@ -1,3 +1,6 @@
+etch = require('etch')
+$ = etch.dom
+
 require('../utils/attr')
 
 Pty          = require('node-pty')
@@ -139,4 +142,3 @@ class ArchipelagoTerminal extends HTMLElement
     @bindExit()
 
 module.exports = ArchipelagoTerminal
-window.customElements.define('archipelago-terminal', ArchipelagoTerminal)

@@ -1,12 +1,15 @@
 { ipcRenderer } = require('electron')
 Split           = require('./split')
 ConfigFile      = require('../utils/config_file')
+ArchipelagoTabs = require('./archipelago_tabs')
+ArchipelagoTab  = require('./archipelago_tab')
 
-require('./archipelago_tab')
 require('./archipelago_terminal')
 
 configFile = new ConfigFile()
-window.activeTerminal = null
+tabs = new ArchipelagoTabs()
+global.tabs = tabs
+global.activeTerminal = null
 
 window.addEventListener 'resize', () =>
   selector = '.tab-container:not(.hidden) archipelago-terminal'
@@ -21,12 +24,10 @@ window.addEventListener 'beforeunload', () =>
 
 document.addEventListener 'DOMContentLoaded', () =>
   setDocumentSettings()
-
-  newTab()
+  document.querySelector('body').appendChild(tabs.element)
 
 newTab = ->
-  tab = document.createElement('archipelago-tab')
-  document.querySelector('#titlebar').appendChild(tab)
+  tabs.addTab()
 
 setDocumentSettings = ->
   element = document.documentElement
