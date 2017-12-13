@@ -7,15 +7,16 @@ class ArchipelagoTabList extends React.Component
     React.createElement(
       'archipelago-tab-list',
       null,
-      @props.ids.map (tabId) =>
+      @props.tabs.map (tabObject) =>
         React.createElement(
           ArchipelagoTab, {
-            id: tabId,
+            id: tabObject.id,
+            title: tabObject.title,
             selectTab: @props.selectTab,
             addTab: @props.addTab,
             removeTab: @props.removeTab,
-            key: tabId,
-            active: @props.currentTab == tabId
+            key: tabObject.id,
+            active: @props.currentTab == tabObject.id
           }
         )
     )

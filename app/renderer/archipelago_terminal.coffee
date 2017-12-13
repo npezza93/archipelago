@@ -1,35 +1,26 @@
-etch = require('etch')
-$ = etch.dom
-
 require('../utils/attr')
+
+React = require('react')
 
 Pty          = require('node-pty')
 defaultShell = require('default-shell')
 ConfigFile   = require('../utils/config_file')
 Unsplit      = require('./unsplit')
 
-class ArchipelagoTerminal extends HTMLElement
+module.exports =
+class ArchipelagoTerminal extends React.Component
   @attr 'pty',
     get: ->
-      return @_pty if @_pty?
-      args = undefined
-
-      args = @settings('shellArgs').split(',') if @settings('shellArgs')
-
-      @_pty = Pty.spawn(@settings('shell') ||defaultShell, args, {
+      @_pty ?= Pty.spawn(@settings('shell') ||defaultShell, @settings('shellArgs').split(','), {
         name: 'xterm-256color',
         env: process.env
       })
-
-      @_pty
     set: (pty) ->
       @_pty = pty
 
   @attr 'xterm',
     get: ->
-      return @_xterm if @_xterm?
-
-      @_xterm = new Terminal({
+      @_xterm ?= new Terminal({
         fontFamily: @settings('fontFamily'),
         fontSize: @settings('fontSize'),
         lineHeight: @settings('lineHeight'),
@@ -44,22 +35,24 @@ class ArchipelagoTerminal extends HTMLElement
     set: (xterm) ->
       @_xterm = xterm
 
-  @attr 'tab',
-    get: ->
-      @_tab
-    set: (tab) ->
-      @_tab = tab
-
   @attr 'configFile',
     get: ->
-      return @_configFile if @_configFile?
+      @_configFile ?= new ConfigFile()
 
-      @_configFile = new ConfigFile()
+  constructor: (props) ->
+    super(props)
+    @bindDataListeners()
+
+  render: ->
+    React.createElement('archipelago-terminal', { ref: "container" })
+
+  componentDidMount: ->
+    @open()
 
   open: ->
     return unless @pty? && @xterm?
 
-    @xterm.open(this, true)
+    @xterm.open(@refs.container, true)
     @xterm.setOption('bellStyle', @settings('bellStyle'))
 
   fit: ->
@@ -128,17 +121,15 @@ class ArchipelagoTerminal extends HTMLElement
 
     @xterm.on 'focus', () =>
       @fit()
-      @tab.title = @xterm.title
-      window.activeTerminal = this
+      @props.changeTitle(@props.tabId, @xterm.title)
+    #   global.activeTerminal = this
 
     @xterm.on 'title', (title) =>
-      @tab.title = title
+      @props.changeTitle(@props.tabId, @xterm.title)
 
     @pty.on 'data', (data) =>
       @xterm.write(data)
-      if !@tab.isActive() && !@tab.classList.contains('is-unread')
-        @tab.classList += ' is-unread'
+      # if !@tab.isActive() && !@tab.classList.contains('is-unread')
+      #   @tab.classList += ' is-unread'
 
-    @bindExit()
-
-module.exports = ArchipelagoTerminal
+    # @bindExit()

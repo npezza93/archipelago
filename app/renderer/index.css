@@ -5,7 +5,7 @@
   }
 }
 
-html, body {
+html, body, #root, archipelago-app {
   height: 100%;
   -webkit-font-feature-settings: "liga" off, "calt" off;
 }
@@ -81,6 +81,8 @@ archipelago-app {
 archipelago-pane-list archipelago-pane {
   margin: 0px 0px 10px 15px;
   overflow-y: hidden;
+  display: block;
+  height: calc(100% - 10px);
 }
 
 

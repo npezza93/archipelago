@@ -2,10 +2,6 @@ React = require('react')
 
 module.exports =
 class ArchipelagoTab extends React.Component
-  constructor: (props) ->
-    super(props)
-    @state = {}
-
   render: ->
     React.createElement('archipelago-tab', {
       class: if @props.active then 'active' else '',
@@ -13,7 +9,7 @@ class ArchipelagoTab extends React.Component
     }, @renderTitle(), @renderExit())
 
   renderTitle: () ->
-    React.createElement('span', {}, @props.id || @state.title || '')
+    React.createElement('span', {}, @props.title)
 
   renderExit: () ->
     React.createElement('div', {

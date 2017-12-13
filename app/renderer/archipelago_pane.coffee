@@ -5,16 +5,20 @@ module.exports =
 class ArchipelagoPane extends React.Component
   constructor: (props) ->
     super(props)
-    @state = { terminals: [] }
+    @state = { terminals: [Math.random()] }
 
   render: ->
     React.createElement('archipelago-pane', {
       class: if !@props.active then 'hidden' else '',
-    }, @state.terminals)
+    }, @renderTerminals())
 
   renderTerminals: ->
-    @properties.terminals.map (terminal) ->
-      terminal.render()
-
-  newTerminal: ->
-    new ArchipelagoTerminal({paneComponent: this})
+    @state.terminals.map (terminalId) =>
+      React.createElement(
+        ArchipelagoTerminal, {
+          id: terminalId,
+          key: terminalId,
+          tabId: @props.id,
+          changeTitle: @props.changeTitle
+        }
+      )

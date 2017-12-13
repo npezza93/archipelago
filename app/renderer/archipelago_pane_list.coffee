@@ -7,12 +7,13 @@ class ArchipelagoPaneList extends React.Component
     React.createElement(
       'archipelago-pane-list',
       null,
-      @props.ids.map (tabId) =>
+      @props.tabs.map (tabObject) =>
         React.createElement(
           ArchipelagoPane, {
-            id: tabId,
-            key: tabId,
-            active: @props.currentTab == tabId
+            id: tabObject.id,
+            key: tabObject.id,
+            active: @props.currentTab == tabObject.id,
+            changeTitle: @props.changeTitle
           }
         )
     )

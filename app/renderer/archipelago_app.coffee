@@ -8,7 +8,7 @@ class ArchipelagoApp extends React.Component
     super(props)
 
     id = Math.random()
-    @state = { ids: [id], currentTab: id }
+    @state = { tabs: [{ id: id, title: '' }], currentTab: id }
 
   render: ->
     React.createElement(
@@ -17,7 +17,7 @@ class ArchipelagoApp extends React.Component
       [
         React.createElement(
           ArchipelagoTabList, {
-            ids: @state.ids,
+            tabs: @state.tabs,
             currentTab: @state.currentTab,
             selectTab: @selectTab.bind(this),
             addTab: @addTab.bind(this),
@@ -27,8 +27,9 @@ class ArchipelagoApp extends React.Component
         )
         React.createElement(
           ArchipelagoPaneList, {
-            ids: @state.ids,
+            tabs: @state.tabs,
             currentTab: @state.currentTab,
+            changeTitle: @changeTitle.bind(this),
             key: "panes"
           }
         )
@@ -40,15 +41,24 @@ class ArchipelagoApp extends React.Component
 
   addTab: ->
     id = Math.random()
-    @setState(ids: @state.ids.concat(id), currentTab: id)
+    @setState(tabs: @state.tabs.concat({ id: id, title: ''}), currentTab: id)
 
   removeTab: (id) ->
-    ids = @state.ids.filter (tabId) =>
-      tabId != id
+    tabs = @state.tabs.filter (tabObject) =>
+      tabId != tabObject.id
 
-    if ids.length == 0
+    if tabs.length == 0
       window.close()
     else if @state.currentTab == id
-      @setState(currentTab: ids[0], ids: ids)
+      @setState(currentTab: tabs[0].id, tabs: tabs)
     else
-      @setState(ids: ids)
+      @setState(tabs: tabs)
+
+  changeTitle: (id, title) ->
+    tabs = @state.tabs.map (tabObject) =>
+      if tabObject.id == id
+        tabObject.title = title
+
+      tabObject
+
+    @setState(tabs: tabs)
