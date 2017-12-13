@@ -1,45 +1,23 @@
-etch = require('etch')
-$ = etch.dom
+React = require('react')
 
 module.exports =
-class ArchipelagoTab
-  constructor: (properties) ->
-    @properties = properties || {}
-
-    etch.initialize(this)
+class ArchipelagoTab extends React.Component
+  constructor: (props) ->
+    super(props)
+    @state = {}
 
   render: ->
-    etch.dom('archipelago-tab', {
-      className: if @properties.active then 'active' else '',
-      onclick: () =>
-        @focus()
+    React.createElement('archipelago-tab', {
+      class: if @props.active then 'active' else '',
+      onClick: () => @props.selectTab(@props.id)
     }, @renderTitle(), @renderExit())
 
-  update: (props) ->
-    Object.assign(@properties, props)
-
-    etch.update(this)
-    @properties.tabsComponent.update()
-
-  destroy: ->
-    await etch.destroy(this)
-
-  hide: ->
-    @update({active: false})
-
-  focus: ->
-    @properties.tabsComponent.properties.tabs.forEach (tab) =>
-      tab.hide()
-
-    @update({active: true})
-
   renderTitle: () ->
-    $.span({}, @properties.title || '')
+    React.createElement('span', {}, @props.id || @state.title || '')
 
   renderExit: () ->
-    $.div({
-      onclick: () =>
-        @properties.tabsComponent.removeTab(this)
-
-        @destroy()
+    React.createElement('div', {
+      onClick: (e) =>
+        e.stopPropagation()
+        @props.removeTab(@props.id)
     }, "\u00D7")
