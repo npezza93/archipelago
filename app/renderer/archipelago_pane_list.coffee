@@ -12,8 +12,10 @@ class ArchipelagoPaneList extends React.Component
           ArchipelagoPane, {
             id: tabObject.id,
             key: tabObject.id,
-            active: @props.currentTab == tabObject.id,
-            changeTitle: @props.changeTitle
+            currentTab: @props.currentTab,
+            changeTitle: @props.changeTitle,
+            markUnread: @props.markUnread,
+            removeTab: @props.removeTab
           }
         )
     )

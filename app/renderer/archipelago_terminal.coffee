@@ -42,18 +42,20 @@ class ArchipelagoTerminal extends React.Component
   constructor: (props) ->
     super(props)
     @bindDataListeners()
+    @resizeEnd = null
 
   render: ->
     React.createElement('archipelago-terminal', { ref: "container" })
 
   componentDidMount: ->
-    @open()
-
-  open: ->
     return unless @pty? && @xterm?
 
     @xterm.open(@refs.container, true)
     @xterm.setOption('bellStyle', @settings('bellStyle'))
+    @xterm.focus()
+
+  componentWillUnmount: ->
+    @kill()
 
   fit: ->
     @xterm.charMeasure.measure(@xterm.options)
@@ -94,23 +96,8 @@ class ArchipelagoTerminal extends React.Component
     @fit()
 
   kill: ->
-    @xterm.destroy()
-    @pty.kill()
-
-  bindExit: ->
-    @pty.on 'exit', () =>
-      parent = @parentElement
-      @remove()
-
-      @xterm.destroy()
-      @pty.kill()
-      @tab.remove() if @tab.terminals().length == 0
-
-      if document.querySelector('archipelago-tab') == null
-        window.close() if !@windowClosing
-      else
-        (new Unsplit(parent)).unsplit()
-        document.querySelector('archipelago-tab').focus()
+    await @xterm.destroy()
+    await @pty.kill()
 
   bindDataListeners: ->
     @configFile.on 'change', () =>
@@ -122,14 +109,19 @@ class ArchipelagoTerminal extends React.Component
     @xterm.on 'focus', () =>
       @fit()
       @props.changeTitle(@props.tabId, @xterm.title)
-    #   global.activeTerminal = this
 
     @xterm.on 'title', (title) =>
       @props.changeTitle(@props.tabId, @xterm.title)
 
     @pty.on 'data', (data) =>
       @xterm.write(data)
-      # if !@tab.isActive() && !@tab.classList.contains('is-unread')
-      #   @tab.classList += ' is-unread'
+      if @props.currentTab != @props.tabId
+        @props.markUnread(@props.tabId)
 
-    # @bindExit()
+    @pty.on 'exit', () =>
+      @kill()
+
+      @props.removeTerminal(@props.id)
+
+    window.addEventListener 'resize', () =>
+      @fit()

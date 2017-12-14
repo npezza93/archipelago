@@ -8,17 +8,6 @@ ArchipelagoApp      = require('./archipelago_app')
 configFile = new ConfigFile()
 global.activeTerminal = null
 
-# window.addEventListener 'resize', () =>
-#   selector = '.tab-container:not(.hidden) archipelago-terminal'
-#   document.querySelectorAll(selector).forEach (terminal) =>
-#     terminal.fit()
-#
-# window.addEventListener 'beforeunload', () =>
-#   document.querySelectorAll('archipelago-terminal').forEach (terminal) =>
-#     terminal.windowClosing = true
-#     terminal.xterm.destroy()
-#     terminal.pty.kill()
-
 document.addEventListener 'DOMContentLoaded', () =>
   setDocumentSettings()
   global.app = ReactDOM.render(

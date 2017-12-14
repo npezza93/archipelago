@@ -8,7 +8,7 @@ class ArchipelagoApp extends React.Component
     super(props)
 
     id = Math.random()
-    @state = { tabs: [{ id: id, title: '' }], currentTab: id }
+    @state = { tabs: [{ id: id, title: '', isUnread: false }], currentTab: id }
 
   render: ->
     React.createElement(
@@ -17,27 +17,33 @@ class ArchipelagoApp extends React.Component
       [
         React.createElement(
           ArchipelagoTabList, {
-            tabs: @state.tabs,
-            currentTab: @state.currentTab,
+            tabs: @state.tabs, currentTab: @state.currentTab,
+            key: "tabs",
             selectTab: @selectTab.bind(this),
             addTab: @addTab.bind(this),
             removeTab: @removeTab.bind(this),
-            key: "tabs"
           }
         )
         React.createElement(
           ArchipelagoPaneList, {
-            tabs: @state.tabs,
-            currentTab: @state.currentTab,
-            changeTitle: @changeTitle.bind(this),
+            tabs: @state.tabs, currentTab: @state.currentTab,
             key: "panes"
+            changeTitle: @changeTitle.bind(this),
+            markUnread: @markUnread.bind(this),
+            removeTab: @removeTab.bind(this),
           }
         )
       ]
     )
 
   selectTab: (id) ->
-    @setState(currentTab: id)
+    tabs = @state.tabs.map (tabObject) =>
+      if tabObject.id == id
+        tabObject.isUnread = false
+
+      tabObject
+
+    @setState(tabs: tabs, currentTab: id)
 
   addTab: ->
     id = Math.random()
@@ -45,7 +51,7 @@ class ArchipelagoApp extends React.Component
 
   removeTab: (id) ->
     tabs = @state.tabs.filter (tabObject) =>
-      tabId != tabObject.id
+      id != tabObject.id
 
     if tabs.length == 0
       window.close()
@@ -58,6 +64,15 @@ class ArchipelagoApp extends React.Component
     tabs = @state.tabs.map (tabObject) =>
       if tabObject.id == id
         tabObject.title = title
+
+      tabObject
+
+    @setState(tabs: tabs)
+
+  markUnread: (id) ->
+    tabs = @state.tabs.map (tabObject) =>
+      if tabObject.id == id
+        tabObject.isUnread = true
 
       tabObject
 

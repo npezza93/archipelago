@@ -4,7 +4,7 @@ module.exports =
 class ArchipelagoTab extends React.Component
   render: ->
     React.createElement('archipelago-tab', {
-      class: if @props.active then 'active' else '',
+      class: @htmlClasses(),
       onClick: () => @props.selectTab(@props.id)
     }, @renderTitle(), @renderExit())
 
@@ -17,3 +17,12 @@ class ArchipelagoTab extends React.Component
         e.stopPropagation()
         @props.removeTab(@props.id)
     }, "\u00D7")
+
+  htmlClasses: () ->
+    classes = []
+    if @props.active
+      classes.push('active')
+    else if @props.isUnread
+      classes.push('is-unread')
+
+    classes.join(' ')

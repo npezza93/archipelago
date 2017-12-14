@@ -12,6 +12,7 @@ class ArchipelagoTabList extends React.Component
           ArchipelagoTab, {
             id: tabObject.id,
             title: tabObject.title,
+            isUnread: tabObject.isUnread,
             selectTab: @props.selectTab,
             addTab: @props.addTab,
             removeTab: @props.removeTab,
