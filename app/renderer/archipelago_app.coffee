@@ -16,7 +16,7 @@ class ArchipelagoApp extends React.Component
         id: tabId, title: '', isUnread: false, terminals: [newTerminal]
       }],
       currentTab: tabId,
-      currentTerminal: null
+      currentTerminal: newTerminal.id
     }
 
   render: ->
@@ -40,7 +40,6 @@ class ArchipelagoApp extends React.Component
             key: "panes"
             changeTitle: @changeTitle.bind(this),
             markUnread: @markUnread.bind(this),
-            removeTab: @removeTab.bind(this),
             removeTerminal: @removeTerminal.bind(this)
           }
         )
@@ -94,17 +93,22 @@ class ArchipelagoApp extends React.Component
     @setState(tabs: tabs)
 
   removeTerminal: (tabId, terminalId) ->
-    terminals = @state.tabs.map (tabObject) =>
+    removeTab = false
+
+    tabs = @state.tabs.map (tabObject) =>
       if tabObject.id == tabId
         terminals = tabObject.terminals.filter (terminalObject) =>
           terminalId != terminalObject.id
         tabObject.terminals = terminals
 
+        if terminals.length == 0
+          removeTab = true
+
         tabObject
       else
         tabObject
 
-    if terminals.length == 0
-      @props.removeTab(@props.id)
+    if removeTab
+      @removeTab(tabId)
     else
-      @setState(terminals: terminals)
+      @setState(tabs: tabs)

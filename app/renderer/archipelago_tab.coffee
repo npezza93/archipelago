@@ -9,7 +9,7 @@ class ArchipelagoTab extends React.Component
     }, @renderTitle(), @renderExit())
 
   renderTitle: () ->
-    React.createElement('span', {}, @props.title)
+    React.createElement('span', {}, @props.title || 'Loading...')
 
   renderExit: () ->
     React.createElement('div', {

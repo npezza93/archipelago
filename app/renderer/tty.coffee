@@ -73,8 +73,8 @@ class Tty
     @fit()
 
   kill: ->
-    await @xterm.destroy()
-    await @pty.kill()
+    @xterm.destroy()
+    @pty.kill()
 
   bindDataListeners: ->
     @configFile.on 'change', () =>

@@ -25,7 +25,7 @@ class ArchipelagoTerminal extends React.Component
       @props.changeTitle(@props.tabId, @props.terminal.xterm.title)
 
     @props.terminal.on 'exit', () =>
-      @props.removeTerminal(@props.terminal.id)
+      @props.removeTerminal(@props.tabId, @props.terminal.id)
 
     @props.terminal.on 'data', () =>
       if @props.currentTab != @props.tabId
