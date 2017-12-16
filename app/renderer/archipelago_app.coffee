@@ -1,14 +1,23 @@
 React                = require('react')
 ArchipelagoPaneList  = require('./archipelago_pane_list')
 ArchipelagoTabList   = require('./archipelago_tab_list')
+Tty                  = require('./tty')
 
 module.exports =
 class ArchipelagoApp extends React.Component
   constructor: (props) ->
     super(props)
 
-    id = Math.random()
-    @state = { tabs: [{ id: id, title: '', isUnread: false }], currentTab: id }
+    tabId = Math.random()
+    newTerminal = new Tty()
+
+    @state = {
+      tabs: [{
+        id: tabId, title: '', isUnread: false, terminals: [newTerminal]
+      }],
+      currentTab: tabId,
+      currentTerminal: null
+    }
 
   render: ->
     React.createElement(
@@ -27,10 +36,12 @@ class ArchipelagoApp extends React.Component
         React.createElement(
           ArchipelagoPaneList, {
             tabs: @state.tabs, currentTab: @state.currentTab,
+            currentTerminal: @state.currentTerminal,
             key: "panes"
             changeTitle: @changeTitle.bind(this),
             markUnread: @markUnread.bind(this),
             removeTab: @removeTab.bind(this),
+            removeTerminal: @removeTerminal.bind(this)
           }
         )
       ]
@@ -46,8 +57,12 @@ class ArchipelagoApp extends React.Component
     @setState(tabs: tabs, currentTab: id)
 
   addTab: ->
-    id = Math.random()
-    @setState(tabs: @state.tabs.concat({ id: id, title: ''}), currentTab: id)
+    tabId = Math.random()
+    newTerminal = new Tty()
+
+    @setState(tabs: @state.tabs.concat({
+      id: tabId, title: '', isUnread: false, terminals: [newTerminal]
+    }), currentTab: tabId)
 
   removeTab: (id) ->
     tabs = @state.tabs.filter (tabObject) =>
@@ -77,3 +92,19 @@ class ArchipelagoApp extends React.Component
       tabObject
 
     @setState(tabs: tabs)
+
+  removeTerminal: (tabId, terminalId) ->
+    terminals = @state.tabs.map (tabObject) =>
+      if tabObject.id == tabId
+        terminals = tabObject.terminals.filter (terminalObject) =>
+          terminalId != terminalObject.id
+        tabObject.terminals = terminals
+
+        tabObject
+      else
+        tabObject
+
+    if terminals.length == 0
+      @props.removeTab(@props.id)
+    else
+      @setState(terminals: terminals)
