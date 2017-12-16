@@ -40,7 +40,8 @@ class ArchipelagoApp extends React.Component
             key: "panes"
             changeTitle: @changeTitle.bind(this),
             markUnread: @markUnread.bind(this),
-            removeTerminal: @removeTerminal.bind(this)
+            removeTerminal: @removeTerminal.bind(this),
+            selectTerminal: @selectTerminal.bind(this)
           }
         )
       ]
@@ -54,6 +55,9 @@ class ArchipelagoApp extends React.Component
       tabObject
 
     @setState(tabs: tabs, currentTab: id)
+
+  selectTerminal: (id) ->
+    @setState(currentTerminal: id)
 
   addTab: ->
     tabId = Math.random()

@@ -18,6 +18,7 @@ class ArchipelagoPane extends React.Component
           currentTab: @props.currentTab,
           changeTitle: @props.changeTitle,
           markUnread: @props.markUnread,
-          removeTerminal: @props.removeTerminal
+          removeTerminal: @props.removeTerminal,
+          selectTerminal: @props.selectTerminal
         }
       )

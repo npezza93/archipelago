@@ -17,7 +17,8 @@ class ArchipelagoPaneList extends React.Component
             currentTerminal: @props.currentTerminal,
             changeTitle: @props.changeTitle,
             markUnread: @props.markUnread,
-            removeTerminal: @props.removeTerminal
+            removeTerminal: @props.removeTerminal,
+            selectTerminal: @props.selectTerminal
           }
         )
     )

@@ -19,6 +19,7 @@ class ArchipelagoTerminal extends React.Component
 
   bindDataListeners: ->
     @props.terminal.on 'focused', () =>
+      @props.selectTerminal(@props.terminal.id)
       @props.changeTitle(@props.tabId, @props.terminal.xterm.title)
 
     @props.terminal.on 'titleChanged', () =>
