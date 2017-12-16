@@ -116,3 +116,6 @@ class ArchipelagoApp extends React.Component
       @removeTab(tabId)
     else
       @setState(tabs: tabs)
+
+  split: (orientation) ->
+    console.log 'split'

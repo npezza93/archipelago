@@ -1,7 +1,6 @@
 { ipcRenderer }     = require('electron')
 React               = require('react')
 ReactDOM            = require('react-dom')
-Split               = require('./split')
 ConfigFile          = require('../utils/config_file')
 ArchipelagoApp      = require('./archipelago_app')
 
@@ -27,6 +26,6 @@ configFile.on('change', setDocumentSettings)
 ipcRenderer.on 'new-tab', () =>
   global.app.addTab()
 ipcRenderer.on 'split-horizontal', () =>
-  (new Split('horizontal')).split()
+  global.app.split('horizontal')
 ipcRenderer.on 'split-vertical', () =>
-  (new Split('vertical')).split()
+  global.app.split('vertical')
