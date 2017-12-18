@@ -59,16 +59,7 @@ archipelago-terminal {
 .terminal .xterm-viewport {
   background-color: transparent;
 }
-.terminal-container .gutter {
-  background-color: rgb(51, 51, 51);
-  z-index: 100;
-}
-.terminal-container .gutter-horizontal {
-  cursor: ew-resize;
-}
-.terminal-container .gutter-vertical {
-  cursor: ns-resize;
-}
+
 /* ArchipelagoApp */
 archipelago-app {
   display: grid;
@@ -132,22 +123,6 @@ archipelago-tab div {
 
 
 /* Splitting */
-.terminal-container {
-  height: 100%;
-  flex: 1;
-  display: flex;
-}
-.terminal-container.horizontal {
-  flex-direction: row;
-  align-items: flex-end;
-}
-.terminal-container.vertical {
-  flex-direction: column;
-}
-.terminal-container .gutter-horizontal {
-  height: calc(100%);
-}
-
 .Resizer.horizontal, .Resizer.vertical {
   background-color: var(--background-color);
   filter: invert(50%);
