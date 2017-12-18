@@ -114,4 +114,5 @@ class Session
       @pty.kill()
       @emitter.emit('exit')
 
-    window.addEventListener 'resize', @fit
+    window.addEventListener 'resize', () =>
+      @fit()
