@@ -13,9 +13,9 @@ class Session
     @emitter = new EventEmitter()
     @configFile = new ConfigFile()
     @pty = Pty.spawn(
-      @settings('shell') ||defaultShell,
+      @settings('shell') || defaultShell,
       @settings('shellArgs').split(','),
-      { name: 'xterm-256color', env: process.env }
+      { name: 'xterm-256color', cwd: process.PWD, env: process.env }
     )
     @xterm = new Terminal({
       fontFamily: @settings('fontFamily'),
@@ -92,10 +92,6 @@ class Session
 
     @fit()
 
-  kill: ->
-    @xterm.destroy()
-    @pty.kill()
-
   bindDataListeners: ->
     @configFile.on 'change', () =>
       @updateSettings()
@@ -115,7 +111,7 @@ class Session
       @emitter.emit('data')
 
     @pty.on 'exit', () =>
-      @kill()
+      @pty.kill()
       @emitter.emit('exit')
 
     window.addEventListener 'resize', @fit

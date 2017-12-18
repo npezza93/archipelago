@@ -15,7 +15,7 @@ class Sessions
       @_newGroup(@_find(@trunk, sessionId))
 
   remove: (sessionId) ->
-    if @trunk.isSession() && @trunk.session.id == sessionId
+    if @trunk.isSession() && @trunk.id == sessionId
       @trunk = null
     else
       sessionToRemove = @_find(@trunk, sessionId)

@@ -98,11 +98,9 @@ class ArchipelagoApp extends React.Component
 
     tabs = @state.tabs.map (tabObject) =>
       if tabObject.id == tabId
-        terminals = tabObject.terminals.filter (terminalObject) =>
-          terminalId != terminalObject.id
-        tabObject.terminals = terminals
+        tabObject.terminals.remove(terminalId)
 
-        if terminals.length == 0
+        if tabObject.terminals.trunk == null
           removeTab = true
 
         tabObject
