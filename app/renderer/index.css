@@ -83,6 +83,7 @@ archipelago-pane-list archipelago-pane {
   overflow-y: hidden;
   display: block;
   height: calc(100% - 10px);
+  position: relative;
 }
 
 
@@ -145,4 +146,29 @@ archipelago-tab div {
 }
 .terminal-container .gutter-horizontal {
   height: calc(100%);
+}
+
+.Resizer.horizontal, .Resizer.vertical {
+  background-color: var(--background-color);
+  filter: invert(50%);
+  box-sizing: border-box;
+  z-index: 1;
+  background-clip: padding-box;
+  flex-shrink: 0;
+}
+.Resizer.horizontal {
+  height: 11px;
+  margin: -5px 0;
+  border-top: 5px solid rgba(255, 255, 255, 0);
+  border-bottom: 5px solid rgba(255, 255, 255, 0);
+  cursor: row-resize;
+  width: 100%;
+}
+
+.Resizer.vertical {
+  width: 11px;
+  margin: 0 -5px;
+  border-left: 5px solid rgba(255, 255, 255, 0);
+  border-right: 5px solid rgba(255, 255, 255, 0);
+  cursor: col-resize;
 }

@@ -2,11 +2,14 @@ Pty                  = require('node-pty')
 defaultShell         = require('default-shell')
 ConfigFile           = require('../utils/config_file')
 { EventEmitter }     = require('events')
+React                = require('react')
+ArchipelagoTerminal  = require('./archipelago_terminal')
 
 module.exports =
-class Tty
-  constructor: ->
+class Session
+  constructor: (group) ->
     @id = Math.random()
+    @group = group
     @emitter = new EventEmitter()
     @configFile = new ConfigFile()
     @pty = Pty.spawn(
@@ -27,6 +30,23 @@ class Tty
       theme: @settings('theme')
     })
     @bindDataListeners()
+
+  render: (props) ->
+    React.createElement(
+      ArchipelagoTerminal, {
+        terminal: this,
+        key: @id,
+        tabId: props.id,
+        currentTab: props.currentTab,
+        changeTitle: props.changeTitle,
+        markUnread: props.markUnread,
+        removeTerminal: props.removeTerminal,
+        selectTerminal: props.selectTerminal
+      }
+    )
+
+  isSession: ->
+    true
 
   on: (event, handler) ->
     @emitter.on(event, handler)

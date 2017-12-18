@@ -1,7 +1,7 @@
 React                = require('react')
 ArchipelagoPaneList  = require('./archipelago_pane_list')
 ArchipelagoTabList   = require('./archipelago_tab_list')
-Tty                  = require('./tty')
+Sessions             = require('./sessions')
 
 module.exports =
 class ArchipelagoApp extends React.Component
@@ -9,14 +9,12 @@ class ArchipelagoApp extends React.Component
     super(props)
 
     tabId = Math.random()
-    newTerminal = new Tty()
 
     @state = {
       tabs: [{
-        id: tabId, title: '', isUnread: false, terminals: [newTerminal]
+        id: tabId, title: '', isUnread: false, terminals: new Sessions()
       }],
-      currentTab: tabId,
-      currentTerminal: newTerminal.id
+      currentTab: tabId
     }
 
   render: ->
@@ -61,10 +59,9 @@ class ArchipelagoApp extends React.Component
 
   addTab: ->
     tabId = Math.random()
-    newTerminal = new Tty()
 
     @setState(tabs: @state.tabs.concat({
-      id: tabId, title: '', isUnread: false, terminals: [newTerminal]
+      id: tabId, title: '', isUnread: false, terminals: new Sessions()
     }), currentTab: tabId)
 
   removeTab: (id) ->
@@ -118,4 +115,5 @@ class ArchipelagoApp extends React.Component
       @setState(tabs: tabs)
 
   split: (orientation) ->
+    @state.
     console.log 'split'
