@@ -113,5 +113,10 @@ class ArchipelagoApp extends React.Component
       @setState(tabs: tabs)
 
   split: (orientation) ->
-    @state.
-    console.log 'split'
+    tabs = @state.tabs.map (tabObject) =>
+      if tabObject.id == @state.currentTab
+        tabObject.terminals.add(@state.currentTerminal, orientation)
+
+      tabObject
+
+    @setState(tabs: tabs)

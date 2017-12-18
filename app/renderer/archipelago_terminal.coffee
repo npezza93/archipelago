@@ -12,6 +12,7 @@ class ArchipelagoTerminal extends React.Component
   componentDidMount: ->
     @props.terminal.xterm.open(@refs.container, true)
     @props.terminal.setBellStyle()
+    @props.terminal.updateSettings()
     @props.terminal.xterm.focus()
 
   componentWillUnmount: ->

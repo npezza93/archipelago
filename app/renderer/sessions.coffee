@@ -6,13 +6,13 @@ class Sessions
   constructor: ->
     @trunk = new Session()
 
-  add: (sessionId) ->
+  add: (sessionId, orientation) ->
     if @trunk.isSession()
       session = @trunk
-      group = @_newGroup(session)
+      group = @_newGroup(session, orientation)
       @trunk = group
     else
-      @_newGroup(@_find(@trunk, sessionId))
+      @_newGroup(@_find(@trunk, sessionId), orientation)
 
   remove: (sessionId) ->
     if @trunk.isSession() && @trunk.id == sessionId
@@ -38,7 +38,7 @@ class Sessions
   _find: (group, sessionId) ->
     foundSession = null
     @_traverse(group, (session) =>
-      if session.session.id == sessionId then foundSession = session
+      if session.id == sessionId then foundSession = session
     )
 
     foundSession
@@ -52,8 +52,8 @@ class Sessions
     @_traverse(group.left, callback)
     @_traverse(group.right, callback)
 
-  _newGroup: (session) ->
-    group = new SessionGroup(session.group, 'horizontal')
+  _newGroup: (session, orientation) ->
+    group = new SessionGroup(session.group, orientation)
     group.left = session
     group.right = new Session(group)
 
