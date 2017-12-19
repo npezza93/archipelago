@@ -47,7 +47,7 @@ class ArchipelagoApp extends React.Component
 
   componentWillUnmount: ->
     @state.tabs.map (tabObject) =>
-      tabObject.terminals.trunk.kill()
+      tabObject.terminals.kill()
 
   selectTab: (id) ->
     tabs = @state.tabs.map (tabObject) =>
@@ -71,7 +71,7 @@ class ArchipelagoApp extends React.Component
   removeTab: (id) ->
     tabs = @state.tabs.filter (tabObject) =>
       if tabObject.id == id
-        tabObject.terminals.trunk.kill()
+        tabObject.terminals.kill()
 
       tabObject.id != id
 
@@ -107,7 +107,7 @@ class ArchipelagoApp extends React.Component
       if tabObject.id == tabId
         tabObject.terminals.remove(terminalId)
 
-        if tabObject.terminals.trunk == null
+        if tabObject.terminals.root == null
           removeTab = true
 
         tabObject

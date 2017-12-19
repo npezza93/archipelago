@@ -4,21 +4,21 @@ SessionGroup = require('./session_group')
 module.exports =
 class Sessions
   constructor: ->
-    @trunk = new Session()
+    @root = new Session()
 
   add: (sessionId, orientation) ->
-    if @trunk.isSession()
-      session = @trunk
+    if @root.isSession()
+      session = @root
       group = @_newGroup(session, orientation)
-      @trunk = group
+      @root = group
     else
-      @_newGroup(@_find(@trunk, sessionId), orientation)
+      @_newGroup(@_find(@root, sessionId), orientation)
 
   remove: (sessionId) ->
-    if @trunk.isSession() && @trunk.id == sessionId
-      @trunk = null
+    if @root.isSession() && @root.id == sessionId
+      @root = null
     else
-      sessionToRemove = @_find(@trunk, sessionId)
+      sessionToRemove = @_find(@root, sessionId)
 
       if sessionToRemove then sessionToRemove.kill()
 
@@ -27,15 +27,18 @@ class Sessions
       else if sessionToRemove.group && sessionToRemove.group.right == sessionToRemove
         sessionToSave = sessionToRemove.group.left
 
-      if sessionToSave.group == @trunk
-        @trunk = sessionToSave
+      if sessionToSave.group == @root
+        @root = sessionToSave
       else if sessionToSave.group.group.left == sessionToSave.group
         sessionToSave.group.group.left = sessionToSave
       else if sessionToSave.group.group.right == sessionToSave.group
         sessionToSave.group.group.right = sessionToSave
 
   render: (props) ->
-    @trunk.render(props)
+    @root.render(props)
+
+  kill: ->
+    @root.kill()
 
   _find: (group, sessionId) ->
     foundSession = null
