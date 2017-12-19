@@ -20,6 +20,8 @@ class Sessions
     else
       sessionToRemove = @_find(@trunk, sessionId)
 
+      if sessionToRemove then sessionToRemove.kill()
+
       if sessionToRemove.group && sessionToRemove.group.left == sessionToRemove
         sessionToSave = sessionToRemove.group.right
       else if sessionToRemove.group && sessionToRemove.group.right == sessionToRemove

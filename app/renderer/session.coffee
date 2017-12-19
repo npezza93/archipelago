@@ -48,6 +48,9 @@ class Session
   isSession: ->
     true
 
+  kill: ->
+    await @pty.kill()
+
   on: (event, handler) ->
     @emitter.on(event, handler)
 
@@ -111,7 +114,6 @@ class Session
       @emitter.emit('data')
 
     @pty.on 'exit', () =>
-      @pty.kill()
       @emitter.emit('exit')
 
     window.addEventListener 'resize', () =>

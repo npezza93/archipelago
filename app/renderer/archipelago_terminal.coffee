@@ -15,9 +15,6 @@ class ArchipelagoTerminal extends React.Component
     @props.terminal.updateSettings()
     @props.terminal.xterm.focus()
 
-  componentWillUnmount: ->
-    @props.terminal.pty.kill()
-
   bindDataListeners: ->
     @props.terminal.on 'focused', () =>
       @props.selectTerminal(@props.terminal.id)

@@ -17,3 +17,7 @@ class SessionGroup
         defaultSize: '50%'
       }, @left.render(props), @right.render(props)
     )
+
+  kill: ->
+    @left.kill()
+    @right.kill()
