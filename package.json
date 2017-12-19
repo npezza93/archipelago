@@ -11,8 +11,7 @@
     "node-pty": "^0.7.4",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-split-pane": "^0.1.71",
-    "electron-builder": "19.45.0"
+    "react-split-pane": "^0.1.71"
   },
   "description": "A terminal built on electron",
   "repository": "https://github.com/npezza93/archipelago",
