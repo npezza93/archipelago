@@ -11,7 +11,8 @@
     "node-pty": "^0.7.4",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-split-pane": "^0.1.71"
+    "react-split-pane": "^0.1.71",
+    "electron-builder": "19.45.0"
   },
   "description": "A terminal built on electron",
   "repository": "https://github.com/npezza93/archipelago",
@@ -22,10 +23,10 @@
     "electron-builder": "19.45.0"
   },
   "scripts": {
-    "postinstall": "electron-builder install-app-deps",
+    "postinstall": "node_modules/.bin/electron-builder  install-app-deps",
     "start": "electron .",
-    "pack": "electron-builder --dir",
-    "dist": "electron-builder --publish onTagOrDraft"
+    "pack": "node_modules/.bin/electron-builder  --dir",
+    "dist": "node_modules/.bin/electron-builder  --publish onTagOrDraft"
   },
   "build": {
     "dmg": {
