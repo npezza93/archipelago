@@ -11,9 +11,6 @@ matrix:
     - os: linux
       services: docker
       language: generic
-      sudo: required
-      dist: trusty
-      group: deprecated-2017Q4
 
 cache:
   directories:
