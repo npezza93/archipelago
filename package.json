@@ -6,6 +6,7 @@
     "chokidar": "^1.7.0",
     "coffeescript": "^2.1.0",
     "default-shell": "^1.0.1",
+    "is-hotkey": "^0.1.1",
     "material-components-web": "^0.21.1",
     "nested-property": "0.0.7",
     "node-pty": "^0.7.4",

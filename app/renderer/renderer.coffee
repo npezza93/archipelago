@@ -5,7 +5,6 @@ ConfigFile          = require('../utils/config_file')
 ArchipelagoApp      = require('./archipelago_app')
 
 configFile = new ConfigFile()
-global.activeTerminal = null
 
 document.addEventListener 'DOMContentLoaded', () =>
   setDocumentSettings()

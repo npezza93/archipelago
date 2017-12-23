@@ -4,6 +4,8 @@ ConfigFile           = require('../utils/config_file')
 { EventEmitter }     = require('events')
 React                = require('react')
 ArchipelagoTerminal  = require('./archipelago_terminal')
+keymapping           = require("../keymaps/#{process.platform}")
+{ isHotkey }         = require('is-hotkey')
 
 module.exports =
 class Session
@@ -29,6 +31,7 @@ class Session
       tabStopWidth: parseInt(@settings('tabStopWidth')),
       theme: @settings('theme')
     })
+    @xterm.attachCustomKeyEventHandler(@hotKeyHandler)
     @bindDataListeners()
 
   render: (props) ->
@@ -71,6 +74,16 @@ class Session
       @configFile.activeSettings()[setting]
     else
       @configFile.activeSettings()
+
+  hotKeyHandler: (e) =>
+    caught = false
+
+    Object.keys(keymapping).forEach (shortcutName) =>
+      if isHotkey(keymapping[shortcutName].accelerator, e)
+        @pty.write(keymapping[shortcutName].command)
+        caught = true
+
+    !caught
 
   updateSettings: ->
     [

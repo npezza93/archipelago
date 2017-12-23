@@ -1,0 +1,26 @@
+{
+  "move cursor to previous word": {
+    "accelerator": "ctrl+left", "command": "\u001bb"
+  },
+  "move cursor to next word": {
+    "accelerator": "ctrl+right", "command": "\u001bf"
+  },
+  "move cursor to beginning of line": {
+    "accelerator": "home", "command": "\u001bOH"
+  },
+  "move cursor to end of line": {
+    "accelerator": "end", "command": "\u001bOF"
+  },
+  "delete previous word": {
+    "accelerator": "ctrl+backspace", "command": "\u001b"
+  },
+  "delete next word": {
+    "accelerator": "ctrl+del", "command": "\u001bd"
+  },
+  "delete to the beginning of line": {
+    "accelerator": "ctrl+home", "command": "\u001bw"
+  },
+  "delete to the end of line": {
+    "accelerator": "ctrl+end", "command": "\u0010B"
+  }
+}
