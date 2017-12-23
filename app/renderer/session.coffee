@@ -49,7 +49,8 @@ class Session
     true
 
   kill: ->
-    await @pty.kill()
+    @pty.kill()
+    @xterm.destroy()
 
   on: (event, handler) ->
     @emitter.on(event, handler)
