@@ -22,10 +22,10 @@
     "electron-builder": "19.45.0"
   },
   "scripts": {
-    "postinstall": "node_modules/.bin/electron-builder  install-app-deps",
+    "postinstall": "yarn compile && electron-builder install-app-deps",
     "start": "electron .",
-    "pack": "node_modules/.bin/electron-builder  --dir",
-    "dist": "node_modules/.bin/electron-builder  --publish onTagOrDraft"
+    "pack": "yarn compile && electron-builder --dir",
+    "dist": "yarn compile && electron-builder --publish onTagOrDraft"
   },
   "build": {
     "dmg": {
