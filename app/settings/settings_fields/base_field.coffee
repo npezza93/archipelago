@@ -40,7 +40,6 @@ class BaseField extends HTMLElement
   updateSetting: (valueKey, value) ->
     configContents = @currentSettings()
     nestedProperty.set(configContents, valueKey, value)
-    console.log configContents
     @configFile.write(configContents)
 
   valueKey: ->

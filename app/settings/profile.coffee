@@ -1,9 +1,8 @@
 require('../utils/attr')
 
-ConfigFile = require('../utils/config_file')
+ConfigFile           = require('../utils/config_file')
 ProfileSelectorField = require('./settings_fields/profile_selector_field')
-TextField = require('./settings_fields/text_field')
-defaultProfile = require('./default_profile.json')
+TextField            = require('./settings_fields/text_field')
 
 module.exports =
 class Profile
@@ -79,8 +78,7 @@ class Profile
     id = Object.keys(contents.profiles || {}).length + 1
 
     contents.profiles = contents.profiles || {}
-    contents.profiles[id] = { 'id': id, 'name': 'New Profile' }
-    Object.assign(contents.profiles[id], defaultProfile)
+    contents.profiles[id] = ConfigFile.defaultProfile()
     contents.activeProfile = id
     configFile.write(contents)
 

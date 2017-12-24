@@ -1,5 +1,5 @@
-mdc = require('material-components-web/dist/material-components-web')
-BaseField = require('./base_field')
+mdc            = require('material-components-web/dist/material-components-web')
+BaseField      = require('./base_field')
 nestedProperty = require('nested-property')
 
 class SelectField extends BaseField

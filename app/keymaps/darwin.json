@@ -1,26 +1,10 @@
-{
-  "move cursor to previous word": {
-    "accelerator": "alt+left", "command": "\u001bb"
-  },
-  "move cursor to next word": {
-    "accelerator": "alt+right", "command": "\u001bf"
-  },
-  "move cursor to beginning of line": {
-    "accelerator": "command+left", "command": "\u001bOH"
-  },
-  "move cursor to end of line": {
-    "accelerator": "command+right", "command": "\u001bOF"
-  },
-  "delete previous word": {
-    "accelerator": "alt+backspace", "command": "\u001b"
-  },
-  "delete next word": {
-    "accelerator": "alt+delete", "command": "\u001bd"
-  },
-  "delete to the beginning of line": {
-    "accelerator": "command+backspace", "command": "\u001bw"
-  },
-  "delete to the end of line": {
-    "accelerator": "command+delete", "command": "\u0010B"
-  }
-}
+[
+  { "accelerator": "alt+left", "command": "\u001bb" },
+  { "accelerator": "alt+right", "command": "\u001bf" },
+  { "accelerator": "command+left", "command": "\u001bOH" },
+  { "accelerator": "command+right", "command": "\u001bOF" },
+  { "accelerator": "alt+backspace", "command": "\u001b" },
+  { "accelerator": "alt+delete", "command": "\u001bd" },
+  { "accelerator": "command+backspace", "command": "\u001bw" },
+  { "accelerator": "command+delete", "command": "\u0010B" }
+]
