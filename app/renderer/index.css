@@ -112,6 +112,9 @@ archipelago-tab-list archipelago-tab {
 archipelago-tab-list archipelago-tab.active {
   filter: invert(0%);
 }
+archipelago-tab-list  archipelago-tab:first-child:nth-last-child(1) div {
+  display: none;
+}
 archipelago-tab-list  archipelago-tab span {
   text-align: center;
   text-overflow: ellipsis;
