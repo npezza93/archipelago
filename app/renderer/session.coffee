@@ -107,7 +107,8 @@ class Session
       @updateSettings()
 
     @xterm.on 'data', (data) =>
-      @pty.write(data)
+      try
+        @pty.write(data)
 
     @xterm.on 'focus', () =>
       @fit()
