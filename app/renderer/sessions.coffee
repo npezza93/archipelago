@@ -20,7 +20,9 @@ class Sessions
     else
       sessionToRemove = @_find(@root, sessionId)
 
-      if sessionToRemove then sessionToRemove.kill()
+      return unless sessionToRemove
+
+      sessionToRemove.kill()
 
       if sessionToRemove.group && sessionToRemove.group.left == sessionToRemove
         sessionToSave = sessionToRemove.group.right
@@ -31,8 +33,10 @@ class Sessions
         @root = sessionToSave
       else if sessionToSave.group.group.left == sessionToSave.group
         sessionToSave.group.group.left = sessionToSave
+        sessionToSave.group = sessionToSave.group.group
       else if sessionToSave.group.group.right == sessionToSave.group
         sessionToSave.group.group.right = sessionToSave
+        sessionToSave.group = sessionToSave.group.group
 
   render: (props) ->
     @root.render(props)
