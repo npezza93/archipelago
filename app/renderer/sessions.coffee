@@ -38,7 +38,7 @@ class Sessions
     @root.render(props)
 
   kill: ->
-    @root.kill()
+    if @root then @root.kill()
 
   _find: (group, sessionId) ->
     foundSession = null

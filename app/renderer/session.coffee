@@ -64,8 +64,9 @@ class Session
     rows = Math.floor(@xterm.element.offsetHeight / @xterm.charMeasure.height)
     cols = Math.floor(@xterm.element.offsetWidth / @xterm.charMeasure.width) - 2
 
-    @xterm.resize(cols, rows)
-    @pty.resize(cols, rows)
+    try
+      @xterm.resize(cols, rows)
+      @pty.resize(cols, rows)
 
   settings: (setting) ->
     if setting?
