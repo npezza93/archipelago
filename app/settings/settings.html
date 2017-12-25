@@ -4,97 +4,46 @@
     <meta charset="UTF-8">
     <title>Archipelago</title>
     <link rel="stylesheet" type="text/css" href="settings.css"/>
-    <link rel="stylesheet" type="text/css" href="roboto.css"/>
     <link rel="stylesheet" type="text/css" href="../../node_modules/material-components-web/dist/material-components-web.css"/>
-    <script type="text/javascript" src="color_picker/jqColorPicker.min.js"></script>
-  </head>
-  <body class="m-0">
-    <div id="titlebar" class="d-flex flex-row justify-content-center">Settings</div>
-
-    <form class="wrap flex-row d-flex justify-content-around mb-6">
-      <div class="profilesContainer d-flex flex-column">
-        <div class="mdc-typography--title mt-6 d-flex flex-row justify-content-center">Profiles</div>
-
-        <div class="profiles"></div>
-        <div class="newProfile mdc-button">Add New Profile</div>
-      </div>
-
-      <section class="mt-6">
-        <nav class="mdc-tab-bar">
-          <a role="tab" aria-controls="standardSettings"  class="mdc-tab mdc-tab--active" href="#standardSettings">General</a>
-          <a role="tab" aria-controls="theme"             class="mdc-tab" href="#theme">Theme</a>
-          <a role="tab" aria-controls="keyboardShortcuts" class="mdc-tab" href="#keyboardShortcuts">Keyboard</a>
-          <span class="mdc-tab-bar__indicator"></span>
-        </nav>
-
-        <div class="panels d-flex flex-row justify-content-center">
-          <div id="standardSettings" class="d-flex flex-column panel active">
-            <h5 class="mb-0 mt-6 mdc-typography--body2">Font</h5>
-            <div class="d-flex flex-row wrap justify-content-around container">
-              <text-field data-id="fontFamily"    data-label="Font Family"></text-field>
-              <text-field data-id="fontSize"      data-label="Font Size"></text-field>
-              <text-field data-id="lineHeight"    data-label="Line Height"></text-field>
-              <text-field data-id="letterSpacing" data-label="Letter Spacing"></text-field>
-            </div>
-
-            <h5 class="mb-0 mt-6 mdc-typography--body2">Cursor</h5>
-            <div class="d-flex flex-row wrap justify-content-around align-items-end container">
-              <select-field data-id="cursorStyle" data-label="Choose a cursor style" data-options='[["block", "Block"], ["underline", "Underline"], ["bar", "Bar"]]'></select-field>
-              <switch-field data-id="cursorBlink" data-label="Blink cursor"></switch-field>
-            </div>
-
-            <h5 class="mb-0 mt-6 mdc-typography--body2">Bell</h5>
-            <div class="d-flex flex-row wrap justify-content-around align-items-base container">
-              <text-field   data-id="bellSound" data-label="Bell sound" data-help-text="URL or URI"></text-field>
-              <select-field data-id="bellStyle" data-label="Choose a bell style" data-options='[["none", "None"], ["visual", "Visual"], ["sound", "Sound"], ["both", "Both"]]'></select-field>
-            </div>
-
-            <h5 class="mb-0 mt-6 mdc-typography--body2">Shell</h5>
-            <div class="d-flex flex-row wrap justify-content-around align-items-base container">
-              <text-field data-id="shell"        data-label="Shell"           data-help-text="The shell to run when spawning a new session (i.e. /usr/local/bin/fish)"></text-field>
-              <text-field data-id="shellArgs"    data-label="Shell Arguments" data-help-text="for setting shell arguments (comma seperated)"></text-field>
-              <text-field data-id="scrollback"   data-label="Scrollback"></text-field>
-              <text-field data-id="tabStopWidth" data-label="Tab Stop Width"></text-field>
-            </div>
-
-            <h5 class="mb-0 mt-6 mdc-typography--body2">Vibrancy</h5>
-            <div class="d-flex flex-row wrap justify-content-around align-items-base container">
-              <select-field data-id="vibrancy" data-label="Vibrancy" data-options='[["appearance-based", "appearance-based"], ["light", "light"], ["dark", "dark"], ["titlebar", "titlebar"], ["selection", "selection"], ["menu", "menu"], ["popover", "popover"], ["sidebar", "sidebar"], ["medium-light", "medium-light"], ["ultra-dark", "ultra-dark"]]'></select-field>
-            </div>
-          </div>
-
-          <div id="theme" class="panel mt-6 flex-column">
-            <color-field data-id="theme.foreground"    data-label="Foreground"></color-field>
-            <color-field data-id="theme.background"    data-label="Terminal Background"></color-field>
-            <color-field data-id="windowBackground"    data-label="Window Background"></color-field>
-            <color-field data-id="tabColor"            data-label="Tab Color"></color-field>
-            <color-field data-id="theme.selection"     data-label="Selection"></color-field>
-            <color-field data-id="theme.cursor"        data-label="Cursor"></color-field>
-            <color-field data-id="theme.cursorAccent"  data-label="Cursor Accent"></color-field>
-            <color-field data-id="theme.red"           data-label="Red"></color-field>
-            <color-field data-id="theme.brightRed"     data-label="Bright Red"></color-field>
-            <color-field data-id="theme.green"         data-label="Green"></color-field>
-            <color-field data-id="theme.brightGreen"   data-label="Bright Green"></color-field>
-            <color-field data-id="theme.yellow"        data-label="Yellow"></color-field>
-            <color-field data-id="theme.brightYellow"  data-label="Bright Yellow"></color-field>
-            <color-field data-id="theme.magenta"       data-label="Magenta"></color-field>
-            <color-field data-id="theme.brightMagenta" data-label="Bright Magenta"></color-field>
-            <color-field data-id="theme.cyan"          data-label="Cyan"></color-field>
-            <color-field data-id="theme.brightCyan"    data-label="Bright Cyan"></color-field>
-            <color-field data-id="theme.blue"          data-label="Blue"></color-field>
-            <color-field data-id="theme.brightBlue"    data-label="Bright Blue"></color-field>
-            <color-field data-id="theme.white"         data-label="White"></color-field>
-            <color-field data-id="theme.brightWhite"   data-label="Bright White"></color-field>
-            <color-field data-id="theme.black"         data-label="Black"></color-field>
-            <color-field data-id="theme.brightBlack"   data-label="Bright Black"></color-field>
-          </div>
-
-          <div id="keyboardShortcuts" class="panel">
-            <div class="mt-6 mdc-typography--title">Coming Soon!</div>
-          </div>
-        </div>
-      </section>
-    </form>
     <script type="text/javascript" src="init.js"></script>
+  </head>
+  <body>
+    <div id="titlebar"></div>
+
+    <div class="form-container">
+      <div class="profiles-container"></div>
+
+      <div class="options-container">
+        <div id="theme">
+          <color-field data-id="theme.foreground"    data-label="Foreground"></color-field>
+          <color-field data-id="theme.background"    data-label="Terminal Background"></color-field>
+          <color-field data-id="windowBackground"    data-label="Window Background"></color-field>
+          <color-field data-id="tabColor"            data-label="Tab Color"></color-field>
+          <color-field data-id="theme.selection"     data-label="Selection"></color-field>
+          <color-field data-id="theme.cursor"        data-label="Cursor"></color-field>
+          <color-field data-id="theme.cursorAccent"  data-label="Cursor Accent"></color-field>
+          <color-field data-id="theme.red"           data-label="Red"></color-field>
+          <color-field data-id="theme.brightRed"     data-label="Bright Red"></color-field>
+          <color-field data-id="theme.green"         data-label="Green"></color-field>
+          <color-field data-id="theme.brightGreen"   data-label="Bright Green"></color-field>
+          <color-field data-id="theme.yellow"        data-label="Yellow"></color-field>
+          <color-field data-id="theme.brightYellow"  data-label="Bright Yellow"></color-field>
+          <color-field data-id="theme.magenta"       data-label="Magenta"></color-field>
+          <color-field data-id="theme.brightMagenta" data-label="Bright Magenta"></color-field>
+          <color-field data-id="theme.cyan"          data-label="Cyan"></color-field>
+          <color-field data-id="theme.brightCyan"    data-label="Bright Cyan"></color-field>
+          <color-field data-id="theme.blue"          data-label="Blue"></color-field>
+          <color-field data-id="theme.brightBlue"    data-label="Bright Blue"></color-field>
+          <color-field data-id="theme.white"         data-label="White"></color-field>
+          <color-field data-id="theme.brightWhite"   data-label="Bright White"></color-field>
+          <color-field data-id="theme.black"         data-label="Black"></color-field>
+          <color-field data-id="theme.brightBlack"   data-label="Bright Black"></color-field>
+        </div>
+
+        <div id="keyboardShortcuts">
+          <div class="mt-6 mdc-typography--title">Coming Soon!</div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
