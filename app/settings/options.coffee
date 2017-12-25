@@ -35,7 +35,6 @@ class Options extends React.Component
     else
       value = e.target.value
 
-    console.log activeProfileKey, value
     @_configFile.update(activeProfileKey, value)
 
     @setState("#{e.target.getAttribute('datakey')}": value)
