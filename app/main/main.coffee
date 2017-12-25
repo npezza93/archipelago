@@ -47,4 +47,5 @@ app.on 'activate', () =>
 
 configFile.on 'change', () =>
   windows.forEach (win) =>
-    win.setVibrancy(configFile.contents().vibrancy)
+    unless win.isDestroyed()
+      win.setVibrancy(configFile.contents().vibrancy)
