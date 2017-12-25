@@ -131,11 +131,14 @@ class AppMenu
           click: () ->
             if !settings? || settings.isDestroyed()
               settings = new BrowserWindow({
-                width: 1100,
-                height: 600,
-                show: true,
-                titleBarStyle: 'hidden-inset',
+                width: 1100
+                height: 600
+                show: true
+                titleBarStyle: 'hidden-inset'
                 icon: path.join(__dirname, '../../../build/icon.png')
+                webPreferences: {
+                  experimentalFeatures: true
+                }
               })
 
               settings.loadURL(url.format({
