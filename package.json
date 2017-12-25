@@ -21,7 +21,7 @@
   "license": "MIT",
   "devDependencies": {
     "electron": "^1.8.1",
-    "electron-builder": "19.45.0"
+    "electron-builder": "^19.49.2"
   },
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
