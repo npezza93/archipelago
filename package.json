@@ -7,12 +7,13 @@
     "coffeescript": "^2.1.0",
     "default-shell": "^1.0.1",
     "is-hotkey": "^0.1.1",
-    "material-components-web": "^0.21.1",
+    "material-components-web": "^0.27.0",
     "nested-property": "0.0.7",
     "node-pty": "^0.7.4",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-split-pane": "^0.1.74"
+    "react-split-pane": "^0.1.74",
+    "rmwc": "0.0.1-rc12"
   },
   "description": "A terminal built on electron",
   "repository": "https://github.com/npezza93/archipelago",
