@@ -46,6 +46,7 @@ input, .mdc-form-field {
 .form-container {
   position: relative;
   display: flex;
+  flex-direction: row;
 }
 
 color-field input {
@@ -130,9 +131,8 @@ color-field input {
   overflow: auto;
   display: flex;
   flex-direction: column;
-  margin: auto;
-  width: 100%;
   position: relative;
+  flex: 1;
 }
 archipelago-options {
   display: block;
@@ -147,7 +147,7 @@ archipelago-options archipelago-options-header {
   flex-direction: column;
   justify-content: center;
   position: fixed;
-  width: calc(100% - 304px);
+  width: calc(100% - 359px);
   background-color: rgba(255, 255, 255, 0.2);
   z-index: 1;
 }
