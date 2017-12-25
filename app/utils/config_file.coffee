@@ -3,6 +3,7 @@ chokidar         = require('chokidar')
 { homedir }      = require('os')
 { join }         = require('path')
 { EventEmitter } = require('events')
+nestedProperty   = require('nested-property')
 defaultProfile   = require('../settings/default_profile.json')
 darwinMappings   = require('../keymaps/darwin')
 linuxMappings    = require('../keymaps/linux')
@@ -28,6 +29,11 @@ class ConfigFile
 
   activeSettings: ->
     @contents().profiles[@contents().activeProfile]
+
+  update: (key, value) ->
+    settings = @contents()
+    nestedProperty.set(settings, key, value)
+    @write(settings)
 
   write: (content) ->
     fs.writeFileSync @filePath(), JSON.stringify(content, null, 2), (err) =>
