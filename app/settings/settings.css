@@ -1,5 +1,6 @@
 :root {
   --mdc-theme-primary: #000 !important;
+  --mdc-theme-secondary: #000 !important;
 }
 
 html, body {
@@ -26,7 +27,9 @@ html, body {
 ::-webkit-scrollbar-corner {
   background: rgb(248, 248, 248);
 }
-
+input, .mdc-form-field {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !important;
+}
 #titlebar {
   height: 40px;
   width: 100%;
@@ -120,3 +123,70 @@ color-field input {
 }
 
 
+
+/* Options */
+.options-container {
+  height: 100vh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 100%;
+  position: relative;
+}
+archipelago-options {
+  display: block;
+  height: 100%;
+}
+archipelago-options archipelago-options-header {
+  font-size: 23px;
+  font-weight: 700;
+  padding-left: 75px;
+  height: 170px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: fixed;
+  width: calc(100% - 304px);
+  background-color: rgba(255, 255, 255, 0.2);
+  z-index: 1;
+}
+archipelago-options archipelago-options-header:before {
+  content: ' ';
+  backdrop-filter: blur(2px);
+  position: absolute;
+  top: 0;
+  left: 1px;
+  width: calc(100% - 2px);
+  height: 100%;
+  z-index: -1;
+}
+archipelago-options archipelago-options-header:after {
+  content: ' ';
+  backdrop-filter: blur(1px);
+  position: absolute;
+  bottom: -5px;
+  left: 1px;
+  width: calc(100% - 2px);
+  height: 10px;
+  z-index: -1;
+}
+archipelago-options archipelago-general-options {
+  margin: 170px 75px 0 75px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 100px;
+  grid-row-gap: 20px;
+}
+archipelago-options archipelago-general-options .seperator {
+  grid-column: span 2;
+  height: 48px;
+}
+archipelago-options archipelago-general-options .mdc-form-field {
+  display: flex;
+  flex-direction: row-reverse;
+}
+archipelago-options archipelago-general-options .mdc-text-field {
+  margin-top: 8px !important;
+  bottom: 0px !important;
+}

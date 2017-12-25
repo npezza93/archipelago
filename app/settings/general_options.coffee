@@ -1,0 +1,65 @@
+React = require('react')
+{ TextField, TextFieldHelperText, Select, Switch } = require('rmwc')
+
+module.exports =
+class GeneralOptions extends React.Component
+  render: ->
+    React.createElement(
+      'archipelago-general-options'
+      {}
+      @text('fontFamily', 'Font Family')
+      @text('fontSize', 'Font Size', true)
+      @text('lineHeight', 'Line Height')
+      @text('letterSpacing', 'Letter Spacing', true)
+
+      React.createElement('div', className: 'seperator')
+
+      @select('cursorStyle', 'Choose a cursor style', { 'block': 'Block', 'underline': 'Underline', 'bar': 'Bar' })
+      @switch('cursorBlink', 'Blink cursor')
+
+      React.createElement('div', className: 'seperator')
+
+      @text('bellSound', 'Bell sound (URL or URI)')
+      @select('bellStyle', 'Choose a bell style', { 'none': 'None', 'visual': 'Visual', 'sound': 'Sound', 'both': 'Both' })
+
+      React.createElement('div', className: 'seperator')
+
+      @text('shell', 'Shell', false, "The shell to run when spawning a new session (i.e. /usr/local/bin/fish)")
+      @text('shellArgs', 'Shell Arguments (comma seperated)')
+      @text('scrollback', 'Scrollback')
+      @text('tabStopWidth', 'Tab Stop Width')
+
+      React.createElement('div', className: 'seperator')
+
+      @select('vibrancy', 'Vibrancy', { 'light': 'light', 'medium-light': 'medium-light', 'dark': 'dark',  'ultra-dark': 'ultra-dark' })
+
+      React.createElement('div', className: 'seperator')
+    )
+
+  text: (key, label, int) ->
+    React.createElement(
+      TextField
+      datakey: key
+      label: label
+      value: if int then parseInt(@props[key]) else @props[key]
+      onChange: @props.updateGeneralOption
+    )
+
+  select: (key, label, options) ->
+    React.createElement(
+      Select
+      datakey: key
+      label: label
+      value: @props[key]
+      options: options
+      onChange: @props.updateGeneralOption
+    )
+
+  switch: (key, label) ->
+    React.createElement(
+      Switch
+      datakey: key
+      checked: @props[key]
+      label: label
+      onChange: @props.updateGeneralOption
+    )
