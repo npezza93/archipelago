@@ -50,6 +50,8 @@ class Session
     true
 
   kill: ->
+    window.removeEventListener('resize', @fit.bind(this))
+
     @pty.kill()
     @xterm.destroy()
 
@@ -102,9 +104,8 @@ class Session
 
   bindDataListeners: ->
     @xterm.attachCustomKeyEventHandler(@hotkeyHandler)
-
-    @configFile.on 'change', () =>
-      @updateSettings()
+    window.addEventListener 'resize', @fit.bind(this)
+    @configFile.on 'change', @updateSettings.bind(this)
 
     @xterm.on 'data', (data) =>
       try
@@ -123,6 +124,3 @@ class Session
 
     @pty.on 'exit', () =>
       @emitter.emit('exit')
-
-    window.addEventListener 'resize', () =>
-      @fit()
