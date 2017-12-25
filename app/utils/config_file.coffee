@@ -5,9 +5,6 @@ chokidar         = require('chokidar')
 { EventEmitter } = require('events')
 nestedProperty   = require('nested-property')
 defaultProfile   = require('../settings/default_profile.json')
-darwinMappings   = require('../keymaps/darwin')
-linuxMappings    = require('../keymaps/linux')
-win32Mappings    = require('../keymaps/win32')
 
 module.exports =
 class ConfigFile
@@ -48,15 +45,7 @@ class ConfigFile
     @emitter.on('change', handler)
 
   @defaultProfile: (id) ->
-    profile = {
-      'id': id,
-      'name': 'New Profile',
-      'keyboard': {
-        'linux': linuxMappings,
-        'win32': win32Mappings,
-        'darwin': darwinMappings
-      }
-    }
+    profile = { 'id': id, 'name': 'New Profile' }
     Object.assign(profile, defaultProfile)
 
     profile

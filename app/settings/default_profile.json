@@ -36,5 +36,37 @@
       "brightBlack":"#808080",
       "cursorAccent":"#000000",
       "cursor":"#FFFFFF"
+   },
+   "keyboard": {
+     "linux": [
+       { "accelerator": "ctrl+left", "command": "\u001bb" },
+       { "accelerator": "ctrl+right", "command": "\u001bf" },
+       { "accelerator": "home", "command": "\u001bOH" },
+       { "accelerator": "end", "command": "\u001bOF" },
+       { "accelerator": "ctrl+backspace", "command": "\u001b" },
+       { "accelerator": "ctrl+del", "command": "\u001bd" },
+       { "accelerator": "ctrl+home", "command": "\u001bw" },
+       { "accelerator": "ctrl+end", "command": "\u0010B" }
+     ],
+     "win32": [
+       { "accelerator": "ctrl+left", "command": "\u001bb" },
+       { "accelerator":"ctrl+right", "command": "\u001bf" },
+       { "accelerator": "home", "command": "\u001bOH" },
+       { "accelerator": "end", "command": "\u001bOF" },
+       { "accelerator": "ctrl+backspace", "command": "\u001b" },
+       { "accelerator": "cltr+del", "command": "\u001bd" },
+       { "accelerator": "ctrl+home", "command": "\u001bw" },
+       { "accelerator": "ctrl+end", "command": "\u0010B" }
+     ],
+     "darwin": [
+       { "accelerator": "alt+left", "command": "\u001bb" },
+       { "accelerator": "alt+right", "command": "\u001bf" },
+       { "accelerator": "command+left", "command": "\u001bOH" },
+       { "accelerator": "command+right", "command": "\u001bOF" },
+       { "accelerator": "alt+backspace", "command": "\u001b" },
+       { "accelerator": "alt+delete", "command": "\u001bd" },
+       { "accelerator": "command+backspace", "command": "\u001bw" },
+       { "accelerator": "command+delete", "command": "\u0010B" }
+     ]
    }
 }
