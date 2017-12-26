@@ -1,0 +1,17 @@
+{
+  "plugins": [
+    "coffeescript"
+  ],
+  "parser": "babel-eslint",
+  "env": {
+    "node": true,
+    "browser": true,
+    "commonjs": true,
+    "es6": true
+  },
+  "parserOptions": {
+    "sourceType": "module",
+    "allowImportExportEverywhere": false,
+    "codeFrame": false
+  }
+}
