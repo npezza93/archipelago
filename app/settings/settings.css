@@ -142,10 +142,7 @@ archipelago-options archipelago-options-header {
   font-size: 23px;
   font-weight: 700;
   padding-left: 75px;
-  height: 170px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  height: 125px;
   position: fixed;
   width: calc(100% - 359px);
   background-color: rgba(255, 255, 255, 0.2);
@@ -161,6 +158,10 @@ archipelago-options archipelago-options-header:before {
   height: 100%;
   z-index: -1;
 }
+archipelago-options archipelago-options-header div {
+  position: absolute;
+  top: 73px;
+}
 archipelago-options archipelago-options-header:after {
   content: ' ';
   backdrop-filter: blur(1px);
@@ -173,7 +174,7 @@ archipelago-options archipelago-options-header:after {
 }
 /* General Options */
 archipelago-options archipelago-general-options {
-  margin: 170px 75px 0 75px;
+  margin: 130px 75px 0 75px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 100px;
@@ -193,7 +194,7 @@ archipelago-options archipelago-general-options .mdc-text-field {
 }
 /* Theme Options */
 archipelago-options archipelago-theme-options {
-  margin: 170px 75px 0 75px;
+  margin: 130px 75px 0 75px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 100px;
@@ -214,7 +215,7 @@ archipelago-options archipelago-theme-options .mdc-text-field .chrome-picker  {
 }
 /* Keyboard Options */
 archipelago-options archipelago-keyboard-options {
-  margin: 170px 75px 0 75px;
+  margin: 130px 75px 0 75px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 100px;

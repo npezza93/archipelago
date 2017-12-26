@@ -6,5 +6,5 @@ class OptionsHeader extends React.Component
     React.createElement(
       'archipelago-options-header'
       {}
-      'Preferences'
+      React.createElement('div', {}, 'Preferences')
     )
