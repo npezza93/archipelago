@@ -13,7 +13,7 @@ class AppMenu
       }
     ]
 
-  @menu: (settings, createWindow) ->
+  @menu: (about, settings, createWindow) ->
     template = [
       @shellMenu(createWindow)
       @editMenu(),
@@ -23,7 +23,7 @@ class AppMenu
     ]
 
     if process.platform == 'darwin'
-      template.unshift(@aboutMenu(settings))
+      template.unshift(@aboutMenu(about, settings))
 
     template
 
@@ -119,11 +119,30 @@ class AppMenu
       ]
     }
 
-  @aboutMenu: (settings) ->
+  @aboutMenu: (about, settings) ->
     {
       label: app.getName(),
       submenu: [
-        { role: 'about' },
+        {
+          label: 'About Archipelago',
+          click: () =>
+            if !about? || about.isDestroyed()
+              about = new BrowserWindow(
+                width: 300
+                height: 500
+                show: true
+                titleBarStyle: 'hidden-inset'
+                icon: path.join(__dirname, '../../../build/icon.png')
+              )
+
+              about.loadURL(url.format(
+                pathname: path.join(__dirname, '../about/about.html')
+                protocol: 'file:'
+                slashes: true
+              ))
+
+              about.focus()
+        },
         { type: 'separator' },
         {
           label: 'Settings',

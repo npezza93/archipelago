@@ -5,8 +5,9 @@ AppMenu                             = require('./app_menu')
 ConfigFile                          = require('../utils/config_file')
 AutoUpdate                          = require('./auto_update')
 
-settings = null
-windows = []
+settings   = null
+about      = null
+windows    = []
 configFile = new ConfigFile()
 
 createWindow = () ->
@@ -34,7 +35,7 @@ createWindow = () ->
 app.on 'ready', () =>
   createWindow()
   Menu.setApplicationMenu(
-    Menu.buildFromTemplate(AppMenu.menu(settings, createWindow))
+    Menu.buildFromTemplate(AppMenu.menu(about, settings, createWindow))
   )
   if (process.platform == 'darwin')
     app.dock.setMenu(Menu.buildFromTemplate(AppMenu.dock(createWindow)))
