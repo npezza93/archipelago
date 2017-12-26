@@ -12,7 +12,7 @@ class ThemeOptions extends React.Component
   render: ->
     React.createElement(
       'archipelago-theme-options'
-      {}
+      ref: @props.innerRef
       @text('theme.foreground', 'Foreground')
       @text('theme.background', 'Terminal Background')
       @text('windowBackground', 'Window Background')

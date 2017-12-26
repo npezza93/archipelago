@@ -6,7 +6,7 @@ class GeneralOptions extends React.Component
   render: ->
     React.createElement(
       'archipelago-general-options'
-      {}
+      ref: @props.innerRef
       @text('fontFamily', 'Font Family')
       @text('fontSize', 'Font Size', true)
       @text('lineHeight', 'Line Height')

@@ -5,6 +5,7 @@ ThemeOptions = require('./theme_options')
 KeyboardOptions = require('./keyboard_options')
 ConfigFile = require('../utils/config_file')
 nestedProperty = require('nested-property')
+Waypoint = require('react-waypoint')
 
 module.exports =
 class Options extends React.Component
@@ -20,9 +21,30 @@ class Options extends React.Component
       'archipelago-options'
       {}
       React.createElement(OptionsHeader)
-      React.createElement(GeneralOptions, { updateOption: @updateOption.bind(this), ...@state })
-      React.createElement(ThemeOptions, { updateOption: @updateOption.bind(this), ...@state })
-      React.createElement(KeyboardOptions, { updateOption: @updateOption.bind(this), ...@state })
+      React.createElement(
+        Waypoint
+        onEnter: () =>
+          console.log 'general entered'
+        onLeave: () =>
+          console.log 'general left'
+        React.createElement(GeneralOptions, { updateOption: @updateOption.bind(this), ...@state })
+      )
+      React.createElement(
+        Waypoint
+        onEnter: () =>
+          console.log 'theme entered'
+        onLeave: () =>
+          console.log 'theme left'
+        React.createElement(ThemeOptions, { updateOption: @updateOption.bind(this), ...@state })
+      )
+      React.createElement(
+        Waypoint
+        onEnter: () =>
+          console.log 'keyboard entered'
+        onLeave: () =>
+          console.log 'keyboard left'
+        React.createElement(KeyboardOptions, { updateOption: @updateOption.bind(this), ...@state })
+      )
     )
 
   bindListener: ->
