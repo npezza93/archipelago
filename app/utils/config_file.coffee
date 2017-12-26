@@ -12,7 +12,7 @@ class ConfigFile
     fs.open @filePath(), 'r', (err) =>
       if err
         @write({
-          'activeProfile': 1, 'profiles': @constructor.defaultProfile(1)
+          'activeProfile': 1, 'profiles': { 1: @constructor.defaultProfile(1) }
         })
 
     @emitter = new EventEmitter()

@@ -9,7 +9,7 @@
    "lineHeight":1.0,
    "tabStopWidth":8,
    "windowBackground":"#000000",
-   "tabColor":"#fffff",
+   "tabColor":"#ffffff",
    "shellArgs":"--login",
    "bellSound":"https://raw.githubusercontent.com/chromium/hterm/master/audio/bell.ogg",
    "bellStyle":"both",
