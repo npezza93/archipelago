@@ -2,6 +2,7 @@ React = require('react')
 OptionsHeader  = require('./options_header')
 GeneralOptions = require('./general_options')
 ThemeOptions = require('./theme_options')
+KeyboardOptions = require('./keyboard_options')
 ConfigFile = require('../utils/config_file')
 nestedProperty = require('nested-property')
 
@@ -21,6 +22,7 @@ class Options extends React.Component
       React.createElement(OptionsHeader)
       React.createElement(GeneralOptions, { updateOption: @updateOption.bind(this), ...@state })
       React.createElement(ThemeOptions, { updateOption: @updateOption.bind(this), ...@state })
+      React.createElement(KeyboardOptions, { updateOption: @updateOption.bind(this), ...@state })
     )
 
   bindListener: ->

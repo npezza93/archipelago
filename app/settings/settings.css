@@ -212,3 +212,11 @@ archipelago-options archipelago-theme-options .mdc-text-field .color-picker {
 archipelago-options archipelago-theme-options .mdc-text-field .chrome-picker  {
   width: 100% !important;
 }
+/* Keyboard Options */
+archipelago-options archipelago-keyboard-options {
+  margin: 170px 75px 0 75px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 100px;
+  grid-row-gap: 20px;
+}
