@@ -11,6 +11,7 @@ document.addEventListener 'DOMContentLoaded', () =>
   global.app = ReactDOM.render(
     React.createElement(ArchipelagoApp), document.getElementById('root')
   )
+  document.querySelector('#boot').classList.add('calculating')
 
 setDocumentSettings = ->
   element = document.documentElement

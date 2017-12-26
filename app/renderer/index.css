@@ -26,7 +26,41 @@ html, body, #root, archipelago-app {
   --tab-font-size: 15px;
 }
 
-
+/* Boot screen */
+#boot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 5;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  -webkit-app-region: drag;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 300ms linear 1700ms, visibility 300ms linear 1700ms;
+}
+#boot.calculating {
+  visibility: hidden;
+  opacity: 0;
+}
+#boot #progress-container {
+  width: 200px;
+  height: 1px;
+}
+#boot #progress-container #progress-bar {
+  width: 0px;
+  height: 1px;
+  background: #000;
+  transition: width 2000ms linear;
+}
+#boot.calculating #progress-container #progress-bar {
+  width: 100%;
+}
 /* scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
