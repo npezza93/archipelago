@@ -42,7 +42,8 @@ class GeneralOptions extends React.Component
       datakey: key
       label: label
       value: if int then parseInt(@props[key]) else @props[key]
-      onChange: @props.updateGeneralOption
+      onChange: (e) =>
+        @props.updateOption(key, e.target.value)
     )
 
   select: (key, label, options) ->
@@ -52,7 +53,8 @@ class GeneralOptions extends React.Component
       label: label
       value: @props[key]
       options: options
-      onChange: @props.updateGeneralOption
+      onChange: (e) =>
+        @props.updateOption(key, e.target.value)
     )
 
   switch: (key, label) ->
@@ -61,5 +63,6 @@ class GeneralOptions extends React.Component
       datakey: key
       checked: @props[key]
       label: label
-      onChange: @props.updateGeneralOption
+      onChange: (e) =>
+        @props.updateOption(key, e.target.checked)
     )

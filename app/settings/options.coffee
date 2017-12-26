@@ -1,7 +1,9 @@
 React = require('react')
 OptionsHeader  = require('./options_header')
 GeneralOptions = require('./general_options')
+ThemeOptions = require('./theme_options')
 ConfigFile = require('../utils/config_file')
+nestedProperty = require('nested-property')
 
 module.exports =
 class Options extends React.Component
@@ -17,7 +19,8 @@ class Options extends React.Component
       'archipelago-options'
       {}
       React.createElement(OptionsHeader)
-      React.createElement(GeneralOptions, { updateGeneralOption: @updateGeneralOption.bind(this), ...@state })
+      React.createElement(GeneralOptions, { updateOption: @updateOption.bind(this), ...@state })
+      React.createElement(ThemeOptions, { updateOption: @updateOption.bind(this), ...@state })
     )
 
   bindListener: ->
@@ -26,15 +29,13 @@ class Options extends React.Component
         @activeProfile = @_configFile.contents().activeProfile
         @setState(@_configFile.activeSettings())
 
-  updateGeneralOption: (e) ->
-    activeProfileKey = "profiles.#{@_configFile.contents().activeProfile}."
-    activeProfileKey += e.target.getAttribute('datakey')
+  updateOption: (key, value) ->
+    optionKey = "profiles.#{@_configFile.contents().activeProfile}."
+    optionKey += key
 
-    if e.target.type == 'checkbox'
-      value = e.target.checked
-    else
-      value = e.target.value
+    @_configFile.update(optionKey, value)
+    tempState = {}
+    Object.assign(tempState, @state)
 
-    @_configFile.update(activeProfileKey, value)
-
-    @setState("#{e.target.getAttribute('datakey')}": value)
+    nestedProperty.set(tempState, key, value)
+    @setState(tempState)
