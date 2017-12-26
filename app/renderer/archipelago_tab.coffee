@@ -4,8 +4,8 @@ module.exports =
 class ArchipelagoTab extends React.Component
   render: ->
     React.createElement('archipelago-tab', {
-      class: @htmlClasses(),
-      onClick: () => @props.selectTab(@props.id)
+      class: @htmlClasses()
+      onClick: (e) => @props.selectTab(e, @props.id)
     }, @renderTitle(), @renderExit())
 
   renderTitle: () ->
