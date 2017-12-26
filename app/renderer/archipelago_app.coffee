@@ -49,14 +49,36 @@ class ArchipelagoApp extends React.Component
     @state.tabs.map (tabObject) =>
       tabObject.terminals.kill()
 
-  selectTab: (id) ->
+  componentDidUpdate: (prevProps, prevState) ->
+    currentTerminal = @currentTabObject().terminals.find(
+      @currentTabObject().terminals.root, @state.currentTerminal
+    )
+
+    if currentTerminal then currentTerminal.xterm.focus()
+
+  currentTabObject: (id) ->
+    currentTabObject = null
+
+    @state.tabs.map (tabObject) =>
+      if tabObject.id == (id || @state.currentTab)
+        currentTabObject = tabObject
+
+    currentTabObject
+
+  selectTab: (e, id) ->
+    e.preventDefault()
+    session = null
     tabs = @state.tabs.map (tabObject) =>
       if tabObject.id == id
         tabObject.isUnread = false
+        root = tabObject.terminals.root
+        session = tabObject.terminals.find(root, @state.currentTerminal)
+        unless session
+          session = tabObject.terminals.firstSession()
 
       tabObject
 
-    @setState(tabs: tabs, currentTab: id)
+    @setState(tabs: tabs, currentTab: id, currentTerminal: session.id)
 
   selectTerminal: (id) ->
     @setState(currentTerminal: id)
@@ -78,7 +100,9 @@ class ArchipelagoApp extends React.Component
     if tabs.length == 0
       window.close()
     else if @state.currentTab == id
-      @setState(currentTab: tabs[0].id, tabs: tabs)
+      session = tabs[0].terminals.firstSession()
+
+      @setState(currentTab: tabs[0].id, tabs: tabs, currentTerminal: session.id)
     else
       @setState(tabs: tabs)
 

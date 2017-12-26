@@ -52,6 +52,13 @@ class Sessions
 
     foundSession
 
+  firstSession: ->
+    session = @root
+    until session.isSession()
+      session = session.left
+
+    session
+
   _traverse: (group, callback) ->
     unless group? then return
 
