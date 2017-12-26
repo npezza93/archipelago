@@ -12,13 +12,13 @@ class Sessions
       group = @_newGroup(session, orientation)
       @root = group
     else
-      @_newGroup(@_find(@root, sessionId), orientation)
+      @_newGroup(@find(@root, sessionId), orientation)
 
   remove: (sessionId) ->
     if @root.isSession() && @root.id == sessionId
       @root = null
     else
-      sessionToRemove = @_find(@root, sessionId)
+      sessionToRemove = @find(@root, sessionId)
 
       return unless sessionToRemove
 
@@ -44,7 +44,7 @@ class Sessions
   kill: ->
     if @root then @root.kill()
 
-  _find: (group, sessionId) ->
+  find: (group, sessionId) ->
     foundSession = null
     @_traverse(group, (session) =>
       if session.id == sessionId then foundSession = session
