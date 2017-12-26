@@ -13,36 +13,32 @@ class Options extends React.Component
     super(props)
     @_configFile = new ConfigFile()
     @activeProfile = @_configFile.contents().activeProfile
-    @state = @_configFile.activeSettings()
+    @state = {
+      header: { preferences: 0, theme: 1,  keyboard: 2 },
+      ...@_configFile.activeSettings()
+    }
     @bindListener()
 
   render: ->
     React.createElement(
       'archipelago-options'
       {}
-      React.createElement(OptionsHeader)
+      React.createElement(OptionsHeader, @state.header)
+      React.createElement(GeneralOptions, { updateOption: @updateOption.bind(this), ...@state })
       React.createElement(
         Waypoint
         onEnter: () =>
-          console.log 'general entered'
+          @setState(header: { preferences: -1, theme: 0,  keyboard: 1 })
         onLeave: () =>
-          console.log 'general left'
-        React.createElement(GeneralOptions, { updateOption: @updateOption.bind(this), ...@state })
-      )
-      React.createElement(
-        Waypoint
-        onEnter: () =>
-          console.log 'theme entered'
-        onLeave: () =>
-          console.log 'theme left'
+          @setState(header: { preferences: 0, theme: 1,  keyboard: 2 })
         React.createElement(ThemeOptions, { updateOption: @updateOption.bind(this), ...@state })
       )
       React.createElement(
         Waypoint
         onEnter: () =>
-          console.log 'keyboard entered'
+          @setState(header: { preferences: -2, theme: -1,  keyboard: 0 })
         onLeave: () =>
-          console.log 'keyboard left'
+          @setState(header: { preferences: -1, theme: 0,  keyboard: 1 })
         React.createElement(KeyboardOptions, { updateOption: @updateOption.bind(this), ...@state })
       )
     )
