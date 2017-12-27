@@ -1,29 +1,25 @@
-(function (addon) {
-    if (typeof window !== 'undefined' && 'Terminal' in window) {
-        addon(window.Terminal);
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+function winptyCompatInit(terminal) {
+    var isWindows = ['Windows', 'Win16', 'Win32', 'WinCE'].indexOf(navigator.platform) >= 0;
+    if (!isWindows) {
+        return;
     }
-    else if (typeof exports === 'object' && typeof module === 'object') {
-        module.exports = addon(require('../../Terminal').Terminal);
-    }
-    else if (typeof define === 'function') {
-        define(['../../xterm'], addon);
-    }
-})(function (Terminal) {
-    Terminal.prototype.winptyCompatInit = function () {
-        var _this = this;
-        var isWindows = ['Windows', 'Win16', 'Win32', 'WinCE'].indexOf(navigator.platform) >= 0;
-        if (!isWindows) {
-            return;
+    terminal.on('linefeed', function () {
+        var line = terminal.buffer.lines.get(terminal.buffer.ybase + terminal.buffer.y - 1);
+        var lastChar = line[terminal.cols - 1];
+        if (lastChar[3] !== 32) {
+            var nextLine = terminal.buffer.lines.get(terminal.buffer.ybase + terminal.buffer.y);
+            nextLine.isWrapped = true;
         }
-        this.on('lineFeed', function () {
-            var line = _this.buffer.lines.get(_this.buffer.ybase + _this.buffer.y - 1);
-            var lastChar = line[_this.cols - 1];
-            if (lastChar[3] !== 32) {
-                var nextLine = _this.buffer.lines.get(_this.buffer.ybase + _this.buffer.y);
-                nextLine.isWrapped = true;
-            }
-        });
+    });
+}
+exports.winptyCompatInit = winptyCompatInit;
+function apply(terminalConstructor) {
+    terminalConstructor.prototype.winptyCompatInit = function () {
+        winptyCompatInit(this);
     };
-});
+}
+exports.apply = apply;
 
 //# sourceMappingURL=winptyCompat.js.map

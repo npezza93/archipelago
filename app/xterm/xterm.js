@@ -907,7 +907,7 @@ var InputHandler = (function () {
         if (this._terminal.buffer.x >= this._terminal.cols) {
             this._terminal.buffer.x--;
         }
-        this._terminal.emit('lineFeed');
+        this._terminal.emit('linefeed');
     };
     InputHandler.prototype.carriageReturn = function () {
         this._terminal.buffer.x = 0;
@@ -1825,9 +1825,9 @@ var Linkifier = (function (_super) {
             }
         }));
     };
+    Linkifier.TIME_BEFORE_LINKIFY = 200;
     return Linkifier;
 }(EventEmitter_1.EventEmitter));
-Linkifier.TIME_BEFORE_LINKIFY = 200;
 exports.Linkifier = Linkifier;
 
 
@@ -2890,9 +2890,10 @@ var document = (typeof window !== 'undefined') ? window.document : null;
 var WRITE_BUFFER_PAUSE_THRESHOLD = 5;
 var WRITE_BATCH_SIZE = 300;
 var DEFAULT_OPTIONS = {
+    cols: 80,
+    rows: 24,
     convertEol: false,
     termName: 'xterm',
-    geometry: [80, 24],
     cursorBlink: false,
     cursorStyle: 'block',
     bellSound: Sounds_1.BellSound,
@@ -2930,9 +2931,8 @@ var Terminal = (function (_super) {
             _this[key] = _this.options[key];
         });
         this.parent = document ? document.body : null;
-        this.cols = this.options.cols || this.options.geometry[0];
-        this.rows = this.options.rows || this.options.geometry[1];
-        this.geometry = [this.cols, this.rows];
+        this.cols = this.options.cols;
+        this.rows = this.options.rows;
         if (this.options.handler) {
             this.on('data', this.options.handler);
         }
@@ -2983,7 +2983,9 @@ var Terminal = (function (_super) {
         return (this.defAttr & ~0x1ff) | (this.curAttr & 0x1ff);
     };
     Terminal.prototype.focus = function () {
-        this.textarea.focus();
+        if (this.textarea) {
+            this.textarea.focus();
+        }
     };
     Object.defineProperty(Terminal.prototype, "isFocused", {
         get: function () {
@@ -3185,19 +3187,20 @@ var Terminal = (function (_super) {
         this.element.classList.add('terminal');
         this.element.classList.add('xterm');
         this.element.setAttribute('tabindex', '0');
+        this.parent.appendChild(this.element);
+        var fragment = document.createDocumentFragment();
         this.viewportElement = document.createElement('div');
         this.viewportElement.classList.add('xterm-viewport');
-        this.element.appendChild(this.viewportElement);
+        fragment.appendChild(this.viewportElement);
         this.viewportScrollArea = document.createElement('div');
         this.viewportScrollArea.classList.add('xterm-scroll-area');
         this.viewportElement.appendChild(this.viewportScrollArea);
-        this.syncBellSound();
         this._mouseZoneManager = new MouseZoneManager_1.MouseZoneManager(this);
         this.on('scroll', function () { return _this._mouseZoneManager.clearAll(); });
         this.linkifier.attachToDom(this._mouseZoneManager);
         this.helperContainer = document.createElement('div');
         this.helperContainer.classList.add('xterm-helpers');
-        this.element.appendChild(this.helperContainer);
+        fragment.appendChild(this.helperContainer);
         this.textarea = document.createElement('textarea');
         this.textarea.classList.add('xterm-helper-textarea');
         this.textarea.setAttribute('autocorrect', 'off');
@@ -3213,8 +3216,9 @@ var Terminal = (function (_super) {
         this.helperContainer.appendChild(this.compositionView);
         this.charSizeStyleElement = document.createElement('style');
         this.helperContainer.appendChild(this.charSizeStyleElement);
-        this.parent.appendChild(this.element);
         this.charMeasure = new CharMeasure_1.CharMeasure(document, this.helperContainer);
+        this.syncBellSound();
+        this.element.appendChild(fragment);
         this.renderer = new Renderer_1.Renderer(this, this.options.theme);
         this.options.theme = null;
         this.viewport = new Viewport_1.Viewport(this, this.viewportElement, this.viewportScrollArea, this.charMeasure);
@@ -3251,17 +3255,8 @@ var Terminal = (function (_super) {
             this.viewport.onThemeChanged(colors);
         }
     };
-    Terminal.loadAddon = function (addon, callback) {
-        if (typeof exports === 'object' && typeof module === 'object') {
-            return require('./addons/' + addon + '/' + addon);
-        }
-        else if (typeof define === 'function') {
-            return require(['./addons/' + addon + '/' + addon], callback);
-        }
-        else {
-            console.error('Cannot load a module without a CommonJS or RequireJS environment.');
-            return false;
-        }
+    Terminal.applyAddon = function (addon) {
+        addon.apply(Terminal);
     };
     Terminal.prototype.bindMouse = function () {
         var _this = this;
@@ -4106,7 +4101,6 @@ var Terminal = (function (_super) {
         this.buffers.setupTabStops(this.cols);
         this.charMeasure.measure(this.options);
         this.refresh(0, this.rows - 1);
-        this.geometry = [this.cols, this.rows];
         this.emit('resize', { cols: x, rows: y });
     };
     Terminal.prototype.updateRange = function (y) {
@@ -4255,6 +4249,9 @@ var Terminal = (function (_super) {
             this.options.bellStyle === 'both';
     };
     Terminal.prototype.syncBellSound = function () {
+        if (!this.element) {
+            return;
+        }
         if (this.soundBell() && this.bellAudioElement) {
             this.bellAudioElement.setAttribute('src', this.options.bellSound);
         }
@@ -4366,9 +4363,9 @@ function matchColor_(r1, g1, b1) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var LinkHoverEventTypes;
 (function (LinkHoverEventTypes) {
-    LinkHoverEventTypes[LinkHoverEventTypes["HOVER"] = 'linkhover'] = "HOVER";
-    LinkHoverEventTypes[LinkHoverEventTypes["TOOLTIP"] = 'linktooltip'] = "TOOLTIP";
-    LinkHoverEventTypes[LinkHoverEventTypes["LEAVE"] = 'linkleave'] = "LEAVE";
+    LinkHoverEventTypes["HOVER"] = "linkhover";
+    LinkHoverEventTypes["TOOLTIP"] = "linktooltip";
+    LinkHoverEventTypes["LEAVE"] = "linkleave";
 })(LinkHoverEventTypes = exports.LinkHoverEventTypes || (exports.LinkHoverEventTypes = {}));
 ;
 
@@ -5654,6 +5651,7 @@ var Renderer = (function (_super) {
             actualCellHeight: null
         };
         _this._devicePixelRatio = window.devicePixelRatio;
+        _this._updateDimensions();
         return _this;
     }
     Renderer.prototype.onWindowResize = function (devicePixelRatio) {
@@ -5674,21 +5672,7 @@ var Renderer = (function (_super) {
     };
     Renderer.prototype.onResize = function (cols, rows, didCharSizeChange) {
         var _this = this;
-        if (!this._terminal.charMeasure.width || !this._terminal.charMeasure.height) {
-            return;
-        }
-        this.dimensions.scaledCharWidth = Math.floor(this._terminal.charMeasure.width * window.devicePixelRatio);
-        this.dimensions.scaledCharHeight = Math.ceil(this._terminal.charMeasure.height * window.devicePixelRatio);
-        this.dimensions.scaledCellHeight = Math.floor(this.dimensions.scaledCharHeight * this._terminal.options.lineHeight);
-        this.dimensions.scaledCharTop = this._terminal.options.lineHeight === 1 ? 0 : Math.round((this.dimensions.scaledCellHeight - this.dimensions.scaledCharHeight) / 2);
-        this.dimensions.scaledCellWidth = this.dimensions.scaledCharWidth + Math.round(this._terminal.options.letterSpacing);
-        this.dimensions.scaledCharLeft = Math.floor(this._terminal.options.letterSpacing / 2);
-        this.dimensions.scaledCanvasHeight = this._terminal.rows * this.dimensions.scaledCellHeight;
-        this.dimensions.scaledCanvasWidth = this._terminal.cols * this.dimensions.scaledCellWidth;
-        this.dimensions.canvasHeight = Math.round(this.dimensions.scaledCanvasHeight / window.devicePixelRatio);
-        this.dimensions.canvasWidth = Math.round(this.dimensions.scaledCanvasWidth / window.devicePixelRatio);
-        this.dimensions.actualCellHeight = this.dimensions.canvasHeight / this._terminal.rows;
-        this.dimensions.actualCellWidth = this.dimensions.canvasWidth / this._terminal.cols;
+        this._updateDimensions();
         this._renderLayers.forEach(function (l) { return l.resize(_this._terminal, _this.dimensions, didCharSizeChange); });
         this._terminal.refresh(0, this._terminal.rows - 1);
         this.emit('resize', {
@@ -5755,6 +5739,23 @@ var Renderer = (function (_super) {
         end = Math.min(end, this._terminal.rows - 1);
         this._renderLayers.forEach(function (l) { return l.onGridChanged(_this._terminal, start, end); });
         this._terminal.emit('refresh', { start: start, end: end });
+    };
+    Renderer.prototype._updateDimensions = function () {
+        if (!this._terminal.charMeasure.width || !this._terminal.charMeasure.height) {
+            return;
+        }
+        this.dimensions.scaledCharWidth = Math.floor(this._terminal.charMeasure.width * window.devicePixelRatio);
+        this.dimensions.scaledCharHeight = Math.ceil(this._terminal.charMeasure.height * window.devicePixelRatio);
+        this.dimensions.scaledCellHeight = Math.floor(this.dimensions.scaledCharHeight * this._terminal.options.lineHeight);
+        this.dimensions.scaledCharTop = this._terminal.options.lineHeight === 1 ? 0 : Math.round((this.dimensions.scaledCellHeight - this.dimensions.scaledCharHeight) / 2);
+        this.dimensions.scaledCellWidth = this.dimensions.scaledCharWidth + Math.round(this._terminal.options.letterSpacing);
+        this.dimensions.scaledCharLeft = Math.floor(this._terminal.options.letterSpacing / 2);
+        this.dimensions.scaledCanvasHeight = this._terminal.rows * this.dimensions.scaledCellHeight;
+        this.dimensions.scaledCanvasWidth = this._terminal.cols * this.dimensions.scaledCellWidth;
+        this.dimensions.canvasHeight = Math.round(this.dimensions.scaledCanvasHeight / window.devicePixelRatio);
+        this.dimensions.canvasWidth = Math.round(this.dimensions.scaledCanvasWidth / window.devicePixelRatio);
+        this.dimensions.actualCellHeight = this.dimensions.canvasHeight / this._terminal.rows;
+        this.dimensions.actualCellWidth = this.dimensions.canvasWidth / this._terminal.cols;
     };
     return Renderer;
 }(EventEmitter_1.EventEmitter));
@@ -6045,6 +6046,14 @@ var CharMeasure = (function (_super) {
         var _this = _super.call(this) || this;
         _this._document = document;
         _this._parentElement = parentElement;
+        _this._measureElement = _this._document.createElement('span');
+        _this._measureElement.style.position = 'absolute';
+        _this._measureElement.style.top = '0';
+        _this._measureElement.style.left = '-9999em';
+        _this._measureElement.style.lineHeight = 'normal';
+        _this._measureElement.textContent = 'W';
+        _this._measureElement.setAttribute('aria-hidden', 'true');
+        _this._parentElement.appendChild(_this._measureElement);
         return _this;
     }
     Object.defineProperty(CharMeasure.prototype, "width", {
@@ -6062,23 +6071,6 @@ var CharMeasure = (function (_super) {
         configurable: true
     });
     CharMeasure.prototype.measure = function (options) {
-        var _this = this;
-        if (!this._measureElement) {
-            this._measureElement = this._document.createElement('span');
-            this._measureElement.style.position = 'absolute';
-            this._measureElement.style.top = '0';
-            this._measureElement.style.left = '-9999em';
-            this._measureElement.style.lineHeight = 'normal';
-            this._measureElement.textContent = 'W';
-            this._measureElement.setAttribute('aria-hidden', 'true');
-            this._parentElement.appendChild(this._measureElement);
-            setTimeout(function () { return _this._doMeasure(options); }, 0);
-        }
-        else {
-            this._doMeasure(options);
-        }
-    };
-    CharMeasure.prototype._doMeasure = function (options) {
         this._measureElement.style.fontFamily = options.fontFamily;
         this._measureElement.style.fontSize = options.fontSize + "px";
         var geometry = this._measureElement.getBoundingClientRect();
