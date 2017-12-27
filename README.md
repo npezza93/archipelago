@@ -45,7 +45,7 @@ Archipelago is compatible with:
 - Debian 8
 
 ## Changelog
-For changelogs, check out [the Releases section of materialize](https://github.com/npezza93/archipelago/releases) or the [CHANGELOG.md](CHANGELOG.md).
+For changelogs, check out [the Releases section of Archipelago](https://github.com/npezza93/archipelago/releases) or the [CHANGELOG.md](CHANGELOG.md).
 
 ## Contributing
 Check out the [CONTRIBUTING document](CONTRIBUTING.md) in the root of the repository to learn how you can contribute. You can also browse the [help-wanted](https://github.com/npezza93/archipelago/labels/help-wanted) tag in our issue tracker to find things to do.
