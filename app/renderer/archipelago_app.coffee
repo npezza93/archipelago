@@ -46,7 +46,7 @@ class ArchipelagoApp extends React.Component
     )
 
   componentWillUnmount: ->
-    @state.tabs.map (tabObject) =>
+    @state.tabs.map (tabObject) ->
       tabObject.terminals.kill()
 
   componentDidUpdate: (prevProps, prevState) ->
@@ -91,7 +91,7 @@ class ArchipelagoApp extends React.Component
     }), currentTab: tabId)
 
   removeTab: (id) ->
-    tabs = @state.tabs.filter (tabObject) =>
+    tabs = @state.tabs.filter (tabObject) ->
       if tabObject.id == id
         tabObject.terminals.kill()
 
@@ -107,7 +107,7 @@ class ArchipelagoApp extends React.Component
       @setState(tabs: tabs)
 
   changeTitle: (id, title) ->
-    tabs = @state.tabs.map (tabObject) =>
+    tabs = @state.tabs.map (tabObject) ->
       if tabObject.id == id
         tabObject.title = title
 
@@ -116,7 +116,7 @@ class ArchipelagoApp extends React.Component
     @setState(tabs: tabs)
 
   markUnread: (id) ->
-    tabs = @state.tabs.map (tabObject) =>
+    tabs = @state.tabs.map (tabObject) ->
       if tabObject.id == id
         tabObject.isUnread = true
 
@@ -127,7 +127,7 @@ class ArchipelagoApp extends React.Component
   removeTerminal: (tabId, terminalId) ->
     removeTab = false
 
-    tabs = @state.tabs.map (tabObject) =>
+    tabs = @state.tabs.map (tabObject) ->
       if tabObject.id == tabId
         tabObject.terminals.remove(terminalId)
 

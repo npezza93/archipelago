@@ -24,14 +24,18 @@ class Options extends React.Component
       'archipelago-options'
       {}
       React.createElement(OptionsHeader, @state.header)
-      React.createElement(GeneralOptions, { updateOption: @updateOption.bind(this), ...@state })
+      React.createElement(
+        GeneralOptions, { updateOption: @updateOption.bind(this), ...@state }
+      )
       React.createElement(
         Waypoint
         onEnter: () =>
           @setState(header: { preferences: -1, theme: 0,  keyboard: 1 })
         onLeave: () =>
           @setState(header: { preferences: 0, theme: 1,  keyboard: 2 })
-        React.createElement(ThemeOptions, { updateOption: @updateOption.bind(this), ...@state })
+        React.createElement(
+          ThemeOptions, { updateOption: @updateOption.bind(this), ...@state }
+        )
       )
       React.createElement(
         Waypoint
@@ -39,7 +43,9 @@ class Options extends React.Component
           @setState(header: { preferences: -2, theme: -1,  keyboard: 0 })
         onLeave: () =>
           @setState(header: { preferences: -1, theme: 0,  keyboard: 1 })
-        React.createElement(KeyboardOptions, { updateOption: @updateOption.bind(this), ...@state })
+        React.createElement(
+          KeyboardOptions, { updateOption: @updateOption.bind(this), ...@state }
+        )
       )
     )
 

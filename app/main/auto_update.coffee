@@ -13,13 +13,13 @@ module.exports =
       'https://archipelago-terminal.herokuapp.com/update/'
 
     autoCheck: ->
-      autoUpdater.on 'update-available', () =>
+      autoUpdater.on 'update-available', () ->
         console.log('update-available')
-      autoUpdater.on 'update-not-available', () =>
+      autoUpdater.on 'update-not-available', () ->
         console.log('update-not-available')
-      autoUpdater.on 'checking-for-update', () =>
+      autoUpdater.on 'checking-for-update', () ->
         console.log('checking-for-update')
-      autoUpdater.on 'error', (err) =>
+      autoUpdater.on 'error', (err) ->
         console.log(err)
 
       @bindDownloaded()
@@ -40,12 +40,13 @@ module.exports =
     #   autoUpdater.checkForUpdates()
 
     bindDownloaded: ->
-      autoUpdater.on 'update-downloaded', (event, releaseNotes, releaseName) =>
-        message = "#{app.getName()} #{releaseName} is now available!\nRestart #{app.getName()} to install."
+      autoUpdater.on 'update-downloaded', (event, releaseNotes, releaseName) ->
+        message = "#{app.getName()} #{releaseName} is now available!\n"
+        message += "Restart #{app.getName()} to install."
 
         if releaseNotes
           message += '\n\nRelease notes:\n'
-          releaseNotes.split(/[^\r]\n/).forEach (notes) =>
+          releaseNotes.split(/[^\r]\n/).forEach (notes) ->
             message += notes + '\n\n'
 
         dialog.showMessageBox {
@@ -62,6 +63,6 @@ module.exports =
           defaultId: 0,
           message: "A new version of #{app.getName()} has been downloaded",
           detail: message
-        }, (response) =>
+        }, (response) ->
           if response == 0
             autoUpdater.quitAndInstall()

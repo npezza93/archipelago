@@ -15,7 +15,7 @@ class ArchipelagoTerminal extends React.Component
     @props.terminal.updateSettings()
     @props.terminal.xterm.focus()
     @props.terminal.xterm.element.addEventListener 'wheel', () =>
-      clearTimeout(@scrollbarFade);
+      clearTimeout(@scrollbarFade)
       @scrollbarFade = setTimeout(
         () => @props.terminal.xterm.element.classList.remove('scrolling'),
         600

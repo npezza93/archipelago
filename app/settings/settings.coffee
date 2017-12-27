@@ -3,7 +3,7 @@ ReactDOM = require('react-dom')
 Profiles = require('./profiles')
 Options  = require('./options')
 
-document.addEventListener 'DOMContentLoaded', () =>
+document.addEventListener 'DOMContentLoaded', () ->
   ReactDOM.render(
     React.createElement(Profiles), document.querySelector('.profiles-container')
   )

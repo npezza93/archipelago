@@ -32,7 +32,7 @@ createWindow = () ->
     # if process.platform == 'darwin' || process.platform == 'win32'
       # (new AutoUpdate()).autoCheck()
 
-app.on 'ready', () =>
+app.on 'ready', () ->
   createWindow()
   Menu.setApplicationMenu(
     Menu.buildFromTemplate(AppMenu.menu(about, settings, createWindow))
@@ -40,13 +40,13 @@ app.on 'ready', () =>
   if (process.platform == 'darwin')
     app.dock.setMenu(Menu.buildFromTemplate(AppMenu.dock(createWindow)))
 
-app.on 'window-all-closed', () =>
+app.on 'window-all-closed', () ->
   app.quit() if process.platform != 'darwin'
 
-app.on 'activate', () =>
+app.on 'activate', () ->
   createWindow() if windows.length == 0
 
-configFile.on 'change', () =>
-  windows.forEach (win) =>
+configFile.on 'change', () ->
+  windows.forEach (win) ->
     unless win.isDestroyed()
       win.setVibrancy(configFile.contents().vibrancy)

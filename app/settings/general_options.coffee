@@ -14,24 +14,34 @@ class GeneralOptions extends React.Component
 
       React.createElement('div', className: 'seperator')
 
-      @select('cursorStyle', 'Choose a cursor style', { 'block': 'Block', 'underline': 'Underline', 'bar': 'Bar' })
+      @select('cursorStyle', 'Choose a cursor style', {
+        'block': 'Block', 'underline': 'Underline', 'bar': 'Bar'
+      })
       @switch('cursorBlink', 'Blink cursor')
 
       React.createElement('div', className: 'seperator')
 
       @text('bellSound', 'Bell sound (URL or URI)')
-      @select('bellStyle', 'Choose a bell style', { 'none': 'None', 'visual': 'Visual', 'sound': 'Sound', 'both': 'Both' })
+      @select('bellStyle', 'Choose a bell style', {
+        'none': 'None', 'visual': 'Visual', 'sound': 'Sound', 'both': 'Both'
+      })
 
       React.createElement('div', className: 'seperator')
 
-      @text('shell', 'Shell', false, "The shell to run when spawning a new session (i.e. /usr/local/bin/fish)")
+      @text(
+        'shell', 'Shell', false,
+        "Shell to run when spawning a new session (i.e. /usr/local/bin/fish)"
+      )
       @text('shellArgs', 'Shell Arguments (comma seperated)')
       @text('scrollback', 'Scrollback')
       @text('tabStopWidth', 'Tab Stop Width')
 
       React.createElement('div', className: 'seperator')
 
-      @select('vibrancy', 'Vibrancy', { 'light': 'light', 'medium-light': 'medium-light', 'dark': 'dark',  'ultra-dark': 'ultra-dark' })
+      @select('vibrancy', 'Vibrancy', {
+        'light': 'light', 'medium-light': 'medium-light', 'dark': 'dark',
+        'ultra-dark': 'ultra-dark'
+      })
 
       React.createElement('div', className: 'seperator')
     )

@@ -7,7 +7,7 @@ class KeyboardOptions extends React.Component
     React.createElement(
       'archipelago-keyboard-options'
       ref: @props.innerRef
-      @props.keyboard[process.platform].map (hotkey) =>
+      @props.keyboard[process.platform].map (hotkey) ->
         React.createElement(
           'div'
           key: hotkey.accelerator

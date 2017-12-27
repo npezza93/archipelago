@@ -89,8 +89,8 @@ class Session
   updateSettings: ->
     ['fontFamily', 'lineHeight', 'cursorStyle', 'cursorBlink', 'bellSound',
      'bellStyle', 'scrollback', 'theme'].forEach (field) =>
-      if @xterm[field] != @settings(field)
-        @xterm.setOption(field, @settings(field))
+       if @xterm[field] != @settings(field)
+         @xterm.setOption(field, @settings(field))
 
     ['tabStopWidth', 'fontSize', 'letterSpacing'].forEach (field) =>
       if @xterm[field] != parseInt(@settings(field))

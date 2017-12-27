@@ -26,7 +26,8 @@ class Sessions
 
       if sessionToRemove.group && sessionToRemove.group.left == sessionToRemove
         sessionToSave = sessionToRemove.group.right
-      else if sessionToRemove.group && sessionToRemove.group.right == sessionToRemove
+      else if sessionToRemove.group &&
+          sessionToRemove.group.right == sessionToRemove
         sessionToSave = sessionToRemove.group.left
 
       if sessionToSave.group == @root
@@ -46,7 +47,7 @@ class Sessions
 
   find: (group, sessionId) ->
     foundSession = null
-    @_traverse(group, (session) =>
+    @_traverse(group, (session) ->
       if session.id == sessionId then foundSession = session
     )
 

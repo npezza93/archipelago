@@ -33,7 +33,7 @@ class ConfigFile
     @write(settings)
 
   write: (content) ->
-    fs.writeFileSync @filePath(), JSON.stringify(content, null, 2), (err) =>
+    fs.writeFileSync @filePath(), JSON.stringify(content, null, 2), (err) ->
       if err
         console.log(err)
 

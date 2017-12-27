@@ -114,7 +114,9 @@ class AppMenu
         {
           label: 'Report Issue',
           click: () ->
-            shell.openExternal('https://github.com/npezza93/archipelago/issues/new')
+            shell.openExternal(
+              'https://github.com/npezza93/archipelago/issues/new'
+            )
         }
       ]
     }
@@ -125,7 +127,7 @@ class AppMenu
       submenu: [
         {
           label: 'About Archipelago',
-          click: () =>
+          click: () ->
             if !about? || about.isDestroyed()
               about = new BrowserWindow(
                 width: 300
