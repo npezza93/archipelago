@@ -28,20 +28,27 @@ class GeneralOptions extends React.Component
 
       React.createElement('div', className: 'seperator')
 
-      @text(
-        'shell', 'Shell', false,
-        'Shell to run when spawning a new session (i.e. /usr/local/bin/fish)'
-      )
+      @text('shell', 'Shell to run (i.e. /usr/local/bin/fish)')
       @text('shellArgs', 'Shell Arguments (comma seperated)')
       @text('scrollback', 'Scrollback')
       @text('tabStopWidth', 'Tab Stop Width')
 
       React.createElement('div', className: 'seperator')
 
-      @select('vibrancy', 'Vibrancy', {
-        'light': 'light', 'medium-light': 'medium-light', 'dark': 'dark',
-        'ultra-dark': 'ultra-dark'
-      })
+      React.createElement(
+        'div'
+        style: {
+          display: 'flex'
+          flexDirection: 'column'
+          fontSize: '13px'
+          color: 'rgba(0, 0, 0, 0.5)'
+        }
+        @select('vibrancy', 'Vibrancy', {
+          'light': 'light', 'medium-light': 'medium-light', 'dark': 'dark',
+          'ultra-dark': 'ultra-dark'
+        }, true)
+        'Transparency will be available coming soon!'
+      )
 
       React.createElement('div', className: 'seperator')
     )
@@ -56,13 +63,14 @@ class GeneralOptions extends React.Component
         @props.updateOption(key, e.target.value)
     )
 
-  select: (key, label, options) ->
+  select: (key, label, options, disabled) ->
     React.createElement(
       Select
       datakey: key
       label: label
       value: @props[key]
       options: options
+      disabled: disabled
       onChange: (e) =>
         @props.updateOption(key, e.target.value)
     )
