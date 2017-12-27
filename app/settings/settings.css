@@ -1,11 +1,11 @@
 ::-webkit-scrollbar {
   height: 9px;
   width: 9px;
-  background: rgb(248, 248, 248);
+  background: #FFF;
 }
 
 ::-webkit-scrollbar-corner {
-  background: rgb(248, 248, 248);
+  background: #FFF;
 }
 
 ::-webkit-scrollbar-thumb {
