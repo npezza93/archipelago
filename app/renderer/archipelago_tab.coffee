@@ -16,7 +16,7 @@ class ArchipelagoTab extends React.Component
       onClick: (e) =>
         e.stopPropagation()
         @props.removeTab(@props.id)
-    }, "\u00D7")
+    }, '\u00D7')
 
   htmlClasses: () ->
     classes = []

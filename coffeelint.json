@@ -1,0 +1,38 @@
+{
+    "arrow_spacing": {
+        "level": "error"
+    },
+    "line_endings": {
+        "level": "error"
+    },
+    "indentation": {
+        "value": 2
+    },
+    "colon_assignment_spacing": {
+        "level": "error",
+        "spacing": {
+            "left": 0,
+            "right": 1
+        }
+    },
+    "space_operators": {
+        "level": "error"
+    },
+    "cyclomatic_complexity": {
+        "value": 11,
+        "level": "warn"
+    },
+    "spacing_after_comma": {
+        "level": "error"
+    },
+    "no_unnecessary_double_quotes": {
+        "level": "error"
+    },
+    "braces_spacing": {
+        "level": "error",
+        "spaces": 1
+    },
+    "eol_last": {
+        "level": "error"
+    }
+}

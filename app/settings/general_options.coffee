@@ -30,7 +30,7 @@ class GeneralOptions extends React.Component
 
       @text(
         'shell', 'Shell', false,
-        "Shell to run when spawning a new session (i.e. /usr/local/bin/fish)"
+        'Shell to run when spawning a new session (i.e. /usr/local/bin/fish)'
       )
       @text('shellArgs', 'Shell Arguments (comma seperated)')
       @text('scrollback', 'Scrollback')

@@ -25,7 +25,7 @@ class ArchipelagoApp extends React.Component
         React.createElement(
           ArchipelagoTabList, {
             tabs: @state.tabs, currentTab: @state.currentTab,
-            key: "tabs",
+            key: 'tabs',
             selectTab: @selectTab.bind(this),
             addTab: @addTab.bind(this),
             removeTab: @removeTab.bind(this),
@@ -35,7 +35,7 @@ class ArchipelagoApp extends React.Component
           ArchipelagoPaneList, {
             tabs: @state.tabs, currentTab: @state.currentTab,
             currentTerminal: @state.currentTerminal,
-            key: "panes"
+            key: 'panes'
             changeTitle: @changeTitle.bind(this),
             markUnread: @markUnread.bind(this),
             removeTerminal: @removeTerminal.bind(this),
