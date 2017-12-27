@@ -8,10 +8,9 @@
     "start": "electron .",
     "pack": "electron-builder --dir",
     "dist": "electron-builder --publish onTagOrDraft",
-    "fix:js": "eslint app/**/*.js --fix",
-    "fix:css": "stylefmt app/**/*.scss",
+    "fix:css": "stylefmt app/**/*.css",
     "fix": "npm-run-all fix:*",
-    "lint:js": "eslint app/**/*.js",
+    "lint:coffee": "coffeelint app/**/*.coffee",
     "lint:css": "stylelint app/**/*.css",
     "lint:markdown": "remark README.md",
     "lint": "npm-run-all lint:*"
@@ -62,11 +61,9 @@
     "rmwc": "0.0.1-rc12"
   },
   "devDependencies": {
-    "babel-eslint": "^8.1.2",
+    "coffeelint": "^2.0.7",
     "electron": "^1.8.1",
     "electron-builder": "^19.49.2",
-    "eslint": "^4.14.0",
-    "eslint-plugin-coffeescript": "^0.2.1",
     "npm-run-all": "^4.1.2",
     "remark-cli": "^4.0.0",
     "remark-preset-lint-recommended": "^3.0.1",
