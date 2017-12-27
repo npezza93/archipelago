@@ -4,13 +4,6 @@
 
 ## Steps to Reproduce
 
-## Browsers Used
-- [ ] Explorer  
-- [ ] Chrome
-- [ ] Firefox
-- [ ] Edge
-- [ ] Opera
-
 ## OS Used
 - [ ] Linux
 - [ ] Mac
