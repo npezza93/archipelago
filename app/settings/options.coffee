@@ -13,6 +13,7 @@ class Options extends React.Component
     super(props)
     @_configFile = new ConfigFile()
     @activeProfile = @_configFile.contents().activeProfile
+    @header = {}
     @state = {
       header: { preferences: 0, theme: 1,  keyboard: 2 },
       ...@_configFile.activeSettings()
@@ -32,7 +33,8 @@ class Options extends React.Component
         onEnter: () =>
           @setState(header: { preferences: -1, theme: 0,  keyboard: 1 })
         onLeave: () =>
-          @setState(header: { preferences: 0, theme: 1,  keyboard: 2 })
+          unless @header.keyboard == 'entered'
+            @setState(header: { preferences: 0, theme: 1,  keyboard: 2 })
         React.createElement(
           ThemeOptions, { updateOption: @updateOption.bind(this), ...@state }
         )
@@ -40,8 +42,10 @@ class Options extends React.Component
       React.createElement(
         Waypoint
         onEnter: () =>
+          @header.keyboard = 'entered'
           @setState(header: { preferences: -2, theme: -1,  keyboard: 0 })
         onLeave: () =>
+          @header.keyboard = 'left'
           @setState(header: { preferences: -1, theme: 0,  keyboard: 1 })
         React.createElement(
           KeyboardOptions, { updateOption: @updateOption.bind(this), ...@state }
