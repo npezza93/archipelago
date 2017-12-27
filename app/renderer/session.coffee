@@ -98,7 +98,13 @@ class Session
       if @xterm[field] != parseFloat(@settings(field))
         @xterm.setOption(field, parseFloat(@settings(field)))
 
+    @bindCopyOnSelect()
     @fit()
+
+  bindCopyOnSelect: ->
+    @xterm.selectionManager.on 'selection', () =>
+      if @settings('copyOnSelect')
+        document.execCommand('copy')
 
   bindDataListeners: ->
     @xterm.attachCustomKeyEventHandler(@hotkeyHandler)

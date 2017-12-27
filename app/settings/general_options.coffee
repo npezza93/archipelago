@@ -49,6 +49,7 @@ class GeneralOptions extends React.Component
         }, true)
         'Transparency will be available coming soon!'
       )
+      @switch('copyOnSelect', 'Copy on select')
 
       React.createElement('div', className: 'seperator')
     )
