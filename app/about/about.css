@@ -1,5 +1,6 @@
-html, body {
-  background-color: white;
+html,
+body {
+  background-color: #FFF;
   color: #000;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   text-rendering: geometricPrecision;
@@ -9,39 +10,47 @@ html, body {
   -webkit-app-region: drag;
   height: 100%;
 }
+
 body {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  margin: 0px 15px 0px 15px;
+  margin: 0 15px 0 15px;
 }
+
 img.project-logo {
   max-width: 40%;
   margin-top: 45px;
 }
+
 img.np-logo {
   width: 40px;
   margin-bottom: 15px;
 }
+
 a {
   color: #000;
   text-decoration: none;
   font-weight: 500;
 }
+
 p {
   text-align: center;
   font-weight: 300;
   margin: 0;
 }
+
 .developed-by {
   font-weight: 500;
 }
+
 #heading-container {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 #heading-container #heading {
   color: #000;
   margin: 0;

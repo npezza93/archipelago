@@ -1,23 +1,51 @@
 /* normalization and helpers */
 @media (min-resolution: 2dppx) {
+
   * {
-      text-rendering: geometricPrecision;
+    text-rendering: geometricPrecision;
   }
 }
 
-html, body, #root, archipelago-app {
+html,
+body,
+#root,
+archipelago-app {
   height: 100%;
   -webkit-font-feature-settings: "liga" off, "calt" off;
 }
 
 @keyframes pulse {
-  from { opacity: 1; }
-  50% { opacity: 0.3; }
-  to { opacity: 1; }
+
+  from {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: .3;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .hidden {
   display: none;
+}
+
+/* scrollbar */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #666;
+}
+
+::-webkit-scrollbar,
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
 }
 
 :root {
@@ -27,6 +55,7 @@ html, body, #root, archipelago-app {
 }
 
 /* Boot screen */
+
 #boot {
   position: fixed;
   top: 0;
@@ -34,7 +63,7 @@ html, body, #root, archipelago-app {
   right: 0;
   bottom: 0;
   z-index: 5;
-  background: white;
+  background: #FFF;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -44,53 +73,55 @@ html, body, #root, archipelago-app {
   visibility: visible;
   transition: opacity 300ms linear 1700ms, visibility 300ms linear 1700ms;
 }
+
 #boot.calculating {
   visibility: hidden;
   opacity: 0;
 }
+
 #boot #progress-container {
   width: 200px;
   height: 1px;
 }
+
 #boot #progress-container #progress-bar {
-  width: 0px;
+  width: 0;
   height: 1px;
   background: #000;
   transition: width 2000ms linear;
 }
+
 #boot.calculating #progress-container #progress-bar {
   width: 100%;
 }
-/* scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-}
-::-webkit-scrollbar-thumb {
-  background: #666;
-}
-::-webkit-scrollbar, ::-webkit-scrollbar-thumb {
-  border-radius: 5px;
-}
+
 .xterm .xterm-viewport {
   -webkit-transition: all .5s;
   opacity: 0;
 }
-.xterm .xterm-viewport:hover, .xterm.scrolling .xterm-viewport {
+
+.terminal .xterm-viewport {
+  background-color: transparent;
+}
+
+.xterm .xterm-viewport:hover,
+.xterm.scrolling .xterm-viewport {
   opacity: 1;
- -webkit-transition: all .5s;
+  -webkit-transition: all .5s;
 }
 
 body {
-  margin: 0px;
+  margin: 0;
   background-color: var(--background-color);
 }
 
 archipelago-terminal {
   display: flex;
-  margin: 0px 0px 10px 15px;
+  margin: 0 0 10px 15px;
   width: calc(100% - 15px);
   height: calc(100% - 10px);
 }
+
 .terminal {
   width: 100%;
 }
@@ -98,29 +129,27 @@ archipelago-terminal {
 .xterm {
   background-color: transparent;
 }
-.terminal .xterm-viewport {
-  background-color: transparent;
-}
 
 /* ArchipelagoApp */
+
 archipelago-app {
   display: grid;
   grid-template-rows: 40px auto;
   grid-template-columns: 1fr;
 }
 
-
 /* Panes */
+
 archipelago-pane-list archipelago-pane {
-  margin: 0px;
+  margin: 0;
   overflow-y: hidden;
   display: block;
   height: calc(100% - 10px);
   position: relative;
 }
 
-
 /* Titlebar and Tabs */
+
 archipelago-tab-list {
   -webkit-app-region: drag;
   display: flex;
@@ -128,6 +157,7 @@ archipelago-tab-list {
   padding-left: 70px;
   width: calc(100vw - 70px);
 }
+
 archipelago-tab-list archipelago-tab {
   color: var(--tab-color);
   filter: invert(50%);
@@ -136,29 +166,18 @@ archipelago-tab-list archipelago-tab {
   justify-content: center;
   align-items: center;
   flex: 1;
-  transition: all 0.3s ease;
+  transition: all .3s ease;
   min-width: 0;
   font-family: var(--font-family);
   font-size: var(--font-size);
   line-height: 18px !important;
   position: relative;
 }
+
 archipelago-tab-list archipelago-tab.active {
   filter: invert(0%);
 }
-archipelago-tab-list  archipelago-tab:first-child:nth-last-child(1) div {
-  display: none;
-}
-archipelago-tab-list  archipelago-tab span {
-  text-align: center;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  max-width: 75%;
-}
-archipelago-tab.is-unread span {
-  animation: pulse 2s infinite;
-}
+
 archipelago-tab div {
   position: absolute;
   right: 10px;
@@ -166,9 +185,26 @@ archipelago-tab div {
   font-size: 20px;
 }
 
+archipelago-tab-list archipelago-tab:first-child:nth-last-child(1) div {
+  display: none;
+}
+
+archipelago-tab-list archipelago-tab span {
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 75%;
+}
+
+archipelago-tab.is-unread span {
+  animation: pulse 2s infinite;
+}
 
 /* Splitting */
-.Resizer.horizontal, .Resizer.vertical {
+
+.Resizer.horizontal,
+.Resizer.vertical {
   background-color: var(--background-color);
   filter: invert(50%);
   box-sizing: border-box;
@@ -176,22 +212,22 @@ archipelago-tab div {
   background-clip: padding-box;
   flex-shrink: 0;
 }
+
 .Resizer.horizontal {
   height: 11px;
   border-top: 5px solid rgba(255, 255, 255, 0);
   border-bottom: 5px solid rgba(255, 255, 255, 0);
   cursor: row-resize;
   width: 100%;
-  /* margin-top: 5px;
-  margin-bottom: 5px; */
 }
+
 .Pane.Pane2.horizontal {
   display: flex;
 }
+
 .Resizer.vertical {
   width: 11px;
   margin: 0 -5px;
-  /* margin-right: 10px; */
   border-left: 5px solid rgba(255, 255, 255, 0);
   border-right: 5px solid rgba(255, 255, 255, 0);
   cursor: col-resize;
