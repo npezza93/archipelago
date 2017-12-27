@@ -26,6 +26,7 @@ class Session
       cursorStyle: @settings('cursorStyle'),
       cursorBlink: @settings('cursorBlink'),
       bellSound: @settings('bellSound'),
+      bellStyle: @settings('bellStyle'),
       scrollback: @settings('scrollback'),
       tabStopWidth: parseInt(@settings('tabStopWidth')),
       theme: @settings('theme')
@@ -57,9 +58,6 @@ class Session
 
   on: (event, handler) ->
     @emitter.on(event, handler)
-
-  setBellStyle: ->
-    @xterm.setOption('bellStyle', @settings('bellStyle'))
 
   fit: ->
     @xterm.charMeasure.measure(@xterm.options)
