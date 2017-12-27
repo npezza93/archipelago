@@ -1,13 +1,16 @@
 {
   "name": "Archipelago",
   "version": "0.1.0",
-  "description": "A fast lightweight terminal built on electron",
+  "description": "Archipelago is a terminal emulator built on open web technologies.",
   "main": "app/main/init.js",
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
     "start": "electron .",
     "pack": "electron-builder --dir",
     "dist": "electron-builder --publish onTagOrDraft",
+    "fix:js": "eslint app/**/*.js --fix",
+    "fix:css": "stylefmt app/**/*.scss",
+    "fix": "npm-run-all fix:*",
     "lint:js": "eslint app/**/*.js",
     "lint:css": "stylelint app/**/*.css",
     "lint:markdown": "remark README.md",
@@ -97,7 +100,7 @@
     "linux": {
       "category": "TerminalEmulator",
       "packageCategory": "TerminalEmulator",
-      "description": "A fast lightweight terminal built on electron",
+      "description": "Archipelago is a terminal emulator built on open web technologies.",
       "target": [
         "AppImage",
         "deb"
