@@ -1,7 +1,50 @@
 {
   "name": "Archipelago",
   "version": "0.1.0",
+  "description": "Archipelago is a terminal emulator built on open web technologies.",
   "main": "app/main/init.js",
+  "scripts": {
+    "postinstall": "electron-builder install-app-deps",
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder --publish onTagOrDraft",
+    "fix:css": "stylefmt app/**/*.css",
+    "fix": "npm-run-all fix:*",
+    "lint:coffee": "coffeelint app/**/*.coffee",
+    "lint:css": "stylelint app/**/*.css",
+    "lint:markdown": "remark README.md",
+    "lint": "npm-run-all lint:*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/npezza93/archipelago.git"
+  },
+  "keywords": [
+    "terminal",
+    "xterm",
+    "archipelago",
+    "electron app"
+  ],
+  "author": {
+    "name": "Nick Pezza",
+    "email": "npezza93@gmail.com"
+  },
+  "contributors": [
+    {
+      "name": "Nick Pezza",
+      "email": "npezza93@gmail.com"
+    },
+    {
+      "name": "Christopher Pezza",
+      "email": "pezza.chris@gmail.com",
+      "url": "http://www.chris-pezza.com"
+    }
+  ],
+  "homepage": "https://github.com/npezza93/archipelago",
+  "bugs": {
+    "url": "https://github.com/npezza93/archipelago/issues"
+  },
+  "license": "MIT",
   "dependencies": {
     "chokidar": "^1.7.0",
     "coffeescript": "^2.1.0",
@@ -17,48 +60,62 @@
     "react-waypoint": "^7.3.4",
     "rmwc": "0.0.1-rc12"
   },
-  "description": "A terminal built on electron",
-  "repository": "https://github.com/npezza93/archipelago",
-  "author": "npezza93 <npezza93@gmail.com>",
-  "license": "MIT",
   "devDependencies": {
+    "coffeelint": "^2.0.7",
     "electron": "^1.8.1",
-    "electron-builder": "^19.49.2"
-  },
-  "scripts": {
-    "postinstall": "electron-builder install-app-deps",
-    "start": "electron .",
-    "pack": "electron-builder --dir",
-    "dist": "electron-builder --publish onTagOrDraft"
+    "electron-builder": "^19.49.2",
+    "npm-run-all": "^4.1.2",
+    "remark-cli": "^4.0.0",
+    "remark-preset-lint-recommended": "^3.0.1",
+    "stylefmt": "^6.0.0",
+    "stylelint": "^8.4.0",
+    "stylelint-config-standard": "^18.0.0",
+    "stylelint-order": "^0.8.0"
   },
   "build": {
+    "productName": "Archipelago",
+    "mac": {
+      "category": "public.app-category.developer-tools"
+    },
     "dmg": {
+      "icon": "build/icon.icns",
+      "iconSize": 128,
       "contents": [
-        {
-          "x": 110,
-          "y": 150
-        },
         {
           "x": 240,
           "y": 150,
           "type": "link",
           "path": "/Applications"
+        },
+        {
+          "x": 110,
+          "y": 150,
+          "type": "file"
         }
       ]
     },
     "linux": {
+      "category": "TerminalEmulator",
+      "packageCategory": "TerminalEmulator",
+      "description": "Archipelago is a terminal emulator built on open web technologies.",
       "target": [
         "AppImage",
         "deb"
       ],
-      "category": "TerminalEmulator"
+      "maintainer": "Nick Pezza <npezza93@gmail.com>"
+    },
+    "deb": {
+      "synopsis": "Archipelago"
     },
     "win": {
       "target": "nsis",
-      "icon": "build/icon.ico"
+      "icon": "build/icon.ico",
+      "publisherName": "Nick Pezza"
     },
-    "mac": {
-      "category": "public.app-category.developer-tools"
+    "nsis": {
+      "perMachine": true,
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
     }
   }
 }
