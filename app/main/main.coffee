@@ -19,7 +19,7 @@ createWindow = () ->
   })
 
   win.loadURL(url.format({
-    pathname: path.join(__dirname, '../renderer/index.html'),
+    pathname: path.join(__dirname, '../renderer/renderer.html'),
     protocol: 'file:',
     slashes: true
   }))
