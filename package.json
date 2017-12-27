@@ -10,7 +10,7 @@
     "dist": "electron-builder --publish onTagOrDraft",
     "lint:js": "eslint app/**/*.js",
     "lint:css": "stylelint app/**/*.css",
-    "lint:markdown": "remark README.md .github/*.md",
+    "lint:markdown": "remark README.md",
     "lint": "npm-run-all lint:*"
   },
   "repository": {
