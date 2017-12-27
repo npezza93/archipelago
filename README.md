@@ -10,7 +10,7 @@
   </p>
 </p>
 
-## Usage
+## Download
  - [macOS](https://archipelago-terminal.herokuapp.com/download/latest/osx)
 
 ## Platforms
@@ -28,8 +28,8 @@ Regardless of the platform you are working on, you will need to have Yarn instal
 
 ##### macOS
 1. Clone the repo
-1. yarn install
-1. yarn run
+1. yarn
+1. yarn start
 
 ## License
 
