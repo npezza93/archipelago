@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/npezza93/archipelago">
-    <img src="https://github.com/npezza93/archipelago/blob/repo-structure/.github/logo.png" width="150">
+    <img src="https://github.com/npezza93/archipelago/blob/master/.github/logo.png" width="150">
   </a>
 
   <h3 align="center">Archipelago</h3>
@@ -17,7 +17,10 @@
     <a href="https://codeclimate.com/github/npezza93/archipelago/maintainability">
       <img src="https://api.codeclimate.com/v1/badges/789098777/maintainability" alt="Code Climate Maintainability"/>
     </a>
-    [![GitHub release](https://img.shields.io/github/release/qubyte/rubidium.svg)](https://github.com/npezza93/archipelago/releases)
+    <a href="https://github.com/npezza93/archipelago/releases">
+      <img src="https://img.shields.io/github/release/Naereen/StrapDown.js.svg" alt="GitHub release" />
+    </a>
+  </p>
 </p>
 
 ## Table of Contents
