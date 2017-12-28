@@ -9,32 +9,34 @@ class Profiles extends React.Component
     @_configFile = new ConfigFile()
 
     @state = {
-      activeProfile: @_configFile.contents().activeProfile,
+      activeProfile: @_configFile.contents().activeProfile
       profiles: Object.values(@_configFile.contents().profiles)
     }
 
   render: ->
     React.createElement(
-      'archipelago-profiles',
-      null,
-      React.createElement('div', className: 'profile-header', 'Profiles'),
-      React.createElement('div', className: 'profile-list',
-        @state.profiles.map((profile) =>
+      'archipelago-profiles'
+      null
+      React.createElement('div', className: 'profile-header', 'Profiles')
+      React.createElement(
+        'div'
+        className: 'profile-list'
+        @state.profiles.map (profile) =>
           React.createElement(
-            Profile, {
-              profile: profile
-              activeProfile: @state.activeProfile
-              key: profile.id
-              configFile: @_configFile
-              setActiveProfile: @setActiveProfile.bind(this)
-            }
+            Profile
+            profile: profile
+            activeProfile: @state.activeProfile
+            key: profile.id
+            configFile: @_configFile
+            setActiveProfile: @setActiveProfile.bind(this)
           )
-        )
-      ), React.createElement('div',
-        {
-          className: 'new-profile'
-          onClick: @createProfile.bind(this)
-        }, 'Add New Profile')
+      )
+      React.createElement(
+        'div'
+        className: 'new-profile'
+        onClick: @createProfile.bind(this)
+        'Add New Profile'
+      )
     )
 
   settings: ->
