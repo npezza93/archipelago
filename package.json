@@ -29,17 +29,6 @@
     "name": "Nick Pezza",
     "email": "npezza93@gmail.com"
   },
-  "contributors": [
-    {
-      "name": "Nick Pezza",
-      "email": "npezza93@gmail.com"
-    },
-    {
-      "name": "Christopher Pezza",
-      "email": "pezza.chris@gmail.com",
-      "url": "http://www.chris-pezza.com"
-    }
-  ],
   "homepage": "https://github.com/npezza93/archipelago",
   "bugs": {
     "url": "https://github.com/npezza93/archipelago/issues"
