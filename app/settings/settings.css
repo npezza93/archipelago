@@ -406,6 +406,13 @@ dialog .ascii-heading {
   margin-bottom: 16px;
 }
 
+dialog .ascii-close {
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  cursor: pointer;
+}
+
 @media (max-width: 700px) {
 
   .profiles-container {
