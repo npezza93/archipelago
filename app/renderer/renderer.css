@@ -133,12 +133,16 @@ archipelago-terminal {
 /* ArchipelagoApp */
 
 archipelago-app {
-  display: grid;
-  grid-template-rows: 40px auto;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Panes */
+
+archipelago-pane-list {
+  display: block;
+  height: calc(100% - 40px);
+}
 
 archipelago-pane-list archipelago-pane {
   margin: 0;
@@ -156,6 +160,7 @@ archipelago-tab-list {
   flex-direction: row;
   padding-left: 70px;
   width: calc(100vw - 70px);
+  height: 40px;
 }
 
 archipelago-tab-list archipelago-tab {
