@@ -37,14 +37,7 @@ class GeneralOptions extends React.Component
 
       React.createElement(
         'div'
-        style: {
-          display: 'flex'
-          flexDirection: 'column'
-          fontSize: '13px'
-          color: 'rgba(0, 0, 0, 0.5)'
-          width: '100%'
-          gridColumn: 'span 2'
-        }
+        className: 'vibrancy-option'
         @select('vibrancy', 'Vibrancy', {
           'light': 'light', 'medium-light': 'medium-light', 'dark': 'dark',
           'ultra-dark': 'ultra-dark'
