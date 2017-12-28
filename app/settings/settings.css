@@ -34,6 +34,46 @@ body {
   margin: 0;
 }
 
+#hamburger {
+  width: 15px;
+  height: 12px;
+  top: 46px;
+  left: 32px;
+  cursor: pointer;
+  visibility: hidden;
+  opacity: 0;
+  flex-direction: column;
+  justify-content: space-between;
+  position: fixed;
+  display: flex;
+  transition: opacity .5s ease-in-out, visibility .5s ease-in-out;
+  z-index: 10;
+}
+
+#hamburger div {
+  height: 2px;
+  background: #212121;
+  border-radius: 3px;
+}
+
+#backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, .5);
+  z-index: 3;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .5s ease-in-out, visibility .5s ease-in-out;
+}
+
+#backdrop.active {
+  visibility: visible;
+  opacity: 1;
+}
+
 input,
 .mdc-form-field {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !important;
@@ -58,24 +98,16 @@ input,
   flex-direction: row;
 }
 
-color-field input {
-  width: 200px;
-  padding: 0;
-  font-size: 16px;
-  border: 0;
-  text-align: end;
-}
-
-#theme {
-  width: 400px;
-}
-
 /* Profiles */
 
 .profiles-container {
   height: 100vh;
   width: 275px;
   background-image: linear-gradient(to right, #F7F7FA, #ECEEF2);
+  transition: left .5s ease-in-out;
+  left: 0;
+  position: absolute;
+  z-index: 10;
 }
 
 .profiles-container archipelago-profiles {
@@ -145,8 +177,11 @@ color-field input {
   overflow: auto;
   display: flex;
   flex-direction: column;
-  position: relative;
+  position: absolute;
+  left: 275px;
+  width: calc(100% - 275px);
   flex: 1;
+  transition: left .5s ease-in-out, width .5s ease-in-out;
 }
 
 archipelago-options {
@@ -279,4 +314,36 @@ archipelago-options archipelago-keyboard-options {
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 100px;
   grid-row-gap: 20px;
+}
+
+@media(max-width: 700px) {
+  .profiles-container {
+    left: -275px;
+  }
+
+  .options-container {
+    left: 0px;
+    width: 100%;
+  }
+
+  #hamburger {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@media(min-width: 700px) {
+  #backdrop {
+    display: none !important;
+  }
+}
+
+@media(max-width: 910px) {
+  archipelago-general-options .mdc-text-field,
+  archipelago-general-options .mdc-select,
+  archipelago-general-options .mdc-form-field,
+  archipelago-options archipelago-theme-options .color-container,
+  archipelago-options archipelago-keyboard-options .keybinding-container {
+    grid-column: span 2;
+  }
 }

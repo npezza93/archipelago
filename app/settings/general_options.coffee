@@ -42,6 +42,8 @@ class GeneralOptions extends React.Component
           flexDirection: 'column'
           fontSize: '13px'
           color: 'rgba(0, 0, 0, 0.5)'
+          width: '100%'
+          gridColumn: 'span 2'
         }
         @select('vibrancy', 'Vibrancy', {
           'light': 'light', 'medium-light': 'medium-light', 'dark': 'dark',

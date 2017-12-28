@@ -41,6 +41,7 @@ class ThemeOptions extends React.Component
   text: (key, label) ->
     React.createElement(
       'div'
+      className: 'color-container'
       style: if @state.activeField == key then { zIndex: 2 }
       if @state.activeField == key
         React.createElement(
