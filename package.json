@@ -20,10 +20,15 @@
     "url": "https://github.com/npezza93/archipelago.git"
   },
   "keywords": [
+    "archipelago",
     "terminal",
     "xterm",
-    "archipelago",
-    "electron app"
+    "electron",
+    "terminal-emulators",
+    "react",
+    "javascript",
+    "html",
+    "css"
   ],
   "author": {
     "name": "Nick Pezza",
