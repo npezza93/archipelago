@@ -15,9 +15,6 @@
     "lint:markdown": "remark README.md",
     "lint": "npm-run-all lint:*"
   },
-  "publish": {
-    "releaseType": "release"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/npezza93/archipelago.git"
