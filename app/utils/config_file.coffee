@@ -25,7 +25,10 @@ class ConfigFile
     JSON.parse(fs.readFileSync(@filePath()).toString())
 
   activeSettings: ->
-    @contents().profiles[@contents().activeProfile]
+    @contents().profiles[@activeProfile()]
+
+  activeProfile: ->
+    @contents().activeProfile
 
   update: (key, value) ->
     settings = @contents()

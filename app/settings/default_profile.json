@@ -39,35 +39,35 @@
       "cursor":"#FFFFFF"
    },
    "keyboard": {
-     "linux": [
-       { "accelerator": "ctrl+left", "command": "\u001bb" },
-       { "accelerator": "ctrl+right", "command": "\u001bf" },
-       { "accelerator": "home", "command": "\u001bOH" },
-       { "accelerator": "end", "command": "\u001bOF" },
-       { "accelerator": "ctrl+backspace", "command": "\u001b" },
-       { "accelerator": "ctrl+del", "command": "\u001bd" },
-       { "accelerator": "ctrl+home", "command": "\u001bw" },
-       { "accelerator": "ctrl+end", "command": "\u0010B" }
-     ],
-     "win32": [
-       { "accelerator": "ctrl+left", "command": "\u001bb" },
-       { "accelerator":"ctrl+right", "command": "\u001bf" },
-       { "accelerator": "home", "command": "\u001bOH" },
-       { "accelerator": "end", "command": "\u001bOF" },
-       { "accelerator": "ctrl+backspace", "command": "\u001b" },
-       { "accelerator": "cltr+del", "command": "\u001bd" },
-       { "accelerator": "ctrl+home", "command": "\u001bw" },
-       { "accelerator": "ctrl+end", "command": "\u0010B" }
-     ],
-     "darwin": [
-       { "accelerator": "alt+left", "command": "\u001bb" },
-       { "accelerator": "alt+right", "command": "\u001bf" },
-       { "accelerator": "command+left", "command": "\u001bOH" },
-       { "accelerator": "command+right", "command": "\u001bOF" },
-       { "accelerator": "alt+backspace", "command": "\u001b" },
-       { "accelerator": "alt+delete", "command": "\u001bd" },
-       { "accelerator": "command+backspace", "command": "\u001bw" },
-       { "accelerator": "command+delete", "command": "\u0010B" }
-     ]
+     "linux": {
+       "1": { "accelerator": "ctrl+left", "command": [27, 98] },
+       "2": { "accelerator": "ctrl+right", "command": [27, 102] },
+       "3": { "accelerator": "home", "command": [27, 79, 72] },
+       "4": { "accelerator": "end", "command": [27, 79, 70] },
+       "5": { "accelerator": "ctrl+backspace", "command": [27, 127] },
+       "6": { "accelerator": "ctrl+del", "command": [27, 100] },
+       "7": { "accelerator": "ctrl+home", "command": [27, 119] },
+       "8": { "accelerator": "ctrl+end", "command": [16, 66] }
+     },
+     "win32": {
+       "1": { "accelerator": "ctrl+left", "command": [27, 98] },
+       "2": { "accelerator":"ctrl+right", "command": [27, 102] },
+       "3": { "accelerator": "home", "command": [27, 79, 72] },
+       "4": { "accelerator": "end", "command": [27, 79, 70] },
+       "5": { "accelerator": "ctrl+backspace", "command": [27, 127] },
+       "6": { "accelerator": "cltr+del", "command": [27, 100] },
+       "7": { "accelerator": "ctrl+home", "command": [27, 119] },
+       "8": { "accelerator": "ctrl+end", "command": [16, 66] }
+     },
+     "darwin": {
+       "1": { "accelerator": "alt+left", "command": [27, 98] },
+       "2": { "accelerator": "alt+right", "command": [27, 102] },
+       "3": { "accelerator": "command+left", "command": [27, 79, 72] },
+       "4": { "accelerator": "command+right", "command": [27, 79, 70] },
+       "5": { "accelerator": "alt+backspace", "command": [27, 127] },
+       "6": { "accelerator": "alt+delete", "command": [27, 100] },
+       "7": { "accelerator": "command+backspace", "command": [27, 119] },
+       "8": { "accelerator": "command+delete", "command": [16, 66] }
+     }
    }
 }

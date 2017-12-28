@@ -10,5 +10,5 @@ class OptionsHeader extends React.Component
         'div', { position: @props.preferences }, 'Preferences'
       )
       React.createElement('div', { position: @props.theme }, 'Theme')
-      React.createElement('div', { position: @props.keyboard }, 'Keyboard')
+      React.createElement('div', { position: @props.keyboard }, 'Keybindings')
     )

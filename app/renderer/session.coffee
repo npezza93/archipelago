@@ -77,9 +77,11 @@ class Session
   hotkeyHandler: (e) =>
     caught = false
 
-    @settings('keyboard')[process.platform].forEach (hotkey) =>
+    Object.values(@settings('keyboard')[process.platform]).forEach (hotkey) =>
       if isHotkey(hotkey.accelerator, e)
-        @pty.write(hotkey.command)
+        command = hotkey.command.map (num) =>
+          String.fromCharCode(parseInt(num))
+        @pty.write(command.join(''))
         caught = true
 
     !caught

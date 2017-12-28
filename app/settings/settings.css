@@ -309,11 +309,60 @@ archipelago-options archipelago-theme-options .mdc-text-field .chrome-picker {
 /* Keyboard Options */
 
 archipelago-options archipelago-keyboard-options {
-  margin: 130px 75px 0 75px;
+  margin: 130px 75px 50px 75px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 100px;
   grid-row-gap: 20px;
+}
+
+archipelago-options archipelago-keyboard-options .keybinding-container {
+  display: flex;
+  position: relative;
+}
+
+archipelago-options archipelago-keyboard-options .keybinding-container .remove-keybinding {
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .5s ease-in-out, visibility .5s ease-in-out;
+}
+
+archipelago-options archipelago-keyboard-options .keybinding-container:hover .remove-keybinding {
+  opacity: 1;
+  visibility: visible;
+}
+
+archipelago-options archipelago-keyboard-options div:first-child {
+  margin-right: 5px;
+}
+
+archipelago-options archipelago-keyboard-options div:nth-child(2) {
+  margin-left: 5px;
+}
+
+archipelago-options archipelago-keyboard-options .mdc-text-field {
+  width: 100%;
+}
+
+archipelago-options archipelago-keyboard-options .create-keybinding {
+  height: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all .2s ease-in-out;
+  cursor: pointer;
+  color: #889199;
+  grid-column: span 2;
+}
+
+archipelago-options archipelago-keyboard-options .create-keybinding:hover {
+color: #424242;
 }
 
 @media(max-width: 700px) {
