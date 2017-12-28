@@ -15,6 +15,8 @@ I've been a proponent of web technologies for some time, thus I've been using
 [Hyper](https://github.com/zeit/hyper) as my default terminal for a while.
 Hyper was by far the coolest, best looking, and extensible terminal emulator I had used and being an Electron app, it was cross-platform. But, I found Hyper to be extremely slow, to the point if I was going to run a command that I knew would have a lot of output I would opt for using the OS default. Along with that, occasionally buffers would overlap making the terminal unreadable and force me to restart the terminal. After using Hyper for a while and then finding the [Xterm.js](https://xtermjs.org/) project, I thought surely I can make a terminal that performs faster than Hyper. So that's what Archipelago is, my perfect terminal. All the speed of the OS default with all the extensibility that HTML, CSS, and JavaScript provides.
 
+![Screenshot](https://raw.githubusercontent.com/npezza93/archipelago/blob/master/.github/screenshot.png)
+
 ## Download
 -   [macOS](https://archipelago-terminal.herokuapp.com/download/latest/osx)
 
