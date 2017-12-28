@@ -6,6 +6,7 @@ Keybindings = require('./keybindings')
 ConfigFile = require('../utils/config_file')
 nestedProperty = require('nested-property')
 Waypoint = require('react-waypoint')
+AsciiDialog = require('./ascii_dialog')
 
 module.exports =
 class Options extends React.Component
@@ -51,6 +52,7 @@ class Options extends React.Component
           Keybindings, { updateOption: @updateOption.bind(this), ...@state }
         )
       )
+      React.createElement(AsciiDialog)
     )
 
   bindListener: ->

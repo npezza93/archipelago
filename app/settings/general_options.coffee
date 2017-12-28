@@ -29,7 +29,7 @@ class GeneralOptions extends React.Component
       React.createElement('div', className: 'seperator')
 
       @text('shell', 'Shell to run (i.e. /usr/local/bin/fish)')
-      @text('shellArgs', 'Shell Arguments (comma seperated)')
+      @text('shellArgs', 'Shell Arguments (comma separated)')
       @text('scrollback', 'Scrollback')
       @text('tabStopWidth', 'Tab Stop Width')
 
