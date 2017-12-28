@@ -38,7 +38,7 @@
       "cursorAccent":"#000000",
       "cursor":"#FFFFFF"
    },
-   "keyboard": {
+   "keybindings": {
      "linux": {
        "1": { "accelerator": "ctrl+left", "command": [27, 98] },
        "2": { "accelerator": "ctrl+right", "command": [27, 102] },

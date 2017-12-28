@@ -1,5 +1,4 @@
 React         = require('react')
-jsesc         = require('jsesc')
 { TextField } = require('rmwc')
 
 module.exports =

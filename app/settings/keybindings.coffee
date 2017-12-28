@@ -2,14 +2,14 @@ React      = require('react')
 Keybinding = require('./keybinding')
 
 module.exports =
-class KeyboardOptions extends React.Component
+class Keybindings extends React.Component
   constructor: (props) ->
     super(props)
-    @state = { keybindings: props.keyboard[process.platform] }
+    @state = { keybindings: props.keybindings[process.platform] }
 
   render: ->
     React.createElement(
-      'archipelago-keyboard-options'
+      'archipelago-keybindings'
       ref: @props.innerRef
       Object.keys(@state.keybindings).map (keybindingId) =>
         React.createElement(
@@ -40,7 +40,7 @@ class KeyboardOptions extends React.Component
     id = Math.max(...Object.keys(@state.keybindings)) + 1
 
     @props.updateOption(
-      "keyboard.#{process.platform}.#{id}"
+      "keybindings.#{process.platform}.#{id}"
       accelerator: ''
       command: []
     )
@@ -50,8 +50,8 @@ class KeyboardOptions extends React.Component
     Object.assign(tempState, @state.keybindings)
     delete tempState[id]
 
-    @props.updateOption("keyboard.#{process.platform}", tempState)
+    @props.updateOption("keybindings.#{process.platform}", tempState)
     @setState(keybindings: tempState)
 
   configKey: (id, key) ->
-    "keyboard.#{process.platform}.#{id}.#{key}"
+    "keybindings.#{process.platform}.#{id}.#{key}"

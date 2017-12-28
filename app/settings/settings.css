@@ -306,9 +306,9 @@ archipelago-options archipelago-theme-options .mdc-text-field .chrome-picker {
   width: 100% !important;
 }
 
-/* Keyboard Options */
+/* Keybindings */
 
-archipelago-options archipelago-keyboard-options {
+archipelago-options archipelago-keybindings {
   margin: 130px 75px 50px 75px;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -316,12 +316,12 @@ archipelago-options archipelago-keyboard-options {
   grid-row-gap: 20px;
 }
 
-archipelago-options archipelago-keyboard-options .keybinding-container {
+archipelago-options archipelago-keybindings .keybinding-container {
   display: flex;
   position: relative;
 }
 
-archipelago-options archipelago-keyboard-options .keybinding-container .remove-keybinding {
+archipelago-options archipelago-keybindings .keybinding-container .remove-keybinding {
   position: absolute;
   right: 0;
   cursor: pointer;
@@ -330,24 +330,24 @@ archipelago-options archipelago-keyboard-options .keybinding-container .remove-k
   transition: opacity .5s ease-in-out, visibility .5s ease-in-out;
 }
 
-archipelago-options archipelago-keyboard-options .keybinding-container:hover .remove-keybinding {
+archipelago-options archipelago-keybindings .keybinding-container:hover .remove-keybinding {
   opacity: 1;
   visibility: visible;
 }
 
-archipelago-options archipelago-keyboard-options div:first-child {
+archipelago-options archipelago-keybindings div:first-child {
   margin-right: 5px;
 }
 
-archipelago-options archipelago-keyboard-options div:nth-child(2) {
+archipelago-options archipelago-keybindings div:nth-child(2) {
   margin-left: 5px;
 }
 
-archipelago-options archipelago-keyboard-options .mdc-text-field {
+archipelago-options archipelago-keybindings .mdc-text-field {
   width: 100%;
 }
 
-archipelago-options archipelago-keyboard-options .create-keybinding {
+archipelago-options archipelago-keybindings .create-keybinding {
   height: 55px;
   display: flex;
   justify-content: center;
@@ -361,7 +361,7 @@ archipelago-options archipelago-keyboard-options .create-keybinding {
   grid-column: span 2;
 }
 
-archipelago-options archipelago-keyboard-options .create-keybinding:hover {
+archipelago-options archipelago-keybindings .create-keybinding:hover {
 color: #424242;
 }
 
@@ -392,7 +392,7 @@ color: #424242;
   archipelago-general-options .mdc-select,
   archipelago-general-options .mdc-form-field,
   archipelago-options archipelago-theme-options .color-container,
-  archipelago-options archipelago-keyboard-options .keybinding-container {
+  archipelago-options archipelago-keybindings .keybinding-container {
     grid-column: span 2;
   }
 }

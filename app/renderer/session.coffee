@@ -77,7 +77,7 @@ class Session
   hotkeyHandler: (e) =>
     caught = false
 
-    Object.values(@settings('keyboard')[process.platform]).forEach (hotkey) =>
+    Object.values(@settings('keybindings')[process.platform]).forEach (hotkey) =>
       if isHotkey(hotkey.accelerator, e)
         command = hotkey.command.map (num) =>
           String.fromCharCode(parseInt(num))
