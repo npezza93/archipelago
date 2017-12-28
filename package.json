@@ -15,7 +15,7 @@
     "lint:markdown": "remark README.md",
     "lint": "npm-run-all lint:*"
   },
-  "build": {
+  "publish": {
     "releaseType": "release"
   },
   "repository": {
