@@ -1,7 +1,7 @@
 {
    "cursorStyle":"block",
    "cursorBlink":true,
-   "fontFamily":"firacode-retina",
+   "fontFamily":"courier-new, courier, monospace",
    "fontSize":"15",
    "scrollback":"4000",
    "bellStyle":"both",
