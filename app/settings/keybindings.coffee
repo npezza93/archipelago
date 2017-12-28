@@ -14,7 +14,8 @@ class Keybindings extends React.Component
       React.createElement(
         'div'
         className: 'keybindings-info'
-        'Keybinding commands should be a comma separated list of ascii character codes'
+        'Keybinding commands should be a comma separated list of ascii
+         character codes'
         React.createElement(
           'div'
           className: 'keybinding-dialog-trigger'

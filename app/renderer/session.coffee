@@ -74,12 +74,13 @@ class Session
     else
       @configFile.activeSettings()
 
-  hotkeyHandler: (e) =>
+  keybindingHandler: (e) =>
     caught = false
+    keybindings = Object.values(@settings('keybindings')[process.platform])
 
-    Object.values(@settings('keybindings')[process.platform]).forEach (hotkey) =>
-      if isHotkey(hotkey.accelerator, e)
-        command = hotkey.command.map (num) =>
+    keybindings.forEach (keybinding) =>
+      if isHotkey(keybinding.accelerator, e)
+        command = keybinding.command.map (num) ->
           String.fromCharCode(parseInt(num))
         @pty.write(command.join(''))
         caught = true
@@ -109,7 +110,7 @@ class Session
         document.execCommand('copy')
 
   bindDataListeners: ->
-    @xterm.attachCustomKeyEventHandler(@hotkeyHandler)
+    @xterm.attachCustomKeyEventHandler(@keybindingHandler)
     window.addEventListener 'resize', @fit.bind(this)
     @configFile.on 'change', @updateSettings.bind(this)
 

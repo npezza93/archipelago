@@ -8,7 +8,7 @@ class AsciiDialog extends React.Component
       'dialog'
       {}
       React.createElement('div', className: 'ascii-heading', 'ASCII Chart')
-      asciiChart.map (row) =>
+      asciiChart.map (row) ->
         React.createElement(
           'div'
           key: row.dec

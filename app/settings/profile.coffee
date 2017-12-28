@@ -29,7 +29,7 @@ class Profile extends React.Component
       autoFocus: true
       type: 'text'
       value: @state.name
-      onFocus: (e) =>
+      onFocus: (e) ->
         e.target.select()
       onBlur: (e) =>
         @setState(editMode: false)
