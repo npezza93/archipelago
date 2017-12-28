@@ -16,7 +16,7 @@ class Session
     @pty = Pty.spawn(
       @settings('shell') || defaultShell,
       @settings('shellArgs').split(','),
-      { name: 'xterm-256color', cwd: process.PWD, env: process.env }
+      { name: 'xterm-256color', cwd: process.env.HOME, env: process.env }
     )
     @xterm = new Terminal({
       fontFamily: @settings('fontFamily'),
