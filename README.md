@@ -6,7 +6,7 @@
   <h3 align="center">Archipelago</h3>
 
   <p align="center">
-    Archipelago is a terminal emulator built on open web technologies.
+    Archipelago is an open-source terminal emulator built on web technology.
   </p>
 </p>
 
