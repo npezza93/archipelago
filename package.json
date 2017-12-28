@@ -7,13 +7,16 @@
     "postinstall": "electron-builder install-app-deps",
     "start": "electron .",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder --publish onTagOrDraft -- releaseType release",
+    "dist": "electron-builder --publish onTagOrDraft",
     "fix:css": "stylefmt app/**/*.css",
     "fix": "npm-run-all fix:*",
     "lint:coffee": "coffeelint app/**/*.coffee",
     "lint:css": "stylelint app/**/*.css",
     "lint:markdown": "remark README.md",
     "lint": "npm-run-all lint:*"
+  },
+  "build": {
+    "releaseType": "release"
   },
   "repository": {
     "type": "git",
