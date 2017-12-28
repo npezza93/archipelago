@@ -7,7 +7,7 @@
     "postinstall": "electron-builder install-app-deps",
     "start": "electron .",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder --publish onTagOrDraft",
+    "dist": "electron-builder --publish onTagOrDraft -- releaseType release",
     "fix:css": "stylefmt app/**/*.css",
     "fix": "npm-run-all fix:*",
     "lint:coffee": "coffeelint app/**/*.coffee",
