@@ -3,10 +3,6 @@ Keybinding = require('./keybinding')
 
 module.exports =
 class Keybindings extends React.Component
-  constructor: (props) ->
-    super(props)
-    @state = { keybindings: props.keybindings[process.platform] }
-
   render: ->
     React.createElement(
       'archipelago-keybindings'
@@ -26,13 +22,13 @@ class Keybindings extends React.Component
           '\u24D8'
         )
       )
-      Object.keys(@state.keybindings).map (keybindingId) =>
+      Object.keys(@keybindings()).map (keybindingId) =>
         React.createElement(
           Keybinding
           key: keybindingId
           id: keybindingId
-          accelerator: @state.keybindings[keybindingId].accelerator
-          command: @state.keybindings[keybindingId].command
+          accelerator: @keybindings()[keybindingId].accelerator
+          command: @keybindings()[keybindingId].command
           updateKeystroke: @updateKeystroke.bind(this)
           updateCommand: @updateCommand.bind(this)
           removeKeybinding: @removeKeybinding.bind(this)
@@ -52,7 +48,7 @@ class Keybindings extends React.Component
     @props.updateOption(@configKey(id, 'command'), command)
 
   createKeybinding: ->
-    id = Math.max(...Object.keys(@state.keybindings)) + 1
+    id = Math.max(...Object.keys(@keybindings())) + 1
 
     @props.updateOption(
       "keybindings.#{process.platform}.#{id}"
@@ -61,12 +57,14 @@ class Keybindings extends React.Component
     )
 
   removeKeybinding: (id) ->
-    tempState = {}
-    Object.assign(tempState, @state.keybindings)
-    delete tempState[id]
+    props = {}
+    Object.assign(props, @keybindings())
+    delete props[id]
 
-    @props.updateOption("keybindings.#{process.platform}", tempState)
-    @setState(keybindings: tempState)
+    @props.updateOption("keybindings.#{process.platform}", props)
 
   configKey: (id, key) ->
     "keybindings.#{process.platform}.#{id}.#{key}"
+
+  keybindings: ->
+    @props.keybindings[process.platform]
