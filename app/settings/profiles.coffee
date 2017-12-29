@@ -50,7 +50,7 @@ class Profiles extends React.Component
 
   removeProfile: (id) ->
     settings = @settings()
-    profileId = ""
+    profileId = ''
     tempState = {}
     Object.assign(tempState, settings)
     if tempState.activeProfile == id
