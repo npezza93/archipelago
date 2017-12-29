@@ -20,17 +20,9 @@ class Profile extends React.Component
         'span'
         className: 'profile-remove'
         onClick: (e) =>
-          tempState = {}
-
-          Object.assign(tempState, @props.configFile.contents())
-          delete tempState.profiles[@props.profile.id]
-          @props.configFile.write(tempState)
-
-          @props.updateProfileList(Object.keys(Object.assign(
-            tempState, @props.configFile.contents()
-          ).profiles)[0])
+          @props.removeProfile(@props.profile.id)
           e.stopPropagation()
-        'x'
+        '\u00D7'
       )
     )
 

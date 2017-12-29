@@ -28,7 +28,7 @@ class Profiles extends React.Component
             activeProfile: @state.activeProfile
             key: profile.id
             configFile: @_configFile
-            updateProfileList: @updateProfileList.bind(this)
+            removeProfile: @removeProfile.bind(this)
             setActiveProfile: @setActiveProfile.bind(this)
           )
       )
@@ -48,12 +48,21 @@ class Profiles extends React.Component
 
     @setState(activeProfile: id)
 
-  updateProfileList: (id) ->
+  removeProfile: (id) ->
     settings = @settings()
-    if settings.length > 0
-      @setState(activeProfile: id, profiles: Object.values(settings.profiles))
-    else
-      @setState(profiles: Object.values(settings.profiles))
+    profileId = ""
+    tempState = {}
+    Object.assign(tempState, settings)
+    if tempState.activeProfile == id
+      profileId = Object.keys(tempState.profiles)[0]
+      tempState.activeProfile = Object.keys(tempState.profiles)[0]
+
+    delete tempState.profiles[id]
+    @_configFile.write(tempState)
+
+    @setState(
+      activeProfile: profileId, profiles: Object.values(settings.profiles)
+    )
 
   createProfile: ->
     settings = @settings()
