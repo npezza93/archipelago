@@ -17,6 +17,7 @@ class ThemeOptions extends React.Component
       @text('theme.background', 'Terminal Background')
       @text('windowBackground', 'Window Background')
       @text('tabColor', 'Tab Color')
+      @text('tabBorderColor', 'Tab Border Color')
       @text('theme.selection', 'Selection')
       @text('theme.cursor', 'Cursor')
       @text('theme.cursorAccent', 'Cursor Accent')
