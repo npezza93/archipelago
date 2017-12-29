@@ -97,6 +97,24 @@ input,
   font-weight: 400;
   font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 16px;
+  position: relative;
+  z-index: 15;
+}
+
+.profiles-container archipelago-profiles .profile-list archipelago-profile .profile-remove {
+  position: absolute;
+  left: 15px;
+  bottom: 16px;
+  visibility: hidden;
+  z-index: 20;
+  transition: opacity .5s ease-in-out, visibility .5s ease-in-out;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.profiles-container archipelago-profiles .profile-list archipelago-profile:hover .profile-remove {
+  opacity: 1;
+  visibility: visible;
 }
 
 .profiles-container archipelago-profiles .profile-list archipelago-profile.active,
@@ -110,7 +128,7 @@ input,
   font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 16px;
   font-weight: 400;
-  padding: 0;
+  padding: 5px;
 }
 
 .profiles-container archipelago-profiles .new-profile {
