@@ -430,7 +430,11 @@ dialog .ascii-close {
   }
 }
 
-@media (min-width: 700px) {
+@media (min-width: 699px) {
+
+  .profiles-container {
+    left: 0 !important;
+  }
 
   #backdrop {
     display: none !important;
