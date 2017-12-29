@@ -28,6 +28,7 @@ class Profiles extends React.Component
             activeProfile: @state.activeProfile
             key: profile.id
             configFile: @_configFile
+            updateProfileList: @updateProfileList.bind(this)
             setActiveProfile: @setActiveProfile.bind(this)
           )
       )
@@ -46,6 +47,13 @@ class Profiles extends React.Component
     @_configFile.update('activeProfile', id)
 
     @setState(activeProfile: id)
+
+  updateProfileList: (id) ->
+    settings = @settings()
+    if settings.length > 0
+      @setState(activeProfile: id, profiles: Object.values(settings.profiles))
+    else
+      @setState(profiles: Object.values(settings.profiles))
 
   createProfile: ->
     settings = @settings()

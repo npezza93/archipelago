@@ -16,6 +16,22 @@ class Profile extends React.Component
       onClick: (e) =>
         @props.setActiveProfile(@props.profile.id)
       @textOrInput()
+      React.createElement(
+        'span'
+        className: 'profile-remove'
+        onClick: (e) =>
+          tempState = {}
+
+          Object.assign(tempState, @props.configFile.contents())
+          delete tempState.profiles[@props.profile.id]
+          @props.configFile.write(tempState)
+
+          @props.updateProfileList(Object.keys(Object.assign(
+            tempState, @props.configFile.contents()
+          ).profiles)[0])
+          e.stopPropagation()
+        'x'
+      )
     )
 
   textOrInput: ->
