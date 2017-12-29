@@ -104,7 +104,7 @@ input,
 .profiles-container archipelago-profiles .profile-list archipelago-profile .profile-remove {
   position: absolute;
   left: 15px;
-  bottom: 17px;
+  bottom: 16px;
   visibility: hidden;
   z-index: 20;
   transition: opacity .5s ease-in-out, visibility .5s ease-in-out;
