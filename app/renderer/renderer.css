@@ -179,8 +179,31 @@ archipelago-tab-list archipelago-tab {
   position: relative;
 }
 
+archipelago-tab-list archipelago-tab:not(.active)::after {
+  position: absolute;
+  content: "";
+  height: 1px;
+  background: var(--tab-border-color);
+  transition: all .15s linear;
+  width: 0;
+  bottom: 0;
+}
+
+archipelago-tab-list archipelago-tab:hover::after {
+  width: 100%;
+}
+
 archipelago-tab-list archipelago-tab.active {
   filter: invert(0%);
+}
+
+archipelago-tab-list archipelago-tab.active::after {
+  position: absolute;
+  content: "";
+  height: 1px;
+  background: var(--tab-border-color);
+  width: 100%;
+  bottom: 0;
 }
 
 archipelago-tab div {
