@@ -6,8 +6,8 @@
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
     "start": "electron .",
-    "pack": "yarn compile && electron-builder --dir",
-    "dist": "yarn compile && electron-builder --publish onTagOrDraft",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder --publish onTagOrDraft",
     "fix:css": "stylefmt app/**/*.css",
     "fix": "npm-run-all fix:*",
     "lint:coffee": "coffeelint app/**/*.coffee",
