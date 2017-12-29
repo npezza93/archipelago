@@ -50,18 +50,17 @@ class Profiles extends React.Component
 
   removeProfile: (id) ->
     settings = @settings()
-    profileId = ''
     tempState = {}
     Object.assign(tempState, settings)
     if tempState.activeProfile == id
-      profileId = Object.keys(tempState.profiles)[0]
       tempState.activeProfile = Object.keys(tempState.profiles)[0]
 
     delete tempState.profiles[id]
     @_configFile.write(tempState)
 
     @setState(
-      activeProfile: profileId, profiles: Object.values(settings.profiles)
+      activeProfile: tempState.activeProfile,
+      profiles: Object.values(settings.profiles)
     )
 
   createProfile: ->
