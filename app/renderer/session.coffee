@@ -5,6 +5,7 @@ React               = require('react')
 { isHotkey }        = require('is-hotkey')
 ConfigFile          = require('../utils/config_file')
 ArchipelagoTerminal = require('./archipelago_terminal')
+Terminal             = require('../xterm/xterm')
 
 module.exports =
 class Session
