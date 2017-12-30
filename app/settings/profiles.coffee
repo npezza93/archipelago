@@ -65,7 +65,7 @@ class Profiles extends React.Component
 
   createProfile: ->
     settings = @settings()
-    id = Object.keys(settings.profiles || {}).length + 1
+    id = Math.max(Object.keys(...(settings.profiles || {}_))) + 1
 
     settings.profiles ?= {}
     settings.profiles[id] = ConfigFile.defaultProfile(id)
