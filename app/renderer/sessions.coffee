@@ -81,4 +81,4 @@ class Sessions
 
     session.group = group
 
-    group.right
+    group
