@@ -75,7 +75,7 @@ archipelago-app {
 }
 
 #boot img {
-  width: 43%;
+  width: 25%;
 }
 
 #boot.calculating {
@@ -87,7 +87,7 @@ archipelago-app {
   width: 200px;
   height: 1px;
   position: fixed;
-  top: 70%;
+  top: 63%;
 }
 
 #boot #progress-container #progress-bar {
