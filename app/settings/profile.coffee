@@ -16,14 +16,15 @@ class Profile extends React.Component
       onClick: (e) =>
         @props.setActiveProfile(@props.profile.id)
       @textOrInput()
-      React.createElement(
-        'span'
-        className: 'profile-remove'
-        onClick: (e) =>
-          @props.removeProfile(@props.profile.id)
-          e.stopPropagation()
-        '\u00D7'
-      )
+      if Object.keys(@props.configFile.contents().profiles).length > 1
+        React.createElement(
+          'span'
+          className: 'profile-remove'
+          onClick: (e) =>
+            @props.removeProfile(@props.profile.id)
+            e.stopPropagation()
+          '\u00D7'
+        )
     )
 
   textOrInput: ->
