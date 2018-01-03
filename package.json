@@ -69,7 +69,13 @@
   "build": {
     "productName": "Archipelago",
     "mac": {
-      "category": "public.app-category.developer-tools"
+      "category": "public.app-category.developer-tools",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": ["x64"]
+        }
+      ]
     },
     "dmg": {
       "icon": "build/icon.icns",
@@ -92,10 +98,7 @@
       "category": "TerminalEmulator",
       "packageCategory": "TerminalEmulator",
       "description": "Archipelago is a terminal emulator built on open web technologies.",
-      "target": [
-        "AppImage",
-        "deb"
-      ],
+      "target": ["AppImage", "deb", "rpm"],
       "maintainer": "Nick Pezza <npezza93@gmail.com>"
     },
     "deb": {
