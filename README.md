@@ -18,7 +18,9 @@ Hyper was by far the coolest, best looking, and extensible terminal emulator I h
 ![Screenshot](https://raw.githubusercontent.com/npezza93/archipelago/master/.github/screenshot.png)
 
 ## Download
--   [macOS](https://archipelago-terminal.herokuapp.com/download/osx)
+[Download the latest now!](https://archipelago-terminal.herokuapp.com/download)
+
+Other executables can be found [here](https://github.com/npezza93/archipelago/releases)
 
 ## Platforms
 Archipelago is compatible with:
