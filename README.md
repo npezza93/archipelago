@@ -7,6 +7,8 @@
 
   <p align="center">
     Archipelago is an open-source terminal emulator built on web technology.
+    <br>
+    <a href="https://archipelago-terminal.herokuapp.com/download">Download now!</a>
   </p>
 </p>
 
