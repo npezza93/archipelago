@@ -18,6 +18,11 @@ class ConfigFile
     @emitter = new EventEmitter()
     @bindWatcher()
 
+    if Object.keys(@contents().profiles).length == 0
+      @write({
+        'activeProfile': 1, 'profiles': { 1: @constructor.defaultProfile(1) }
+      })
+
   filePath: ->
     join(homedir(), '.archipelago.json')
 
