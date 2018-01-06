@@ -44,7 +44,11 @@ app.on 'window-all-closed', () ->
   app.quit() if process.platform != 'darwin'
 
 app.on 'activate', () ->
-  createWindow() if windows.length == 0
+  windowCount = 0
+  windows.forEach (win) ->
+    windowCount += 1 unless win.isDestroyed()
+
+  createWindow() if windowCount == 0
 
 configFile.on 'change', () ->
   windows.forEach (win) ->
