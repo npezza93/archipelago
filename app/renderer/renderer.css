@@ -123,9 +123,9 @@ body {
 
 archipelago-terminal {
   display: flex;
-  margin: 0 0 10px 15px;
+  margin: 5px 0 10px 15px;
   width: calc(100% - 15px);
-  height: calc(100% - 10px);
+  height: calc(100% - 15px);
 }
 
 .terminal {
