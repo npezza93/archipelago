@@ -73,7 +73,9 @@
       "target": [
         {
           "target": "dmg",
-          "arch": ["x64"]
+          "arch": [
+            "x64"
+          ]
         }
       ]
     },
@@ -98,7 +100,11 @@
       "category": "TerminalEmulator",
       "packageCategory": "TerminalEmulator",
       "description": "Archipelago is a terminal emulator built on open web technologies.",
-      "target": ["AppImage", "deb", "rpm"],
+      "target": [
+        "AppImage",
+        "deb",
+        "rpm"
+      ],
       "maintainer": "Nick Pezza <npezza93@gmail.com>"
     },
     "deb": {
