@@ -5,7 +5,7 @@ React               = require('react')
 { isHotkey }        = require('is-hotkey')
 ConfigFile          = require('../utils/config_file')
 ArchipelagoTerminal = require('./archipelago_terminal')
-Terminal             = require('../xterm/xterm')
+Xterm               = require('xterm').Terminal
 
 module.exports =
 class Session
@@ -19,7 +19,7 @@ class Session
       @settings('shellArgs').split(','),
       { name: 'xterm-256color', cwd: process.env.HOME, env: process.env }
     )
-    @xterm = new Terminal({
+    @xterm = new Xterm(
       fontFamily: @settings('fontFamily'),
       fontSize: @settings('fontSize'),
       lineHeight: @settings('lineHeight'),
@@ -31,7 +31,7 @@ class Session
       scrollback: @settings('scrollback'),
       tabStopWidth: parseInt(@settings('tabStopWidth')),
       theme: @settings('theme')
-    })
+    )
     @bindDataListeners()
 
   render: (props) ->
