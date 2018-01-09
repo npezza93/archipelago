@@ -1,34 +1,28 @@
 { ipcRenderer }     = require('electron')
 React               = require('react')
 ReactDOM            = require('react-dom')
-ConfigFile          = require('../utils/config_file')
 ArchipelagoApp      = require('./archipelago_app')
 
-configFile = new ConfigFile()
+styleProperties =
+  fontFamily: '--font-family'
+  windowBackground: '--background-color'
+  tabColor: '--tab-color'
+  tabBorderColor: '--tab-border-color'
+  fontSize: '--font-size'
 
 document.addEventListener 'DOMContentLoaded', () ->
-  setDocumentSettings()
   global.app = ReactDOM.render(
     React.createElement(ArchipelagoApp), document.getElementById('root')
   )
   document.querySelector('#boot').classList.add('calculating')
 
-setDocumentSettings = ->
-  element = document.documentElement
+  for selector, cssVar of styleProperties
+    element = document.documentElement
 
-  element.style.setProperty(
-    '--font-family', configFile.activeSettings().fontFamily
-  )
-  element.style.setProperty(
-    '--background-color', configFile.activeSettings().windowBackground
-  )
-  element.style.setProperty('--tab-color', configFile.activeSettings().tabColor)
-  element.style.setProperty(
-    '--tab-border-color', configFile.activeSettings().tabBorderColor
-  )
-  element.style.setProperty('--font-size', configFile.activeSettings().fontSize)
+    element.style.setProperty(cssVar, archipelago.config.get(selector))
 
-configFile.on('change', setDocumentSettings)
+    archipelago.config.onDidChange selector, (newValue) =>
+      element.style.setProperty(cssVar, newValue)
 
 ipcRenderer.on 'new-tab', () ->
   global.app.addTab()

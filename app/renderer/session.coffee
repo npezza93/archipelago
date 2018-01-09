@@ -3,7 +3,6 @@ defaultShell        = require('default-shell')
 React               = require('react')
 { EventEmitter }    = require('events')
 { isHotkey }        = require('is-hotkey')
-ConfigFile          = require('../utils/config_file')
 ArchipelagoTerminal = require('./archipelago_terminal')
 Xterm               = require('xterm').Terminal
 
@@ -13,7 +12,6 @@ class Session
     @id = Math.random()
     @group = group
     @emitter = new EventEmitter()
-    @configFile = new ConfigFile()
     @pty = Pty.spawn(
       @settings('shell') || defaultShell,
       @settings('shellArgs').split(','),
@@ -70,10 +68,7 @@ class Session
       @pty.resize(cols, rows)
 
   settings: (setting) ->
-    if setting?
-      @configFile.activeSettings()[setting]
-    else
-      @configFile.activeSettings()
+    archipelago.config.get(setting)
 
   keybindingHandler: (e) =>
     caught = false
@@ -113,7 +108,6 @@ class Session
   bindDataListeners: ->
     @xterm.attachCustomKeyEventHandler(@keybindingHandler)
     window.addEventListener 'resize', @fit.bind(this)
-    @configFile.on 'change', @updateSettings.bind(this)
 
     @xterm.on 'data', (data) =>
       try
@@ -132,3 +126,9 @@ class Session
 
     @pty.on 'exit', () =>
       @emitter.emit('exit')
+
+    ['fontFamily', 'cursorStyle', 'cursorBlink', 'scrollback',
+     'enableBold', 'tabStopWidth', 'fontSize', 'letterSpacing',
+     'lineHeight', 'bellSound', 'bellStyle', 'theme'].forEach (field) =>
+       archipelago.config.onDidChange field, (newValue) =>
+         @xterm.setOption(field, newValue)

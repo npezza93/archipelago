@@ -1,6 +1,6 @@
 React      = require('react')
 Profile    = require('./profile')
-ConfigFile = require('../utils/config_file')
+ConfigFile = require('../config_file')
 
 module.exports =
 class Profiles extends React.Component

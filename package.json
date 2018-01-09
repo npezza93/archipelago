@@ -53,6 +53,7 @@
     "react-split-pane": "^0.1.74",
     "react-waypoint": "^7.3.4",
     "rmwc": "0.0.1-rc12",
+    "season": "^6.0.2",
     "xterm": "^3.0.1"
   },
   "devDependencies": {

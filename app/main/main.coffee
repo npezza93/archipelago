@@ -2,27 +2,27 @@
 path                                = require('path')
 url                                 = require('url')
 AppMenu                             = require('./app_menu')
-ConfigFile                          = require('../utils/config_file')
+ConfigFile                          = require('../config_file')
 AutoUpdate                          = require('./auto_update')
 
 settings   = null
 about      = null
 windows    = []
-configFile = new ConfigFile()
+config     = new ConfigFile()
 
 createWindow = () ->
-  win = new BrowserWindow({
-    width: 1000,
-    height: 600,
-    titleBarStyle: 'hidden-inset',
-    vibrancy: configFile.contents().vibrancy
-  })
+  win = new BrowserWindow(
+    width: 1000
+    height: 600
+    titleBarStyle: 'hidden-inset'
+    vibrancy: config.get('vibrancy')
+  )
 
-  win.loadURL(url.format({
-    pathname: path.join(__dirname, '../renderer/renderer.html'),
-    protocol: 'file:',
+  win.loadURL(url.format(
+    pathname: path.join(__dirname, '../renderer/renderer.html')
+    protocol: 'file:'
     slashes: true
-  }))
+  ))
 
   win.focus()
 
@@ -50,7 +50,6 @@ app.on 'activate', () ->
 
   createWindow() if windowCount == 0
 
-configFile.on 'change', () ->
+config.onDidChange 'vibrancy', () ->
   windows.forEach (win) ->
-    unless win.isDestroyed()
-      win.setVibrancy(configFile.contents().vibrancy)
+    win.setVibrancy(config.get('vibrancy')) unless win.isDestroyed()
