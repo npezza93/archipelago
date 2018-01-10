@@ -4,10 +4,10 @@ SessionGroup = require('./session_group')
 module.exports =
 class Sessions
   constructor: ->
-    @root = new Session()
+    @root = new Session
 
   add: (sessionId, orientation) ->
-    if @root.isSession()
+    if @root.isSession
       session = @root
       group = @_newGroup(session, orientation)
       @root = group
@@ -15,7 +15,7 @@ class Sessions
       @_newGroup(@find(@root, sessionId), orientation)
 
   remove: (sessionId) ->
-    if @root.isSession() && @root.id == sessionId
+    if @root.isSession && @root.id == sessionId
       @root = null
     else
       sessionToRemove = @find(@root, sessionId)
@@ -55,7 +55,7 @@ class Sessions
 
   firstSession: ->
     session = @root
-    until session.isSession()
+    until session.isSession
       session = session.left
 
     session
@@ -63,7 +63,7 @@ class Sessions
   _traverse: (group, callback) ->
     unless group? then return
 
-    if group.isSession()
+    if group.isSession
       callback(group)
 
     @_traverse(group.left, callback)

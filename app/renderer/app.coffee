@@ -1,0 +1,142 @@
+React    = require 'react'
+PaneList = require './pane_list'
+TabList  = require './tab_list'
+Sessions = require './sessions'
+
+module.exports =
+class App extends React.Component
+  constructor: (props) ->
+    super(props)
+
+    tabId = Math.random()
+
+    @state =
+      tabs: [
+        id: tabId, title: '', isUnread: false, sessions: new Sessions()
+      ]
+      currentTabId: tabId
+
+  render: ->
+    React.createElement(
+      'archipelago-app'
+      {}
+      React.createElement(
+        TabList
+        key: 'tabs'
+        tabs: @state.tabs
+        currentTabId: @state.currentTabId
+        selectTab: @selectTab.bind(this)
+        addTab: @addTab.bind(this)
+        removeTab: @removeTab.bind(this)
+      )
+      React.createElement(
+        PaneList
+        key: 'panes'
+        tabs: @state.tabs
+        currentTabId: @state.currentTabId
+        currentSessionId: @state.currentSessionId
+        changeTitle: @changeTitle.bind(this)
+        markUnread: @markUnread.bind(this)
+        removeSession: @removeSession.bind(this)
+        selectSession: @selectSession.bind(this)
+      )
+    )
+
+  componentWillUnmount: ->
+    for tab in @state.tabs
+      tab.sessions.kill()
+
+  currentTab: (id) ->
+    currentTab = null
+
+    for tab in @state.tabs
+      currentTab = tabObject if tabObject.id == (id || @state.currentTabId)
+
+    currentTab
+
+  selectTab: (e, id) ->
+    e.preventDefault()
+    session = null
+    tabs = @state.tabs.map (tab) =>
+      if tab.id == id
+        tab.isUnread = false
+        root = tab.sessions.root
+        session = tab.sessions.find(root, @state.currentSessionId)
+        session = tab.sessions.firstSession() unless session
+
+      tab
+
+    @setState(tabs: tabs, currentTabId: id, currentSessionId: session.id)
+
+  selectSession: (id) ->
+    @setState(currentSessionId: id)
+
+  addTab: ->
+    tabId = Math.random()
+
+    @setState(
+      tabs: @state.tabs.concat(
+        id: tabId, title: '', isUnread: false, sessions: new Sessions()
+      )
+      currentTabId: tabId
+    )
+
+  removeTab: (id) ->
+    tabs = @state.tabs.filter (tab) ->
+      tab.sessions.kill() if tab.id == id
+
+      tab.id != id
+
+    if tabs.length == 0
+      window.close()
+    else if @state.currentTabId == id
+      @setState(
+        currentTabId: tabs[0].id
+        tabs: tabs
+        currentSessionId: tabs[0].sessions.firstSession().id
+      )
+    else
+      @setState(tabs: tabs)
+
+  changeTitle: (id, title) ->
+    tabs = @state.tabs.map (tab) ->
+      tab.title = title if tab.id == id
+
+      tab
+
+    @setState(tabs: tabs)
+
+  markUnread: (id) ->
+    tabs = @state.tabs.map (tab) ->
+      tab.isUnread = true if tab.id == id
+
+      tab
+
+    @setState(tabs: tabs)
+
+  removeSession: (tabId, sessionId) ->
+    removeTab = false
+
+    tabs = @state.tabs.map (tab) ->
+      if tab.id == tabId
+        tab.sessions.remove(sessionId)
+
+        removeTab = true if tab.sessions.root == null
+
+        tab
+      else
+        tab
+
+    if removeTab
+      @removeTab(tabId)
+    else
+      @setState(tabs: tabs)
+
+  split: (orientation) ->
+    tabs = @state.tabs.map (tab) =>
+      if tab.id == @state.currentTabId
+        tab.sessions.add(@state.currentSessionId, orientation)
+
+      tab
+
+    @setState(tabs: tabs)

@@ -1,7 +1,7 @@
-{ ipcRenderer }     = require('electron')
-React               = require('react')
-ReactDOM            = require('react-dom')
-ArchipelagoApp      = require('./archipelago_app')
+{ ipcRenderer }     = require 'electron'
+React               = require 'react'
+ReactDOM            = require 'react-dom'
+App                 = require './app'
 
 styleProperties =
   fontFamily: '--font-family'
@@ -11,8 +11,8 @@ styleProperties =
   fontSize: '--font-size'
 
 document.addEventListener 'DOMContentLoaded', () ->
-  global.app = ReactDOM.render(
-    React.createElement(ArchipelagoApp), document.getElementById('root')
+  archipelago.app = ReactDOM.render(
+    React.createElement(App), document.getElementById('root')
   )
   document.querySelector('#boot').classList.add('calculating')
 
@@ -25,8 +25,8 @@ document.addEventListener 'DOMContentLoaded', () ->
       element.style.setProperty(cssVar, newValue)
 
 ipcRenderer.on 'new-tab', () ->
-  global.app.addTab()
+  archipelago.app.addTab()
 ipcRenderer.on 'split-horizontal', () ->
-  global.app.split('horizontal')
+  archipelago.app.split('horizontal')
 ipcRenderer.on 'split-vertical', () ->
-  global.app.split('vertical')
+  archipelago.app.split('vertical')

@@ -1,22 +1,27 @@
-React = require('react')
+React = require 'react'
 
 module.exports =
-class ArchipelagoTab extends React.Component
+class Tab extends React.Component
   render: ->
-    React.createElement('archipelago-tab', {
+    React.createElement(
+      'archipelago-tab'
       class: @htmlClasses()
       onClick: (e) => @props.selectTab(e, @props.id)
-    }, @renderTitle(), @renderExit())
+      @renderTitle()
+      @renderExit()
+    )
 
   renderTitle: () ->
     React.createElement('span', {}, @props.title || 'Loading...')
 
   renderExit: () ->
-    React.createElement('div', {
+    React.createElement(
+      'div'
       onClick: (e) =>
         e.stopPropagation()
         @props.removeTab(@props.id)
-    }, '\u00D7')
+      '\u00D7'
+    )
 
   htmlClasses: () ->
     classes = []

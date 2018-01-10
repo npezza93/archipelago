@@ -1,53 +1,51 @@
-Pty                 = require('node-pty')
+{ spawn }           = require('node-pty')
 defaultShell        = require('default-shell')
 React               = require('react')
 { EventEmitter }    = require('events')
 { isHotkey }        = require('is-hotkey')
-ArchipelagoTerminal = require('./archipelago_terminal')
 Xterm               = require('xterm').Terminal
+Terminal            = require('./terminal')
 
 module.exports =
 class Session
+  isSession: true
+
   constructor: (group) ->
     @id = Math.random()
     @group = group
-    @emitter = new EventEmitter()
-    @pty = Pty.spawn(
-      @settings('shell') || defaultShell,
-      @settings('shellArgs').split(','),
-      { name: 'xterm-256color', cwd: process.env.HOME, env: process.env }
+    @emitter = new EventEmitter
+    @pty = spawn(
+      @settings('shell') || defaultShell
+      @settings('shellArgs').split(',')
+      name: 'xterm-256color', cwd: process.env.HOME, env: process.env
     )
     @xterm = new Xterm(
-      fontFamily: @settings('fontFamily'),
-      fontSize: @settings('fontSize'),
-      lineHeight: @settings('lineHeight'),
-      letterSpacing: @settings('letterSpacing'),
-      cursorStyle: @settings('cursorStyle'),
-      cursorBlink: @settings('cursorBlink'),
-      bellSound: @settings('bellSound'),
-      bellStyle: @settings('bellStyle'),
-      scrollback: @settings('scrollback'),
-      tabStopWidth: parseInt(@settings('tabStopWidth')),
+      fontFamily: @settings('fontFamily')
+      fontSize: @settings('fontSize')
+      lineHeight: @settings('lineHeight')
+      letterSpacing: @settings('letterSpacing')
+      cursorStyle: @settings('cursorStyle')
+      cursorBlink: @settings('cursorBlink')
+      bellSound: @settings('bellSound')
+      bellStyle: @settings('bellStyle')
+      scrollback: @settings('scrollback')
+      tabStopWidth: parseInt(@settings('tabStopWidth'))
       theme: @settings('theme')
     )
     @bindDataListeners()
 
   render: (props) ->
     React.createElement(
-      ArchipelagoTerminal, {
-        terminal: this,
-        key: @id,
-        tabId: props.id,
-        currentTab: props.currentTab,
-        changeTitle: props.changeTitle,
-        markUnread: props.markUnread,
-        removeTerminal: props.removeTerminal,
-        selectTerminal: props.selectTerminal
-      }
+      Terminal
+      key: @id
+      session: this
+      tabId: props.id
+      currentTabId: props.currentTabId
+      changeTitle: props.changeTitle
+      markUnread: props.markUnread
+      removeSession: props.removeSession
+      selectSession: props.selectSession
     )
-
-  isSession: ->
-    true
 
   kill: ->
     window.removeEventListener('resize', @fit.bind(this))
@@ -97,13 +95,7 @@ class Session
       if @xterm[field] != parseFloat(@settings(field))
         @xterm.setOption(field, parseFloat(@settings(field)))
 
-    @bindCopyOnSelect()
     @fit()
-
-  bindCopyOnSelect: ->
-    @xterm.selectionManager.on 'selection', () =>
-      if @settings('copyOnSelect')
-        document.execCommand('copy')
 
   bindDataListeners: ->
     @xterm.attachCustomKeyEventHandler(@keybindingHandler)
@@ -115,17 +107,20 @@ class Session
 
     @xterm.on 'focus', () =>
       @fit()
-      @emitter.emit('focused')
+      @emitter.emit('did-focus')
 
     @xterm.on 'title', (title) =>
-      @emitter.emit('titleChanged')
+      @emitter.emit('did-change-title')
+
+    @xterm.on 'selection', () =>
+      document.execCommand('copy') if @settings('copyOnSelect')
 
     @pty.on 'data', (data) =>
       @xterm.write(data)
       @emitter.emit('data')
 
     @pty.on 'exit', () =>
-      @emitter.emit('exit')
+      @emitter.emit('did-exit')
 
     ['fontFamily', 'cursorStyle', 'cursorBlink', 'scrollback',
      'enableBold', 'tabStopWidth', 'fontSize', 'letterSpacing',
