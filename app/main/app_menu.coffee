@@ -138,7 +138,7 @@ class AppMenu
               )
 
               about.loadURL(url.format(
-                pathname: path.join(__dirname, '../about/about.html')
+                pathname: path.join(__dirname, '../about/index.html')
                 protocol: 'file:'
                 slashes: true
               ))
@@ -163,7 +163,7 @@ class AppMenu
               })
 
               settings.loadURL(url.format({
-                pathname: path.join(__dirname, '../settings/settings.html'),
+                pathname: path.join(__dirname, '../settings/index.html'),
                 protocol: 'file:',
                 slashes: true
               }))

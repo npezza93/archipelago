@@ -1,4 +1,4 @@
-appVersion = require('electron').remote.app.getVersion()
+{ remote } = require 'electron'
 
 document.addEventListener 'DOMContentLoaded', () ->
-  document.querySelector('#version').innerText = "v#{appVersion}"
+  document.querySelector('#version').innerText = "v#{remote.app.getVersion()}"
