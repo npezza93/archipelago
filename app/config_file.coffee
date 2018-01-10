@@ -10,6 +10,7 @@ class ConfigFile
   constructor: ->
     @filePath = join(homedir(), '.archipelago.json')
     @emitter = new EventEmitter()
+    @emitter.setMaxListeners(100)
 
     @_openFile()
     @_bindWatcher()
