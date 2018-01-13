@@ -1,13 +1,13 @@
-React          = require('react')
-{ TextField, FormField }  = require('rmwc')
-nestedProperty = require('nested-property')
-{ ChromePicker } = require('react-color')
+{ TextField, FormField } = require 'rmwc'
+{ ChromePicker }         = require 'react-color'
+React                    = require 'react'
+nestedProperty           = require 'nested-property'
 
 module.exports =
 class ThemeOptions extends React.Component
   constructor: (props) ->
     super(props)
-    @state = { activeField: null }
+    @state = activeField: null
 
   render: ->
     React.createElement(

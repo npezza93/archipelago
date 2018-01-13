@@ -1,5 +1,5 @@
-React         = require('react')
-{ TextField } = require('rmwc')
+React         = require 'react'
+{ TextField } = require 'rmwc'
 
 module.exports =
 class Keybinding extends React.Component

@@ -357,6 +357,7 @@ archipelago-options archipelago-keybindings .keybindings-info {
 
 archipelago-options archipelago-keybindings .keybinding-dialog-trigger {
   margin-right: 0;
+  margin-left: 5px;
   cursor: pointer;
   transition: color .5s ease-in-out;
 }

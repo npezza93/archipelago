@@ -1,12 +1,10 @@
-React      = require('react')
-Profile    = require('./profile')
-ConfigFile = require('../config_file')
+React      = require 'react'
+Profile    = require './profile'
 
 module.exports =
 class Profiles extends React.Component
   constructor: (props) ->
     super(props)
-    @_configFile = new ConfigFile()
 
     @state = {
       activeProfile: @_configFile.contents().activeProfile
@@ -16,7 +14,7 @@ class Profiles extends React.Component
   render: ->
     React.createElement(
       'archipelago-profiles'
-      null
+      {}
       React.createElement('div', className: 'profile-header', 'Profiles')
       React.createElement(
         'div'
@@ -27,7 +25,6 @@ class Profiles extends React.Component
             profile: profile
             activeProfile: @state.activeProfile
             key: profile.id
-            configFile: @_configFile
             removeProfile: @removeProfile.bind(this)
             setActiveProfile: @setActiveProfile.bind(this)
           )
@@ -39,9 +36,6 @@ class Profiles extends React.Component
         'Add New Profile'
       )
     )
-
-  settings: ->
-    @_configFile.contents()
 
   setActiveProfile: (id) ->
     @_configFile.update('activeProfile', id)

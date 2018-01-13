@@ -3,7 +3,6 @@ OptionsHeader  = require('./options_header')
 GeneralOptions = require('./general_options')
 ThemeOptions = require('./theme_options')
 Keybindings = require('./keybindings')
-ConfigFile = require('../config_file')
 nestedProperty = require('nested-property')
 Waypoint = require('react-waypoint')
 AsciiDialog = require('./ascii_dialog')
@@ -12,7 +11,6 @@ module.exports =
 class Options extends React.Component
   constructor: (props) ->
     super(props)
-    @_configFile = new ConfigFile()
     @activeProfile = @_configFile.contents().activeProfile
     @header = {}
     @state = {

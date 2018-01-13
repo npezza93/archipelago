@@ -1,5 +1,5 @@
-React      = require('react')
-Keybinding = require('./keybinding')
+React      = require 'react'
+Keybinding = require './keybinding'
 
 module.exports =
 class Keybindings extends React.Component
@@ -15,8 +15,6 @@ class Keybindings extends React.Component
         React.createElement(
           'div'
           className: 'keybinding-dialog-trigger'
-          style:
-            marginLeft: '5px'
           onClick: () ->
             document.querySelector('dialog').showModal()
           '\u24D8'

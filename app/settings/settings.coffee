@@ -1,20 +1,21 @@
-React    = require('react')
-ReactDOM = require('react-dom')
-Profiles = require('./profiles')
-Options  = require('./options')
+React    = require 'react'
+ReactDOM = require 'react-dom'
+Profiles = require './profiles'
+Options  = require './options'
+
+profilesContainer = document.querySelector('.profiles-container')
+backdrop          = document.querySelector('#backdrop')
 
 document.addEventListener 'DOMContentLoaded', () ->
-  ReactDOM.render(
-    React.createElement(Profiles), document.querySelector('.profiles-container')
-  )
+  ReactDOM.render(React.createElement(Profiles), profilesContainer)
   ReactDOM.render(
     React.createElement(Options), document.querySelector('.options-container')
   )
 
   document.querySelector('#hamburger').addEventListener 'click', () ->
-    document.querySelector('.profiles-container').style.left = '0px'
-    document.querySelector('#backdrop').classList.add('active')
+    profilesContainer.style.left = '0px'
+    backdrop.classList.add('active')
 
-  document.querySelector('#backdrop').addEventListener 'click', () ->
-    document.querySelector('.profiles-container').style.left = '-275px'
-    document.querySelector('#backdrop').classList.remove('active')
+  backdrop.addEventListener 'click', () ->
+    profilesContainer.style.left = '-275px'
+    backdrop.classList.remove('active')
