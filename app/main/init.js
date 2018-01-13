@@ -1,5 +1,5 @@
 require('coffeescript').register()
-ConfigFile   = require('../config_file')
+Config   = require('../config')
 
-global.archipelago = { config: new ConfigFile() }
+global.archipelago = { config: new Config }
 require('./main')

@@ -27,18 +27,6 @@ module.exports =
 
       autoUpdater.checkForUpdates()
 
-    # manualCheck: ->
-    #   autoUpdater.on 'update-available', () =>
-    #     console.log('update-available')
-    # 	autoUpdater.on 'update-not-available', () =>
-    #     console.log('update-not-available')
-    # 	autoUpdater.on 'checking-for-update', () =>
-    #     console.log('checking-for-update')
-    #   autoUpdater.on 'error', (err) =>
-    #     console.log(err)
-    #   @bindDownloaded()
-    #   autoUpdater.checkForUpdates()
-
     bindDownloaded: ->
       autoUpdater.on 'update-downloaded', (event, releaseNotes, releaseName) ->
         message = "#{app.getName()} #{releaseName} is now available!\n"
@@ -50,19 +38,10 @@ module.exports =
             message += notes + '\n\n'
 
         dialog.showMessageBox {
-          type: 'question'
-          buttons: ['Install and Relaunch', 'Later'],
-          defaultId: 0
-          message: 'A new version of ' + app.getName() + ' has been downloaded'
-          detail: message
-        }, (response) ->
-
-        dialog.showMessageBox {
           type: 'question',
           buttons: ['Install and Relaunch', 'Later'],
           defaultId: 0,
           message: "A new version of #{app.getName()} has been downloaded",
           detail: message
         }, (response) ->
-          if response == 0
-            autoUpdater.quitAndInstall()
+          if response == 0 then autoUpdater.quitAndInstall()
