@@ -12,7 +12,7 @@ class App extends React.Component
 
     @state =
       tabs: [
-        id: tabId, title: '', isUnread: false, sessions: new Sessions()
+        id: tabId, title: '', isUnread: false, sessions: new Sessions
       ]
       currentTabId: tabId
 
@@ -76,7 +76,7 @@ class App extends React.Component
 
     @setState(
       tabs: @state.tabs.concat(
-        id: tabId, title: '', isUnread: false, sessions: new Sessions()
+        id: tabId, title: '', isUnread: false, sessions: new Sessions
       )
       currentTabId: tabId
     )
