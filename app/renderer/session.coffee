@@ -1,7 +1,7 @@
 { spawn }           = require 'node-pty'
 defaultShell        = require 'default-shell'
 React               = require 'react'
-{ EventEmitter }    = require 'events'
+{ Emitter }         = require 'event-kit'
 Terminal            = require './terminal'
 Xterm               = require('xterm').Terminal
 
@@ -14,7 +14,7 @@ class Session
   constructor: (group) ->
     @id = Math.random()
     @group = group
-    @emitter = new EventEmitter
+    @emitter = new Emitter
     @pty = spawn(
       @settings('shell') || defaultShell
       @settings('shellArgs').split(',')
@@ -51,6 +51,7 @@ class Session
   kill: ->
     window.removeEventListener('resize', @fit.bind(this))
 
+    @emitter.dispose()
     @pty.kill()
     @xterm.destroy()
 

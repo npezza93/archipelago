@@ -1,7 +1,7 @@
 CSON             = require 'season'
 { homedir }      = require 'os'
 { join }         = require 'path'
-{ EventEmitter } = require 'events'
+{ Emitter }      = require 'event-kit'
 chokidar         = require 'chokidar'
 nestedProperty   = require 'nested-property'
 
@@ -9,7 +9,7 @@ module.exports =
 class Config
   constructor: ->
     @filePath = join(homedir(), '.archipelago.json')
-    @emitter = new EventEmitter()
+    @emitter = new Emitter
 
     @_openFile()
     @_bindWatcher()
