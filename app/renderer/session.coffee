@@ -96,8 +96,8 @@ class Session
     @xterm.on 'focus', () =>
       @fit()
       setTimeout(() =>
-        @xterm.setOption('cursorBlink', !archipelago.config.get('cursorBlink'))
-        @xterm.setOption('cursorBlink', archipelago.config.get('cursorBlink'))
+        @xterm.setOption('cursorBlink', !@settings('cursorBlink'))
+        @xterm.setOption('cursorBlink', @settings('cursorBlink'))
         100
       )
       @emitter.emit('did-focus')
