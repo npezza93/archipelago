@@ -1,5 +1,5 @@
-asciiChart = require('./ascii')
-React = require('react')
+CSON  = require 'season'
+React = require 'react'
 
 module.exports =
 class AsciiDialog extends React.Component
@@ -15,32 +15,13 @@ class AsciiDialog extends React.Component
           document.querySelector('dialog').close()
         '\u00D7'
       )
-      asciiChart.map (row) ->
+      CSON.readFileSync(join(__dirname, './ascii.json')).map (row) ->
         React.createElement(
           'div'
           key: row.dec
-          style:
-            display: 'flex'
-            flexDirection: 'row'
-            justifyContent: 'space-between'
-          React.createElement(
-            'div'
-            style:
-              flex: 1
-            row.dec
-          )
-          React.createElement(
-            'div'
-            style:
-              flex: 1
-            row.char
-          )
-          React.createElement(
-            'div'
-            style:
-              flex: 2
-              textTransform: 'lowercase'
-            row.detail
-          )
+          className: 'ascii-row'
+          React.createElement('div', {}, row.dec)
+          React.createElement('div', {}, row.char)
+          React.createElement('div', {}, row.detail)
         )
     )

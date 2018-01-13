@@ -431,6 +431,22 @@ dialog .ascii-close {
   cursor: pointer;
 }
 
+dialog .ascii-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+dialog .ascii-row:nth-child(1),
+dialog .ascii-row:nth-child(2) {
+  flex: 1;
+}
+
+dialog .ascii-row:nth-child(3) {
+  flex: 2;
+  text-transform: lowercase;
+}
+
 @media (max-width: 700px) {
 
   .profiles-container {
