@@ -6,11 +6,10 @@ chokidar         = require 'chokidar'
 nestedProperty   = require 'nested-property'
 
 module.exports =
-class ConfigFile
+class Config
   constructor: ->
     @filePath = join(homedir(), '.archipelago.json')
     @emitter = new EventEmitter()
-    @emitter.setMaxListeners(100)
 
     @_openFile()
     @_bindWatcher()
@@ -18,7 +17,7 @@ class ConfigFile
   get: (selector, activeProfile = true) ->
     selector = "profiles.#{@_activeProfileId()}.#{selector}" if activeProfile
 
-    nestedProperty.get(@_contents(), selector)
+    @_coerce(selector, nestedProperty.get(@_contents(), selector))
 
   set: (selector, value, activeProfile = true) ->
     selector = "profiles.#{@_activeProfileId()}.#{selector}" if activeProfile
@@ -40,12 +39,25 @@ class ConfigFile
 
     profile
 
+  getSchemaFor: (selector) ->
+    nestedProperty.get(@_schema(), selector)
+
   _activeProfileId: ->
     @_contents().activeProfile
 
   _bindWatcher: ->
     chokidar.watch(@filePath).on 'change', () =>
       @emitter.emit('did-change')
+
+  _coerce: (selector, value) ->
+    schema = @getSchemaFor(selector)
+
+    if schema && schema.type == 'integer'
+      parseInt(value)
+    else if schema && schema.type == 'float'
+      parseFloat(value)
+    else
+      value
 
   _contents: ->
     CSON.readFileSync(@filePath)
@@ -56,6 +68,9 @@ class ConfigFile
   _openFile: ->
     if !@_exists() || Object.keys(@get('profiles', false)).length == 0
       @_write(activeProfile: 1, profiles: { 1: @defaultProfile(1) })
+
+  _schema: ->
+    @schema ?= CSON.readFileSync(join(__dirname, './schema.cson'))
 
   _write: (config) ->
     CSON.writeFile(@filePath, config)

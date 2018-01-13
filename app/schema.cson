@@ -1,0 +1,163 @@
+name:
+  type: 'string'
+  input: 'text'
+cursorStyle:
+  type: 'string'
+  options:
+    block: 'Block'
+    underline: 'Underline'
+    bar: 'Bar'
+  label: 'Choose a cursor style'
+  input: 'select'
+cursorBlink:
+  type: 'boolean'
+  label: 'Blink cursor'
+  input: 'switch'
+fontFamily:
+  type: 'string'
+  label: 'Font Family'
+  input: 'text'
+fontSize:
+  type: 'integer'
+  label: 'Font Size'
+  input: 'text'
+scrollback:
+  type: 'integer'
+  label: 'Scrollback'
+  input: 'text'
+bellStyle:
+  type: 'string'
+  options:
+    none: 'None'
+    visual: 'Visual'
+    sound: 'Sound'
+    both: 'Both'
+  label: 'Choose a bell style'
+  input: 'select'
+vibrancy:
+  type: 'string'
+  label: 'Vibrancy'
+  disabled: true
+  input: 'select'
+  options:
+    light: 'light'
+    'medium-light': 'medium-light'
+    dark: 'dark'
+    'ultra-dark': 'ultra-dark'
+lineHeight:
+  type: 'float'
+  label: 'Line Height'
+  input: 'text'
+tabStopWidth:
+  type: 'integer'
+  label: 'Tab Stop Width'
+  input: 'text'
+windowBackground:
+  type: 'string'
+  label: 'Window Background'
+  input: 'color'
+tabColor:
+  type: 'string'
+  label: 'Tab Color'
+  input: 'color'
+tabBorderColor:
+  type: 'string'
+  label: 'Tab Border Color'
+  input: 'color'
+shellArgs:
+  label: 'Shell Arguments (comma separated)'
+  type: 'string'
+  input: 'text'
+letterSpacing:
+  type: 'float'
+  label: 'Letter Spacing'
+  input: 'string'
+copyOnSelect:
+  type: 'boolean'
+  label: 'Copy on select'
+  input: 'switch'
+theme:
+	selection:
+    type: 'string'
+    input: 'color'
+    label: 'Selection'
+	foreground:
+    type: 'string'
+    input: 'color'
+    label: 'Foreground'
+	background:
+    type: 'string'
+    input: 'color'
+    label: 'Terminal Background'
+	black:
+    type: 'string'
+    input: 'color'
+    label: 'Black'
+	red:
+    type: 'string'
+    input: 'color'
+    label: 'Red'
+	brightRed:
+    type: 'string'
+    input: 'color'
+    label: 'Bright Red'
+	green:
+    type: 'string'
+    input: 'color'
+    label: 'Green'
+	brightGreen:
+    type: 'string'
+    input: 'color'
+    label: 'Bright Green'
+	yellow:
+    type: 'string'
+    input: 'color'
+    label: 'Yellow'
+	brightYellow:
+    type: 'string'
+    input: 'color'
+    label: 'Bright Yellow'
+	magenta:
+    type: 'string'
+    input: 'color'
+    label: 'Magenta'
+	brightMagenta:
+    type: 'string'
+    input: 'color'
+    label: 'Bright Magenta'
+	cyan:
+    type: 'string'
+    input: 'color'
+    label: 'Cyan'
+	brightCyan:
+    type: 'string'
+    input: 'color'
+    label: 'Bright Cyan'
+	blue:
+    type: 'string'
+    input: 'color'
+    label: 'Blue'
+	brightBlue:
+    type: 'string'
+    input: 'color'
+    label: 'Bright Blue'
+	white:
+    type: 'string'
+    input: 'color'
+    label: 'White'
+	brightWhite:
+    type: 'string'
+    input: 'color'
+    label: 'Bright White'
+	brightBlack:
+    type: 'string'
+    input: 'color'
+    label: 'Bright Black'
+	cursorAccent:
+    type: 'string'
+    input: 'color'
+    label: 'Cursor Accent'
+	cursor:
+    type: 'string'
+    input: 'color'
+    label: 'Cursor'
