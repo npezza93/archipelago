@@ -5,16 +5,16 @@ class Tab extends React.Component
   render: ->
     React.createElement(
       'archipelago-tab'
-      class: @htmlClasses()
+      class: @_class()
       onClick: (e) => @props.selectTab(e, @props.id)
-      @renderTitle()
-      @renderExit()
+      @_title()
+      @_exit()
     )
 
-  renderTitle: () ->
+  _title: () ->
     React.createElement('span', {}, @props.title || 'Loading...')
 
-  renderExit: () ->
+  _exit: () ->
     React.createElement(
       'div'
       onClick: (e) =>
@@ -23,11 +23,8 @@ class Tab extends React.Component
       '\u00D7'
     )
 
-  htmlClasses: () ->
-    classes = []
+  _class: () ->
     if @props.active
-      classes.push('active')
+      'active'
     else if @props.isUnread
-      classes.push('is-unread')
-
-    classes.join(' ')
+      'is-unread'

@@ -1,5 +1,5 @@
-Session      = require('./session')
-SessionGroup = require('./session_group')
+Session      = require './session'
+SessionGroup = require './session_group'
 
 module.exports =
 class Sessions
@@ -63,8 +63,7 @@ class Sessions
   _traverse: (group, callback) ->
     unless group? then return
 
-    if group.isSession
-      callback(group)
+    if group.isSession then callback(group)
 
     @_traverse(group.left, callback)
     @_traverse(group.right, callback)

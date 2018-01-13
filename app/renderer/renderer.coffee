@@ -21,7 +21,7 @@ document.addEventListener 'DOMContentLoaded', () ->
 
     element.style.setProperty(cssVar, archipelago.config.get(selector))
 
-    archipelago.config.onDidChange selector, (newValue) =>
+    archipelago.config.onDidChange selector, (newValue) ->
       element.style.setProperty(cssVar, newValue)
 
 ipcRenderer.on 'new-tab', () ->
