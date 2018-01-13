@@ -26,9 +26,10 @@ createWindow = () ->
 
   windows.push(win)
 
-  # win.webContents.once 'did-frame-finish-load', () =>
-    # if process.platform == 'darwin' || process.platform == 'win32'
-      # (new AutoUpdate()).autoCheck()
+  win.webContents.once 'did-frame-finish-load', () =>
+    if process.platform == 'darwin' || process.platform == 'win32'
+      console.log 'Will check for update'
+      # (new AutoUpdate).autoCheck()
 
 app.on 'ready', () ->
   createWindow()
@@ -48,6 +49,6 @@ app.on 'activate', () ->
 
   createWindow() if windowCount == 0
 
-archipelago.config.onDidChange 'vibrancy', () ->
+archipelago.config.onDidChange 'vibrancy', (value) ->
   windows.forEach (win) ->
-    win.setVibrancy(archipelago.config.get('vibrancy')) unless win.isDestroyed()
+    win.setVibrancy(value) unless win.isDestroyed()
