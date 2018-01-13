@@ -124,8 +124,8 @@ body {
 archipelago-terminal {
   display: flex;
   margin: 5px 0 10px 15px;
-  width: calc(100% - 15px);
-  height: calc(100% - 15px);
+  flex: 1;
+  height: 100%;
 }
 
 .terminal {
@@ -165,7 +165,7 @@ archipelago-tab-list {
   display: flex;
   flex-direction: row;
   padding-left: 70px;
-  width: calc(100vw - 70px);
+  flex: 1;
   height: 40px;
 }
 

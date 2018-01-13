@@ -10,16 +10,12 @@ class Terminal extends React.Component
     React.createElement('archipelago-terminal', ref: 'container')
 
   componentDidMount: ->
-    @props.session.xterm.open(@refs.container)
-    @props.session.updateSettings()
-    @props.session.xterm.focus()
-    @props.session.xterm.element.addEventListener 'wheel', () =>
-      clearTimeout(@scrollbarFade)
-      @scrollbarFade = setTimeout(
-        () => @props.session.xterm.element.classList.remove('scrolling'),
-        600
-      )
-      @props.session.xterm.element.classList.add('scrolling')
+    xterm = @props.session.xterm
+
+    xterm.open(@refs.container)
+    xterm.setOption('theme', archipelago.config.get('theme'))
+    xterm.focus()
+    @props.session.bindScrollListener()
 
   bindDataListeners: ->
     @props.session.on 'did-focus', () =>

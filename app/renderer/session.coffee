@@ -1,10 +1,11 @@
-{ spawn }           = require('node-pty')
-defaultShell        = require('default-shell')
-React               = require('react')
-{ EventEmitter }    = require('events')
-{ isHotkey }        = require('is-hotkey')
+{ spawn }           = require 'node-pty'
+defaultShell        = require 'default-shell'
+React               = require 'react'
+{ EventEmitter }    = require 'events'
+Terminal            = require './terminal'
 Xterm               = require('xterm').Terminal
-Terminal            = require('./terminal')
+
+Xterm.applyAddon(require('xterm/lib/addons/fit/fit'))
 
 module.exports =
 class Session
@@ -29,7 +30,7 @@ class Session
       bellSound: @settings('bellSound')
       bellStyle: @settings('bellStyle')
       scrollback: @settings('scrollback')
-      tabStopWidth: parseInt(@settings('tabStopWidth'))
+      tabStopWidth: @settings('tabStopWidth')
       theme: @settings('theme')
     )
     @bindDataListeners()
@@ -58,44 +59,31 @@ class Session
 
   fit: ->
     @xterm.charMeasure.measure(@xterm.options)
-    rows = Math.floor(@xterm.element.offsetHeight / @xterm.charMeasure.height)
-    cols = Math.floor(@xterm.element.offsetWidth / @xterm.charMeasure.width) - 2
 
-    try
-      @xterm.resize(cols, rows)
-      @pty.resize(cols, rows)
+    @xterm.fit()
+    @pty.resize(@xterm.cols, @xterm.rows)
 
   settings: (setting) ->
     archipelago.config.get(setting)
 
-  keybindingHandler: (e) =>
+  keybindingHandler: (e) ->
     caught = false
-    keybindings = Object.values(@settings('keybindings')[process.platform])
 
-    keybindings.forEach (keybinding) =>
-      if isHotkey(keybinding.accelerator, e)
-        command = keybinding.command.map (num) ->
-          String.fromCharCode(parseInt(num))
-        @pty.write(command.join(''))
+    archipelago.keymaps.mappings.forEach (mapping) =>
+      if archipelago.keymaps.keystrokeForKeyboardEvent(e) == mapping.keystroke
+        @pty.write(keybinding.command)
         caught = true
 
     !caught
 
-  updateSettings: ->
-    ['fontFamily', 'lineHeight', 'cursorStyle', 'cursorBlink', 'bellSound',
-     'bellStyle', 'scrollback', 'theme'].forEach (field) =>
-       if @xterm[field] != @settings(field)
-         @xterm.setOption(field, @settings(field))
-
-    ['tabStopWidth', 'fontSize', 'letterSpacing'].forEach (field) =>
-      if @xterm[field] != parseInt(@settings(field))
-        @xterm.setOption(field, parseInt(@settings(field)))
-
-    ['lineHeight'].forEach (field) =>
-      if @xterm[field] != parseFloat(@settings(field))
-        @xterm.setOption(field, parseFloat(@settings(field)))
-
-    @fit()
+  bindScrollListener: ->
+    @xterm.element.addEventListener 'wheel', () =>
+      clearTimeout(@scrollbarFade)
+      @scrollbarFade = setTimeout(
+        () => @xterm.element.classList.remove('scrolling'),
+        600
+      )
+      @xterm.element.classList.add('scrolling')
 
   bindDataListeners: ->
     @xterm.attachCustomKeyEventHandler(@keybindingHandler)
@@ -107,6 +95,11 @@ class Session
 
     @xterm.on 'focus', () =>
       @fit()
+      setTimeout(() =>
+        @xterm.setOption('cursorBlink', !archipelago.config.get('cursorBlink'))
+        @xterm.setOption('cursorBlink', archipelago.config.get('cursorBlink'))
+        100
+      )
       @emitter.emit('did-focus')
 
     @xterm.on 'title', (title) =>
