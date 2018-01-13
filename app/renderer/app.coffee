@@ -46,11 +46,19 @@ class App extends React.Component
     for tab in @state.tabs
       tab.sessions.kill()
 
+  componentDidUpdate: ->
+    currentSession = @currentTab().sessions.find(
+      @currentTab().sessions.root, @state.currentSessionId
+    )
+
+    if currentSession && !currentSession.isFocused 
+      currentSession.xterm.focus()
+
   currentTab: (id) ->
     currentTab = null
 
     for tab in @state.tabs
-      currentTab = tabObject if tabObject.id == (id || @state.currentTabId)
+      currentTab = tab if tab.id == (id || @state.currentTabId)
 
     currentTab
 
