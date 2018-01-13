@@ -40,153 +40,117 @@ theme:
 keybindings:
 	linux:
 		"1":
-			accelerator: "ctrl+left"
-			command: [
-				27
-				98
-			]
-		"2":
-			accelerator: "ctrl+right"
-			command: [
-				27
-				102
-			]
-		"3":
 			accelerator: "home"
 			command: [
 				27
 				79
 				72
 			]
-		"4":
+		"2":
 			accelerator: "end"
 			command: [
 				27
 				79
 				70
 			]
-		"5":
-			accelerator: "ctrl+backspace"
+		"3":
+			accelerator: "ctrl-backspace"
 			command: [
 				27
 				127
 			]
-		"6":
-			accelerator: "ctrl+del"
+		"4":
+			accelerator: "ctrl-del"
 			command: [
 				27
 				100
 			]
-		"7":
-			accelerator: "ctrl+home"
+		"5":
+			accelerator: "ctrl-home"
 			command: [
 				27
 				119
 			]
-		"8":
-			accelerator: "ctrl+end"
+		"6":
+			accelerator: "ctrl-end"
 			command: [
 				16
 				66
 			]
 	win32:
 		"1":
-			accelerator: "ctrl+left"
-			command: [
-				27
-				98
-			]
-		"2":
-			accelerator: "ctrl+right"
-			command: [
-				27
-				102
-			]
-		"3":
 			accelerator: "home"
 			command: [
 				27
 				79
 				72
 			]
-		"4":
+		"2":
 			accelerator: "end"
 			command: [
 				27
 				79
 				70
 			]
-		"5":
-			accelerator: "ctrl+backspace"
+		"3":
+			accelerator: "ctrl-backspace"
 			command: [
 				27
 				127
 			]
-		"6":
-			accelerator: "cltr+del"
+		"4":
+			accelerator: "cltr-del"
 			command: [
 				27
 				100
 			]
-		"7":
-			accelerator: "ctrl+home"
+		"5":
+			accelerator: "ctrl-home"
 			command: [
 				27
 				119
 			]
-		"8":
-			accelerator: "ctrl+end"
+		"6":
+			accelerator: "ctrl-end"
 			command: [
 				16
 				66
 			]
 	darwin:
 		"1":
-			accelerator: "alt+left"
-			command: [
-				27
-				98
-			]
-		"2":
-			accelerator: "alt+right"
-			command: [
-				27
-				102
-			]
-		"3":
-			accelerator: "command+left"
+			accelerator: "command-left"
 			command: [
 				27
 				79
 				72
 			]
-		"4":
-			accelerator: "command+right"
+		"2":
+			accelerator: "command-right"
 			command: [
 				27
 				79
 				70
 			]
-		"5":
-			accelerator: "alt+backspace"
+		"3":
+			accelerator: "alt-backspace"
 			command: [
 				27
 				127
 			]
-		"6":
-			accelerator: "alt+delete"
+		"4":
+			accelerator: "alt-delete"
 			command: [
 				27
 				100
 			]
-		"7":
-			accelerator: "command+backspace"
+		"5":
+			accelerator: "command-backspace"
 			command: [
 				27
 				119
 			]
-		"8":
-			accelerator: "command+delete"
+		"6":
+			accelerator: "command-delete"
 			command: [
 				16
 				66
