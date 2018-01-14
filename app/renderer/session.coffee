@@ -16,22 +16,25 @@ class Session
     @group = group
     @emitter = new Emitter
     @pty = spawn(
-      @settings('shell') || defaultShell
-      @settings('shellArgs').split(',')
-      name: 'xterm-256color', cwd: process.env.HOME, env: process.env
+      @setting('shell') || defaultShell
+      @setting('shellArgs').split(',')
+      name: 'xterm-256color'
+      cwd: process.env.HOME
+      env: process.env
     )
+
     @xterm = new Xterm(
-      fontFamily: @settings('fontFamily')
-      fontSize: @settings('fontSize')
-      lineHeight: @settings('lineHeight')
-      letterSpacing: @settings('letterSpacing')
-      cursorStyle: @settings('cursorStyle')
-      cursorBlink: @settings('cursorBlink')
-      bellSound: @settings('bellSound')
-      bellStyle: @settings('bellStyle')
-      scrollback: @settings('scrollback')
-      tabStopWidth: @settings('tabStopWidth')
-      theme: @settings('theme')
+      fontFamily: @setting('fontFamily')
+      fontSize: @setting('fontSize')
+      lineHeight: @setting('lineHeight')
+      letterSpacing: @setting('letterSpacing')
+      cursorStyle: @setting('cursorStyle')
+      cursorBlink: @setting('cursorBlink')
+      bellSound: @setting('bellSound')
+      bellStyle: @setting('bellStyle')
+      scrollback: @setting('scrollback')
+      tabStopWidth: @setting('tabStopWidth')
+      theme: @setting('theme')
     )
     @bindDataListeners()
 
@@ -64,7 +67,7 @@ class Session
     @xterm.fit()
     @pty.resize(@xterm.cols, @xterm.rows)
 
-  settings: (setting) ->
+  setting: (setting) ->
     archipelago.config.get(setting)
 
   keybindingHandler: (e) ->
@@ -97,8 +100,8 @@ class Session
     @xterm.on 'focus', () =>
       @fit()
       setTimeout(() =>
-        @xterm.setOption('cursorBlink', !@settings('cursorBlink'))
-        @xterm.setOption('cursorBlink', @settings('cursorBlink'))
+        @xterm.setOption('cursorBlink', !@setting('cursorBlink'))
+        @xterm.setOption('cursorBlink', @setting('cursorBlink'))
         100
       )
       @emitter.emit('did-focus')
@@ -107,7 +110,7 @@ class Session
       @emitter.emit('did-change-title')
 
     @xterm.on 'selection', () =>
-      document.execCommand('copy') if @settings('copyOnSelect')
+      document.execCommand('copy') if @setting('copyOnSelect')
 
     @pty.on 'data', (data) =>
       @xterm.write(data)
