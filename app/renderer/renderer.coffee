@@ -21,12 +21,13 @@ document.addEventListener 'DOMContentLoaded', () ->
 
     element.style.setProperty(cssVar, archipelago.config.get(selector))
 
-    archipelago.config.onDidChange selector, (newValue) ->
-      element.style.setProperty(cssVar, newValue)
-
 ipcRenderer.on 'new-tab', () ->
   archipelago.app.addTab()
 ipcRenderer.on 'split-horizontal', () ->
   archipelago.app.split('horizontal')
 ipcRenderer.on 'split-vertical', () ->
   archipelago.app.split('vertical')
+
+Object.entries(styleProperties).forEach (property) ->
+  archipelago.config.onDidChange property[0], (newValue) ->
+    document.documentElement.style.setProperty(property[1], newValue)
