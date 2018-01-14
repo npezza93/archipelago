@@ -51,7 +51,7 @@ class App extends React.Component
       @currentTab().sessions.root, @state.currentSessionId
     )
 
-    if currentSession && !currentSession.isFocused 
+    if currentSession && !currentSession.isFocused
       currentSession.xterm.focus()
 
   currentTab: (id) ->
@@ -141,10 +141,12 @@ class App extends React.Component
       @setState(tabs: tabs)
 
   split: (orientation) ->
+    newSessionId = null
     tabs = @state.tabs.map (tab) =>
       if tab.id == @state.currentTabId
-        tab.sessions.add(@state.currentSessionId, orientation)
+        newGroup = tab.sessions.add(@state.currentSessionId, orientation)
+        newSessionId = newGroup.right.id
 
       tab
 
-    @setState(tabs: tabs)
+    @setState(tabs: tabs, currentSessionId: newSessionId)
