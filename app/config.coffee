@@ -25,10 +25,10 @@ class Config
     nestedProperty.set(settings, selector, value)
     @_write(settings)
 
-  onDidChange: (selector, callback) ->
-    oldValue = @get(selector)
+  onDidChange: (selector, callback, activeProfile = true) ->
+    oldValue = @get(selector, activeProfile)
     @emitter.on 'did-change', =>
-      newValue = @get(selector)
+      newValue = @get(selector, activeProfile)
       unless oldValue == newValue
         oldValue = newValue
         callback(newValue)
