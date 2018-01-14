@@ -34,6 +34,10 @@ bellStyle:
     both: 'Both'
   label: 'Choose a bell style'
   input: 'select'
+bellSound:
+  type: 'string'
+  input: 'text'
+  label: 'Bell sound (URI)'
 vibrancy:
   type: 'string'
   label: 'Vibrancy'
@@ -68,10 +72,14 @@ shellArgs:
   label: 'Shell Arguments (comma separated)'
   type: 'string'
   input: 'text'
+shell:
+  type: 'string'
+  input: 'text'
+  label: 'Shell to run (i.e. /usr/local/bin/fish)'
 letterSpacing:
-  type: 'float'
+  type: 'string'
   label: 'Letter Spacing'
-  input: 'string'
+  input: 'text'
 copyOnSelect:
   type: 'boolean'
   label: 'Copy on select'
