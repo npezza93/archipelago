@@ -77,7 +77,7 @@ class Session
 
     archipelago.keymaps.mappings.forEach (mapping) =>
       if archipelago.keymaps.keystrokeForKeyboardEvent(e) == mapping.keystroke
-        @pty.write(keybinding.command)
+        @pty.write(mapping.command)
         caught = true
 
     !caught
