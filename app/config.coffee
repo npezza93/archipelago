@@ -27,7 +27,7 @@ class Config
 
   onDidChange: (selector, callback, activeProfile = true) ->
     oldValue = @get(selector, activeProfile)
-    @emitter.on 'did-change', =>
+    @emitter.on 'did-change', () =>
       newValue = @get(selector, activeProfile)
       unless oldValue == newValue
         oldValue = newValue

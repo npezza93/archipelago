@@ -1,9 +1,11 @@
-React = require 'react'
+React                   = require 'react'
+{ CompositeDisposable } = require 'event-kit'
 
 module.exports =
 class Terminal extends React.Component
   constructor: (props) ->
     super(props)
+    @subscriptions = new CompositeDisposable
     @bindDataListeners()
 
   render: ->
@@ -17,16 +19,19 @@ class Terminal extends React.Component
     xterm.focus()
     @props.session.bindScrollListener()
 
+  componentWillUnmount: ->
+    @subscriptions.dispose()
+
   bindDataListeners: ->
-    @props.session.on 'did-focus', () =>
+    @subscriptions.add @props.session.onDidFocus () =>
       @props.selectSession(@props.session.id)
       @props.changeTitle(@props.tabId, @props.session.xterm.title)
 
-    @props.session.on 'did-change-title', () =>
+    @subscriptions.add @props.session.onDidChangeTitle () =>
       @props.changeTitle(@props.tabId, @props.session.xterm.title)
 
-    @props.session.on 'did-exit', () =>
+    @subscriptions.add @props.session.onDidExit () =>
       @props.removeSession(@props.tabId, @props.session.id)
 
-    @props.session.on 'data', () =>
+    @subscriptions.add @props.session.onData () =>
       @props.markUnread(@props.tabId) if @props.currentTabId != @props.tabId

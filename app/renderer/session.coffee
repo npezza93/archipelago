@@ -1,9 +1,9 @@
-{ spawn }           = require 'node-pty'
-defaultShell        = require 'default-shell'
-React               = require 'react'
-{ Emitter }         = require 'event-kit'
-Terminal            = require './terminal'
-Xterm               = require('xterm').Terminal
+{ spawn }                        = require 'node-pty'
+defaultShell                     = require 'default-shell'
+React                            = require 'react'
+{ Emitter, CompositeDisposable } = require 'event-kit'
+Terminal                         = require './terminal'
+Xterm                            = require('xterm').Terminal
 
 Xterm.applyAddon(require('xterm/lib/addons/fit/fit'))
 
@@ -15,6 +15,7 @@ class Session
     @id = Math.random()
     @group = group
     @emitter = new Emitter
+    @subscriptions = new CompositeDisposable
     @pty = spawn(
       @setting('shell') || defaultShell
       @setting('shellArgs').split(',')
@@ -55,6 +56,7 @@ class Session
     window.removeEventListener('resize', @fit.bind(this))
 
     @emitter.dispose()
+    @subscriptions.dispose()
     @pty.kill()
     @xterm.destroy()
 
@@ -89,8 +91,20 @@ class Session
       )
       @xterm.element.classList.add('scrolling')
 
+  onDidFocus: (callback) ->
+    @emitter.on 'did-focus', callback
+
+  onDidChangeTitle: (callback) ->
+    @emitter.on 'did-change-title', callback
+
+  onDidExit: (callback) ->
+    @emitter.on 'did-exit', callback
+
+  onData: (callback) ->
+    @emitter.on 'data', callback
+
   bindDataListeners: ->
-    @xterm.attachCustomKeyEventHandler(@keybindingHandler)
+    @xterm.attachCustomKeyEventHandler(@keybindingHandler.bind(this))
     window.addEventListener 'resize', @fit.bind(this)
 
     @xterm.on 'data', (data) =>
@@ -122,5 +136,5 @@ class Session
     ['fontFamily', 'cursorStyle', 'cursorBlink', 'scrollback',
      'enableBold', 'tabStopWidth', 'fontSize', 'letterSpacing',
      'lineHeight', 'bellSound', 'bellStyle', 'theme'].forEach (field) =>
-       archipelago.config.onDidChange field, (newValue) =>
+       @subscriptions.add archipelago.config.onDidChange field, (newValue) =>
          @xterm.setOption(field, newValue)
