@@ -21,13 +21,12 @@ class Profiles extends React.Component
   createProfile: ->
     tempProfiles = @dupeProfiles()
 
-    id = Math.max(Object.keys(...(tempProfiles || {}))) + 1
-
+    id = Math.max(...Object.keys(tempProfiles)) + 1
     tempProfiles[id] = archipelago.config.defaultProfile(id)
     archipelago.config.set('profiles', tempProfiles, false)
     archipelago.config.set('activeProfile', id, false)
 
-    @setState(activeProfile: id, profiles: tempProfiles)
+    @setState(activeProfile: id, profiles: Object.values(tempProfiles))
 
   dupeProfiles: ->
     tempProfiles = {}
@@ -68,11 +67,11 @@ class Profiles extends React.Component
     delete tempProfiles[id]
     archipelago.config.set('profiles', tempProfiles, false)
 
-    @resetActiveProfile()
+    @resetActiveProfile(id)
 
     @setState(
       activeProfile: archipelago.config.get('activeProfile', false)
-      profiles: tempProfiles
+      profiles: Object.values(tempProfiles)
     )
 
   resetActiveProfile: (id) ->

@@ -43,6 +43,7 @@ class Config
     nestedProperty.get(@_schema(), selector)
 
   _activeProfileId: ->
+    @_validateActiveProfile()
     @_contents().activeProfile
 
   _bindWatcher: ->
@@ -74,5 +75,12 @@ class Config
   _schema: ->
     @schema ?= CSON.readFileSync(join(__dirname, './schema.cson'))
 
+  _validateActiveProfile: ->
+    return if @_contents().profiles[@_contents().activeProfile]
+
+    activeProfile = Object.keys(@_contents().profiles)[0]
+
+    @set('activeProfile', parseInt(activeProfile), false)
+
   _write: (config) ->
-    CSON.writeFile(@filePath, config)
+    CSON.writeFileSync(@filePath, config)
