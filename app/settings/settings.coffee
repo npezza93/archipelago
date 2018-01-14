@@ -3,10 +3,10 @@ ReactDOM = require 'react-dom'
 Profiles = require './profiles'
 Options  = require './options'
 
-profilesContainer = document.querySelector('.profiles-container')
-backdrop          = document.querySelector('#backdrop')
-
 document.addEventListener 'DOMContentLoaded', () ->
+  profilesContainer = document.querySelector('.profiles-container')
+  backdrop          = document.querySelector('#backdrop')
+
   ReactDOM.render(React.createElement(Profiles), profilesContainer)
   ReactDOM.render(
     React.createElement(Options), document.querySelector('.options-container')

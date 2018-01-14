@@ -1,21 +1,21 @@
-React = require('react')
-OptionsHeader  = require('./options_header')
-GeneralOptions = require('./general_options')
-ThemeOptions = require('./theme_options')
-Keybindings = require('./keybindings')
-nestedProperty = require('nested-property')
-Waypoint = require('react-waypoint')
-AsciiDialog = require('./ascii_dialog')
+React          = require 'react'
+nestedProperty = require 'nested-property'
+Waypoint       = require 'react-waypoint'
+OptionsHeader  = require './options_header'
+GeneralOptions = require './general_options'
+ThemeOptions   = require './theme_options'
+Keybindings    = require './keybindings'
+AsciiDialog    = require './ascii_dialog'
 
 module.exports =
 class Options extends React.Component
   constructor: (props) ->
     super(props)
-    @activeProfile = @_configFile.contents().activeProfile
     @header = {}
+    activeProfileId = archipelago.config.get('activeProfile', false)
     @state = {
-      header: { preferences: 0, theme: 1,  keybinding: 2 },
-      ...@_configFile.activeSettings()
+      header: { preferences: 0, theme: 1, keybinding: 2 },
+      ...archipelago.config.get("profiles.#{activeProfileId}", false)
     }
     @bindListener()
 
@@ -54,16 +54,16 @@ class Options extends React.Component
     )
 
   bindListener: ->
-    @_configFile.on 'change', () =>
-      if @activeProfile != @_configFile.contents().activeProfile
-        @activeProfile = @_configFile.contents().activeProfile
-        @setState(@_configFile.activeSettings())
+    archipelago.config.onDidChange(
+      'activeProfile'
+      (newActiveProfileId) =>
+        @setState(archipelago.config.get("profiles.#{newActiveProfileId}", false))
+      false
+    )
 
   updateOption: (key, value) ->
-    optionKey = "profiles.#{@_configFile.contents().activeProfile}."
-    optionKey += key
+    archipelago.config.set(key, value)
 
-    @_configFile.update(optionKey, value)
     tempState = {}
     Object.assign(tempState, @state)
 

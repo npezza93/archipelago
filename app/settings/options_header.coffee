@@ -1,14 +1,23 @@
-React = require('react')
+React = require 'react'
 
 module.exports =
 class OptionsHeader extends React.Component
+  constructor: (props) ->
+    super(props)
+    @headings =
+      preferences: 'Preferences'
+      theme: 'Theme'
+      keybinding: 'Keybindings'
+
   render: ->
     React.createElement(
       'archipelago-options-header'
       {}
-      React.createElement(
-        'div', { position: @props.preferences }, 'Preferences'
-      )
-      React.createElement('div', { position: @props.theme }, 'Theme')
-      React.createElement('div', { position: @props.keybinding }, 'Keybindings')
+      for headingKey, heading of @headings
+        React.createElement(
+          'div'
+          key: headingKey
+          position: @props[headingKey]
+          heading
+        )
     )

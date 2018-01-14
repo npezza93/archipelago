@@ -1,69 +1,89 @@
-React      = require 'react'
-Profile    = require './profile'
+React   = require 'react'
+Profile = require './profile'
 
 module.exports =
 class Profiles extends React.Component
   constructor: (props) ->
     super(props)
-
-    @state = {
-      activeProfile: @_configFile.contents().activeProfile
-      profiles: Object.values(@_configFile.contents().profiles)
-    }
+    @state =
+      activeProfile: archipelago.config.get('activeProfile', false)
+      profiles: Object.values(archipelago.config.get('profiles', false))
 
   render: ->
     React.createElement(
       'archipelago-profiles'
       {}
-      React.createElement('div', className: 'profile-header', 'Profiles')
-      React.createElement(
-        'div'
-        className: 'profile-list'
-        @state.profiles.map (profile) =>
-          React.createElement(
-            Profile
-            profile: profile
-            activeProfile: @state.activeProfile
-            key: profile.id
-            removeProfile: @removeProfile.bind(this)
-            setActiveProfile: @setActiveProfile.bind(this)
-          )
-      )
-      React.createElement(
-        'div'
-        className: 'new-profile'
-        onClick: @createProfile.bind(this)
-        'Add New Profile'
-      )
-    )
-
-  setActiveProfile: (id) ->
-    @_configFile.update('activeProfile', id)
-
-    @setState(activeProfile: id)
-
-  removeProfile: (id) ->
-    tempState = {}
-
-    Object.assign(tempState, @settings())
-    if tempState.activeProfile == id
-      tempState.activeProfile = parseInt(Object.keys(tempState.profiles)[0])
-
-    delete tempState.profiles[id]
-    @_configFile.write(tempState)
-
-    @setState(
-      activeProfile: @settings().activeProfile
-      profiles: Object.values(@settings().profiles)
+      @header()
+      @list()
+      @newProfile()
     )
 
   createProfile: ->
-    settings = @settings()
-    id = Math.max(Object.keys(...(settings.profiles || {}))) + 1
+    tempProfiles = @dupeProfiles()
 
-    settings.profiles ?= {}
-    settings.profiles[id] = ConfigFile.defaultProfile(id)
-    settings.activeProfile = id
-    @_configFile.write(settings)
+    id = Math.max(Object.keys(...(tempProfiles || {}))) + 1
 
-    @setState(activeProfile: id, profiles: Object.values(settings.profiles))
+    tempProfiles[id] = archipelago.config.defaultProfile(id)
+    archipelago.config.set('profiles', tempProfiles, false)
+    archipelago.config.set('activeProfile', id, false)
+
+    @setState(activeProfile: id, profiles: tempProfiles)
+
+  dupeProfiles: ->
+    tempProfiles = {}
+
+    Object.assign(tempProfiles, archipelago.config.get('profiles', false))
+
+    tempProfiles
+
+  header: ->
+    React.createElement('div', className: 'profile-header', 'Profiles')
+
+  list: ->
+    React.createElement(
+      'div'
+      className: 'profile-list'
+      for profile in @state.profiles
+        React.createElement(
+          Profile
+          profile: profile
+          activeProfile: @state.activeProfile
+          key: profile.id
+          removeProfile: @removeProfile.bind(this)
+          setActiveProfile: @setActiveProfile.bind(this)
+        )
+    )
+
+  newProfile: ->
+    React.createElement(
+      'div'
+      className: 'new-profile'
+      onClick: @createProfile.bind(this)
+      'Add New Profile'
+    )
+
+  removeProfile: (id) ->
+    tempProfiles = @dupeProfiles()
+
+    delete tempProfiles[id]
+    archipelago.config.set('profiles', tempProfiles, false)
+
+    @resetActiveProfile()
+
+    @setState(
+      activeProfile: archipelago.config.get('activeProfile', false)
+      profiles: tempProfiles
+    )
+
+  resetActiveProfile: (id) ->
+    if archipelago.config.get('activeProfile', false) == id
+      activeProfile = Object.keys(archipelago.config.get('profiles', false))[0]
+
+      archipelago.config.set('activeProfile', parseInt(activeProfile), false)
+
+      activeProfile
+
+  setActiveProfile: (id) ->
+    archipelago.config.set('activeProfile', id, false)
+
+    @setState(activeProfile: id)

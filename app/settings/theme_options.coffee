@@ -1,7 +1,6 @@
-{ TextField, FormField } = require 'rmwc'
-{ ChromePicker }         = require 'react-color'
-React                    = require 'react'
-nestedProperty           = require 'nested-property'
+{ TextField }    = require 'rmwc'
+{ ChromePicker } = require 'react-color'
+React            = require 'react'
 
 module.exports =
 class ThemeOptions extends React.Component
@@ -13,64 +12,68 @@ class ThemeOptions extends React.Component
     React.createElement(
       'archipelago-theme-options'
       ref: @props.innerRef
-      @text('theme.foreground', 'Foreground')
-      @text('theme.background', 'Terminal Background')
-      @text('windowBackground', 'Window Background')
-      @text('tabColor', 'Tab Color')
-      @text('tabBorderColor', 'Tab Border Color')
-      @text('theme.selection', 'Selection')
-      @text('theme.cursor', 'Cursor')
-      @text('theme.cursorAccent', 'Cursor Accent')
-      @text('theme.red', 'Red')
-      @text('theme.brightRed', 'Bright Red')
-      @text('theme.green', 'Green')
-      @text('theme.brightGreen', 'Bright Green')
-      @text('theme.yellow', 'Yellow')
-      @text('theme.brightYellow', 'Bright Yellow')
-      @text('theme.magenta', 'Magenta')
-      @text('theme.brightMagenta',  'Bright Magenta')
-      @text('theme.cyan', 'Cyan')
-      @text('theme.brightCyan', 'Bright Cyan')
-      @text('theme.blue', 'Blue')
-      @text('theme.brightBlue', 'Bright Blue')
-      @text('theme.white', 'White')
-      @text('theme.brightWhite', 'Bright White')
-      @text('theme.black', 'Black')
-      @text('theme.brightBlack', 'Bright Black')
+      @make field for field in @fields()
     )
 
-  text: (key, label) ->
+  color: (field, schema) ->
     React.createElement(
       'div'
       className: 'color-container'
-      style: if @state.activeField == key then { zIndex: 2 }
-      if @state.activeField == key
-        React.createElement(
-          'div'
-          style: { position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }
-          onClick: () =>
-            @setState(activeField: null)
-        )
+      key: field
+      style: if @state.activeField == field then zIndex: 2
+      @colorBackdrop(field)
+      @input(field, schema)
+    )
+
+  colorBackdrop: (field) ->
+    return unless @state.activeField is field
+
+    React.createElement(
+      'div'
+      style: { position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }
+      onClick: () =>
+        @setState(activeField: null)
+    )
+
+  colorInput: (field) ->
+    return unless @state.activeField is field
+
+    React.createElement(
+      'div'
+      className: 'color-picker'
       React.createElement(
-        TextField
-        datakey: key
-        label: label
-        value: nestedProperty.get(@props, key)
-        onClick: (e) =>
-          @setState(activeField: key)
-        onChange: (e) =>
-          @props.updateOption(key, e.target.value)
-        if @state.activeField == key
-          React.createElement(
-            'div'
-            className: 'color-picker'
-            React.createElement(
-              ChromePicker
-              color: nestedProperty.get(@props, key)
-              onChange: (color) =>
-                rgba = "rgba(#{Object.values(color.rgb).join(",")})"
-                @props.updateOption(key, rgba)
-            )
-          )
+        ChromePicker
+        color: archipelago.config.get(field)
+        onChange: (color) =>
+          rgba = "rgba(#{Object.values(color.rgb).join(",")})"
+          @props.updateOption(field, rgba)
       )
     )
+
+  fields: ->
+    [
+      'theme.foreground', 'theme.background', 'windowBackground', 'tabColor',
+      'tabBorderColor', 'theme.selection', 'theme.cursor', 'theme.cursorAccent',
+      'theme.red', 'theme.brightRed', 'theme.green', 'theme.brightGreen',
+      'theme.yellow', 'theme.brightYellow', 'theme.magenta',
+      'theme.brightMagenta', 'theme.cyan', 'theme.brightCyan', 'theme.blue',
+      'theme.brightBlue', 'theme.white', 'theme.brightWhite', 'theme.black',
+      'theme.brightBlack',
+    ]
+
+  input: (field, schema) ->
+    React.createElement(
+      TextField
+      datakey: field
+      label: schema.label
+      value: archipelago.config.get(field)
+      onClick: (e) =>
+        @setState(activeField: field)
+      onChange: (e) =>
+        @props.updateOption(field, e.target.value)
+      @colorInput(field)
+    )
+
+  make: (field) ->
+    schema = archipelago.config.getSchemaFor(field)
+    @color(field, schema)

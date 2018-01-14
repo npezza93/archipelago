@@ -7,46 +7,24 @@ class Keybindings extends React.Component
     React.createElement(
       'archipelago-keybindings'
       ref: @props.innerRef
-      React.createElement(
-        'div'
-        className: 'keybindings-info'
-        'Keybinding commands should be a comma separated list of ascii
-         character codes'
-        React.createElement(
-          'div'
-          className: 'keybinding-dialog-trigger'
-          onClick: () ->
-            document.querySelector('dialog').showModal()
-          '\u24D8'
-        )
-      )
-      Object.keys(@keybindings()).map (keybindingId) =>
-        React.createElement(
-          Keybinding
-          key: keybindingId
-          id: keybindingId
-          accelerator: @keybindings()[keybindingId].accelerator
-          command: @keybindings()[keybindingId].command
-          updateKeystroke: @updateKeystroke.bind(this)
-          updateCommand: @updateCommand.bind(this)
-          removeKeybinding: @removeKeybinding.bind(this)
-        )
-      React.createElement(
-        'div'
-        className: 'create-keybinding'
-        onClick: @createKeybinding.bind(this)
-        'add new keybinding'
-      )
+      @info()
+      @make keymapId for keymapId of @keymaps()
+      @create()
     )
 
-  updateKeystroke: (id, keystroke) ->
-    @props.updateOption(@configKey(id, 'accelerator'), keystroke)
+  configKey: (id, key) ->
+    "keybindings.#{process.platform}.#{id}.#{key}"
 
-  updateCommand: (id, command) ->
-    @props.updateOption(@configKey(id, 'command'), command)
+  create: ->
+    React.createElement(
+      'div'
+      className: 'create-keybinding'
+      onClick: @createKeymap.bind(this)
+      'add new keybinding'
+    )
 
-  createKeybinding: ->
-    id = Math.max(...Object.keys(@keybindings())) + 1
+  createKeymap: ->
+    id = Math.max(...Object.keys(@keymaps())) + 1
 
     @props.updateOption(
       "keybindings.#{process.platform}.#{id}"
@@ -54,15 +32,48 @@ class Keybindings extends React.Component
       command: []
     )
 
+  info: ->
+    React.createElement(
+      'div'
+      className: 'keybindings-info'
+      'Keybinding commands should be a comma separated list of ascii
+       character codes'
+      React.createElement(
+        'div'
+        className: 'keybinding-dialog-trigger'
+        onClick: () ->
+          document.querySelector('dialog').showModal()
+        '\u24D8'
+      )
+    )
+
+  keymap: (id) ->
+    @keymaps()[id]
+
+  keymaps: ->
+    @props.keybindings[process.platform]
+
+  make: (keymapId) ->
+    React.createElement(
+      Keybinding
+      key: keymapId
+      id: keymapId
+      accelerator: @keymap(keymapId).accelerator
+      command: @keymap(keymapId).command
+      updateKeystroke: @updateKeystroke.bind(this)
+      updateCommand: @updateCommand.bind(this)
+      removeKeybinding: @removeKeybinding.bind(this)
+    )
+
   removeKeybinding: (id) ->
     props = {}
-    Object.assign(props, @keybindings())
+    Object.assign(props, @keymaps())
     delete props[id]
 
     @props.updateOption("keybindings.#{process.platform}", props)
 
-  configKey: (id, key) ->
-    "keybindings.#{process.platform}.#{id}.#{key}"
+  updateKeystroke: (id, keystroke) ->
+    @props.updateOption(@configKey(id, 'accelerator'), keystroke)
 
-  keybindings: ->
-    @props.keybindings[process.platform]
+  updateCommand: (id, command) ->
+    @props.updateOption(@configKey(id, 'command'), command)

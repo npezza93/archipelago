@@ -1,36 +1,24 @@
-React = require('react')
+React = require 'react'
 
 module.exports =
 class Profile extends React.Component
   constructor: (props) ->
     super(props)
-    @state = { editMode: false, name: props.profile.name }
+    @state =
+      editMode: false
+      name: props.profile.name
 
   render: ->
     React.createElement(
       'archipelago-profile',
-      tabIndex: 1
       class: if @props.activeProfile == @props.profile.id then 'active'
-      onDoubleClick: (e) =>
+      onDoubleClick: () =>
         @setState(editMode: true)
-      onClick: (e) =>
+      onClick: () =>
         @props.setActiveProfile(@props.profile.id)
       @textOrInput()
-      if Object.keys(@props.configFile.contents().profiles).length > 1
-        React.createElement(
-          'span'
-          className: 'profile-remove'
-          onClick: (e) =>
-            @props.removeProfile(@props.profile.id)
-            e.stopPropagation()
-          '\u00D7'
-        )
+      @removeProfile()
     )
-
-  textOrInput: ->
-    return @state.name unless @state.editMode
-
-    @input()
 
   input: ->
     React.createElement(
@@ -40,11 +28,29 @@ class Profile extends React.Component
       value: @state.name
       onFocus: (e) ->
         e.target.select()
-      onBlur: (e) =>
+      onBlur: () =>
         @setState(editMode: false)
       onChange: (e) =>
-        @props.configFile.update(
-          "profiles.#{@props.profile.id}.name", e.target.value
-        )
-        @setState(name: e.target.value)
+        selector = "profiles.#{@props.profile.id}.name"
+        value = e.target.value
+
+        archipelago.config.set(selector, value)
+        @setState(name: value)
     )
+
+  removeProfile: ->
+    if Object.keys(archipelago.config.get('profiles', false)).length > 1
+      React.createElement(
+        'span'
+        className: 'profile-remove'
+        onClick: (e) =>
+          e.stopPropagation()
+          @props.removeProfile(@props.profile.id)
+        '\u00D7'
+      )
+
+  textOrInput: ->
+    if @state.editMode
+      @input()
+    else
+      @state.name
