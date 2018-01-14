@@ -13,12 +13,20 @@ matrix:
       language: generic
       env:
         - YARN_COMMAND=build
+      apt:
+        packages:
+          - libx11-dev
+          - libxkbfile-dev
 
     - os: linux
       services: docker
       language: generic
       env:
         - YARN_COMMAND=lint
+      apt:
+        packages:
+          - libx11-dev
+          - libxkbfile-dev
 
 cache:
   directories:
@@ -45,7 +53,7 @@ script:
         -v ~/.cache/electron:/root/.cache/electron \
         -v ~/.cache/electron-builder:/root/.cache/electron-builder \
         electronuserland/builder:wine \
-        /bin/bash -c "yarn --link-duplicates --pure-lockfile && yarn run dist --linux --win"
+        /bin/bash -c "apt-get update && apt-get -y install libx11-dev libxkbfile-dev && yarn --link-duplicates --pure-lockfile && yarn run dist --linux --win"
     elif [ "$TRAVIS_OS_NAME" == "linux" ] && [ "$YARN_COMMAND" == "lint" ]; then
       docker run --rm \
         --env-file <(env | grep -iE 'DEBUG|NODE_|ELECTRON_|YARN_|NPM_|CI|CIRCLE|TRAVIS|APPVEYOR_|CSC_|_TOKEN|_KEY|AWS_|STRIP|BUILD_') \
@@ -53,7 +61,7 @@ script:
         -v ~/.cache/electron:/root/.cache/electron \
         -v ~/.cache/electron-builder:/root/.cache/electron-builder \
         electronuserland/builder:wine \
-        /bin/bash -c "yarn --link-duplicates --pure-lockfile && yarn run lint"
+        /bin/bash -c "apt-get update && apt-get -y install libx11-dev libxkbfile-dev && yarn --link-duplicates --pure-lockfile && yarn run lint"
     else
       yarn run dist
     fi
