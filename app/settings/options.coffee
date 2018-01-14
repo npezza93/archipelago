@@ -57,7 +57,9 @@ class Options extends React.Component
     archipelago.config.onDidChange(
       'activeProfile'
       (newActiveProfileId) =>
-        @setState(archipelago.config.get("profiles.#{newActiveProfileId}", false))
+        @setState(
+          archipelago.config.get("profiles.#{newActiveProfileId}", false)
+        )
       false
     )
 

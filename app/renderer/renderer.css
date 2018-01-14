@@ -43,11 +43,6 @@ archipelago-app {
   background: #666;
   border: 3px solid var(--background-color);
 }
-::-webkit-scrollbar-thumb:active {
-  background: #666;
-  border: 0px solid var(--background-color);
-  border-radius: 0px;
-}
 
 ::-webkit-scrollbar,
 ::-webkit-scrollbar-thumb {
@@ -58,6 +53,12 @@ archipelago-app {
   --background-color: #000;
   --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --tab-font-size: 15px;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: #666;
+  border: 0 solid var(--background-color);
+  border-radius: 0;
 }
 
 /* Boot screen */
