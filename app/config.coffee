@@ -56,6 +56,8 @@ class Config
       parseInt(value)
     else if schema && schema.type == 'float'
       parseFloat(value)
+    else if schema && schema.type == 'boolean'
+      Boolean(value)
     else
       value
 
