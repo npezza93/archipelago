@@ -113,10 +113,9 @@ class Session
 
     @xterm.on 'focus', () =>
       @fit()
-      setTimeout(() =>
+      window.requestAnimationFrame(() =>
         @xterm.setOption('cursorBlink', !@setting('cursorBlink'))
         @xterm.setOption('cursorBlink', @setting('cursorBlink'))
-        100
       )
       @emitter.emit('did-focus')
 
