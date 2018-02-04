@@ -120,7 +120,7 @@ class Session
       @emitter.emit('did-focus')
 
     @xterm.on 'title', (title) =>
-      @emitter.emit('did-change-title')
+      @emitter.emit('did-change-title', title)
 
     @xterm.on 'selection', () =>
       document.execCommand('copy') if @setting('copyOnSelect')

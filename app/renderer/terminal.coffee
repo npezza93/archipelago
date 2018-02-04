@@ -27,8 +27,8 @@ class Terminal extends React.Component
       @props.selectSession(@props.session.id)
       @props.changeTitle(@props.tabId, @props.session.xterm.title)
 
-    @subscriptions.add @props.session.onDidChangeTitle () =>
-      @props.changeTitle(@props.tabId, @props.session.xterm.title)
+    @subscriptions.add @props.session.onDidChangeTitle (title) =>
+      @props.changeTitle(@props.tabId, title)
 
     @subscriptions.add @props.session.onDidExit () =>
       @props.removeSession(@props.tabId, @props.session.id)
