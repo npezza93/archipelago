@@ -1,7 +1,8 @@
-React    = require 'react'
-PaneList = require './pane_list'
-TabList  = require './tab_list'
-Sessions = require './sessions'
+React     = require 'react'
+PaneList  = require './pane_list'
+TabList   = require './tab_list'
+Sessions  = require './sessions'
+GitStatus = require './git_status'
 
 module.exports =
 class App extends React.Component
@@ -39,6 +40,11 @@ class App extends React.Component
         markUnread: @markUnread.bind(this)
         removeSession: @removeSession.bind(this)
         selectSession: @selectSession.bind(this)
+      )
+      React.createElement(
+        GitStatus
+        key: 'gitStatus'
+        pid: @state.currentPid
       )
     )
 
