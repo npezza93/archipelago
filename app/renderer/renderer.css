@@ -159,7 +159,7 @@ archipelago-app {
 
 archipelago-pane-list {
   display: block;
-  height: calc(100% - 40px);
+  flex: 1;
 }
 
 archipelago-pane-list archipelago-pane {
@@ -177,7 +177,6 @@ archipelago-tab-list {
   display: flex;
   flex-direction: row;
   padding-left: 70px;
-  flex: 1;
   height: 40px;
 }
 
