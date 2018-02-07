@@ -9,6 +9,7 @@ styleProperties =
   tabColor: '--tab-color'
   tabBorderColor: '--tab-border-color'
   fontSize: '--font-size'
+  'theme.selection': '--selection-color'
 
 document.addEventListener 'DOMContentLoaded', () ->
   archipelago.app = ReactDOM.render(
