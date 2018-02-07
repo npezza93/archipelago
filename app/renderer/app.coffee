@@ -55,8 +55,8 @@ class App extends React.Component
     archipelago.subscriptions.dispose()
 
   componentDidUpdate: ->
-    currentSession = @currentTab().sessions.find(
-      @currentTab().sessions.root, @state.currentSessionId
+    currentSession = @_currentSessions().find(
+      @_currentSessions().root, @state.currentSessionId
     )
 
     if currentSession && !currentSession.isFocused
@@ -85,7 +85,12 @@ class App extends React.Component
     @setState(tabs: tabs, currentTabId: id, currentSessionId: session.id)
 
   selectSession: (id) ->
-    @setState(currentSessionId: id)
+    currentSession = @_currentSessions().find(@_currentSessions().root, id)
+
+    if currentSession
+      @setState(currentPid: currentSession.pty.pid, currentSessionId: id)
+    else
+      @setState(currentSessionId: id)
 
   addTab: ->
     tabId = Math.random()
@@ -158,3 +163,6 @@ class App extends React.Component
       tab
 
     @setState(tabs: tabs, currentSessionId: newSessionId)
+
+  _currentSessions: ->
+    @currentTab().sessions
