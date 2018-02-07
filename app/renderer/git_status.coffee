@@ -28,14 +28,22 @@ class GitStatus extends React.Component
         style:
           flex: 1
       )
-      React.createElement(Branch, key: 'branch', isGit: @state.isGit, cwd: @state.cwd)
-      React.createElement(Dirty, key: 'dirty', isGit: @state.isGit, cwd: @state.cwd)
+      React.createElement(
+        Branch, key: 'branch', isGit: @state.isGit, cwd: @state.cwd
+      )
+      React.createElement(
+        Dirty, key: 'dirty', isGit: @state.isGit, cwd: @state.cwd
+      )
       React.createElement(
         'div'
         className: 'behind-ahead-container'
         key: 'behindAheadContainer'
-        React.createElement(Behind, key: 'behindElement', isGit: @state.isGit, cwd: @state.cwd)
-        React.createElement(Ahead, key: 'ahead', isGit: @state.isGit, cwd: @state.cwd)
+        React.createElement(
+          Behind, key: 'behindElement', isGit: @state.isGit, cwd: @state.cwd
+        )
+        React.createElement(
+          Ahead, key: 'ahead', isGit: @state.isGit, cwd: @state.cwd
+        )
       )
     )
 

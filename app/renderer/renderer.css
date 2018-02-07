@@ -1,4 +1,5 @@
 /* normalization and helpers */
+
 *::selection {
   background: var(--selection-color);
 }
@@ -55,7 +56,7 @@ archipelago-app {
 
 :root {
   --background-color: #000;
-  --selection-color: rgba(255, 255, 255, 0.3);
+  --selection-color: rgba(255, 255, 255, .3);
   --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --tab-font-size: 15px;
 }
@@ -293,7 +294,7 @@ archipelago-git-status {
 }
 
 archipelago-git-status .dirty {
-  color: #e2c08d;
+  color: #E2C08D;
 }
 
 archipelago-git-status archipelago-git-status-branch,
@@ -326,9 +327,5 @@ archipelago-git-status .behind-ahead-container archipelago-git-status-ahead {
 archipelago-git-status .behind-ahead-container archipelago-git-status-behind svg,
 archipelago-git-status .behind-ahead-container archipelago-git-status-ahead svg {
   margin-right: 4px;
-}
-
-archipelago-git-status .behind-ahead-container archipelago-git-status-behind svg,
-archipelago-git-status .behind-ahead-container archipelago-git-status-ahead svg {
   margin-left: 8px;
 }
