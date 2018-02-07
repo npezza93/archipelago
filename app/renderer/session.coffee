@@ -120,6 +120,7 @@ class Session
       @emitter.emit('did-focus')
 
     @xterm.on 'title', (title) =>
+      archipelago.emit('did-change-title', title, this)
       @emitter.emit('did-change-title', title)
 
     @xterm.on 'selection', () =>

@@ -46,6 +46,8 @@ class App extends React.Component
     for tab in @state.tabs
       tab.sessions.kill()
 
+    archipelago.subscriptions.dispose()
+
   componentDidUpdate: ->
     currentSession = @currentTab().sessions.find(
       @currentTab().sessions.root, @state.currentSessionId
