@@ -50,11 +50,13 @@
     "node-pty": "^0.7.4",
     "react": "^16.2.0",
     "react-color": "^2.13.8",
+    "react-component-octicons": "^1.5.0",
     "react-dom": "^16.2.0",
     "react-split-pane": "^0.1.74",
     "react-waypoint": "^7.3.4",
     "rmwc": "0.0.1-rc12",
     "season": "^6.0.2",
+    "tildify": "^1.2.0",
     "xterm": "^3.0.1"
   },
   "devDependencies": {
