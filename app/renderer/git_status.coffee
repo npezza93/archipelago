@@ -55,6 +55,7 @@ class GitStatus extends React.Component
 
     exec command, (err, stdout) =>
       @setState(cwd: stdout.trim())
+      @isGit()
 
   isGit: ->
     unless @state.cwd then return
@@ -64,4 +65,3 @@ class GitStatus extends React.Component
 
   bindListeners: ->
     archipelago.subscriptions.add archipelago.onDidChangeTitle @cwd.bind(this)
-    archipelago.subscriptions.add archipelago.onDidChangeTitle @isGit.bind(this)
