@@ -135,7 +135,6 @@ body {
 
 archipelago-terminal {
   display: flex;
-  margin: 5px 0 10px 15px;
   flex: 1;
   height: 100%;
 }
@@ -146,6 +145,7 @@ archipelago-terminal {
 
 .xterm {
   background-color: transparent;
+  padding: 5px 0 10px 15px;
 }
 
 /* ArchipelagoApp */
