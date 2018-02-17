@@ -26,6 +26,8 @@ class Session
 
     @xterm = new Xterm(
       fontFamily: @setting('fontFamily')
+      fontWeight: @setting('fontWeight')
+      fontWeightBold: @setting('fontWeightBold')
       fontSize: @setting('fontSize')
       lineHeight: @setting('lineHeight')
       letterSpacing: @setting('letterSpacing')
@@ -35,6 +37,9 @@ class Session
       bellStyle: @setting('bellStyle')
       scrollback: @setting('scrollback')
       tabStopWidth: @setting('tabStopWidth')
+      allowTransparency: @setting('allowTransparency')
+      rightClickSelectsWord: @setting('rightClickSelectsWord')
+      macOptionIsMeta: @setting('macOptionIsMeta')
       theme: @setting('theme')
     )
     @bindDataListeners()
@@ -132,8 +137,9 @@ class Session
     @pty.on 'exit', () =>
       @emitter.emit('did-exit')
 
-    ['fontFamily', 'cursorStyle', 'cursorBlink', 'scrollback',
-     'enableBold', 'tabStopWidth', 'fontSize', 'letterSpacing',
+    ['fontFamily', 'fontWeight', 'fontWeightBold', 'cursorStyle', 'cursorBlink',
+     'scrollback', 'tabStopWidth', 'fontSize', 'letterSpacing',
+     'allowTransparency', 'rightClickSelectsWord', 'macOptionIsMeta',
      'lineHeight', 'bellSound', 'bellStyle', 'theme'].forEach (field) =>
        @subscriptions.add archipelago.config.onDidChange field, (newValue) =>
          @xterm.setOption(field, newValue)
