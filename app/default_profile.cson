@@ -19,136 +19,79 @@ bellSound: 'data:audio/ogg;base64,T2dnUwACAAAAAAAAAADhqW5KAAAAAMFvEjYBHgF2b3JiaX
 letterSpacing: 0
 copyOnSelect: true
 theme:
-	selection: "rgba(255, 255, 255, 0.3)"
-	foreground: "#FFFFFF"
-	background: "#000000"
-	black: "#000000"
-	red: "#ff5c57"
-	brightRed: "#ff5c57"
-	green: "#5af78e"
-	brightGreen: "#5af78e"
-	yellow: "#f3f99d"
-	brightYellow: "#f3f99d"
-	magenta: "#ff6ac1"
-	brightMagenta: "#ff6ac1"
-	cyan: "#5fcbd8"
-	brightCyan: "#5fcbd8"
-	blue: "#57c7ff"
-	brightBlue: "#57c7ff"
-	white: "#ffffff"
-	brightWhite: "#FFFFFF"
-	brightBlack: "#808080"
-	cursorAccent: "#000000"
-	cursor: "#FFFFFF"
+  selection: 'rgba(255, 255, 255, 0.3)'
+  foreground: '#FFFFFF'
+  background: '#000000'
+  black: '#000000'
+  red: '#ff5c57'
+  brightRed: '#ff5c57'
+  green: '#5af78e'
+  brightGreen: '#5af78e'
+  yellow: '#f3f99d'
+  brightYellow: '#f3f99d'
+  magenta: '#ff6ac1'
+  brightMagenta: '#ff6ac1'
+  cyan: '#5fcbd8'
+  brightCyan: '#5fcbd8'
+  blue: '#57c7ff'
+  brightBlue: '#57c7ff'
+  white: '#ffffff'
+  brightWhite: '#FFFFFF'
+  brightBlack: '#808080'
+  cursorAccent: '#000000'
+  cursor: '#FFFFFF'
 keybindings:
-	linux:
-		"1":
-			accelerator: "home"
-			command: [
-				27
-				79
-				72
-			]
-		"2":
-			accelerator: "end"
-			command: [
-				27
-				79
-				70
-			]
-		"3":
-			accelerator: "ctrl-backspace"
-			command: [
-				27
-				127
-			]
-		"4":
-			accelerator: "ctrl-del"
-			command: [
-				27
-				100
-			]
-		"5":
-			accelerator: "ctrl-home"
-			command: [
-				27
-				119
-			]
-		"6":
-			accelerator: "ctrl-end"
-			command: [
-				16
-				66
-			]
-	win32:
-		"1":
-			accelerator: "home"
-			command: [
-				27
-				79
-				72
-			]
-		"2":
-			accelerator: "end"
-			command: [
-				27
-				79
-				70
-			]
-		"3":
-			accelerator: "ctrl-backspace"
-			command: [
-				27
-				127
-			]
-		"4":
-			accelerator: "cltr-del"
-			command: [
-				27
-				100
-			]
-		"5":
-			accelerator: "ctrl-home"
-			command: [
-				27
-				119
-			]
-		"6":
-			accelerator: "ctrl-end"
-			command: [
-				16
-				66
-			]
-	darwin:
-		"1":
-			accelerator: "command-left"
-			command: [
-				27
-				79
-				72
-			]
-		"2":
-			accelerator: "command-right"
-			command: [
-				27
-				79
-				70
-			]
-		"3":
-			accelerator: "alt-delete"
-			command: [
-				27
-				100
-			]
-		"4":
-			accelerator: "command-backspace"
-			command: [
-				27
-				119
-			]
-		"5":
-			accelerator: "command-delete"
-			command: [
-				16
-				66
-			]
+  linux:
+    '1':
+      accelerator: 'home'
+      command: [27, 79, 72]
+    '2':
+      accelerator: 'end'
+      command: [27, 79, 70]
+    '3':
+      accelerator: 'ctrl-backspace'
+      command: [27, 127]
+    '4':
+      accelerator: 'ctrl-del'
+      command: [27, 100]
+    '5':
+      accelerator: 'ctrl-home'
+      command: [27, 119]
+    '6':
+      accelerator: 'ctrl-end'
+      command: [16, 66]
+  win32:
+    '1':
+      accelerator: 'home'
+      command: [27, 79, 72]
+    '2':
+      accelerator: 'end'
+      command: [27, 79, 70]
+    '3':
+      accelerator: 'ctrl-backspace'
+      command: [27, 127]
+    '4':
+      accelerator: 'cltr-del'
+      command: [27, 100]
+    '5':
+      accelerator: 'ctrl-home'
+      command: [27, 119]
+    '6':
+      accelerator: 'ctrl-end'
+      command: [16, 66]
+  darwin:
+    '1':
+      accelerator: 'command-left'
+      command: [27, 79, 72]
+    '2':
+      accelerator: 'command-right'
+      command: [27, 79, 70]
+    '3':
+      accelerator: 'alt-delete'
+      command: [27, 100]
+    '4':
+      accelerator: 'command-backspace'
+      command: [27, 119]
+    '5':
+      accelerator: 'command-delete'
+      command: [16, 66]
