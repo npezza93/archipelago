@@ -135,87 +135,87 @@ copyOnSelect:
   label: 'Copy on select'
   input: 'switch'
 theme:
-	selection:
+  selection:
     type: 'string'
     input: 'color'
     label: 'Selection'
-	foreground:
+  foreground:
     type: 'string'
     input: 'color'
     label: 'Foreground'
-	background:
+  background:
     type: 'string'
     input: 'color'
     label: 'Terminal Background'
-	black:
+  black:
     type: 'string'
     input: 'color'
     label: 'Black'
-	red:
+  red:
     type: 'string'
     input: 'color'
     label: 'Red'
-	brightRed:
+  brightRed:
     type: 'string'
     input: 'color'
     label: 'Bright Red'
-	green:
+  green:
     type: 'string'
     input: 'color'
     label: 'Green'
-	brightGreen:
+  brightGreen:
     type: 'string'
     input: 'color'
     label: 'Bright Green'
-	yellow:
+  yellow:
     type: 'string'
     input: 'color'
     label: 'Yellow'
-	brightYellow:
+  brightYellow:
     type: 'string'
     input: 'color'
     label: 'Bright Yellow'
-	magenta:
+  magenta:
     type: 'string'
     input: 'color'
     label: 'Magenta'
-	brightMagenta:
+  brightMagenta:
     type: 'string'
     input: 'color'
     label: 'Bright Magenta'
-	cyan:
+  cyan:
     type: 'string'
     input: 'color'
     label: 'Cyan'
-	brightCyan:
+  brightCyan:
     type: 'string'
     input: 'color'
     label: 'Bright Cyan'
-	blue:
+  blue:
     type: 'string'
     input: 'color'
     label: 'Blue'
-	brightBlue:
+  brightBlue:
     type: 'string'
     input: 'color'
     label: 'Bright Blue'
-	white:
+  white:
     type: 'string'
     input: 'color'
     label: 'White'
-	brightWhite:
+  brightWhite:
     type: 'string'
     input: 'color'
     label: 'Bright White'
-	brightBlack:
+  brightBlack:
     type: 'string'
     input: 'color'
     label: 'Bright Black'
-	cursorAccent:
+  cursorAccent:
     type: 'string'
     input: 'color'
     label: 'Cursor Accent'
-	cursor:
+  cursor:
     type: 'string'
     input: 'color'
     label: 'Cursor'
