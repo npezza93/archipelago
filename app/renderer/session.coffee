@@ -27,6 +27,7 @@ class Session
     @xterm = new Xterm(
       fontFamily: @setting('fontFamily')
       fontWeight: @setting('fontWeight')
+      fontWeightBold: @setting('fontWeightBold')
       fontSize: @setting('fontSize')
       lineHeight: @setting('lineHeight')
       letterSpacing: @setting('letterSpacing')
@@ -136,8 +137,8 @@ class Session
     @pty.on 'exit', () =>
       @emitter.emit('did-exit')
 
-    ['fontFamily', 'fontWeight', 'cursorStyle', 'cursorBlink', 'scrollback',
-     'tabStopWidth', 'fontSize', 'letterSpacing',
+    ['fontFamily', 'fontWeight', 'fontWeightBold', 'cursorStyle', 'cursorBlink',
+     'scrollback', 'tabStopWidth', 'fontSize', 'letterSpacing',
      'allowTransparency', 'rightClickSelectsWord', 'macOptionIsMeta',
      'lineHeight', 'bellSound', 'bellStyle', 'theme'].forEach (field) =>
        @subscriptions.add archipelago.config.onDidChange field, (newValue) =>

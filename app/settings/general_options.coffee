@@ -20,8 +20,8 @@ class GeneralOptions extends React.Component
   fields: ->
     [
       'fontFamily', 'fontSize', 'lineHeight', 'letterSpacing', 'fontWeight',
-      'seperator', 'cursorStyle', 'cursorBlink', 'seperator', 'bellSound',
-      'bellStyle', 'seperator', 'shell', 'shellArgs', 'scrollback',
+      'fontWeightBold', 'seperator', 'cursorStyle', 'cursorBlink', 'seperator',
+      'bellSound', 'bellStyle', 'seperator', 'shell', 'shellArgs', 'scrollback',
       'tabStopWidth', 'macOptionIsMeta', 'seperator', 'allowTransparency',
       'vibrancy', 'seperator', 'copyOnSelect', 'rightClickSelectsWord',
       'seperator'
