@@ -453,6 +453,10 @@ dialog {
     opacity: 1;
     visibility: visible;
   }
+
+  archipelago-options archipelago-options-header {
+    width: calc(100% - 87px);
+  }
 }
 
 @media (min-width: 699px) {
