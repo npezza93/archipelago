@@ -105,7 +105,7 @@ vibrancy:
   input: 'select'
   default: ''
   options:
-    '': 'none'
+    ' ': 'none'
     light: 'light'
     'medium-light': 'medium-light'
     dark: 'dark'

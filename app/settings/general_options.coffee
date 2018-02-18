@@ -10,6 +10,8 @@ class GeneralOptions extends React.Component
       select: @select.bind(this)
       switch: @switch.bind(this)
 
+    @_bindListeners()
+
   render: ->
     React.createElement(
       'archipelago-general-options'
@@ -40,9 +42,9 @@ class GeneralOptions extends React.Component
       key: field
       datakey: field
       label: schema.label
-      value: @props[field]
-      onChange: (e) =>
-        @props.updateOption(field, e.target.value)
+      value: @state[field]
+      onChange: (e) ->
+        archipelago.config.set(field, e.target.value)
     )
 
   select: (field, schema) ->
@@ -51,11 +53,11 @@ class GeneralOptions extends React.Component
       key: field
       datakey: field
       label: schema.label
-      value: @props[field]
+      value: @state[field]
       options: schema.options
       disabled: schema.disabled
-      onChange: (e) =>
-        @props.updateOption(field, e.target.value)
+      onChange: (e) ->
+        archipelago.config.set(field, e.target.value)
     )
 
   switch: (field, schema) ->
@@ -63,8 +65,16 @@ class GeneralOptions extends React.Component
       Switch
       key: field
       datakey: field
-      checked: @props[field]
+      checked: @state[field]
       label: schema.label
-      onChange: (e) =>
-        @props.updateOption(field, e.target.checked)
+      onChange: (e) ->
+        archipelago.config.set(field, e.target.checked)
     )
+
+  _bindListeners: ->
+    @state = {}
+    @fields().forEach (field) =>
+      if field != 'seperator'
+        @state[field] = archipelago.config.get(field)
+        archipelago.config.onDidChange field, (newValue) =>
+          @setState("#{field}": newValue)
