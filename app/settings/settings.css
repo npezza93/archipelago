@@ -1,26 +1,28 @@
-::-webkit-scrollbar {
-  height: 9px;
-  width: 9px;
-  background: #FFF;
-}
+/* scrollbar */
 
-::-webkit-scrollbar-corner {
-  background: #FFF;
+::-webkit-scrollbar {
+  width: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgb(180, 180, 180);
-  -webkit-border-radius: 0;
+  background: #666;
+  border: 3px solid #fff;
+}
+
+::-webkit-scrollbar,
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: #666;
+  border: 0 solid #fff;
+  border-radius: 0;
 }
 
 :root {
   --mdc-theme-primary: #000 !important;
   --mdc-theme-secondary: #000 !important;
-}
-
-::-webkit-scrollbar-thumb:hover,
-::-webkit-scrollbar-thumb:active {
-  background: rgb(106, 106, 106);
 }
 
 html,
@@ -76,6 +78,22 @@ input,
   height: 100%;
 }
 
+.profiles-container archipelago-profiles ::-webkit-scrollbar-thumb {
+  background: #666;
+  border: 3px solid #ECEEF2;
+}
+
+.profiles-container archipelago-profiles ::-webkit-scrollbar,
+.profiles-container archipelago-profiles ::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+}
+
+.profiles-container archipelago-profiles ::-webkit-scrollbar-thumb:active {
+  background: #666;
+  border: 0 solid #ECEEF2;
+  border-radius: 0;
+}
+
 .profiles-container archipelago-profiles .profile-header {
   text-transform: uppercase;
   color: #889199;
@@ -88,6 +106,7 @@ input,
   flex: 1;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
 }
 
 .profiles-container archipelago-profiles .profile-list archipelago-profile {
@@ -171,7 +190,7 @@ archipelago-options archipelago-options-header {
   padding-left: 75px;
   height: 125px;
   position: fixed;
-  width: calc(100% - 359px);
+  width: calc(100% - 362px);
   background-color: rgba(255, 255, 255, .2);
   z-index: 2;
 }
@@ -251,6 +270,7 @@ archipelago-options archipelago-general-options .seperator {
 archipelago-options archipelago-general-options .mdc-form-field {
   display: flex;
   flex-direction: row-reverse;
+  align-items: flex-end;
 }
 
 archipelago-options archipelago-general-options .mdc-text-field {
