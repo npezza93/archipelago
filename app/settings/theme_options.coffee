@@ -1,13 +1,14 @@
 { TextField }    = require 'rmwc'
 { ChromePicker } = require 'react-color'
 React            = require 'react'
-nestedProperty   = require 'nested-property'
 
 module.exports =
 class ThemeOptions extends React.Component
   constructor: (props) ->
     super(props)
     @state = activeField: null
+
+    @_bindListeners()
 
   render: ->
     React.createElement(
@@ -44,10 +45,10 @@ class ThemeOptions extends React.Component
       className: 'color-picker'
       React.createElement(
         ChromePicker
-        color: nestedProperty.get(@props, field)
-        onChange: (color) =>
+        color: @state[field]
+        onChangeComplete: (color) ->
           rgba = "rgba(#{Object.values(color.rgb).join(",")})"
-          @props.updateOption(field, rgba)
+          archipelago.config.set(field, rgba)
       )
     )
 
@@ -67,14 +68,21 @@ class ThemeOptions extends React.Component
       TextField
       datakey: field
       label: schema.label
-      value: nestedProperty.get(@props, field)
+      value: @state[field]
       onClick: (e) =>
         @setState(activeField: field)
-      onChange: (e) =>
-        @props.updateOption(field, e.target.value)
+      onChange: (e) ->
+        archipelago.config.set(field, e.target.value)
       @colorInput(field)
     )
 
   make: (field) ->
     schema = archipelago.config.getSchemaFor(field)
     @color(field, schema)
+
+  _bindListeners: ->
+    @fields().forEach (field) =>
+      if field != 'seperator'
+        @state[field] = archipelago.config.get(field)
+        archipelago.config.onDidChange field, (newValue) =>
+          @setState("#{field}": newValue)
