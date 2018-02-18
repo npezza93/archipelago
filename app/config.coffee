@@ -22,7 +22,7 @@ class Config
 
   get: (selector) ->
     profileSelector = "profiles.#{@activeProfileId}.#{selector}"
-    schema = getValueAtKeyPath(@schema, selector)
+    schema = @getSchemaFor(selector)
     value = getValueAtKeyPath(@contents, profileSelector)
 
     return value unless schema?
@@ -43,9 +43,39 @@ class Config
         callback(newValue)
 
   setActiveProfileId: (id) ->
+    @contents.activeProfileId = parseInt(id)
+
+    @_write(@contents)
+
+  setProfileName: (id, newName) ->
+    @contents.profiles[id].name = newName
+
+    @_write(@contents)
+
+  getProfileName: (id) ->
+    schema = @getSchemaFor('name')
+    value = getValueAtKeyPath(@contents, "profiles.#{id}.name")
+
+    @_coerce(schema, 'name', value)
+
+  createProfile: ->
+    id = Math.max(...@profileIds) + 1
+    @contents.profiles[id] = { id: id }
     @contents.activeProfileId = id
 
     @_write(@contents)
+
+    id
+
+  destroyProfile: (id) ->
+    delete @contents.profiles[id]
+
+    @_write(@contents)
+
+    Object.keys(@contents.profiles)
+
+  getSchemaFor: (setting) ->
+    getValueAtKeyPath(@schema, setting)
 
   _refreshConfig: (error, newContents) ->
     return if error?

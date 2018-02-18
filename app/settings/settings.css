@@ -104,7 +104,7 @@ input,
 .profiles-container archipelago-profiles .profile-list archipelago-profile .profile-remove {
   position: absolute;
   left: 15px;
-  bottom: 16px;
+  bottom: 17px;
   visibility: hidden;
   z-index: 20;
   transition: opacity .5s ease-in-out, visibility .5s ease-in-out;
@@ -128,7 +128,7 @@ input,
   font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 16px;
   font-weight: 400;
-  padding: 5px;
+  padding: 0px;
 }
 
 .profiles-container archipelago-profiles .new-profile {
