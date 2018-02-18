@@ -9,6 +9,8 @@ class Profiles extends React.Component
       activeProfileId: archipelago.config.activeProfileId
       profileIds: archipelago.config.profileIds
 
+    @_bindListener()
+
   render: ->
     React.createElement(
       'archipelago-profiles'
@@ -52,24 +54,29 @@ class Profiles extends React.Component
     )
 
   removeProfile: (id) ->
-    remainingProfileIds = archipelago.config.destroyProfile(id)
+    @setState(profileIds: archipelago.config.destroyProfile(id))
 
-    newActiveProfileId = @resetActiveProfile(id)
-
-    @setState(
-      activeProfileId: newActiveProfileId || archipelago.config.activeProfileId
-      profileIds: remainingProfileIds
-    )
-
-  resetActiveProfile: (id) ->
-    if archipelago.config.activeProfileId == id
-      activeProfileId = archipelago.config.profileIds[0]
-
-      archipelago.config.setActiveProfileId(activeProfileId)
-
-      activeProfileId
+    archipelago.config.validateActiveProfile()
 
   setActiveProfileId: (id) ->
+    @setState(activeProfileId: id)
+
     archipelago.config.setActiveProfileId(id)
 
-    @setState(activeProfileId: id)
+  _bindListener: ->
+    archipelago.config.on 'did-change', () =>
+      profileIdsMatch =
+        archipelago.config.profileIds.length == @state.profileIds.length &&
+          archipelago.config.profileIds.every (id, i) =>
+            id == @state.profileIds[i]
+
+      activeProfileIdMatch =
+          archipelago.config.activeProfileId == @state.activeProfileId
+
+      if !profileIdsMatch || !activeProfileIdMatch
+        archipelago.config.validateActiveProfile()
+
+        @setState(
+          activeProfileId: archipelago.config.activeProfileId
+          profileIds: archipelago.config.profileIds
+        )

@@ -8,6 +8,8 @@ class Profile extends React.Component
       editMode: false
       name: archipelago.config.getProfileName(props.profileId)
 
+    @_bindListener()
+
   render: ->
     React.createElement(
       'archipelago-profile',
@@ -54,3 +56,11 @@ class Profile extends React.Component
         @props.removeProfile(@props.profileId)
       '\u00D7'
     )
+
+  _bindListener: ->
+    archipelago.config.on 'did-change', (newContents) =>
+      nameMatch =
+        archipelago.config.getProfileName(@props.profileId) == @state.name
+
+      unless nameMatch
+        @setState(name: archipelago.config.getProfileName(@props.profileId))

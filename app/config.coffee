@@ -42,6 +42,9 @@ class Config
         oldValue = newValue
         callback(newValue)
 
+  on: (event, callback) ->
+    @emitter.on(event, callback)
+
   setActiveProfileId: (id) ->
     @contents.activeProfileId = parseInt(id)
 
@@ -77,6 +80,14 @@ class Config
   getSchemaFor: (setting) ->
     getValueAtKeyPath(@schema, setting)
 
+  validateActiveProfile: ->
+    return if @activeProfileId? && @activeProfile?
+
+    if Object.keys(@profiles)[0]?
+      @setActiveProfileId(Object.keys(@profiles)[0])
+    else
+      @_write(activeProfileId: 1, profiles: { 1: { id: 1 } })
+
   _refreshConfig: (error, newContents) ->
     return if error?
 
@@ -86,21 +97,12 @@ class Config
     @activeProfile = @profiles[@activeProfileId]
     @contents = newContents
 
-    @_validateActiveProfile()
-
-  _validateActiveProfile: ->
-    return if @activeProfileId? && @activeProfile?
-
-    if Object.keys(@profiles)[0]?
-      @setActiveProfileId(Object.keys(@profiles)[0])
-    else
-      @_write(activeProfileId: 1, profiles: { 1: { id: 1 } })
+    @validateActiveProfile()
+    @emitter.emit('did-change', newContents)
 
   _bindWatcher: ->
     chokidar.watch(@filePath).on 'change', () =>
       CSON.readFile(@filePath, @_refreshConfig.bind(this))
-
-      @emitter.emit('did-change')
 
   _coerce: (schema, selector, value) ->
     value = schema.default unless value? || schema.type == 'object'
