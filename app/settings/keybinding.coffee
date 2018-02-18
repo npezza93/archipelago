@@ -16,9 +16,9 @@ class Keybinding extends React.Component
     React.createElement(
       TextField
       label: 'Command'
-      value: command.join(',')
+      value: command
       onChange: (e) =>
-        @props.updateCommand(@props.id, e.target.value.split(','))
+        @props.updateCommand(@props.id, e.target.value)
     )
 
   keystroke: (accelerator) ->

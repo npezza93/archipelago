@@ -1,6 +1,7 @@
 require('coffeescript').register()
 KeymapManager = require('atom-keymap')
 Config   = require('../config')
+unescapeString = require('unescape-js')
 
 global.archipelago = { config: new Config, keymaps: new KeymapManager }
 
@@ -9,9 +10,7 @@ archipelago.keymaps.mappings = Object.values(
 ).map((keybinding) => {
   return {
     'keystroke': keybinding.accelerator,
-    'command': keybinding.command.map((num) => {
-      return String.fromCharCode(parseInt(num))
-    }).join('')
+    'command': unescapeString(keybinding.command)
   }
 })
 

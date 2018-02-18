@@ -51,7 +51,7 @@ class Keybindings extends React.Component
     @keymaps()[id]
 
   keymaps: ->
-    @props.keybindings[process.platform]
+    archipelago.config.get('keybindings')[process.platform]
 
   make: (keymapId) ->
     React.createElement(

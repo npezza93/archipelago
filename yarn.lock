@@ -4313,6 +4313,10 @@ string-width@^2.0.0, string-width@^2.1.0, string-width@^2.1.1:
     is-fullwidth-code-point "^2.0.0"
     strip-ansi "^4.0.0"
 
+string.fromcodepoint@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/string.fromcodepoint/-/string.fromcodepoint-0.2.1.tgz#8d978333c0bc92538f50f383e4888f3e5619d653"
+
 string.prototype.padend@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/string.prototype.padend/-/string.prototype.padend-3.0.0.tgz#f3aaef7c1719f170c5eab1c32bf780d96e21f2f0"
@@ -4760,6 +4764,12 @@ underscore-plus@1.x, underscore-plus@~1.x:
 underscore@~1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.6.0.tgz#8b38b10cacdef63337b8b24e4ff86d45aea529a8"
+
+unescape-js@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/unescape-js/-/unescape-js-1.1.0.tgz#38f93ec9419a84b5fbcf5b0450accffed286c18a"
+  dependencies:
+    string.fromcodepoint "^0.2.1"
 
 unherit@^1.0.4:
   version "1.1.0"

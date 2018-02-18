@@ -266,54 +266,54 @@ keybindings:
     linux:
       '1':
         accelerator: 'home'
-        command: [27, 79, 72]
+        command: '\\x1bOH'
       '2':
         accelerator: 'end'
-        command: [27, 79, 70]
+        command: '\\x1bOF'
       '3':
         accelerator: 'ctrl-backspace'
-        command: [27, 127]
+        command: '\\x1b\\x08'
       '4':
         accelerator: 'ctrl-del'
-        command: [27, 100]
+        command: '\\x1bd'
       '5':
         accelerator: 'ctrl-home'
-        command: [27, 119]
+        command: '\\x1bw'
       '6':
         accelerator: 'ctrl-end'
-        command: [16, 66]
+        command: '\\x10B'
     win32:
       '1':
         accelerator: 'home'
-        command: [27, 79, 72]
+        command: '\\x1bOH'
       '2':
         accelerator: 'end'
-        command: [27, 79, 70]
+        command: '\\x1bOF'
       '3':
         accelerator: 'ctrl-backspace'
-        command: [27, 127]
+        command: '\\x1b\\x08'
       '4':
         accelerator: 'cltr-del'
-        command: [27, 100]
+        command: '\\x1bd'
       '5':
         accelerator: 'ctrl-home'
-        command: [27, 119]
+        command: '\\x1bw'
       '6':
         accelerator: 'ctrl-end'
-        command: [16, 66]
+        command: '\\x10B'
     darwin:
       '1':
-        accelerator: 'command-left'
-        command: [27, 79, 72]
+        accelerator: 'cmd-left'
+        command: '\\x1bOH'
       '2':
-        accelerator: 'command-right'
-        command: [27, 79, 70]
+        accelerator: 'cmd-right'
+        command: '\\x1bOF'
       '3':
         accelerator: 'alt-delete'
-        command: [27, 100]
+        command: '\\x1bd'
       '4':
-        accelerator: 'command-backspace'
-        command: [27, 119]
+        accelerator: 'cmd-backspace'
+        command: '\\x1bw'
       '5':
-        accelerator: 'command-delete'
-        command: [16, 66]
+        accelerator: 'cmd-delete'
+        command: '\\x10B'

@@ -54,6 +54,7 @@
     "react-waypoint": "^8.0.0",
     "rmwc": "1.2.0",
     "season": "^6.0.2",
+    "unescape-js": "^1.1.0",
     "xterm": "^3.1.0"
   },
   "devDependencies": {
