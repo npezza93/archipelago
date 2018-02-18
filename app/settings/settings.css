@@ -6,7 +6,7 @@
 
 ::-webkit-scrollbar-thumb {
   background: #666;
-  border: 3px solid #fff;
+  border: 3px solid #FFF;
 }
 
 ::-webkit-scrollbar,
@@ -14,15 +14,15 @@
   border-radius: 5px;
 }
 
-::-webkit-scrollbar-thumb:active {
-  background: #666;
-  border: 0 solid #fff;
-  border-radius: 0;
-}
-
 :root {
   --mdc-theme-primary: #000 !important;
   --mdc-theme-secondary: #000 !important;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: #666;
+  border: 0 solid #FFF;
+  border-radius: 0;
 }
 
 html,
@@ -147,7 +147,7 @@ input,
   font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 16px;
   font-weight: 400;
-  padding: 0px;
+  padding: 0;
 }
 
 .profiles-container archipelago-profiles .new-profile {

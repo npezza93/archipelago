@@ -12,7 +12,6 @@
     "fix": "npm-run-all fix:*",
     "lint:coffee": "coffeelint app/**/*.coffee",
     "lint:css": "stylelint app/**/*.css",
-    "lint:markdown": "remark README.md",
     "lint": "npm-run-all lint:*"
   },
   "repository": {
