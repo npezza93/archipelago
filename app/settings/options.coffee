@@ -4,7 +4,6 @@ OptionsHeader  = require './options_header'
 GeneralOptions = require './general_options'
 ThemeOptions   = require './theme_options'
 Keybindings    = require './keybindings'
-AsciiDialog    = require './ascii_dialog'
 
 module.exports =
 class Options extends React.Component
@@ -40,5 +39,4 @@ class Options extends React.Component
           @setState(header: { preferences: -1, theme: 0,  keybinding: 1 })
         React.createElement(Keybindings)
       )
-      React.createElement(AsciiDialog)
     )

@@ -398,36 +398,6 @@ dialog {
   width: 300px;
 }
 
-dialog .ascii-heading {
-  text-align: center;
-  font-size: 16px;
-  font-weight: 500;
-  margin-bottom: 16px;
-}
-
-dialog .ascii-close {
-  position: absolute;
-  top: 5px;
-  right: 15px;
-  cursor: pointer;
-}
-
-dialog .ascii-row {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-dialog .ascii-row div:nth-child(1),
-dialog .ascii-row div:nth-child(2) {
-  flex: 1;
-}
-
-dialog .ascii-row div:nth-child(3) {
-  flex: 2;
-  text-transform: lowercase;
-}
-
 #hamburger {
   width: 15px;
   height: 12px;

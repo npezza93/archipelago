@@ -7,7 +7,6 @@ class Keybindings extends React.Component
     React.createElement(
       'archipelago-keybindings'
       ref: @props.innerRef
-      @info()
       @make keymapId for keymapId of @keymaps()
       @create()
     )
@@ -30,21 +29,6 @@ class Keybindings extends React.Component
       "keybindings.#{process.platform}.#{id}"
       accelerator: ''
       command: []
-    )
-
-  info: ->
-    React.createElement(
-      'div'
-      className: 'keybindings-info'
-      'Keybinding commands should be a comma separated list of ascii
-       character codes'
-      React.createElement(
-        'div'
-        className: 'keybinding-dialog-trigger'
-        onClick: () ->
-          document.querySelector('dialog').showModal()
-        '\u24D8'
-      )
     )
 
   keymap: (id) ->
