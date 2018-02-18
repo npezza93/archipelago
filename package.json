@@ -47,7 +47,6 @@
     "event-kit": "^2.4.0",
     "key-path-helpers": "^0.4.0",
     "material-components-web": "^0.30.0",
-    "nested-property": "0.0.7",
     "node-pty": "^0.7.4",
     "react": "^16.2.0",
     "react-color": "^2.13.8",
