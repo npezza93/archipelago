@@ -75,8 +75,6 @@ class Config
 
     @_write(@contents)
 
-    Object.keys(@contents.profiles)
-
   getSchemaFor: (setting) ->
     getValueAtKeyPath(@schema, setting)
 

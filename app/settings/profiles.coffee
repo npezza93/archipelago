@@ -54,7 +54,7 @@ class Profiles extends React.Component
     )
 
   removeProfile: (id) ->
-    @setState(profileIds: archipelago.config.destroyProfile(id))
+    archipelago.config.destroyProfile(id)
 
     archipelago.config.validateActiveProfile()
 
