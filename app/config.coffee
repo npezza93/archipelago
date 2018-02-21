@@ -4,11 +4,13 @@ CSON           = require 'season'
 { Emitter }    = require 'event-kit'
 chokidar       = require 'chokidar'
 { getValueAtKeyPath, setValueAtKeyPath } = require 'key-path-helpers'
+Schema         = require './schema'
+Coercer        = require './coercer'
 
 module.exports =
 class Config
   filePath: join(homedir(), '.archipelago.dev.json')
-  schema: CSON.readFileSync(join(__dirname, './schema.cson'))
+  schema: new Schema
 
   constructor: ->
     @emitter  = new Emitter
@@ -20,24 +22,25 @@ class Config
 
     @_bindWatcher()
 
-  get: (selector) ->
-    profileSelector = "profiles.#{@activeProfileId}.#{selector}"
-    schema = @getSchemaFor(selector)
-    value = getValueAtKeyPath(@contents, profileSelector)
+  get: (keyPath) ->
+    schema = @schema.getSchema(keyPath)
+    defaultValue = @schema.getDefaultValue(keyPath)
+    value =
+      getValueAtKeyPath(@contents, "profiles.#{@activeProfileId}.#{keyPath}")
 
-    return value unless schema?
+    coercer = new Coercer(keyPath, value || defaultValue, schema)
 
-    @_coerce(schema, selector, value)
+    coercer.coerce()
 
-  set: (selector, value) ->
-    selector = "profiles.#{@activeProfileId}.#{selector}"
-    setValueAtKeyPath(@contents, selector, value)
+  set: (keyPath, value) ->
+    keyPath = "profiles.#{@activeProfileId}.#{keyPath}"
+    setValueAtKeyPath(@contents, keyPath, value)
     @_write(@contents)
 
-  onDidChange: (selector, callback) ->
-    oldValue = @get(selector)
+  onDidChange: (keyPath, callback) ->
+    oldValue = @get(keyPath)
     @emitter.on 'did-change', () =>
-      newValue = @get(selector)
+      newValue = @get(keyPath)
       unless oldValue == newValue
         oldValue = newValue
         callback(newValue)
@@ -56,10 +59,11 @@ class Config
     @_write(@contents)
 
   getProfileName: (id) ->
-    schema = @getSchemaFor('name')
+    schema = @schema.getSchema('name')
+    defaultValue = @schema.getDefaultValue('name')
     value = getValueAtKeyPath(@contents, "profiles.#{id}.name")
 
-    @_coerce(schema, 'name', value)
+    (new Coercer('name', value || defaultValue, schema)).coerce()
 
   createProfile: ->
     id = Math.max(...@profileIds) + 1
@@ -75,9 +79,6 @@ class Config
 
     @_write(@contents)
 
-  getSchemaFor: (setting) ->
-    getValueAtKeyPath(@schema, setting)
-
   validateActiveProfile: ->
     return if @activeProfileId? && @activeProfile?
 
@@ -85,6 +86,12 @@ class Config
       @setActiveProfileId(Object.keys(@profiles)[0])
     else
       @_write(activeProfileId: 1, profiles: { 1: { id: 1 } })
+
+  settingScopes: ->
+    @schema.settingScopes()
+
+  fieldsInSettingScope: (scope) ->
+    @schema.bySettingScope()[scope]
 
   _refreshConfig: (error, newContents) ->
     return if error?
@@ -96,34 +103,11 @@ class Config
     @contents = newContents
 
     @validateActiveProfile()
-    @emitter.emit('did-change', newContents)
+    @emitter.emit('did-change')
 
   _bindWatcher: ->
     chokidar.watch(@filePath).on 'change', () =>
       CSON.readFile(@filePath, @_refreshConfig.bind(this))
-
-  _coerce: (schema, selector, value) ->
-    value = schema.default unless value? || schema.type == 'object'
-
-    if schema.type == 'object'
-      @_fetchObjectSetting(schema, selector)
-    else if schema.type == 'integer'
-      parseInt(value)
-    else if schema.type == 'float'
-      parseFloat(value)
-    else if schema.type == 'boolean'
-      Boolean(value)
-    else
-      value
-
-  _fetchObjectSetting: (schema, selector) ->
-    setting = {}
-
-    Object.keys(schema).forEach (key) =>
-      unless ['type', 'label', 'input', 'default'].includes(key)
-        setting[key] = @get("#{selector}.#{key}")
-
-    setting
 
   _write: (contents) ->
     CSON.writeFile(@filePath, contents)
