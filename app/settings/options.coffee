@@ -2,48 +2,52 @@ React          = require 'react'
 Waypoint       = require 'react-waypoint'
 OptionsHeader  = require './options_header'
 GeneralOptions = require './general_options'
-ThemeOptions   = require './theme_options'
 Keybindings    = require './keybindings'
 
 module.exports =
 class Options extends React.Component
   constructor: (props) ->
     super(props)
-    @header = {}
+    @scopes = archipelago.config.schema.groupByScope().settings
 
     @state =
-      header: { preferences: 0, theme: 1, keybinding: 2 }
+      headers: { preferences: 0, theme: 1, keybinding: 2 }
 
   render: ->
     React.createElement(
       'archipelago-options'
       {}
-      React.createElement(OptionsHeader, @state.header)
-      React.createElement(GeneralOptions)
-      @withWaypoint(ThemeOptions)
-      @withWaypoint(Keybindings)
+      React.createElement(OptionsHeader, @state.headers)
+      React.createElement(
+        GeneralOptions, properties: @scopes.preferences, key: 'preferences'
+      )
+      @withWaypoint('theme')
     )
 
-  withWaypoint: (element) ->
+  withWaypoint: (scope) ->
     React.createElement(
       Waypoint
+      key: scope
       onEnter: () =>
         @decrementWaypoint()
       onLeave: () =>
         @incrementWaypoint()
-      React.createElement(element)
+      React.createElement(
+        GeneralOptions,
+        properties: @scopes[scope], key: scope
+      )
     )
 
   decrementWaypoint: ->
     headerState = {}
-    Object.keys(@state.header).forEach (key) =>
-      headerState[key] = @state.header[key] - 1
+    for header, position of @state.headers
+      headerState[header] = @state.headers[header] - 1
 
-    @setState(header: headerState)
+    @setState(headers: headerState)
 
   incrementWaypoint: ->
     headerState = {}
-    Object.keys(@state.header).forEach (key) =>
-      headerState[key] = @state.header[key] + 1
+    for header of @state.headers
+      headerState[header] = @state.headers[header] + 1
 
-    @setState(header: headerState)
+    @setState(headers: headerState)
