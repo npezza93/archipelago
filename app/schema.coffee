@@ -10,29 +10,30 @@ class Schema
       properties:
         CSON.readFileSync(join(__dirname, './schema.cson'))
 
-  settingScopes: ->
-    Object.keys(@bySettingScope())
+  groupByScope: ->
+    scopes = {}
 
-  bySettingScope: ->
-    scoped = {}
+    for property, schema of @editableProperties()
+      for scopeKey, scope of schema.scopes
+        scopes[scopeKey] ?= {}
+        scopes[scopeKey][scope] ?= {}
+        Object.assign(scopes[scopeKey][scope], { "#{property}": schema })
 
-    @allSettings().forEach (setting) =>
-      schema = getValueAtKeyPath(@raw, setting)
-      scoped[schema.setting_scope] ?= []
-      scoped[schema.setting_scope].push(setting)
+    scopes
 
-    scoped
+  editableProperties: ->
+    @getPropertyFromSchema('', @schema)
 
-  editableSettings: ->
-    editableSettings =
-      for setting of @schema
-        if @schema[setting].type == 'object'
-          for property of @schema[setting].properties
-            "#{setting}.#{property}"
-        else
-          setting
-
-    editableSettings.flatten()
+  getPropertyFromSchema: (keyPath, schema) ->
+    if schema.type is 'object'
+      properties = {}
+      for childKeyPath, childSchema of (schema.properties || {})
+        propertyKeyPath = pushKeyPath(keyPath, childKeyPath)
+        childProperties = @getPropertyFromSchema(propertyKeyPath, childSchema)
+        Object.assign(properties, childProperties)
+      properties
+    else
+      { "#{keyPath}": schema }
 
   getDefaultValue: (keyPath) ->
     schema = @getSchema(keyPath)
