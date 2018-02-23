@@ -98,10 +98,10 @@ allowTransparency:
   setting_scope: 'preferences'
 vibrancy:
   type: 'string'
-  default: ' '
+  default: null
   setting_scope: 'preferences'
   enum: [
-    { value: ' ', description: 'none' }
+    { value: null, description: 'none' }
     { value: 'light', description: 'light' }
     { value: 'medium-light', description: 'medium-light' }
     { value: 'dark', description: 'dark' }

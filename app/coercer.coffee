@@ -60,7 +60,7 @@ class Coercer
         @throwError(errorMsg)
 
   string: ->
-    value = if @value == undefined then '' else String(@value)
+    value = if @value? then String(@value) else ''
 
     @throwError('must be a string') unless typeof value is 'string'
 
