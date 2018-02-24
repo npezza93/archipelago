@@ -1,14 +1,14 @@
-{ pushKeyPath } = require 'key-path-helpers'
+{ pushKeyPath, getValueAtKeyPath } = require 'key-path-helpers'
 unescapeString  = require 'unescape-js'
 Color           = require 'color'
 
 module.exports =
 class Coercer
-  constructor: (keyPath, value, schema) ->
+  constructor: (keyPath, value, defaultValue, schema) ->
     @keyPath = keyPath
     @value = value
+    @defaultValue = defaultValue
     @schema = schema
-    @errors = []
 
   coerce: ->
     error = null
@@ -18,104 +18,134 @@ class Coercer
     for type in types
       @value = this[type].call(this)
 
-      if @errors.length > 0 then break
-
-    if @errors.length > 0 then console.log @errors
-
     @value
 
-  throwError: (comment) ->
-    message = "Validation failed at #{@keyPath}, #{JSON.stringify(@value)}"
-    if comment?
-      message += " #{comment}"
-
-    @errors.push(message)
-
   float: ->
-    value = parseFloat(@value)
+    value = parseFloat(@value || @defaultValue)
+
     if isNaN(value) or not isFinite(value)
-      @throwError('cannot be coerced into a float')
-    value
+      @_validationFailed('cannot be coerced into a float')
+    else
+      value
 
   integer: ->
-    value = parseInt(@value)
-    if isNaN(value) || !isFinite(value)
-      @throwError('cannot be coerced into an int')
+    value = parseInt(@value || @defaultValue)
+
+    if isNaN(value) or not isFinite(value)
+      @_validationFailed('cannot be coerced into an int')
     else
       value
 
   boolean: ->
     errorMsg = "must be a boolean or the string 'true' or 'false'"
-    switch typeof @value
+    value = @value || @defaultValue
+    switch typeof value
       when 'string'
-        if @value.toLowerCase() is 'true'
+        if value.toLowerCase() is 'true'
           true
-        else if @value.toLowerCase() is 'false'
+        else if value.toLowerCase() is 'false'
           false
         else
-          @throwError(errorMsg)
+          @_validationFailed(errorMsg)
       when 'boolean'
-        @value
+        value
       else
-        @throwError(errorMsg)
+        @_validationFailed(errorMsg)
 
   string: ->
-    value = if @value? then String(@value) else ''
+    value = @value || @defaultValue
+    value = if value? then String(value) else ''
 
-    @throwError('must be a string') unless typeof value is 'string'
-
-    value
+    if typeof value is 'string'
+      value
+    else
+      @_validationFailed('must be a string')
 
   rawString: ->
     unescapeString(@string())
 
   object: ->
-    return @value unless @schema.properties?
+    value = @value || @defaultValue
+
+    return value unless @schema.properties?
 
     defaultChildSchema = null
     newValue = {}
-    for prop, propValue of @value
-      childSchema = @schema.properties[prop]
-      if childSchema?
+
+    for property, propertySchema of @schema.properties
+      if propertySchema?
         try
-          propKeyPath = pushKeyPath(@keyPath, prop)
-          coercer = new Coercer(propKeyPath, propValue, childSchema)
-          newValue[prop] = coercer.coerce()
+          propertyKeyPath = pushKeyPath(@keyPath, property)
+          propertyValue = getValueAtKeyPath(value, property)
+          coercer = new Coercer(
+            propertyKeyPath,
+            propertyValue,
+            propertySchema.default,
+            propertySchema
+          )
+          newValue[property] = coercer.coerce()
         catch error
-          console.warn "Error setting item in object: #{error.message}"
+          @_error 'Error setting item in object', error.message
       else
-        console.warn "Illegal object key: #{@keyPath}.#{prop}"
+        @_error 'Illegal object key', "#{@keyPath}.#{property}"
 
     newValue
 
   array: ->
-    @throwError('must be an array') unless Array.isArray(@value)
+    value = @value || @defaultValue
+
+    @_validationFailed('must be an array') unless Array.isArray(value)
 
     itemSchema = @schema.items
     if itemSchema?
       newValue = []
-      for item in @value
+      for item in value
         try
-          coercer = new Coercer(@keyPath, item, itemSchema)
+          coercer = new Coercer(@keyPath, item, null, itemSchema)
           newValue.push coercer.coerce()
         catch error
-          console.warn "Error setting item in array: #{error.message}"
+          @_error 'Error setting item in array', error.message
       newValue
     else
-      @value
+      value
 
   color: ->
-    switch typeof @value
+    value = @value || @defaultValue
+    switch typeof value
       when 'string'
         break
       when 'object'
-        if (Array.isArray(@value)) then return null
+        if (Array.isArray(value)) then return null
         break
       else
         return null
 
     try
-      parsedColor = new Color(@value)
+      parsedColor = new Color(value)
       parsedColor.toString()
     catch error
-      throwError('cannot be coerced into a color')
+      @_validationFailed('cannot be coerced into a color')
+
+  _validationFailed: (comment) ->
+    title = "Validation failed at #{@keyPath}"
+    body = JSON.stringify(@value)
+
+    if comment? then body += " #{comment}"
+
+    @_warning(title, body, 'warning')
+
+  _error: (title, message) ->
+    @_sendNotification(title, message, 'error')
+
+  _warning: (title, message) ->
+    @_sendNotification(title, message, 'warning')
+
+  _sendNotification: (title, body, type) ->
+    if typeof window.Notification isnt 'function'
+      alert('This browser does not support desktop notification')
+    else if Notification.permission is 'granted'
+      new Notification(title, { body: body, icon: "../icons/#{type}.png" })
+    else if Notification.permission isnt 'denied'
+      Notification.requestPermission (permission) ->
+        if permission is 'granted'
+          new Notification(title, { body: body, icon: "../icons/#{type}.png" })

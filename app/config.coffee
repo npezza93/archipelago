@@ -28,7 +28,7 @@ class Config
     value =
       getValueAtKeyPath(@contents, "profiles.#{@activeProfileId}.#{keyPath}")
 
-    coercer = new Coercer(keyPath, value || defaultValue, schema)
+    coercer = new Coercer(keyPath, value, defaultValue, schema)
 
     coercer.coerce()
 
@@ -63,7 +63,7 @@ class Config
     defaultValue = @schema.getDefaultValue('name')
     value = getValueAtKeyPath(@contents, "profiles.#{id}.name")
 
-    (new Coercer('name', value || defaultValue, schema)).coerce()
+    (new Coercer('name', value, defaultValue, schema)).coerce()
 
   createProfile: ->
     id = Math.max(...@profileIds) + 1
