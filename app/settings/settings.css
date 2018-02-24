@@ -186,7 +186,7 @@ archipelago-options {
   height: 100%;
 }
 
-archipelago-options archipelago-options-header {
+archipelago-properties archipelago-header {
   padding-left: 75px;
   height: 125px;
   position: fixed;
@@ -195,7 +195,7 @@ archipelago-options archipelago-options-header {
   z-index: 2;
 }
 
-archipelago-options archipelago-options-header::before {
+archipelago-properties archipelago-header::before {
   content: " ";
   backdrop-filter: blur(2px);
   position: absolute;
@@ -206,8 +206,8 @@ archipelago-options archipelago-options-header::before {
   z-index: -1;
 }
 
-archipelago-options archipelago-options-header div,
-archipelago-options archipelago-options-header div[position = "0"] {
+archipelago-properties archipelago-header div,
+archipelago-properties archipelago-header div[position = "0"] {
   font-size: 23px;
   font-weight: 700;
   color: #000;
@@ -217,7 +217,7 @@ archipelago-options archipelago-options-header div[position = "0"] {
   opacity: 1;
 }
 
-archipelago-options archipelago-options-header div[position = "-2"] {
+archipelago-properties archipelago-header div[position = "-2"] {
   font-size: 11px;
   font-weight: 500;
   color: #889199;
@@ -226,7 +226,7 @@ archipelago-options archipelago-options-header div[position = "-2"] {
   transition: all .3s ease-in-out;
 }
 
-archipelago-options archipelago-options-header div[position = "-1"] {
+archipelago-properties archipelago-header div[position = "-1"] {
   font-size: 14px;
   font-weight: 500;
   color: #889199;
@@ -234,14 +234,14 @@ archipelago-options archipelago-options-header div[position = "-1"] {
   transition: all .3s ease-in-out;
 }
 
-archipelago-options archipelago-options-header div[position = "1"],
-archipelago-options archipelago-options-header div[position = "2"] {
+archipelago-properties archipelago-header div[position = "1"],
+archipelago-properties archipelago-header div[position = "2"] {
   opacity: 0;
   top: 100px;
   font-size: 26px;
 }
 
-archipelago-options archipelago-options-header::after {
+archipelago-properties archipelago-header::after {
   content: " ";
   backdrop-filter: blur(1px);
   position: absolute;
@@ -454,7 +454,7 @@ dialog {
     visibility: visible;
   }
 
-  archipelago-options archipelago-options-header {
+  archipelago-properties archipelago-header {
     width: calc(100% - 87px);
   }
 }

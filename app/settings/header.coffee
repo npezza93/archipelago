@@ -1,7 +1,7 @@
 React = require 'react'
 
 module.exports =
-class OptionsHeader extends React.Component
+class Header extends React.Component
   constructor: (props) ->
     super(props)
     @headings =
@@ -11,7 +11,7 @@ class OptionsHeader extends React.Component
 
   render: ->
     React.createElement(
-      'archipelago-options-header'
+      'archipelago-header'
       {}
       for headingKey, heading of @headings
         React.createElement(
