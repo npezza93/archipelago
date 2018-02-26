@@ -10,16 +10,14 @@ class Schema
       properties:
         CSON.readFileSync(join(__dirname, './schema.cson'))
 
-  groupByScope: ->
-    scopes = {}
+  settingsScopes: ->
+    settings = {}
 
     for property, schema of @editableProperties()
-      for scopeKey, scope of schema.scopes
-        scopes[scopeKey] ?= {}
-        scopes[scopeKey][scope] ?= {}
-        Object.assign(scopes[scopeKey][scope], { "#{property}": schema })
+      settings[schema.settings.title] ?= []
+      settings[schema.settings.title].push("#{property}": schema)
 
-    scopes
+    settings
 
   editableProperties: ->
     @getPropertyFromSchema('', @schema)
