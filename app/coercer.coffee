@@ -1,6 +1,6 @@
 { pushKeyPath, getValueAtKeyPath } = require 'key-path-helpers'
-unescapeString  = require 'unescape-js'
-Color           = require 'color'
+unescapeString = require 'unescape-js'
+Color          = require 'color'
 
 module.exports =
 class Coercer
