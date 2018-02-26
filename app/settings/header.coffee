@@ -1,23 +1,18 @@
-React = require 'react'
+React      = require 'react'
+titleize   = require 'titleize'
+decamelize = require 'decamelize'
 
 module.exports =
 class Header extends React.Component
-  constructor: (props) ->
-    super(props)
-    @headings =
-      preferences: 'Preferences'
-      theme: 'Theme'
-      keybinding: 'Keybindings'
-
   render: ->
     React.createElement(
       'archipelago-header'
       {}
-      for headingKey, heading of @headings
+      for heading, headingPosition of @props.headings
         React.createElement(
           'div'
-          key: headingKey
-          position: @props[headingKey]
-          heading
+          key: heading
+          position: headingPosition
+          titleize(decamelize(heading, ' '))
         )
     )
