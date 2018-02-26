@@ -1,8 +1,8 @@
 name:
   type: 'string'
   default: 'New Profile'
-  scopes:
-    settings: 'profile'
+  settings:
+    title: 'profile'
 fontFamily:
   type: 'string'
   default: 'courier-new, courier, monospace'
