@@ -1,4 +1,3 @@
-require('../../lib/array')
 require('coffeescript').register()
 KeymapManager = require('atom-keymap')
 Config   = require('../config')
