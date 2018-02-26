@@ -1,7 +1,7 @@
-React    = require 'react'
-ReactDOM = require 'react-dom'
-Profiles = require './profiles'
-Options  = require './options'
+React          = require 'react'
+ReactDOM       = require 'react-dom'
+Profiles       = require './profiles'
+PropertiesPane = require './properties_pane'
 
 document.addEventListener 'DOMContentLoaded', () ->
   profilesContainer = document.querySelector('.profiles-container')
@@ -9,7 +9,8 @@ document.addEventListener 'DOMContentLoaded', () ->
 
   ReactDOM.render(React.createElement(Profiles), profilesContainer)
   ReactDOM.render(
-    React.createElement(Options), document.querySelector('.options-container')
+    React.createElement(PropertiesPane),
+    document.querySelector('.options-container')
   )
 
   document.querySelector('#hamburger').addEventListener 'click', () ->
