@@ -3,7 +3,8 @@ CSON           = require 'season'
 { join }       = require 'path'
 { Emitter }    = require 'event-kit'
 chokidar       = require 'chokidar'
-{ getValueAtKeyPath, setValueAtKeyPath } = require 'key-path-helpers'
+{ getValueAtKeyPath, setValueAtKeyPath, pushKeyPath } =
+  require 'key-path-helpers'
 Schema         = require './schema'
 Coercer        = require './coercer'
 
@@ -27,15 +28,24 @@ class Config
     return unless schema?
 
     defaultValue = @schema.getDefaultValue(keyPath)
-    value =
-      getValueAtKeyPath(@contents, "profiles.#{@activeProfileId}.#{keyPath}")
+
+    profileKeyPath = "profiles.#{@activeProfileId}.#{keyPath}"
+    if schema.platformSpecific?
+      profileKeyPath = pushKeyPath(profileKeyPath, process.platform)
+
+    value = getValueAtKeyPath(@contents, profileKeyPath)
 
     coercer = new Coercer(keyPath, value, defaultValue, schema)
 
     coercer.coerce()
 
   set: (keyPath, value) ->
+    schema = @schema.getSchema(keyPath)
+    return unless schema?
     keyPath = "profiles.#{@activeProfileId}.#{keyPath}"
+    if schema.platformSpecific?
+      keyPath = pushKeyPath(keyPath, process.platform)
+
     setValueAtKeyPath(@contents, keyPath, value)
     @_write(@contents)
 
