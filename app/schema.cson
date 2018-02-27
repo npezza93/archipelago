@@ -150,6 +150,7 @@ tabStopWidth:
 vibrancy:
   type: 'string'
   default: null
+  enabled_on: ['darwin']
   settings:
     title: 'preferences'
     group: 5
@@ -179,6 +180,7 @@ macOptionIsMeta:
   type: 'boolean'
   title: 'macOptionIsMeta'
   default: true
+  enabled_on: ['darwin']
   settings:
     title: 'preferences'
     group: 6

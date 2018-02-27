@@ -24,6 +24,8 @@ class Config
 
   get: (keyPath) ->
     schema = @schema.getSchema(keyPath)
+    return unless schema?
+
     defaultValue = @schema.getDefaultValue(keyPath)
     value =
       getValueAtKeyPath(@contents, "profiles.#{@activeProfileId}.#{keyPath}")

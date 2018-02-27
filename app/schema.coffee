@@ -30,7 +30,7 @@ class Schema
         childProperties = @getPropertyFromSchema(propertyKeyPath, childSchema)
         Object.assign(properties, childProperties)
       properties
-    else
+    else if @_enabledProperty(schema)
       { "#{keyPath}": schema }
 
   getDefaultValue: (keyPath) ->
@@ -53,4 +53,10 @@ class Schema
       if schema.type is 'object'
         childSchema = schema.properties?[key]
       schema = childSchema
-    schema
+
+    schema if @_enabledProperty(schema)
+
+  _enabledProperty: (schema) ->
+    defaultPlatforms = ['linux', 'win32', 'darwin']
+
+    (schema.enabled_on || defaultPlatforms).includes(process.platform)
