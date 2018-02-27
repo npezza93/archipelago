@@ -38,8 +38,8 @@ class Property extends React.Component
       TextField
       datakey: @props.property
       label: @_propertyTitle()
-      value: archipelago.config.get(@props.property)
-      onChange: (e) ->
+      value: @state[@props.property]
+      onChange: (e) =>
         archipelago.config.set(@props.property, e.target.value)
     )
 
@@ -48,9 +48,9 @@ class Property extends React.Component
       Select
       datakey: @props.property
       label: @_propertyTitle()
-      value: archipelago.config.get(@props.property)
+      value: @state[@props.property]
       options: @props.schema.enum
-      onChange: (e) ->
+      onChange: (e) =>
         archipelago.config.set(@props.property, e.target.value)
     )
 
@@ -58,9 +58,9 @@ class Property extends React.Component
     React.createElement(
       Switch
       datakey: @props.property
-      checked: archipelago.config.get(@props.property)
+      checked: @state[@props.property]
       label: @_propertyTitle()
-      onChange: (e) ->
+      onChange: (e) =>
         archipelago.config.set(@props.property, e.target.checked)
     )
 
@@ -89,10 +89,10 @@ class Property extends React.Component
       TextField
       datakey: @props.property
       label: @_propertyTitle()
-      value: archipelago.config.get(@props.property)
+      value: @state[@props.property]
       onClick: (e) =>
         @setState(active: true)
-      onChange: (e) ->
+      onChange: (e) =>
         archipelago.config.set(@props.property, e.target.value)
       @colorInput()
     )
@@ -106,7 +106,7 @@ class Property extends React.Component
       React.createElement(
         ChromePicker
         color: archipelago.config.get(@props.property)
-        onChangeComplete: (color) ->
+        onChangeComplete: (color) =>
           rgba = "rgba(#{Object.values(color.rgb).join(",")})"
           archipelago.config.set(@props.property, rgba)
       )
