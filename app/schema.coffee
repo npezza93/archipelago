@@ -36,7 +36,7 @@ class Schema
   getDefaultValue: (keyPath) ->
     schema = @getSchema(keyPath)
 
-    if schema.default? && schema.platform_specific
+    if schema.default? && schema.platformSpecific
       schema.default[process.platform]
     else if schema.default?
       schema.default
@@ -59,4 +59,4 @@ class Schema
   _enabledProperty: (schema) ->
     defaultPlatforms = ['linux', 'win32', 'darwin']
 
-    (schema.enabled_on || defaultPlatforms).includes(process.platform)
+    (schema.enabledOn || defaultPlatforms).includes(process.platform)

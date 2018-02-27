@@ -150,7 +150,7 @@ tabStopWidth:
 vibrancy:
   type: 'string'
   default: null
-  enabled_on: ['darwin']
+  enabledOn: ['darwin']
   settings:
     title: 'preferences'
     group: 5
@@ -180,7 +180,7 @@ macOptionIsMeta:
   type: 'boolean'
   title: 'macOptionIsMeta'
   default: true
-  enabled_on: ['darwin']
+  enabledOn: ['darwin']
   settings:
     title: 'preferences'
     group: 6
@@ -369,7 +369,7 @@ keybindings:
     title: 'keybindings'
     group: 1
     order: 1
-  platform_specific: true
+  platformSpecific: true
   items:
     type: 'object'
     properties:
