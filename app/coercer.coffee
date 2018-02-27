@@ -38,7 +38,10 @@ class Coercer
 
   boolean: ->
     errorMsg = "must be a boolean or the string 'true' or 'false'"
-    value = @value || @defaultValue
+    value = @value
+    if value == undefined || value == null
+      value = @defaultValue
+
     switch typeof value
       when 'string'
         if value.toLowerCase() is 'true'
