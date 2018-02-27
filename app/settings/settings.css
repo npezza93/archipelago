@@ -304,7 +304,7 @@ archipelago-properties-pane .color-container .mdc-text-field .chrome-picker {
 
 /* Keybindings */
 
-archipelago-properties-pane archipelago-keybindings {
+/* archipelago-properties-pane archipelago-keybindings {
   margin: 130px 75px 50px 75px;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -378,7 +378,7 @@ archipelago-properties-pane archipelago-keybindings .keybinding-dialog-trigger:h
 
 archipelago-properties-pane archipelago-keybindings .create-keybinding:hover {
   color: #424242;
-}
+} */
 
 #hamburger {
   width: 15px;
