@@ -1,3 +1,4 @@
+{ remote }                       = require 'electron'
 { spawn }                        = require 'node-pty'
 defaultShell                     = require 'default-shell'
 React                            = require 'react'
@@ -21,7 +22,12 @@ class Session
       @setting('shellArgs').split(',')
       name: 'xterm-256color'
       cwd: process.env.HOME
-      env: process.env
+      env: {
+        ...process.env
+        LANG: remote.app.getLocale().replace('-', '_') + '.UTF-8'
+        TERM: 'xterm-256color'
+        COLORTERM: 'truecolor'
+      }
     )
 
     @xterm = new Xterm(
