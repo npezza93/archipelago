@@ -59,6 +59,7 @@ archipelago-app {
   --selection-color: rgba(255, 255, 255, .3);
   --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --tab-font-size: 15px;
+  --terminal-padding: 5px 0 10px 15px;
 }
 
 ::-webkit-scrollbar-thumb:active {
@@ -146,7 +147,7 @@ archipelago-terminal {
 
 .xterm {
   background-color: transparent;
-  padding: 5px 0 10px 15px;
+  padding: var(--terminal-padding);
 }
 
 /* ArchipelagoApp */
@@ -179,6 +180,15 @@ archipelago-tab-list {
   flex-direction: row;
   padding-left: 70px;
   height: 40px;
+}
+
+archipelago-tab-list[data-single-tab-mode] {
+  height: 30px;
+}
+
+archipelago-tab-list[data-single-tab-mode] span,
+archipelago-tab-list[data-single-tab-mode] div {
+  color: var(--background-color);
 }
 
 archipelago-tab-list archipelago-tab {
