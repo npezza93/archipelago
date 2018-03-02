@@ -1,9 +1,9 @@
 React                         = require 'react'
 { TextField, Select, Switch } = require 'rmwc'
 { ChromePicker }              = require 'react-color'
-titleize                      = require 'titleize'
-decamelize                    = require 'decamelize'
 { splitKeyPath }              = require 'key-path-helpers'
+decamelize                    = require 'decamelize'
+titleize                      = require 'titleize'
 
 module.exports =
 class Property extends React.Component
@@ -40,6 +40,7 @@ class Property extends React.Component
       label: @_propertyTitle()
       value: @state[@props.property]
       onChange: (e) =>
+        @setState("#{@props.property}": e.target.value)
         archipelago.config.set(@props.property, e.target.value)
     )
 
@@ -51,6 +52,7 @@ class Property extends React.Component
       value: @state[@props.property]
       options: @props.schema.enum
       onChange: (e) =>
+        @setState("#{@props.property}": e.target.value)
         archipelago.config.set(@props.property, e.target.value)
     )
 
@@ -61,6 +63,7 @@ class Property extends React.Component
       checked: @state[@props.property]
       label: @_propertyTitle()
       onChange: (e) =>
+        @setState("#{@props.property}": e.target.checked)
         archipelago.config.set(@props.property, e.target.checked)
     )
 
@@ -93,6 +96,7 @@ class Property extends React.Component
       onClick: (e) =>
         @setState(active: true)
       onChange: (e) =>
+        @setState("#{@props.property}": e.target.value)
         archipelago.config.set(@props.property, e.target.value)
       @colorInput()
     )
@@ -108,6 +112,7 @@ class Property extends React.Component
         color: archipelago.config.get(@props.property)
         onChangeComplete: (color) =>
           rgba = "rgba(#{Object.values(color.rgb).join(",")})"
+          @setState("#{@props.property}": rgba)
           archipelago.config.set(@props.property, rgba)
       )
     )
@@ -120,4 +125,5 @@ class Property extends React.Component
 
   _bindListener: ->
     archipelago.config.onDidChange @props.property, (newValue) =>
-      @setState("#{@props.property}": newValue)
+      if @state[@props.property] != newValue
+        @setState("#{@props.property}": newValue)
