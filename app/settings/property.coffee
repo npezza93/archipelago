@@ -95,3 +95,4 @@ class Property extends React.Component
     archipelago.config.onDidChange @props.property, (newValue) =>
       if @state[@props.property] != newValue
         @setState("#{@props.property}": newValue)
+    , keepEscaped: true

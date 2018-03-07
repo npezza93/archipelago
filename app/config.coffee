@@ -49,10 +49,10 @@ class Config
     setValueAtKeyPath(@contents, keyPath, value)
     @_write(@contents)
 
-  onDidChange: (keyPath, callback) ->
+  onDidChange: (keyPath, callback, options) ->
     oldValue = @get(keyPath)
     @emitter.on 'did-change', () =>
-      newValue = @get(keyPath)
+      newValue = @get(keyPath, options)
       unless oldValue == newValue
         oldValue = newValue
         callback(newValue)
