@@ -43,9 +43,9 @@
     "chokidar": "^2.0.2",
     "coffeescript": "^2.2.0",
     "color": "^3.0.0",
-    "decamelize": "^2.0.0",
     "default-shell": "^1.0.1",
     "event-kit": "^2.4.0",
+    "i": "^0.3.6",
     "jsesc": "^2.5.1",
     "key-path-helpers": "^0.4.0",
     "material-components-web": "^0.30.0",
@@ -57,7 +57,6 @@
     "react-waypoint": "^8.0.0",
     "rmwc": "1.2.0",
     "season": "^6.0.2",
-    "titleize": "^1.0.0",
     "unescape-js": "^1.1.0",
     "xterm": "^3.1.0"
   },

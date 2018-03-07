@@ -1,6 +1,4 @@
 React      = require 'react'
-titleize   = require 'titleize'
-decamelize = require 'decamelize'
 
 module.exports =
 class Header extends React.Component
@@ -13,6 +11,6 @@ class Header extends React.Component
           'div'
           key: heading
           position: headingPosition
-          titleize(decamelize(heading, ' '))
+          heading.titleize
         )
     )

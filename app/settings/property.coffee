@@ -1,7 +1,5 @@
 React            = require 'react'
 { splitKeyPath } = require 'key-path-helpers'
-decamelize       = require 'decamelize'
-titleize         = require 'titleize'
 jsesc            = require 'jsesc'
 BooleanField     = require './fields/boolean_field'
 ColorField       = require './fields/color_field'
@@ -80,7 +78,7 @@ class Property extends React.Component
     if @props.schema.title?
       @props.schema.title
     else
-      titleize(decamelize([...splitKeyPath(@props.property)].pop(), ' '))
+      [...splitKeyPath(@props.property)].pop().titleize
 
   bindListener: ->
     archipelago.config.onDidChange @props.property, (newValue) =>
