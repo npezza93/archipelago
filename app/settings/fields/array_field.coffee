@@ -1,14 +1,10 @@
-React            = require 'react'
-{ splitKeyPath } = require 'key-path-helpers'
-BooleanField     = require './boolean_field'
-ColorField       = require './color_field'
-SelectField      = require './select_field'
-TextField        = require './text_field'
+React          = require 'react'
+FieldComponent = require '../field_component'
 
 module.exports =
-class ArrayField extends React.Component
+class ArrayField extends FieldComponent
   render: ->
-    elements = for element, i in (@props.value || [])
+    elements = for element, i in @props.value
       @renderElement(element, i)
 
     elements.concat(@addElement())
@@ -22,16 +18,23 @@ class ArrayField extends React.Component
       @removeElement(index)
     )
 
-  renderItems: (element, index) ->
+  renderItems: (value, index) ->
     if @props.schema.items.type is 'object'
       for property, propertySchema of @props.schema.items.properties
-        this[propertySchema.type].call(
-          this, property, propertySchema, element[property], index
-        )
+        @renderItem(property, value[property], propertySchema, index)
     else
-      this[@props.schema.items.type].call(
-        this, @props.datakey, @props.schema.items, element, index
-      )
+      @renderItem(@props.property, value, @props.schema.items, index)
+
+  renderItem: (property, value, schema, index) ->
+    this[schema.type].call(
+      this
+      property
+      value
+      schema
+      (newValue) =>
+        @props.value[index][property] = newValue
+        @props.onChange.call(this, @props.value)
+    )
 
   addElement: ->
     React.createElement(
@@ -39,7 +42,7 @@ class ArrayField extends React.Component
       key: Math.random()
       className: 'create-array-element'
       onClick: @createElement.bind(this)
-      "add new #{@props.datakey.singularize}"
+      "add new #{@props.property.singularize}"
     )
 
   removeElement: (index) ->
@@ -58,46 +61,9 @@ class ArrayField extends React.Component
     else
       newItem = @props.schema.items.default || null
 
-    @props.onChange.call(this, (@props.value || []).concat(newItem))
+    @props.onChange.call(this, @props.value.concat(newItem))
 
   destroyElement: (index) ->
     @props.value.splice(index, 1)
 
-    @props.onChange.call(this, (@props.value || []))
-
-  rawString: (property, schema, value, index) ->
-    React.createElement(
-      TextField
-      key: property
-      value: value
-      label: @title(property, schema)
-      onChange: (newValue) =>
-        @props.value[index][property] = newValue
-        @props.onChange.call(this, @props.value)
-    )
-
-  integer: (property, schema, value, index) ->
-    @string(property, schema, value, index)
-
-  float: (property, schema, value, index) ->
-    @integer(property, schema, value, index)
-
-  string: (property, schema, value, index) ->
-    if schema.enum?
-      @select()
-    else
-      React.createElement(
-        TextField
-        key: property
-        value: value
-        label: @title(property, schema)
-        onChange: (newValue) =>
-          @props.value[index][property] = newValue
-          @props.onChange.call(this, @props.value)
-      )
-
-  title: (property, schema) ->
-    if schema.title?
-      schema.title
-    else
-      [...splitKeyPath(property)].pop().titleize
+    @props.onChange.call(this, @props.value)
