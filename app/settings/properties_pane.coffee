@@ -2,7 +2,6 @@ React             = require 'react'
 Waypoint          = require 'react-waypoint'
 Header            = require './header'
 PropertiesSection = require './properties_section'
-Keybindings       = require './keybindings'
 
 module.exports =
 class PropertiesPane extends React.Component
