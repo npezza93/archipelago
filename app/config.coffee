@@ -23,7 +23,7 @@ class Config
 
     @_bindWatcher()
 
-  get: (keyPath) ->
+  get: (keyPath, options) ->
     schema = @schema.getSchema(keyPath)
     return unless schema?
 
@@ -35,7 +35,7 @@ class Config
 
     value = getValueAtKeyPath(@contents, profileKeyPath)
 
-    coercer = new Coercer(keyPath, value, defaultValue, schema)
+    coercer = new Coercer(keyPath, value, defaultValue, schema, options)
 
     coercer.coerce()
 

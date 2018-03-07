@@ -4,11 +4,12 @@ Color          = require 'color'
 
 module.exports =
 class Coercer
-  constructor: (keyPath, value, defaultValue, schema) ->
+  constructor: (keyPath, value, defaultValue, schema, options) ->
     @keyPath = keyPath
     @value = value
     @defaultValue = defaultValue
     @schema = schema
+    @options = options
 
   coerce: ->
     error = null
@@ -65,7 +66,10 @@ class Coercer
       @_validationFailed('must be a string')
 
   rawString: ->
-    unescapeString(@string())
+    if @options && @options.keepEscaped
+      @string()
+    else
+      unescapeString(@string())
 
   object: ->
     value = @value || @defaultValue
@@ -84,7 +88,8 @@ class Coercer
             propertyKeyPath,
             propertyValue,
             propertySchema.default,
-            propertySchema
+            propertySchema,
+            @options
           )
           newValue[property] = coercer.coerce()
         catch error
@@ -104,7 +109,7 @@ class Coercer
       newValue = []
       for item in value
         try
-          coercer = new Coercer(@keyPath, item, null, itemSchema)
+          coercer = new Coercer(@keyPath, item, null, itemSchema, @options)
           newValue.push coercer.coerce()
         catch error
           @_error 'Error setting item in array', error.message
