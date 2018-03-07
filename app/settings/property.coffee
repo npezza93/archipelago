@@ -1,17 +1,19 @@
 React            = require 'react'
 { splitKeyPath } = require 'key-path-helpers'
-jsesc            = require 'jsesc'
 BooleanField     = require './fields/boolean_field'
 ColorField       = require './fields/color_field'
 SelectField      = require './fields/select_field'
 TextField        = require './fields/text_field'
+ArrayField       = require './fields/array_field'
 
 module.exports =
 class Property extends React.Component
   constructor: (props) ->
     super(props)
 
-    @state = "#{props.property}": archipelago.config.get(props.property)
+    @state = "#{props.property}": archipelago.config.get(
+      props.property, { keepEscaped: true }
+    )
 
     @bindListener()
 
@@ -71,6 +73,15 @@ class Property extends React.Component
       value: @state[@props.property]
       label: @title()
       options: @props.schema.enum
+      onChange: (newValue) => archipelago.config.set(@props.property, newValue)
+    )
+
+  array: ->
+    React.createElement(
+      ArrayField
+      datakey: @props.property
+      value: @state[@props.property]
+      schema: @props.schema
       onChange: (newValue) => archipelago.config.set(@props.property, newValue)
     )
 

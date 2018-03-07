@@ -22,6 +22,7 @@ class PropertiesPane extends React.Component
       React.createElement(Header, headings: @state.headings)
       React.createElement(PropertiesSection, properties: @scopes.preferences)
       @withWaypoint('theme')
+      @withWaypoint('keybindings')
     )
 
   withWaypoint: (scope) ->

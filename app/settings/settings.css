@@ -304,20 +304,12 @@ archipelago-properties-pane .color-container .mdc-text-field .chrome-picker {
 
 /* Keybindings */
 
-/* archipelago-properties-pane archipelago-keybindings {
-  margin: 130px 75px 50px 75px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 100px;
-  grid-row-gap: 20px;
-}
-
-archipelago-properties-pane archipelago-keybindings .keybinding-container {
+archipelago-properties-pane .array-element-container {
   display: flex;
   position: relative;
 }
 
-archipelago-properties-pane archipelago-keybindings .keybinding-container .remove-keybinding {
+archipelago-properties-pane .array-element-container .remove-array-element {
   position: absolute;
   right: 0;
   cursor: pointer;
@@ -326,24 +318,24 @@ archipelago-properties-pane archipelago-keybindings .keybinding-container .remov
   transition: opacity .5s ease-in-out, visibility .5s ease-in-out;
 }
 
-archipelago-properties-pane archipelago-keybindings .keybinding-container:hover .remove-keybinding {
+archipelago-properties-pane .array-element-container:hover .remove-array-element {
   opacity: 1;
   visibility: visible;
 }
 
-archipelago-properties-pane archipelago-keybindings div:first-child {
+archipelago-properties-pane .array-element-container div:first-child {
   margin-right: 5px;
 }
 
-archipelago-properties-pane archipelago-keybindings div:nth-child(2) {
+archipelago-properties-pane .array-element-container div:nth-child(2) {
   margin-left: 5px;
 }
 
-archipelago-properties-pane archipelago-keybindings .mdc-text-field {
+archipelago-properties-pane .array-element-container .mdc-text-field {
   width: 100%;
 }
 
-archipelago-properties-pane archipelago-keybindings .create-keybinding {
+archipelago-properties-pane .create-array-element {
   height: 55px;
   display: flex;
   justify-content: center;
@@ -357,28 +349,9 @@ archipelago-properties-pane archipelago-keybindings .create-keybinding {
   grid-column: span 2;
 }
 
-archipelago-properties-pane archipelago-keybindings .keybindings-info {
-  grid-column: span 2;
-  margin-right: 0;
-  color: rgba(0, 0, 0, .5);
-  display: flex;
-  justify-content: space-between;
-}
-
-archipelago-properties-pane archipelago-keybindings .keybinding-dialog-trigger {
-  margin-right: 0;
-  margin-left: 5px;
-  cursor: pointer;
-  transition: color .5s ease-in-out;
-}
-
-archipelago-properties-pane archipelago-keybindings .keybinding-dialog-trigger:hover {
+archipelago-properties-pane .create-array-element:hover {
   color: #424242;
 }
-
-archipelago-properties-pane archipelago-keybindings .create-keybinding:hover {
-  color: #424242;
-} */
 
 #hamburger {
   width: 15px;
@@ -458,7 +431,7 @@ archipelago-properties-pane archipelago-keybindings .create-keybinding:hover {
   archipelago-properties-section .mdc-select,
   archipelago-properties-section .mdc-form-field,
   archipelago-properties-pane .color-container,
-  archipelago-properties-pane archipelago-keybindings .keybinding-container {
+  archipelago-properties-pane .array-element-container {
     grid-column: span 2;
   }
 }
