@@ -6,19 +6,27 @@ class Profile extends React.Component
     super(props)
     @state =
       editMode: false
-      name: props.profile.name
+      name: archipelago.config.getProfileName(props.profileId)
+
+    @_bindListener()
 
   render: ->
     React.createElement(
       'archipelago-profile',
-      class: if @props.activeProfile == @props.profile.id then 'active'
+      class: if @props.activeProfileId == @props.profileId then 'active'
       onDoubleClick: () =>
         @setState(editMode: true)
       onClick: () =>
-        @props.setActiveProfile(@props.profile.id)
+        @props.setActiveProfileId(@props.profileId)
       @textOrInput()
       @removeProfile()
     )
+
+  textOrInput: ->
+    if @state.editMode
+      @input()
+    else
+      @state.name
 
   input: ->
     React.createElement(
@@ -31,26 +39,28 @@ class Profile extends React.Component
       onBlur: () =>
         @setState(editMode: false)
       onChange: (e) =>
-        selector = "profiles.#{@props.profile.id}.name"
-        value = e.target.value
+        newName = e.target.value
 
-        archipelago.config.set(selector, value)
-        @setState(name: value)
+        archipelago.config.setProfileName(@props.profileId, newName)
+        @setState(name: newName)
     )
 
   removeProfile: ->
-    if Object.keys(archipelago.config.get('profiles', false)).length > 1
-      React.createElement(
-        'span'
-        className: 'profile-remove'
-        onClick: (e) =>
-          e.stopPropagation()
-          @props.removeProfile(@props.profile.id)
-        '\u00D7'
-      )
+    return if Object.keys(archipelago.config.profiles).length <= 1
 
-  textOrInput: ->
-    if @state.editMode
-      @input()
-    else
-      @state.name
+    React.createElement(
+      'span'
+      className: 'profile-remove'
+      onClick: (e) =>
+        e.stopPropagation()
+        @props.removeProfile(@props.profileId)
+      '\u00D7'
+    )
+
+  _bindListener: ->
+    archipelago.config.on 'did-change', (newContents) =>
+      nameMatch =
+        archipelago.config.getProfileName(@props.profileId) == @state.name
+
+      unless nameMatch
+        @setState(name: archipelago.config.getProfileName(@props.profileId))

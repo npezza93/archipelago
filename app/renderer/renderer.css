@@ -84,7 +84,7 @@ archipelago-app {
   -webkit-app-region: drag;
   opacity: 1;
   visibility: visible;
-  transition: opacity 300ms linear 1700ms, visibility 300ms linear 1700ms;
+  transition: opacity 300ms linear 800ms, visibility 300ms linear 800ms;
 }
 
 #boot img {
@@ -107,7 +107,7 @@ archipelago-app {
   width: 0;
   height: 1px;
   background: #000;
-  transition: width 2000ms linear;
+  transition: width 1000ms linear;
 }
 
 #boot.calculating #progress-container #progress-bar {

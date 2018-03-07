@@ -1,86 +1,125 @@
-CSON             = require 'season'
-{ homedir }      = require 'os'
-{ join }         = require 'path'
-{ Emitter }      = require 'event-kit'
-chokidar         = require 'chokidar'
-nestedProperty   = require 'nested-property'
+CSON           = require 'season'
+{ homedir }    = require 'os'
+{ join }       = require 'path'
+{ Emitter }    = require 'event-kit'
+chokidar       = require 'chokidar'
+{ getValueAtKeyPath, setValueAtKeyPath, pushKeyPath } =
+  require 'key-path-helpers'
+Schema         = require './schema'
+Coercer        = require './coercer'
 
 module.exports =
 class Config
-  constructor: ->
-    @filePath = join(homedir(), '.archipelago.json')
-    @emitter = new Emitter
+  filePath: join(homedir(), '.archipelago.dev.json')
+  schema: new Schema
 
-    @_openFile()
+  constructor: ->
+    @emitter  = new Emitter
+
+    if CSON.resolve(@filePath)?
+      @_refreshConfig(null, CSON.readFileSync(@filePath))
+    else
+      @_refreshConfig(null, {})
+
     @_bindWatcher()
 
-  get: (selector, activeProfile = true) ->
-    selector = "profiles.#{@_activeProfileId()}.#{selector}" if activeProfile
+  get: (keyPath, options) ->
+    schema = @schema.getSchema(keyPath)
+    return unless schema?
 
-    @_coerce(selector, nestedProperty.get(@_contents(), selector))
+    defaultValue = @schema.getDefaultValue(keyPath)
 
-  set: (selector, value, activeProfile = true) ->
-    selector = "profiles.#{@_activeProfileId()}.#{selector}" if activeProfile
-    settings = @_contents()
-    nestedProperty.set(settings, selector, value)
-    @_write(settings)
+    profileKeyPath = "profiles.#{@activeProfileId}.#{keyPath}"
+    if schema.platformSpecific?
+      profileKeyPath = pushKeyPath(profileKeyPath, process.platform)
 
-  onDidChange: (selector, callback, activeProfile = true) ->
-    oldValue = @get(selector, activeProfile)
+    value = getValueAtKeyPath(@contents, profileKeyPath)
+
+    coercer = new Coercer(keyPath, value, defaultValue, schema, options)
+
+    coercer.coerce()
+
+  set: (keyPath, value) ->
+    schema = @schema.getSchema(keyPath)
+    return unless schema?
+    keyPath = "profiles.#{@activeProfileId}.#{keyPath}"
+    if schema.platformSpecific?
+      keyPath = pushKeyPath(keyPath, process.platform)
+
+    setValueAtKeyPath(@contents, keyPath, value)
+    @_write(@contents)
+
+  onDidChange: (keyPath, callback, options) ->
+    oldValue = @get(keyPath)
     @emitter.on 'did-change', () =>
-      newValue = @get(selector, activeProfile)
+      newValue = @get(keyPath, options)
       unless oldValue == newValue
         oldValue = newValue
         callback(newValue)
 
-  defaultProfile: (id) ->
-    profile = CSON.readFileSync(join(__dirname, './default_profile.cson'))
-    profile.id = id
+  on: (event, callback) ->
+    @emitter.on(event, callback)
 
-    profile
+  setActiveProfileId: (id) ->
+    @contents.activeProfileId = parseInt(id)
 
-  getSchemaFor: (selector) ->
-    nestedProperty.get(@_schema(), selector)
+    @_write(@contents)
 
-  _activeProfileId: ->
-    @_validateActiveProfile()
-    @_contents().activeProfile
+  setProfileName: (id, newName) ->
+    @contents.profiles[id].name = newName
+
+    @_write(@contents)
+
+  getProfileName: (id) ->
+    schema = @schema.getSchema('name')
+    defaultValue = @schema.getDefaultValue('name')
+    value = getValueAtKeyPath(@contents, "profiles.#{id}.name")
+
+    (new Coercer('name', value, defaultValue, schema)).coerce()
+
+  createProfile: ->
+    id = Math.max(...@profileIds) + 1
+    @contents.profiles[id] = { id: id }
+    @contents.activeProfileId = id
+
+    @_write(@contents)
+
+    id
+
+  destroyProfile: (id) ->
+    delete @contents.profiles[id]
+
+    @_write(@contents)
+
+  validateActiveProfile: ->
+    return if @activeProfileId? && @activeProfile?
+
+    if Object.keys(@profiles)[0]?
+      @setActiveProfileId(Object.keys(@profiles)[0])
+    else
+      @_write(activeProfileId: 1, profiles: { 1: { id: 1 } })
+
+  settingScopes: ->
+    @schema.settingScopes()
+
+  fieldsInSettingScope: (scope) ->
+    @schema.bySettingScope()[scope]
+
+  _refreshConfig: (error, newContents) ->
+    return if error?
+
+    @profiles = newContents.profiles || {}
+    @profileIds = Object.keys(@profiles)
+    @activeProfileId = newContents.activeProfileId
+    @activeProfile = @profiles[@activeProfileId]
+    @contents = newContents
+
+    @validateActiveProfile()
+    @emitter.emit('did-change')
 
   _bindWatcher: ->
     chokidar.watch(@filePath).on 'change', () =>
-      @emitter.emit('did-change')
+      CSON.readFile(@filePath, @_refreshConfig.bind(this))
 
-  _coerce: (selector, value) ->
-    schema = @getSchemaFor(selector)
-
-    if schema && schema.type == 'integer'
-      parseInt(value)
-    else if schema && schema.type == 'float'
-      parseFloat(value)
-    else if schema && schema.type == 'boolean'
-      Boolean(value)
-    else
-      value
-
-  _contents: ->
-    CSON.readFileSync(@filePath)
-
-  _exists: ->
-    CSON.resolve(@filePath)?
-
-  _openFile: ->
-    if !@_exists() || Object.keys(@get('profiles', false)).length == 0
-      @_write(activeProfile: 1, profiles: { 1: @defaultProfile(1) })
-
-  _schema: ->
-    @schema ?= CSON.readFileSync(join(__dirname, './schema.cson'))
-
-  _validateActiveProfile: ->
-    return if @_contents().profiles[@_contents().activeProfile]
-
-    activeProfile = Object.keys(@_contents().profiles)[0]
-
-    @set('activeProfile', parseInt(activeProfile), false)
-
-  _write: (config) ->
-    CSON.writeFileSync(@filePath, config)
+  _write: (contents) ->
+    CSON.writeFile(@filePath, contents)

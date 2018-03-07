@@ -1,16 +1,17 @@
-::-webkit-scrollbar {
-  height: 9px;
-  width: 9px;
-  background: #FFF;
-}
+/* scrollbar */
 
-::-webkit-scrollbar-corner {
-  background: #FFF;
+::-webkit-scrollbar {
+  width: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgb(180, 180, 180);
-  -webkit-border-radius: 0;
+  background: #666;
+  border: 3px solid #FFF;
+}
+
+::-webkit-scrollbar,
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
 }
 
 :root {
@@ -18,9 +19,10 @@
   --mdc-theme-secondary: #000 !important;
 }
 
-::-webkit-scrollbar-thumb:hover,
 ::-webkit-scrollbar-thumb:active {
-  background: rgb(106, 106, 106);
+  background: #666;
+  border: 0 solid #FFF;
+  border-radius: 0;
 }
 
 html,
@@ -76,6 +78,22 @@ input,
   height: 100%;
 }
 
+.profiles-container archipelago-profiles ::-webkit-scrollbar-thumb {
+  background: #666;
+  border: 3px solid #ECEEF2;
+}
+
+.profiles-container archipelago-profiles ::-webkit-scrollbar,
+.profiles-container archipelago-profiles ::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+}
+
+.profiles-container archipelago-profiles ::-webkit-scrollbar-thumb:active {
+  background: #666;
+  border: 0 solid #ECEEF2;
+  border-radius: 0;
+}
+
 .profiles-container archipelago-profiles .profile-header {
   text-transform: uppercase;
   color: #889199;
@@ -88,6 +106,7 @@ input,
   flex: 1;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
 }
 
 .profiles-container archipelago-profiles .profile-list archipelago-profile {
@@ -104,7 +123,7 @@ input,
 .profiles-container archipelago-profiles .profile-list archipelago-profile .profile-remove {
   position: absolute;
   left: 15px;
-  bottom: 16px;
+  bottom: 17px;
   visibility: hidden;
   z-index: 20;
   transition: opacity .5s ease-in-out, visibility .5s ease-in-out;
@@ -128,7 +147,7 @@ input,
   font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 16px;
   font-weight: 400;
-  padding: 5px;
+  padding: 0;
 }
 
 .profiles-container archipelago-profiles .new-profile {
@@ -162,21 +181,21 @@ input,
   transition: left .5s ease-in-out, width .5s ease-in-out;
 }
 
-archipelago-options {
+archipelago-properties-pane {
   display: block;
   height: 100%;
 }
 
-archipelago-options archipelago-options-header {
+archipelago-properties-pane archipelago-header {
   padding-left: 75px;
   height: 125px;
   position: fixed;
-  width: calc(100% - 359px);
+  width: calc(100% - 362px);
   background-color: rgba(255, 255, 255, .2);
   z-index: 2;
 }
 
-archipelago-options archipelago-options-header::before {
+archipelago-properties-pane archipelago-header::before {
   content: " ";
   backdrop-filter: blur(2px);
   position: absolute;
@@ -187,8 +206,8 @@ archipelago-options archipelago-options-header::before {
   z-index: -1;
 }
 
-archipelago-options archipelago-options-header div,
-archipelago-options archipelago-options-header div[position = "0"] {
+archipelago-properties-pane archipelago-header div,
+archipelago-properties-pane archipelago-header div[position = "0"] {
   font-size: 23px;
   font-weight: 700;
   color: #000;
@@ -198,7 +217,7 @@ archipelago-options archipelago-options-header div[position = "0"] {
   opacity: 1;
 }
 
-archipelago-options archipelago-options-header div[position = "-2"] {
+archipelago-properties-pane archipelago-header div[position = "-2"] {
   font-size: 11px;
   font-weight: 500;
   color: #889199;
@@ -207,7 +226,7 @@ archipelago-options archipelago-options-header div[position = "-2"] {
   transition: all .3s ease-in-out;
 }
 
-archipelago-options archipelago-options-header div[position = "-1"] {
+archipelago-properties-pane archipelago-header div[position = "-1"] {
   font-size: 14px;
   font-weight: 500;
   color: #889199;
@@ -215,14 +234,14 @@ archipelago-options archipelago-options-header div[position = "-1"] {
   transition: all .3s ease-in-out;
 }
 
-archipelago-options archipelago-options-header div[position = "1"],
-archipelago-options archipelago-options-header div[position = "2"] {
+archipelago-properties-pane archipelago-header div[position = "1"],
+archipelago-properties-pane archipelago-header div[position = "2"] {
   opacity: 0;
   top: 100px;
   font-size: 26px;
 }
 
-archipelago-options archipelago-options-header::after {
+archipelago-properties-pane archipelago-header::after {
   content: " ";
   backdrop-filter: blur(1px);
   position: absolute;
@@ -235,7 +254,7 @@ archipelago-options archipelago-options-header::after {
 
 /* General Options */
 
-archipelago-options archipelago-general-options {
+archipelago-properties-pane archipelago-properties-section {
   margin: 130px 75px 0 75px;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -243,22 +262,23 @@ archipelago-options archipelago-general-options {
   grid-row-gap: 20px;
 }
 
-archipelago-options archipelago-general-options .seperator {
+archipelago-properties-pane archipelago-properties-section .seperator {
   grid-column: span 2;
   height: 48px;
 }
 
-archipelago-options archipelago-general-options .mdc-form-field {
+archipelago-properties-pane archipelago-properties-section .mdc-form-field {
   display: flex;
   flex-direction: row-reverse;
+  align-items: flex-end;
 }
 
-archipelago-options archipelago-general-options .mdc-text-field {
+archipelago-properties-pane archipelago-properties-section .mdc-text-field {
   margin-top: 8px !important;
   bottom: 0 !important;
 }
 
-archipelago-options archipelago-general-options .vibrancy-option {
+archipelago-properties-pane archipelago-properties-section .vibrancy-option {
   display: flex;
   flex-direction: column;
   font-size: 13px;
@@ -266,48 +286,30 @@ archipelago-options archipelago-general-options .vibrancy-option {
   width: 100%;
 }
 
-/* Theme Options */
-
-archipelago-options archipelago-theme-options {
-  margin: 130px 75px 0 75px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 100px;
-  grid-row-gap: 20px;
-}
-
-archipelago-options archipelago-theme-options .mdc-text-field {
+archipelago-properties-pane .color-container .mdc-text-field {
   margin-top: 8px !important;
   bottom: 0 !important;
   width: 100% !important;
 }
 
-archipelago-options archipelago-theme-options .mdc-text-field .color-picker {
+archipelago-properties-pane .color-container .mdc-text-field .color-picker {
   position: absolute;
   top: 48px;
   width: 100%;
 }
 
-archipelago-options archipelago-theme-options .mdc-text-field .chrome-picker {
+archipelago-properties-pane .color-container .mdc-text-field .chrome-picker {
   width: 100% !important;
 }
 
 /* Keybindings */
 
-archipelago-options archipelago-keybindings {
-  margin: 130px 75px 50px 75px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 100px;
-  grid-row-gap: 20px;
-}
-
-archipelago-options archipelago-keybindings .keybinding-container {
+archipelago-properties-pane .array-element-container {
   display: flex;
   position: relative;
 }
 
-archipelago-options archipelago-keybindings .keybinding-container .remove-keybinding {
+archipelago-properties-pane .array-element-container .remove-array-element {
   position: absolute;
   right: 0;
   cursor: pointer;
@@ -316,24 +318,24 @@ archipelago-options archipelago-keybindings .keybinding-container .remove-keybin
   transition: opacity .5s ease-in-out, visibility .5s ease-in-out;
 }
 
-archipelago-options archipelago-keybindings .keybinding-container:hover .remove-keybinding {
+archipelago-properties-pane .array-element-container:hover .remove-array-element {
   opacity: 1;
   visibility: visible;
 }
 
-archipelago-options archipelago-keybindings div:first-child {
+archipelago-properties-pane .array-element-container div:first-child {
   margin-right: 5px;
 }
 
-archipelago-options archipelago-keybindings div:nth-child(2) {
+archipelago-properties-pane .array-element-container div:nth-child(2) {
   margin-left: 5px;
 }
 
-archipelago-options archipelago-keybindings .mdc-text-field {
+archipelago-properties-pane .array-element-container .mdc-text-field {
   width: 100%;
 }
 
-archipelago-options archipelago-keybindings .create-keybinding {
+archipelago-properties-pane .create-array-element {
   height: 55px;
   display: flex;
   justify-content: center;
@@ -347,65 +349,8 @@ archipelago-options archipelago-keybindings .create-keybinding {
   grid-column: span 2;
 }
 
-archipelago-options archipelago-keybindings .keybindings-info {
-  grid-column: span 2;
-  margin-right: 0;
-  color: rgba(0, 0, 0, .5);
-  display: flex;
-  justify-content: space-between;
-}
-
-archipelago-options archipelago-keybindings .keybinding-dialog-trigger {
-  margin-right: 0;
-  margin-left: 5px;
-  cursor: pointer;
-  transition: color .5s ease-in-out;
-}
-
-archipelago-options archipelago-keybindings .keybinding-dialog-trigger:hover {
+archipelago-properties-pane .create-array-element:hover {
   color: #424242;
-}
-
-archipelago-options archipelago-keybindings .create-keybinding:hover {
-  color: #424242;
-}
-
-dialog {
-  height: 400px;
-  border: none;
-  top: 20px;
-  overflow-y: scroll;
-  width: 300px;
-}
-
-dialog .ascii-heading {
-  text-align: center;
-  font-size: 16px;
-  font-weight: 500;
-  margin-bottom: 16px;
-}
-
-dialog .ascii-close {
-  position: absolute;
-  top: 5px;
-  right: 15px;
-  cursor: pointer;
-}
-
-dialog .ascii-row {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-dialog .ascii-row div:nth-child(1),
-dialog .ascii-row div:nth-child(2) {
-  flex: 1;
-}
-
-dialog .ascii-row div:nth-child(3) {
-  flex: 2;
-  text-transform: lowercase;
 }
 
 #hamburger {
@@ -463,6 +408,10 @@ dialog .ascii-row div:nth-child(3) {
     opacity: 1;
     visibility: visible;
   }
+
+  archipelago-properties-pane archipelago-header {
+    width: calc(100% - 87px);
+  }
 }
 
 @media (min-width: 699px) {
@@ -478,12 +427,11 @@ dialog .ascii-row div:nth-child(3) {
 
 @media (max-width: 910px) {
 
-  archipelago-general-options .mdc-text-field,
-  archipelago-general-options .mdc-select,
-  archipelago-general-options .mdc-form-field,
-  archipelago-options archipelago-theme-options .color-container,
-  archipelago-options archipelago-keybindings .keybinding-container,
-  archipelago-options archipelago-general-options .vibrancy-option {
+  archipelago-properties-section .mdc-text-field,
+  archipelago-properties-section .mdc-select,
+  archipelago-properties-section .mdc-form-field,
+  archipelago-properties-pane .color-container,
+  archipelago-properties-pane .array-element-container {
     grid-column: span 2;
   }
 }

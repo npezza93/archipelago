@@ -5,14 +5,13 @@
   "main": "app/main/init.js",
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
-    "start": "electron .",
+    "start": "./node_modules/.bin/electron .",
     "pack": "electron-builder --dir",
     "dist": "electron-builder --publish onTagOrDraft",
     "fix:css": "stylefmt app/**/*.css",
     "fix": "npm-run-all fix:*",
     "lint:coffee": "coffeelint app/**/*.coffee",
     "lint:css": "stylelint app/**/*.css",
-    "lint:markdown": "remark README.md",
     "lint": "npm-run-all lint:*"
   },
   "repository": {
@@ -43,10 +42,12 @@
     "atom-keymap": "^8.2.8",
     "chokidar": "^2.0.2",
     "coffeescript": "^2.2.0",
+    "color": "^3.0.0",
     "default-shell": "^1.0.1",
     "event-kit": "^2.4.0",
+    "i": "^0.3.6",
+    "key-path-helpers": "^0.4.0",
     "material-components-web": "^0.30.0",
-    "nested-property": "0.0.7",
     "node-pty": "^0.7.4",
     "react": "^16.2.0",
     "react-color": "^2.13.8",
@@ -55,6 +56,7 @@
     "react-waypoint": "^8.0.0",
     "rmwc": "1.2.0",
     "season": "^6.0.2",
+    "unescape-js": "^1.1.0",
     "xterm": "^3.1.0"
   },
   "devDependencies": {

@@ -6,8 +6,10 @@ class Profiles extends React.Component
   constructor: (props) ->
     super(props)
     @state =
-      activeProfile: archipelago.config.get('activeProfile', false)
-      profiles: Object.values(archipelago.config.get('profiles', false))
+      activeProfileId: archipelago.config.activeProfileId
+      profileIds: archipelago.config.profileIds
+
+    @_bindListener()
 
   render: ->
     React.createElement(
@@ -18,23 +20,6 @@ class Profiles extends React.Component
       @newProfile()
     )
 
-  createProfile: ->
-    tempProfiles = @dupeProfiles()
-
-    id = Math.max(...Object.keys(tempProfiles)) + 1
-    tempProfiles[id] = archipelago.config.defaultProfile(id)
-    archipelago.config.set('profiles', tempProfiles, false)
-    archipelago.config.set('activeProfile', id, false)
-
-    @setState(activeProfile: id, profiles: Object.values(tempProfiles))
-
-  dupeProfiles: ->
-    tempProfiles = {}
-
-    Object.assign(tempProfiles, archipelago.config.get('profiles', false))
-
-    tempProfiles
-
   header: ->
     React.createElement('div', className: 'profile-header', 'Profiles')
 
@@ -42,14 +27,14 @@ class Profiles extends React.Component
     React.createElement(
       'div'
       className: 'profile-list'
-      for profile in @state.profiles
+      for profileId in @state.profileIds
         React.createElement(
           Profile
-          profile: profile
-          activeProfile: @state.activeProfile
-          key: profile.id
+          profileId: parseInt(profileId)
+          activeProfileId: parseInt(@state.activeProfileId)
+          key: profileId
           removeProfile: @removeProfile.bind(this)
-          setActiveProfile: @setActiveProfile.bind(this)
+          setActiveProfileId: @setActiveProfileId.bind(this)
         )
     )
 
@@ -57,32 +42,41 @@ class Profiles extends React.Component
     React.createElement(
       'div'
       className: 'new-profile'
-      onClick: @createProfile.bind(this)
+      onClick: =>
+        profileId = archipelago.config.createProfile()
+
+        @setState(
+          activeProfileId: profileId,
+          profileIds: [...@state.profileIds, profileId]
+        )
+
       'Add New Profile'
     )
 
   removeProfile: (id) ->
-    tempProfiles = @dupeProfiles()
+    archipelago.config.destroyProfile(id)
 
-    delete tempProfiles[id]
-    archipelago.config.set('profiles', tempProfiles, false)
+    archipelago.config.validateActiveProfile()
 
-    @resetActiveProfile(id)
+  setActiveProfileId: (id) ->
+    @setState(activeProfileId: id)
 
-    @setState(
-      activeProfile: archipelago.config.get('activeProfile', false)
-      profiles: Object.values(tempProfiles)
-    )
+    archipelago.config.setActiveProfileId(id)
 
-  resetActiveProfile: (id) ->
-    if archipelago.config.get('activeProfile', false) == id
-      activeProfile = Object.keys(archipelago.config.get('profiles', false))[0]
+  _bindListener: ->
+    archipelago.config.on 'did-change', () =>
+      profileIdsMatch =
+        archipelago.config.profileIds.length == @state.profileIds.length &&
+          archipelago.config.profileIds.every (id, i) =>
+            id == @state.profileIds[i]
 
-      archipelago.config.set('activeProfile', parseInt(activeProfile), false)
+      activeProfileIdMatch =
+          archipelago.config.activeProfileId == @state.activeProfileId
 
-      activeProfile
+      if !profileIdsMatch || !activeProfileIdMatch
+        archipelago.config.validateActiveProfile()
 
-  setActiveProfile: (id) ->
-    archipelago.config.set('activeProfile', id, false)
-
-    @setState(activeProfile: id)
+        @setState(
+          activeProfileId: archipelago.config.activeProfileId
+          profileIds: archipelago.config.profileIds
+        )
