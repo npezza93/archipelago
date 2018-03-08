@@ -192,6 +192,20 @@ rightClickSelectsWord:
     title: 'preferences'
     group: 6
     order: 3
+singleTabMode:
+  type: 'boolean'
+  default: false
+  settings:
+    title: 'preferences'
+    group: 6
+    order: 4
+padding:
+  type: 'string'
+  default: '5px 0 10px 15px'
+  settings:
+    title: 'preferences'
+    group: 6
+    order: 5
 windowBackground:
   type: 'color'
   default: '#000000'

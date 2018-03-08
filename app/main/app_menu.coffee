@@ -47,14 +47,21 @@ class AppMenu
         click: (item, focusedWindow) ->
           if focusedWindow then focusedWindow.send('split-horizontal')
       }
-      { type: 'separator' }
-      {
-        label: 'New Tab'
-        accelerator: 'CmdOrCtrl+T'
-        click: (item, focusedWindow) ->
-          if focusedWindow then focusedWindow.send('new-tab')
-      }
-    ]
+    ].concat(@newTabItem())
+
+  @newTabItem: ->
+    if !archipelago.config.get('singleTabMode')
+      [
+        { type: 'separator' }
+        {
+          label: 'New Tab'
+          accelerator: 'CmdOrCtrl+T'
+          click: (item, focusedWindow) ->
+            if focusedWindow then focusedWindow.send('new-tab')
+        }
+      ]
+    else
+      []
 
   @editMenu: () ->
     label: 'Edit'

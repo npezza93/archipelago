@@ -52,3 +52,8 @@ app.on 'activate', () ->
 archipelago.config.onDidChange 'vibrancy', (value) ->
   windows.forEach (win) ->
     win.setVibrancy(value) unless win.isDestroyed()
+
+archipelago.config.onDidChange 'singleTabMode', (value) ->
+  Menu.setApplicationMenu(
+    Menu.buildFromTemplate(AppMenu.menu(about, settings, createWindow))
+  )

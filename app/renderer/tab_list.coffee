@@ -6,7 +6,10 @@ class TabList extends React.Component
   render: ->
     React.createElement(
       'archipelago-tab-list'
-      {}
+      if archipelago.config.get('singleTabMode')
+        'data-single-tab-mode': ''
+      else
+        {}
       @props.tabs.map (tab) =>
         React.createElement(
           Tab
