@@ -182,15 +182,6 @@ archipelago-tab-list {
   height: 40px;
 }
 
-archipelago-tab-list[data-single-tab-mode] {
-  height: 30px;
-}
-
-archipelago-tab-list[data-single-tab-mode] span,
-archipelago-tab-list[data-single-tab-mode] div {
-  color: var(--background-color);
-}
-
 archipelago-tab-list archipelago-tab {
   color: var(--tab-color);
   filter: invert(50%);
@@ -241,6 +232,10 @@ archipelago-tab div {
   font-size: 20px;
 }
 
+archipelago-tab-list[data-single-tab-mode] div {
+  color: var(--background-color);
+}
+
 archipelago-tab-list archipelago-tab:first-child:nth-last-child(1) div {
   display: none;
 }
@@ -251,6 +246,14 @@ archipelago-tab-list archipelago-tab span {
   white-space: nowrap;
   overflow: hidden;
   max-width: 75%;
+}
+
+archipelago-tab-list[data-single-tab-mode] span {
+  color: var(--background-color);
+}
+
+archipelago-tab-list[data-single-tab-mode] {
+  height: 30px;
 }
 
 archipelago-tab.is-unread span {
