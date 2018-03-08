@@ -168,7 +168,7 @@ archipelago-pane-list archipelago-pane {
   margin: 0;
   overflow-y: hidden;
   display: block;
-  height: calc(100% - 10px);
+  height: 100%;
   position: relative;
 }
 
