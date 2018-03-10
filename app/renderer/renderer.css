@@ -160,7 +160,7 @@ archipelago-app {
 /* Panes */
 
 archipelago-pane-list {
-  display: block;
+  display: flex;
   flex: 1;
 }
 
@@ -170,6 +170,7 @@ archipelago-pane-list archipelago-pane {
   display: block;
   height: 100%;
   position: relative;
+  width: 100%;
 }
 
 /* Titlebar and Tabs */
