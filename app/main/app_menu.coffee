@@ -127,7 +127,7 @@ class AppMenu
               width: 300
               height: 500
               show: true
-              titleBarStyle: 'hidden-inset'
+              titleBarStyle: 'hiddenInset'
               icon: path.join(__dirname, '../../../build/icon.png')
             )
 
@@ -153,7 +153,7 @@ class AppMenu
               width: 1100
               height: 600
               show: true
-              titleBarStyle: 'hidden-inset'
+              titleBarStyle: 'hiddenInset'
               icon: path.join(__dirname, '../../../build/icon.png')
               webPreferences:
                 experimentalFeatures: true
