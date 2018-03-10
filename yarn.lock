@@ -1605,9 +1605,9 @@ ejs@^2.5.7:
   version "2.5.7"
   resolved "https://registry.yarnpkg.com/ejs/-/ejs-2.5.7.tgz#cc872c168880ae3c7189762fd5ffc00896c9518a"
 
-electron-builder-lib@20.4.0:
-  version "20.4.0"
-  resolved "https://registry.yarnpkg.com/electron-builder-lib/-/electron-builder-lib-20.4.0.tgz#e9a6d34b4bc6ed848a39a9ee894a3da015474c2a"
+electron-builder-lib@20.4.1:
+  version "20.4.1"
+  resolved "https://registry.yarnpkg.com/electron-builder-lib/-/electron-builder-lib-20.4.1.tgz#8560563e21ca0596046eac398cad204154665a5e"
   dependencies:
     "7zip-bin" "~3.1.0"
     app-builder-bin "1.7.2"
@@ -1618,10 +1618,10 @@ electron-builder-lib@20.4.0:
     chromium-pickle-js "^0.2.0"
     debug "^3.1.0"
     ejs "^2.5.7"
-    electron-osx-sign "0.4.8"
+    electron-osx-sign "0.4.10"
     electron-publish "20.2.0"
     fs-extra-p "^4.5.2"
-    hosted-git-info "^2.5.0"
+    hosted-git-info "^2.6.0"
     is-ci "^1.1.0"
     isbinaryfile "^3.0.2"
     js-yaml "^3.11.0"
@@ -1663,16 +1663,16 @@ electron-builder-lib@~20.2.0:
     semver "^5.5.0"
     temp-file "^3.1.1"
 
-electron-builder@^20.0.5:
-  version "20.4.0"
-  resolved "https://registry.yarnpkg.com/electron-builder/-/electron-builder-20.4.0.tgz#d1393719339c17dd7c2dd16d58b4e138ca6646ce"
+electron-builder@^20.4.1:
+  version "20.4.1"
+  resolved "https://registry.yarnpkg.com/electron-builder/-/electron-builder-20.4.1.tgz#ec8b5ada929df8d7a4ab4b1685568be4e12bf8f3"
   dependencies:
     bluebird-lst "^1.0.5"
     builder-util "5.6.4"
     builder-util-runtime "4.0.5"
     chalk "^2.3.2"
     dmg-builder "4.1.1"
-    electron-builder-lib "20.4.0"
+    electron-builder-lib "20.4.1"
     electron-download-tf "4.3.4"
     fs-extra-p "^4.5.2"
     is-ci "^1.1.0"
@@ -1709,6 +1709,17 @@ electron-download@^3.0.1:
     rc "^1.1.2"
     semver "^5.3.0"
     sumchecker "^1.2.0"
+
+electron-osx-sign@0.4.10:
+  version "0.4.10"
+  resolved "https://registry.yarnpkg.com/electron-osx-sign/-/electron-osx-sign-0.4.10.tgz#be4f3b89b2a75a1dc5f1e7249081ab2929ca3a26"
+  dependencies:
+    bluebird "^3.5.0"
+    compare-version "^0.1.2"
+    debug "^2.6.8"
+    isbinaryfile "^3.0.2"
+    minimist "^1.2.0"
+    plist "^2.1.0"
 
 electron-osx-sign@0.4.8:
   version "0.4.8"
@@ -2430,7 +2441,7 @@ home-path@^1.0.1:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/home-path/-/home-path-1.0.5.tgz#788b29815b12d53bacf575648476e6f9041d133f"
 
-hosted-git-info@^2.1.4, hosted-git-info@^2.5.0:
+hosted-git-info@^2.1.4, hosted-git-info@^2.5.0, hosted-git-info@^2.6.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.6.0.tgz#23235b29ab230c576aab0d4f13fc046b0b038222"
 
@@ -5385,9 +5396,9 @@ xtend@~2.1.1:
   dependencies:
     object-keys "~0.4.0"
 
-xterm@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/xterm/-/xterm-3.1.0.tgz#7f7e1c8cf4b80bd881a4e8891213b851423e90c9"
+xterm@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/xterm/-/xterm-3.2.0.tgz#da50f54a83d81463c0a2c9f2e0a5d14d3867df02"
 
 y18n@^3.2.0, y18n@^3.2.1:
   version "3.2.1"
