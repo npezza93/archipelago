@@ -234,8 +234,7 @@ archipelago-properties-pane archipelago-header div[position = "-1"] {
   transition: all .3s ease-in-out;
 }
 
-archipelago-properties-pane archipelago-header div[position = "1"],
-archipelago-properties-pane archipelago-header div[position = "2"] {
+archipelago-properties-pane archipelago-header div[position = "1"] {
   opacity: 0;
   top: 100px;
   font-size: 26px;
