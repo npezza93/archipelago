@@ -63,7 +63,7 @@ class AppMenu
     else
       []
 
-  @editMenu: () ->
+  @editMenu: ->
     label: 'Edit'
     submenu: [
       { role: 'undo' }
@@ -75,7 +75,7 @@ class AppMenu
       { role: 'selectall' }
     ]
 
-  @viewMenu: () ->
+  @viewMenu: ->
     label: 'View'
     submenu: [
       { role: 'reload' }
@@ -89,7 +89,7 @@ class AppMenu
       { role: 'togglefullscreen' }
     ]
 
-  @windowMenu: () ->
+  @windowMenu: ->
     currentMenu =
       role: 'window'
       submenu: [
@@ -108,11 +108,11 @@ class AppMenu
 
     currentMenu
 
-  @helpMenu: () ->
+  @helpMenu: ->
     role: 'help'
     submenu: [
       label: 'Report Issue'
-      click: () ->
+      click: ->
         shell.openExternal('https://github.com/npezza93/archipelago/issues/new')
     ]
 
@@ -121,7 +121,7 @@ class AppMenu
     submenu: [
       {
         label: 'About Archipelago'
-        click: () ->
+        click: ->
           if !about? || about.isDestroyed()
             about = new BrowserWindow(
               width: 300
@@ -147,7 +147,7 @@ class AppMenu
       {
         label: 'Settings'
         accelerator: 'CmdOrCtrl+,'
-        click: () ->
+        click: ->
           if !settings? || settings.isDestroyed()
             settings = new BrowserWindow({
               width: 1100

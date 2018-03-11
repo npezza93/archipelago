@@ -8,7 +8,7 @@ settings   = null
 about      = null
 windows    = []
 
-createWindow = () ->
+createWindow = ->
   win = new BrowserWindow(
     width: 1000
     height: 600
@@ -26,12 +26,12 @@ createWindow = () ->
 
   windows.push(win)
 
-  win.webContents.once 'did-frame-finish-load', () ->
+  win.webContents.once 'did-frame-finish-load', ->
     if process.platform == 'darwin' || process.platform == 'win32'
       console.log 'Will check for update'
       # (new AutoUpdate).autoCheck()
 
-app.on 'ready', () ->
+app.on 'ready', ->
   createWindow()
   Menu.setApplicationMenu(
     Menu.buildFromTemplate(AppMenu.menu(about, settings, createWindow))
@@ -39,10 +39,10 @@ app.on 'ready', () ->
   if (process.platform == 'darwin')
     app.dock.setMenu(Menu.buildFromTemplate(AppMenu.dock(createWindow)))
 
-app.on 'window-all-closed', () ->
+app.on 'window-all-closed', ->
   app.quit() if process.platform != 'darwin'
 
-app.on 'activate', () ->
+app.on 'activate', ->
   windowCount = 0
   windows.forEach (win) ->
     windowCount += 1 unless win.isDestroyed()
