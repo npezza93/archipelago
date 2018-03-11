@@ -276,7 +276,7 @@ archipelago-properties-pane archipelago-properties-section .seperator {
 archipelago-properties-pane archipelago-properties-section .mdc-form-field {
   display: flex;
   flex-direction: row-reverse;
-  align-items: flex-end;
+  align-items: center;
 }
 
 archipelago-properties-pane archipelago-properties-section .mdc-text-field {
