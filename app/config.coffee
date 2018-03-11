@@ -1,12 +1,15 @@
-CSON           = require 'season'
-{ homedir }    = require 'os'
-{ join }       = require 'path'
-{ Emitter }    = require 'event-kit'
-chokidar       = require 'chokidar'
+CSON        = require 'season'
+{ homedir } = require 'os'
+{ join }    = require 'path'
+{ Emitter } = require 'event-kit'
+chokidar    = require 'chokidar'
+{ remote }  = require 'electron'
 { getValueAtKeyPath, setValueAtKeyPath, pushKeyPath } =
   require 'key-path-helpers'
-Schema         = require './schema'
-Coercer        = require './coercer'
+
+Schema          = require './schema'
+Coercer         = require './coercer'
+VersionMigrator = require './version_migrator'
 
 module.exports =
 class Config
@@ -18,8 +21,9 @@ class Config
 
     if CSON.resolve(@filePath)?
       @_refreshConfig(null, CSON.readFileSync(@filePath) || {})
+      @_checkConfigVersion()
     else
-      @_refreshConfig(null, {})
+      @_refreshConfig(null, version: remote.app.getVersion())
 
     @_bindWatcher()
 
@@ -131,3 +135,11 @@ class Config
 
   _write: (contents) ->
     CSON.writeFile(@filePath, contents)
+
+  _checkConfigVersion: ->
+    if @contents.version? && @contents.version isnt remote.app.getVersion()
+      (new VersionMigrator(self, @contents.version)).run
+    else
+      @contents.version = '1.0.5'
+      @_write(@contents)
+      @_checkConfigVersion()
