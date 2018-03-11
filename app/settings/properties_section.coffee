@@ -7,8 +7,12 @@ class PropertiesSection extends React.Component
     React.createElement(
       'archipelago-properties-section'
       ref: @props.innerRef
-      for group, properties of @groupedProperties()
-        @groupOfProperties(properties).concat(@seperator(group))
+      React.createElement(
+        'archipelago-properties-section-container'
+        null
+        for group, properties of @groupedProperties()
+          @groupOfProperties(properties).concat(@seperator(group))
+      )
     )
 
   groupOfProperties: (properties) ->

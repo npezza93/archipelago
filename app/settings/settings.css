@@ -255,10 +255,17 @@ archipelago-properties-pane archipelago-header::after {
 
 archipelago-properties-pane archipelago-properties-section {
   margin: 130px 75px 0 75px;
+  display: flex;
+  align-items: center;
+  min-height: calc(100% - 130px);
+}
+
+archipelago-properties-pane archipelago-properties-section archipelago-properties-section-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 100px;
   grid-row-gap: 20px;
+  width: 100%;
 }
 
 archipelago-properties-pane archipelago-properties-section .seperator {
