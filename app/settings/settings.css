@@ -441,3 +441,8 @@ archipelago-properties-pane .create-array-element:hover {
     grid-column: span 2;
   }
 }
+
+archipelago-properties-section .mdc-select .mdc-select__label {
+  -webkit-transform: translateY(-100%) scale(.75);
+  transform: translateY(-100%) scale(.75);
+}
