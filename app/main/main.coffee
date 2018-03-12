@@ -16,6 +16,8 @@ createWindow = ->
     height: 600
     titleBarStyle: 'hiddenInset'
     vibrancy: archipelago.config.get('vibrancy')
+    transparent: true
+    frame: false
   )
 
   win.loadURL(url.format(
