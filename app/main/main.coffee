@@ -8,6 +8,8 @@ settings   = null
 about      = null
 windows    = []
 
+app.commandLine.appendSwitch('ignore-gpu-blacklist')
+
 createWindow = ->
   win = new BrowserWindow(
     width: 1000
