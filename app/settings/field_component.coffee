@@ -57,7 +57,7 @@ class FieldComponent extends React.Component
       value: value
       label: @title(property, schema)
       options: schema.enum
-      onChange: onChange: onChange.bind(this)
+      onChange: onChange.bind(this)
     )
 
   title: (property, schema) ->
