@@ -99,7 +99,6 @@ class AppMenu
           type: 'radio'
           click: (item, focusedWindow) ->
             archipelago.config.setActiveProfileId(profileId)
-            if focusedWindow then focusedWindow.send('fit')
 
         if archipelago.config.activeProfileId == parseInt(profileId)
           profileItem.checked = true

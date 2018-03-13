@@ -21,7 +21,3 @@ class SessionGroup
   kill: ->
     @left.kill()
     @right.kill()
-
-  fit: ->
-    @left.fit()
-    @right.fit()
