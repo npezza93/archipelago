@@ -17,6 +17,7 @@ class AppMenu
       @shellMenu(createWindow)
       @editMenu()
       @viewMenu()
+      @profilesMenu()
       @windowMenu()
       @helpMenu()
     ]
@@ -88,6 +89,21 @@ class AppMenu
       { type: 'separator' }
       { role: 'togglefullscreen' }
     ]
+
+  @profilesMenu: ->
+    label: 'Profiles'
+    submenu:
+      archipelago.config.profileIds.map (profileId) ->
+        profileItem =
+          label: archipelago.config.getProfileName(profileId)
+          type: 'radio'
+          click: (item, focusedWindow) ->
+            archipelago.config.setActiveProfileId(profileId)
+            if focusedWindow then focusedWindow.send('fit')
+
+        if archipelago.config.activeProfileId == parseInt(profileId)
+          profileItem.checked = true
+        profileItem
 
   @windowMenu: ->
     currentMenu =

@@ -57,6 +57,14 @@ class Config
         oldValue = newValue
         callback(newValue)
 
+  onActiveProfileChange: (callback) ->
+    oldValue = @activeProfileId
+    @emitter.on 'did-change', () =>
+      newValue = @activeProfileId
+      unless oldValue == newValue
+        oldValue = newValue
+        callback(newValue)
+
   on: (event, callback) ->
     @emitter.on(event, callback)
 

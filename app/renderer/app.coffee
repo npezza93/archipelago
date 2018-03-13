@@ -150,3 +150,6 @@ class App extends React.Component
       tab
 
     @setState(tabs: tabs, currentSessionId: newSessionId)
+
+  fitAll: ->
+    @state.tabs.map (tab) -> tab.sessions.root.fit()

@@ -10,6 +10,11 @@ windows    = []
 
 app.commandLine.appendSwitch('ignore-gpu-blacklist')
 
+resetApplicationMenu = ->
+  Menu.setApplicationMenu(
+    Menu.buildFromTemplate(AppMenu.menu(about, settings, createWindow))
+  )
+
 createWindow = ->
   win = new BrowserWindow(
     width: 1000
@@ -37,9 +42,7 @@ createWindow = ->
 
 app.on 'ready', ->
   createWindow()
-  Menu.setApplicationMenu(
-    Menu.buildFromTemplate(AppMenu.menu(about, settings, createWindow))
-  )
+  resetApplicationMenu()
   if (process.platform == 'darwin')
     app.dock.setMenu(Menu.buildFromTemplate(AppMenu.dock(createWindow)))
 
@@ -57,7 +60,5 @@ archipelago.config.onDidChange 'vibrancy', (value) ->
   windows.forEach (win) ->
     win.setVibrancy(value) unless win.isDestroyed()
 
-archipelago.config.onDidChange 'singleTabMode', (value) ->
-  Menu.setApplicationMenu(
-    Menu.buildFromTemplate(AppMenu.menu(about, settings, createWindow))
-  )
+archipelago.config.onDidChange 'singleTabMode', resetApplicationMenu
+archipelago.config.onActiveProfileChange resetApplicationMenu

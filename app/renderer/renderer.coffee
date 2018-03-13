@@ -29,6 +29,8 @@ ipcRenderer.on 'split-horizontal', () ->
   archipelago.app.split('horizontal')
 ipcRenderer.on 'split-vertical', () ->
   archipelago.app.split('vertical')
+ipcRenderer.on 'fit', () ->
+  archipelago.app.fitAll()
 
 Object.entries(styleProperties).forEach (property) ->
   archipelago.config.onDidChange property[0], (newValue) ->
