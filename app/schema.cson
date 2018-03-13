@@ -186,10 +186,10 @@ vibrancy:
     order: 1
   enum: [
     { value: null, label: 'none' }
-    { value: 'light', label: 'light' }
-    { value: 'medium-light', label: 'medium-light' }
-    { value: 'dark', label: 'dark' }
-    { value: 'ultra-dark', label: 'ultra-dark' }
+    { value: 'light', label: 'Light' }
+    { value: 'medium-light', label: 'Medium Light' }
+    { value: 'dark', label: 'Dark' }
+    { value: 'ultra-dark', label: 'Ultra Dark' }
   ]
 allowTransparency:
   type: 'boolean'
