@@ -154,6 +154,10 @@ class AppMenu
 
             about.focus()
       }
+      {
+        label: "Version #{app.getVersion()}"
+        enabled: false
+      }
       # {
       #   label: 'Check for Update'
       #   metadata: { autoUpdate: true }
