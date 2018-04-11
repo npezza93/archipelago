@@ -57,7 +57,7 @@
     "rmwc": "1.2.0",
     "season": "^6.0.2",
     "unescape-js": "^1.1.0",
-    "xterm": "^3.2.0"
+    "xterm": "^3.3.0"
   },
   "devDependencies": {
     "coffeelint": "^2.0.7",
