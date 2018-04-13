@@ -35,8 +35,7 @@ createWindow = ->
 
   win.webContents.once 'did-frame-finish-load', ->
     if process.platform == 'darwin' || process.platform == 'win32'
-      console.log 'Will check for update'
-      # (new AutoUpdate).autoCheck()
+      (new AutoUpdate).autoCheck()
 
 app.on 'ready', ->
   createWindow()
