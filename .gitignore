@@ -1,5 +1,4 @@
 #directories
-bower_components
 node_modules
 release-builds
 dist
