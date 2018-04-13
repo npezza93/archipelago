@@ -39,6 +39,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@material/linear-progress": "^0.34.0",
     "atom-keymap": "^8.2.8",
     "chokidar": "^2.0.2",
     "coffeescript": "^2.2.0",

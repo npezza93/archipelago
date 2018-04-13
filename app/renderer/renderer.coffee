@@ -16,7 +16,6 @@ document.addEventListener 'DOMContentLoaded', () ->
   archipelago.app = ReactDOM.render(
     React.createElement(App), document.getElementById('root')
   )
-  document.querySelector('#boot').classList.add('calculating')
 
   for selector, cssVar of styleProperties
     element = document.documentElement

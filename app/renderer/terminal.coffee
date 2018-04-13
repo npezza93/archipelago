@@ -17,6 +17,8 @@ class Terminal extends React.Component
     xterm.open(@refs.container)
     xterm.setOption('theme', archipelago.config.get('theme'))
     xterm.focus()
+    unless document.querySelector('#boot').classList.contains('booted')
+      document.querySelector('#boot').classList.add('booted')
     @props.session.bindScrollListener()
 
   componentWillUnmount: ->

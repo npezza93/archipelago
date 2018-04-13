@@ -4,14 +4,23 @@
     <meta charset="UTF-8">
     <title>Archipelago</title>
     <link  href="../../node_modules/xterm/dist/xterm.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="../../node_modules/@material/linear-progress/dist/mdc.linear-progress.min.css"/>
+    <script type="text/javascript" src="../../node_modules/@material/linear-progress/dist/mdc.linearProgress.min.js"></script>
     <link  href="renderer.css" rel="stylesheet" type="text/css"/>
     <script src="init.js"></script>
   </head>
   <body>
     <div id="boot">
       <img src="boot-logo.png">
-      <div id="progress-container">
-        <div id="progress-bar"></div>
+      <div role="progressbar" class="mdc-linear-progress mdc-linear-progress--indeterminate">
+        <div class="mdc-linear-progress__buffering-dots"></div>
+        <div class="mdc-linear-progress__buffer"></div>
+        <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
+          <span class="mdc-linear-progress__bar-inner"></span>
+        </div>
+        <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+          <span class="mdc-linear-progress__bar-inner"></span>
+        </div>
       </div>
     </div>
     <div id="root"></div>
