@@ -150,7 +150,13 @@ hamburger-menu {
   left: 13px;
   top: 9px;
   position: fixed;
-  z-index: 10;
+  z-index: 4;
+  filter: invert(20%);
+  cursor: pointer;
+}
+
+hamburger-menu:hover {
+  filter: invert(0%);
 }
 
 hamburger-menu div {
@@ -166,10 +172,16 @@ minimize-button {
   display: flex;
   height: 12px;
   width: 15px;
-  right: 83px;
+  right: 113px;
   top: 9px;
   position: fixed;
-  z-index: 10;
+  z-index: 4;
+  filter: invert(20%);
+  cursor: pointer;
+}
+
+minimize-button:hover {
+  filter: invert(0%);
 }
 
 minimize-button div {
@@ -185,11 +197,17 @@ maximize-button {
   display: flex;
   height: 12px;
   width: 12px;
-  right: 48px;
+  right: 61px;
   top: 9px;
   position: fixed;
-  z-index: 10;
+  z-index: 4;
   border: var(--tab-color) 1px solid;
+  filter: invert(20%);
+  cursor: pointer;
+}
+
+maximize-button:hover {
+  filter: invert(0%);
 }
 
 /* Close Button */
@@ -200,7 +218,13 @@ close-button {
   right: 13px;
   top: 9px;
   position: fixed;
-  z-index: 10;
+  z-index: 4;
+  filter: invert(20%);
+  cursor: pointer;
+}
+
+close-button:hover {
+  filter: invert(0%);
 }
 
 close-button div {
@@ -242,8 +266,16 @@ archipelago-tab-list {
   -webkit-app-region: drag;
   display: flex;
   flex-direction: row;
-  padding-left: 70px;
   height: 40px;
+}
+
+archipelago-app.darwin archipelago-tab-list {
+  padding-left: 70px;
+}
+
+archipelago-app.win32 archipelago-tab-list,
+archipelago-app.linux archipelago-tab-list {
+  padding-left: 41px;
 }
 
 archipelago-tab-list archipelago-tab {
@@ -314,8 +346,16 @@ archipelago-tab-list[data-single-tab-mode] archipelago-tab {
 
 archipelago-tab-list[data-single-tab-mode] {
   position: absolute;
-  width: calc(100% - 70px);
   height: 30px;
+}
+
+archipelago-app.darwin archipelago-tab-list[data-single-tab-mode] {
+  width: calc(100% - 70px);
+}
+
+archipelago-app.win32 archipelago-tab-list[data-single-tab-mode],
+archipelago-app.linux archipelago-tab-list[data-single-tab-mode] {
+  width: calc(100% - 184px);
 }
 
 archipelago-tab.is-unread span {

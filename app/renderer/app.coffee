@@ -24,7 +24,7 @@ class App extends React.Component
   render: ->
     React.createElement(
       'archipelago-app'
-      {}
+      class: process.platform
       React.createElement(HamburgerMenu, key: 'hamburger')
       React.createElement(
         TabList
