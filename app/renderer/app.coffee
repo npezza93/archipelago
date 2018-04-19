@@ -2,7 +2,9 @@ React         = require 'react'
 PaneList      = require './pane_list'
 TabList       = require './tab_list'
 Sessions      = require './sessions'
-HamburgerMenu = require './hamburger_menu'
+
+HamburgerMenu  = require './hamburger_menu'
+MinimizeButton = require './minimize_button'
 
 module.exports =
 class App extends React.Component
@@ -31,6 +33,7 @@ class App extends React.Component
         addTab: @addTab.bind(this)
         removeTab: @removeTab.bind(this)
       )
+      React.createElement(MinimizeButton, key: 'minimize')
       React.createElement(
         PaneList
         key: 'panes'

@@ -154,8 +154,26 @@ hamburger-menu {
 }
 
 hamburger-menu div {
-  height: 2px;
-  border-radius: 3px;
+  height: 1px;
+  background: var(--tab-color);
+}
+
+/* Minimize Button */
+
+minimize-button {
+  flex-direction: column;
+  justify-content: center;
+  display: flex;
+  height: 12px;
+  width: 15px;
+  right: 13px;
+  top: 12px;
+  position: fixed;
+  z-index: 10;
+}
+
+minimize-button div {
+  height: 1px;
   background: var(--tab-color);
 }
 
