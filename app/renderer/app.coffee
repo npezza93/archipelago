@@ -1,7 +1,8 @@
-React    = require 'react'
-PaneList = require './pane_list'
-TabList  = require './tab_list'
-Sessions = require './sessions'
+React         = require 'react'
+PaneList      = require './pane_list'
+TabList       = require './tab_list'
+Sessions      = require './sessions'
+HamburgerMenu = require './hamburger_menu'
 
 module.exports =
 class App extends React.Component
@@ -20,6 +21,7 @@ class App extends React.Component
     React.createElement(
       'archipelago-app'
       {}
+      React.createElement(HamburgerMenu, key: 'hamburger')
       React.createElement(
         TabList
         key: 'tabs'

@@ -1,8 +1,8 @@
-{ app, BrowserWindow, Menu, shell } = require 'electron'
-path                                = require 'path'
-url                                 = require 'url'
-AppMenu                             = require './app_menu'
-AutoUpdate                          = require './auto_update'
+{ app, BrowserWindow, Menu, shell, ipcMain } = require 'electron'
+path                                         = require 'path'
+url                                          = require 'url'
+AppMenu                                      = require './app_menu'
+AutoUpdate                                   = require './auto_update'
 
 settings   = null
 about      = null
@@ -59,3 +59,6 @@ archipelago.config.onDidChange 'vibrancy', (value) ->
 
 archipelago.config.onDidChange 'singleTabMode', resetApplicationMenu
 archipelago.config.onActiveProfileChange resetApplicationMenu
+
+ipcMain.on 'open-hamburger-menu', (ev, args) ->
+  Menu.getApplicationMenu().popup(args)

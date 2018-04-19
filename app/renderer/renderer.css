@@ -139,6 +139,26 @@ archipelago-app {
   flex-direction: column;
 }
 
+/* Hamburger Menu */
+
+hamburger-menu {
+  flex-direction: column;
+  justify-content: space-between;
+  display: flex;
+  height: 12px;
+  width: 15px;
+  left: 13px;
+  top: 12px;
+  position: fixed;
+  z-index: 10;
+}
+
+hamburger-menu div {
+  height: 2px;
+  border-radius: 3px;
+  background: var(--tab-color);
+}
+
 /* Panes */
 
 archipelago-pane-list {
