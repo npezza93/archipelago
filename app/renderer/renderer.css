@@ -166,7 +166,7 @@ minimize-button {
   display: flex;
   height: 12px;
   width: 15px;
-  right: 13px;
+  right: 48px;
   top: 12px;
   position: fixed;
   z-index: 10;
@@ -175,6 +175,21 @@ minimize-button {
 minimize-button div {
   height: 1px;
   background: var(--tab-color);
+}
+
+/* Maximize Button */
+
+maximize-button {
+  flex-direction: column;
+  justify-content: center;
+  display: flex;
+  height: 12px;
+  width: 12px;
+  right: 13px;
+  top: 12px;
+  position: fixed;
+  z-index: 10;
+  border: var(--tab-color) 1px solid;
 }
 
 /* Panes */

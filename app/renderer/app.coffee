@@ -5,6 +5,7 @@ Sessions      = require './sessions'
 
 HamburgerMenu  = require './hamburger_menu'
 MinimizeButton = require './minimize_button'
+MaximizeButton = require './maximize_button'
 
 module.exports =
 class App extends React.Component
@@ -34,6 +35,7 @@ class App extends React.Component
         removeTab: @removeTab.bind(this)
       )
       React.createElement(MinimizeButton, key: 'minimize')
+      React.createElement(MaximizeButton, key: 'maximize')
       React.createElement(
         PaneList
         key: 'panes'
