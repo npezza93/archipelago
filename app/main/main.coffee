@@ -19,7 +19,7 @@ createWindow = ->
   win = new BrowserWindow(
     width: 1000
     height: 600
-    titleBarStyle: 'hiddenInset'
+    titleBarStyle: (process.platform is 'darwin' && 'hiddenInset') || 'hidden'
     vibrancy: archipelago.config.get('vibrancy')
   )
 
