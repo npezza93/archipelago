@@ -166,7 +166,7 @@ minimize-button {
   display: flex;
   height: 12px;
   width: 15px;
-  right: 48px;
+  right: 83px;
   top: 12px;
   position: fixed;
   z-index: 10;
@@ -185,11 +185,39 @@ maximize-button {
   display: flex;
   height: 12px;
   width: 12px;
-  right: 13px;
+  right: 48px;
   top: 12px;
   position: fixed;
   z-index: 10;
   border: var(--tab-color) 1px solid;
+}
+
+/* Close Button */
+
+close-button {
+  height: 15px;
+  width: 15px;
+  right: 13px;
+  top: 12px;
+  position: fixed;
+  z-index: 10;
+}
+
+close-button div {
+  height: 1px;
+  background: var(--tab-color);
+  position: absolute;
+  width: 19px;
+  top: 7px;
+  left: -2px;
+}
+
+close-button div:first-child {
+  transform: rotate(45deg);
+}
+
+close-button div:nth-child(2) {
+  transform: rotate(135deg);
 }
 
 /* Panes */
