@@ -14,6 +14,7 @@ class AppMenu
 
   @menu: (about, settings, createWindow) ->
     template = [
+      @aboutMenu(about, settings)
       @shellMenu(createWindow)
       @editMenu()
       @viewMenu()
@@ -21,9 +22,6 @@ class AppMenu
       @windowMenu()
       @helpMenu()
     ]
-
-    if process.platform == 'darwin'
-      template.unshift(@aboutMenu(about, settings))
 
     template
 
@@ -196,11 +194,12 @@ class AppMenu
           settings.focus()
       }
       { type: 'separator' }
-      { role: 'services', submenu: [] }
-      { type: 'separator' }
-      { role: 'hide' }
-      { role: 'hideothers' }
-      { role: 'unhide' }
-      { type: 'separator' }
+      if process.platform == 'darwin'
+        { role: 'services', submenu: [] }
+        { type: 'separator' }
+        { role: 'hide' }
+        { role: 'hideothers' }
+        { role: 'unhide' }
+        { type: 'separator' }
       { role: 'quit' }
     ]
