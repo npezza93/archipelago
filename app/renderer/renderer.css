@@ -148,7 +148,7 @@ hamburger-menu {
   height: 12px;
   width: 15px;
   left: 13px;
-  top: 12px;
+  top: 9px;
   position: fixed;
   z-index: 10;
 }
@@ -167,7 +167,7 @@ minimize-button {
   height: 12px;
   width: 15px;
   right: 83px;
-  top: 12px;
+  top: 9px;
   position: fixed;
   z-index: 10;
 }
@@ -186,7 +186,7 @@ maximize-button {
   height: 12px;
   width: 12px;
   right: 48px;
-  top: 12px;
+  top: 9px;
   position: fixed;
   z-index: 10;
   border: var(--tab-color) 1px solid;
@@ -198,7 +198,7 @@ close-button {
   height: 15px;
   width: 15px;
   right: 13px;
-  top: 12px;
+  top: 9px;
   position: fixed;
   z-index: 10;
 }
