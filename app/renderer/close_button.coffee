@@ -8,8 +8,7 @@ class CloseButton extends React.Component
 
     React.createElement(
       'close-button'
-      onClick: (event) ->
-        remote.getCurrentWindow().close()
+      onClick: -> remote.getCurrentWindow().close()
       React.createElement('div')
       React.createElement('div')
     )

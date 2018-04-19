@@ -8,6 +8,5 @@ class MaximizeButton extends React.Component
 
     React.createElement(
       'maximize-button'
-      onClick: (event) ->
-        remote.getCurrentWindow().maximize()
+      onClick: -> remote.getCurrentWindow().maximize()
     )

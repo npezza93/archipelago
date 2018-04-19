@@ -8,7 +8,6 @@ class MinimizeButton extends React.Component
 
     React.createElement(
       'minimize-button'
-      onClick: (event) ->
-        remote.getCurrentWindow().minimize()
+      onClick: -> remote.getCurrentWindow().minimize()
       React.createElement('div')
     )
