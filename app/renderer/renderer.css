@@ -148,11 +148,15 @@ hamburger-menu {
   height: 12px;
   width: 15px;
   left: 13px;
-  top: 9px;
+  top: 14px;
   position: fixed;
   z-index: 4;
   filter: invert(20%);
   cursor: pointer;
+}
+
+archipelago-app[data-single-tab-mode] hamburger-menu {
+  top: 9px;
 }
 
 hamburger-menu:hover {
@@ -173,11 +177,15 @@ minimize-button {
   height: 12px;
   width: 15px;
   right: 113px;
-  top: 9px;
+  top: 14px;
   position: fixed;
   z-index: 4;
   filter: invert(20%);
   cursor: pointer;
+}
+
+archipelago-app[data-single-tab-mode] minimize-button {
+  top: 9px;
 }
 
 minimize-button:hover {
@@ -198,12 +206,16 @@ maximize-button {
   height: 12px;
   width: 12px;
   right: 61px;
-  top: 9px;
+  top: 14px;
   position: fixed;
   z-index: 4;
   border: var(--tab-color) 1px solid;
   filter: invert(20%);
   cursor: pointer;
+}
+
+archipelago-app[data-single-tab-mode] maximize-button {
+  top: 9px;
 }
 
 maximize-button:hover {
@@ -216,11 +228,15 @@ close-button {
   height: 15px;
   width: 15px;
   right: 13px;
-  top: 9px;
+  top: 14px;
   position: fixed;
   z-index: 4;
   filter: invert(20%);
   cursor: pointer;
+}
+
+archipelago-app[data-single-tab-mode] close-button {
+  top: 9px;
 }
 
 close-button:hover {
@@ -340,21 +356,21 @@ archipelago-tab-list archipelago-tab span {
   max-width: 75%;
 }
 
-archipelago-tab-list[data-single-tab-mode] archipelago-tab {
+archipelago-app[data-single-tab-mode] archipelago-tab-list archipelago-tab {
   display: none;
 }
 
-archipelago-tab-list[data-single-tab-mode] {
+archipelago-app[data-single-tab-mode] archipelago-tab-list {
   position: absolute;
   height: 30px;
 }
 
-archipelago-app.darwin archipelago-tab-list[data-single-tab-mode] {
+archipelago-app.darwin[data-single-tab-mode] archipelago-tab-list {
   width: calc(100% - 70px);
 }
 
-archipelago-app.win32 archipelago-tab-list[data-single-tab-mode],
-archipelago-app.linux archipelago-tab-list[data-single-tab-mode] {
+archipelago-app.win32 archipelago-tab-list,
+archipelago-app.linux archipelago-tab-list {
   width: calc(100% - 184px);
 }
 

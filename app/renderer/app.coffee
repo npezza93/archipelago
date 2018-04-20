@@ -25,6 +25,7 @@ class App extends React.Component
     React.createElement(
       'archipelago-app'
       class: process.platform
+      'data-single-tab-mode': '' if archipelago.config.get('singleTabMode')
       React.createElement(HamburgerMenu, key: 'hamburger')
       React.createElement(
         TabList
