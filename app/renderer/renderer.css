@@ -286,12 +286,12 @@ archipelago-tab-list {
 }
 
 archipelago-app.darwin archipelago-tab-list {
-  padding-left: 70px;
+  margin-left: 70px;
 }
 
 archipelago-app.win32 archipelago-tab-list,
 archipelago-app.linux archipelago-tab-list {
-  padding-left: 41px;
+  margin-left: 41px;
 }
 
 archipelago-tab-list archipelago-tab {
