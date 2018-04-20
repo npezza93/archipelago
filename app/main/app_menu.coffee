@@ -141,6 +141,7 @@ class AppMenu
               height: 500
               show: true
               titleBarStyle: 'hiddenInset'
+              frame: process.platform is 'darwin'
               icon: path.join(__dirname, '../../../build/icon.png')
             )
 
@@ -180,6 +181,7 @@ class AppMenu
               height: 600
               show: true
               titleBarStyle: 'hiddenInset'
+              frame: process.platform is 'darwin'
               icon: path.join(__dirname, '../../../build/icon.png')
               webPreferences:
                 experimentalFeatures: true

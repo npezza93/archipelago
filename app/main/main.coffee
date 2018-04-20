@@ -20,6 +20,7 @@ createWindow = ->
     width: 1000
     height: 600
     titleBarStyle: (process.platform is 'darwin' && 'hiddenInset') || 'hidden'
+    frame: process.platform is 'darwin'
     vibrancy: archipelago.config.get('vibrancy')
   )
 
