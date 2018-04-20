@@ -204,4 +204,4 @@ class AppMenu
         { role: 'unhide' }
         { type: 'separator' }
       { role: 'quit' }
-    ]
+    ].filter (item) -> item?
