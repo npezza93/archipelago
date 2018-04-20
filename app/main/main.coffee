@@ -34,13 +34,13 @@ createWindow = ->
   windows.push(win)
 
   win.webContents.once 'did-frame-finish-load', ->
-    if process.platform == 'darwin' || process.platform == 'win32'
+    if process.platform is 'darwin' || process.platform is 'win32'
       (new AutoUpdate).autoCheck()
 
 app.on 'ready', ->
   createWindow()
   resetApplicationMenu()
-  if (process.platform == 'darwin')
+  if process.platform is 'darwin'
     app.dock.setMenu(Menu.buildFromTemplate(AppMenu.dock(createWindow)))
 
 app.on 'window-all-closed', ->

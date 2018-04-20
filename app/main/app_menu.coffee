@@ -110,7 +110,7 @@ class AppMenu
         { role: 'close' }
       ]
 
-    if process.platform == 'darwin'
+    if process.platform is 'darwin'
       currentMenu.submenu = [
         { role: 'close' }
         { role: 'minimize' }
@@ -156,11 +156,11 @@ class AppMenu
         label: "Version #{app.getVersion()}"
         enabled: false
       }
-      if process.platform == 'darwin' || process.platform == 'win32'
+      if process.platform is 'darwin' || process.platform is 'win32'
         {
           label: 'Check for Update'
           click: ->
-            if process.platform == 'darwin' || process.platform == 'win32'
+            if process.platform is 'darwin' || process.platform is 'win32'
               autoUpdater.on 'update-not-available', () ->
                 dialog.showMessageBox {
                   type: 'info',
@@ -194,7 +194,7 @@ class AppMenu
           settings.focus()
       }
       { type: 'separator' }
-      if process.platform == 'darwin'
+      if process.platform is 'darwin'
         { role: 'services', submenu: [] }
         { type: 'separator' }
         { role: 'hide' }
