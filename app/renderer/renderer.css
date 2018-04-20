@@ -292,6 +292,7 @@ archipelago-app.darwin archipelago-tab-list {
 archipelago-app.win32 archipelago-tab-list,
 archipelago-app.linux archipelago-tab-list {
   margin-left: 41px;
+  width: calc(100% - 184px);
 }
 
 archipelago-tab-list archipelago-tab {
