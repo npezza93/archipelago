@@ -194,6 +194,7 @@ vibrancy:
 allowTransparency:
   type: 'boolean'
   default: false
+  enabledOn: ['darwin']
   settings:
     title: 'vibrancy'
     group: 1
