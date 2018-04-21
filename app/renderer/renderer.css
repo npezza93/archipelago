@@ -171,7 +171,7 @@ hamburger-menu div {
 /* Minimize Button */
 
 archipelago-app[data-single-tab-mode] minimize-button {
-  top: 9px;
+  top: 9px !important;
 }
 
 minimize-button:hover {
@@ -179,17 +179,17 @@ minimize-button:hover {
 }
 
 minimize-button div {
-  background: var(--tab-color);
+  background: var(--tab-color) !important;
 }
 
 /* Maximize Button */
 
 maximize-button {
-  border: var(--tab-color) 1px solid;
+  border: var(--tab-color) 1px solid !important;
 }
 
 archipelago-app[data-single-tab-mode] maximize-button {
-  top: 9px;
+  top: 9px !important;
 }
 
 maximize-button:hover {
@@ -199,7 +199,7 @@ maximize-button:hover {
 /* Close Button */
 
 archipelago-app[data-single-tab-mode] close-button {
-  top: 9px;
+  top: 9px !important;
 }
 
 close-button:hover {

@@ -4,9 +4,7 @@ TabList       = require './tab_list'
 Sessions      = require './sessions'
 
 HamburgerMenu  = require './hamburger_menu'
-MinimizeButton = require './minimize_button'
-MaximizeButton = require './maximize_button'
-CloseButton    = require './close_button'
+TrafficLights  = require '../traffic_lights'
 
 module.exports =
 class App extends React.Component
@@ -36,9 +34,7 @@ class App extends React.Component
         addTab: @addTab.bind(this)
         removeTab: @removeTab.bind(this)
       )
-      React.createElement(MinimizeButton, key: 'minimize')
-      React.createElement(MaximizeButton, key: 'maximize')
-      React.createElement(CloseButton, key: 'close')
+      React.createElement(TrafficLights, key: 'traffic-lights')
       React.createElement(
         PaneList
         key: 'panes'
