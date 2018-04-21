@@ -9,6 +9,7 @@ class Close extends React.Component
     React.createElement(
       'close-button'
       style:
+        '-webkit-app-region': 'no-drag'
         height: '16px'
         width: '16px'
         right: '13px'

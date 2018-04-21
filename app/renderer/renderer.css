@@ -142,6 +142,7 @@ archipelago-app {
 /* Hamburger Menu */
 
 hamburger-menu {
+  -webkit-app-region: no-drag;
   flex-direction: column;
   justify-content: space-between;
   display: flex;

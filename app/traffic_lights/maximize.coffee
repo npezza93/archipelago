@@ -9,6 +9,7 @@ class Maximize extends React.Component
     React.createElement(
       'maximize-button'
       style:
+        '-webkit-app-region': 'no-drag'
         flexDirection: 'column'
         justifyContent: 'center'
         display: 'flex'

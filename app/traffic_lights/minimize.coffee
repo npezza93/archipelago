@@ -9,6 +9,7 @@ class Minimize extends React.Component
     React.createElement(
       'minimize-button'
       style:
+        '-webkit-app-region': 'no-drag'
         flexDirection: 'column'
         justifyContent: 'center'
         display: 'flex'
