@@ -14,6 +14,7 @@ class AppMenu
 
   @menu: (about, settings, createWindow) ->
     template = [
+      @aboutMenu(about, settings)
       @shellMenu(createWindow)
       @editMenu()
       @viewMenu()
@@ -21,9 +22,6 @@ class AppMenu
       @windowMenu()
       @helpMenu()
     ]
-
-    if process.platform == 'darwin'
-      template.unshift(@aboutMenu(about, settings))
 
     template
 
@@ -112,7 +110,7 @@ class AppMenu
         { role: 'close' }
       ]
 
-    if process.platform == 'darwin'
+    if process.platform is 'darwin'
       currentMenu.submenu = [
         { role: 'close' }
         { role: 'minimize' }
@@ -143,6 +141,7 @@ class AppMenu
               height: 500
               show: true
               titleBarStyle: 'hiddenInset'
+              frame: process.platform is 'darwin'
               icon: path.join(__dirname, '../../../build/icon.png')
             )
 
@@ -158,11 +157,11 @@ class AppMenu
         label: "Version #{app.getVersion()}"
         enabled: false
       }
-      if process.platform == 'darwin' || process.platform == 'win32'
+      if process.platform is 'darwin' || process.platform is 'win32'
         {
           label: 'Check for Update'
           click: ->
-            if process.platform == 'darwin' || process.platform == 'win32'
+            if process.platform is 'darwin' || process.platform is 'win32'
               autoUpdater.on 'update-not-available', () ->
                 dialog.showMessageBox {
                   type: 'info',
@@ -182,6 +181,7 @@ class AppMenu
               height: 600
               show: true
               titleBarStyle: 'hiddenInset'
+              frame: process.platform is 'darwin'
               icon: path.join(__dirname, '../../../build/icon.png')
               webPreferences:
                 experimentalFeatures: true
@@ -196,11 +196,12 @@ class AppMenu
           settings.focus()
       }
       { type: 'separator' }
-      { role: 'services', submenu: [] }
-      { type: 'separator' }
-      { role: 'hide' }
-      { role: 'hideothers' }
-      { role: 'unhide' }
-      { type: 'separator' }
+      if process.platform is 'darwin'
+        { role: 'services', submenu: [] }
+        { type: 'separator' }
+        { role: 'hide' }
+        { role: 'hideothers' }
+        { role: 'unhide' }
+        { type: 'separator' }
       { role: 'quit' }
-    ]
+    ].filter (item) -> item?

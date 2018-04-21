@@ -17,7 +17,7 @@ class Config
     @emitter  = new Emitter
 
     if CSON.resolve(@filePath)?
-      @_refreshConfig(null, CSON.readFileSync(@filePath))
+      @_refreshConfig(null, CSON.readFileSync(@filePath) || {})
     else
       @_refreshConfig(null, {})
 

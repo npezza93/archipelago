@@ -1,8 +1,8 @@
-{ app, BrowserWindow, Menu, shell } = require 'electron'
-path                                = require 'path'
-url                                 = require 'url'
-AppMenu                             = require './app_menu'
-AutoUpdate                          = require './auto_update'
+{ app, BrowserWindow, Menu, shell, ipcMain } = require 'electron'
+path                                         = require 'path'
+url                                          = require 'url'
+AppMenu                                      = require './app_menu'
+AutoUpdate                                   = require './auto_update'
 
 settings   = null
 about      = null
@@ -19,7 +19,8 @@ createWindow = ->
   win = new BrowserWindow(
     width: 1000
     height: 600
-    titleBarStyle: 'hiddenInset'
+    titleBarStyle: (process.platform is 'darwin' && 'hiddenInset') || 'hidden'
+    frame: process.platform is 'darwin'
     vibrancy: archipelago.config.get('vibrancy')
   )
 
@@ -34,13 +35,13 @@ createWindow = ->
   windows.push(win)
 
   win.webContents.once 'did-frame-finish-load', ->
-    if process.platform == 'darwin' || process.platform == 'win32'
+    if process.platform is 'darwin' || process.platform is 'win32'
       (new AutoUpdate).autoCheck()
 
 app.on 'ready', ->
   createWindow()
   resetApplicationMenu()
-  if (process.platform == 'darwin')
+  if process.platform is 'darwin'
     app.dock.setMenu(Menu.buildFromTemplate(AppMenu.dock(createWindow)))
 
 app.on 'window-all-closed', ->
@@ -59,3 +60,6 @@ archipelago.config.onDidChange 'vibrancy', (value) ->
 
 archipelago.config.onDidChange 'singleTabMode', resetApplicationMenu
 archipelago.config.onActiveProfileChange resetApplicationMenu
+
+ipcMain.on 'open-hamburger-menu', (ev, args) ->
+  Menu.getApplicationMenu().popup(args)

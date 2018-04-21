@@ -3,6 +3,8 @@ ReactDOM       = require 'react-dom'
 Profiles       = require './profiles'
 PropertiesPane = require './properties_pane'
 
+TrafficLights = require '../traffic_lights'
+
 document.addEventListener 'DOMContentLoaded', () ->
   profilesContainer = document.querySelector('.profiles-container')
   backdrop          = document.querySelector('#backdrop')
@@ -11,6 +13,10 @@ document.addEventListener 'DOMContentLoaded', () ->
   ReactDOM.render(
     React.createElement(PropertiesPane),
     document.querySelector('.options-container')
+  )
+  ReactDOM.render(
+    React.createElement(TrafficLights),
+    document.querySelector('#titlebar')
   )
 
   document.querySelector('#hamburger').addEventListener 'click', () ->

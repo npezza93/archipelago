@@ -1,7 +1,10 @@
-React    = require 'react'
-PaneList = require './pane_list'
-TabList  = require './tab_list'
-Sessions = require './sessions'
+React         = require 'react'
+PaneList      = require './pane_list'
+TabList       = require './tab_list'
+Sessions      = require './sessions'
+
+HamburgerMenu  = require './hamburger_menu'
+TrafficLights  = require '../traffic_lights'
 
 module.exports =
 class App extends React.Component
@@ -19,7 +22,9 @@ class App extends React.Component
   render: ->
     React.createElement(
       'archipelago-app'
-      {}
+      class: process.platform
+      'data-single-tab-mode': '' if archipelago.config.get('singleTabMode')
+      React.createElement(HamburgerMenu, key: 'hamburger')
       React.createElement(
         TabList
         key: 'tabs'
@@ -29,6 +34,7 @@ class App extends React.Component
         addTab: @addTab.bind(this)
         removeTab: @removeTab.bind(this)
       )
+      React.createElement(TrafficLights, key: 'traffic-lights')
       React.createElement(
         PaneList
         key: 'panes'

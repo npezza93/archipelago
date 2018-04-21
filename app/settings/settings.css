@@ -360,15 +360,15 @@ archipelago-properties-pane .create-array-element:hover {
 }
 
 #hamburger {
-  width: 15px;
-  height: 12px;
+  width: 16px;
+  height: 16px;
   top: 46px;
   left: 32px;
   cursor: pointer;
   visibility: hidden;
   opacity: 0;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   position: fixed;
   display: flex;
   transition: opacity .5s ease-in-out, visibility .5s ease-in-out;
@@ -445,4 +445,33 @@ archipelago-properties-pane .create-array-element:hover {
 archipelago-properties-section .mdc-select .mdc-select__label {
   -webkit-transform: translateY(-100%) scale(.75);
   transform: translateY(-100%) scale(.75);
+}
+
+/* Traffic Lights */
+
+minimize-button {
+  top: 46px !important;
+  right: 128px !important;
+  z-index: 100 !important;
+}
+
+minimize-button div {
+  height: 2px !important;
+}
+
+maximize-button {
+  top: 46px !important;
+  right: 80px !important;
+  z-index: 100 !important;
+  border: 2px solid #000 !important;
+}
+
+close-button {
+  top: 46px !important;
+  right: 32px !important;
+  z-index: 100 !important;
+}
+
+close-button div {
+  height: 2px !important;
 }

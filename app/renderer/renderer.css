@@ -139,6 +139,78 @@ archipelago-app {
   flex-direction: column;
 }
 
+/* Hamburger Menu */
+
+hamburger-menu {
+  -webkit-app-region: no-drag;
+  flex-direction: column;
+  justify-content: space-between;
+  display: flex;
+  height: 12px;
+  width: 15px;
+  left: 13px;
+  top: 14px;
+  position: fixed;
+  z-index: 4;
+  filter: invert(20%);
+  cursor: pointer;
+}
+
+archipelago-app[data-single-tab-mode] hamburger-menu {
+  top: 9px;
+}
+
+hamburger-menu:hover {
+  filter: invert(0%);
+}
+
+hamburger-menu div {
+  height: 1px;
+  background: var(--tab-color);
+}
+
+/* Minimize Button */
+
+archipelago-app[data-single-tab-mode] minimize-button {
+  top: 9px !important;
+}
+
+minimize-button:hover {
+  filter: invert(0%);
+}
+
+minimize-button div {
+  background: var(--tab-color) !important;
+}
+
+/* Maximize Button */
+
+maximize-button {
+  border: var(--tab-color) 1px solid !important;
+}
+
+archipelago-app[data-single-tab-mode] maximize-button {
+  top: 9px !important;
+}
+
+maximize-button:hover {
+  filter: invert(0%);
+}
+
+/* Close Button */
+
+archipelago-app[data-single-tab-mode] close-button {
+  top: 9px !important;
+}
+
+close-button:hover {
+  filter: invert(0%);
+}
+
+close-button div {
+  background: var(--tab-color) !important;
+}
+
 /* Panes */
 
 archipelago-pane-list {
@@ -161,8 +233,17 @@ archipelago-tab-list {
   -webkit-app-region: drag;
   display: flex;
   flex-direction: row;
-  padding-left: 70px;
   height: 40px;
+}
+
+archipelago-app.darwin archipelago-tab-list {
+  margin-left: 70px;
+}
+
+archipelago-app.win32 archipelago-tab-list,
+archipelago-app.linux archipelago-tab-list {
+  margin-left: 41px;
+  width: calc(100% - 184px);
 }
 
 archipelago-tab-list archipelago-tab {
@@ -227,14 +308,17 @@ archipelago-tab-list archipelago-tab span {
   max-width: 75%;
 }
 
-archipelago-tab-list[data-single-tab-mode] archipelago-tab {
+archipelago-app[data-single-tab-mode] archipelago-tab-list archipelago-tab {
   display: none;
 }
 
-archipelago-tab-list[data-single-tab-mode] {
+archipelago-app[data-single-tab-mode] archipelago-tab-list {
   position: absolute;
-  width: calc(100% - 70px);
   height: 30px;
+}
+
+archipelago-app.darwin[data-single-tab-mode] archipelago-tab-list {
+  width: calc(100% - 70px);
 }
 
 archipelago-tab.is-unread span {
