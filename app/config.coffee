@@ -13,15 +13,15 @@ VersionMigrator = require './version_migrator'
 
 module.exports =
 class Config
-  filePath: join(homedir(), '.archipelago.dev.json')
+  filePath: join(homedir(), '.archipelago.json')
   schema: new Schema
 
   constructor: ->
     @emitter  = new Emitter
 
     if CSON.resolve(@filePath)?
+      @_checkConfigVersion(CSON.readFileSync(@filePath) || {})
       @_refreshConfig(null, CSON.readFileSync(@filePath) || {})
-      @_checkConfigVersion()
     else
       @_refreshConfig(null, version: @currentVersion())
 
@@ -139,10 +139,13 @@ class Config
   _write: (contents) ->
     CSON.writeFile(@filePath, contents)
 
-  _checkConfigVersion: ->
-    if @contents.version? && @contents.version isnt @currentVersion()
-      (new VersionMigrator(this, @contents.version)).run()
-    else
-      @contents.version = '1.0.5'
-      @_write(@contents)
-      @_checkConfigVersion()
+  _writeSync: (contents) ->
+    CSON.writeFileSync(@filePath, contents)
+
+  _checkConfigVersion: (contents) ->
+    @contents = contents
+    differentVersion =
+      contents.version? && contents.version isnt @currentVersion()
+
+    if differentVersion || !contents.version?
+      (new VersionMigrator(this, contents.version || '1.0.5')).run()

@@ -1,19 +1,14 @@
 module.exports =
-  {
-    run: (config) ->
-      @renameActiveProfile(config)
-      @removeKeyboardShortcuts(config)
+  run: (config) ->
+    contents = config.contents
 
-      config.contents.version = '2.0.0'
-      config._write(config.contents)
+    if contents.activeProfileId == undefined
+      contents.activeProfileId = contents.activeProfile
+      delete contents.activeProfile
 
-    renameActiveProfile: (config) ->
-      return if config.contents.activeProfileId?
+    for profileId in Object.keys(contents.profiles)
+      delete contents.profiles[profileId].keybindings
 
-      config.contents.activeProfileId = config.contents.activeProfile
+    contents.version = '2.0.0'
 
-      delete config.contents.activeProfile
-
-    removeKeyboardShortcuts: (config) ->
-      delete config.contents.keybindings
-  }
+    config._writeSync(contents)
