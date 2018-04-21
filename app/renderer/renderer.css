@@ -170,20 +170,6 @@ hamburger-menu div {
 
 /* Minimize Button */
 
-minimize-button {
-  flex-direction: column;
-  justify-content: center;
-  display: flex;
-  height: 12px;
-  width: 15px;
-  right: 113px;
-  top: 14px;
-  position: fixed;
-  z-index: 4;
-  filter: invert(20%);
-  cursor: pointer;
-}
-
 archipelago-app[data-single-tab-mode] minimize-button {
   top: 9px;
 }
@@ -193,25 +179,13 @@ minimize-button:hover {
 }
 
 minimize-button div {
-  height: 1px;
   background: var(--tab-color);
 }
 
 /* Maximize Button */
 
 maximize-button {
-  flex-direction: column;
-  justify-content: center;
-  display: flex;
-  height: 12px;
-  width: 12px;
-  right: 61px;
-  top: 14px;
-  position: fixed;
-  z-index: 4;
   border: var(--tab-color) 1px solid;
-  filter: invert(20%);
-  cursor: pointer;
 }
 
 archipelago-app[data-single-tab-mode] maximize-button {
@@ -224,17 +198,6 @@ maximize-button:hover {
 
 /* Close Button */
 
-close-button {
-  height: 15px;
-  width: 15px;
-  right: 13px;
-  top: 14px;
-  position: fixed;
-  z-index: 4;
-  filter: invert(20%);
-  cursor: pointer;
-}
-
 archipelago-app[data-single-tab-mode] close-button {
   top: 9px;
 }
@@ -244,20 +207,7 @@ close-button:hover {
 }
 
 close-button div {
-  height: 1px;
-  background: var(--tab-color);
-  position: absolute;
-  width: 19px;
-  top: 7px;
-  left: -2px;
-}
-
-close-button div:first-child {
-  transform: rotate(45deg);
-}
-
-close-button div:nth-child(2) {
-  transform: rotate(135deg);
+  background: var(--tab-color) !important;
 }
 
 /* Panes */
