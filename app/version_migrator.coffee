@@ -1,3 +1,4 @@
+module.exports =
 class VersionMigrator
   versions: ['1.0.5', '2.0.0']
 
@@ -9,4 +10,4 @@ class VersionMigrator
     currentIndex = @versions.indexOf(@currentVersion)
     for version, index in @versions
       if index > currentIndex
-        require("./migrations/#{version}").run()
+        require("./migrations/#{version}").run(@config)
