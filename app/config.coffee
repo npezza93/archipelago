@@ -1,25 +1,29 @@
-CSON           = require 'season'
-{ homedir }    = require 'os'
-{ join }       = require 'path'
-{ Emitter }    = require 'event-kit'
-chokidar       = require 'chokidar'
+CSON            = require 'season'
+{ homedir }     = require 'os'
+{ join }        = require 'path'
+{ Emitter }     = require 'event-kit'
+chokidar        = require 'chokidar'
+{ remote, app } = require 'electron'
 { getValueAtKeyPath, setValueAtKeyPath, pushKeyPath } =
   require 'key-path-helpers'
-Schema         = require './schema'
-Coercer        = require './coercer'
+
+Schema          = require './schema'
+Coercer         = require './coercer'
+VersionMigrator = require './version_migrator'
 
 module.exports =
 class Config
-  filePath: join(homedir(), '.archipelago.dev.json')
+  filePath: join(homedir(), '.archipelago.json')
   schema: new Schema
 
   constructor: ->
     @emitter  = new Emitter
 
     if CSON.resolve(@filePath)?
+      @_checkConfigVersion(CSON.readFileSync(@filePath) || {})
       @_refreshConfig(null, CSON.readFileSync(@filePath) || {})
     else
-      @_refreshConfig(null, {})
+      @_refreshConfig(null, version: @currentVersion())
 
     @_bindWatcher()
 
@@ -113,6 +117,9 @@ class Config
   fieldsInSettingScope: (scope) ->
     @schema.bySettingScope()[scope]
 
+  currentVersion: ->
+    ((remote && remote.app) || app).getVersion()
+
   _refreshConfig: (error, newContents) ->
     return if error?
 
@@ -131,3 +138,14 @@ class Config
 
   _write: (contents) ->
     CSON.writeFile(@filePath, contents)
+
+  _writeSync: (contents) ->
+    CSON.writeFileSync(@filePath, contents)
+
+  _checkConfigVersion: (contents) ->
+    @contents = contents
+    differentVersion =
+      contents.version? && contents.version isnt @currentVersion()
+
+    if differentVersion || !contents.version?
+      (new VersionMigrator(this, contents.version || '1.0.5')).run()
