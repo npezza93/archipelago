@@ -30,8 +30,8 @@ Hyper was by far the coolest, best looking, and extensible terminal emulator I h
 Archipelago is compatible with:
 
 -   macOS
+-   Linux
 -   A Windows package is available but not yet tested
--   A Linux package is available but not yet tested
 
 ## Contributing
 Bug reports and pull requests are welcome on [GitHub](https://github.com/npezza93/archipelago).
