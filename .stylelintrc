@@ -31,6 +31,7 @@
         "media-feature-parentheses-space-inside": "never",
         "media-feature-colon-space-before": "never",
         "media-feature-colon-space-after": "always",
+        "no-descending-specificity": null,
         "selector-type-no-unknown": [true, { ignore: ["custom-elements", "default-namespace"] }]
     }
 }

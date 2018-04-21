@@ -321,11 +321,6 @@ archipelago-app.darwin[data-single-tab-mode] archipelago-tab-list {
   width: calc(100% - 70px);
 }
 
-archipelago-app.win32 archipelago-tab-list,
-archipelago-app.linux archipelago-tab-list {
-  width: calc(100% - 184px);
-}
-
 archipelago-tab.is-unread span {
   animation: pulse 2s infinite;
 }
