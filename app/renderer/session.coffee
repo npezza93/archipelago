@@ -46,7 +46,9 @@ class Session
       allowTransparency: @setting('allowTransparency')
       rightClickSelectsWord: @setting('rightClickSelectsWord')
       macOptionIsMeta: @setting('macOptionIsMeta')
-      theme: @setting('theme')
+      theme: @setting('theme'),
+      experimentalCharAtlas: @setting('experimentalCharAtlas')
+      useFlowControl: @setting('useFlowControl')
     )
     @bindDataListeners()
 

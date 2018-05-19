@@ -140,27 +140,40 @@ scrollback:
     title: 'shell'
     group: 1
     order: 3
+experimentalCharAtlas:
+  type: 'string'
+  title: 'Choose the type of character atlas'
+  default: 'static'
+  settings:
+    title: 'shell'
+    group: 1
+    order: 4
+  enum: [
+    { value: 'none', label: 'None' }
+    { value: 'static', label: 'Static' }
+    { value: 'dynamic', label: 'Dynamic (experimental)' }
+  ]
 tabStopWidth:
   type: 'integer'
   default: 8
   settings:
     title: 'shell'
     group: 1
-    order: 4
+    order: 5
 padding:
   type: 'string'
   default: '5px 0 10px 15px'
   settings:
     title: 'shell'
     group: 1
-    order: 5
+    order: 6
 copyOnSelect:
   type: 'boolean'
   default: true
   settings:
     title: 'shell'
     group: 1
-    order: 6
+    order: 7
 macOptionIsMeta:
   type: 'boolean'
   default: true
@@ -168,14 +181,22 @@ macOptionIsMeta:
   settings:
     title: 'shell'
     group: 1
-    order: 7
+    order: 8
 rightClickSelectsWord:
   type: 'boolean'
   default: true
   settings:
     title: 'shell'
     group: 1
-    order: 8
+    order: 9
+useFlowControl:
+  type: 'boolean'
+  title: 'Use flow control'
+  default: false
+  settings:
+    title: 'shell'
+    group: 1
+    order: 10
 vibrancy:
   type: 'string'
   default: null
