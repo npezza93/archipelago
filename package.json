@@ -76,6 +76,11 @@
       "category": "public.app-category.developer-tools",
       "target": [
         {
+          "target": "dmg",
+          "arch": ["x64"]
+        },
+        {
+          "target": "zip",
           "arch": ["x64"]
         }
       ]
