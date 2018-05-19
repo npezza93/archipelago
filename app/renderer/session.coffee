@@ -71,7 +71,7 @@ class Session
     @emitter.dispose()
     @subscriptions.dispose()
     @pty.kill()
-    @xterm.destroy()
+    @xterm.dispose()
 
   on: (event, handler) ->
     @emitter.on(event, handler)
