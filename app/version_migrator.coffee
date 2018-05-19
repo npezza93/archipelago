@@ -1,6 +1,6 @@
 module.exports =
 class VersionMigrator
-  versions: ['1.0.5', '2.0.0', '2.1.0']
+  versions: ['1.0.5', '2.0.0', '2.1.0', '2.1.1']
 
   constructor: (config, currentVersion) ->
     @config = config
