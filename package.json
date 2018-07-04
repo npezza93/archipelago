@@ -40,21 +40,21 @@
   "license": "MIT",
   "dependencies": {
     "@material/linear-progress": "^0.34.0",
-    "atom-keymap": "^8.2.8",
-    "chokidar": "^2.0.2",
-    "coffeescript": "^2.2.0",
+    "atom-keymap": "^8.2.10",
+    "chokidar": "^2.0.4",
+    "coffeescript": "^2.3.1",
     "color": "^3.0.0",
     "default-shell": "^1.0.1",
-    "event-kit": "^2.4.0",
+    "event-kit": "^2.5.0",
     "i": "^0.3.6",
     "key-path-helpers": "^0.4.0",
     "material-components-web": "0.30.0",
-    "node-pty": "^0.7.4",
-    "react": "^16.2.0",
-    "react-color": "^2.13.8",
-    "react-dom": "^16.2.0",
-    "react-split-pane": "^0.1.74",
-    "react-waypoint": "^8.0.0",
+    "node-pty": "^0.7.6",
+    "react": "^16.4.1",
+    "react-color": "^2.14.1",
+    "react-dom": "^16.4.1",
+    "react-split-pane": "^0.1.81",
+    "react-waypoint": "^8.0.2",
     "rmwc": "1.2.0",
     "season": "^6.0.2",
     "unescape-js": "^1.1.0",
@@ -62,8 +62,8 @@
   },
   "devDependencies": {
     "coffeelint": "^2.0.7",
-    "electron": "^2.0.0",
-    "electron-builder": "^20.4.1",
+    "electron": "^2.0.4",
+    "electron-builder": "^20.19.1",
     "npm-run-all": "^4.1.2",
     "stylefmt": "^6.0.0",
     "stylelint": "^9.1.1",
@@ -77,11 +77,15 @@
       "target": [
         {
           "target": "dmg",
-          "arch": ["x64"]
+          "arch": [
+            "x64"
+          ]
         },
         {
           "target": "zip",
-          "arch": ["x64"]
+          "arch": [
+            "x64"
+          ]
         }
       ]
     },
