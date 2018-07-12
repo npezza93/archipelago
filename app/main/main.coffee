@@ -8,8 +8,6 @@ settings   = null
 about      = null
 windows    = []
 
-app.commandLine.appendSwitch('ignore-gpu-blacklist')
-
 resetApplicationMenu = ->
   Menu.setApplicationMenu(
     Menu.buildFromTemplate(AppMenu.menu(about, settings, createWindow))
