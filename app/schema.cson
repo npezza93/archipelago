@@ -197,6 +197,15 @@ useFlowControl:
     title: 'shell'
     group: 1
     order: 10
+macOptionClickForcesSelection:
+  title: 'Mac - Click forces selection'
+  type: 'boolean'
+  default: true
+  enabledOn: ['darwin']
+  settings:
+    title: 'shell'
+    group: 1
+    order: 11
 vibrancy:
   type: 'string'
   default: null
