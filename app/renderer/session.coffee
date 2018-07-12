@@ -46,6 +46,7 @@ class Session
       allowTransparency: @setting('allowTransparency')
       rightClickSelectsWord: @setting('rightClickSelectsWord')
       macOptionIsMeta: @setting('macOptionIsMeta')
+      macOptionClickForcesSelection: @setting('macOptionClickForcesSelection')
       theme: @setting('theme'),
       experimentalCharAtlas: @setting('experimentalCharAtlas')
       useFlowControl: @setting('useFlowControl')
@@ -148,6 +149,7 @@ class Session
     ['fontFamily', 'fontWeight', 'fontWeightBold', 'cursorStyle', 'cursorBlink',
      'scrollback', 'tabStopWidth', 'fontSize', 'letterSpacing',
      'allowTransparency', 'rightClickSelectsWord', 'macOptionIsMeta',
-     'lineHeight', 'bellSound', 'bellStyle', 'theme'].forEach (field) =>
+     'lineHeight', 'bellSound', 'bellStyle', 'theme',
+     'macOptionClickForcesSelection'].forEach (field) =>
        @subscriptions.add archipelago.config.onDidChange field, (newValue) =>
          @xterm.setOption(field, newValue)
