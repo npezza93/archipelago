@@ -78,8 +78,6 @@ class Session
     @emitter.on(event, handler)
 
   fit: ->
-    @xterm.charMeasure.measure(@xterm.options)
-
     @xterm.fit()
     @pty.resize(@xterm.cols, @xterm.rows)
 
