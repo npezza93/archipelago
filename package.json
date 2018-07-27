@@ -45,6 +45,7 @@
     "coffeescript": "^2.3.1",
     "color": "^3.0.0",
     "default-shell": "^1.0.1",
+    "electron-is-dev": "^0.3.0",
     "event-kit": "^2.5.0",
     "i": "^0.3.6",
     "key-path-helpers": "^0.4.0",
@@ -58,6 +59,7 @@
     "rmwc": "1.2.0",
     "season": "^6.0.2",
     "unescape-js": "^1.1.0",
+    "update-electron-app": "^1.3.0",
     "xterm": "^3.5.1"
   },
   "devDependencies": {

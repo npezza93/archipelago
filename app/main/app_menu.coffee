@@ -1,4 +1,4 @@
-{ app, BrowserWindow, shell, autoUpdater, dialog } = require 'electron'
+{ app, BrowserWindow, shell, dialog } = require 'electron'
 path = require 'path'
 url  = require 'url'
 
@@ -157,19 +157,6 @@ class AppMenu
         label: "Version #{app.getVersion()}"
         enabled: false
       }
-      if process.platform is 'darwin' || process.platform is 'win32'
-        {
-          label: 'Check for Update'
-          click: ->
-            if process.platform is 'darwin' || process.platform is 'win32'
-              autoUpdater.on 'update-not-available', () ->
-                dialog.showMessageBox {
-                  type: 'info',
-                  message: 'No update available',
-                  detail: "Version #{app.getVersion()} is the latest version."
-                }
-              autoUpdater.checkForUpdates()
-        }
       { type: 'separator' }
       {
         label: 'Settings'

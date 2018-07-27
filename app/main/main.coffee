@@ -2,11 +2,14 @@
 path                                         = require 'path'
 url                                          = require 'url'
 AppMenu                                      = require './app_menu'
-AutoUpdate                                   = require './auto_update'
+isDev                                        = require 'electron-is-dev'
 
 settings   = null
 about      = null
 windows    = []
+
+if !isDev
+  require('update-electron-app')()
 
 resetApplicationMenu = ->
   Menu.setApplicationMenu(
@@ -31,10 +34,6 @@ createWindow = ->
   win.focus()
 
   windows.push(win)
-
-  win.webContents.once 'did-frame-finish-load', ->
-    if process.platform is 'darwin' || process.platform is 'win32'
-      (new AutoUpdate).autoCheck()
 
 app.on 'ready', ->
   createWindow()
