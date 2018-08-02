@@ -27,7 +27,7 @@ class Terminal extends React.Component
   bindDataListeners: ->
     @subscriptions.add @props.session.onDidFocus () =>
       @props.selectSession(@props.session.id)
-      @props.changeTitle(@props.tabId, @props.session.xterm.title)
+      @props.changeTitle(@props.tabId, @props.session.title)
 
     @subscriptions.add @props.session.onDidChangeTitle (title) =>
       @props.changeTitle(@props.tabId, title)

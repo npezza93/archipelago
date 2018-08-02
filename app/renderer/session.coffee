@@ -17,6 +17,7 @@ class Session
     @group = group
     @emitter = new Emitter
     @subscriptions = new CompositeDisposable
+    @title = ''
     @pty = spawn(
       @setting('shell') || defaultShell
       @setting('shellArgs').split(',')
@@ -132,6 +133,7 @@ class Session
       @emitter.emit('did-focus')
 
     @xterm.on 'title', (title) =>
+      @title = title
       @emitter.emit('did-change-title', title)
 
     @xterm.on 'selection', () =>
