@@ -1,6 +1,6 @@
 {
   "name": "Archipelago",
-  "version": "2.2.6",
+  "version": "2.3.0",
   "description": "Archipelago is an open-source terminal emulator built on web technology",
   "main": "app/main/init.js",
   "scripts": {
