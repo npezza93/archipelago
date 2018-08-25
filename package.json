@@ -41,7 +41,6 @@
   "dependencies": {
     "@material/linear-progress": "^0.34.0",
     "atom-keymap": "^8.2.10",
-    "chokidar": "^2.0.4",
     "coffeescript": "^2.3.1",
     "color": "^3.0.0",
     "default-shell": "^1.0.1",

@@ -1,8 +1,8 @@
 CSON            = require 'season'
+fs              = require 'fs'
 { homedir }     = require 'os'
 { join }        = require 'path'
 { Emitter }     = require 'event-kit'
-chokidar        = require 'chokidar'
 { remote, app } = require 'electron'
 { getValueAtKeyPath, setValueAtKeyPath, pushKeyPath } =
   require 'key-path-helpers'
@@ -121,7 +121,7 @@ class Config
     ((remote && remote.app) || app).getVersion()
 
   _refreshConfig: (error, newContents) ->
-    return if error?
+    return if error? || !newContents?
 
     @profiles = newContents.profiles || {}
     @profileIds = Object.keys(@profiles)
@@ -133,8 +133,13 @@ class Config
     @emitter.emit('did-change')
 
   _bindWatcher: ->
-    chokidar.watch(@filePath).on 'change', () =>
-      CSON.readFile(@filePath, @_refreshConfig.bind(this))
+    fsWait = false
+    fs.watch @filePath, (event, filename) =>
+      if filename && event is 'change'
+        if fsWait
+          return
+        fsWait = setTimeout((() -> fsWait = false), 100)
+        CSON.readFile(@filePath, @_refreshConfig.bind(this))
 
   _write: (contents) ->
     CSON.writeFile(@filePath, contents)
