@@ -9,6 +9,4 @@ module.exports =
     for profileId in Object.keys(contents.profiles)
       delete contents.profiles[profileId].keybindings
 
-    contents.version = '2.0.0'
-
     config._writeSync(contents)

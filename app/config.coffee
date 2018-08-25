@@ -153,4 +153,7 @@ class Config
       contents.version? && contents.version isnt @currentVersion()
 
     if differentVersion || !contents.version?
-      (new VersionMigrator(this, contents.version || '1.0.5')).run()
+      migrator = new VersionMigrator(
+        this, contents.version || '1.0.5', @currentVersion()
+      )
+      migrator.run()
