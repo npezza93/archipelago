@@ -11,6 +11,8 @@ class VersionMigrator
     for version, index in @versions()
       require("./migrations/#{version}").run(@config)
 
+    @updateCurrentVersion()
+
   versions: ->
     fs.readdirSync('./app/migrations').map((fileName) ->
       fileName.substring(0, 5)
