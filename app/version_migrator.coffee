@@ -9,7 +9,7 @@ class VersionMigrator
 
   run: ->
     for version, index in @versions()
-      require("./migrations/#{version}.coffee").run(@config)
+      require("./migrations/#{version}").run(@config)
 
   versions: ->
     fs.readdirSync('./app/migrations').map((fileName) ->
