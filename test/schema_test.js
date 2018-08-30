@@ -3,6 +3,15 @@ const Schema = require('../app/schema');
 
 describe('Schema', () => {
   describe('property', () => {
+    const oldPlatform = process.platform;
+    before(() => {
+      Object.defineProperty(process, 'platform', { value: 'darwin' });
+    });
+
+    after(() => {
+      Object.defineProperty(process, 'platform', { value: oldPlatform });
+    });
+
     it('is enabled on the specified platform', () => {
       let schema = new Schema;
       let property = {
@@ -23,6 +32,8 @@ describe('Schema', () => {
           'defaultValue': true
         }
       }
+
+      Object.defineProperty(process, 'platform', { value: 'linux' });
       assert(schema.isEnabled(property['property']));
     });
 
@@ -35,11 +46,9 @@ describe('Schema', () => {
           'enabledOn': ['darwin']
         }
       }
+
       Object.defineProperty(process, 'platform', { value: 'linux' });
-
       assert.isFalse(schema.isEnabled(property['property']));
-
-      Object.defineProperty(process, 'platform', { value: 'darwin' });
     });
   });
 
