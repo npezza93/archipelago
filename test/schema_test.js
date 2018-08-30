@@ -2,16 +2,16 @@ const { assert } = require('chai');
 const Schema = require('../app/schema');
 
 describe('Schema', () => {
+  const oldPlatform = process.platform;
+  before(() => {
+    Object.defineProperty(process, 'platform', { value: 'darwin' });
+  });
+
+  after(() => {
+    Object.defineProperty(process, 'platform', { value: oldPlatform });
+  });
+
   describe('property', () => {
-    const oldPlatform = process.platform;
-    before(() => {
-      Object.defineProperty(process, 'platform', { value: 'darwin' });
-    });
-
-    after(() => {
-      Object.defineProperty(process, 'platform', { value: oldPlatform });
-    });
-
     it('is enabled on the specified platform', () => {
       let schema = new Schema;
       let property = {
@@ -91,8 +91,6 @@ describe('Schema', () => {
       Object.defineProperty(process, 'platform', { value: 'linux' });
 
       assert.isUndefined(schema.getSchema('macOptionIsMeta'));
-
-      Object.defineProperty(process, 'platform', { value: 'darwin' });
     });
   });
 
