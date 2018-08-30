@@ -7,7 +7,6 @@ matrix:
       env:
         - ELECTRON_CACHE=$HOME/.cache/electron
         - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
-
     - os: linux
       services: docker
       language: generic
@@ -17,13 +16,10 @@ matrix:
         packages:
           - libx11-dev
           - libxkbfile-dev
-
     - os: linux
       language: node_js
       node_js: "10"
       env:
-        - ELECTRON_CACHE=$HOME/.cache/electron
-        - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
         - YARN_COMMAND=lint
       addons:
         apt:
@@ -31,14 +27,15 @@ matrix:
             - libx11-dev
             - libxkbfile-dev
     - os: linux
-      services: docker
-      language: generic
+      language: node_js
+      node_js: "10"
       env:
         - YARN_COMMAND=test
-      apt:
-        packages:
-          - libx11-dev
-          - libxkbfile-dev
+      addons:
+        apt:
+          packages:
+            - libx11-dev
+            - libxkbfile-dev
 
 cache:
   directories:
@@ -53,9 +50,6 @@ before_install:
       export PATH="/tmp/git-lfs:$PATH"
     fi
 
-before_script:
-  - git lfs pull
-
 script:
   - |
     if [ "$TRAVIS_OS_NAME" == "linux" ] && [ "$YARN_COMMAND" == "build" ]; then
@@ -69,13 +63,7 @@ script:
     elif [ "$TRAVIS_OS_NAME" == "linux" ] && [ "$YARN_COMMAND" == "lint" ]; then
       yarn --link-duplicates --pure-lockfile --ignore-engines && yarn run lint
     elif [ "$TRAVIS_OS_NAME" == "linux" ] && [ "$YARN_COMMAND" == "test" ]; then
-      docker run --rm \
-        --env-file <(env | grep -iE 'DEBUG|NODE_|ELECTRON_|YARN_|NPM_|CI|CIRCLE|TRAVIS|APPVEYOR_|CSC_|_TOKEN|_KEY|AWS_|STRIP|BUILD_') \
-        -v ${PWD}:/project \
-        -v ~/.cache/electron:/root/.cache/electron \
-        -v ~/.cache/electron-builder:/root/.cache/electron-builder \
-        electronuserland/builder:wine \
-        /bin/bash -c "apt-get update && apt-get -y install libx11-dev libxkbfile-dev && yarn --link-duplicates --pure-lockfile --ignore-engines && yarn run test"
+      yarn --link-duplicates --pure-lockfile --ignore-engines && yarn run test
     else
       yarn run dist
     fi
