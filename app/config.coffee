@@ -31,7 +31,7 @@ class Config
     schema = @schema.getSchema(keyPath)
     return unless schema?
 
-    defaultValue = @schema.getDefaultValue(keyPath)
+    defaultValue = @schema.defaultValue(keyPath)
 
     profileKeyPath = "profiles.#{@activeProfileId}.#{keyPath}"
     if schema.platformSpecific?
@@ -84,7 +84,7 @@ class Config
 
   getProfileName: (id) ->
     schema = @schema.getSchema('name')
-    defaultValue = @schema.getDefaultValue('name')
+    defaultValue = @schema.defaultValue('name')
     value = getValueAtKeyPath(@contents, "profiles.#{id}.name")
 
     (new Coercer('name', value, defaultValue, schema)).coerce()
