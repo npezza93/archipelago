@@ -8,7 +8,7 @@ describe('Schema', () => {
       let property = {
         'property': {
           'type': 'boolean',
-          'default': true,
+          'defaultValue': true,
           'enabledOn': ['darwin']
         }
       }
@@ -20,7 +20,7 @@ describe('Schema', () => {
       let property = {
         'property': {
           'type': 'boolean',
-          'default': true
+          'defaultValue': true
         }
       }
       assert(schema.isEnabled(property['property']));
@@ -31,7 +31,7 @@ describe('Schema', () => {
       let property = {
         'property': {
           'type': 'boolean',
-          'default': true,
+          'defaultValue': true,
           'enabledOn': ['darwin']
         }
       }
@@ -51,7 +51,7 @@ describe('Schema', () => {
         schema.getSchema('theme.foreground'),
         {
           "type": "color",
-          "default": "#FFFFFF",
+          "defaultValue": "#FFFFFF",
           "settings": {
             "title": "theme",
             "group": 1,
@@ -68,7 +68,7 @@ describe('Schema', () => {
         schema.getSchema('name'),
         {
           "type": "string",
-          "default": "New Profile",
+          "defaultValue": "New Profile",
           "settings": {
             "title": "profile"
           }
