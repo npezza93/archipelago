@@ -7,7 +7,7 @@ module.exports =
 class PropertiesPane extends React.Component
   constructor: (props) ->
     super(props)
-    @scopes = archipelago.config.schema.settingsScopes()
+    @scopes = archipelago.config.schema.propertiesGroupedBySetting()
 
     @state = headings: {}
 

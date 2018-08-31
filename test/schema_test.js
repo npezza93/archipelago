@@ -9,7 +9,6 @@ describe('Schema', () => {
     });
 
     after(() => {
-      console.log(oldPlatform);
       Object.defineProperty(process, 'platform', { value: oldPlatform });
     });
 
@@ -59,7 +58,6 @@ describe('Schema', () => {
     });
 
     after(() => {
-      console.log(oldPlatform);
       Object.defineProperty(process, 'platform', { value: oldPlatform });
     });
 
@@ -153,4 +151,18 @@ describe('Schema', () => {
       assert.deepEqual(schema.defaultValue('keybindings'), defaultKeybindings);
     });
   });
+
+  describe('propertiesGroupedBySetting', () => {
+    it('groups all properties by their setting', () => {
+      let schema = new Schema;
+      let settings = [
+        'profile', 'font', 'cursor', 'bell', 'shell', 'vibrancy', 'modes',
+        'theme', 'keybindings'
+      ];
+
+      assert.deepEqual(
+        Object.keys(schema.propertiesGroupedBySetting()), settings
+      );
+    })
+  })
 });

@@ -11,35 +11,21 @@ class Schema {
     this.schema = { 'type': 'object', 'properties': rootSchema };
   }
 
-  settingsScopes() {
-    const settings = {};
+  propertiesGroupedBySetting() {
+    const propertiesBySetting = {};
 
-    const object = this.editableProperties();
-    for (let property in object) {
-      const schema = object[property];
-      if (settings[schema.settings.title] == null) {
-        settings[schema.settings.title] = [];
+    const properties = this._childPropertiesFromSchema(this.schema);
+    for (let property in properties) {
+      const { settings } = properties[property];
+      if (propertiesBySetting[settings.title] == null) {
+        propertiesBySetting[settings.title] = [];
       }
-      settings[schema.settings.title].push({[property]: schema});
+      propertiesBySetting[settings.title].push(
+        { [property]: properties[property] }
+      );
     }
 
-    return settings;
-  }
-
-  getPropertyFromSchema(keyPath, schema) {
-    if (schema.type === 'object') {
-      const properties = {};
-      const object = schema.properties || {};
-      for (let childKeyPath in object) {
-        const childSchema = object[childKeyPath];
-        const propertyKeyPath = pushKeyPath(keyPath, childKeyPath);
-        const childProperties = this.getPropertyFromSchema(propertyKeyPath, childSchema);
-        Object.assign(properties, childProperties);
-      }
-      return properties;
-    } else if (this.isEnabled(schema)) {
-      return { [keyPath]: schema };
-    }
+    return propertiesBySetting;
   }
 
   defaultValue(keyPath) {
@@ -76,10 +62,6 @@ class Schema {
     return (schema.enabledOn || defaultPlatforms).includes(process.platform);
   }
 
-  editableProperties() {
-    return this.getPropertyFromSchema('', this.schema)
-  }
-
   // private
 
   _objectDefaultValue(keyPath, childSchema) {
@@ -99,6 +81,22 @@ class Schema {
       return defaultValue[process.platform];
     } else {
       return defaultValue;
+    }
+  }
+
+  _childPropertiesFromSchema(schema, keyPath = null) {
+    if (schema.type === 'object') {
+      const properties = {};
+      const object = schema.properties || {};
+      for (let childKeyPath in object) {
+        const childSchema = object[childKeyPath];
+        const propertyKeyPath = pushKeyPath(keyPath, childKeyPath);
+        const childProperties = this._childPropertiesFromSchema(childSchema, propertyKeyPath);
+        Object.assign(properties, childProperties);
+      }
+      return properties;
+    } else if (this.isEnabled(schema)) {
+      return { [keyPath]: schema };
     }
   }
 };
