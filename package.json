@@ -13,6 +13,7 @@
     "fix": "npm-run-all fix:*",
     "lint:coffee": "coffeelint app/**/*.coffee",
     "lint:css": "stylelint app/**/*.css",
+    "lint:js": "./node_modules/.bin/eslint test app",
     "lint": "npm-run-all lint:*"
   },
   "repository": {
