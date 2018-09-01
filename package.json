@@ -72,6 +72,7 @@
     "eslint": "^5.4.0",
     "mocha": "^5.2.0",
     "npm-run-all": "^4.1.2",
+    "spectron": "^4.0.0",
     "stylefmt": "^6.0.0",
     "stylelint": "^9.1.1",
     "stylelint-config-standard": "^18.0.0",
