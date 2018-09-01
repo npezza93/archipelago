@@ -25,5 +25,5 @@ describe('Application launch', () => {
     return this.app.client.getWindowCount().then((count) => {
       assert.equal(count, 1)
     })
-  })
+  }).timeout(10000)
 })
