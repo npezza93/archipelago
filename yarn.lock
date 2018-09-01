@@ -1600,9 +1600,9 @@ electron-to-chromium@^1.3.61:
   version "1.3.61"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.61.tgz#a8ac295b28d0f03d85e37326fd16b6b6b17a1795"
 
-electron@3.0.0-beta.7:
-  version "3.0.0-beta.7"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-3.0.0-beta.7.tgz#fe72a3e27fa823ea3966d21538e0ff66e1089612"
+electron@3.0.0-beta.8:
+  version "3.0.0-beta.8"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-3.0.0-beta.8.tgz#07e06958a8c9c1c64a9813896c997e06389bde2a"
   dependencies:
     "@types/node" "^8.0.24"
     electron-download "^4.1.0"
