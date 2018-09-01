@@ -31,15 +31,13 @@ class Config
     schema = @schema.getSchema(keyPath)
     return unless schema?
 
-    defaultValue = @schema.defaultValue(keyPath)
-
     profileKeyPath = "profiles.#{@activeProfileId}.#{keyPath}"
     if schema.platformSpecific?
       profileKeyPath = pushKeyPath(profileKeyPath, process.platform)
 
     value = getValueAtKeyPath(@contents, profileKeyPath)
 
-    coercer = new Coercer(keyPath, value, defaultValue, schema, options)
+    coercer = new Coercer(keyPath, value, schema, options)
 
     coercer.coerce()
 

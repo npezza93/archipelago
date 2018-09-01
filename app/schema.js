@@ -4,8 +4,20 @@ const rootSchema       = require('./schema.json')
 
 module.exports =
 class Schema {
-  constructor() {
-    this.schema = { 'type': 'object', 'properties': rootSchema }
+  constructor(schema = null) {
+    this.schema = schema || { 'type': 'object', 'properties': rootSchema }
+  }
+
+  get type() {
+    return this.schema.type
+  }
+
+  get properties() {
+    return this.schema.properties
+  }
+
+  get items() {
+    return this.schema.items
   }
 
   propertiesGroupedBySetting() {
@@ -46,8 +58,8 @@ class Schema {
       let childSchema
       if (schema.type === 'object') {
         childSchema = schema.properties[key]
+        schema = childSchema
       }
-      schema = childSchema
     }
 
     if (this.isEnabled(schema)) { return schema }
