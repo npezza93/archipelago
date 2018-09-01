@@ -4,7 +4,6 @@ const { pushKeyPath }       = require('key-path-helpers')
 const { getValueAtKeyPath } = require('key-path-helpers')
 const unescapeString        = require('unescape-js')
 const Color                 = require('color')
-const Schema                = require('./schema.js')
 
 module.exports =
 class Coercer {
