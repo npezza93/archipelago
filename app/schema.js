@@ -8,18 +8,6 @@ class Schema {
     this.schema = schema || { 'type': 'object', 'properties': rootSchema }
   }
 
-  get type() {
-    return this.schema.type
-  }
-
-  get properties() {
-    return this.schema.properties
-  }
-
-  get items() {
-    return this.schema.items
-  }
-
   propertiesGroupedBySetting() {
     const propertiesBySetting = {}
 

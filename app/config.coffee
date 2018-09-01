@@ -35,10 +35,10 @@ class Config
     if schema.platformSpecific?
       profileKeyPath = pushKeyPath(profileKeyPath, process.platform)
 
-    value = getValueAtKeyPath(@contents, profileKeyPath)
+    currentValue = getValueAtKeyPath(@contents, profileKeyPath)
+    defaultValue = @schema.defaultValue(keyPath)
 
-    coercer = new Coercer(keyPath, value, schema, options)
-
+    coercer = new Coercer(keyPath, currentValue, defaultValue, schema, options)
     coercer.coerce()
 
   set: (keyPath, value) ->
@@ -83,9 +83,9 @@ class Config
   getProfileName: (id) ->
     schema = @schema.getSchema('name')
     defaultValue = @schema.defaultValue('name')
-    value = getValueAtKeyPath(@contents, "profiles.#{id}.name")
+    currentValue = getValueAtKeyPath(@contents, "profiles.#{id}.name")
 
-    (new Coercer('name', value, defaultValue, schema)).coerce()
+    (new Coercer('name', currentValue, defaultValue, schema)).coerce()
 
   createProfile: ->
     id = Math.max(...@profileIds) + 1

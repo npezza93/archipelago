@@ -1,16 +1,17 @@
 /* global Notification */
 
-const { pushKeyPath } = require('key-path-helpers')
-const unescapeString  = require('unescape-js')
-const Color           = require('color')
-const Schema          = require('./schema.js')
+const { pushKeyPath }       = require('key-path-helpers')
+const { getValueAtKeyPath } = require('key-path-helpers')
+const unescapeString        = require('unescape-js')
+const Color                 = require('color')
+const Schema                = require('./schema.js')
 
 module.exports =
 class Coercer {
-  constructor(keyPath, currentValue, schema, options = null) {
+  constructor(keyPath, currentValue, defaultValue, schema, options = null) {
     this.keyPath = keyPath
     this.currentValue = currentValue
-    this.defaultValue = schema.defaultValue(keyPath)
+    this.defaultValue = defaultValue
     this.schema = schema
     this.options = options
   }
@@ -64,17 +65,18 @@ class Coercer {
   }
 
   object() {
-    if (this.schema.properties == null) { return this.currentValue }
+    const value = this.currentValue || this.defaultValue
+    if (this.schema.properties == null) { return value }
 
     const newValue = {}
     for (let property in this.schema.properties) {
       let childSchema = this.schema.properties[property]
       if (childSchema != null) {
         try {
-          childSchema = new Schema(childSchema)
           const coercer = new Coercer(
             pushKeyPath(this.keyPath, property),
-            (this.currentValue && this.currentValue[property]) || childSchema.defaultValue(),
+            getValueAtKeyPath(value, property),
+            childSchema.defaultValue,
             childSchema,
             this.options
           )
@@ -121,7 +123,7 @@ class Coercer {
       const newValue = []
       for (let item of value) {
         try {
-          const coercer = new Coercer(null, item, new Schema(itemSchema), this.options)
+          const coercer = new Coercer(this.keyPath, item, null, itemSchema, this.options)
           newValue.push(coercer.coerce())
         } catch (error) {
           this._canNotCoerce(`Error setting item in array: ${error.message}`)
