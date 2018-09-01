@@ -155,6 +155,14 @@ describe('Schema', () => {
   })
 
   describe('propertiesGroupedBySetting', () => {
+    before(() => {
+      Object.defineProperty(process, 'platform', { value: 'darwin' })
+    })
+
+    after(() => {
+      Object.defineProperty(process, 'platform', { value: oldPlatform })
+    })
+
     it('groups all properties by their setting', () => {
       let schema = new Schema
       let settings = [

@@ -1,3 +1,5 @@
+/* global Notification */
+
 const { pushKeyPath } = require('key-path-helpers')
 const unescapeString  = require('unescape-js')
 const Color           = require('color')

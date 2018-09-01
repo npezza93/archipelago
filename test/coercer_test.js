@@ -216,11 +216,11 @@ describe('Coercer', () => {
     it('coerces the current value', () => {
       const coercer = new Coercer(
         'key',
-        [{ keystroke: "cmd-left", command: "10" }],
+        [{ keystroke: 'cmd-left', command: '10' }],
         new Schema({
           type: 'array', items: {
-            type: "object", properties: {
-              keystroke: { type: "string" }, command: { type: "integer" }
+            type: 'object', properties: {
+              keystroke: { type: 'string' }, command: { type: 'integer' }
             }
           }
         })
@@ -228,7 +228,7 @@ describe('Coercer', () => {
 
       assert.deepEqual(
         coercer.coerce(),
-        [{ "keystroke": "cmd-left", "command": 10 }]
+        [{ 'keystroke': 'cmd-left', 'command': 10 }]
       )
     })
   })
