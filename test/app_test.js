@@ -1,9 +1,9 @@
 /* global describe, beforeEach, afterEach, it */
 
-const Application = require('spectron').Application
-const { assert }  = require('chai')
-const electron    = require('electron')
-const path = require('path')
+const { Application } = require('spectron')
+const { assert }      = require('chai')
+const electron        = require('electron')
+const path            = require('path')
 
 describe('Application launch', () => {
   beforeEach(() => {
