@@ -1,7 +1,5 @@
 module.exports = {
-  run(config) {
-    const { contents } = config
-
+  run(contents) {
     if (contents.activeProfileId === undefined) {
       contents.activeProfileId = contents.activeProfile
       delete contents.activeProfile
@@ -11,6 +9,6 @@ module.exports = {
       delete contents.profiles[profileId].keybindings
     }
 
-    return config._writeSync(contents)
+    return contents
   }
 }

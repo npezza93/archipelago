@@ -1,37 +1,27 @@
-const isDev           = require('electron-is-dev')
-const CSON            = require('season')
-const fs              = require('fs')
-const { homedir }     = require('os')
-const { join }        = require('path')
-const { Emitter }     = require('event-kit')
-const { remote, app } = require('electron')
-const { getValueAtKeyPath, setValueAtKeyPath, pushKeyPath } =
-  require('key-path-helpers')
+const { Emitter } = require('event-kit')
+const { getValueAtKeyPath, pushKeyPath } = require('key-path-helpers')
 
-const Schema          = require('./schema')
-const Coercer         = require('./coercer')
-const VersionMigrator = require('./version_migrator')
+const Schema     = require('./schema')
+const Coercer    = require('./coercer')
+const ConfigFile = require('./config_file')
 
 module.exports =
 class Config {
   constructor() {
-    if (isDev) {
-      this.filePath = join(homedir(), '.archipelago.dev.json')
-    } else {
-      this.filePath = join(homedir(), '.archipelago.json')
-    }
-    this.schema = new Schema
-    this.emitter  = new Emitter
+    this._refreshConfig(null, this.configFile.contents)
+    this.configFile.onDidChange(this._refreshConfig.bind(this))
+  }
 
-    if (CSON.resolve(this.filePath) != null) {
-      this._checkConfigVersion(CSON.readFileSync(this.filePath) || {})
-      this._refreshConfig(null, CSON.readFileSync(this.filePath) || {})
-    } else {
-      this._refreshConfig(null, {version: this.currentVersion()})
-      this._writeSync(this.contents)
-    }
+  get schema() {
+    return this._schema || (this._schema = new Schema)
+  }
 
-    this._bindWatcher()
+  get emitter() {
+    return this._emitter || (this._emitter = new Emitter)
+  }
+
+  get configFile() {
+    return this._config_file || (this._config_file = new ConfigFile)
   }
 
   get(keyPath, options) {
@@ -58,8 +48,7 @@ class Config {
       keyPath = pushKeyPath(keyPath, process.platform)
     }
 
-    setValueAtKeyPath(this.contents, keyPath, value)
-    return this._write(this.contents)
+    return this.configFile.update(keyPath, value)
   }
 
   onDidChange(keyPath, callback, options) {
@@ -91,13 +80,13 @@ class Config {
   setActiveProfileId(id) {
     this.contents.activeProfileId = parseInt(id)
 
-    return this._write(this.contents)
+    return this.configFile.contents = this.contents
   }
 
   setProfileName(id, newName) {
     this.contents.profiles[id].name = newName
 
-    return this._write(this.contents)
+    return this.configFile.contents = this.contents
   }
 
   getProfileName(id) {
@@ -113,7 +102,7 @@ class Config {
     this.contents.profiles[id] = { id }
     this.contents.activeProfileId = id
 
-    this._write(this.contents)
+    this.configFile.contents = this.contents
 
     return id
   }
@@ -121,7 +110,7 @@ class Config {
   destroyProfile(id) {
     delete this.contents.profiles[id]
 
-    return this._write(this.contents)
+    return this.configFile.contents = this.contents
   }
 
   validateActiveProfile() {
@@ -130,7 +119,7 @@ class Config {
     if (Object.keys(this.profiles)[0] != null) {
       return this.setActiveProfileId(Object.keys(this.profiles)[0])
     } else {
-      return this._write({activeProfileId: 1, profiles: { 1: { id: 1 } }})
+      return this.configFile.contents = {activeProfileId: 1, profiles: { 1: { id: 1 } }}
     }
   }
 
@@ -140,10 +129,6 @@ class Config {
 
   fieldsInSettingScope(scope) {
     return this.schema.bySettingScope()[scope]
-  }
-
-  currentVersion() {
-    return ((remote && remote.app) || app).getVersion()
   }
 
   _refreshConfig(error, newContents) {
@@ -157,39 +142,5 @@ class Config {
 
     this.validateActiveProfile()
     return this.emitter.emit('did-change')
-  }
-
-  _bindWatcher() {
-    let fsWait = false
-    return fs.watch(this.filePath, (event, filename) => {
-      if (filename && (event === 'change')) {
-        if (fsWait) {
-          return
-        }
-        fsWait = setTimeout((() => fsWait = false), 100)
-        return CSON.readFile(this.filePath, this._refreshConfig.bind(this))
-      }
-    })
-  }
-
-  _write(contents) {
-    return CSON.writeFile(this.filePath, contents)
-  }
-
-  _writeSync(contents) {
-    return CSON.writeFileSync(this.filePath, contents)
-  }
-
-  _checkConfigVersion(contents) {
-    this.contents = contents
-    const differentVersion =
-      (contents.version != null) && (contents.version !== this.currentVersion())
-
-    if (differentVersion || (contents.version == null)) {
-      const migrator = new VersionMigrator(
-        this, contents.version || '1.0.5', this.currentVersion()
-      )
-      return migrator.run()
-    }
   }
 }

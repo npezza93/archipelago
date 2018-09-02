@@ -1,20 +1,21 @@
-const fs              = require('fs') 
+const fs              = require('fs')
 const compareVersions = require('compare-versions')
 
 module.exports =
 class VersionMigrator {
-  constructor(config, currentVersion, appVersion) {
-    this.config = config
+  constructor(currentConfig, currentVersion, appVersion) {
+    this.currentConfig  = currentConfig
     this.currentVersion = currentVersion
-    this.appVersion = appVersion
+    this.appVersion     = appVersion
   }
 
   run() {
     for (let version of this.versions()) {
-      require(`./migrations/${version}`).run(this.config)
+      this.currentConfig =
+        require(`./migrations/${version}`).run(this.currentConfig)
     }
 
-    this.updateCurrentVersion()
+    return this.currentConfig
   }
 
   versions() {
@@ -23,13 +24,5 @@ class VersionMigrator {
     }).filter((version) => {
       return compareVersions(version, this.currentVersion) === 1
     }).sort(compareVersions)
-  }
-
-  updateCurrentVersion() {
-    const { contents } = this.config
-
-    contents.version = this.appVersion
-
-    this.config._writeSync(contents)
   }
 }
