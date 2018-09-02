@@ -66,7 +66,7 @@ before_cache:
 
 before_script:
   - |
-    if [ "$TRAVIS_OS_NAME" == "linux" ] && [ "$YARN_COMMAND" == "build" ]; then
+    if [ "$TRAVIS_OS_NAME" == "linux" ] && [ "$YARN_COMMAND" == "test" ]; then
       export DISPLAY=:99.0; sh -e /etc/init.d/xvfb start;sleep 3;
     fi
 
