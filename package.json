@@ -2,7 +2,7 @@
   "name": "Archipelago",
   "version": "2.3.2",
   "description": "Archipelago is an open-source terminal emulator built on web technology",
-  "main": "app/main/init.js",
+  "main": "app/main/index.js",
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
     "start": "./node_modules/.bin/electron .",

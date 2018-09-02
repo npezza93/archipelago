@@ -10,7 +10,7 @@ describe('Application launch', () => {
     this.app = new Application({
       path: electron,
 
-      args: [path.join(__dirname, '../app/main/init.js')]
+      args: [path.join(__dirname, '../app/main/index.js')]
     })
     return this.app.start()
   })
