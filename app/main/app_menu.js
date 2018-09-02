@@ -1,4 +1,5 @@
 /* global archipelago */
+
 const { app, BrowserWindow, shell } = require('electron')
 const path = require('path')
 const url  = require('url')
@@ -129,10 +130,7 @@ class AppMenu {
   static windowMenu() {
     const currentMenu = {
       role: 'window',
-      submenu: [
-        { role: 'minimize' },
-        { role: 'close' }
-      ]
+      submenu: [{ role: 'minimize' }, { role: 'close' }]
     }
 
     if (process.platform === 'darwin') {

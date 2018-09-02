@@ -1,11 +1,11 @@
 /* global archipelago */
 
 const { app, BrowserWindow, Menu, ipcMain } = require('electron')
-const path                                         = require('path')
-const url                                          = require('url')
-const AppMenu                                      = require('./app_menu')
-const isDev                                        = require('electron-is-dev')
-const Config                                       = require('../config')
+const path                                  = require('path')
+const url                                   = require('url')
+const AppMenu                               = require('./app_menu')
+const isDev                                 = require('electron-is-dev')
+const Config                                = require('../config')
 
 const settings   = null
 const about      = null
@@ -22,8 +22,7 @@ const resetApplicationMenu = () =>
     Menu.buildFromTemplate(AppMenu.menu(about, settings, createWindow))
   )
 
-
-var createWindow = function() {
+var createWindow = () => {
   const win = new BrowserWindow({
     width: 1000,
     height: 600,
@@ -43,7 +42,7 @@ var createWindow = function() {
   return windows.push(win)
 }
 
-app.on('ready', function() {
+app.on('ready', () => {
   createWindow()
   resetApplicationMenu()
   if (process.platform === 'darwin') {
@@ -51,13 +50,13 @@ app.on('ready', function() {
   }
 })
 
-app.on('window-all-closed', function() {
+app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') { return app.quit() }
 })
 
-app.on('activate', function() {
+app.on('activate', () => {
   let windowCount = 0
-  windows.forEach(function(win) {
+  windows.forEach((win) => {
     if (!win.isDestroyed()) { return windowCount += 1 }
   })
 
@@ -65,7 +64,7 @@ app.on('activate', function() {
 })
 
 archipelago.config.onDidChange('vibrancy', value =>
-  windows.forEach(function(win) {
+  windows.forEach((win) => {
     if (!win.isDestroyed()) { return win.setVibrancy(value) }
   })
 )
