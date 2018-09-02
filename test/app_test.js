@@ -5,7 +5,9 @@ const { assert }      = require('chai')
 const electron        = require('electron')
 const path            = require('path')
 
-describe('Application launch', () => {
+describe('Application launch', function() {
+  this.timeout(10000)
+
   beforeEach(() => {
     this.app = new Application({
       path: electron,
@@ -25,5 +27,5 @@ describe('Application launch', () => {
     return this.app.client.getWindowCount().then((count) => {
       assert.equal(count, 1)
     })
-  }).timeout(10000)
+  })
 })
