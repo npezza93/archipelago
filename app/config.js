@@ -1,3 +1,4 @@
+const isDev           = require('electron-is-dev')
 const CSON            = require('season')
 const fs              = require('fs')
 const { homedir }     = require('os')
@@ -14,7 +15,11 @@ const VersionMigrator = require('./version_migrator')
 module.exports =
 class Config {
   constructor() {
-    this.filePath = join(homedir(), '.archipelago.json')
+    if (isDev) {
+      this.filePath = join(homedir(), '.archipelago.dev.json')
+    } else {
+      this.filePath = join(homedir(), '.archipelago.json')
+    }
     this.schema = new Schema
     this.emitter  = new Emitter
 
