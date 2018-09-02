@@ -23,6 +23,7 @@ class Config {
       this._refreshConfig(null, CSON.readFileSync(this.filePath) || {})
     } else {
       this._refreshConfig(null, {version: this.currentVersion()})
+      this._writeSync(this.contents)
     }
 
     this._bindWatcher()
