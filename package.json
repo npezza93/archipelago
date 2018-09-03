@@ -6,7 +6,7 @@
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
     "start": "./node_modules/.bin/electron .",
-    "test": "./node_modules/mocha/bin/mocha --colors",
+    "test": "./node_modules/.bin/electron-mocha",
     "pack": "electron-builder --dir",
     "dist": "electron-builder --publish onTagOrDraft",
     "lint:coffee": "coffeelint app/**/*.coffee",
@@ -67,6 +67,7 @@
     "coffeelint": "^2.0.7",
     "electron": "3.0.0-beta.8",
     "electron-builder": "^20.19.1",
+    "electron-mocha": "^6.0.4",
     "eslint": "^5.4.0",
     "mocha": "^5.2.0",
     "npm-run-all": "^4.1.2",

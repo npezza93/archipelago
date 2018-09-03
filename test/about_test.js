@@ -2,8 +2,8 @@
 
 const { Application } = require('spectron')
 const { assert }      = require('chai')
-const electron        = require('electron')
 const path            = require('path')
+const electron        = './node_modules/electron/dist/Electron.app/Contents/MacOS/Electron'
 
 describe('About launch', function() {
   this.timeout(10000)
