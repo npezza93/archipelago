@@ -3,7 +3,13 @@
 const { Application } = require('spectron')
 const { assert }      = require('chai')
 const path            = require('path')
-const electron        = './node_modules/electron/dist/Electron.app/Contents/MacOS/Electron'
+let electron = './node_modules/electron/dist/'
+
+if (process.platform == 'darwin') {
+  electron += 'Electron.app/Contents/MacOS/Electron'
+} else if (process.platform == 'linux') {
+  electron += 'electron'
+}
 
 describe('Application launch', function() {
   this.timeout(10000)
