@@ -52,9 +52,10 @@ class ConfigFile {
   }
 
   update(keyPath, value) {
-    setValueAtKeyPath(this.contents, keyPath, value)
+    let newContents = this.contents
+    setValueAtKeyPath(newContents, keyPath, value)
 
-    return this.contents
+    return this.contents = newContents
   }
 
   fileExists() {
