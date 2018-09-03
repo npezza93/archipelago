@@ -5,7 +5,7 @@ module.exports = {
       delete contents.activeProfile
     }
 
-    for (let profileId of Object.keys(contents.profiles)) {
+    for (let profileId of Object.keys(contents.profiles || {})) {
       delete contents.profiles[profileId].keybindings
     }
 
