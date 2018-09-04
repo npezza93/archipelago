@@ -1,6 +1,6 @@
 require('coffeescript').register()
-Config = require('../config')
 
-global.archipelago = { config: new Config }
+global.archipelago = require('../global')
+
 require('i')(true)
 require('./settings')

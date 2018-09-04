@@ -5,13 +5,12 @@ const path                                  = require('path')
 const url                                   = require('url')
 const AppMenu                               = require('./app_menu')
 const isDev                                 = require('electron-is-dev')
-const Config                                = require('../config')
 
 const settings   = null
 const about      = null
 const windows    = []
 
-global.archipelago = { config: new Config }
+global.archipelago = require('../global')
 
 if (!isDev) {
   require('update-electron-app')()
