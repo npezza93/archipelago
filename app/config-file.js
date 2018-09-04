@@ -1,12 +1,12 @@
-const { Emitter }           = require('event-kit')
-const isDev                 = require('electron-is-dev')
-const CSON                  = require('season')
-const { homedir }           = require('os')
-const { join }              = require('path')
-const fs                    = require('fs')
-const { remote, app }       = require('electron')
-const { setValueAtKeyPath } = require('key-path-helpers')
-const VersionMigrator       = require('./version_migrator')
+const {homedir} = require('os')
+const {join} = require('path')
+const fs = require('fs')
+const {remote, app} = require('electron')
+const CSON = require('season')
+const isDev = require('electron-is-dev')
+const {Emitter} = require('event-kit')
+const {setValueAtKeyPath} = require('key-path-helpers')
+const VersionMigrator = require('./version_migrator')
 
 module.exports =
 class ConfigFile {
@@ -14,7 +14,7 @@ class ConfigFile {
     if (this.fileExists()) {
       this.migrateVersions()
     } else {
-      this.contents = { version: this.appVersion }
+      this.contents = {version: this.appVersion}
     }
 
     this.bindWatcher()
@@ -23,9 +23,8 @@ class ConfigFile {
   get filePath() {
     if (isDev) {
       return join(homedir(), '.archipelago.dev.json')
-    } else {
-      return join(homedir(), '.archipelago.json')
     }
+    return join(homedir(), '.archipelago.json')
   }
 
   get appVersion() {
@@ -33,7 +32,7 @@ class ConfigFile {
   }
 
   get emitter() {
-    return this._emitter || (this._emitter = new Emitter)
+    return this._emitter || (this._emitter = new Emitter())
   }
 
   get contents() {
@@ -52,14 +51,16 @@ class ConfigFile {
   }
 
   update(keyPath, value) {
-    let newContents = this.contents
+    const newContents = this.contents
     setValueAtKeyPath(newContents, keyPath, value)
 
-    return this.contents = newContents
+    this.contents = newContents
+
+    return newContents
   }
 
   fileExists() {
-    return CSON.resolve(this.filePath) != null
+    return CSON.resolve(this.filePath) !== null
   }
 
   migrateVersions() {
@@ -70,7 +71,7 @@ class ConfigFile {
         this.contents, currentVersion, this.appVersion
       )
 
-      let newContents = migrator.run()
+      const newContents = migrator.run()
       newContents.version = this.appVersion
 
       this.contents = newContents
@@ -91,7 +92,7 @@ class ConfigFile {
   }
 
   onDidChange(callback) {
-    return this.emitter.on('did-change', (contents) => {
+    return this.emitter.on('did-change', contents => {
       return callback(contents)
     })
   }

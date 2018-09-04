@@ -6,7 +6,7 @@ const fs = require('fs')
 const {app} = require('electron')
 const CSON = require('season')
 const {assert} = require('chai')
-const ConfigFile = require('../app/config_file')
+const ConfigFile = require('../app/config-file')
 
 describe('ConfigFile', () => {
   before(() => {
