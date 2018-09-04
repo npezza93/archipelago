@@ -1,6 +1,6 @@
 /* global document */
 
-const { remote } = require('electron')
+const {remote} = require('electron')
 
 if (process.platform !== 'darwin') {
   const React = require('react')

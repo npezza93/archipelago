@@ -1,9 +1,9 @@
 /* global Notification */
 
-const { pushKeyPath }       = require('key-path-helpers')
-const { getValueAtKeyPath } = require('key-path-helpers')
-const unescapeString        = require('unescape-js')
-const Color                 = require('color')
+const {pushKeyPath} = require('key-path-helpers')
+const {getValueAtKeyPath} = require('key-path-helpers')
+const unescapeString = require('unescape-js')
+const Color = require('color')
 
 module.exports =
 class Coercer {
