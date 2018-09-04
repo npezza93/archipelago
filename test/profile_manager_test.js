@@ -10,12 +10,22 @@ const fs             = require('fs')
 const CSON           = require('season')
 
 describe('ProfileManager', () => {
-  before(() => {
+  beforeEach(() => {
     this.filePath = join(homedir(), '.archipelago.dev.json')
     fs.unlink(this.filePath, () => {})
+    this.profiles = {
+      '1': {
+        id: 1,
+        name: 'Profile 1'
+      },
+      '2': {
+        id: 2,
+        name: 'Profile 2'
+      }
+    }
   })
 
-  after(() => {
+  afterEach(() => {
     fs.unlink(this.filePath, () => {})
   })
 
