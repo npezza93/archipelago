@@ -16,7 +16,7 @@ class Coercer {
   }
 
   coerce() {
-    return this[this.schema.type].call(this)
+    return this[this.schema.type]()
   }
 
   float() {
@@ -30,7 +30,7 @@ class Coercer {
   }
 
   integer() {
-    const value = parseInt(this.currentValue || this.defaultValue)
+    const value = parseInt(this.currentValue || this.defaultValue, 10)
 
     if (isNaN(value) || !isFinite(value)) {
       throw this._canNotCoerce(this.currentValue || this.defaultValue)
@@ -45,32 +45,36 @@ class Coercer {
 
   boolean() {
     let value = this.currentValue
-    if ((value === undefined) || (value === null)) { value = this.defaultValue }
+    if ((value === undefined) || (value === null)) {
+      value = this.defaultValue
+    }
 
     switch (typeof value) {
-    case 'string':
-      if (value.toLowerCase() === 'true') {
-        return true
-      } else if (value.toLowerCase() === 'false') {
-        return false
-      } else {
+      case 'string':
+        if (value.toLowerCase() === 'true') {
+          return true
+        } if (value.toLowerCase() === 'false') {
+          return false
+        }
         throw this._canNotCoerce(value)
-      }
-    case 'boolean':
-      return value
-    default:
-      throw this._canNotCoerce(value)
+
+      case 'boolean':
+        return value
+      default:
+        throw this._canNotCoerce(value)
     }
   }
 
   object() {
     const value = this.currentValue || this.defaultValue
-    if (this.schema.properties == null) { return value }
+    if (this.schema.properties === null) {
+      return value
+    }
 
     const newValue = {}
-    for (let property in this.schema.properties) {
-      let childSchema = this.schema.properties[property]
-      if (childSchema != null) {
+    for (const property in this.schema.properties) {
+      const childSchema = this.schema.properties[property]
+      if (childSchema !== null) {
         try {
           const coercer = new Coercer(
             pushKeyPath(this.keyPath, property),
@@ -115,12 +119,14 @@ class Coercer {
   array() {
     const value = this.currentValue || this.defaultValue
 
-    if (!Array.isArray(value)) { this._canNotCoerce(value) }
+    if (!Array.isArray(value)) {
+      this._canNotCoerce(value)
+    }
 
     const itemSchema = this.schema.items
-    if (itemSchema != null) {
+    if (itemSchema !== null) {
       const newValue = []
-      for (let item of value) {
+      for (const item of value) {
         try {
           const coercer = new Coercer(this.keyPath, item, null, itemSchema, this.options)
           newValue.push(coercer.coerce())
@@ -129,9 +135,8 @@ class Coercer {
         }
       }
       return newValue
-    } else {
-      return value
     }
+    return value
   }
 
   _canNotCoerce(value) {
@@ -142,11 +147,11 @@ class Coercer {
 
   _sendNotification(title, body, type) {
     if (Notification.permission === 'granted') {
-      return new Notification(title, { body, icon: `../icons/${type}.png` })
-    } else if (Notification.permission !== 'denied') {
-      return Notification.requestPermission((permission) => {
+      return new Notification(title, {body, icon: `../icons/${type}.png`})
+    } if (Notification.permission !== 'denied') {
+      return Notification.requestPermission(permission => {
         if (permission === 'granted') {
-          return new Notification(title, { body, icon: `../icons/${type}.png` })
+          return new Notification(title, {body, icon: `../icons/${type}.png`})
         }
       })
     }
