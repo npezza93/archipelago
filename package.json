@@ -7,12 +7,13 @@
     "postinstall": "electron-builder install-app-deps",
     "start": "./node_modules/.bin/electron .",
     "test": "./node_modules/.bin/electron-mocha test test/migrations",
+    "lint": "xo",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder --publish onTagOrDraft",
-    "lint:coffee": "coffeelint app/**/*.coffee",
-    "lint:css": "stylelint app/**/*.css",
-    "lint:js": "./node_modules/.bin/eslint test app",
-    "lint": "npm-run-all lint:*"
+    "dist": "electron-builder --publish onTagOrDraft"
+  },
+  "xo": {
+    "space": true,
+    "semicolon": false
   },
   "repository": {
     "type": "git",
@@ -68,14 +69,9 @@
     "electron": "3.0.0-beta.8",
     "electron-builder": "^20.19.1",
     "electron-mocha": "^6.0.4",
-    "eslint": "^5.4.0",
     "mocha": "^5.2.0",
-    "npm-run-all": "^4.1.2",
     "spectron": "^4.0.0",
-    "stylefmt": "^6.0.0",
-    "stylelint": "^9.1.1",
-    "stylelint-config-standard": "^18.0.0",
-    "stylelint-order": "^0.8.0"
+    "xo": "^0.23.0"
   },
   "build": {
     "productName": "Archipelago",
