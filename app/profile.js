@@ -1,4 +1,4 @@
-const Schema  = require('./schema')
+const Schema = require('./schema')
 const Coercer = require('./coercer')
 
 module.exports =
@@ -29,7 +29,11 @@ class Profile {
   }
 
   get schema() {
-    return this._schema || (this._schema = new Schema)
+    if (this._schema === undefined) {
+      this._schema = new Schema()
+    }
+
+    return this._schema
   }
 
   set name(newName) {
@@ -39,9 +43,11 @@ class Profile {
   }
 
   destroy() {
-    let currentContents = this._configFile.contents
+    const currentContents = this._configFile.contents
     delete currentContents.profiles[this.id]
 
-    return this.configFile.contents = currentContents
+    this.configFile.contents = currentContents
+
+    return currentContents
   }
 }
