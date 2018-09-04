@@ -110,16 +110,16 @@ class AppMenu {
     return {
       label: 'Profiles',
       submenu:
-        archipelago.config.profileIds.map(function(profileId) {
+        archipelago.profileManager.profileIds.map(function(profileId) {
           const profileItem = {
-            label: archipelago.config.getProfileName(profileId),
+            label: archipelago.profileManager.find(profileId).name,
             type: 'radio',
             click() {
-              return archipelago.config.setActiveProfileId(profileId)
+              archipelago.profileManager.activeProfileId = profileId
             }
           }
 
-          if (archipelago.config.activeProfileId === parseInt(profileId)) {
+          if (archipelago.profileManager.activeProfileId === parseInt(profileId)) {
             profileItem.checked = true
           }
           return profileItem

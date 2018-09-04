@@ -70,6 +70,6 @@ archipelago.config.onDidChange('vibrancy', value =>
 )
 
 archipelago.config.onDidChange('singleTabMode', resetApplicationMenu)
-archipelago.config.onActiveProfileChange(resetApplicationMenu)
+archipelago.profileManager.onActiveProfileChange(resetApplicationMenu)
 
 ipcMain.on('open-hamburger-menu', (ev, args) => Menu.getApplicationMenu().popup(args))

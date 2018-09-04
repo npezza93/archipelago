@@ -6,8 +6,8 @@ class Profiles extends React.Component
   constructor: (props) ->
     super(props)
     @state =
-      activeProfileId: archipelago.config.activeProfileId
-      profileIds: archipelago.config.profileIds
+      activeProfileId: archipelago.profileManager.activeProfileId
+      profileIds: archipelago.profileManager.profileIds
 
     @_bindListener()
 
@@ -43,40 +43,43 @@ class Profiles extends React.Component
       'div'
       className: 'new-profile'
       onClick: =>
-        profileId = archipelago.config.createProfile()
+        profile = archipelago.profileManager.create()
 
         @setState(
-          activeProfileId: profileId,
-          profileIds: [...@state.profileIds, profileId]
+          activeProfileId: profile.id,
+          profileIds: [...@state.profileIds, profile.id]
         )
 
       'Add New Profile'
     )
 
   removeProfile: (id) ->
-    archipelago.config.destroyProfile(id)
+    profile = archipelago.profileManager.find(id)
+    profile.destroy()
 
-    archipelago.config.validateActiveProfile()
+    archipelago.profileManager.validate()
 
   setActiveProfileId: (id) ->
     @setState(activeProfileId: id)
 
-    archipelago.config.setActiveProfileId(id)
+    archipelago.profileManager.activeProfileId = id
 
   _bindListener: ->
     archipelago.config.on 'did-change', () =>
+      profileIds = archipelago.profileManager.profileIds
+      activeProfile = archipelago.profileManager.activeProfile()
+
       profileIdsMatch =
-        archipelago.config.profileIds.length == @state.profileIds.length &&
-          archipelago.config.profileIds.every (id, i) =>
+        profileIds.length == @state.profileIds.length &&
+          archipelago.profileManager.profileIds.every (id, i) =>
             id == @state.profileIds[i]
 
-      activeProfileIdMatch =
-          archipelago.config.activeProfileId == @state.activeProfileId
+      activeProfileIdMatch = activeProfile.id == @state.activeProfileId
 
       if !profileIdsMatch || !activeProfileIdMatch
-        archipelago.config.validateActiveProfile()
+        archipelago.profileManager.validate()
 
         @setState(
-          activeProfileId: archipelago.config.activeProfileId
-          profileIds: archipelago.config.profileIds
+          activeProfileId: activeProfile.id
+          profileIds: profileIds
         )

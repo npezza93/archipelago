@@ -1,13 +1,19 @@
-const Profile = require('./profile')
+const { Emitter } = require('event-kit')
+const Profile     = require('./profile')
 
 module.exports =
 class ProfileManager {
   constructor(configFile) {
     this._configFile = configFile
+    this._emitter    = new Emitter
   }
 
   get configFile() {
     return this._configFile
+  }
+
+  get emitter() {
+    return this._emitter
   }
 
   set activeProfileId(id) {
@@ -22,6 +28,10 @@ class ProfileManager {
 
   get profileIds() {
     return Object.keys(this.rawProfiles)
+  }
+
+  any() {
+    return this.profileIds.length > 0
   }
 
   activeProfile() {
@@ -48,24 +58,24 @@ class ProfileManager {
     this.configFile.update(`profiles.${id}`, { 'id': id})
     this.configFile.update('activeProfileId', id)
 
-    return id
+    return this.find(id)
   }
 
   validate() {
     if (this.activeProfile() != null) { return }
 
-    if (this.profileIds.length === 0) {
-      this.create()
-    } else {
+    if (this.any()) {
       this.activeProfileId = this.profileIds[0]
+    } else {
+      this.create()
     }
   }
 
   onActiveProfileChange(callback) {
-    let oldValue = this.activeProfileId
-    return this.emitter.on('did-change', () => {
-      const newValue = this.activeProfileId
-      if (oldValue !== newValue) {
+    let oldValue = this.activeProfile()
+    return this.configFile.onDidChange(() => {
+      const newValue = this.activeProfile()
+      if (oldValue.id !== newValue.id) {
         oldValue = newValue
         return callback(newValue)
       }

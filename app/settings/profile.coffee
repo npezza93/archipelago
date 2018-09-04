@@ -6,7 +6,7 @@ class Profile extends React.Component
     super(props)
     @state =
       editMode: false
-      name: archipelago.config.getProfileName(props.profileId)
+      name: archipelago.profileManager.find(props.profileId).name
 
     @_bindListener()
 
@@ -41,12 +41,14 @@ class Profile extends React.Component
       onChange: (e) =>
         newName = e.target.value
 
-        archipelago.config.setProfileName(@props.profileId, newName)
+        profile = archipelago.profileManager.find(@props.profileId)
+        profile.name = newName
+
         @setState(name: newName)
     )
 
   removeProfile: ->
-    return if Object.keys(archipelago.config.profiles).length <= 1
+    return if archipelago.profileManager.profileIds.length <= 1
 
     React.createElement(
       'span'
@@ -59,8 +61,9 @@ class Profile extends React.Component
 
   _bindListener: ->
     archipelago.config.on 'did-change', (newContents) =>
-      nameMatch =
-        archipelago.config.getProfileName(@props.profileId) == @state.name
+      profile = archipelago.profileManager.find(props.profileId)
+
+      nameMatch = profile.name == @state.name
 
       unless nameMatch
-        @setState(name: archipelago.config.getProfileName(@props.profileId))
+        @setState(name: profile.name)
