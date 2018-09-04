@@ -1,4 +1,4 @@
-/* global describe, it, after, before */
+/* global describe, it, afterEach, beforeEach, before */
 
 const { assert }  = require('chai')
 const ConfigFile  = require('../app/config_file')
@@ -11,14 +11,17 @@ const { app }     = require('electron')
 describe('ConfigFile', () => {
   before(() => {
     this.filePath = join(homedir(), '.archipelago.dev.json')
-    fs.unlink(this.filePath, () => {})
-  })
-
-  after(() => {
-    fs.unlink(this.filePath, () => {})
   })
 
   describe('no config file exists', () => {
+    beforeEach(() => {
+      fs.unlink(this.filePath, () => {})
+    })
+
+    afterEach(() => {
+      fs.unlink(this.filePath, () => {})
+    })
+
     it('creates a config file', () => {
       assert.isNull(CSON.resolve(this.filePath))
       new ConfigFile
@@ -32,6 +35,14 @@ describe('ConfigFile', () => {
   })
 
   describe('update', () => {
+    beforeEach(() => {
+      fs.unlink(this.filePath, () => {})
+    })
+
+    afterEach(() => {
+      fs.unlink(this.filePath, () => {})
+    })
+
     it('writes a field', () => {
       const configFile = new ConfigFile
       configFile.update('thing', 'field')
@@ -44,9 +55,14 @@ describe('ConfigFile', () => {
   })
 
   describe('runs migrations', () => {
-    before(() => {
+    beforeEach(() => {
       CSON.writeFileSync(this.filePath, {})
     })
+
+    afterEach(() => {
+      fs.unlink(this.filePath, () => {})
+    })
+
 
     it('upgrades the version and runs migrations', () => {
       const currentContents = CSON.readFileSync(this.filePath)
