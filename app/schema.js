@@ -1,24 +1,26 @@
-const { splitKeyPath } = require('key-path-helpers')
-const { pushKeyPath }  = require('key-path-helpers')
-const rootSchema       = require('./schema.json')
+/* eslint guard-for-in: "off" */
+
+const {splitKeyPath} = require('key-path-helpers')
+const {pushKeyPath} = require('key-path-helpers')
+const rootSchema = require('./schema.json')
 
 module.exports =
 class Schema {
   constructor(schema = null) {
-    this.schema = schema || { 'type': 'object', 'properties': rootSchema }
+    this.schema = schema || {type: 'object', properties: rootSchema}
   }
 
   propertiesGroupedBySetting() {
     const propertiesBySetting = {}
 
-    const properties = this._childPropertiesFromSchema(this.schema)
-    for (let property in properties) {
-      const { settings } = properties[property]
-      if (propertiesBySetting[settings.title] == null) {
+    const properties = this.childPropertiesFromSchema(this.schema)
+    for (const property in properties) {
+      const {settings} = properties[property]
+      if (propertiesBySetting[settings.title] === null) {
         propertiesBySetting[settings.title] = []
       }
       propertiesBySetting[settings.title].push(
-        { [property]: properties[property] }
+        {[property]: properties[property]}
       )
     }
 
@@ -30,9 +32,9 @@ class Schema {
     let value
 
     if (childSchema.type === 'object') {
-      value = this._objectDefaultValue(keyPath, childSchema)
+      value = this.objectDefaultValue(keyPath, childSchema)
     } else {
-      value = this._topLevelDefaultValue(childSchema)
+      value = this.topLevelDefaultValue(childSchema)
     }
 
     return value
@@ -40,9 +42,9 @@ class Schema {
 
   getSchema(keyPath) {
     const keys = splitKeyPath(keyPath)
-    let { schema } = this
+    let {schema} = this
 
-    for (let key of keys) {
+    for (const key of keys) {
       let childSchema
       if (schema.type === 'object') {
         childSchema = schema.properties[key]
@@ -50,7 +52,9 @@ class Schema {
       }
     }
 
-    if (this.isEnabled(schema)) { return schema }
+    if (this.isEnabled(schema)) {
+      return schema
+    }
   }
 
   isEnabled(schema) {
@@ -59,41 +63,38 @@ class Schema {
     return (schema.enabledOn || defaultPlatforms).includes(process.platform)
   }
 
-  // private
-
-  _objectDefaultValue(keyPath, childSchema) {
+  objectDefaultValue(keyPath, childSchema) {
     const defaults = {}
 
-    for (let key in (childSchema.properties || {})) {
+    for (const key in (childSchema.properties || {})) {
       defaults[key] = this.defaultValue(pushKeyPath(keyPath, key))
     }
 
     return defaults
   }
 
-  _topLevelDefaultValue(childSchema) {
-    const { defaultValue, platformSpecific } = childSchema
+  topLevelDefaultValue(childSchema) {
+    const {defaultValue, platformSpecific} = childSchema
 
-    if (defaultValue != undefined && platformSpecific) {
+    if (defaultValue !== undefined && platformSpecific) {
       return defaultValue[process.platform]
-    } else {
-      return defaultValue
     }
+    return defaultValue
   }
 
-  _childPropertiesFromSchema(schema, keyPath = null) {
+  childPropertiesFromSchema(schema, keyPath = null) {
     if (schema.type === 'object') {
       const properties = {}
       const object = schema.properties || {}
-      for (let childKeyPath in object) {
+      for (const childKeyPath in object) {
         const childSchema = object[childKeyPath]
         const propertyKeyPath = pushKeyPath(keyPath, childKeyPath)
-        const childProperties = this._childPropertiesFromSchema(childSchema, propertyKeyPath)
+        const childProperties = this.childPropertiesFromSchema(childSchema, propertyKeyPath)
         Object.assign(properties, childProperties)
       }
       return properties
-    } else if (this.isEnabled(schema)) {
-      return { [keyPath]: schema }
+    } if (this.isEnabled(schema)) {
+      return {[keyPath]: schema}
     }
   }
 }
