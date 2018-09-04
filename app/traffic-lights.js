@@ -1,8 +1,8 @@
 const React = require('react')
 
-const Minimize = require('./traffic_lights/minimize')
-const Maximize = require('./traffic_lights/maximize')
-const Close    = require('./traffic_lights/close')
+const Minimize = require('./traffic-lights/minimize')
+const Maximize = require('./traffic-lights/maximize')
+const Close = require('./traffic-lights/close')
 
 module.exports =
 class TrafficLights extends React.Component {

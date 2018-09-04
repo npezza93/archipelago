@@ -4,7 +4,7 @@ TabList       = require './tab_list'
 Sessions      = require './sessions'
 
 HamburgerMenu  = require './hamburger_menu'
-TrafficLights  = require '../traffic_lights'
+TrafficLights  = require '../traffic-lights'
 
 module.exports =
 class App extends React.Component

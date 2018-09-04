@@ -1,10 +1,12 @@
-const { remote } = require('electron')
-const React      = require('react')
+const {remote} = require('electron')
+const React = require('react')
 
 module.exports =
 class Minimize extends React.Component {
   render() {
-    if (process.platform === 'darwin') { return null }
+    if (process.platform === 'darwin') {
+      return null
+    }
 
     return React.createElement(
       'minimize-button',
@@ -23,10 +25,12 @@ class Minimize extends React.Component {
           filter: 'invert(20%)',
           cursor: 'pointer'
         },
-        onClick() { return remote.getCurrentWindow().minimize() }
+        onClick() {
+          return remote.getCurrentWindow().minimize()
+        }
       },
       React.createElement(
-        'div', { style: { height: '1px', background: '#000' } }
+        'div', {style: {height: '1px', background: '#000'}}
       )
     )
   }

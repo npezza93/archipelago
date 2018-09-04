@@ -1,10 +1,12 @@
-const { remote } = require('electron')
-const React      = require('react')
+const {remote} = require('electron')
+const React = require('react')
 
 module.exports =
 class Maximize extends React.Component {
   render() {
-    if (process.platform === 'darwin') { return null }
+    if (process.platform === 'darwin') {
+      return null
+    }
 
     return React.createElement(
       'maximize-button',
@@ -24,7 +26,9 @@ class Maximize extends React.Component {
           filter: 'invert(20%)',
           cursor: 'pointer'
         },
-        onClick() { return remote.getCurrentWindow().maximize() }
+        onClick() {
+          return remote.getCurrentWindow().maximize()
+        }
       }
     )
   }

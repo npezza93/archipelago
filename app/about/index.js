@@ -5,7 +5,7 @@ const {remote} = require('electron')
 if (process.platform !== 'darwin') {
   const React = require('react')
   const ReactDOM = require('react-dom')
-  const TrafficLights = require('../traffic_lights')
+  const TrafficLights = require('../traffic-lights')
 
   document.addEventListener('DOMContentLoaded', () => {
     ReactDOM.render(
