@@ -1,12 +1,12 @@
 /* global describe, it, afterEach, beforeEach, before */
 
-const { assert }  = require('chai')
-const ConfigFile  = require('../app/config_file')
-const { homedir } = require('os')
-const { join }    = require('path')
-const fs          = require('fs')
-const CSON        = require('season')
-const { app }     = require('electron')
+const {homedir} = require('os')
+const {join} = require('path')
+const fs = require('fs')
+const {app} = require('electron')
+const CSON = require('season')
+const {assert} = require('chai')
+const ConfigFile = require('../app/config_file')
 
 describe('ConfigFile', () => {
   before(() => {
@@ -14,13 +14,13 @@ describe('ConfigFile', () => {
   })
 
   describe('no config file exists', () => {
-    beforeEach((done) => {
+    beforeEach(done => {
       fs.unlink(this.filePath, () => {
         done()
       })
     })
 
-    afterEach((done) => {
+    afterEach(done => {
       fs.unlink(this.filePath, () => {
         done()
       })
@@ -28,36 +28,36 @@ describe('ConfigFile', () => {
 
     it('creates a config file', () => {
       assert.isNull(CSON.resolve(this.filePath))
-      new ConfigFile
+      new ConfigFile()
       assert.isNotNull(CSON.resolve(this.filePath))
     })
 
     it('writes the current version', () => {
-      const configFile = new ConfigFile
-      assert.deepEqual(configFile.read(), { version: app.getVersion() })
+      const configFile = new ConfigFile()
+      assert.deepEqual(configFile.read(), {version: app.getVersion()})
     })
   })
 
   describe('update', () => {
-    beforeEach((done) => {
+    beforeEach(done => {
       fs.unlink(this.filePath, () => {
         done()
       })
     })
 
-    afterEach((done) => {
+    afterEach(done => {
       fs.unlink(this.filePath, () => {
         done()
       })
     })
 
     it('writes a field', () => {
-      const configFile = new ConfigFile
+      const configFile = new ConfigFile()
       configFile.update('thing', 'field')
 
       assert.deepEqual(
         configFile.read(),
-        { version: app.getVersion(), thing: 'field' }
+        {version: app.getVersion(), thing: 'field'}
       )
     })
   })
@@ -67,18 +67,17 @@ describe('ConfigFile', () => {
       CSON.writeFileSync(this.filePath, {})
     })
 
-    afterEach((done) => {
+    afterEach(done => {
       fs.unlink(this.filePath, () => {
         done()
       })
     })
 
-
     it('upgrades the version and runs migrations', () => {
       const currentContents = CSON.readFileSync(this.filePath)
       assert.deepEqual(currentContents, {})
-      const configFile = new ConfigFile
-      assert.deepEqual(configFile.read(), { version: app.getVersion() })
+      const configFile = new ConfigFile()
+      assert.deepEqual(configFile.read(), {version: app.getVersion()})
     })
   })
 })

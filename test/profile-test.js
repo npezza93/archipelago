@@ -1,19 +1,19 @@
 /* global describe, it, beforeEach */
 
-const { assert } = require('chai')
-const Profile    = require('../app/profile')
-const ConfigFile = require('./fixtures/config_file_mock')
+const {assert} = require('chai')
+const Profile = require('../app/profile')
+const ConfigFile = require('./fixtures/config-file-mock')
 
 describe('Profile', () => {
   beforeEach(() => {
     this.profiles = {
-      '1': {
+      1: {
         id: 1,
         name: 'Profile 1'
       },
-      '2': { id: 2 }
+      2: {id: 2}
     }
-    this.configFile = new ConfigFile
+    this.configFile = new ConfigFile()
   })
 
   it('returns the id', () => {
@@ -42,7 +42,7 @@ describe('Profile', () => {
 
     assert.deepEqual(
       this.configFile.contents.profiles[2],
-      { id: 2, name: 'Profile 3000' }
+      {id: 2, name: 'Profile 3000'}
     )
   })
 

@@ -1,11 +1,11 @@
-const { app }           = require('electron')
-const { BrowserWindow } = require('electron')
-const path              = require('path')
-const url               = require('url')
+const {app} = require('electron')
+const {BrowserWindow} = require('electron')
+const path = require('path')
+const url = require('url')
 
 let about = null
 
-app.on('ready', function () {
+app.on('ready', () => {
   about = new BrowserWindow({
     width: 300,
     height: 500,
@@ -20,5 +20,7 @@ app.on('ready', function () {
     slashes: true
   }))
 
-  about.on('closed', function () { about = null })
+  about.on('closed', () => {
+    about = null
+  })
 })

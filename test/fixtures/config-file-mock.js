@@ -1,8 +1,13 @@
-const { setValueAtKeyPath } = require('key-path-helpers')
+const {setValueAtKeyPath} = require('key-path-helpers')
+const {Emitter} = require('event-kit')
 const VersionMigrator = require('../../app/version_migrator')
 
 module.exports =
 class ConfigFileMock {
+  constructor() {
+    this.emitter = new Emitter()
+  }
+
   get contents() {
     return this._contents || {}
   }
@@ -10,14 +15,18 @@ class ConfigFileMock {
   set contents(newContents) {
     this._contents = newContents
 
+    this.emitter.emit('did-change', this.contents)
+
     return this._contents
   }
 
   update(keyPath, value) {
-    let newContents = this.contents
+    const newContents = this.contents
     setValueAtKeyPath(newContents, keyPath, value)
 
-    return this.contents = newContents
+    this.contents = newContents
+
+    return newContents
   }
 
   get appVersion() {
@@ -32,10 +41,16 @@ class ConfigFileMock {
         this.contents, currentVersion, this.appVersion
       )
 
-      let newContents = migrator.run()
+      const newContents = migrator.run()
       newContents.version = this.appVersion
 
       this.contents = newContents
     }
+  }
+
+  onDidChange(callback) {
+    return this.emitter.on('did-change', contents => {
+      return callback(contents)
+    })
   }
 }
