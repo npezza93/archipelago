@@ -1,4 +1,4 @@
-/* global describe, it, beforeEach, afterEach */
+/* global describe, it, before, after */
 
 const { assert }     = require('chai')
 const ProfileManager = require('../app/profile_manager')
@@ -10,40 +10,27 @@ const fs             = require('fs')
 const CSON           = require('season')
 
 describe('ProfileManager', () => {
-  beforeEach(() => {
+  before(() => {
     this.filePath = join(homedir(), '.archipelago.dev.json')
-    if (CSON.resolve(this.filePath) != null) {
-      fs.unlinkSync(this.filePath)
-    }
-    this.configFile = new ConfigFile
-    this.profiles = {
-      '1': {
-        id: 1,
-        name: 'Profile 1'
-      },
-      '2': {
-        id: 2,
-        name: 'Profile 2'
-      }
-    }
+    fs.unlink(this.filePath, () => {})
   })
 
-  afterEach(() => {
-    if (CSON.resolve(this.filePath) != null) {
-      fs.unlinkSync(this.filePath)
-    }
+  after(() => {
+    fs.unlink(this.filePath, () => {})
   })
 
   describe('all', () => {
     it('grabs all profiles', () => {
-      this.configFile.update('profiles', this.profiles)
-      const manager = new ProfileManager(this.configFile)
+      const configFile = new ConfigFile
+      configFile.update('profiles', this.profiles)
+      const manager = new ProfileManager(configFile)
 
       assert.equal(manager.all().length, 2)
     })
 
     it('doesnt error when no config file initially exists', () => {
-      const manager = new ProfileManager(this.configFile)
+      const configFile = new ConfigFile
+      const manager = new ProfileManager(configFile)
 
       assert.equal(manager.all().length, 0)
     })
@@ -51,8 +38,9 @@ describe('ProfileManager', () => {
 
   describe('find', () => {
     it('grabs the given profile', () => {
-      this.configFile.update('profiles', this.profiles)
-      const manager = new ProfileManager(this.configFile)
+      const configFile = new ConfigFile
+      configFile.update('profiles', this.profiles)
+      const manager = new ProfileManager(configFile)
 
       const foundProfile = manager.find(1)
 
@@ -62,8 +50,9 @@ describe('ProfileManager', () => {
     })
 
     it('returns null when no profile is found', () => {
-      this.configFile.update('profiles', this.profiles)
-      const manager = new ProfileManager(this.configFile)
+      const configFile = new ConfigFile
+      configFile.update('profiles', this.profiles)
+      const manager = new ProfileManager(configFile)
 
       const foundProfile = manager.find(3)
 
@@ -71,7 +60,8 @@ describe('ProfileManager', () => {
     })
 
     it('doesnt error when no config file initially exists', () => {
-      const manager = new ProfileManager(this.configFile)
+      const configFile = new ConfigFile
+      const manager = new ProfileManager(configFile)
 
       const foundProfile = manager.find(1)
 
@@ -81,8 +71,9 @@ describe('ProfileManager', () => {
 
   describe('activeProfile', () => {
     it('sets the active profile', () => {
-      this.configFile.update('profiles', this.profiles)
-      const manager = new ProfileManager(this.configFile)
+      const configFile = new ConfigFile
+      configFile.update('profiles', this.profiles)
+      const manager = new ProfileManager(configFile)
 
       assert.isNull(manager.activeProfile())
 
@@ -96,14 +87,15 @@ describe('ProfileManager', () => {
 
   describe('create', () => {
     it('saves a new profile', () => {
-      this.configFile.update('profiles', this.profiles)
-      const manager = new ProfileManager(this.configFile)
+      const configFile = new ConfigFile
+      configFile.update('profiles', this.profiles)
+      const manager = new ProfileManager(configFile)
 
       assert.equal(manager.create(), 3)
 
       assert.equal(manager.activeProfile().id, 3)
       assert.deepEqual(
-        this.configFile.contents.profiles,
+        configFile.contents.profiles,
         {
           '1': { id: 1, name: 'Profile 1' },
           '2': { id: 2, name: 'Profile 2' },
@@ -115,7 +107,8 @@ describe('ProfileManager', () => {
 
   describe('validate', () => {
     it('creates a profile if none exist', () => {
-      const manager = new ProfileManager(this.configFile)
+      const configFile = new ConfigFile
+      const manager = new ProfileManager(configFile)
 
       assert.equal(manager.profileIds, 0)
       assert.isNull(manager.activeProfile())
@@ -127,8 +120,9 @@ describe('ProfileManager', () => {
     })
 
     it('does nothing if an activeProfile exists', () => {
-      this.configFile.update('profiles', this.profiles)
-      const manager = new ProfileManager(this.configFile)
+      const configFile = new ConfigFile
+      configFile.update('profiles', this.profiles)
+      const manager = new ProfileManager(configFile)
       manager.activeProfileId = 1
 
       assert.isNotNull(manager.activeProfile())
@@ -140,8 +134,9 @@ describe('ProfileManager', () => {
     })
 
     it('resets the activeProfile if it was deleted', () => {
-      this.configFile.update('profiles', this.profiles)
-      const manager = new ProfileManager(this.configFile)
+      const configFile = new ConfigFile
+      configFile.update('profiles', this.profiles)
+      const manager = new ProfileManager(configFile)
       manager.activeProfileId = 3
 
       assert.isNull(manager.activeProfile())
