@@ -1,6 +1,6 @@
 const {setValueAtKeyPath} = require('key-path-helpers')
 const {Emitter} = require('event-kit')
-const VersionMigrator = require('../../app/version_migrator')
+const VersionMigrator = require('../../app/version-migrator')
 
 module.exports =
 class ConfigFileMock {

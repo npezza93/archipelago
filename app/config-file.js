@@ -6,7 +6,7 @@ const CSON = require('season')
 const isDev = require('electron-is-dev')
 const {Emitter} = require('event-kit')
 const {setValueAtKeyPath} = require('key-path-helpers')
-const VersionMigrator = require('./version_migrator')
+const VersionMigrator = require('./version-migrator')
 
 module.exports =
 class ConfigFile {
