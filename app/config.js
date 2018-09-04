@@ -4,6 +4,7 @@ const { getValueAtKeyPath, pushKeyPath } = require('key-path-helpers')
 const Schema     = require('./schema')
 const Coercer    = require('./coercer')
 const ConfigFile = require('./config_file')
+const ProfileManager = require('./profile_manager')
 
 module.exports =
 class Config {
@@ -21,7 +22,12 @@ class Config {
   }
 
   get configFile() {
-    return this._config_file || (this._config_file = new ConfigFile)
+    return this._configFile || (this._configFile = new ConfigFile)
+  }
+
+  get profileManager() {
+    return this._profileManager ||
+      (this._profileManager = new ProfileManager(this.configFile))
   }
 
   get(keyPath, options) {
