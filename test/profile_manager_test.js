@@ -3,17 +3,10 @@
 const { assert }     = require('chai')
 const ProfileManager = require('../app/profile_manager')
 const Profile        = require('../app/profile')
-const ConfigFile     = require('../app/config_file')
-const { homedir }    = require('os')
-const { join }       = require('path')
-const fs             = require('fs')
+const ConfigFile     = require('./fixtures/config_file_mock')
 
 describe('ProfileManager', () => {
-  beforeEach((done) => {
-    this.filePath = join(homedir(), '.archipelago.dev.json')
-    fs.unlink(this.filePath, () => {
-      done()
-    })
+  beforeEach(() => {
     this.profiles = {
       '1': {
         id: 1,
@@ -24,12 +17,6 @@ describe('ProfileManager', () => {
         name: 'Profile 2'
       }
     }
-  })
-
-  afterEach((done) => {
-    fs.unlink(this.filePath, () => {
-      done()
-    })
   })
 
   describe('all', () => {
