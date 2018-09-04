@@ -1,7 +1,7 @@
 /* global describe, it, beforeEach */
 
 const {assert} = require('chai')
-const ProfileManager = require('../app/profile_manager')
+const ProfileManager = require('../app/profile-manager')
 const Profile = require('../app/profile')
 const ConfigFile = require('./fixtures/config-file-mock')
 

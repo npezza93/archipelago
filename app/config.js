@@ -3,7 +3,7 @@ const {getValueAtKeyPath, pushKeyPath} = require('key-path-helpers')
 const Schema = require('./schema')
 const Coercer = require('./coercer')
 const ConfigFile = require('./config-file')
-const ProfileManager = require('./profile_manager')
+const ProfileManager = require('./profile-manager')
 
 module.exports =
 class Config {

@@ -1,5 +1,5 @@
 const ConfigFile = require('./config-file')
-const ProfileManager = require('./profile_manager')
+const ProfileManager = require('./profile-manager')
 const Config = require('./config')
 
 module.exports = {

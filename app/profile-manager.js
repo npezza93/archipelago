@@ -1,11 +1,11 @@
-const { Emitter } = require('event-kit')
-const Profile     = require('./profile')
+const {Emitter} = require('event-kit')
+const Profile = require('./profile')
 
 module.exports =
 class ProfileManager {
   constructor(configFile) {
     this._configFile = configFile
-    this._emitter    = new Emitter
+    this._emitter = new Emitter()
   }
 
   get configFile() {
@@ -17,9 +17,9 @@ class ProfileManager {
   }
 
   set activeProfileId(id) {
-    this.configFile.update('activeProfileId', parseInt(id))
+    this.configFile.update('activeProfileId', parseInt(id, 10))
 
-    return parseInt(id)
+    return parseInt(id, 10)
   }
 
   get rawProfiles() {
@@ -39,7 +39,7 @@ class ProfileManager {
   }
 
   all() {
-    return this.profileIds.map((id) => {
+    return this.profileIds.map(id => {
       return new Profile(this.rawProfiles[id], this._configFile)
     })
   }
@@ -47,22 +47,23 @@ class ProfileManager {
   find(id) {
     if (this.rawProfiles[id]) {
       return new Profile(this.rawProfiles[id], this._configFile)
-    } else {
-      return null
     }
+    return null
   }
 
   create() {
     const id = Math.max(0, Math.max(...this.profileIds)) + 1
 
-    this.configFile.update(`profiles.${id}`, { 'id': id})
+    this.configFile.update(`profiles.${id}`, {id})
     this.configFile.update('activeProfileId', id)
 
     return this.find(id)
   }
 
   validate() {
-    if (this.activeProfile() != null) { return }
+    if (this.activeProfile() !== null) {
+      return
+    }
 
     if (this.any()) {
       this.activeProfileId = this.profileIds[0]
