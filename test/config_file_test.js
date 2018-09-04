@@ -14,8 +14,10 @@ describe('ConfigFile', () => {
   })
 
   describe('no config file exists', () => {
-    beforeEach(() => {
-      fs.unlink(this.filePath, () => {})
+    beforeEach((done) => {
+      fs.unlink(this.filePath, () => {
+        done()
+      })
     })
 
     afterEach((done) => {
@@ -37,8 +39,10 @@ describe('ConfigFile', () => {
   })
 
   describe('update', () => {
-    beforeEach(() => {
-      fs.unlink(this.filePath, () => {})
+    beforeEach((done) => {
+      fs.unlink(this.filePath, () => {
+        done()
+      })
     })
 
     afterEach((done) => {

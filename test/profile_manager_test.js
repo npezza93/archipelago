@@ -1,4 +1,4 @@
-/* global describe, it, before, after */
+/* global describe, it, beforeEach, afterEach */
 
 const { assert }     = require('chai')
 const ProfileManager = require('../app/profile_manager')
@@ -7,12 +7,13 @@ const ConfigFile     = require('../app/config_file')
 const { homedir }    = require('os')
 const { join }       = require('path')
 const fs             = require('fs')
-const CSON           = require('season')
 
 describe('ProfileManager', () => {
-  beforeEach(() => {
+  beforeEach((done) => {
     this.filePath = join(homedir(), '.archipelago.dev.json')
-    fs.unlink(this.filePath, () => {})
+    fs.unlink(this.filePath, () => {
+      done()
+    })
     this.profiles = {
       '1': {
         id: 1,
@@ -25,8 +26,10 @@ describe('ProfileManager', () => {
     }
   })
 
-  afterEach(() => {
-    fs.unlink(this.filePath, () => {})
+  afterEach((done) => {
+    fs.unlink(this.filePath, () => {
+      done()
+    })
   })
 
   describe('all', () => {
