@@ -32,16 +32,16 @@ class Profile {
     return this._schema || (this._schema = new Schema)
   }
 
+  set name(newName) {
+    this.configFile.update(`profiles.${this.id}.name`, newName)
+
+    return newName
+  }
+
   destroy() {
     let currentContents = this._configFile.contents
     delete currentContents.profiles[this.id]
 
     return this.configFile.contents = currentContents
-  }
-
-  set name(newName) {
-    this.configFile.update(`profiles.${this.id}.name`, newName)
-
-    return newName
   }
 }
