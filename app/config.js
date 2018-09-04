@@ -1,7 +1,7 @@
-const { getValueAtKeyPath, pushKeyPath } = require('key-path-helpers')
+const {getValueAtKeyPath, pushKeyPath} = require('key-path-helpers')
 
-const Schema     = require('./schema')
-const Coercer    = require('./coercer')
+const Schema = require('./schema')
+const Coercer = require('./coercer')
 const ConfigFile = require('./config-file')
 const ProfileManager = require('./profile_manager')
 
@@ -13,11 +13,11 @@ class Config {
   }
 
   get schema() {
-    return this._schema || (this._schema = new Schema)
+    return this._schema || (this._schema = new Schema())
   }
 
   get configFile() {
-    return this._configFile || (this._configFile = new ConfigFile)
+    return this._configFile || (this._configFile = new ConfigFile())
   }
 
   get profileManager() {
@@ -27,11 +27,13 @@ class Config {
 
   get(keyPath, options) {
     const schema = this.schema.getSchema(keyPath)
-    if (schema == null) { return }
+    if (schema === null) {
+      return
+    }
     const activeProfile = this.profileManager.activeProfile()
 
     let profileKeyPath = `profiles.${activeProfile.id}.${keyPath}`
-    if (schema.platformSpecific != null) {
+    if (schema.platformSpecific !== null) {
       profileKeyPath = pushKeyPath(profileKeyPath, process.platform)
     }
 
@@ -44,11 +46,13 @@ class Config {
 
   set(keyPath, value) {
     const schema = this.schema.getSchema(keyPath)
-    if (schema == null) { return }
+    if (schema === null) {
+      return
+    }
     const activeProfile = this.profileManager.activeProfile()
 
     keyPath = `profiles.${activeProfile.id}.${keyPath}`
-    if (schema.platformSpecific != null) {
+    if (schema.platformSpecific !== null) {
       keyPath = pushKeyPath(keyPath, process.platform)
     }
 
@@ -71,7 +75,9 @@ class Config {
   }
 
   _refreshConfig(error, newContents) {
-    if ((error != null) || (newContents == null)) { return }
+    if ((error !== null) || (newContents === null)) {
+      return
+    }
 
     this.contents = newContents
 
