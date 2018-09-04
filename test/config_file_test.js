@@ -18,8 +18,10 @@ describe('ConfigFile', () => {
       fs.unlink(this.filePath, () => {})
     })
 
-    afterEach(() => {
-      fs.unlink(this.filePath, () => {})
+    afterEach((done) => {
+      fs.unlink(this.filePath, () => {
+        done()
+      })
     })
 
     it('creates a config file', () => {
@@ -39,8 +41,10 @@ describe('ConfigFile', () => {
       fs.unlink(this.filePath, () => {})
     })
 
-    afterEach(() => {
-      fs.unlink(this.filePath, () => {})
+    afterEach((done) => {
+      fs.unlink(this.filePath, () => {
+        done()
+      })
     })
 
     it('writes a field', () => {
@@ -59,8 +63,10 @@ describe('ConfigFile', () => {
       CSON.writeFileSync(this.filePath, {})
     })
 
-    afterEach(() => {
-      fs.unlink(this.filePath, () => {})
+    afterEach((done) => {
+      fs.unlink(this.filePath, () => {
+        done()
+      })
     })
 
 
