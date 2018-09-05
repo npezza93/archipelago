@@ -1,3 +1,4 @@
+/* eslint guard-for-in: "off" */
 /* global Notification */
 
 const {pushKeyPath} = require('key-path-helpers')
@@ -53,7 +54,8 @@ class Coercer {
       case 'string':
         if (value.toLowerCase() === 'true') {
           return true
-        } if (value.toLowerCase() === 'false') {
+        }
+        if (value.toLowerCase() === 'false') {
           return false
         }
         throw this._canNotCoerce(value)
@@ -74,7 +76,9 @@ class Coercer {
     const newValue = {}
     for (const property in this.schema.properties) {
       const childSchema = this.schema.properties[property]
-      if (childSchema !== null) {
+      if (childSchema === null) {
+        throw new Error(`Illegal object key: ${this.keyPath}.${property}`)
+      } else {
         try {
           const coercer = new Coercer(
             pushKeyPath(this.keyPath, property),
@@ -87,8 +91,6 @@ class Coercer {
         } catch (error) {
           throw new Error(`Error setting item in object: ${error.message}`)
         }
-      } else {
-        throw new Error(`Illegal object key: ${this.keyPath}.${property}`)
       }
     }
 
@@ -148,7 +150,8 @@ class Coercer {
   _sendNotification(title, body, type) {
     if (Notification.permission === 'granted') {
       return new Notification(title, {body, icon: `../icons/${type}.png`})
-    } if (Notification.permission !== 'denied') {
+    }
+    if (Notification.permission !== 'denied') {
       return Notification.requestPermission(permission => {
         if (permission === 'granted') {
           return new Notification(title, {body, icon: `../icons/${type}.png`})

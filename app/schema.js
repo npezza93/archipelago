@@ -16,7 +16,8 @@ class Schema {
     const properties = this.childPropertiesFromSchema(this.schema)
     for (const property in properties) {
       const {settings} = properties[property]
-      if (propertiesBySetting[settings.title] === null) {
+      if (propertiesBySetting[settings.title] === null ||
+          propertiesBySetting[settings.title] === undefined) {
         propertiesBySetting[settings.title] = []
       }
       propertiesBySetting[settings.title].push(
@@ -93,7 +94,9 @@ class Schema {
         Object.assign(properties, childProperties)
       }
       return properties
-    } if (this.isEnabled(schema)) {
+    }
+
+    if (this.isEnabled(schema)) {
       return {[keyPath]: schema}
     }
   }

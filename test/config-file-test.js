@@ -28,8 +28,9 @@ describe('ConfigFile', () => {
 
     it('creates a config file', () => {
       assert.isNull(CSON.resolve(this.filePath))
-      new ConfigFile()
+      const configFile = new ConfigFile()
       assert.isNotNull(CSON.resolve(this.filePath))
+      assert(configFile.fileExists())
     })
 
     it('writes the current version', () => {

@@ -32,7 +32,11 @@ class ConfigFile {
   }
 
   get emitter() {
-    return this._emitter || (this._emitter = new Emitter())
+    if (this._emitter === undefined) {
+      this._emitter = new Emitter()
+    }
+
+    return this._emitter
   }
 
   get contents() {
@@ -47,7 +51,9 @@ class ConfigFile {
   }
 
   read() {
-    return this._contents = CSON.readFileSync(this.filePath)
+    this._contents = CSON.readFileSync(this.filePath)
+
+    return this.contents
   }
 
   update(keyPath, value) {
@@ -79,13 +85,8 @@ class ConfigFile {
   }
 
   bindWatcher() {
-    let fsWait = false
     return fs.watch(this.filePath, (event, filename) => {
       if (filename && (event === 'change')) {
-        if (fsWait) {
-          return
-        }
-        fsWait = setTimeout((() => fsWait = false), 100)
         return this.emitter.emit('did-change', this.read())
       }
     })

@@ -13,16 +13,27 @@ class Config {
   }
 
   get schema() {
-    return this._schema || (this._schema = new Schema())
+    if (this._schema === undefined) {
+      this._schema = new Schema()
+    }
+
+    return this._schema
   }
 
   get configFile() {
-    return this._configFile || (this._configFile = new ConfigFile())
+    if (this._configFile === undefined) {
+      this._configFile = new ConfigFile()
+    }
+
+    return this._configFile
   }
 
   get profileManager() {
-    return this._profileManager ||
-      (this._profileManager = new ProfileManager(this.configFile))
+    if (this._profileManager === undefined) {
+      this._profileManager = new ProfileManager(this.configFile)
+    }
+
+    return this._profileManager
   }
 
   get(keyPath, options) {
