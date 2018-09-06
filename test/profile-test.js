@@ -1,8 +1,8 @@
 /* global describe, it, beforeEach */
 
 const {assert} = require('chai')
-const Profile = require('../app/profile')
-const ConfigFile = require('../app/config-file')
+const Profile = require('../app/configuration/profile')
+const ConfigFile = require('../app/configuration/config-file')
 
 describe('Profile', () => {
   beforeEach(() => {

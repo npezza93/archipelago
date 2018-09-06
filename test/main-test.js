@@ -4,7 +4,7 @@ const path = require('path')
 const {Application} = require('spectron')
 const {assert} = require('chai')
 
-const ConfigFile = require('../app/config-file')
+const ConfigFile = require('../app/configuration/config-file')
 
 let electron = './node_modules/electron/dist/'
 

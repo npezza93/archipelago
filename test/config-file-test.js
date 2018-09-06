@@ -2,7 +2,7 @@
 
 const {assert} = require('chai')
 
-const ConfigFile = require('../app/config-file')
+const ConfigFile = require('../app/configuration/config-file')
 
 const pkg = require('../package.json')
 
