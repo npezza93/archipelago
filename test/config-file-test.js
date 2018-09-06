@@ -1,84 +1,31 @@
-/* global describe, it, afterEach, beforeEach, before */
+/* global describe, it, afterEach, beforeEach */
 
-const {homedir} = require('os')
-const {join} = require('path')
-const fs = require('fs')
-const {app} = require('electron')
-const CSON = require('season')
 const {assert} = require('chai')
+
 const ConfigFile = require('../app/config-file')
 
+const pkg = require('../package.json')
+
 describe('ConfigFile', () => {
-  before(() => {
-    this.filePath = join(homedir(), '.archipelago.dev.json')
+  beforeEach(() => {
+    (new ConfigFile()).clear()
+    this.configFile = new ConfigFile()
   })
 
-  describe('no config file exists', () => {
-    beforeEach(done => {
-      fs.unlink(this.filePath, () => {
-        done()
-      })
-    })
-
-    afterEach(done => {
-      fs.unlink(this.filePath, () => {
-        done()
-      })
-    })
-
-    it('creates a config file', () => {
-      assert.isNull(CSON.resolve(this.filePath))
-      const configFile = new ConfigFile()
-      assert.isNotNull(CSON.resolve(this.filePath))
-      assert(configFile.fileExists())
-    })
-
-    it('writes the current version', () => {
-      const configFile = new ConfigFile()
-      assert.deepEqual(configFile.read(), {version: app.getVersion()})
-    })
+  afterEach(() => {
+    this.configFile.clear()
   })
 
-  describe('update', () => {
-    beforeEach(done => {
-      fs.unlink(this.filePath, () => {
-        done()
-      })
-    })
-
-    afterEach(done => {
-      fs.unlink(this.filePath, () => {
-        done()
-      })
-    })
-
-    it('writes a field', () => {
-      const configFile = new ConfigFile()
-      configFile.update('thing', 'field')
-
-      assert.deepEqual(
-        configFile.read(),
-        {version: app.getVersion(), thing: 'field'}
-      )
-    })
+  it('writes the current version when no config file exists', () => {
+    assert.deepEqual(this.configFile.store, {version: pkg.version})
   })
 
-  describe('runs migrations', () => {
-    beforeEach(() => {
-      CSON.writeFileSync(this.filePath, {})
-    })
+  it('writes a field', () => {
+    this.configFile.set('thing', 'field')
 
-    afterEach(done => {
-      fs.unlink(this.filePath, () => {
-        done()
-      })
-    })
-
-    it('upgrades the version and runs migrations', () => {
-      const currentContents = CSON.readFileSync(this.filePath)
-      assert.deepEqual(currentContents, {})
-      const configFile = new ConfigFile()
-      assert.deepEqual(configFile.read(), {version: app.getVersion()})
-    })
+    assert.deepEqual(
+      this.configFile.store,
+      {version: pkg.version, thing: 'field'}
+    )
   })
 })

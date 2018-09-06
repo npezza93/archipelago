@@ -1,32 +1,42 @@
-/* global describe, it */
+/* global describe, it, beforeEach, afterEach */
 
 const {assert} = require('chai')
-const ConfigFile = require('../fixtures/config-file-mock')
+const ConfigFile = require('../../app/config-file')
+
+const pkg = require('../../package.json')
 
 describe('migration to 2.0.0', () => {
-  it('migrate from activeProfile to activeProfileId', () => {
-    const configFile = new ConfigFile()
-    configFile.contents = {activeProfile: 1}
+  beforeEach(() => {
+    (new ConfigFile()).clear()
+    this.configFile = new ConfigFile()
+  })
 
-    configFile.migrateVersions()
+  afterEach(() => {
+    this.configFile.clear()
+  })
+
+  it('migrate from activeProfile to activeProfileId', () => {
+    this.configFile.set('activeProfile', 1)
+    this.configFile.set('version', '1.0.5')
+
+    this.configFile.migrateVersions()
 
     assert.deepEqual(
-      configFile.contents,
-      {version: '3000', activeProfileId: 1}
+      this.configFile.store,
+      {version: pkg.version, activeProfileId: 1}
     )
   })
 
   it('removes all stored keybindings', () => {
-    const configFile = new ConfigFile()
-    configFile.contents = {
-      activeProfileId: 1, profiles: {1: {keybindings: ['thing']}}
-    }
+    this.configFile.set('activeProfile', 1)
+    this.configFile.set('profiles.1.keybindings', ['thing'])
+    this.configFile.set('version', '1.0.5')
 
-    configFile.migrateVersions()
+    this.configFile.migrateVersions()
 
     assert.deepEqual(
-      configFile.contents,
-      {activeProfileId: 1, version: '3000', profiles: {1: {}}}
+      this.configFile.store,
+      {activeProfileId: 1, version: pkg.version, profiles: {1: {}}}
     )
   })
 })

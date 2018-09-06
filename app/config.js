@@ -8,8 +8,7 @@ const ProfileManager = require('./profile-manager')
 module.exports =
 class Config {
   constructor() {
-    this._refreshConfig(null, this.configFile.contents)
-    this.configFile.onDidChange(this._refreshConfig.bind(this))
+    this.profileManager.validate()
   }
 
   get schema() {
@@ -67,31 +66,29 @@ class Config {
       keyPath = pushKeyPath(keyPath, process.platform)
     }
 
-    return this.configFile.update(keyPath, value)
+    return this.configFile.set(keyPath, value)
   }
 
   onDidChange(keyPath, callback, options) {
     let oldValue = this.get(keyPath)
-    return this.configFile.onDidChange(() => {
+    const onChange = this.configFile.onDidChange(keyPath, () => {
       const newValue = this.get(keyPath, options)
       if (oldValue !== newValue) {
         oldValue = newValue
         return callback(newValue)
       }
     })
+
+    return {dispose() {
+      onChange.call()
+    }}
   }
 
   on(event, callback) {
-    return this.configFile.emitter.on(event, callback)
+    return this.configFile.events.on(event, callback)
   }
 
-  _refreshConfig(error, newContents) {
-    if ((error !== null) || (newContents === null)) {
-      return
-    }
-
-    this.contents = newContents
-
-    this.profileManager.validate()
+  get contents() {
+    return this.configFile.store
   }
 }
