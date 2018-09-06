@@ -6,7 +6,7 @@
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
     "start": "./node_modules/.bin/electron .",
-    "test": "./node_modules/.bin/electron-mocha test test/migrations",
+    "test": "./node_modules/.bin/electron-mocha",
     "lint": "./node_modules/.bin/xo",
     "pack": "electron-builder --dir",
     "dist": "electron-builder --publish onTagOrDraft"
