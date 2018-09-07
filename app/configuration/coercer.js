@@ -20,57 +20,50 @@ class Coercer {
     return this[this.schema.type]()
   }
 
+  get usableValue() {
+    let value = this.currentValue
+    if ((value === undefined) || (value === null)) {
+      value = this.defaultValue
+    }
+
+    return value
+  }
+
   float() {
-    const value = parseFloat(this.currentValue || this.defaultValue)
+    const value = parseFloat(this.usableValue)
 
     if (isNaN(value) || !isFinite(value)) {
-      throw this._canNotCoerce(this.currentValue || this.defaultValue)
+      throw this._canNotCoerce(this.usableValue)
     }
 
     return value
   }
 
   integer() {
-    const value = parseInt(this.currentValue || this.defaultValue, 10)
+    const value = parseInt(this.usableValue, 10)
 
     if (isNaN(value) || !isFinite(value)) {
-      throw this._canNotCoerce(this.currentValue || this.defaultValue)
+      throw this._canNotCoerce(this.usableValue)
     }
 
     return value
   }
 
   string() {
-    return String(this.currentValue || this.defaultValue || '')
+    return String(this.usableValue || '')
   }
 
   boolean() {
-    let value = this.currentValue
-    if ((value === undefined) || (value === null)) {
-      value = this.defaultValue
+    if (this.usableValue === 'false') {
+      return false
     }
 
-    switch (typeof value) {
-      case 'string':
-        if (value.toLowerCase() === 'true') {
-          return true
-        }
-        if (value.toLowerCase() === 'false') {
-          return false
-        }
-        throw this._canNotCoerce(value)
-
-      case 'boolean':
-        return value
-      default:
-        throw this._canNotCoerce(value)
-    }
+    return Boolean(this.usableValue)
   }
 
   object() {
-    const value = this.currentValue || this.defaultValue
     if (this.schema.properties === null) {
-      return value
+      return this.usableValue
     }
 
     const newValue = {}
@@ -82,7 +75,7 @@ class Coercer {
         try {
           const coercer = new Coercer(
             pushKeyPath(this.keyPath, property),
-            getValueAtKeyPath(value, property),
+            getValueAtKeyPath(this.usableValue, property),
             childSchema.defaultValue,
             childSchema,
             this.options
@@ -108,27 +101,23 @@ class Coercer {
   }
 
   color() {
-    const value = this.currentValue || this.defaultValue
-
     try {
-      const parsedColor = new Color(value)
+      const parsedColor = new Color(this.usableValue)
       return parsedColor.toString()
     } catch (error) {
-      throw this._canNotCoerce(this.currentValue || this.defaultValue)
+      throw this._canNotCoerce(this.usableValue)
     }
   }
 
   array() {
-    const value = this.currentValue || this.defaultValue
-
-    if (!Array.isArray(value)) {
-      this._canNotCoerce(value)
+    if (!Array.isArray(this.usableValue)) {
+      throw this._canNotCoerce(this.usableValue)
     }
 
     const itemSchema = this.schema.items
     if (itemSchema !== null) {
       const newValue = []
-      for (const item of value) {
+      for (const item of this.usableValue) {
         try {
           const coercer = new Coercer(this.keyPath, item, null, itemSchema, this.options)
           newValue.push(coercer.coerce())
@@ -138,7 +127,7 @@ class Coercer {
       }
       return newValue
     }
-    return value
+    return this.usableValue
   }
 
   _canNotCoerce(value) {

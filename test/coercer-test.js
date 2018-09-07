@@ -1,7 +1,7 @@
 /* global describe, it */
 
 const {assert} = require('chai')
-const Coercer = require('../app/coercer')
+const Coercer = require('../app/configuration/coercer')
 
 describe('Coercer', () => {
   describe('float', () => {
@@ -94,26 +94,6 @@ describe('Coercer', () => {
 
       assert.equal(coercer.coerce(), false)
     })
-
-    it('throws an error when string cannot be coerced', () => {
-      const coercer = new Coercer('key', 'string', null, {type: 'boolean'})
-
-      assert.throws(
-        coercer.coerce.bind(coercer),
-        Error,
-        'Validation failed at key, "string" cannot be coerced into a boolean'
-      )
-    })
-
-    it('throws an error when anything but boolean or string are given', () => {
-      const coercer = new Coercer('key', [], null, {type: 'boolean'})
-
-      assert.throws(
-        coercer.coerce.bind(coercer),
-        Error,
-        'Validation failed at key, [] cannot be coerced into a boolean'
-      )
-    })
   })
 
   describe('object', () => {
@@ -134,18 +114,18 @@ describe('Coercer', () => {
     it('throws error if child properties cannot be coerced', () => {
       const coercer = new Coercer(
         'key',
-        {child: '10'},
+        {child: 'thing'},
         null,
         {
           type: 'object',
-          properties: {child: {type: 'boolean'}}
+          properties: {child: {type: 'float'}}
         }
       )
 
       assert.throws(
         coercer.coerce.bind(coercer),
         Error,
-        'Error setting item in object: Validation failed at key.child, "10" cannot be coerced into a boolean'
+        'Error setting item in object: Validation failed at key.child, "thing" cannot be coerced into a float'
       )
     })
   })

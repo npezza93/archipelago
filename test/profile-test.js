@@ -1,8 +1,8 @@
 /* global describe, it, beforeEach */
 
 const {assert} = require('chai')
-const Profile = require('../app/profile')
-const ConfigFile = require('./fixtures/config-file-mock')
+const Profile = require('../app/configuration/profile')
+const ConfigFile = require('../app/configuration/config-file')
 
 describe('Profile', () => {
   beforeEach(() => {
@@ -35,26 +35,26 @@ describe('Profile', () => {
   })
 
   it('sets the name', () => {
-    this.configFile.update('profiles', this.profiles)
+    this.configFile.set('profiles', this.profiles)
     const profile = new Profile(this.profiles[2], this.configFile)
 
     assert.equal(profile.name = 'Profile 3000', 'Profile 3000')
 
     assert.deepEqual(
-      this.configFile.contents.profiles[2],
+      this.configFile.get('profiles.2'),
       {id: 2, name: 'Profile 3000'}
     )
   })
 
   it('destroys the profile', () => {
-    this.configFile.update('profiles', this.profiles)
+    this.configFile.set('profiles', this.profiles)
     const profile = new Profile(this.profiles[2], this.configFile)
 
-    assert.equal(Object.keys(this.configFile.contents.profiles).length, 2)
+    assert.equal(Object.keys(this.configFile.get('profiles')).length, 2)
 
     profile.destroy()
 
-    assert.equal(Object.keys(this.configFile.contents.profiles).length, 1)
-    assert.isUndefined(this.configFile.contents.profiles[2])
+    assert.equal(Object.keys(this.configFile.get('profiles')).length, 1)
+    assert.isUndefined(this.configFile.get('profiles.2'))
   })
 })

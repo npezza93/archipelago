@@ -10,7 +10,7 @@ const settings = null
 const about = null
 const windows = []
 
-global.archipelago = require('../global')
+global.archipelago = require('../configuration/global')
 
 if (!isDev) {
   require('update-electron-app')()

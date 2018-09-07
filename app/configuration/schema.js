@@ -16,8 +16,7 @@ class Schema {
     const properties = this.childPropertiesFromSchema(this.schema)
     for (const property in properties) {
       const {settings} = properties[property]
-      if (propertiesBySetting[settings.title] === null ||
-          propertiesBySetting[settings.title] === undefined) {
+      if (!propertiesBySetting[settings.title]) {
         propertiesBySetting[settings.title] = []
       }
       propertiesBySetting[settings.title].push(

@@ -6,7 +6,7 @@
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
     "start": "./node_modules/.bin/electron .",
-    "test": "./node_modules/.bin/electron-mocha test test/migrations",
+    "test": "./node_modules/.bin/electron-mocha",
     "lint": "./node_modules/.bin/xo",
     "pack": "electron-builder --dir",
     "dist": "electron-builder --publish onTagOrDraft"
@@ -47,6 +47,7 @@
     "compare-versions": "^3.3.1",
     "default-shell": "^1.0.1",
     "electron-is-dev": "^0.3.0",
+    "electron-store": "^2.0.0",
     "event-kit": "^2.5.0",
     "i": "^0.3.6",
     "key-path-helpers": "^0.4.0",

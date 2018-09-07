@@ -17,13 +17,13 @@ class ProfileManager {
   }
 
   set activeProfileId(id) {
-    this.configFile.update('activeProfileId', parseInt(id, 10))
+    this.configFile.set('activeProfileId', parseInt(id, 10))
 
     return parseInt(id, 10)
   }
 
   get rawProfiles() {
-    return this.configFile.contents.profiles || {}
+    return this.configFile.get('profiles') || {}
   }
 
   get profileIds() {
@@ -35,7 +35,7 @@ class ProfileManager {
   }
 
   activeProfile() {
-    return this.find(this.configFile.contents.activeProfileId)
+    return this.find(this.configFile.get('activeProfileId'))
   }
 
   all() {
@@ -54,8 +54,8 @@ class ProfileManager {
   create() {
     const id = Math.max(0, Math.max(...this.profileIds)) + 1
 
-    this.configFile.update(`profiles.${id}`, {id})
-    this.configFile.update('activeProfileId', id)
+    this.configFile.set(`profiles.${id}`, {id})
+    this.configFile.set('activeProfileId', id)
 
     return this.find(id)
   }
@@ -74,9 +74,9 @@ class ProfileManager {
 
   onActiveProfileChange(callback) {
     let oldValue = this.activeProfile()
-    return this.configFile.onDidChange(() => {
+    return this.configFile.onDidChange('activeProfileId', () => {
       const newValue = this.activeProfile()
-      if (oldValue.id !== newValue.id) {
+      if (oldValue && newValue && oldValue.id !== newValue.id) {
         oldValue = newValue
         return callback(newValue)
       }

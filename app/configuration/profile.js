@@ -37,17 +37,14 @@ class Profile {
   }
 
   set name(newName) {
-    this.configFile.update(`profiles.${this.id}.name`, newName)
+    this.configFile.set(`profiles.${this.id}.name`, newName)
 
     return newName
   }
 
   destroy() {
-    const currentContents = this._configFile.contents
-    delete currentContents.profiles[this.id]
+    this.configFile.delete(`profiles.${this.id}`)
 
-    this.configFile.contents = currentContents
-
-    return currentContents
+    return this.configFile.store
   }
 }
