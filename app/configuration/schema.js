@@ -27,6 +27,12 @@ class Schema {
     return propertiesBySetting
   }
 
+  xtermSettings() {
+    return Object.keys(this.schema.properties).filter(property => {
+      return this.schema.properties[property].scope === 'xterm'
+    })
+  }
+
   defaultValue(keyPath) {
     const childSchema = this.getSchema(keyPath)
     let value
