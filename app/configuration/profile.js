@@ -15,7 +15,7 @@ class Profile {
   get name() {
     const schema = this.schema.getSchema('name')
     const defaultValue = this.schema.defaultValue('name')
-    const coercer = new Coercer('name', this.attributes.name, defaultValue, schema)
+    const coercer = new Coercer('name', this.attributes.name || defaultValue, schema)
 
     return coercer.coerce()
   }
@@ -46,5 +46,32 @@ class Profile {
     this.configFile.delete(`profiles.${this.id}`)
 
     return this.configFile.store
+  }
+
+  get(keyPath, options) {
+    const schema = this.schema.getSchema(keyPath)
+
+    let configKeyPath = `profiles.${this.id}.${keyPath}`
+    if (schema.platformSpecific) {
+      configKeyPath += `.${process.platform}`
+    }
+
+    const value = this.configFile.get(
+      configKeyPath, this.schema.defaultValue(keyPath)
+    )
+
+    const coercer = new Coercer(keyPath, value, schema, options)
+    return coercer.coerce()
+  }
+
+  set(keyPath, value) {
+    const schema = this.schema.getSchema(keyPath)
+
+    keyPath = `profiles.${this.id}.${keyPath}`
+    if (schema.platformSpecific) {
+      keyPath += `.${process.platform}`
+    }
+
+    return this.configFile.set(keyPath, value)
   }
 }
