@@ -8,10 +8,9 @@ const Color = require('color')
 
 module.exports =
 class Coercer {
-  constructor(keyPath, currentValue, defaultValue, schema, options = null) {
+  constructor(keyPath, currentValue, schema, options = null) {
     this.keyPath = keyPath
     this.currentValue = currentValue
-    this.defaultValue = defaultValue
     this.schema = schema
     this.options = options
   }
@@ -20,50 +19,41 @@ class Coercer {
     return this[this.schema.type]()
   }
 
-  get usableValue() {
-    let value = this.currentValue
-    if ((value === undefined) || (value === null)) {
-      value = this.defaultValue
-    }
-
-    return value
-  }
-
   float() {
-    const value = parseFloat(this.usableValue)
+    const value = parseFloat(this.currentValue)
 
     if (isNaN(value) || !isFinite(value)) {
-      throw this._canNotCoerce(this.usableValue)
+      throw this._canNotCoerce(this.currentValue)
     }
 
     return value
   }
 
   integer() {
-    const value = parseInt(this.usableValue, 10)
+    const value = parseInt(this.currentValue, 10)
 
     if (isNaN(value) || !isFinite(value)) {
-      throw this._canNotCoerce(this.usableValue)
+      throw this._canNotCoerce(this.currentValue)
     }
 
     return value
   }
 
   string() {
-    return String(this.usableValue || '')
+    return String(this.currentValue || '')
   }
 
   boolean() {
-    if (this.usableValue === 'false') {
+    if (this.currentValue === 'false') {
       return false
     }
 
-    return Boolean(this.usableValue)
+    return Boolean(this.currentValue)
   }
 
   object() {
     if (this.schema.properties === null) {
-      return this.usableValue
+      return this.currentValue
     }
 
     const newValue = {}
@@ -75,8 +65,7 @@ class Coercer {
         try {
           const coercer = new Coercer(
             pushKeyPath(this.keyPath, property),
-            getValueAtKeyPath(this.usableValue, property),
-            childSchema.defaultValue,
+            getValueAtKeyPath(this.currentValue, property) || childSchema.defaultValue,
             childSchema,
             this.options
           )
@@ -102,24 +91,24 @@ class Coercer {
 
   color() {
     try {
-      const parsedColor = new Color(this.usableValue)
+      const parsedColor = new Color(this.currentValue)
       return parsedColor.toString()
     } catch (error) {
-      throw this._canNotCoerce(this.usableValue)
+      throw this._canNotCoerce(this.currentValue)
     }
   }
 
   array() {
-    if (!Array.isArray(this.usableValue)) {
-      throw this._canNotCoerce(this.usableValue)
+    if (!Array.isArray(this.currentValue)) {
+      throw this._canNotCoerce(this.currentValue)
     }
 
     const itemSchema = this.schema.items
     if (itemSchema !== null) {
       const newValue = []
-      for (const item of this.usableValue) {
+      for (const item of this.currentValue) {
         try {
-          const coercer = new Coercer(this.keyPath, item, null, itemSchema, this.options)
+          const coercer = new Coercer(this.keyPath, item, itemSchema, this.options)
           newValue.push(coercer.coerce())
         } catch (error) {
           this._canNotCoerce(`Error setting item in array: ${error.message}`)
@@ -127,7 +116,7 @@ class Coercer {
       }
       return newValue
     }
-    return this.usableValue
+    return this.currentValue
   }
 
   _canNotCoerce(value) {
