@@ -1,9 +1,9 @@
 React         = require 'react'
-TabList       = require './tab_list'
-Sessions      = require './sessions'
 PaneList      = require './pane-list'
+TabList       = require './tab-list'
+Sessions      = require '../sessions/tab'
 
-HamburgerMenu  = require './hamburger_menu'
+HamburgerMenu  = require './hamburger-menu'
 TrafficLights  = require '../traffic-lights'
 
 module.exports =
@@ -31,7 +31,6 @@ class App extends React.Component
         tabs: @state.tabs
         currentTabId: @state.currentTabId
         selectTab: @selectTab.bind(this)
-        addTab: @addTab.bind(this)
         removeTab: @removeTab.bind(this)
       )
       React.createElement(TrafficLights, key: 'traffic-lights')
