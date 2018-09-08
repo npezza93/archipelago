@@ -15,7 +15,7 @@ class Tab {
   }
 
   add(sessionId, orientation) {
-    if (this.root.isSession) {
+    if (this.root.constructor.name === 'Session') {
       const session = this.root
       const branch = this.newBranch(session, orientation)
       this.root = branch
@@ -26,7 +26,7 @@ class Tab {
   }
 
   remove(sessionId) {
-    if (this.root.isSession && (this.root.id === sessionId)) {
+    if (this.root.constructor.name === 'Session' && (this.root.id === sessionId)) {
       this.root = null
       return
     }
@@ -69,7 +69,7 @@ class Tab {
 
   focusableSession() {
     let session = this.root
-    while (!session.isSession) {
+    while (!session.constructor.name === 'Session') {
       session = session.left
     }
 
@@ -93,7 +93,7 @@ class Tab {
       return
     }
 
-    if (branch.isSession) {
+    if (branch.constructor.name === 'Session') {
       callback(branch)
     }
 

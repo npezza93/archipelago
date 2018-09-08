@@ -6,12 +6,10 @@ const {spawn} = require('node-pty')
 const {Emitter, CompositeDisposable, Disposable} = require('event-kit')
 const {Terminal} = require('xterm')
 const KeymapManager = require('atom-keymap')
-const {createElement} = require('react')
 
 const Schema = require('../configuration/schema')
 const ProfileManager = require('../configuration/profile-manager')
 const ConfigFile = require('../configuration/config-file')
-const TerminalComponent = require('../renderer/terminal')
 
 Terminal.applyAddon(require('xterm/lib/addons/fit/fit'))
 
@@ -27,10 +25,6 @@ class Session {
     this.title = ''
 
     this.bindDataListeners()
-  }
-
-  get isSession() {
-    return true
   }
 
   get pty() {
@@ -85,21 +79,6 @@ class Session {
       }, {})
 
     return this._keymaps
-  }
-
-  render(props) {
-    return createElement(
-      TerminalComponent, {
-        key: this.id,
-        session: this,
-        tabId: props.id,
-        currentTabId: props.currentTabId,
-        changeTitle: props.changeTitle,
-        markUnread: props.markUnread,
-        removeSession: props.removeSession,
-        selectSession: props.selectSession
-      }
-    )
   }
 
   activeProfile() {
