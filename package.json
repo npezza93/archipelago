@@ -45,7 +45,6 @@
     "coffeescript": "^2.3.1",
     "color": "^3.0.0",
     "compare-versions": "^3.3.1",
-    "default-shell": "^1.0.1",
     "electron-is-dev": "^0.3.0",
     "electron-store": "^2.0.0",
     "event-kit": "^2.5.0",
