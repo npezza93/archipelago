@@ -1,7 +1,7 @@
 React         = require 'react'
-PaneList      = require './pane_list'
 TabList       = require './tab_list'
 Sessions      = require './sessions'
+PaneList      = require './pane-list'
 
 HamburgerMenu  = require './hamburger_menu'
 TrafficLights  = require '../traffic-lights'
