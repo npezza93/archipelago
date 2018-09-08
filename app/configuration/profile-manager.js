@@ -4,12 +4,8 @@ const Profile = require('./profile')
 module.exports =
 class ProfileManager {
   constructor(configFile) {
-    this._configFile = configFile
+    this.configFile = configFile
     this._emitter = new Emitter()
-  }
-
-  get configFile() {
-    return this._configFile
   }
 
   get emitter() {
@@ -40,13 +36,13 @@ class ProfileManager {
 
   all() {
     return this.profileIds.map(id => {
-      return new Profile(this.rawProfiles[id], this._configFile)
+      return new Profile(this.rawProfiles[id], this.configFile)
     })
   }
 
   find(id) {
     if (this.rawProfiles[id]) {
-      return new Profile(this.rawProfiles[id], this._configFile)
+      return new Profile(this.rawProfiles[id], this.configFile)
     }
     return null
   }
