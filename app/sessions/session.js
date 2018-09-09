@@ -196,7 +196,7 @@ class Session {
 
     this.schema.xtermSettings().forEach(field => {
       this.subscriptions.add(
-        archipelago.config.onDidChange(field, newValue => {
+        this.profileManager.onDidChange(field, newValue => {
           this.xterm.setOption(field, newValue)
         })
       )

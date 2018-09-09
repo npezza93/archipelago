@@ -1,9 +1,10 @@
 /* global document */
 /* eslint guard-for-in: "off" */
 
-global.archipelago = require('../configuration/global')
+const ConfigFile = require('../configuration/config-file')
+const ProfileManager = require('../configuration/profile-manager')
 
-const {ipcRenderer} = require('electron')
+const profileManager = new ProfileManager(new ConfigFile())
 
 const styleProperties = {
   fontFamily: '--font-family',
@@ -20,26 +21,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const ReactDOM = require('react-dom')
   const App = require('./app')
 
-  archipelago.app = ReactDOM.render(
-    React.createElement(App), document.getElementById('root')
+  global.archipelago = {}
+  global.archipelago.app = ReactDOM.render(
+    React.createElement(App, {profileManager}), document.getElementById('root')
   )
 
   for (const selector in styleProperties) {
     const cssVar = styleProperties[selector]
     const element = document.documentElement
 
-    element.style.setProperty(cssVar, archipelago.config.get(selector))
+    element.style.setProperty(cssVar, profileManager.get(selector))
   }
-})
 
-ipcRenderer.on('new-tab', () => {
-  if (!archipelago.config.get('singleTabMode')) {
-    return archipelago.app.addTab()
-  }
+  Object.entries(styleProperties).forEach(property =>
+    profileManager.onDidChange(property[0], newValue => document.documentElement.style.setProperty(property[1], newValue))
+  )
 })
-ipcRenderer.on('split-horizontal', () => archipelago.app.split('horizontal'))
-ipcRenderer.on('split-vertical', () => archipelago.app.split('vertical'))
-
-Object.entries(styleProperties).forEach(property =>
-  archipelago.config.onDidChange(property[0], newValue => document.documentElement.style.setProperty(property[1], newValue))
-)

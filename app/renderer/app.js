@@ -1,11 +1,12 @@
 /* global window */
 
+const {ipcRenderer} = require('electron')
 const React = require('react')
+
 const Tab = require('../sessions/tab')
 const TrafficLights = require('../traffic-lights')
 const PaneList = require('./pane-list')
 const TabList = require('./tab-list')
-
 const HamburgerMenu = require('./hamburger-menu')
 
 module.exports =
@@ -16,13 +17,21 @@ class App extends React.Component {
     const initialTab = new Tab()
 
     this.state = {tabs: [initialTab], currentTabId: initialTab.id}
+
+    ipcRenderer.on('split-horizontal', () => this.split('horizontal'))
+    ipcRenderer.on('split-vertical', () => this.split('vertical'))
+    ipcRenderer.on('new-tab', () => {
+      if (!this.props.profileManager.get('singleTabMode')) {
+        this.addTab()
+      }
+    })
   }
 
   render() {
     return React.createElement(
       'archipelago-app', {
         class: process.platform,
-        'data-single-tab-mode': (archipelago.config.get('singleTabMode') ? '' : undefined)
+        'data-single-tab-mode': (this.props.profileManager.get('singleTabMode') ? '' : undefined)
       },
       React.createElement(HamburgerMenu, {key: 'hamburger'}),
       React.createElement(
