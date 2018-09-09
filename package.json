@@ -93,15 +93,16 @@
     },
     "dmg": {
       "icon": "build/icon.icns",
+      "iconSize": 130,
       "contents": [
         {
           "x": 110,
-          "y": 230,
+          "y": 200,
           "type": "file"
         },
         {
           "x": 400,
-          "y": 230,
+          "y": 200,
           "type": "link",
           "path": "/Applications"
         }
