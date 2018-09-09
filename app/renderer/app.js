@@ -1,5 +1,7 @@
+/* global window */
+
 const React = require('react')
-const Sessions = require('../sessions/tab')
+const Tab = require('../sessions/tab')
 const TrafficLights = require('../traffic-lights')
 const PaneList = require('./pane-list')
 const TabList = require('./tab-list')
@@ -11,14 +13,9 @@ class App extends React.Component {
   constructor(props) {
     super(props)
 
-    const tabId = Math.random()
+    const initialTab = new Tab()
 
-    this.state = {
-      tabs: [
-        {id: tabId, title: '', isUnread: false, sessions: new Sessions()}
-      ],
-      currentTabId: tabId
-    }
+    this.state = {tabs: [initialTab], currentTabId: initialTab.id}
   }
 
   render() {
@@ -55,12 +52,12 @@ class App extends React.Component {
 
   componentWillUnmount() {
     return [...this.state.tabs].map(tab =>
-      tab.sessions.kill())
+      tab.kill())
   }
 
   componentDidUpdate() {
-    const currentSession = this.currentTab().sessions.find(
-      this.currentTab().sessions.root, this.state.currentSessionId
+    const currentSession = this.currentTab().find(
+      this.currentTab().root, this.state.currentSessionId
     )
 
     if (currentSession && !currentSession.isFocused) {
@@ -86,10 +83,10 @@ class App extends React.Component {
     const tabs = this.state.tabs.map(tab => {
       if (tab.id === id) {
         tab.isUnread = false
-        const {root} = tab.sessions
-        session = tab.sessions.find(root, this.state.currentSessionId)
+        const {root} = tab
+        session = tab.find(root, this.state.currentSessionId)
         if (!session) {
-          session = tab.sessions.firstSession()
+          session = tab.focusableSession()
         }
       }
 
@@ -104,20 +101,18 @@ class App extends React.Component {
   }
 
   addTab() {
-    const tabId = Math.random()
+    const newTab = new Tab()
 
     return this.setState({
-      tabs: this.state.tabs.concat({
-        id: tabId, title: '', isUnread: false, sessions: new Sessions()
-      }),
-      currentTabId: tabId
+      tabs: this.state.tabs.concat(newTab),
+      currentTabId: newTab.id
     })
   }
 
   removeTab(id) {
     const tabs = this.state.tabs.filter(tab => {
       if (tab.id === id) {
-        tab.sessions.kill()
+        tab.kill()
       }
 
       return tab.id !== id
@@ -125,11 +120,12 @@ class App extends React.Component {
 
     if (tabs.length === 0) {
       return window.close()
-    } if (this.state.currentTabId === id) {
+    }
+    if (this.state.currentTabId === id) {
       return this.setState({
         currentTabId: tabs[0].id,
         tabs,
-        currentSessionId: tabs[0].sessions.firstSession().id
+        currentSessionId: tabs[0].focusableSession().id
       })
     }
     return this.setState({tabs})
@@ -164,9 +160,9 @@ class App extends React.Component {
 
     const tabs = this.state.tabs.map(tab => {
       if (tab.id === tabId) {
-        tab.sessions.remove(sessionId)
+        tab.remove(sessionId)
 
-        if (tab.sessions.root === null) {
+        if (tab.root === null) {
           removeTab = true
         }
 
@@ -185,7 +181,7 @@ class App extends React.Component {
     let newSessionId = null
     const tabs = this.state.tabs.map(tab => {
       if (tab.id === this.state.currentTabId) {
-        const newGroup = tab.sessions.add(this.state.currentSessionId, orientation)
+        const newGroup = tab.add(this.state.currentSessionId, orientation)
         newSessionId = newGroup.right.id
       }
 

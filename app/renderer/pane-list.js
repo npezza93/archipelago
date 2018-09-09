@@ -12,7 +12,7 @@ class PaneList extends Component {
           Pane, {
             id: tab.id,
             key: tab.id,
-            sessions: tab.sessions,
+            sessionTree: tab.root,
             currentTabId: this.props.currentTabId,
             currentSessionId: this.props.currentSessionId,
             changeTitle: this.props.changeTitle,

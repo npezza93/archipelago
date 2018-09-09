@@ -8,7 +8,7 @@ class Pane extends Component {
     return createElement(
       'archipelago-pane',
       {class: this.props.currentTabId === this.props.id ? undefined : 'hidden'},
-      this.renderTree(this.props.sessions.root)
+      this.renderTree(this.props.sessionTree)
     )
   }
 
