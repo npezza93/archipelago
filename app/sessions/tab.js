@@ -10,10 +10,6 @@ class Tab {
     this.isUnread = false
   }
 
-  render(props) {
-    return this.root.render(props)
-  }
-
   add(sessionId, orientation) {
     if (this.root.constructor.name === 'Session') {
       const session = this.root
