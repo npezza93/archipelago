@@ -3,7 +3,7 @@ ReactDOM       = require 'react-dom'
 Profiles       = require './profiles'
 PropertiesPane = require './properties_pane'
 
-TrafficLights = require '../traffic-lights'
+TrafficLights = require '../traffic-lights/all'
 
 document.addEventListener 'DOMContentLoaded', () ->
   profilesContainer = document.querySelector('.profiles-container')

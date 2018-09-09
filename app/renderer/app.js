@@ -4,7 +4,7 @@ const {ipcRenderer} = require('electron')
 const React = require('react')
 
 const Tab = require('../sessions/tab')
-const TrafficLights = require('../traffic-lights')
+const TrafficLights = require('../traffic-lights/all')
 const PaneList = require('./pane-list')
 const TabList = require('./tab-list')
 const HamburgerMenu = require('./hamburger-menu')
