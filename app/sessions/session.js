@@ -126,10 +126,10 @@ class Session {
       this.xterm.element.classList.add('scrolling')
     }
 
-    this.xterm.element.addEventListener('wheel', scrollbarFadeEffect.bind(this))
+    this.xterm.element.addEventListener('wheel', scrollbarFadeEffect.bind(this), {passive: true})
 
     return new Disposable(() => {
-      this.xterm.element.removeEventListener('wheel', scrollbarFadeEffect.bind(this))
+      this.xterm.element.removeEventListener('wheel', scrollbarFadeEffect.bind(this), {passive: true})
     })
   }
 
