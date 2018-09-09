@@ -127,12 +127,12 @@ class Coercer {
 
   _sendNotification(title, body, type) {
     if (Notification.permission === 'granted') {
-      return new Notification(title, {body, icon: `../icons/${type}.png`})
+      return new Notification(title, {body, icon: `../images/${type}.png`})
     }
     if (Notification.permission !== 'denied') {
       return Notification.requestPermission(permission => {
         if (permission === 'granted') {
-          return new Notification(title, {body, icon: `../icons/${type}.png`})
+          return new Notification(title, {body, icon: `../images/${type}.png`})
         }
       })
     }
