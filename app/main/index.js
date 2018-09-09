@@ -1,24 +1,28 @@
-/* global archipelago */
-
 const {app, BrowserWindow, Menu, ipcMain} = require('electron')
 const path = require('path')
 const url = require('url')
 const isDev = require('electron-is-dev')
+const {CompositeDisposable} = require('event-kit')
+
+const ConfigFile = require('../configuration/config-file')
+const ProfileManager = require('../configuration/profile-manager')
 const AppMenu = require('./app-menu')
 
 const settings = null
 const about = null
 const windows = []
-
-global.archipelago = require('../configuration/global')
+const subscriptions = new CompositeDisposable()
+const profileManager = new ProfileManager(new ConfigFile())
 
 if (!isDev) {
   require('update-electron-app')()
 }
 
+profileManager.validate()
+
 const resetApplicationMenu = () =>
   Menu.setApplicationMenu(
-    Menu.buildFromTemplate(AppMenu.menu(about, settings, createWindow))
+    Menu.buildFromTemplate(AppMenu.menu(about, settings, createWindow, profileManager))
   )
 
 const createWindow = () => {
@@ -27,7 +31,7 @@ const createWindow = () => {
     height: 600,
     titleBarStyle: ((process.platform === 'darwin') && 'hiddenInset') || 'hidden',
     frame: process.platform === 'darwin',
-    vibrancy: archipelago.config.get('vibrancy')
+    vibrancy: profileManager.get('vibrancy')
   })
 
   win.loadURL(url.format({
@@ -55,6 +59,8 @@ app.on('window-all-closed', () => {
   }
 })
 
+app.on('quit', () => subscriptions.dispose())
+
 app.on('activate', () => {
   let windowCount = 0
   windows.forEach(win => {
@@ -69,15 +75,17 @@ app.on('activate', () => {
   }
 })
 
-archipelago.config.onDidChange('vibrancy', value =>
-  windows.forEach(win => {
-    if (!win.isDestroyed()) {
-      return win.setVibrancy(value)
-    }
-  })
+subscriptions.add(
+  profileManager.onDidChange('vibrancy', value =>
+    windows.forEach(win => {
+      if (!win.isDestroyed()) {
+        win.setVibrancy(value)
+      }
+    })
+  )
 )
 
-archipelago.config.onDidChange('singleTabMode', resetApplicationMenu)
-archipelago.profileManager.onActiveProfileChange(resetApplicationMenu)
+subscriptions.add(profileManager.onDidChange('singleTabMode', resetApplicationMenu))
+subscriptions.add(profileManager.onActiveProfileChange(resetApplicationMenu))
 
 ipcMain.on('open-hamburger-menu', (ev, args) => Menu.getApplicationMenu().popup(args))

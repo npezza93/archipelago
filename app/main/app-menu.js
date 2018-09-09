@@ -1,5 +1,3 @@
-/* global archipelago */
-
 const {app, BrowserWindow, shell} = require('electron')
 const path = require('path')
 const url = require('url')
@@ -15,13 +13,13 @@ class AppMenu {
     ]
   }
 
-  static menu(about, settings, createWindow) {
+  static menu(about, settings, createWindow, profileManager) {
     const template = [
       this.aboutMenu(about, settings),
-      this.shellMenu(createWindow),
+      this.shellMenu(createWindow, profileManager),
       this.editMenu(),
       this.viewMenu(),
-      this.profilesMenu(),
+      this.profilesMenu(profileManager),
       this.windowMenu(),
       this.helpMenu()
     ]
@@ -29,7 +27,7 @@ class AppMenu {
     return template
   }
 
-  static shellMenu(createWindow) {
+  static shellMenu(createWindow, profileManager) {
     return {
       label: 'Shell',
       submenu: [
@@ -57,12 +55,12 @@ class AppMenu {
             }
           }
         }
-      ].concat(this.newTabItem())
+      ].concat(this.newTabItem(profileManager))
     }
   }
 
-  static newTabItem() {
-    if (!archipelago.config.get('singleTabMode')) {
+  static newTabItem(profileManager) {
+    if (!profileManager.get('singleTabMode')) {
       return [
         {type: 'separator'},
         {
@@ -111,20 +109,20 @@ class AppMenu {
     }
   }
 
-  static profilesMenu() {
+  static profilesMenu(profileManager) {
     return {
       label: 'Profiles',
       submenu:
-        archipelago.profileManager.profileIds.map(profileId => {
+        profileManager.profileIds.map(profileId => {
           const profileItem = {
-            label: archipelago.profileManager.find(profileId).name,
+            label: profileManager.find(profileId).name,
             type: 'radio',
             click() {
-              archipelago.profileManager.activeProfileId = profileId
+              profileManager.activeProfileId = profileId
             }
           }
 
-          if (archipelago.profileManager.activeProfileId === parseInt(profileId, 10)) {
+          if (profileManager.activeProfileId === parseInt(profileId, 10)) {
             profileItem.checked = true
           }
           return profileItem

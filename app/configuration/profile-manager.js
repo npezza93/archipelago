@@ -1,4 +1,4 @@
-const {Emitter} = require('event-kit')
+const {Emitter, Disposable} = require('event-kit')
 const Profile = require('./profile')
 
 module.exports =
@@ -68,14 +68,38 @@ class ProfileManager {
     }
   }
 
+  get(keyPath, options) {
+    return this.activeProfile().get(keyPath, options)
+  }
+
+  onDidChange(keyPath, callback) {
+    let oldValue = this.get(keyPath)
+
+    const onChange = () => {
+      const newValue = this.get(keyPath)
+      if (oldValue !== newValue) {
+        oldValue = newValue
+        return callback(newValue)
+      }
+    }
+
+    this.configFile.events.on('change', onChange)
+
+    return new Disposable(() => {
+      this.configFile.events.removeListener('change', onChange)
+    })
+  }
+
   onActiveProfileChange(callback) {
     let oldValue = this.activeProfile()
-    return this.configFile.onDidChange('activeProfileId', () => {
+    const onChange = this.configFile.onDidChange('activeProfileId', () => {
       const newValue = this.activeProfile()
       if (oldValue && newValue && oldValue.id !== newValue.id) {
         oldValue = newValue
         return callback(newValue)
       }
     })
+
+    return new Disposable(() => onChange.call())
   }
 }
