@@ -1,12 +1,9 @@
-/* global document, archipelago */
+/* global document */
 /* eslint guard-for-in: "off" */
 
 global.archipelago = require('../configuration/global')
 
 const {ipcRenderer} = require('electron')
-const React = require('react')
-const ReactDOM = require('react-dom')
-const App = require('./app')
 
 const styleProperties = {
   fontFamily: '--font-family',
@@ -19,6 +16,10 @@ const styleProperties = {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  const React = require('react')
+  const ReactDOM = require('react-dom')
+  const App = require('./app')
+
   archipelago.app = ReactDOM.render(
     React.createElement(App), document.getElementById('root')
   )

@@ -51,8 +51,7 @@ class App extends React.Component {
   }
 
   componentWillUnmount() {
-    return [...this.state.tabs].map(tab =>
-      tab.kill())
+    this.state.tabs.map(tab => tab.kill())
   }
 
   componentDidUpdate() {
@@ -68,7 +67,7 @@ class App extends React.Component {
   currentTab(id) {
     let currentTab = null
 
-    for (const tab of [...this.state.tabs]) {
+    for (const tab of this.state.tabs) {
       if (tab.id === (id || this.state.currentTabId)) {
         currentTab = tab
       }
@@ -188,6 +187,6 @@ class App extends React.Component {
       return tab
     })
 
-    return this.setState({tabs, currentSessionId: newSessionId})
+    this.setState({tabs, currentSessionId: newSessionId})
   }
 }

@@ -4,8 +4,8 @@ const Coercer = require('./coercer')
 module.exports =
 class Profile {
   constructor(attributes, configFile) {
-    this._attributes = attributes
-    this._configFile = configFile
+    this.attributes = attributes
+    this.configFile = configFile
   }
 
   get id() {
@@ -18,14 +18,6 @@ class Profile {
     const coercer = new Coercer('name', this.attributes.name || defaultValue, schema)
 
     return coercer.coerce()
-  }
-
-  get attributes() {
-    return this._attributes
-  }
-
-  get configFile() {
-    return this._configFile
   }
 
   get schema() {
