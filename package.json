@@ -93,7 +93,6 @@
     },
     "dmg": {
       "icon": "build/icon.icns",
-      "iconSize": 128,
       "contents": [
         {
           "x": 110,
