@@ -33,11 +33,11 @@ class Session {
     }
 
     const shell =
-      this.activeProfile().get('shell') ||
+      this.profileManager.get('shell') ||
       process.env[os.platform() === 'win32' ? 'COMSPEC' : 'SHELL']
 
     this._pty = spawn(
-      shell, this.activeProfile().get('shellArgs').split(','), {
+      shell, this.profileManager.get('shellArgs').split(','), {
         name: 'xterm-256color',
         cwd: process.env.HOME,
         env: {
@@ -57,7 +57,7 @@ class Session {
       return this._xterm
     }
     const xtermSettings = this.schema.xtermSettings().reduce((settings, property) => {
-      settings[property] = this.activeProfile().get(property)
+      settings[property] = this.profileManager.get(property)
       return settings
     }, {})
 
@@ -73,7 +73,7 @@ class Session {
 
     this._keymaps = new KeymapManager()
     this._keymaps.mappings =
-      this.activeProfile().get('keybindings').reduce((result, item) => {
+      this.profileManager.get('keybindings').reduce((result, item) => {
         result[item.keystroke] = item.command
         return result
       }, {})
@@ -81,12 +81,8 @@ class Session {
     return this._keymaps
   }
 
-  activeProfile() {
-    return this.profileManager.activeProfile()
-  }
-
   resetTheme() {
-    this.xterm.setOption('theme', this.activeProfile().get('theme'))
+    this.xterm.setOption('theme', this.profileManager.get('theme'))
   }
 
   kill() {
@@ -166,7 +162,7 @@ class Session {
     this.xterm.on('focus', () => {
       this.fit()
       window.requestAnimationFrame(() => {
-        const blink = this.activeProfile().get('cursorBlink')
+        const blink = this.profileManager.get('cursorBlink')
 
         this.xterm.setOption('cursorBlink', !blink)
         this.xterm.setOption('cursorBlink', blink)
@@ -180,7 +176,7 @@ class Session {
     })
 
     this.xterm.on('selection', () => {
-      if (this.activeProfile().get('copyOnSelect')) {
+      if (this.profileManager.get('copyOnSelect')) {
         document.execCommand('copy')
       }
     })
