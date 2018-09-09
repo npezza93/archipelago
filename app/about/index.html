@@ -3,13 +3,57 @@
   <head>
     <meta charset="UTF-8">
     <title>Archipelago</title>
-    <link rel="stylesheet" type="text/css" href="about.css"/>
-    <script src="index.js"></script>
+    <style media="screen">
+      html, body {
+        background-color: #FFF;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        text-rendering: geometricPrecision;
+        -webkit-font-feature-settings: "liga" off, "calt" off;
+        -webkit-font-smoothing: subpixel-antialiased;
+        -webkit-app-region: drag;
+        height: 100%;
+      }
+      body {
+        justify-content: space-around;
+        padding: 0 10px;
+      }
+      img.project-logo {
+        max-width: 40%;
+        margin-top: 0;
+      }
+      img.np-logo {
+        margin-bottom: 15px;
+      }
+      p {
+        text-align: center;
+        font-weight: 300;
+      }
+
+      .centered_column {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      a { text-decoration: none; }
+      .font-weight-500 { font-weight: 500; }
+      .black { color: #000; }
+      .m-0 { margin: 0; }
+
+      minimize-button { z-index: 100 !important; }
+      minimize-button div { height: 2px !important; }
+      close-button div { height: 2px !important; }
+      close-button { z-index: 100 !important; }
+      maximize-button {
+        z-index: 100 !important;
+        border: 2px solid #000 !important;
+      }
+    </style>
+    <script src="index.js" async></script>
   </head>
   <body class="black m-0 centered_column">
     <div id="traffic-lights"></div>
 
-    <img src="logo.png" class="project-logo">
+    <img src="../images/boot-logo.png" class="project-logo">
 
     <div class="centered_column">
       <div class="black font-weight-500 m-0">Archipelago</div>
@@ -36,6 +80,6 @@
       Nick Pezza
     </p>
 
-    <img src="nplogo.png" class="np-logo">
+    <img src="../images/nplogo.png" class="np-logo" width="40">
   </body>
 </html>

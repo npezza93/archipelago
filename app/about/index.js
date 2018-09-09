@@ -7,14 +7,10 @@ if (process.platform !== 'darwin') {
   const ReactDOM = require('react-dom')
   const TrafficLights = require('../traffic-lights')
 
-  document.addEventListener('DOMContentLoaded', () => {
-    ReactDOM.render(
-      React.createElement(TrafficLights),
-      document.querySelector('#traffic-lights')
-    )
-  })
+  ReactDOM.render(
+    React.createElement(TrafficLights),
+    document.querySelector('#traffic-lights')
+  )
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelector('#version').innerText = `v${remote.app.getVersion()}`
-})
+document.querySelector('#version').innerText = `v${remote.app.getVersion()}`
