@@ -8,7 +8,7 @@ class Maximize extends React.Component {
       'maximize-button',
       {
         style: {
-          '-webkit-app-region': 'no-drag',
+          WebkitAppRegion: 'no-drag',
           flexDirection: 'column',
           justifyContent: 'center',
           display: 'flex',

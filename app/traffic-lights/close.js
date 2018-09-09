@@ -8,7 +8,7 @@ class Close extends React.Component {
       'close-button',
       {
         style: {
-          '-webkit-app-region': 'no-drag',
+          WebkitAppRegion: 'no-drag',
           height: '16px',
           width: '16px',
           right: '13px',
