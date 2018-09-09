@@ -3,6 +3,8 @@ const {homedir} = require('os')
 const {join} = require('path')
 const ElectronStore = require('electron-store')
 
+const Schema = require('./schema')
+
 module.exports =
 class ConfigFile extends ElectronStore {
   constructor() {
@@ -19,5 +21,7 @@ class ConfigFile extends ElectronStore {
     }
 
     super(opts)
+
+    this.events.setMaxListeners((new Schema()).xtermSettings().length)
   }
 }
