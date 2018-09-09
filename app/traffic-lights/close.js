@@ -4,10 +4,6 @@ const React = require('react')
 module.exports =
 class Close extends React.Component {
   render() {
-    if (process.platform === 'darwin') {
-      return null
-    }
-
     return React.createElement(
       'close-button',
       {

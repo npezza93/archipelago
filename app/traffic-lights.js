@@ -7,6 +7,10 @@ const Close = require('./traffic-lights/close')
 module.exports =
 class TrafficLights extends React.Component {
   render() {
+    if (process.platform === 'darwin') {
+      return null
+    }
+
     return React.createElement(
       'div',
       {},
