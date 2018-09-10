@@ -51,7 +51,6 @@ describe('About launch', function () {
     return this.app.client.getRenderProcessLogs().then(logs => {
       const filteredLogs = logs.filter(log => log.level === 'SEVERE')
 
-      console.log(filteredLogs)
       assert.isEmpty(filteredLogs, 'Exception in renderer process encountered')
     })
   })
