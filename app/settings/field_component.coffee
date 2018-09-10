@@ -1,9 +1,9 @@
 React            = require 'react'
 { splitKeyPath } = require 'key-path-helpers'
 BooleanField     = require './fields/boolean-field'
-ColorField       = require './fields/color_field'
-SelectField      = require './fields/select_field'
-TextField        = require './fields/text_field'
+ColorField       = require './fields/color-field'
+SelectField      = require './fields/select-field'
+TextField        = require './fields/text-field'
 
 module.exports =
 class FieldComponent extends React.Component
