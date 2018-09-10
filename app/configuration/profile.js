@@ -1,3 +1,5 @@
+const {Disposable} = require('event-kit')
+
 const Schema = require('./schema')
 const Coercer = require('./coercer')
 
@@ -65,5 +67,20 @@ class Profile {
     }
 
     return this.configFile.set(keyPath, value)
+  }
+
+  onDidChange(keyPath, callback) {
+    let oldValue = this.get(keyPath)
+
+    const onChange =
+      this.configFile.onDidChange(`profiles.${this.id}.${keyPath}`, () => {
+        const newValue = this.get(keyPath)
+        if (oldValue !== newValue) {
+          oldValue = newValue
+          return callback(newValue)
+        }
+      })
+
+    return new Disposable(() => onChange.call())
   }
 }

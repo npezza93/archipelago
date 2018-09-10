@@ -102,4 +102,17 @@ class ProfileManager {
 
     return new Disposable(() => onChange.call())
   }
+
+  onProfileChange(callback) {
+    let oldValue = this.all().length
+    const onChange = this.configFile.onDidChange('profiles', () => {
+      const newValue = this.all().length
+      if (oldValue && newValue) {
+        oldValue = newValue
+        return callback()
+      }
+    })
+
+    return new Disposable(() => onChange.call())
+  }
 }
