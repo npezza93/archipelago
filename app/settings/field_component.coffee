@@ -1,6 +1,6 @@
 React            = require 'react'
 { splitKeyPath } = require 'key-path-helpers'
-BooleanField     = require './fields/boolean_field'
+BooleanField     = require './fields/boolean-field'
 ColorField       = require './fields/color_field'
 SelectField      = require './fields/select_field'
 TextField        = require './fields/text_field'
