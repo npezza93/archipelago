@@ -1,10 +1,10 @@
 const {remote} = require('electron')
-const React = require('react')
+const {Component, createElement} = require('react')
 
 module.exports =
-class Close extends React.Component {
+class Close extends Component {
   render() {
-    return React.createElement(
+    return createElement(
       'close-button',
       {
         style: {
@@ -22,7 +22,7 @@ class Close extends React.Component {
           return remote.getCurrentWindow().close()
         }
       },
-      React.createElement(
+      createElement(
         'div',
         {
           style: {
@@ -36,7 +36,7 @@ class Close extends React.Component {
           }
         }
       ),
-      React.createElement(
+      createElement(
         'div',
         {
           style: {

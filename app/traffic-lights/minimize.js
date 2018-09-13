@@ -1,10 +1,10 @@
 const {remote} = require('electron')
-const React = require('react')
+const {Component, createElement} = require('react')
 
 module.exports =
-class Minimize extends React.Component {
+class Minimize extends Component {
   render() {
-    return React.createElement(
+    return createElement(
       'minimize-button',
       {
         style: {
@@ -25,9 +25,7 @@ class Minimize extends React.Component {
           return remote.getCurrentWindow().minimize()
         }
       },
-      React.createElement(
-        'div', {style: {height: '1px', background: '#000'}}
-      )
+      createElement('div', {style: {height: '1px', background: '#000'}})
     )
   }
 }

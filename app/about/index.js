@@ -3,13 +3,12 @@
 const {remote} = require('electron')
 
 if (process.platform !== 'darwin') {
-  const React = require('react')
-  const ReactDOM = require('react-dom')
+  const {createElement} = require('react')
+  const {render} = require('react-dom')
   const TrafficLights = require('../traffic-lights/all')
 
-  ReactDOM.render(
-    React.createElement(TrafficLights),
-    document.querySelector('#traffic-lights')
+  render(
+    createElement(TrafficLights), document.querySelector('#traffic-lights')
   )
 }
 

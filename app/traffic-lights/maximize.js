@@ -1,10 +1,10 @@
 const {remote} = require('electron')
-const React = require('react')
+const {Component, createElement} = require('react')
 
 module.exports =
-class Maximize extends React.Component {
+class Maximize extends Component {
   render() {
-    return React.createElement(
+    return createElement(
       'maximize-button',
       {
         style: {

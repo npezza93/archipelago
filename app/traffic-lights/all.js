@@ -1,22 +1,23 @@
-const React = require('react')
+const {Component, createElement} = require('react')
 
 const Minimize = require('./minimize')
 const Maximize = require('./maximize')
 const Close = require('./close')
 
 module.exports =
-class TrafficLights extends React.Component {
+class TrafficLights extends Component {
   render() {
+    let lights
+
     if (process.platform === 'darwin') {
-      return null
+      lights = null
+    } else {
+      lights = createElement(
+        'div', {},
+        createElement(Minimize), createElement(Maximize), createElement(Close)
+      )
     }
 
-    return React.createElement(
-      'div',
-      {},
-      React.createElement(Minimize),
-      React.createElement(Maximize),
-      React.createElement(Close)
-    )
+    return lights
   }
 }
