@@ -12,7 +12,7 @@ class Header extends Component {
     )
   }
 
-  createHeading(heading) {
+  renderHeading(heading) {
     const headingPosition = this.props.headings[heading]
 
     return createElement(

@@ -14,7 +14,7 @@ document.addEventListener 'DOMContentLoaded', () ->
   backdrop          = document.querySelector('#backdrop')
 
   ReactDOM.render(
-    React.createElement(PropertiesPane),
+    React.createElement(PropertiesPane, profileManager: (new ProfileManager(new ConfigFile()))),
     document.querySelector('.options-container')
   )
   ReactDOM.render(React.createElement(Profiles, profileManager: (new ProfileManager(new ConfigFile()))), profilesContainer)

@@ -1,11 +1,11 @@
 /* eslint guard-for-in: "off" */
 
-const React = require('react')
-const {singularize} = require('i')
+const {Component, createElement} = require('react')
+const {singularize} = require('i')(false)
 const coreFields = require('../core-fields')
 
 module.exports =
-class ArrayField {
+class ArrayField extends Component {
   render() {
     const elements = this.props.value.map((element, i) =>
       this.renderElement(element, i))
@@ -14,7 +14,7 @@ class ArrayField {
   }
 
   renderElement(element, index) {
-    return React.createElement(
+    return createElement(
       'div', {
         key: index,
         className: 'array-element-container'
@@ -51,7 +51,7 @@ class ArrayField {
   }
 
   addElement() {
-    return React.createElement(
+    return createElement(
       'div', {
         key: Math.random(),
         className: 'create-array-element',
@@ -62,7 +62,7 @@ class ArrayField {
   }
 
   removeElement(index) {
-    return React.createElement(
+    return createElement(
       'div', {
         className: 'remove-array-element',
         onClick: this.destroyElement.bind(this, index)

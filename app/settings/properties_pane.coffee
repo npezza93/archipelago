@@ -1,13 +1,14 @@
 React             = require 'react'
 Waypoint          = require 'react-waypoint'
 Header            = require './header'
-PropertiesSection = require './properties_section'
+Schema = require('../configuration/schema')
+PropertiesSection = require './properties-section'
 
 module.exports =
 class PropertiesPane extends React.Component
   constructor: (props) ->
     super(props)
-    @scopes = archipelago.config.schema.propertiesGroupedBySetting()
+    @scopes = (new Schema()).propertiesGroupedBySetting()
 
     @state = headings: {}
 
