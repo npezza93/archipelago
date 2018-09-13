@@ -12,47 +12,20 @@ class PropertiesSection extends Component {
       createElement(
         'archipelago-properties-section-container',
         null,
-        this.renderGroups()
+        this.renderProperties()
       )
     )
   }
 
-  renderGroups() {
-    const group = []
-    const object = this.groupedProperties()
-    for (const section in object) {
-      const properties = object[section]
-      group.push(this.renderProperties(properties).concat(this.seperator(section)))
-    }
-    return group
-  }
+  renderProperties() {
+    return Object.keys(this.props.properties).map(propertyName => {
+      const schema = this.props.properties[propertyName]
 
-  renderProperties(properties) {
-    return properties.map(property => {
-      const group = []
-      for (const name in property) {
-        const schema = property[name]
-        group.push(createElement(Property, {key: name, property: name, schema}))
-      }
-      return group
+      return createElement(Property, {key: propertyName, property: propertyName, schema})
     })
   }
 
   seperator(groupNumber) {
     return createElement('div', {key: groupNumber, className: 'seperator'})
-  }
-
-  groupedProperties() {
-    const properties = {}
-
-    for (const property in this.props.properties) {
-      const schema = this.props.properties[property]
-      if (properties[schema.settings.group] === null || properties[schema.settings.group] === undefined) {
-        properties[schema.settings.group] = []
-      }
-      properties[schema.settings.group].push({[property]: schema})
-    }
-
-    return properties
   }
 }
