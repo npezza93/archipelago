@@ -1,4 +1,6 @@
 const {createElement} = require('react')
+const {titleize} = require('i')(false)
+
 const BooleanField = require('./fields/boolean-field')
 const ColorField = require('./fields/color-field')
 const SelectField = require('./fields/select-field')
@@ -10,7 +12,7 @@ const boolean = (property, value, schema, onChange) => {
       key: property,
       property,
       value,
-      label: schema.title || property.split('.').pop().titleize,
+      label: schema.title || titleize(property.split('.').pop()),
       onChange: onChange.bind(this)
     }
   )
@@ -22,7 +24,7 @@ const color = (property, value, schema, onChange) => {
       key: property,
       property,
       value,
-      label: schema.title || property.split('.').pop().titleize,
+      label: schema.title || titleize(property.split('.').pop()),
       onChange: onChange.bind(this)
     }
   )
@@ -34,7 +36,7 @@ const select = (property, value, schema, onChange) => {
       key: property,
       property,
       value,
-      label: schema.title || property.split('.').pop().titleize,
+      label: schema.title || titleize(property.split('.').pop()),
       options: schema.enum,
       onChange: onChange.bind(this)
     }
@@ -51,7 +53,7 @@ const string = (property, value, schema, onChange) => {
       key: property,
       property,
       value,
-      label: schema.title || property.split('.').pop().titleize,
+      label: schema.title || titleize(property.split('.').pop()),
       onChange: onChange.bind(this)
     }
   )

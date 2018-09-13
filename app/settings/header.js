@@ -1,4 +1,5 @@
 const {Component, createElement} = require('react')
+const {titleize} = require('i')(false)
 
 module.exports =
 class Header extends Component {
@@ -20,7 +21,7 @@ class Header extends Component {
         key: heading,
         position: headingPosition
       },
-      heading.titleize
+      titleize(heading)
     )
   }
 }
