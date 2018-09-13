@@ -5,7 +5,7 @@ Profiles       = require './profiles'
 ProfileManager = require '../configuration/profile-manager'
 ConfigFile = require '../configuration/config-file'
 
-PropertiesPane = require './properties_pane'
+PropertiesPane = require './properties-pane'
 
 TrafficLights = require '../traffic-lights/all'
 
