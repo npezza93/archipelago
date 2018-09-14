@@ -42,7 +42,6 @@
   "dependencies": {
     "@material/linear-progress": "^0.34.0",
     "atom-keymap": "^8.2.10",
-    "coffeescript": "^2.3.1",
     "color": "^3.0.0",
     "compare-versions": "^3.3.1",
     "electron-is-dev": "^0.3.0",
