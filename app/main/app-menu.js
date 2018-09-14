@@ -1,6 +1,7 @@
 const {app, BrowserWindow, shell} = require('electron')
 const path = require('path')
 const url = require('url')
+const settings = require('./settings')
 
 module.exports =
 class AppMenu {
@@ -197,27 +198,7 @@ class AppMenu {
           label: 'Settings',
           accelerator: 'CmdOrCtrl+,',
           click() {
-            if ((settings === null) || settings.isDestroyed()) {
-              settings = new BrowserWindow({
-                width: 1100,
-                height: 600,
-                show: true,
-                titleBarStyle: 'hiddenInset',
-                frame: process.platform === 'darwin',
-                icon: path.join(__dirname, '../../../build/icon.png'),
-                webPreferences: {
-                  experimentalFeatures: true
-                }
-              })
-
-              settings.loadURL(url.format({
-                pathname: path.join(__dirname, '../settings/index.html'),
-                protocol: 'file:',
-                slashes: true
-              }))
-            }
-
-            return settings.focus()
+            settings.display()
           }
         },
         {type: 'separator'},

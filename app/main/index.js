@@ -8,7 +8,6 @@ const ConfigFile = require('../configuration/config-file')
 const ProfileManager = require('../configuration/profile-manager')
 const AppMenu = require('./app-menu')
 
-const settings = null
 const about = null
 const windows = []
 const subscriptions = new CompositeDisposable()
