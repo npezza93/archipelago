@@ -74,7 +74,6 @@ describe('Schema', () => {
           defaultValue: '#FFFFFF',
           settings: {
             title: 'theme',
-            group: 1,
             order: 5
           }
         }
