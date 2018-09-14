@@ -1,7 +1,7 @@
-const {app, BrowserWindow, shell} = require('electron')
-const path = require('path')
-const url = require('url')
+const {app, shell} = require('electron')
+
 const settings = require('./settings')
+const about = require('./about')
 
 module.exports =
 class AppMenu {
@@ -14,9 +14,9 @@ class AppMenu {
     ]
   }
 
-  static menu(about, settings, createWindow, profileManager) {
+  static menu(createWindow, profileManager) {
     const template = [
-      this.aboutMenu(about, settings),
+      this.aboutMenu(),
       this.shellMenu(createWindow, profileManager),
       this.editMenu(),
       this.viewMenu(),
@@ -162,31 +162,14 @@ class AppMenu {
     }
   }
 
-  static aboutMenu(about, settings) {
+  static aboutMenu() {
     return {
       label: app.getName(),
       submenu: [
         {
           label: 'About Archipelago',
           click() {
-            if ((about === null) || about.isDestroyed()) {
-              about = new BrowserWindow({
-                width: 300,
-                height: 500,
-                show: true,
-                titleBarStyle: 'hiddenInset',
-                frame: process.platform === 'darwin',
-                icon: path.join(__dirname, '../../../build/icon.png')
-              })
-
-              about.loadURL(url.format({
-                pathname: path.join(__dirname, '../about/index.html'),
-                protocol: 'file:',
-                slashes: true
-              }))
-
-              return about.focus()
-            }
+            about.display()
           }
         },
         {

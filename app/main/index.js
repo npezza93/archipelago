@@ -8,7 +8,6 @@ const ConfigFile = require('../configuration/config-file')
 const ProfileManager = require('../configuration/profile-manager')
 const AppMenu = require('./app-menu')
 
-const about = null
 const windows = []
 const subscriptions = new CompositeDisposable()
 const profileManager = new ProfileManager(new ConfigFile())
@@ -21,7 +20,7 @@ profileManager.validate()
 
 const resetApplicationMenu = () =>
   Menu.setApplicationMenu(
-    Menu.buildFromTemplate(AppMenu.menu(about, settings, createWindow, profileManager))
+    Menu.buildFromTemplate(AppMenu.menu(createWindow, profileManager))
   )
 
 const createWindow = () => {
