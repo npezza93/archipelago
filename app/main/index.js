@@ -40,20 +40,22 @@ const createWindow = () => {
 
   win.focus()
 
-  return windows.push(win)
+  windows.push(win)
 }
 
 app.on('ready', () => {
   createWindow()
   resetApplicationMenu()
   if (process.platform === 'darwin') {
-    return app.dock.setMenu(Menu.buildFromTemplate(AppMenu.dock(createWindow)))
+    app.dock.setMenu(Menu.buildFromTemplate([
+      {label: 'New Window', click: createWindow}
+    ]))
   }
 })
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
-    return app.quit()
+    app.quit()
   }
 })
 
@@ -64,12 +66,11 @@ app.on('activate', () => {
   windows.forEach(win => {
     if (!win.isDestroyed()) {
       windowCount += 1
-      return windowCount
     }
   })
 
   if (windowCount === 0) {
-    return createWindow()
+    createWindow()
   }
 })
 
