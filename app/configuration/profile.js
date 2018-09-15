@@ -32,6 +32,7 @@ class Profile {
 
   set name(newName) {
     this.configFile.set(`profiles.${this.id}.name`, newName)
+    this.attributes.name = newName
 
     return newName
   }
