@@ -16,7 +16,7 @@ const extraDarwinAboutItems = () => {
       {type: 'separator'}
     ]
   } else {
-    items = null
+    items = []
   }
 
   return items
@@ -46,7 +46,7 @@ const aboutMenu = {
     {type: 'separator'},
     ...extraDarwinAboutItems(),
     {role: 'quit'}
-  ].filter(item => item !== null)
+  ]
 }
 
 const shellMenu = (createWindow, profileManager) => {

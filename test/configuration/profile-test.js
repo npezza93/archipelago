@@ -57,4 +57,14 @@ describe('Profile', () => {
     assert.equal(Object.keys(this.configFile.get('profiles')).length, 1)
     assert.isUndefined(this.configFile.get('profiles.2'))
   })
+
+  it('handles getting values that are not for the given platform', () => {
+    const oldPlatform = process.platform
+    Object.defineProperty(process, 'platform', {value: 'linux'})
+    this.configFile.set('profiles', this.profiles)
+
+    const profile = new Profile(this.profiles[2], this.configFile)
+    assert.isUndefined(profile.get('vibrancy'))
+    Object.defineProperty(process, 'platform', {value: oldPlatform})
+  })
 })

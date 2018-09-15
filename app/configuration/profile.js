@@ -45,18 +45,23 @@ class Profile {
 
   get(keyPath, options) {
     const schema = this.schema.getSchema(keyPath)
+    let value
 
-    let configKeyPath = `profiles.${this.id}.${keyPath}`
-    if (schema.platformSpecific) {
-      configKeyPath += `.${process.platform}`
+    if (schema) {
+      let configKeyPath = `profiles.${this.id}.${keyPath}`
+      if (schema.platformSpecific) {
+        configKeyPath += `.${process.platform}`
+      }
+
+      value = this.configFile.get(
+        configKeyPath, this.schema.defaultValue(keyPath)
+      )
+
+      const coercer = new Coercer(keyPath, value, schema, options)
+      value = coercer.coerce()
     }
 
-    const value = this.configFile.get(
-      configKeyPath, this.schema.defaultValue(keyPath)
-    )
-
-    const coercer = new Coercer(keyPath, value, schema, options)
-    return coercer.coerce()
+    return value
   }
 
   set(keyPath, value) {
