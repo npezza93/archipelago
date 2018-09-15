@@ -4,7 +4,7 @@ const path = require('path')
 const {Application} = require('spectron')
 const {assert} = require('chai')
 
-const ConfigFile = require('../app/configuration/config-file')
+const ConfigFile = require('../../app/configuration/config-file')
 
 let electron = './node_modules/electron/dist/'
 
@@ -14,7 +14,7 @@ if (process.platform === 'darwin') {
   electron += 'electron'
 }
 
-describe('Application launch', function () {
+describe('Settings launch', function () {
   this.timeout(10000)
 
   beforeEach(() => {
@@ -22,7 +22,7 @@ describe('Application launch', function () {
     this.app = new Application({
       path: electron,
 
-      args: [path.join(__dirname, '../app/main/index.js')]
+      args: [path.join(__dirname, '../fixtures/settings.js')]
     })
     return this.app.start()
   })
@@ -33,13 +33,13 @@ describe('Application launch', function () {
     }
   })
 
-  it('renders with no main process errors', () => {
+  it('shows about window', () => {
     return this.app.client.getWindowCount().then(count => {
       assert.equal(count, 1)
     })
   })
 
-  it('renders with no renderer process errors', () => {
+  it('renders with no errors', () => {
     return this.app.client.getRenderProcessLogs().then(logs => {
       const filteredLogs = logs.filter(log => log.level === 'SEVERE')
 

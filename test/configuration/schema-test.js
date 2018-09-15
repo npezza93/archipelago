@@ -1,7 +1,7 @@
 /* global describe, it, before, after */
 
 const {assert} = require('chai')
-const Schema = require('../app/configuration/schema')
+const Schema = require('../../app/configuration/schema')
 
 const oldPlatform = process.platform
 

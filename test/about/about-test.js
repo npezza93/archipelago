@@ -4,7 +4,7 @@ const path = require('path')
 const {Application} = require('spectron')
 const {assert} = require('chai')
 
-const ConfigFile = require('../app/configuration/config-file')
+const ConfigFile = require('../../app/configuration/config-file')
 
 let electron = './node_modules/electron/dist/'
 
@@ -22,7 +22,7 @@ describe('About launch', function () {
     this.app = new Application({
       path: electron,
 
-      args: [path.join(__dirname, './fixtures/about.js')]
+      args: [path.join(__dirname, '../fixtures/about.js')]
     })
     return this.app.start()
   })

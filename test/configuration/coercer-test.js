@@ -1,7 +1,7 @@
 /* global describe, it */
 
 const {assert} = require('chai')
-const Coercer = require('../app/configuration/coercer')
+const Coercer = require('../../app/configuration/coercer')
 
 describe('Coercer', () => {
   describe('float', () => {

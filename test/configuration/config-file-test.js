@@ -2,9 +2,9 @@
 
 const {assert} = require('chai')
 
-const ConfigFile = require('../app/configuration/config-file')
+const ConfigFile = require('../../app/configuration/config-file')
 
-const pkg = require('../package.json')
+const pkg = require('../../package.json')
 
 describe('ConfigFile', () => {
   beforeEach(() => {
