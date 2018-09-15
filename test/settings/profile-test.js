@@ -30,45 +30,12 @@ describe('Profile Component', () => {
           ProfileComponent, {
             profile: this.profile,
             profileManager: this.profileManager,
-            activeProfile: this.profile,
-            removeProfile() {
-              this.profile.destroy()
-
-              this.profileManager.validate()
-            },
-            setActiveProfile(activeProfile) {
-              this.profileManager.activeProfileId = activeProfile.id
-            }
+            activeProfile: this.profile
           }
         )
       )
 
       assert(component.find('.profile-remove').exists())
-    })
-
-    it('removes the profile', () => {
-      const component = mount(
-        React.createElement(
-          ProfileComponent, {
-            profile: this.profile,
-            profileManager: this.profileManager,
-            activeProfile: this.profile,
-            removeProfile() {
-              this.profile.destroy()
-
-              this.profileManager.validate()
-            },
-            setActiveProfile(activeProfile) {
-              this.profileManager.activeProfileId = activeProfile.id
-            }
-          }
-        )
-      )
-
-      assert.equal(this.conf.get('activeProfileId'), 1)
-      component.find('.profile-remove').simulate('click')
-      assert.notEqual(this.conf.get('activeProfileId'), 1)
-      assert.isUndefined(this.conf.get('profiles.1'))
     })
   })
 
@@ -87,15 +54,7 @@ describe('Profile Component', () => {
           ProfileComponent, {
             profile: this.profile,
             profileManager: this.profileManager,
-            activeProfile: this.profile,
-            removeProfile() {
-              this.profile.destroy()
-
-              this.profileManager.validate()
-            },
-            setActiveProfile(activeProfile) {
-              this.profileManager.activeProfileId = activeProfile.id
-            }
+            activeProfile: this.profile
           }
         )
       )
@@ -109,15 +68,7 @@ describe('Profile Component', () => {
           ProfileComponent, {
             profile: this.profile,
             profileManager: this.profileManager,
-            activeProfile: this.profile,
-            removeProfile() {
-              this.profile.destroy()
-
-              this.profileManager.validate()
-            },
-            setActiveProfile(activeProfile) {
-              this.profileManager.activeProfileId = activeProfile.id
-            }
+            activeProfile: this.profile
           }
         )
       )
@@ -135,15 +86,7 @@ describe('Profile Component', () => {
           ProfileComponent, {
             profile: this.profile,
             profileManager: this.profileManager,
-            activeProfile: this.profile,
-            removeProfile() {
-              this.profile.destroy()
-
-              this.profileManager.validate()
-            },
-            setActiveProfile(activeProfile) {
-              this.profileManager.activeProfileId = activeProfile.id
-            }
+            activeProfile: this.profile
           }
         )
       )
