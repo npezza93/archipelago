@@ -5,11 +5,7 @@ module.exports =
 class ProfileManager {
   constructor(configFile) {
     this.configFile = configFile
-    this._emitter = new Emitter()
-  }
-
-  get emitter() {
-    return this._emitter
+    this.emitter = new Emitter()
   }
 
   set activeProfileId(id) {

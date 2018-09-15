@@ -21,9 +21,9 @@ class Profile extends React.Component {
   render() {
     return React.createElement(
       'archipelago-profile', {
-        class: this.props.activeProfileId === this.props.profileId ? 'active' : undefined,
+        class: this.props.activeProfile.id === this.props.profile.id ? 'active' : undefined,
         onDoubleClick: () => this.setState({editMode: true}),
-        onClick: () => this.props.setActiveProfileId(this.props.profileId)
+        onClick: () => this.props.setActiveProfile(this.props.profile)
       },
       this.textOrInput(),
       this.removeProfile()
@@ -70,7 +70,7 @@ class Profile extends React.Component {
         className: 'profile-remove',
         onClick: e => {
           e.stopPropagation()
-          this.props.removeProfile(this.props.profileId)
+          this.props.removeProfile(this.props.profile)
         }
       },
       '\u00D7'

@@ -8,7 +8,7 @@ class Profiles extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      activeProfileId: this.props.profileManager.activeProfileId,
+      activeProfile: this.props.profileManager.activeProfile(),
       profiles: this.props.profileManager.all()
     }
 
@@ -44,9 +44,9 @@ class Profiles extends React.Component {
             profile,
             profileManager: this.props.profileManager,
             key: profile.id,
-            activeProfileId: this.state.activeProfileId,
+            activeProfile: this.state.activeProfile,
             removeProfile: this.removeProfile.bind(this),
-            setActiveProfileId: this.setActiveProfileId.bind(this)
+            setActiveProfile: this.setActiveProfile.bind(this)
           }
         )
       )
@@ -61,7 +61,7 @@ class Profiles extends React.Component {
           const profile = this.props.profileManager.create()
 
           this.setState({
-            activeProfileId: profile.id,
+            activeProfile: profile,
             profiles: this.props.profileManager.all()
           })
         }
@@ -70,23 +70,22 @@ class Profiles extends React.Component {
     )
   }
 
-  removeProfile(id) {
-    const profile = this.props.profileManager.find(id)
+  removeProfile(profile) {
     profile.destroy()
 
     this.props.profileManager.validate()
   }
 
-  setActiveProfileId(activeProfileId) {
-    this.setState({activeProfileId})
+  setActiveProfile(activeProfile) {
+    this.setState({activeProfile})
 
-    this.props.profileManager.activeProfileId = activeProfileId
+    this.props.profileManager.activeProfileId = activeProfile.id
   }
 
   bindListener() {
     this.subscriptions.add(
-      this.props.profileManager.onActiveProfileChange(activeProfileId => {
-        this.setState({activeProfileId})
+      this.props.profileManager.onActiveProfileChange(activeProfile => {
+        this.setState({activeProfile})
       })
     )
 
