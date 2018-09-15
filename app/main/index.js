@@ -6,7 +6,7 @@ const {CompositeDisposable} = require('event-kit')
 
 const ConfigFile = require('../configuration/config-file')
 const ProfileManager = require('../configuration/profile-manager')
-const AppMenu = require('./app-menu')
+const {template} = require('./app-menu')
 
 const windows = []
 const subscriptions = new CompositeDisposable()
@@ -20,7 +20,7 @@ profileManager.validate()
 
 const resetApplicationMenu = () =>
   Menu.setApplicationMenu(
-    Menu.buildFromTemplate(AppMenu.menu(createWindow, profileManager))
+    Menu.buildFromTemplate(template(createWindow, profileManager))
   )
 
 const createWindow = () => {

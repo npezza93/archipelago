@@ -25,6 +25,9 @@ class App extends React.Component {
         this.addTab()
       }
     })
+    ipcRenderer.on('close-current-tab', () => {
+      this.removeTab(this.state.currentTabId)
+    })
   }
 
   render() {
