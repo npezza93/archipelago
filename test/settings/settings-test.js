@@ -33,7 +33,7 @@ describe('Settings launch', function () {
     }
   })
 
-  it('shows about window', () => {
+  it('shows settings window', () => {
     return this.app.client.getWindowCount().then(count => {
       assert.equal(count, 1)
     })

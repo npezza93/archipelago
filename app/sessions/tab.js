@@ -98,9 +98,9 @@ class Tab {
   }
 
   newBranch(session, orientation) {
-    const branch = new Branch(session.branch, orientation)
-    branch.left = session
-    branch.right = new Session(branch)
+    const branch = new Branch(
+      session.branch, orientation, session, new Session(branch)
+    )
 
     if (session.branch && session.branch.left.id === session.id) {
       session.branch.left = branch
