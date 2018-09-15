@@ -6,7 +6,7 @@
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
     "start": "./node_modules/.bin/electron .",
-    "test": "./node_modules/.bin/electron-mocha --recursive",
+    "test": "./node_modules/.bin/electron-mocha --require test/setup.js --recursive",
     "lint": "./node_modules/.bin/xo",
     "pack": "electron-builder --dir",
     "dist": "electron-builder --publish onTagOrDraft"
@@ -64,10 +64,16 @@
   "devDependencies": {
     "chai": "^4.1.2",
     "coffeelint": "^2.0.7",
+    "conf": "^2.0.0",
     "electron": "3.0.0-beta.12",
     "electron-builder": "^20.19.1",
     "electron-mocha": "^6.0.4",
+    "enzyme": "^3.6.0",
+    "enzyme-adapter-react-16": "^1.5.0",
+    "jsdom": "^12.0.0",
+    "jsdom-global": "^3.0.2",
     "mocha": "^5.2.0",
+    "raf": "^3.4.0",
     "spectron": "^4.0.0",
     "xo": "^0.23.0"
   },
