@@ -704,5 +704,80 @@
         }
       ]
     }
+  },
+  "visor": {
+    "type": "object",
+    "scope": "visor",
+    "properties": {
+      "vibrancy": {
+        "type": "string",
+        "defaultValue": null,
+        "enabledOn": [
+          "darwin"
+        ],
+        "settings": {
+          "title": "visor",
+          "order": 1
+        },
+        "enum": [
+          {
+            "value": null,
+            "label": "none"
+          },
+          {
+            "value": "light",
+            "label": "Light"
+          },
+          {
+            "value": "medium-light",
+            "label": "Medium Light"
+          },
+          {
+            "value": "dark",
+            "label": "Dark"
+          },
+          {
+            "value": "ultra-dark",
+            "label": "Ultra Dark"
+          }
+        ]
+      },
+      "allowTransparency": {
+        "type": "boolean",
+        "defaultValue": false,
+        "scope": "visor",
+        "enabledOn": [
+          "darwin"
+        ],
+        "settings": {
+          "title": "visor",
+          "order": 2
+        }
+      },
+      "padding": {
+        "type": "string",
+        "defaultValue": "5px 0 10px 15px",
+        "settings": {
+          "title": "visor",
+          "order": 3
+        }
+      },
+      "windowBackground": {
+        "type": "color",
+        "defaultValue": "#000000",
+        "settings": {
+          "title": "visor",
+          "order": 4
+        }
+      },
+      "background": {
+        "type": "color",
+        "defaultValue": "#000000",
+        "settings": {
+          "title": "visor",
+          "order": 5
+        }
+      }
+    }
   }
 }

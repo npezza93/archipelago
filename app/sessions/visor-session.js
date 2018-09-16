@@ -84,14 +84,6 @@ class Session {
     }, {})
   }
 
-  visorXtermSettings() {
-    return {
-      ...this.defaultXtermSettings(),
-      allowTransparency: this.profileManager.get('visor.allowTransparency'),
-      theme: {...this.profileManager.get('theme'), background: this.profileManager.get('visor.background')}
-    }
-  }
-
   resetTheme() {
     this.xterm.setOption('theme', this.profileManager.get('theme'))
   }

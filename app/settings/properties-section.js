@@ -14,7 +14,7 @@ class PropertiesSection extends Component {
         tag: 'archipelago-properties-section',
         threshold: [0.1, 0.5],
         onChange: inView => {
-          this.props.onChange(inView, this.props.scope)
+          this.props.onObserved(inView, this.props.scope)
         }
       },
       createElement(

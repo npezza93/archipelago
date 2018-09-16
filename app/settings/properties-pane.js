@@ -32,14 +32,14 @@ class PropertiesPane extends Component {
             scope,
             key: scope,
             properties: Object.assign(...this.scopes[scope]),
-            onChange: this.onChange.bind(this)
+            onObserved: this.onObserved.bind(this)
           }
         )
       })
     )
   }
 
-  onChange(inView, scope) {
+  onObserved(inView, scope) {
     if (inView) {
       const enteringIndex = this.headings.indexOf(scope)
       const headerState = {}
