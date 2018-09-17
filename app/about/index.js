@@ -1,6 +1,6 @@
-/* global document */
+/* global document, window */
 
-const {remote} = require('electron')
+const {remote, ipcRenderer} = require('electron')
 
 if (process.platform !== 'darwin') {
   const {createElement} = require('react')
@@ -13,3 +13,7 @@ if (process.platform !== 'darwin') {
 }
 
 document.querySelector('#version').innerText = `v${remote.app.getVersion()}`
+
+ipcRenderer.on('close-current-tab', () => {
+  window.close()
+})

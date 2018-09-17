@@ -1,5 +1,6 @@
-/* global document */
+/* global document, window */
 
+const {ipcRenderer} = require('electron')
 const React = require('react')
 const ReactDOM = require('react-dom')
 
@@ -32,4 +33,8 @@ document.querySelector('#hamburger').addEventListener('click', () => {
 backdrop.addEventListener('click', () => {
   profilesContainer.style.left = '-275px'
   return backdrop.classList.remove('active')
+})
+
+ipcRenderer.on('close-current-tab', () => {
+  window.close()
 })
