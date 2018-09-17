@@ -1,5 +1,4 @@
 const {Component, createElement} = require('react')
-const {TextField} = require('rmwc')
 const {ChromePicker} = require('react-color')
 
 module.exports =
@@ -35,13 +34,19 @@ class ColorField extends Component {
 
   text() {
     return createElement(
-      TextField, {
-        datakey: this.props.datakey,
-        label: this.props.label,
-        value: this.props.value,
-        onClick: () => this.setState({active: true}),
-        onChange: () => {}
-      },
+      'input-field',
+      {},
+      createElement(
+        'input', {
+          type: 'text',
+          datakey: this.props.datakey,
+          value: this.props.value,
+          onClick: () => this.setState({active: true}),
+          onChange: () => {}
+        }
+      ),
+      createElement('label', {}, this.props.label),
+      createElement('div', {className: 'input-border'}),
       this.picker()
     )
   }

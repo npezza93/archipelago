@@ -1,5 +1,145 @@
 /* scrollbar */
 
+select-field select {
+  width: 100%;
+  transition: transform 250ms ease-in-out;
+  font-size: 24px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !important;
+  font-weight: 300;
+  z-index: 1;
+  padding: 20px 26px 4px 0;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.75rem;
+  letter-spacing: .00937em;
+  text-decoration: inherit;
+  text-transform: inherit;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid rgba(0,0,0,0.4);
+  border-radius: 0;
+  outline: none;
+  background-color: transparent;
+  white-space: nowrap;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+select-field {
+  position: relative;
+  margin-bottom: 15px;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='10' height='5' viewBox='7 10 10 5' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%230' fill-rule='evenodd' opacity='.54' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  box-sizing: border-box;
+  height: 52px;
+  background-repeat: no-repeat;
+  background-position: right 8px bottom 12px;
+}
+select-field label {
+  color: rgba(0,0,0,0.4);
+  font-size: 15px;
+  position: absolute;
+  left: 0;
+  bottom: 34px;
+  transition: all 250ms ease-in-out;
+  z-index: -1;
+}
+
+switch-field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 24px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !important;
+  font-weight: 300;
+  position: relative;
+  margin-bottom: 15px;
+}
+switch-field input {display:none;}
+switch-field label {
+  display: inline-block;
+  width: 56px;
+  height: 28px;
+  position: relative;
+}
+switch-field .slider {
+  cursor: pointer;
+  top: 12px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-bottom: 2px solid rgba(0,0,0,0.4);
+  transition: .4s;
+  border-radius: 30px;
+  height: 1px;
+  width: 56px;
+  position: absolute;
+}
+
+switch-field .slider:before {
+  position: absolute;
+  content: "";
+  height: 24px;
+  width: 24px;
+  left: 0px;
+  top: -12px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 30px;
+  border: 2px solid rgb(153, 153, 153);
+}
+
+switch-field input:checked + .slider:before {
+  transform: translateX(28px);
+  background: rgb(153, 153, 153);
+}
+
+
+input-field {
+  position: relative;
+  display: block;
+  margin-bottom: 15px;
+}
+input-field label {
+  color: rgba(0,0,0,0.4);
+  font-size: 15px;
+  position: absolute;
+  left: 0;
+  bottom: 34px;
+  transition: all 250ms ease-in-out;
+  z-index: -1;
+}
+input[type='text'] {
+  width: 100%;
+  margin-top: 5px;
+  border: none;
+  border-bottom: 1px solid rgba(0,0,0,0.4);
+  padding: 0px;
+  padding-bottom: 5px;
+  outline: none;
+  transition: transform 250ms ease-in-out;
+  font-size: 24px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !important;
+  font-weight: 300;
+  z-index: 1;
+  background: transparent;
+}
+input-field input[type='text'][value=''] + label {
+  bottom: 5px;
+  font-size: 24px;
+  font-weight: 300;
+}
+.input-border:after {
+    display: block;
+    content: '';
+    border-bottom: solid 1px rgba(0,0,0,0.4);
+    transform: scaleX(0);
+    transition: transform 250ms ease-in-out;
+    transform-origin: 0% 50%;
+    z-index: 1;
+  }
+input:focus + label + .input-border:after {
+  transform: scaleX(1);
+}
+
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -12,11 +152,6 @@
 ::-webkit-scrollbar,
 ::-webkit-scrollbar-thumb {
   border-radius: 5px;
-}
-
-:root {
-  --mdc-theme-primary: #000 !important;
-  --mdc-theme-secondary: #000 !important;
 }
 
 ::-webkit-scrollbar-thumb:active {
@@ -34,11 +169,6 @@ body {
   -webkit-font-feature-settings: "liga" off, "calt" off;
   -webkit-font-smoothing: subpixel-antialiased;
   margin: 0;
-}
-
-input,
-.mdc-form-field {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !important;
 }
 
 #titlebar {
@@ -257,31 +387,17 @@ archipelago-properties-pane archipelago-properties-section {
   margin: 130px 75px 0 75px;
   display: flex;
   align-items: center;
+  justify-content: center;
   min-height: calc(100% - 130px);
 }
 
 archipelago-properties-pane archipelago-properties-section archipelago-properties-section-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   grid-column-gap: 100px;
   grid-row-gap: 20px;
   width: 100%;
-}
-
-archipelago-properties-pane archipelago-properties-section .seperator {
-  grid-column: span 2;
-  height: 48px;
-}
-
-archipelago-properties-pane archipelago-properties-section .mdc-form-field {
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: center;
-}
-
-archipelago-properties-pane archipelago-properties-section .mdc-text-field {
-  margin-top: 8px !important;
-  bottom: 0 !important;
+  max-width: 350px;
 }
 
 archipelago-properties-pane archipelago-properties-section .vibrancy-option {
@@ -292,20 +408,19 @@ archipelago-properties-pane archipelago-properties-section .vibrancy-option {
   width: 100%;
 }
 
-archipelago-properties-pane .color-container .mdc-text-field {
-  margin-top: 8px !important;
-  bottom: 0 !important;
-  width: 100% !important;
-}
-
-archipelago-properties-pane .color-container .mdc-text-field .color-picker {
+archipelago-properties-pane .color-picker {
   position: absolute;
-  top: 48px;
+  top: 39px;
   width: 100%;
 }
 
-archipelago-properties-pane .color-container .mdc-text-field .chrome-picker {
+archipelago-properties-pane .color-picker .chrome-picker {
   width: 100% !important;
+  border-radius: 0px !important;
+}
+
+archipelago-properties-pane .color-picker .chrome-picker div:first-child {
+  border-radius: 0px !important;
 }
 
 /* Keybindings */
@@ -318,6 +433,7 @@ archipelago-properties-pane .array-element-container {
 archipelago-properties-pane .array-element-container .remove-array-element {
   position: absolute;
   right: 0;
+  top: -10px;
   cursor: pointer;
   opacity: 0;
   visibility: hidden;
@@ -337,10 +453,6 @@ archipelago-properties-pane .array-element-container div:nth-child(2) {
   margin-left: 5px;
 }
 
-archipelago-properties-pane .array-element-container .mdc-text-field {
-  width: 100%;
-}
-
 archipelago-properties-pane .create-array-element {
   height: 55px;
   display: flex;
@@ -352,7 +464,6 @@ archipelago-properties-pane .create-array-element {
   transition: all .2s ease-in-out;
   cursor: pointer;
   color: #889199;
-  grid-column: span 2;
 }
 
 archipelago-properties-pane .create-array-element:hover {
@@ -429,22 +540,6 @@ archipelago-properties-pane .create-array-element:hover {
   #backdrop {
     display: none !important;
   }
-}
-
-@media (max-width: 910px) {
-
-  archipelago-properties-section .mdc-text-field,
-  archipelago-properties-section .mdc-select,
-  archipelago-properties-section .mdc-form-field,
-  archipelago-properties-pane .color-container,
-  archipelago-properties-pane .array-element-container {
-    grid-column: span 2;
-  }
-}
-
-archipelago-properties-section .mdc-select .mdc-select__label {
-  -webkit-transform: translateY(-100%) scale(.75);
-  transform: translateY(-100%) scale(.75);
 }
 
 /* Traffic Lights */

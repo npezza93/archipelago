@@ -8,7 +8,7 @@ module.exports = {
   display() {
     if ((settingsWindow === null) || settingsWindow.isDestroyed()) {
       settingsWindow = new BrowserWindow({
-        width: 1100,
+        width: 600,
         height: 600,
         show: true,
         titleBarStyle: 'hiddenInset',

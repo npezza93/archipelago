@@ -68,6 +68,10 @@ class ProfileManager {
     return this.activeProfile().get(keyPath, options)
   }
 
+  set(keyPath, value) {
+    return this.activeProfile().set(keyPath, value)
+  }
+
   onDidChange(keyPath, callback) {
     let oldValue = this.get(keyPath)
 

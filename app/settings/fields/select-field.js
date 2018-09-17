@@ -1,17 +1,24 @@
 const {Component, createElement} = require('react')
-const {Select} = require('rmwc')
 
 module.exports =
 class SelectField extends Component {
   render() {
     return createElement(
-      Select, {
-        datakey: this.props.datakey,
-        label: this.props.label,
-        value: this.props.value,
-        options: this.props.options,
-        onChange: e => this.props.onChange.call(this, e.target.value)
-      }
+      'select-field',
+      {},
+      createElement(
+        'select',
+        {onChange: e => this.props.onChange.call(this, e.target.value),
+          value: this.props.value},
+        this.props.options.map(option => {
+          return createElement('option', {key: option.value, value: option.value}, option.label)
+        })
+      ),
+      createElement(
+        'label',
+        {},
+        this.props.label
+      )
     )
   }
 }
