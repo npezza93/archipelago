@@ -1,5 +1,5 @@
 const {Component, createElement} = require('react')
-const Waypoint = require('react-waypoint')
+
 const Schema = require('../configuration/schema')
 const Header = require('./header')
 const PropertiesSection = require('./properties-section')
@@ -25,45 +25,41 @@ class PropertiesPane extends Component {
       'archipelago-properties-pane',
       {},
       createElement(Header, {headings: this.state.headings}),
-      this.headings.map(heading => this.withWaypoint(heading))
+      this.headings.map(scope => {
+        return createElement(
+          PropertiesSection,
+          {
+            scope,
+            key: scope,
+            properties: Object.assign(...this.scopes[scope]),
+            onChange: this.onChange.bind(this)
+          }
+        )
+      })
     )
   }
 
-  withWaypoint(scope) {
-    return createElement(
-      Waypoint, {
-        key: scope,
-        topOffset: '20px',
-        bottomOffset: '20px',
-        onPositionChange: waypoint => {
-          if (waypoint.currentPosition !== 'inside') {
-            return
+  onChange(inView, scope) {
+    if (inView) {
+      const enteringIndex = this.headings.indexOf(scope)
+      const headerState = {}
+      for (let index = 0; index < this.headings.length; index++) {
+        const heading = this.headings[index]
+        if (index === enteringIndex) {
+          headerState[heading] = 0
+        } else {
+          let position = index - enteringIndex
+          if (position > 1) {
+            position = 1
           }
-
-          const enteringIndex = this.headings.indexOf(scope)
-          const headerState = {}
-          for (let index = 0; index < this.headings.length; index++) {
-            const heading = this.headings[index]
-            if (index === enteringIndex) {
-              headerState[heading] = 0
-            } else {
-              let position = index - enteringIndex
-              if (position > 1) {
-                position = 1
-              }
-              if (position < -2) {
-                position = -2
-              }
-              headerState[heading] = position
-            }
+          if (position < -2) {
+            position = -2
           }
-
-          return this.setState({headings: headerState})
+          headerState[heading] = position
         }
-      },
-      createElement(
-        PropertiesSection, {properties: Object.assign(...this.scopes[scope])}
-      )
-    )
+      }
+
+      this.setState({headings: headerState})
+    }
   }
 }

@@ -1,14 +1,22 @@
 /* eslint guard-for-in: "off" */
 
 const {Component, createElement} = require('react')
+const Observer = require('react-intersection-observer')
+
 const Property = require('./property')
 
 module.exports =
 class PropertiesSection extends Component {
   render() {
     return createElement(
-      'archipelago-properties-section',
-      {ref: this.props.innerRef},
+      Observer,
+      {
+        tag: 'archipelago-properties-section',
+        threshold: [0.1, 0.5],
+        onChange: inView => {
+          this.props.onChange(inView, this.props.scope)
+        }
+      },
       createElement(
         'archipelago-properties-section-container',
         null,
@@ -23,9 +31,5 @@ class PropertiesSection extends Component {
 
       return createElement(Property, {key: propertyName, property: propertyName, schema})
     })
-  }
-
-  seperator(groupNumber) {
-    return createElement('div', {key: groupNumber, className: 'seperator'})
   }
 }
