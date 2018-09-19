@@ -35,13 +35,14 @@ class Session {
     const shell =
       this.profileManager.get('shell') ||
       process.env[os.platform() === 'win32' ? 'COMSPEC' : 'SHELL']
+    const lang = (remote && remote.app && remote.app.getLocale()) || ''
 
     this._pty = spawn(
       shell, this.profileManager.get('shellArgs').split(','), {
         name: 'xterm-256color',
         cwd: process.env.HOME,
         env: {
-          LANG: remote.app.getLocale().replace('-', '_') + '.UTF-8',
+          LANG: lang + '.UTF-8',
           TERM: 'xterm-256color',
           COLORTERM: 'truecolor',
           ...process.env
