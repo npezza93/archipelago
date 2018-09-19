@@ -1,4 +1,4 @@
-/* global window, document */
+/* global window, requestAnimationFrame, requestIdleCallback, document */
 
 const {remote} = require('electron')
 const os = require('os')
@@ -86,6 +86,13 @@ class Session {
     this.xterm.setOption('theme', this.profileManager.get('theme'))
   }
 
+  resetBlink() {
+    if (this.profileManager.get('cursorBlink')) {
+      this.xterm.setOption('cursorBlink', false)
+      this.xterm.setOption('cursorBlink', true)
+    }
+  }
+
   kill() {
     window.removeEventListener('resize', this.fit.bind(this))
 
@@ -162,11 +169,8 @@ class Session {
 
     this.xterm.on('focus', () => {
       this.fit()
-      window.requestAnimationFrame(() => {
-        const blink = this.profileManager.get('cursorBlink')
-
-        this.xterm.setOption('cursorBlink', !blink)
-        this.xterm.setOption('cursorBlink', blink)
+      requestAnimationFrame(() => {
+        requestIdleCallback(() => this.resetBlink())
       })
       this.emitter.emit('did-focus')
     })
