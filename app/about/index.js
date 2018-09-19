@@ -14,6 +14,4 @@ if (process.platform !== 'darwin') {
 
 document.querySelector('#version').innerText = `v${remote.app.getVersion()}`
 
-ipcRenderer.on('close-current-tab', () => {
-  window.close()
-})
+ipcRenderer.on('close-current-tab', () => window.close())

@@ -368,7 +368,7 @@ archipelago-tab.is-unread span {
   width: 50%;
 }
 .mdc-linear-progress__buffer {
-  background: var(--tab-color);  
+  background: var(--tab-color);
 }
 .mdc-linear-progress.mdc-linear-progress--indeterminate .mdc-linear-progress__bar-inner {
   background: var(--background-color);
