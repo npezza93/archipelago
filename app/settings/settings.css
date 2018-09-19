@@ -191,7 +191,7 @@ body {
   background-image: linear-gradient(to right, #F7F7FA, #ECEEF2);
   transition: left .5s ease-in-out;
   left: 0;
-  position: absolute;
+  position: fixed;
   z-index: 10;
 }
 
@@ -500,6 +500,7 @@ archipelago-properties-pane .create-array-element:hover {
   visibility: hidden;
   opacity: 0;
   transition: opacity .5s ease-in-out, visibility .5s ease-in-out;
+  width: 100vw;
 }
 
 #backdrop.active {
