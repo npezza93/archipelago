@@ -5,20 +5,19 @@ const Adapter = require('enzyme-adapter-react-16')
 
 configure({adapter: new Adapter()})
 
-const Conf = require('conf')
 const React = require('react')
 const {mount} = require('enzyme')
 const {assert} = require('chai')
 
+const {pref} = require('../../app/configuration/config-file')
 const ProfilesComponent = require('../../app/settings/profiles')
 const ProfileManager = require('../../app/configuration/profile-manager')
 
 describe('Profiles Component', () => {
   describe('generic actions', () => {
     beforeEach(() => {
-      this.conf = new Conf()
-      this.conf.store = {activeProfileId: 1, profiles: {1: {id: 1}, 2: {id: 2}}}
-      this.profileManager = new ProfileManager(this.conf)
+      pref.store = {activeProfileId: 1, profiles: [{id: 1}, {id: 2}]}
+      this.profileManager = new ProfileManager(pref)
       this.component = mount(
         React.createElement(
           ProfilesComponent, {profileManager: this.profileManager}
@@ -48,9 +47,8 @@ describe('Profiles Component', () => {
 
   describe('more than 1 profile', () => {
     beforeEach(() => {
-      this.conf = new Conf()
-      this.conf.store = {activeProfileId: 1, profiles: {1: {id: 1}, 2: {id: 2}}}
-      this.profileManager = new ProfileManager(this.conf)
+      pref.store = {activeProfileId: 1, profiles: [{id: 1}, {id: 2}]}
+      this.profileManager = new ProfileManager(pref)
       this.component = mount(
         React.createElement(
           ProfilesComponent, {profileManager: this.profileManager}

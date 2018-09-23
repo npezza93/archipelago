@@ -2,18 +2,8 @@
 
 const {assert} = require('chai')
 const Tab = require('../../app/sessions/tab')
-const ProfileManager = require('../../app/configuration/profile-manager')
-const ConfigFile = require('../../app/configuration/config-file')
 
 describe('Tab', () => {
-  beforeEach(() => {
-    const configFile = new ConfigFile()
-    configFile.clear()
-
-    const profileManager = new ProfileManager(configFile)
-    profileManager.validate()
-  })
-
   describe('add', () => {
     it('adds a new session by branching when root is a session', () => {
       const tab = new Tab()

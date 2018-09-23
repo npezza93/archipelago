@@ -18,7 +18,7 @@ describe('Application launch', function () {
   beforeEach(() => {
     this.app = new Application({
       path: electron,
-
+      verbose: true,
       args: [path.join(__dirname, '../../app/main/index.js')]
     })
     return this.app.start()
