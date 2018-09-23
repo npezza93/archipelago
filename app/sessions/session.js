@@ -6,10 +6,10 @@ const {spawn} = require('node-pty')
 const {Emitter, CompositeDisposable, Disposable} = require('event-kit')
 const {Terminal} = require('xterm')
 const KeymapManager = require('atom-keymap')
+const unescape = require('unescape-js')
 
-const Schema = require('../configuration/schema')
 const ProfileManager = require('../configuration/profile-manager')
-const ConfigFile = require('../configuration/config-file')
+const {pref, xtermSettings} = require('../configuration/config-file')
 
 Terminal.applyAddon(require('xterm/lib/addons/fit/fit'))
 
@@ -20,8 +20,7 @@ class Session {
     this.id = Math.random()
     this.emitter = new Emitter()
     this.subscriptions = new CompositeDisposable()
-    this.schema = new Schema()
-    this.profileManager = new ProfileManager(new ConfigFile())
+    this.profileManager = new ProfileManager(pref)
     this.title = ''
 
     this.bindDataListeners()
@@ -57,12 +56,12 @@ class Session {
     if (this._xterm) {
       return this._xterm
     }
-    const xtermSettings = this.schema.xtermSettings().reduce((settings, property) => {
+    const settings = xtermSettings.reduce((settings, property) => {
       settings[property] = this.profileManager.get(property)
       return settings
     }, {})
 
-    this._xterm = new Terminal(xtermSettings)
+    this._xterm = new Terminal(settings)
 
     return this._xterm
   }
@@ -75,7 +74,7 @@ class Session {
     this._keymaps = new KeymapManager()
     this._keymaps.mappings =
       this.profileManager.get('keybindings').reduce((result, item) => {
-        result[item.keystroke] = item.command
+        result[item.keystroke] = unescape(item.command)
         return result
       }, {})
 
@@ -113,7 +112,6 @@ class Session {
 
   keybindingHandler(e) {
     let caught = false
-
     const mapping = this.keymaps.mappings[this.keymaps.keystrokeForKeyboardEvent(e)]
 
     if (mapping) {
@@ -195,7 +193,7 @@ class Session {
       this.emitter.emit('did-exit')
     })
 
-    this.schema.xtermSettings().forEach(field => {
+    xtermSettings.forEach(field => {
       this.subscriptions.add(
         this.profileManager.onDidChange(field, newValue => {
           this.xterm.setOption(field, newValue)

@@ -136,9 +136,18 @@ ajv@^5.1.0, ajv@^5.3.0:
     fast-json-stable-stringify "^2.0.0"
     json-schema-traverse "^0.3.0"
 
-ajv@^6.0.1, ajv@^6.5.2, ajv@^6.5.3:
+ajv@^6.0.1, ajv@^6.5.2:
   version "6.5.3"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.5.3.tgz#71a569d189ecf4f4f321224fecb166f071dd90f9"
+  dependencies:
+    fast-deep-equal "^2.0.1"
+    fast-json-stable-stringify "^2.0.0"
+    json-schema-traverse "^0.4.1"
+    uri-js "^4.2.2"
+
+ajv@^6.5.3:
+  version "6.5.4"
+  resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.5.4.tgz#247d5274110db653706b550fcc2b797ca28cfc59"
   dependencies:
     fast-deep-equal "^2.0.1"
     fast-json-stable-stringify "^2.0.0"
@@ -925,10 +934,6 @@ compare-version@^0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/compare-version/-/compare-version-0.1.2.tgz#0162ec2d9351f5ddd59a9202cba935366a725080"
 
-compare-versions@^3.3.1:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/compare-versions/-/compare-versions-3.4.0.tgz#e0747df5c9cb7f054d6d3dc3e1dbc444f9e92b26"
-
 component-emitter@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/component-emitter/-/component-emitter-1.2.1.tgz#137918d6d78283f7df7a6b7c5a63e140e69425e6"
@@ -954,16 +959,6 @@ concat-stream@1.6.2, concat-stream@^1.5.0, concat-stream@^1.5.2:
     inherits "^2.0.3"
     readable-stream "^2.2.2"
     typedarray "^0.0.6"
-
-conf@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/conf/-/conf-2.0.0.tgz#43f7e282b32faca31f4d18bf279d6841ad657d5a"
-  dependencies:
-    dot-prop "^4.1.0"
-    env-paths "^1.0.0"
-    make-dir "^1.0.0"
-    pkg-up "^2.0.0"
-    write-file-atomic "^2.3.0"
 
 config-chain@~1.1.11:
   version "1.1.11"
@@ -1372,7 +1367,7 @@ domutils@^1.5.1:
     dom-serializer "0"
     domelementtype "1"
 
-dot-prop@^4.1.0:
+dot-prop@^4.1.0, dot-prop@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/dot-prop/-/dot-prop-4.2.0.tgz#1f19e0c2e1aa0e32797c49799f2837ac6af69c57"
   dependencies:
@@ -1496,12 +1491,6 @@ electron-publish@20.28.3:
     fs-extra-p "^4.6.1"
     lazy-val "^1.0.3"
     mime "^2.3.1"
-
-electron-store@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/electron-store/-/electron-store-2.0.0.tgz#1035cca2a95409d1f54c7466606345852450d64a"
-  dependencies:
-    conf "^2.0.0"
 
 electron-window@^0.8.0:
   version "0.8.1"
@@ -1940,6 +1929,10 @@ event-kit@^1.0.0:
 event-kit@^2.0.0, event-kit@^2.1.0, event-kit@^2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/event-kit/-/event-kit-2.5.0.tgz#2f72b11e2b5f533cc1c950387040624a4a025fe8"
+
+event-kit@^2.5.1:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/event-kit/-/event-kit-2.5.1.tgz#9cde53bc1c8e05884a2713a46f59a92fedd4a9c2"
 
 execa@^0.10.0:
   version "0.10.0"
@@ -3468,7 +3461,7 @@ lru-cache@^4.0.1, lru-cache@^4.1.1, lru-cache@^4.1.2, lru-cache@^4.1.3:
     pseudomap "^1.0.2"
     yallist "^2.1.2"
 
-make-dir@^1.0.0:
+make-dir@^1.0.0, make-dir@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/make-dir/-/make-dir-1.3.0.tgz#79c1033b80515bd6d24ec9933e860ca75ee27f0c"
   dependencies:
@@ -4584,6 +4577,20 @@ pn@^1.1.0:
 posix-character-classes@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/posix-character-classes/-/posix-character-classes-0.1.1.tgz#01eac0fe3b5af71a2a6c02feabb8c1fef7e00eab"
+
+pref@^3.1.0:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/pref/-/pref-3.1.2.tgz#b6fc8b89fe146016f9ef1d3d612c15ac0f3d78bf"
+  dependencies:
+    ajv "^6.5.3"
+    color "^3.0.0"
+    dot-prop "^4.2.0"
+    env-paths "^1.0.0"
+    event-kit "^2.5.1"
+    make-dir "^1.3.0"
+    pkg-up "^2.0.0"
+    semver "^5.5.1"
+    write-file-atomic "^2.3.0"
 
 prelude-ls@~1.1.2:
   version "1.1.2"
