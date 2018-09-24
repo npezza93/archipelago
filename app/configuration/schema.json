@@ -16,10 +16,7 @@
           },
           "name": {
             "type": "string",
-            "default": "New Profile",
-            "settings": {
-              "title": "profile"
-            }
+            "default": "New Profile"
           },
           "fontFamily": {
             "type": "string",

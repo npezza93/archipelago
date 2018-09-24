@@ -11,7 +11,7 @@ class SelectField extends Component {
         {onChange: e => this.props.onChange.call(this, e.target.value),
           value: this.props.value},
         this.props.options.map(option => {
-          return createElement('option', {key: option.value, value: option.value}, option.label)
+          return createElement('option', {key: option, value: option}, option)
         })
       ),
       createElement(

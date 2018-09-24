@@ -1,4 +1,4 @@
-/* global describe, it, beforeEach */
+/* global describe, it */
 
 const {assert} = require('chai')
 const Tab = require('../../app/sessions/tab')

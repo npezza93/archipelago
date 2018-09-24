@@ -5,7 +5,7 @@ const React = require('react')
 const ReactDOM = require('react-dom')
 
 const ProfileManager = require('../configuration/profile-manager')
-const ConfigFile = require('../configuration/config-file')
+const {pref} = require('../configuration/config-file')
 
 const TrafficLights = require('../traffic-lights/all')
 const PropertiesPane = require('./properties-pane')
@@ -16,10 +16,10 @@ const profilesContainer = document.querySelector('.profiles-container')
 const backdrop = document.querySelector('#backdrop')
 
 ReactDOM.render(
-  React.createElement(PropertiesPane, {profileManager: (new ProfileManager(new ConfigFile()))}),
+  React.createElement(PropertiesPane, {profileManager: (new ProfileManager(pref))}),
   document.querySelector('.options-container')
 )
-ReactDOM.render(React.createElement(Profiles, {profileManager: (new ProfileManager(new ConfigFile()))}), profilesContainer)
+ReactDOM.render(React.createElement(Profiles, {profileManager: (new ProfileManager(pref))}), profilesContainer)
 ReactDOM.render(
   React.createElement(TrafficLights),
   document.querySelector('#titlebar')

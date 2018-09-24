@@ -63,7 +63,7 @@ const integer = (property, value, schema, onChange) => {
   return string(property, value, schema, onChange)
 }
 
-const float = (property, value, schema, onChange) => {
+const number = (property, value, schema, onChange) => {
   return string(property, value, schema, onChange)
 }
 
@@ -76,5 +76,5 @@ exports.color = color
 exports.select = select
 exports.string = string
 exports.integer = integer
-exports.float = float
+exports.number = number
 exports.rawString = rawString

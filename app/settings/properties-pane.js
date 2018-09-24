@@ -1,6 +1,6 @@
 const {Component, createElement} = require('react')
 
-const Schema = require('../configuration/schema')
+const schema = require('../configuration/schema')
 const Header = require('./header')
 const PropertiesSection = require('./properties-section')
 
@@ -8,9 +8,7 @@ module.exports =
 class PropertiesPane extends Component {
   constructor(props) {
     super(props)
-    this.scopes = (new Schema()).propertiesGroupedBySetting()
-
-    this.headings = Object.keys(this.scopes).filter(header => header !== 'profile')
+    this.headings = Object.keys(this.scopes())
 
     this.state = {
       headings: this.headings.reduce((headingState, heading) => {
@@ -31,7 +29,7 @@ class PropertiesPane extends Component {
           {
             scope,
             key: scope,
-            properties: Object.assign(...this.scopes[scope]),
+            properties: this.scopes()[scope],
             handleChange: this.handleChange.bind(this)
           }
         )
@@ -61,5 +59,24 @@ class PropertiesPane extends Component {
 
       this.setState({headings: headerState})
     }
+  }
+
+  scopes() {
+    const {properties} = schema.properties.profiles.items
+
+    return Object.keys(properties).reduce((accumulator, property) => {
+      const schema = properties[property]
+
+      if (schema.settings) {
+        const {title} = schema.settings
+
+        if (accumulator[title] === undefined) {
+          accumulator[title] = {[property]: schema}
+        } else {
+          accumulator[title][property] = schema
+        }
+      }
+      return accumulator
+    }, {})
   }
 }

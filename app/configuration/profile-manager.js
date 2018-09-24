@@ -66,8 +66,8 @@ class ProfileManager {
     })
   }
 
-  get(keyPath, options) {
-    return this.activeProfile().get(keyPath, options)
+  get(keyPath) {
+    return this.activeProfile().get(keyPath)
   }
 
   set(keyPath, value) {
