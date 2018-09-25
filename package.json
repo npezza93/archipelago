@@ -40,11 +40,11 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@material/linear-progress": "^0.39.0",
+    "@material/linear-progress": "^0.40.0",
     "@researchgate/react-intersection-observer": "^0.7.3",
     "atom-keymap": "^8.2.10",
     "color": "^3.0.0",
-    "electron-is-dev": "^0.3.0",
+    "electron-is-dev": "^1.0.0",
     "event-kit": "^2.5.0",
     "i": "^0.3.6",
     "key-path-helpers": "^0.4.0",
