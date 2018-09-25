@@ -1,5 +1,5 @@
 const Profile = require('./profile')
-const defaultKeybindings = require('./default-keybindings')[process.platform]
+const keybindings = require('./default-keybindings')[process.platform]
 
 module.exports =
 class ProfileManager {
@@ -43,7 +43,7 @@ class ProfileManager {
     const id = Math.max(0, Math.max(...this.profileIds)) + 1
     const index = this.profileIds.length
 
-    this.configFile.set(`profiles.${index}`, {id})
+    this.configFile.set(`profiles.${index}`, {id, keybindings})
     this.configFile.set('activeProfileId', id)
 
     return this.find(id)
@@ -61,7 +61,7 @@ class ProfileManager {
 
     this.all().forEach(profile => {
       if (profile.get('keybindings') === undefined) {
-        profile.set('keybindings', defaultKeybindings)
+        profile.set('keybindings', keybindings)
       }
     })
   }
