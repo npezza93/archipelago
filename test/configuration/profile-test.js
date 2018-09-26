@@ -61,7 +61,7 @@ describe('Profile', () => {
     pref.set('profiles', this.profiles)
 
     const profile = new Profile(this.profiles[1], pref)
-    assert.isUndefined(profile.get('vibrancy'))
+    assert.equal(profile.get('vibrancy'), '')
     Object.defineProperty(process, 'platform', {value: oldPlatform})
   })
 })

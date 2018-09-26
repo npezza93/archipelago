@@ -5,6 +5,7 @@ const Pref = require('pref')
 
 const ProfileManager = require('../../app/configuration/profile-manager')
 const Profile = require('../../app/configuration/profile')
+const keybindings = require('../../app/configuration/default-keybindings')
 
 describe('ProfileManager', () => {
   beforeEach(() => {
@@ -100,7 +101,7 @@ describe('ProfileManager', () => {
         [
           {id: 1, name: 'Profile 1'},
           {id: 2, name: 'Profile 2'},
-          {id: 3}
+          {id: 3, keybindings: keybindings[process.platform]}
         ]
       )
     })
