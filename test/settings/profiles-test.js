@@ -65,7 +65,7 @@ describe('Profiles Component', () => {
 
       assert.equal(this.profileManager.activeProfile().id, 2)
       assert.lengthOf(this.profileManager.all(), 1)
-      assert.isNull(this.profileManager.find(1))
+      assert.isUndefined(this.profileManager.find(1))
     })
 
     it('changes the active profile', () => {

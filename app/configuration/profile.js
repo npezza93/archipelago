@@ -27,8 +27,10 @@ class Profile {
   }
 
   destroy() {
-    this.configFile.delete(`profiles.${this.index}`)
+    const profiles = this.configFile.get('profiles')
+    const filteredProfiles = profiles.filter(profile => profile.id !== this.id)
 
+    this.configFile.set('profiles', filteredProfiles)
     return this.configFile.store
   }
 
