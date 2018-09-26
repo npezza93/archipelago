@@ -68,7 +68,7 @@ describe('Profiles Component', () => {
       assert.isNull(this.profileManager.find(1))
     })
 
-    it('changes trhe active profile', () => {
+    it('changes the active profile', () => {
       const profile = this.component.find('archipelago-profile').at(1)
 
       assert(profile.exists())
