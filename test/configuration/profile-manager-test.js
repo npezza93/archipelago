@@ -10,7 +10,7 @@ const keybindings = require('../../app/configuration/default-keybindings')
 describe('ProfileManager', () => {
   beforeEach(() => {
     (new Pref()).clear()
-    this.pref = new Pref()
+    this.pref = new Pref({watch: false})
     this.profiles = [
       {
         id: 1,

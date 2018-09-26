@@ -1,9 +1,18 @@
-/* global describe, it */
+/* global describe, it, beforeEach, afterEach */
 
 const {assert} = require('chai')
+const Pref = require('pref')
+
 const Tab = require('../../app/sessions/tab')
 
 describe('Tab', () => {
+  beforeEach(() => {
+    this.pref = new Pref({watch: false})
+    this.pref.store = {activeProfileId: 1, profiles: [{id: 1}]}
+  })
+
+  afterEach(() => this.pref.clear())
+
   describe('add', () => {
     it('adds a new session by branching when root is a session', () => {
       const tab = new Tab()
@@ -12,6 +21,7 @@ describe('Tab', () => {
       assert.equal(tab.root.constructor.name, 'Branch')
       assert.isDefined(tab.root.left)
       assert.isDefined(tab.root.right)
+      tab.kill()
     })
 
     it('adds a new session by branching when root is a branch', () => {
@@ -25,6 +35,7 @@ describe('Tab', () => {
       assert.equal(newGroup.constructor.name, 'Branch')
       assert.equal(newGroup.left.id, leftSession)
       assert.equal(newGroup.right.constructor.name, 'Session')
+      tab.kill()
     })
   })
 
@@ -36,6 +47,7 @@ describe('Tab', () => {
       tab.remove(sessionToRemove)
 
       assert.isNull(tab.root)
+      tab.kill()
     })
 
     describe('left', () => {
@@ -52,6 +64,7 @@ describe('Tab', () => {
         assert.equal(tab.root.constructor.name, 'Session')
         assert.equal(tab.root, sessionToSave)
         assert.isNull(tab.root.branch)
+        tab.kill()
       })
 
       it('removes a >1 level branch session', () => {
@@ -65,6 +78,7 @@ describe('Tab', () => {
 
         assert.equal(sessionToSave, tab.root.left)
         assert.equal(sessionToSave.branch, tab.root)
+        tab.kill()
       })
     })
 
@@ -82,6 +96,7 @@ describe('Tab', () => {
         assert.equal(tab.root.constructor.name, 'Session')
         assert.equal(tab.root, sessionToSave)
         assert.isNull(tab.root.branch)
+        tab.kill()
       })
 
       it('removes a >1 level branch session', () => {
@@ -95,6 +110,7 @@ describe('Tab', () => {
 
         assert.equal(sessionToSave, tab.root.right)
         assert.equal(sessionToSave.branch, tab.root)
+        tab.kill()
       })
     })
   })
@@ -107,6 +123,7 @@ describe('Tab', () => {
       const foundSession = tab.find(tab.root, newBranch.left.id)
 
       assert.equal(foundSession, tab.root.right.left)
+      tab.kill()
     })
   })
 })
