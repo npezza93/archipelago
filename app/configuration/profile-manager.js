@@ -14,7 +14,7 @@ class ProfileManager {
   }
 
   get rawProfiles() {
-    return (this.configFile.get('profiles') || []).filter(profile => profile !== null)
+    return this.configFile.get('profiles') || []
   }
 
   get profileIds() {
@@ -51,12 +51,7 @@ class ProfileManager {
 
   validate() {
     if (this.activeProfile() === undefined) {
-      if (this.any()) {
-        this.activeProfileId = this.profileIds[0]
-      } else {
-        this.configFile.set('profiles', [])
-        this.create()
-      }
+      this.resetActiveProfile(this.profileIds[0])
     }
 
     this.all().forEach(profile => {
@@ -112,5 +107,14 @@ class ProfileManager {
     })
 
     return disposable
+  }
+
+  resetActiveProfile(newActiveProfileId) {
+    if (this.any()) {
+      this.activeProfileId = newActiveProfileId
+    } else {
+      this.configFile.set('profiles', [])
+      this.create()
+    }
   }
 }
