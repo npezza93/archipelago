@@ -1,7 +1,8 @@
+/* global requestIdleCallback */
 /* eslint guard-for-in: "off" */
 
 const {Component, createElement} = require('react')
-const Observer = require('react-intersection-observer')
+const Observer = require('@researchgate/react-intersection-observer').default
 
 const Property = require('./property')
 
@@ -12,15 +13,20 @@ class PropertiesSection extends Component {
       Observer,
       {
         tag: 'archipelago-properties-section',
-        threshold: [0.1, 0.5],
-        onChange: inView => {
-          this.props.onObserved(inView, this.props.scope)
+        onChange: event => {
+          requestIdleCallback(() => {
+            this.props.handleChange(event.isIntersecting, this.props.scope)
+          })
         }
       },
       createElement(
-        'archipelago-properties-section-container',
-        null,
-        this.renderProperties()
+        'archipelago-properties-section',
+        {},
+        createElement(
+          'archipelago-properties-section-container',
+          {},
+          this.renderProperties()
+        )
       )
     )
   }

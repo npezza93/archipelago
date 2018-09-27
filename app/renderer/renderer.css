@@ -77,7 +77,7 @@ archipelago-app {
   right: 0;
   bottom: 0;
   z-index: 5;
-  background: #FFF;
+  background: var(--background-color);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -91,7 +91,13 @@ archipelago-app {
 #boot img {
   width: 25%;
 }
-
+#boot svg {
+  width: 25%;
+  height: 40%;
+}
+#boot svg g {
+  fill: var(--tab-color);
+}
 #boot.booted {
   visibility: hidden;
   opacity: 0;
@@ -361,7 +367,9 @@ archipelago-tab.is-unread span {
   height: 1px;
   width: 50%;
 }
-
+.mdc-linear-progress__buffer {
+  background: var(--tab-color);
+}
 .mdc-linear-progress.mdc-linear-progress--indeterminate .mdc-linear-progress__bar-inner {
-  background: #000;
+  background: var(--background-color);
 }

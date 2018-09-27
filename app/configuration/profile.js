@@ -1,8 +1,3 @@
-const {Disposable} = require('event-kit')
-
-const Schema = require('./schema')
-const Coercer = require('./coercer')
-
 module.exports =
 class Profile {
   constructor(attributes, configFile) {
@@ -14,72 +9,44 @@ class Profile {
     return this.attributes.id
   }
 
-  get name() {
-    const schema = this.schema.getSchema('name')
-    const defaultValue = this.schema.defaultValue('name')
-    const coercer = new Coercer('name', this.attributes.name || defaultValue, schema)
-
-    return coercer.coerce()
+  get index() {
+    return this.configFile.get('profiles').findIndex(profile => {
+      return profile.id === this.id
+    })
   }
 
-  get schema() {
-    if (this._schema === undefined) {
-      this._schema = new Schema()
-    }
-
-    return this._schema
+  get name() {
+    return this.get('name')
   }
 
   set name(newName) {
-    this.configFile.set(`profiles.${this.id}.name`, newName)
+    this.configFile.set(`profiles.${this.index}.name`, newName)
     this.attributes.name = newName
 
     return newName
   }
 
   destroy() {
-    this.configFile.delete(`profiles.${this.id}`)
+    const profiles = this.configFile.get('profiles')
+    const filteredProfiles = profiles.filter(profile => profile.id !== this.id)
 
+    this.configFile.set('profiles', filteredProfiles)
     return this.configFile.store
   }
 
-  get(keyPath, options) {
-    const schema = this.schema.getSchema(keyPath)
-    let value
-
-    if (schema) {
-      let configKeyPath = `profiles.${this.id}.${keyPath}`
-      if (schema.platformSpecific) {
-        configKeyPath += `.${process.platform}`
-      }
-
-      value = this.configFile.get(
-        configKeyPath, this.schema.defaultValue(keyPath)
-      )
-
-      const coercer = new Coercer(keyPath, value, schema, options)
-      value = coercer.coerce()
-    }
-
-    return value
+  get(keyPath) {
+    return this.configFile.get(`profiles.${this.index}.${keyPath}`)
   }
 
   set(keyPath, value) {
-    const schema = this.schema.getSchema(keyPath)
-
-    keyPath = `profiles.${this.id}.${keyPath}`
-    if (schema.platformSpecific) {
-      keyPath += `.${process.platform}`
-    }
-
-    return this.configFile.set(keyPath, value)
+    return this.configFile.set(`profiles.${this.index}.${keyPath}`, value)
   }
 
   onDidChange(keyPath, callback) {
     let oldValue = this.get(keyPath)
 
-    const onChange =
-      this.configFile.onDidChange(`profiles.${this.id}.${keyPath}`, () => {
+    const disposable =
+      this.configFile.onDidChange(`profiles.${this.index}.${keyPath}`, () => {
         const newValue = this.get(keyPath)
         if (oldValue !== newValue) {
           oldValue = newValue
@@ -87,6 +54,6 @@ class Profile {
         }
       })
 
-    return new Disposable(() => onChange.call())
+    return disposable
   }
 }

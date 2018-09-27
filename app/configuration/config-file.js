@@ -1,27 +1,29 @@
 const fs = require('fs')
 const {homedir} = require('os')
 const {join} = require('path')
-const ElectronStore = require('electron-store')
+const Pref = require('pref')
 
-const Schema = require('./schema')
+const schema = require('./schema.json')
 
-module.exports =
-class ConfigFile extends ElectronStore {
-  constructor() {
-    const opts = {
-      defaults: {version: require('../../package.json').version},
-      migrations: {
-        '3.0.0': store => {
-          const filePath = join(homedir(), '.archipelago.json')
-          if (fs.existsSync(filePath)) {
-            store.store = JSON.parse(fs.readFileSync(filePath))
-          }
-        }
+const pref = new Pref({
+  schema,
+  migrations: {
+    '3.0.0': store => {
+      const filePath = join(homedir(), '.archipelago.json')
+      if (fs.existsSync(filePath)) {
+        const oldStore = JSON.parse(fs.readFileSync(filePath))
+        const profiles = Object.values(oldStore.profiles)
+        oldStore.profiles = profiles
+        store.store = oldStore
       }
     }
-
-    super(opts)
-
-    this.events.setMaxListeners((new Schema()).xtermSettings().length)
   }
-}
+})
+
+const allProperties = pref.schema.properties.profiles.items.properties
+
+const xtermSettings = Object.keys(allProperties).filter(property => {
+  return allProperties[property].scope === 'xterm'
+})
+
+module.exports = {pref, xtermSettings}

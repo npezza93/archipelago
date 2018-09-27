@@ -71,9 +71,16 @@ class Profiles extends React.Component {
   }
 
   removeProfile(profile) {
-    profile.destroy()
+    const {profileManager} = this.props
 
-    this.props.profileManager.validate()
+    if (profileManager.activeProfile().id === profile.id) {
+      const newActiveProfileId = profileManager.profileIds.find(profileId => {
+        return profileId !== profile.id
+      })
+      profileManager.resetActiveProfile(newActiveProfileId)
+    }
+
+    profile.destroy()
   }
 
   setActiveProfile(activeProfile) {

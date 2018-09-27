@@ -18,7 +18,7 @@ describe('Application launch', function () {
   beforeEach(() => {
     this.app = new Application({
       path: electron,
-
+      verbose: true,
       args: [path.join(__dirname, '../../app/main/index.js')]
     })
     return this.app.start()
@@ -39,6 +39,7 @@ describe('Application launch', function () {
   it('renders with no renderer process errors', () => {
     return this.app.client.getRenderProcessLogs().then(logs => {
       const filteredLogs = logs.filter(log => log.level === 'SEVERE')
+      console.log(filteredLogs)
       assert.isEmpty(filteredLogs, 'Exception in renderer process encountered')
     })
   })

@@ -4,7 +4,7 @@ const url = require('url')
 const isDev = require('electron-is-dev')
 const {CompositeDisposable} = require('event-kit')
 
-const ConfigFile = require('../configuration/config-file')
+const {pref} = require('../configuration/config-file')
 const ProfileManager = require('../configuration/profile-manager')
 const {template} = require('./app-menu')
 
@@ -12,7 +12,7 @@ const visor = require('./visor')
 
 const windows = []
 const subscriptions = new CompositeDisposable()
-const profileManager = new ProfileManager(new ConfigFile())
+const profileManager = new ProfileManager(pref)
 
 if (!isDev) {
   require('update-electron-app')()

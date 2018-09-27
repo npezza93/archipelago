@@ -4,7 +4,7 @@ const path = require('path')
 const {Application} = require('spectron')
 const {assert} = require('chai')
 
-const ConfigFile = require('../../app/configuration/config-file')
+const {pref} = require('../../app/configuration/config-file')
 
 let electron = './node_modules/electron/dist/'
 
@@ -18,7 +18,7 @@ describe('About launch', function () {
   this.timeout(10000)
 
   beforeEach(() => {
-    (new ConfigFile()).clear()
+    pref.clear()
     this.app = new Application({
       path: electron,
 

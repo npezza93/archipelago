@@ -1,4 +1,4 @@
-/* global window, document */
+/* global window, requestAnimationFrame, requestIdleCallback, document */
 
 const {remote} = require('electron')
 const os = require('os')
@@ -6,10 +6,10 @@ const {spawn} = require('node-pty')
 const {Emitter, CompositeDisposable, Disposable} = require('event-kit')
 const {Terminal} = require('xterm')
 const KeymapManager = require('atom-keymap')
+const unescape = require('unescape-js')
 
-const Schema = require('../configuration/schema')
 const ProfileManager = require('../configuration/profile-manager')
-const ConfigFile = require('../configuration/config-file')
+const {pref, xtermSettings} = require('../configuration/config-file')
 
 Terminal.applyAddon(require('xterm/lib/addons/fit/fit'))
 
@@ -20,8 +20,7 @@ class Session {
     this.id = Math.random()
     this.emitter = new Emitter()
     this.subscriptions = new CompositeDisposable()
-    this.schema = new Schema()
-    this.profileManager = new ProfileManager(new ConfigFile())
+    this.profileManager = new ProfileManager(pref)
     this.title = ''
 
     this.bindDataListeners()
@@ -35,13 +34,14 @@ class Session {
     const shell =
       this.profileManager.get('shell') ||
       process.env[os.platform() === 'win32' ? 'COMSPEC' : 'SHELL']
+    const lang = (remote && remote.app && remote.app.getLocale()) || ''
 
     this._pty = spawn(
       shell, this.profileManager.get('shellArgs').split(','), {
         name: 'xterm-256color',
         cwd: process.env.HOME,
         env: {
-          LANG: remote.app.getLocale().replace('-', '_') + '.UTF-8',
+          LANG: lang + '.UTF-8',
           TERM: 'xterm-256color',
           COLORTERM: 'truecolor',
           ...process.env
@@ -56,8 +56,12 @@ class Session {
     if (this._xterm) {
       return this._xterm
     }
+    const settings = xtermSettings.reduce((settings, property) => {
+      settings[property] = this.profileManager.get(property)
+      return settings
+    }, {})
 
-    this._xterm = new Terminal(this.defaultXtermSettings())
+    this._xterm = new Terminal(settings)
 
     return this._xterm
   }
@@ -70,7 +74,7 @@ class Session {
     this._keymaps = new KeymapManager()
     this._keymaps.mappings =
       this.profileManager.get('keybindings').reduce((result, item) => {
-        result[item.keystroke] = item.command
+        result[item.keystroke] = unescape(item.command)
         return result
       }, {})
 
@@ -96,6 +100,13 @@ class Session {
     this.xterm.setOption('theme', this.profileManager.get('theme'))
   }
 
+  resetBlink() {
+    if (this.profileManager.get('cursorBlink')) {
+      this.xterm.setOption('cursorBlink', false)
+      this.xterm.setOption('cursorBlink', true)
+    }
+  }
+
   kill() {
     window.removeEventListener('resize', this.fit.bind(this))
 
@@ -116,7 +127,6 @@ class Session {
 
   keybindingHandler(e) {
     let caught = false
-
     const mapping = this.keymaps.mappings[this.keymaps.keystrokeForKeyboardEvent(e)]
 
     if (mapping) {
@@ -172,11 +182,8 @@ class Session {
 
     this.xterm.on('focus', () => {
       this.fit()
-      window.requestAnimationFrame(() => {
-        const blink = this.profileManager.get('cursorBlink')
-
-        this.xterm.setOption('cursorBlink', !blink)
-        this.xterm.setOption('cursorBlink', blink)
+      requestAnimationFrame(() => {
+        requestIdleCallback(() => this.resetBlink())
       })
       this.emitter.emit('did-focus')
     })
@@ -201,7 +208,7 @@ class Session {
       this.emitter.emit('did-exit')
     })
 
-    this.schema.xtermSettings().forEach(field => {
+    xtermSettings.forEach(field => {
       this.subscriptions.add(
         this.profileManager.onDidChange(field, newValue => {
           this.xterm.setOption(field, newValue)

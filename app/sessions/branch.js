@@ -1,10 +1,12 @@
+const Session = require('./session')
+
 module.exports =
 class Branch {
-  constructor(branch, orientation, left, right) {
+  constructor(branch, orientation, left) {
     this.branch = branch
     this.orientation = orientation
     this.left = left
-    this.right = right
+    this.right = new Session(this)
   }
 
   kill() {

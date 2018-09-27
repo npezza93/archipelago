@@ -1,11 +1,10 @@
-const {Emitter, Disposable} = require('event-kit')
 const Profile = require('./profile')
+const keybindings = require('./default-keybindings')[process.platform]
 
 module.exports =
 class ProfileManager {
   constructor(configFile) {
     this.configFile = configFile
-    this.emitter = new Emitter()
   }
 
   set activeProfileId(id) {
@@ -15,11 +14,11 @@ class ProfileManager {
   }
 
   get rawProfiles() {
-    return this.configFile.get('profiles') || {}
+    return this.configFile.get('profiles') || []
   }
 
   get profileIds() {
-    return Object.keys(this.rawProfiles)
+    return this.rawProfiles.map(profile => profile.id)
   }
 
   any() {
@@ -31,41 +30,39 @@ class ProfileManager {
   }
 
   all() {
-    return this.profileIds.map(id => {
-      return new Profile(this.rawProfiles[id], this.configFile)
+    return this.rawProfiles.map(profile => {
+      return new Profile(profile, this.configFile)
     })
   }
 
   find(id) {
-    if (this.rawProfiles[id]) {
-      return new Profile(this.rawProfiles[id], this.configFile)
-    }
-    return null
+    return this.all().find(profile => profile.id === id)
   }
 
   create() {
     const id = Math.max(0, Math.max(...this.profileIds)) + 1
+    const index = this.profileIds.length
 
-    this.configFile.set(`profiles.${id}`, {id})
+    this.configFile.set(`profiles.${index}`, {id, keybindings})
     this.configFile.set('activeProfileId', id)
 
     return this.find(id)
   }
 
   validate() {
-    if (this.activeProfile() !== null) {
-      return
+    if (this.activeProfile() === undefined) {
+      this.resetActiveProfile(this.profileIds[0])
     }
 
-    if (this.any()) {
-      this.activeProfileId = this.profileIds[0]
-    } else {
-      this.create()
-    }
+    this.all().forEach(profile => {
+      if (profile.get('keybindings') === undefined) {
+        profile.set('keybindings', keybindings)
+      }
+    })
   }
 
-  get(keyPath, options) {
-    return this.activeProfile().get(keyPath, options)
+  get(keyPath) {
+    return this.activeProfile().get(keyPath)
   }
 
   set(keyPath, value) {
@@ -83,16 +80,12 @@ class ProfileManager {
       }
     }
 
-    this.configFile.events.on('change', onChange)
-
-    return new Disposable(() => {
-      this.configFile.events.removeListener('change', onChange)
-    })
+    return this.configFile.events.on('change', onChange)
   }
 
   onActiveProfileChange(callback) {
     let oldValue = this.activeProfile()
-    const onChange = this.configFile.onDidChange('activeProfileId', () => {
+    const disposable = this.configFile.onDidChange('activeProfileId', () => {
       const newValue = this.activeProfile()
       if (oldValue && newValue && oldValue.id !== newValue.id) {
         oldValue = newValue
@@ -100,12 +93,12 @@ class ProfileManager {
       }
     })
 
-    return new Disposable(() => onChange.call())
+    return disposable
   }
 
   onProfileChange(callback) {
     let oldValue = this.all().length
-    const onChange = this.configFile.onDidChange('profiles', () => {
+    const disposable = this.configFile.onDidChange('profiles', () => {
       const newValue = this.all().length
       if (oldValue && newValue) {
         oldValue = newValue
@@ -113,6 +106,15 @@ class ProfileManager {
       }
     })
 
-    return new Disposable(() => onChange.call())
+    return disposable
+  }
+
+  resetActiveProfile(newActiveProfileId) {
+    if (this.any()) {
+      this.activeProfileId = newActiveProfileId
+    } else {
+      this.configFile.set('profiles', [])
+      this.create()
+    }
   }
 }

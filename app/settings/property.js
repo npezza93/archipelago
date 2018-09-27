@@ -2,7 +2,7 @@ const React = require('react')
 const {CompositeDisposable} = require('event-kit')
 
 const ProfileManager = require('../configuration/profile-manager')
-const ConfigFile = require('../configuration/config-file')
+const {pref} = require('../configuration/config-file')
 const allFields = require('./all-fields')
 
 module.exports =
@@ -10,11 +10,11 @@ class Property extends React.Component {
   constructor(props) {
     super(props)
 
-    this.profileManager = new ProfileManager(new ConfigFile())
+    this.profileManager = new ProfileManager(pref)
     this.subscriptions = new CompositeDisposable()
 
     this.state = {
-      [props.property]: this.profileManager.get(props.property, {keepEscaped: true})
+      [props.property]: this.profileManager.get(props.property)
     }
 
     this.bindListener()
