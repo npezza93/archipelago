@@ -1,7 +1,7 @@
 /* global document, window */
 
-const {remote, ipcRenderer: ipc} = require('electron')
-const {is} = require('electron-util')
+const {is, api} = require('electron-util')
+const ipc = require('electron-better-ipc')
 
 if (!is.macos) {
   const {createElement} = require('react')
@@ -13,6 +13,6 @@ if (!is.macos) {
   )
 }
 
-document.querySelector('#version').innerText = `v${remote.app.getVersion()}`
+document.querySelector('#version').innerText = `v${api.app.getVersion()}`
 
-ipc.on('close-current-tab', () => window.close())
+ipc.answerMain('close-current-tab', () => window.close())

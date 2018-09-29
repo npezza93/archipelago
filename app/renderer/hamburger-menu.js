@@ -1,5 +1,6 @@
 const {Component, createElement} = require('react')
-const {platform, app} = require('electron-util')
+const {platform} = require('electron-util')
+const ipc = require('electron-better-ipc')
 
 module.exports =
 class HamburgerMenu extends Component {
@@ -10,7 +11,7 @@ class HamburgerMenu extends Component {
         'hamburger-menu', {
           onClick(event) {
             const {right, bottom} = event.currentTarget.getBoundingClientRect()
-            app.ipcRenderer.send('open-hamburger-menu', {x: right, y: bottom})
+            ipc.callMain('open-hamburger-menu', {x: right, y: bottom})
           }
         },
         createElement('div'),

@@ -1,5 +1,6 @@
-const {app, BrowserWindow, Menu, ipcMain} = require('electron')
+const {app, BrowserWindow, Menu} = require('electron')
 const {is, platform} = require('electron-util')
+const ipc = require('electron-better-ipc')
 const {CompositeDisposable} = require('event-kit')
 
 const {pref} = require('../configuration/config-file')
@@ -79,4 +80,4 @@ subscriptions.add(
 subscriptions.add(profileManager.onDidChange('singleTabMode', resetApplicationMenu))
 subscriptions.add(profileManager.onActiveProfileChange(resetApplicationMenu))
 
-ipcMain.on('open-hamburger-menu', (ev, args) => Menu.getApplicationMenu().popup(args))
+ipc.answerRenderer('open-hamburger-menu', args => Menu.getApplicationMenu().popup(args))

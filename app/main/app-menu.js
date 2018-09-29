@@ -1,4 +1,5 @@
 const {api, platform} = require('electron-util')
+const ipc = require('electron-better-ipc')
 
 const settings = require('./settings')
 const about = require('./about')
@@ -54,18 +55,14 @@ const shellMenu = (createWindow, profileManager) => {
         label: 'Split Vertically',
         accelerator: 'CmdOrCtrl+Shift+S',
         click(item, focusedWindow) {
-          if (focusedWindow) {
-            focusedWindow.send('split-vertical')
-          }
+          ipc.callRenderer(focusedWindow, 'split', 'vertical')
         }
       },
       {
         label: 'Split Horizontally',
         accelerator: 'CmdOrCtrl+S',
         click(item, focusedWindow) {
-          if (focusedWindow) {
-            focusedWindow.send('split-horizontal')
-          }
+          ipc.callRenderer(focusedWindow, 'split', 'horizontal')
         }
       }
     ]
@@ -91,9 +88,7 @@ const shellMenu = (createWindow, profileManager) => {
         label: 'New Tab',
         accelerator: 'CmdOrCtrl+T',
         click(item, focusedWindow) {
-          if (focusedWindow) {
-            focusedWindow.send('new-tab')
-          }
+          ipc.callRenderer(focusedWindow, 'new-tab')
         }
       },
       {type: 'separator'},
@@ -101,9 +96,7 @@ const shellMenu = (createWindow, profileManager) => {
         label: 'Close Tab',
         accelerator: 'CmdOrCtrl+W',
         click(item, focusedWindow) {
-          if (focusedWindow) {
-            focusedWindow.send('close-current-tab')
-          }
+          ipc.callRenderer(focusedWindow, 'close-current-tab')
         }
       },
       {
