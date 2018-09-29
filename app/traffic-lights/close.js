@@ -1,4 +1,4 @@
-const {remote} = require('electron')
+const {activeWindow} = require('electron-util')
 const {Component, createElement} = require('react')
 
 module.exports =
@@ -19,7 +19,7 @@ class Close extends Component {
           cursor: 'pointer'
         },
         onClick() {
-          return remote.getCurrentWindow().close()
+          activeWindow().close()
         }
       },
       createElement(

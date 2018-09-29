@@ -67,14 +67,4 @@ const number = (property, value, schema, onChange) => {
   return string(property, value, schema, onChange)
 }
 
-const rawString = (property, value, schema, onChange) => {
-  return string(property, value, schema, onChange)
-}
-
-exports.boolean = boolean
-exports.color = color
-exports.select = select
-exports.string = string
-exports.integer = integer
-exports.number = number
-exports.rawString = rawString
+module.exports = {boolean, color, select, string, integer, number}

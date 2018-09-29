@@ -1,5 +1,5 @@
 const {app, BrowserWindow, Menu, ipcMain} = require('electron')
-const isDev = require('electron-is-dev')
+const {is, platform} = require('electron-util')
 const {CompositeDisposable} = require('event-kit')
 
 const {pref} = require('../configuration/config-file')
@@ -10,7 +10,7 @@ const windows = []
 const subscriptions = new CompositeDisposable()
 const profileManager = new ProfileManager(pref())
 
-if (!isDev) {
+if (!is.development) {
   require('update-electron-app')()
 }
 
@@ -25,8 +25,8 @@ const createWindow = () => {
   const win = new BrowserWindow({
     width: 1000,
     height: 600,
-    titleBarStyle: ((process.platform === 'darwin') && 'hiddenInset') || 'hidden',
-    frame: process.platform === 'darwin',
+    titleBarStyle: platform({macos: 'hiddenInset', default: 'hidden'}),
+    frame: is.macos,
     vibrancy: profileManager.get('vibrancy')
   })
 
@@ -38,7 +38,7 @@ const createWindow = () => {
 app.on('ready', () => {
   createWindow()
   resetApplicationMenu()
-  if (process.platform === 'darwin') {
+  if (is.macos) {
     app.dock.setMenu(Menu.buildFromTemplate([
       {label: 'New Window', click: createWindow}
     ]))
@@ -46,7 +46,7 @@ app.on('ready', () => {
 })
 
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
+  if (!is.macos) {
     app.quit()
   }
 })

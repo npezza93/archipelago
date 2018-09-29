@@ -1,4 +1,5 @@
 const {BrowserWindow} = require('electron')
+const {is} = require('electron-util')
 
 let settingsWindow = null
 
@@ -9,7 +10,7 @@ exports.display = () => {
       height: 600,
       show: true,
       titleBarStyle: 'hiddenInset',
-      frame: process.platform === 'darwin',
+      frame: is.macos,
       webPreferences: {experimentalFeatures: true}
     })
 

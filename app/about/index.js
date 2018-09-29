@@ -1,8 +1,9 @@
 /* global document, window */
 
-const {remote, ipcRenderer} = require('electron')
+const {remote, ipcRenderer: ipc} = require('electron')
+const {is} = require('electron-util')
 
-if (process.platform !== 'darwin') {
+if (!is.macos) {
   const {createElement} = require('react')
   const {render} = require('react-dom')
   const TrafficLights = require('../traffic-lights/all')
@@ -14,4 +15,4 @@ if (process.platform !== 'darwin') {
 
 document.querySelector('#version').innerText = `v${remote.app.getVersion()}`
 
-ipcRenderer.on('close-current-tab', () => window.close())
+ipc.on('close-current-tab', () => window.close())

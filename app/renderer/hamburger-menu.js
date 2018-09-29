@@ -1,23 +1,22 @@
-const {ipcRenderer} = require('electron')
 const {Component, createElement} = require('react')
+const {platform, app} = require('electron-util')
 
 module.exports =
 class HamburgerMenu extends Component {
   render() {
-    if (process.platform === 'darwin') {
-      return null
-    }
-
-    return createElement(
-      'hamburger-menu', {
-        onClick(event) {
-          const {right, bottom} = event.currentTarget.getBoundingClientRect()
-          ipcRenderer.send('open-hamburger-menu', {x: right, y: bottom})
-        }
-      },
-      createElement('div'),
-      createElement('div'),
-      createElement('div')
-    )
+    return platform({
+      macos: null,
+      default: createElement(
+        'hamburger-menu', {
+          onClick(event) {
+            const {right, bottom} = event.currentTarget.getBoundingClientRect()
+            app.ipcRenderer.send('open-hamburger-menu', {x: right, y: bottom})
+          }
+        },
+        createElement('div'),
+        createElement('div'),
+        createElement('div')
+      )
+    })
   }
 }

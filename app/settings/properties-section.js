@@ -1,8 +1,7 @@
 /* global requestIdleCallback */
-/* eslint guard-for-in: "off" */
 
 const {Component, createElement} = require('react')
-const Observer = require('@researchgate/react-intersection-observer').default
+const {default: Observer} = require('@researchgate/react-intersection-observer')
 
 const Property = require('./property')
 

@@ -1,29 +1,10 @@
-const {app, shell} = require('electron')
+const {api, platform} = require('electron-util')
 
 const settings = require('./settings')
 const about = require('./about')
 
-const extraDarwinAboutItems = () => {
-  let items = []
-
-  if (process.platform === 'darwin') {
-    items = [
-      {role: 'services', submenu: []},
-      {type: 'separator'},
-      {role: 'hide'},
-      {role: 'hideothers'},
-      {role: 'unhide'},
-      {type: 'separator'}
-    ]
-  } else {
-    items = []
-  }
-
-  return items
-}
-
 const aboutMenu = {
-  label: app.getName(),
+  label: api.app.getName(),
   submenu: [
     {
       label: 'About Archipelago',
@@ -32,7 +13,7 @@ const aboutMenu = {
       }
     },
     {
-      label: `Version ${app.getVersion()}`,
+      label: `Version ${api.app.getVersion()}`,
       enabled: false
     },
     {type: 'separator'},
@@ -44,7 +25,17 @@ const aboutMenu = {
       }
     },
     {type: 'separator'},
-    ...extraDarwinAboutItems(),
+    ...platform({
+      macos: [
+        {role: 'services', submenu: []},
+        {type: 'separator'},
+        {role: 'hide'},
+        {role: 'hideothers'},
+        {role: 'unhide'},
+        {type: 'separator'}
+      ],
+      default: []
+    }),
     {role: 'quit'}
   ]
 }
@@ -64,7 +55,7 @@ const shellMenu = (createWindow, profileManager) => {
         accelerator: 'CmdOrCtrl+Shift+S',
         click(item, focusedWindow) {
           if (focusedWindow) {
-            return focusedWindow.send('split-vertical')
+            focusedWindow.send('split-vertical')
           }
         }
       },
@@ -73,7 +64,7 @@ const shellMenu = (createWindow, profileManager) => {
         accelerator: 'CmdOrCtrl+S',
         click(item, focusedWindow) {
           if (focusedWindow) {
-            return focusedWindow.send('split-horizontal')
+            focusedWindow.send('split-horizontal')
           }
         }
       }
@@ -101,7 +92,7 @@ const shellMenu = (createWindow, profileManager) => {
         accelerator: 'CmdOrCtrl+T',
         click(item, focusedWindow) {
           if (focusedWindow) {
-            return focusedWindow.send('new-tab')
+            focusedWindow.send('new-tab')
           }
         }
       },
@@ -179,14 +170,14 @@ const profilesMenu = profileManager => {
   }
 }
 
-const windowMenu = () => {
-  const menu = {role: 'window', submenu: [{role: 'minimize'}]}
-
-  if (process.platform === 'darwin') {
-    menu.submenu.push({role: 'zoom'}, {type: 'separator'}, {role: 'front'})
-  }
-
-  return menu
+const windowMenu = {
+  role: 'window',
+  submenu: platform({
+    macos: [
+      {role: 'minimize'}, {role: 'zoom'}, {type: 'separator'}, {role: 'front'}
+    ],
+    default: [{role: 'minimize'}]
+  })
 }
 
 const helpMenu = {
@@ -194,7 +185,7 @@ const helpMenu = {
   submenu: [{
     label: 'Report Issue',
     click() {
-      shell.openExternal('https://github.com/npezza93/archipelago/issues/new')
+      api.shell.openExternal('https://github.com/npezza93/archipelago/issues/new')
     }
   }]
 }
@@ -206,7 +197,7 @@ exports.template = (createWindow, profileManager) => {
     editMenu,
     viewMenu,
     profilesMenu(profileManager),
-    windowMenu(),
+    windowMenu,
     helpMenu
   ]
 }
