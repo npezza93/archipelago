@@ -1,16 +1,15 @@
 /* global describe, it, beforeEach, afterEach */
 
 const {assert} = require('chai')
-const Pref = require('pref')
 
 const ProfileManager = require('../../app/configuration/profile-manager')
 const Profile = require('../../app/configuration/profile')
+const {pref} = require('../../app/configuration/config-file')
 const keybindings = require('../../app/configuration/default-keybindings')
 
 describe('ProfileManager', () => {
   beforeEach(() => {
-    (new Pref()).clear()
-    this.pref = new Pref({watch: false})
+    this.pref = pref()
     this.profiles = [
       {
         id: 1,
@@ -27,6 +26,7 @@ describe('ProfileManager', () => {
 
   afterEach(() => {
     this.pref.clear()
+    this.pref.events.clear()
   })
 
   describe('all', () => {
