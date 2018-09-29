@@ -15,7 +15,7 @@ module.exports = {
         frame: process.platform === 'darwin',
         icon: path.join(__dirname, '../../../build/icon.png'),
         webPreferences: {
-          experimentalFeatures: true
+          blinkFeatures: 'CSSBackdropFilter'
         }
       })
 
