@@ -2,20 +2,18 @@ const {BrowserWindow} = require('electron')
 
 let aboutWindow = null
 
-module.exports = {
-  display() {
-    if ((aboutWindow === null) || aboutWindow.isDestroyed()) {
-      aboutWindow = new BrowserWindow({
-        width: 300,
-        height: 500,
-        show: true,
-        titleBarStyle: 'hiddenInset',
-        frame: process.platform === 'darwin'
-      })
+exports.display = () => {
+  if ((aboutWindow === null) || aboutWindow.isDestroyed()) {
+    aboutWindow = new BrowserWindow({
+      width: 300,
+      height: 500,
+      show: true,
+      titleBarStyle: 'hiddenInset',
+      frame: process.platform === 'darwin'
+    })
 
-      aboutWindow.loadFile('app/about/index.html')
-    }
-
-    aboutWindow.focus()
+    aboutWindow.loadFile('app/about/index.html')
   }
+
+  aboutWindow.focus()
 }

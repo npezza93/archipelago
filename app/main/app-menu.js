@@ -199,7 +199,7 @@ const helpMenu = {
   }]
 }
 
-module.exports.template = (createWindow, profileManager) => {
+exports.template = (createWindow, profileManager) => {
   return [
     aboutMenu,
     shellMenu(createWindow, profileManager),
