@@ -1,5 +1,5 @@
 const Profile = require('./profile')
-const keybindings = require('./default-keybindings')[process.platform]
+const {keybindings} = require('./config-file')
 
 module.exports =
 class ProfileManager {
