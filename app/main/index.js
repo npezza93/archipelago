@@ -1,6 +1,4 @@
 const {app, BrowserWindow, Menu, ipcMain} = require('electron')
-const path = require('path')
-const url = require('url')
 const isDev = require('electron-is-dev')
 const {CompositeDisposable} = require('event-kit')
 
@@ -32,14 +30,8 @@ const createWindow = () => {
     vibrancy: profileManager.get('vibrancy')
   })
 
-  win.loadURL(url.format({
-    pathname: path.join(__dirname, '../renderer/index.html'),
-    protocol: 'file:',
-    slashes: true
-  }))
-
+  win.loadFile('app/renderer/index.html')
   win.focus()
-
   windows.push(win)
 }
 

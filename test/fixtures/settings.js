@@ -1,7 +1,5 @@
 const {app} = require('electron')
 const {BrowserWindow} = require('electron')
-const path = require('path')
-const url = require('url')
 
 const ProfileManager = require('../../app/configuration/profile-manager')
 const {pref} = require('../../app/configuration/config-file')
@@ -24,11 +22,7 @@ app.on('ready', () => {
     }
   })
 
-  settings.loadURL(url.format({
-    pathname: path.join(__dirname, '../../app/settings/index.html'),
-    protocol: 'file:',
-    slashes: true
-  }))
+  settings.loadFile('app/settings/index.html')
 
   settings.on('closed', () => {
     settings = null

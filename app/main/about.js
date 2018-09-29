@@ -1,6 +1,4 @@
 const {BrowserWindow} = require('electron')
-const path = require('path')
-const url = require('url')
 
 let aboutWindow = null
 
@@ -12,17 +10,12 @@ module.exports = {
         height: 500,
         show: true,
         titleBarStyle: 'hiddenInset',
-        frame: process.platform === 'darwin',
-        icon: path.join(__dirname, '../../../build/icon.png')
+        frame: process.platform === 'darwin'
       })
 
-      aboutWindow.loadURL(url.format({
-        pathname: path.join(__dirname, '../about/index.html'),
-        protocol: 'file:',
-        slashes: true
-      }))
+      aboutWindow.loadFile('app/about/index.html')
     }
 
-    return aboutWindow.focus()
+    aboutWindow.focus()
   }
 }
