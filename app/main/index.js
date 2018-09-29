@@ -12,7 +12,7 @@ const visor = require('./visor')
 
 const windows = []
 const subscriptions = new CompositeDisposable()
-const profileManager = new ProfileManager(pref)
+const profileManager = new ProfileManager(pref())
 
 if (!isDev) {
   require('update-electron-app')()

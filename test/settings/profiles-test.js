@@ -1,4 +1,4 @@
-/* global describe, beforeEach, it */
+/* global describe, beforeEach, afterEach, it */
 
 const {configure} = require('enzyme')
 const Adapter = require('enzyme-adapter-react-16')
@@ -16,14 +16,19 @@ const ProfileManager = require('../../app/configuration/profile-manager')
 describe('Profiles Component', () => {
   describe('generic actions', () => {
     beforeEach(() => {
-      pref.store = {activeProfileId: 1, profiles: [{id: 1}, {id: 2}]}
-      this.profileManager = new ProfileManager(pref)
+      this.pref = pref()
+      this.pref.store = {activeProfileId: 1, profiles: [
+        {id: 1, theme: {}}, {id: 2, theme: {}}
+      ]}
+      this.profileManager = new ProfileManager(this.pref)
       this.component = mount(
         React.createElement(
           ProfilesComponent, {profileManager: this.profileManager}
         )
       )
     })
+
+    afterEach(() => this.pref.dispose())
 
     it('creates a new profile', () => {
       const newProfile = this.component.find('.new-profile')
@@ -47,14 +52,19 @@ describe('Profiles Component', () => {
 
   describe('more than 1 profile', () => {
     beforeEach(() => {
-      pref.store = {activeProfileId: 1, profiles: [{id: 1}, {id: 2}]}
-      this.profileManager = new ProfileManager(pref)
+      this.pref = pref()
+      this.pref.store = {activeProfileId: 1, profiles: [
+        {id: 1, theme: {}}, {id: 2, theme: {}}
+      ]}
+      this.profileManager = new ProfileManager(this.pref)
       this.component = mount(
         React.createElement(
           ProfilesComponent, {profileManager: this.profileManager}
         )
       )
     })
+
+    afterEach(() => this.pref.dispose())
 
     it('removes the profile and resets the active profile', () => {
       const remover = this.component.find('.profile-remove').at(0)

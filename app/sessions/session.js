@@ -9,19 +9,20 @@ const KeymapManager = require('atom-keymap')
 const unescape = require('unescape-js')
 
 const ProfileManager = require('../configuration/profile-manager')
-const {pref, xtermSettings} = require('../configuration/config-file')
+const {xtermSettings} = require('../configuration/config-file')
 
 Terminal.applyAddon(require('xterm/lib/addons/fit/fit'))
 
 module.exports =
 class Session {
-  constructor(branch) {
+  constructor(pref, branch) {
     this.branch = branch
     this.id = Math.random()
     this.emitter = new Emitter()
     this.subscriptions = new CompositeDisposable()
     this.profileManager = new ProfileManager(pref)
     this.title = ''
+    this.pref = pref
 
     this.bindDataListeners()
   }
@@ -114,6 +115,7 @@ class Session {
     this.emitter.dispose()
     this.pty.kill()
     this.xterm.dispose()
+    this.pref.events.dispose()
   }
 
   fit() {

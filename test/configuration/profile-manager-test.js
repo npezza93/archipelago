@@ -1,30 +1,33 @@
 /* global describe, it, beforeEach, afterEach */
 
 const {assert} = require('chai')
-const Pref = require('pref')
 
 const ProfileManager = require('../../app/configuration/profile-manager')
 const Profile = require('../../app/configuration/profile')
+const {pref} = require('../../app/configuration/config-file')
 const keybindings = require('../../app/configuration/default-keybindings')
 
 describe('ProfileManager', () => {
   beforeEach(() => {
-    (new Pref()).clear()
-    this.pref = new Pref({watch: false})
+    this.pref = pref()
+    this.pref.clear()
     this.profiles = [
       {
         id: 1,
-        name: 'Profile 1'
+        name: 'Profile 1',
+        theme: {}
       },
       {
         id: 2,
-        name: 'Profile 2'
+        name: 'Profile 2',
+        theme: {}
       }
     ]
   })
 
   afterEach(() => {
     this.pref.clear()
+    this.pref.dispose()
   })
 
   describe('all', () => {
@@ -97,11 +100,11 @@ describe('ProfileManager', () => {
       assert.equal(manager.activeProfile().id, 3)
 
       assert.deepEqual(
-        this.pref.get('profiles'),
+        this.pref.store.profiles,
         [
-          {id: 1, name: 'Profile 1'},
-          {id: 2, name: 'Profile 2'},
-          {id: 3, keybindings: keybindings[process.platform]}
+          {id: 1, name: 'Profile 1', theme: {}},
+          {id: 2, name: 'Profile 2', theme: {}},
+          {id: 3, keybindings: keybindings[process.platform], theme: {}}
         ]
       )
     })

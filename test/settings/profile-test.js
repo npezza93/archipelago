@@ -1,4 +1,4 @@
-/* global describe, beforeEach, it */
+/* global describe, beforeEach, afterEach, it */
 
 const {configure} = require('enzyme')
 const Adapter = require('enzyme-adapter-react-16')
@@ -17,11 +17,16 @@ const ProfileManager = require('../../app/configuration/profile-manager')
 describe('Profile Component', () => {
   describe('more than 1 profile', () => {
     beforeEach(() => {
-      pref.store = {activeProfileId: 1, profiles: [{id: 1}, {id: 2}]}
-      this.profileManager = new ProfileManager(pref)
+      this.pref = pref()
+      this.pref.store = {activeProfileId: 1, profiles: [
+        {id: 1, theme: {}}, {id: 2, theme: {}}
+      ]}
+      this.profileManager = new ProfileManager(this.pref)
 
-      this.profile = new Profile({id: 1}, pref)
+      this.profile = new Profile({id: 1, theme: {}}, this.pref)
     })
+
+    afterEach(() => this.pref.dispose())
 
     it('displays the profile remove button', () => {
       const component = mount(
@@ -40,11 +45,14 @@ describe('Profile Component', () => {
 
   describe('1 profile', () => {
     beforeEach(() => {
-      pref.store = {activeProfileId: 1, profiles: [{id: 1}]}
-      this.profileManager = new ProfileManager(pref)
+      this.pref = pref()
+      this.pref.store = {activeProfileId: 1, profiles: [{id: 1, theme: {}}]}
+      this.profileManager = new ProfileManager(this.pref)
 
-      this.profile = new Profile({id: 1}, pref)
+      this.profile = new Profile({id: 1, theme: {}}, this.pref)
     })
+
+    afterEach(() => this.pref.dispose())
 
     it('does not display the profile remove button', () => {
       const component = mount(

@@ -9,7 +9,7 @@ const ProfileManager = require('../configuration/profile-manager')
 const App = require('./app')
 
 global.archipelago = {}
-const profileManager = new ProfileManager(pref)
+const profileManager = new ProfileManager(pref())
 const styleProperties = {
   fontFamily: '--font-family',
   windowBackground: '--background-color',
@@ -21,7 +21,7 @@ const styleProperties = {
 }
 
 global.archipelago.app = ReactDOM.render(
-  React.createElement(App, {profileManager}), document.getElementById('root')
+  React.createElement(App, {profileManager, pref}), document.getElementById('root')
 )
 
 for (const selector in styleProperties) {

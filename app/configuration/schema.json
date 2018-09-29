@@ -257,6 +257,7 @@
           "theme": {
             "type": "object",
             "scope": "xterm",
+            "settings": {"title": "theme"},
             "properties": {
               "selection": {
                 "type": "string",

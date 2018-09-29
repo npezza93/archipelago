@@ -10,7 +10,8 @@ class Property extends React.Component {
   constructor(props) {
     super(props)
 
-    this.profileManager = new ProfileManager(pref)
+    this.pref = pref()
+    this.profileManager = new ProfileManager(this.pref)
     this.subscriptions = new CompositeDisposable()
 
     this.state = {
@@ -21,7 +22,7 @@ class Property extends React.Component {
   }
 
   render() {
-    return allFields[this.props.schema.type].call(
+    return allFields[this.fieldType()].call(
       this,
       this.props.property,
       this.state[this.props.property],
@@ -30,7 +31,18 @@ class Property extends React.Component {
     )
   }
 
+  fieldType() {
+    let {type} = this.props.schema
+
+    if (type === 'string' && this.props.schema.color) {
+      type = 'color'
+    }
+
+    return type
+  }
+
   componentWillUnmount() {
+    this.pref.dispose()
     this.subscriptions.dispose()
   }
 
