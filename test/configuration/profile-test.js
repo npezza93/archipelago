@@ -1,4 +1,4 @@
-/* global describe, it, beforeEach */
+/* global describe, it, beforeEach, afterEach */
 
 const {assert} = require('chai')
 const Profile = require('../../app/configuration/profile')
