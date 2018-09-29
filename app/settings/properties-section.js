@@ -25,27 +25,28 @@ class PropertiesSection extends Component {
         createElement(
           'archipelago-properties-section-container',
           {},
-          this.renderProperties()
+          this.renderProperties(this.props.properties, '')
         )
       )
     )
   }
 
-  renderProperties() {
-    return Object.keys(this.props.properties).map(propertyName => {
-      const schema = this.props.properties[propertyName]
+  renderProperties(properties, prefix) {
+    return Object.keys(properties).map(propertyName => {
+      const schema = properties[propertyName]
+      let property
 
       if (schema.type === 'object') {
-        return Object.keys(schema.properties).map(objectPropertyName => {
-          return createElement(Property, {
-            key: `${propertyName}.${objectPropertyName}`,
-            property: `${propertyName}.${objectPropertyName}`,
-            schema: schema.properties[objectPropertyName]
-          })
-        })
+        property = this.renderProperties(schema.properties, propertyName)
       } else {
-        return createElement(Property, {key: propertyName, property: propertyName, schema})
+        const path = [prefix, propertyName].filter(partialPath => {
+          return partialPath.length > 0
+        }).join('.')
+
+        property = createElement(Property, {schema, key: path, property: path})
       }
+
+      return property
     })
   }
 }
