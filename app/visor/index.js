@@ -4,12 +4,12 @@
 const React = require('react')
 const ReactDOM = require('react-dom')
 
-const ConfigFile = require('../configuration/config-file')
+const {pref} = require('../configuration/config-file')
 const ProfileManager = require('../configuration/profile-manager')
 const App = require('./app')
 
 global.archipelago = {}
-const profileManager = new ProfileManager(new ConfigFile())
+const profileManager = new ProfileManager(pref())
 const styleProperties = {
   fontFamily: '--font-family',
   'visor.windowBackground': '--background-color',
@@ -19,7 +19,7 @@ const styleProperties = {
 }
 
 global.archipelago.app = ReactDOM.render(
-  React.createElement(App, {profileManager}), document.getElementById('root')
+  React.createElement(App, {profileManager, pref}), document.getElementById('root')
 )
 
 for (const selector in styleProperties) {

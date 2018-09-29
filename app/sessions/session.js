@@ -15,7 +15,7 @@ Terminal.applyAddon(require('xterm/lib/addons/fit/fit'))
 
 module.exports =
 class Session {
-  constructor(pref, branch) {
+  constructor(pref, type, branch) {
     this.branch = branch
     this.id = Math.random()
     this.emitter = new Emitter()
@@ -23,6 +23,7 @@ class Session {
     this.profileManager = new ProfileManager(pref)
     this.title = ''
     this.pref = pref
+    this.type = type || 'default'
 
     this.bindDataListeners()
   }
@@ -57,12 +58,8 @@ class Session {
     if (this._xterm) {
       return this._xterm
     }
-    const settings = xtermSettings.reduce((settings, property) => {
-      settings[property] = this.profileManager.get(property)
-      return settings
-    }, {})
 
-    this._xterm = new Terminal(settings)
+    this._xterm = new Terminal(this.settings())
 
     return this._xterm
   }
@@ -82,19 +79,28 @@ class Session {
     return this._keymaps
   }
 
-  defaultXtermSettings() {
-    return this.schema.xtermSettings().reduce((settings, property) => {
-      settings[property] = this.profileManager.get(property)
-      return settings
-    }, {})
+  settings() {
+    return this.applySettingModifiers(
+      xtermSettings.reduce((settings, property) => {
+        settings[property] = this.profileManager.get(property)
+        return settings
+      }, {})
+    )
   }
 
-  visorXtermSettings() {
-    return {
-      ...this.defaultXtermSettings(),
-      allowTransparency: this.profileManager.get('visor.allowTransparency'),
-      theme: {...this.profileManager.get('theme'), background: this.profileManager.get('visor.background')}
+  applySettingModifiers(defaultSettings) {
+    if (this.type === 'visor') {
+      defaultSettings = {
+        ...defaultSettings,
+        allowTransparency: this.profileManager.get('visor.allowTransparency'),
+        theme: {
+          ...this.profileManager.get('theme'),
+          background: this.profileManager.get('visor.background')
+        }
+      }
     }
+
+    return defaultSettings
   }
 
   resetTheme() {

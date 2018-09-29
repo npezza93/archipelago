@@ -450,37 +450,32 @@
           "visor": {
             "type": "object",
             "scope": "visor",
+            "settings": {"title": "visor"},
             "properties": {
               "vibrancy": {
                 "type": "string",
-                "defaultValue": null,
+                "default": "",
                 "enabledOn": ["darwin"],
-                "settings": {"title": "visor"},
                 "enum": ["", "light", "medium-light", "dark", "ultra-dark"]
               },
               "allowTransparency": {
                 "type": "boolean",
-                "defaultValue": false,
-                "scope": "visor",
-                "enabledOn": ["darwin"],
-                "settings": {"title": "visor"}
+                "default": false,
+                "enabledOn": ["darwin"]
               },
               "padding": {
                 "type": "string",
-                "defaultValue": "5px 0 10px 15px",
-                "settings": {"title": "visor"}
+                "default": "5px 0 10px 15px"
               },
               "windowBackground": {
                 "type": "string",
                 "color": true,
-                "defaultValue": "#000000",
-                "settings": {"title": "visor"}
+                "default": "#000000"
               },
               "background": {
                 "type": "string",
                 "color": true,
-                "defaultValue": "#000000",
-                "settings": {"title": "visor"}
+                "default": "#000000"
               }
             }
           }

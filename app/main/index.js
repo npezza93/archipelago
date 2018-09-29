@@ -1,4 +1,4 @@
-const {app, BrowserWindow, Menu, ipcMain, globalShortcut} = require('electron')
+const {app, BrowserWindow, Menu, ipcMain} = require('electron')
 const path = require('path')
 const url = require('url')
 const isDev = require('electron-is-dev')
@@ -7,7 +7,6 @@ const {CompositeDisposable} = require('event-kit')
 const {pref} = require('../configuration/config-file')
 const ProfileManager = require('../configuration/profile-manager')
 const {template} = require('./app-menu')
-
 const visor = require('./visor')
 
 const windows = []
@@ -54,10 +53,6 @@ app.on('ready', () => {
       {label: 'New Window', click: createWindow}
     ]))
   }
-})
-
-app.on('will-quit', () => {
-  globalShortcut.unregisterAll()
 })
 
 app.on('window-all-closed', () => {

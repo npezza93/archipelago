@@ -2,11 +2,12 @@ const {app, BrowserWindow, globalShortcut} = require('electron')
 const electron = require('electron')
 const path = require('path')
 const url = require('url')
-const {CompositeDisposable, Disposable} = require('event-kit')
-const ConfigFile = require('../configuration/config-file')
+const {CompositeDisposable} = require('event-kit')
+const {pref} = require('../configuration/config-file')
 const ProfileManager = require('../configuration/profile-manager')
 
-const profileManager = new ProfileManager(new ConfigFile())
+const preferences = pref()
+const profileManager = new ProfileManager(preferences)
 const subscriptions = new CompositeDisposable()
 let visorWindow = null
 let isVisorShowing = false
@@ -26,7 +27,12 @@ const showVisor = () => {
   visorWindow.setPosition(0, 22, true)
 }
 
-app.on('quit', () => subscriptions.dispose())
+app.on('quit', () => {
+  subscriptions.dispose()
+  preferences.dispose()
+})
+
+app.on('will-quit', () => globalShortcut.unregisterAll())
 
 module.exports = {
   register() {

@@ -11,7 +11,8 @@ class App extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = {tab: new Tab()}
+    this.pref = this.props.pref()
+    this.state = {tab: new Tab(this.pref, 'visor')}
 
     ipcRenderer.on('split-horizontal', () => this.split('horizontal'))
     ipcRenderer.on('split-vertical', () => this.split('vertical'))
@@ -37,6 +38,7 @@ class App extends React.Component {
 
   componentWillUnmount() {
     this.state.tab.kill()
+    this.pref.dispose()
   }
 
   componentDidUpdate() {
