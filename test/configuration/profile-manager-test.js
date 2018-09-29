@@ -14,11 +14,13 @@ describe('ProfileManager', () => {
     this.profiles = [
       {
         id: 1,
-        name: 'Profile 1'
+        name: 'Profile 1',
+        theme: {}
       },
       {
         id: 2,
-        name: 'Profile 2'
+        name: 'Profile 2',
+        theme: {}
       }
     ]
   })
@@ -99,9 +101,9 @@ describe('ProfileManager', () => {
       assert.deepEqual(
         this.pref.get('profiles'),
         [
-          {id: 1, name: 'Profile 1'},
-          {id: 2, name: 'Profile 2'},
-          {id: 3, keybindings: keybindings[process.platform]}
+          {id: 1, name: 'Profile 1', theme: {}},
+          {id: 2, name: 'Profile 2', theme: {}},
+          {id: 3, keybindings: keybindings[process.platform], theme: {}}
         ]
       )
     })

@@ -16,7 +16,9 @@ const ProfileManager = require('../../app/configuration/profile-manager')
 describe('Profiles Component', () => {
   describe('generic actions', () => {
     beforeEach(() => {
-      pref.store = {activeProfileId: 1, profiles: [{id: 1}, {id: 2}]}
+      pref.store = {activeProfileId: 1, profiles: [
+        {id: 1, theme: {}}, {id: 2, theme: {}}
+      ]}
       this.profileManager = new ProfileManager(pref)
       this.component = mount(
         React.createElement(
@@ -47,7 +49,9 @@ describe('Profiles Component', () => {
 
   describe('more than 1 profile', () => {
     beforeEach(() => {
-      pref.store = {activeProfileId: 1, profiles: [{id: 1}, {id: 2}]}
+      pref.store = {activeProfileId: 1, profiles: [
+        {id: 1, theme: {}}, {id: 2, theme: {}}
+      ]}
       this.profileManager = new ProfileManager(pref)
       this.component = mount(
         React.createElement(

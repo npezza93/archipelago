@@ -17,10 +17,10 @@ const ProfileManager = require('../../app/configuration/profile-manager')
 describe('Profile Component', () => {
   describe('more than 1 profile', () => {
     beforeEach(() => {
-      pref.store = {activeProfileId: 1, profiles: [{id: 1}, {id: 2}]}
+      pref.store = {activeProfileId: 1, profiles: [{id: 1, theme: {}}, {id: 2, theme: {}}]}
       this.profileManager = new ProfileManager(pref)
 
-      this.profile = new Profile({id: 1}, pref)
+      this.profile = new Profile({id: 1, theme: {}}, pref)
     })
 
     it('displays the profile remove button', () => {
@@ -40,10 +40,10 @@ describe('Profile Component', () => {
 
   describe('1 profile', () => {
     beforeEach(() => {
-      pref.store = {activeProfileId: 1, profiles: [{id: 1}]}
+      pref.store = {activeProfileId: 1, profiles: [{id: 1, theme: {}}]}
       this.profileManager = new ProfileManager(pref)
 
-      this.profile = new Profile({id: 1}, pref)
+      this.profile = new Profile({id: 1, theme: {}}, pref)
     })
 
     it('does not display the profile remove button', () => {

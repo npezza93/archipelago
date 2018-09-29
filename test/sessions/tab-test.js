@@ -8,7 +8,7 @@ const Tab = require('../../app/sessions/tab')
 describe('Tab', () => {
   beforeEach(() => {
     this.pref = new Pref({watch: false})
-    this.pref.store = {activeProfileId: 1, profiles: [{id: 1}]}
+    this.pref.store = {activeProfileId: 1, profiles: [{id: 1, theme: {}}]}
   })
 
   afterEach(() => this.pref.clear())

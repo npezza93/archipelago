@@ -16,6 +16,12 @@ const pref = new Pref({
         oldStore.profiles = profiles
         store.store = oldStore
       }
+
+      (store.store.profiles || []).forEach((profile, index) => {
+        if (store.get(`profiles.${index}.theme`) === undefined) {
+          store.set(`profiles.${index}.theme`, {})
+        }
+      })
     }
   }
 })
