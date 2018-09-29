@@ -22,13 +22,23 @@ class Property extends React.Component {
   }
 
   render() {
-    return allFields[this.props.schema.type].call(
+    return allFields[this.fieldType()].call(
       this,
       this.props.property,
       this.state[this.props.property],
       this.props.schema,
       newValue => this.profileManager.set(this.props.property, newValue)
     )
+  }
+
+  fieldType() {
+    let {type} = this.props.schema
+
+    if (type === 'string' && this.props.schema.color) {
+      type = 'color'
+    }
+
+    return type
   }
 
   componentWillUnmount() {

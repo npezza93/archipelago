@@ -35,7 +35,17 @@ class PropertiesSection extends Component {
     return Object.keys(this.props.properties).map(propertyName => {
       const schema = this.props.properties[propertyName]
 
-      return createElement(Property, {key: propertyName, property: propertyName, schema})
+      if (schema.type === 'object') {
+        return Object.keys(schema.properties).map(objectPropertyName => {
+          return createElement(Property, {
+            key: `${propertyName}.${objectPropertyName}`,
+            property: `${propertyName}.${objectPropertyName}`,
+            schema: schema.properties[objectPropertyName]
+          })
+        })
+      } else {
+        return createElement(Property, {key: propertyName, property: propertyName, schema})
+      }
     })
   }
 }
