@@ -10,6 +10,7 @@ const keybindings = require('../../app/configuration/default-keybindings')
 describe('ProfileManager', () => {
   beforeEach(() => {
     this.pref = pref()
+    this.pref.clear()
     this.profiles = [
       {
         id: 1,
@@ -26,7 +27,7 @@ describe('ProfileManager', () => {
 
   afterEach(() => {
     this.pref.clear()
-    this.pref.events.clear()
+    this.pref.dispose()
   })
 
   describe('all', () => {
@@ -99,7 +100,7 @@ describe('ProfileManager', () => {
       assert.equal(manager.activeProfile().id, 3)
 
       assert.deepEqual(
-        this.pref.get('profiles'),
+        this.pref.store.profiles,
         [
           {id: 1, name: 'Profile 1', theme: {}},
           {id: 2, name: 'Profile 2', theme: {}},

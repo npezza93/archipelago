@@ -14,7 +14,8 @@ class App extends React.Component {
   constructor(props) {
     super(props)
 
-    const initialTab = new Tab(this.props.pref())
+    this.pref = pref()
+    const initialTab = new Tab(this.pref)
 
     this.state = {tabs: [initialTab], currentTabId: initialTab.id}
 
@@ -64,6 +65,8 @@ class App extends React.Component {
 
   componentWillUnmount() {
     this.state.tabs.map(tab => tab.kill())
+    this.pref.dispose()
+
   }
 
   componentDidUpdate() {

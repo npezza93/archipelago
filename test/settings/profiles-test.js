@@ -28,7 +28,7 @@ describe('Profiles Component', () => {
       )
     })
 
-    afterEach(() => this.pref.events.dispose())
+    afterEach(() => this.pref.dispose())
 
     it('creates a new profile', () => {
       const newProfile = this.component.find('.new-profile')
@@ -64,7 +64,7 @@ describe('Profiles Component', () => {
       )
     })
 
-    afterEach(() => this.pref.events.dispose())
+    afterEach(() => this.pref.dispose())
 
     it('removes the profile and resets the active profile', () => {
       const remover = this.component.find('.profile-remove').at(0)

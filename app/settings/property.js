@@ -32,7 +32,7 @@ class Property extends React.Component {
   }
 
   componentWillUnmount() {
-    this.pref.events.dispose()
+    this.pref.dispose()
     this.subscriptions.dispose()
   }
 

@@ -14,7 +14,7 @@ describe('Tab', () => {
 
   afterEach(() => {
     this.tab.kill()
-    this.pref.events.dispose()
+    this.pref.dispose()
     this.pref.clear()
   })
 

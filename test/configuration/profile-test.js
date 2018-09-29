@@ -16,7 +16,7 @@ describe('Profile', () => {
   })
 
   afterEach(() => {
-    this.pref.events.dispose()
+    this.pref.dispose()
     this.pref.clear()
   })
 

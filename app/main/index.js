@@ -10,7 +10,9 @@ const {template} = require('./app-menu')
 
 const windows = []
 const subscriptions = new CompositeDisposable()
-const profileManager = new ProfileManager(pref())
+const preferences = pref()
+
+const profileManager = new ProfileManager(preferences)
 
 if (!isDev) {
   require('update-electron-app')()
@@ -59,7 +61,10 @@ app.on('window-all-closed', () => {
   }
 })
 
-app.on('quit', () => subscriptions.dispose())
+app.on('quit', () => {
+  subscriptions.dispose()
+  preferences.dipose()
+})
 
 app.on('activate', () => {
   let windowCount = 0

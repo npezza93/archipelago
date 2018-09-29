@@ -26,7 +26,7 @@ describe('Profile Component', () => {
       this.profile = new Profile({id: 1, theme: {}}, this.pref)
     })
 
-    afterEach(() => this.pref.events.dispose())
+    afterEach(() => this.pref.dispose())
 
     it('displays the profile remove button', () => {
       const component = mount(
@@ -52,7 +52,7 @@ describe('Profile Component', () => {
       this.profile = new Profile({id: 1, theme: {}}, this.pref)
     })
 
-    afterEach(() => this.pref.events.dispose())
+    afterEach(() => this.pref.dispose())
 
     it('does not display the profile remove button', () => {
       const component = mount(

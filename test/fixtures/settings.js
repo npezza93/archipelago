@@ -7,7 +7,8 @@ const ProfileManager = require('../../app/configuration/profile-manager')
 const {pref} = require('../../app/configuration/config-file')
 
 let settings = null
-const profileManager = new ProfileManager(pref())
+const preferences = pref()
+const profileManager = new ProfileManager(preferences)
 
 profileManager.validate()
 
@@ -33,3 +34,5 @@ app.on('ready', () => {
     settings = null
   })
 })
+
+app.on('quit', () => preferences.dipose())
