@@ -47,7 +47,6 @@
     "electron-is-dev": "^1.0.0",
     "event-kit": "^2.5.0",
     "i": "^0.3.6",
-    "key-path-helpers": "^0.4.0",
     "node-pty": "^0.7.6",
     "pref": "^3.1.0",
     "react": "^16.4.1",

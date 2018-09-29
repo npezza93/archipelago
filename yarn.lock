@@ -3144,10 +3144,6 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
-key-path-helpers@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/key-path-helpers/-/key-path-helpers-0.4.0.tgz#e87f6a159144adf2692e46f2a4641ce269c09119"
-
 keyboard-layout@2.0.14:
   version "2.0.14"
   resolved "https://registry.yarnpkg.com/keyboard-layout/-/keyboard-layout-2.0.14.tgz#ba3eebe3e346790bddbb2cbaeae831e108348416"
