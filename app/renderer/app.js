@@ -14,7 +14,7 @@ class App extends React.Component {
   constructor(props) {
     super(props)
 
-    const initialTab = new Tab()
+    const initialTab = new Tab(this.props.pref())
 
     this.state = {tabs: [initialTab], currentTabId: initialTab.id}
 
@@ -112,7 +112,7 @@ class App extends React.Component {
   }
 
   addTab() {
-    const newTab = new Tab()
+    const newTab = new Tab(this.props.pref())
 
     return this.setState({
       tabs: this.state.tabs.concat(newTab),

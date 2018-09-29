@@ -10,7 +10,8 @@ class Property extends React.Component {
   constructor(props) {
     super(props)
 
-    this.profileManager = new ProfileManager(pref)
+    this.pref = pref()
+    this.profileManager = new ProfileManager(this.pref)
     this.subscriptions = new CompositeDisposable()
 
     this.state = {
@@ -31,6 +32,7 @@ class Property extends React.Component {
   }
 
   componentWillUnmount() {
+    this.pref.events.dispose()
     this.subscriptions.dispose()
   }
 

@@ -16,10 +16,10 @@ const profilesContainer = document.querySelector('.profiles-container')
 const backdrop = document.querySelector('#backdrop')
 
 ReactDOM.render(
-  React.createElement(PropertiesPane, {profileManager: (new ProfileManager(pref))}),
+  React.createElement(PropertiesPane, {profileManager: (new ProfileManager(pref()))}),
   document.querySelector('.options-container')
 )
-ReactDOM.render(React.createElement(Profiles, {profileManager: (new ProfileManager(pref))}), profilesContainer)
+ReactDOM.render(React.createElement(Profiles, {profileManager: (new ProfileManager(pref()))}), profilesContainer)
 ReactDOM.render(
   React.createElement(TrafficLights),
   document.querySelector('#titlebar')

@@ -2,12 +2,12 @@ const {app} = require('electron')
 const {BrowserWindow} = require('electron')
 const path = require('path')
 const url = require('url')
+const Pref = require('pref')
 
-const {pref} = require('../../app/configuration/config-file')
 const ProfileManager = require('../../app/configuration/profile-manager')
 
 let settings = null
-const profileManager = new ProfileManager(pref)
+const profileManager = new ProfileManager(new Pref())
 
 profileManager.validate()
 

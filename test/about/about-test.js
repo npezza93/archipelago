@@ -4,8 +4,6 @@ const path = require('path')
 const {Application} = require('spectron')
 const {assert} = require('chai')
 
-const {pref} = require('../../app/configuration/config-file')
-
 let electron = './node_modules/electron/dist/'
 
 if (process.platform === 'darwin') {
@@ -18,7 +16,6 @@ describe('About launch', function () {
   this.timeout(10000)
 
   beforeEach(() => {
-    pref.clear()
     this.app = new Application({
       path: electron,
 
