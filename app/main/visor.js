@@ -35,7 +35,7 @@ const create = () => {
       width,
       enableLargerThanScreen: true,
       height: parseInt(height * 0.4, 10),
-      show: true,
+      show: false,
       frame: false,
       x: 0,
       y: -parseInt(height * 0.4, 10),
