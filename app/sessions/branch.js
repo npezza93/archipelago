@@ -10,7 +10,9 @@ class Branch {
   }
 
   kill() {
-    this.left.kill()
-    this.right.kill()
+    return (async () => {
+      await this.left.kill()
+      await this.right.kill()
+    })()
   }
 }

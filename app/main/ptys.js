@@ -14,20 +14,26 @@ module.exports = () => {
   }
 
   const create = () => {
-    const newPty = new Pty(pref())
-    newPty.onExit(() => {
-      for (const window of BrowserWindow.getAllWindows()) {
-        ipc.callRenderer(window, `exit-${newPty.id}`)
-      }
-      kill(newPty.id)
+    return new Promise(resolve => {
+      const newPty = new Pty(pref())
+      newPty.onExit(() => {
+        for (const window of BrowserWindow.getAllWindows()) {
+          ipc.callRenderer(window, `exit-${newPty.id}`)
+        }
+        kill(newPty.id)
+      })
+
+      resolve(newPty)
     })
-
-    sessions[newPty.id] = newPty
-
-    return newPty.id
   }
+  let preppedPty = create()
 
-  ipc.answerRenderer('create-pty', create)
+  ipc.answerRenderer('create-pty', async () => {
+    const pty = await preppedPty
+    sessions[pty.id] = pty
+    preppedPty = create()
+    return pty.id
+  })
   ipc.answerRenderer('kill-pty', kill)
   api.app.on('quit', () => Object.keys(sessions).forEach(id => kill(id)))
 }

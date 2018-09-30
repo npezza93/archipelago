@@ -1,4 +1,3 @@
-/* global document */
 const {Component, createElement} = require('react')
 const {CompositeDisposable} = require('event-kit')
 
@@ -20,10 +19,6 @@ class Terminal extends Component {
     session.xterm.open(this.refs.container)
     session.resetTheme()
     session.xterm.focus()
-
-    if (!document.querySelector('#boot').classList.contains('booted')) {
-      document.querySelector('#boot').classList.add('booted')
-    }
 
     this.subscriptions.add(this.props.session.bindScrollListener())
   }

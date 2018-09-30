@@ -15,6 +15,7 @@ module.exports =
 class Session {
   constructor(pref, branch) {
     this.branch = branch
+    this.id = Math.random()
     this.emitter = new Emitter()
     this.subscriptions = new CompositeDisposable()
     this.profileManager = new ProfileManager(pref)
@@ -72,7 +73,8 @@ class Session {
     this.emitter.dispose()
     this.xterm.dispose()
     this.pref.events.dispose()
-    this.pty.then(id => ipc.callMain('kill-pty', id))
+
+    return this.pty.then(id => ipc.callMain('kill-pty', id))
   }
 
   fit() {

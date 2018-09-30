@@ -20,26 +20,6 @@
     esutils "^2.0.2"
     js-tokens "^4.0.0"
 
-"@material/animation@^0.39.0":
-  version "0.39.0"
-  resolved "https://registry.yarnpkg.com/@material/animation/-/animation-0.39.0.tgz#d3d503c9f87ac1193dc4a5b0cccfaedb39478439"
-
-"@material/base@^0.39.0":
-  version "0.39.0"
-  resolved "https://registry.yarnpkg.com/@material/base/-/base-0.39.0.tgz#ca451531cf438f51bf999ad7b96b5e8f3929e19a"
-
-"@material/linear-progress@^0.40.0":
-  version "0.40.0"
-  resolved "https://registry.yarnpkg.com/@material/linear-progress/-/linear-progress-0.40.0.tgz#36f90b62d3e0aad45009a4a468c094c12a294fa7"
-  dependencies:
-    "@material/animation" "^0.39.0"
-    "@material/base" "^0.39.0"
-    "@material/theme" "^0.40.0"
-
-"@material/theme@^0.40.0":
-  version "0.40.0"
-  resolved "https://registry.yarnpkg.com/@material/theme/-/theme-0.40.0.tgz#0b91750bf6334fa7bebf2b1aabb8ec727f519e13"
-
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
