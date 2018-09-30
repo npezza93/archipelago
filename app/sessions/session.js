@@ -1,4 +1,4 @@
-/* global window, requestAnimationFrame, requestIdleCallback, document */
+/* global requestAnimationFrame, requestIdleCallback, document */
 
 const {Emitter, CompositeDisposable, Disposable} = require('event-kit')
 const {Terminal} = require('xterm')
@@ -67,8 +67,6 @@ class Session {
   }
 
   kill() {
-    window.removeEventListener('resize', this.fit.bind(this))
-
     this.subscriptions.dispose()
     this.emitter.dispose()
     this.xterm.dispose()
@@ -77,9 +75,10 @@ class Session {
     return this.pty.then(({id}) => ipc.callMain('kill-pty', id))
   }
 
-  fit() {
+  async fit() {
     this.xterm.fit()
-    this.pty.then(({id}) => ipc.callMain(`resize-${id}`, {cols: this.xterm.cols, rows: this.xterm.rows}))
+    const {id} = await this.pty
+    ipc.callMain(`resize-${id}`, {cols: this.xterm.cols, rows: this.xterm.rows})
   }
 
   on(event, handler) {
@@ -140,7 +139,6 @@ class Session {
     })
 
     this.xterm.attachCustomKeyEventHandler(this.keybindingHandler.bind(this))
-    window.addEventListener('resize', this.fit.bind(this))
 
     this.xterm.on('data', data => {
       this.pty.then(({id}) => ipc.callMain(`write-${id}`, data))
