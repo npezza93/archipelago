@@ -1,3 +1,5 @@
+require('./ptys')()
+
 const {app, BrowserWindow, Menu} = require('electron')
 const {is, platform} = require('electron-util')
 const ipc = require('electron-better-ipc')

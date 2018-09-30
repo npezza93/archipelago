@@ -1,12 +1,10 @@
 /* global window, requestAnimationFrame, requestIdleCallback, document */
 
-const {remote} = require('electron')
-const os = require('os')
-const {spawn} = require('node-pty')
 const {Emitter, CompositeDisposable, Disposable} = require('event-kit')
 const {Terminal} = require('xterm')
 const KeymapManager = require('atom-keymap')
 const unescape = require('unescape-js')
+const ipc = require('electron-better-ipc')
 
 const ProfileManager = require('../configuration/profile-manager')
 const {xtermSettings} = require('../configuration/config-file')
@@ -17,40 +15,14 @@ module.exports =
 class Session {
   constructor(pref, branch) {
     this.branch = branch
-    this.id = Math.random()
     this.emitter = new Emitter()
     this.subscriptions = new CompositeDisposable()
     this.profileManager = new ProfileManager(pref)
     this.title = ''
     this.pref = pref
+    this.pty = ipc.callMain('create-pty')
 
     this.bindDataListeners()
-  }
-
-  get pty() {
-    if (this._pty) {
-      return this._pty
-    }
-
-    const shell =
-      this.profileManager.get('shell') ||
-      process.env[os.platform() === 'win32' ? 'COMSPEC' : 'SHELL']
-    const lang = (remote && remote.app && remote.app.getLocale()) || ''
-
-    this._pty = spawn(
-      shell, this.profileManager.get('shellArgs').split(','), {
-        name: 'xterm-256color',
-        cwd: process.env.HOME,
-        env: {
-          LANG: lang + '.UTF-8',
-          TERM: 'xterm-256color',
-          COLORTERM: 'truecolor',
-          ...process.env
-        }
-      }
-    )
-
-    return this._pty
   }
 
   get xterm() {
@@ -98,14 +70,14 @@ class Session {
 
     this.subscriptions.dispose()
     this.emitter.dispose()
-    this.pty.kill()
     this.xterm.dispose()
     this.pref.events.dispose()
+    this.pty.then(id => ipc.callMain('kill-pty', id))
   }
 
   fit() {
     this.xterm.fit()
-    this.pty.resize(this.xterm.cols, this.xterm.rows)
+    this.pty.then(id => ipc.callMain(`resize-${id}`, {cols: this.xterm.cols, rows: this.xterm.rows}))
   }
 
   on(event, handler) {
@@ -117,7 +89,7 @@ class Session {
     const mapping = this.keymaps.mappings[this.keymaps.keystrokeForKeyboardEvent(e)]
 
     if (mapping) {
-      this.pty.write(mapping)
+      this.pty.then(id => ipc.callMain(`write-${id}`, mapping))
       caught = true
     }
 
@@ -162,9 +134,7 @@ class Session {
     window.addEventListener('resize', this.fit.bind(this))
 
     this.xterm.on('data', data => {
-      try {
-        this.pty.write(data)
-      } catch (error) {}
+      this.pty.then(id => ipc.callMain(`write-${id}`, data))
     })
 
     this.xterm.on('focus', () => {
@@ -186,13 +156,13 @@ class Session {
       }
     })
 
-    this.pty.on('data', data => {
-      this.xterm.write(data)
-      this.emitter.emit('data')
-    })
+    this.pty.then(id => {
+      ipc.answerMain(`write-${id}`, data => {
+        this.xterm.write(data)
+        this.emitter.emit('data')
+      })
 
-    this.pty.on('exit', () => {
-      this.emitter.emit('did-exit')
+      ipc.answerMain(`exit-${id}`, () => this.emitter.emit('did-exit'))
     })
 
     xtermSettings.forEach(field => {
