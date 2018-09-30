@@ -1,6 +1,6 @@
 /* global document, window */
 
-const {ipcRenderer} = require('electron')
+const ipc = require('electron-better-ipc')
 const React = require('react')
 const ReactDOM = require('react-dom')
 
@@ -35,6 +35,4 @@ backdrop.addEventListener('click', () => {
   return backdrop.classList.remove('active')
 })
 
-ipcRenderer.on('close-current-tab', () => {
-  window.close()
-})
+ipc.answerMain('close-current-tab', () => window.close())

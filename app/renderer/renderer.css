@@ -68,41 +68,6 @@ archipelago-app {
   border-radius: 0;
 }
 
-/* Boot screen */
-
-#boot {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 5;
-  background: var(--background-color);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  -webkit-app-region: drag;
-  opacity: 1;
-  visibility: visible;
-  transition: opacity 300ms linear 800ms, visibility 300ms linear 800ms;
-}
-
-#boot img {
-  width: 25%;
-}
-#boot svg {
-  width: 25%;
-  height: 40%;
-}
-#boot svg g {
-  fill: var(--tab-color);
-}
-#boot.booted {
-  visibility: hidden;
-  opacity: 0;
-}
-
 .xterm .xterm-viewport {
   -webkit-transition: all .5s;
   opacity: 0;

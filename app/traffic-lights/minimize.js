@@ -1,4 +1,4 @@
-const {remote} = require('electron')
+const {activeWindow} = require('electron-util')
 const {Component, createElement} = require('react')
 
 module.exports =
@@ -22,7 +22,7 @@ class Minimize extends Component {
           cursor: 'pointer'
         },
         onClick() {
-          return remote.getCurrentWindow().minimize()
+          return activeWindow().minimize()
         }
       },
       createElement('div', {style: {height: '1px', background: '#000'}})

@@ -4,8 +4,7 @@ const {assert} = require('chai')
 
 const ProfileManager = require('../../app/configuration/profile-manager')
 const Profile = require('../../app/configuration/profile')
-const {pref} = require('../../app/configuration/config-file')
-const keybindings = require('../../app/configuration/default-keybindings')
+const {pref, keybindings} = require('../../app/configuration/config-file')
 
 describe('ProfileManager', () => {
   beforeEach(() => {
@@ -104,7 +103,7 @@ describe('ProfileManager', () => {
         [
           {id: 1, name: 'Profile 1', theme: {}},
           {id: 2, name: 'Profile 2', theme: {}},
-          {id: 3, keybindings: keybindings[process.platform], theme: {}}
+          {id: 3, keybindings, theme: {}}
         ]
       )
     })

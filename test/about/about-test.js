@@ -6,11 +6,11 @@ const {assert} = require('chai')
 
 let electron = './node_modules/electron/dist/'
 
-if (process.platform === 'darwin') {
-  electron += 'Electron.app/Contents/MacOS/Electron'
-} else if (process.platform === 'linux') {
-  electron += 'electron'
-}
+electron = {
+  darwin: electron + 'Electron.app/Contents/MacOS/Electron',
+  linux: electron + 'electron',
+  win32: electron
+}[process.platform]
 
 describe('About launch', function () {
   this.timeout(10000)

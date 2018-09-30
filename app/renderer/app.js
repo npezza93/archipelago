@@ -1,6 +1,6 @@
 /* global window */
 
-const {ipcRenderer} = require('electron')
+const ipc = require('electron-better-ipc')
 const React = require('react')
 
 const Tab = require('../sessions/tab')
@@ -19,16 +19,9 @@ class App extends React.Component {
 
     this.state = {tabs: [initialTab], currentTabId: initialTab.id}
 
-    ipcRenderer.on('split-horizontal', () => this.split('horizontal'))
-    ipcRenderer.on('split-vertical', () => this.split('vertical'))
-    ipcRenderer.on('new-tab', () => {
-      if (!this.props.profileManager.get('singleTabMode')) {
-        this.addTab()
-      }
-    })
-    ipcRenderer.on('close-current-tab', () => {
-      this.removeTab(this.state.currentTabId)
-    })
+    ipc.answerMain('split', direction => this.split(direction))
+    ipc.answerMain('new-tab', this.addTab.bind(this))
+    ipc.answerMain('close-current-tab', () => this.removeTab(this.state.currentTabId))
   }
 
   render() {
@@ -114,34 +107,39 @@ class App extends React.Component {
   }
 
   addTab() {
-    const newTab = new Tab(this.props.pref(), 'default')
+    if (!this.props.profileManager.get('singleTabMode')) {
+      const newTab = new Tab(this.props.pref(), 'default')
 
-    return this.setState({
-      tabs: this.state.tabs.concat(newTab),
-      currentTabId: newTab.id
-    })
+      return this.setState({
+        tabs: this.state.tabs.concat(newTab),
+        currentTabId: newTab.id
+      })
+    }
   }
 
   removeTab(id) {
-    const tabs = this.state.tabs.filter(tab => {
+    const [found, remaining] = this.state.tabs.reduce((partition, tab) => {
       if (tab.id === id) {
-        tab.kill()
+        partition[0] = tab
+      } else {
+        partition[1].push(tab)
       }
+      return partition
+    }, [null, []])
 
-      return tab.id !== id
+    found.kill().then(() => {
+      if (remaining.length === 0) {
+        window.close()
+      } else if (this.state.currentTabId === id) {
+        this.setState({
+          currentTabId: remaining[0].id,
+          tabs: remaining,
+          currentSessionId: remaining[0].focusableSession().id
+        })
+      } else {
+        this.setState({tabs: remaining})
+      }
     })
-
-    if (tabs.length === 0) {
-      return window.close()
-    }
-    if (this.state.currentTabId === id) {
-      return this.setState({
-        currentTabId: tabs[0].id,
-        tabs,
-        currentSessionId: tabs[0].focusableSession().id
-      })
-    }
-    return this.setState({tabs})
   }
 
   changeTitle(id, title) {

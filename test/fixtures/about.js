@@ -1,7 +1,7 @@
-const {app} = require('electron')
-const {BrowserWindow} = require('electron')
+const {app, BrowserWindow} = require('electron')
 const path = require('path')
 const url = require('url')
+const {is} = require('electron-util')
 
 let about = null
 
@@ -11,7 +11,7 @@ app.on('ready', () => {
     height: 500,
     show: true,
     titleBarStyle: 'hiddenInset',
-    frame: process.platform === 'darwin'
+    frame: is.macos
   })
 
   about.loadURL(url.format({

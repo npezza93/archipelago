@@ -9,8 +9,8 @@ class Branch {
     this.right = new Session(pref, type, this)
   }
 
-  kill() {
-    this.left.kill()
-    this.right.kill()
+  async kill() {
+    await this.left.kill()
+    await this.right.kill()
   }
 }

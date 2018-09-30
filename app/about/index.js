@@ -1,8 +1,9 @@
 /* global document, window */
 
-const {remote, ipcRenderer} = require('electron')
+const {is, api} = require('electron-util')
+const ipc = require('electron-better-ipc')
 
-if (process.platform !== 'darwin') {
+if (!is.macos) {
   const {createElement} = require('react')
   const {render} = require('react-dom')
   const TrafficLights = require('../traffic-lights/all')
@@ -12,6 +13,6 @@ if (process.platform !== 'darwin') {
   )
 }
 
-document.querySelector('#version').innerText = `v${remote.app.getVersion()}`
+document.querySelector('#version').innerText = `v${api.app.getVersion()}`
 
-ipcRenderer.on('close-current-tab', () => window.close())
+ipc.answerMain('close-current-tab', () => window.close())

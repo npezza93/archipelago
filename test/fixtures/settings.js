@@ -1,7 +1,7 @@
-const {app} = require('electron')
-const {BrowserWindow} = require('electron')
+const {app, BrowserWindow} = require('electron')
 const path = require('path')
 const url = require('url')
+const {is} = require('electron-util')
 
 const ProfileManager = require('../../app/configuration/profile-manager')
 const {pref} = require('../../app/configuration/config-file')
@@ -18,7 +18,7 @@ app.on('ready', () => {
     height: 600,
     show: true,
     titleBarStyle: 'hiddenInset',
-    frame: process.platform === 'darwin',
+    frame: is.macos,
     webPreferences: {
       experimentalFeatures: true
     }

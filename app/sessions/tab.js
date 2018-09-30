@@ -54,9 +54,7 @@ class Tab {
   }
 
   kill() {
-    if (this.root) {
-      this.root.kill()
-    }
+    return (this.root && this.root.kill()) || new Promise(resolve => resolve())
   }
 
   focusableSession() {
