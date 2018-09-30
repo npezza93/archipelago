@@ -6,11 +6,13 @@ const Pty = require('./pty')
 const TitleTracker = require('./title-tracker')
 
 module.exports = () => {
-  const sessions = {}
+  const ptys = {}
 
   const kill = id => {
-    sessions[id].kill()
-    delete sessions[id]
+    if (ptys[id]) {
+      ptys[id].kill()
+      delete ptys[id]
+    }
   }
 
   const create = () => {
@@ -27,7 +29,7 @@ module.exports = () => {
     const {pty, titleTracker} = await preppedPty
 
     pty.onExit(() => kill(pty.id))
-    sessions[pty.id] = pty
+    ptys[pty.id] = pty
     preppedPty = create()
     titleTracker.dispose()
 
@@ -35,5 +37,5 @@ module.exports = () => {
   })
   ipc.answerRenderer('kill-pty', kill)
 
-  api.app.on('quit', () => Object.keys(sessions).forEach(kill))
+  api.app.on('quit', () => Object.keys(ptys).forEach(kill))
 }
