@@ -23,6 +23,10 @@ const pref = () => {
           if (store.get(`profiles.${index}.theme`) === undefined) {
             store.set(`profiles.${index}.theme`, {})
           }
+
+          if (store.get(`profiles.${index}.visor`) === undefined) {
+            store.set(`profiles.${index}.visor`, {})
+          }
         })
       }
     }

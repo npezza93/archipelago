@@ -13,7 +13,7 @@ Terminal.applyAddon(require('xterm/lib/addons/fit/fit'))
 
 module.exports =
 class Session {
-  constructor(pref, branch) {
+  constructor(pref, type, branch) {
     this.branch = branch
     this.id = Math.random()
     this.emitter = new Emitter()
@@ -22,6 +22,7 @@ class Session {
     this.title = ''
     this.pref = pref
     this.pty = ipc.callMain('create-pty')
+    this.type = type || 'default'
 
     this.bindDataListeners()
   }
@@ -30,12 +31,8 @@ class Session {
     if (this._xterm) {
       return this._xterm
     }
-    const settings = xtermSettings.reduce((settings, property) => {
-      settings[property] = this.profileManager.get(property)
-      return settings
-    }, {})
 
-    this._xterm = new Terminal(settings)
+    this._xterm = new Terminal(this.settings())
 
     return this._xterm
   }
@@ -53,6 +50,30 @@ class Session {
       }, {})
 
     return this._keymaps
+  }
+
+  settings() {
+    return this.applySettingModifiers(
+      xtermSettings.reduce((settings, property) => {
+        settings[property] = this.profileManager.get(property)
+        return settings
+      }, {})
+    )
+  }
+
+  applySettingModifiers(defaultSettings) {
+    if (this.type === 'visor') {
+      defaultSettings = {
+        ...defaultSettings,
+        allowTransparency: this.profileManager.get('visor.allowTransparency'),
+        theme: {
+          ...this.profileManager.get('theme'),
+          background: this.profileManager.get('visor.background')
+        }
+      }
+    }
+
+    return defaultSettings
   }
 
   resetTheme() {

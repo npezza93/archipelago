@@ -3,12 +3,13 @@ const Session = require('./session')
 
 module.exports =
 class Tab {
-  constructor(pref) {
-    this.root = new Session(pref)
+  constructor(pref, type) {
+    this.root = new Session(pref, type)
     this.id = Math.random()
     this.title = ''
     this.isUnread = false
     this.pref = pref
+    this.type = type
   }
 
   add(sessionId, orientation) {
@@ -92,7 +93,7 @@ class Tab {
 
   newBranch(session, orientation) {
     const branch = new Branch(
-      session.branch, orientation, session, this.pref
+      session.branch, orientation, session, this.pref, this.type
     )
 
     if (session.branch && session.branch.left.id === session.id) {

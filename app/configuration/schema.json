@@ -446,6 +446,38 @@
                 }
               }
             }
+          },
+          "visor": {
+            "type": "object",
+            "scope": "visor",
+            "settings": {"title": "visor"},
+            "properties": {
+              "vibrancy": {
+                "type": "string",
+                "default": "",
+                "enabledOn": ["darwin"],
+                "enum": ["", "light", "medium-light", "dark", "ultra-dark"]
+              },
+              "allowTransparency": {
+                "type": "boolean",
+                "default": false,
+                "enabledOn": ["darwin"]
+              },
+              "padding": {
+                "type": "string",
+                "default": "5px 0 10px 15px"
+              },
+              "windowBackground": {
+                "type": "string",
+                "color": true,
+                "default": "#000000"
+              },
+              "background": {
+                "type": "string",
+                "color": true,
+                "default": "#000000"
+              }
+            }
           }
         }
       }

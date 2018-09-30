@@ -8,6 +8,7 @@ const {CompositeDisposable} = require('event-kit')
 const {pref} = require('../configuration/config-file')
 const ProfileManager = require('../configuration/profile-manager')
 const {template} = require('./app-menu')
+const visor = require('./visor')
 
 const windows = []
 const subscriptions = new CompositeDisposable()
@@ -39,6 +40,7 @@ const createWindow = () => {
 }
 
 app.on('ready', () => {
+  visor.register()
   createWindow()
   resetApplicationMenu()
   if (is.macos) {

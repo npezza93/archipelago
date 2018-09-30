@@ -15,7 +15,7 @@ class App extends React.Component {
     super(props)
 
     this.pref = this.props.pref()
-    const initialTab = new Tab(this.pref)
+    const initialTab = new Tab(this.pref, 'default')
 
     this.state = {tabs: [initialTab], currentTabId: initialTab.id}
 
@@ -108,7 +108,7 @@ class App extends React.Component {
 
   addTab() {
     if (!this.props.profileManager.get('singleTabMode')) {
-      const newTab = new Tab(this.props.pref())
+      const newTab = new Tab(this.props.pref(), 'default')
 
       return this.setState({
         tabs: this.state.tabs.concat(newTab),

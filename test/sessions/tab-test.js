@@ -9,7 +9,7 @@ describe('Tab', () => {
   beforeEach(() => {
     this.pref = pref()
     this.pref.store = {activeProfileId: 1, profiles: [{id: 1, theme: {}}]}
-    this.tab = new Tab(this.pref)
+    this.tab = new Tab(this.pref, 'default')
   })
 
   afterEach(() => {
