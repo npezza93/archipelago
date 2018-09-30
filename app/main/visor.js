@@ -1,7 +1,5 @@
 const {app, BrowserWindow, globalShortcut} = require('electron')
 const electron = require('electron')
-const path = require('path')
-const url = require('url')
 const {CompositeDisposable} = require('event-kit')
 const {pref} = require('../configuration/config-file')
 const ProfileManager = require('../configuration/profile-manager')
@@ -9,6 +7,7 @@ const ProfileManager = require('../configuration/profile-manager')
 const preferences = pref()
 const profileManager = new ProfileManager(preferences)
 const subscriptions = new CompositeDisposable()
+
 let visorWindow = null
 let isVisorShowing = false
 
@@ -27,6 +26,36 @@ const showVisor = () => {
   visorWindow.setPosition(0, 22, true)
 }
 
+const create = () => {
+  const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize
+
+  if (visorWindow === null || visorWindow.isDestroyed()) {
+    isVisorShowing = false
+    visorWindow = new BrowserWindow({
+      width,
+      enableLargerThanScreen: true,
+      height: parseInt(height * 0.4, 10),
+      show: true,
+      frame: false,
+      x: 0,
+      y: -parseInt(height * 0.4, 10),
+      vibrancy: profileManager.get('visor.vibrancy')
+    })
+
+    visorWindow.loadFile('app/visor/index.html')
+
+    visorWindow.on('blur', hideVisor)
+    visorWindow.on('closed', () => subscriptions.dispose())
+    subscriptions.add(
+      profileManager.onDidChange('visor.vibrancy', value => {
+        if (!visorWindow.isDestroyed()) {
+          visorWindow.setVibrancy(value)
+        }
+      })
+    )
+  }
+}
+
 app.on('quit', () => {
   subscriptions.dispose()
   preferences.dispose()
@@ -36,39 +65,9 @@ app.on('will-quit', () => globalShortcut.unregisterAll())
 
 module.exports = {
   register() {
+    create()
     globalShortcut.register('F1', () => {
-      const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize
-
-      if ((visorWindow === null) || visorWindow.isDestroyed()) {
-        isVisorShowing = false
-        visorWindow = new BrowserWindow({
-          width,
-          enableLargerThanScreen: true,
-          height: parseInt(height * 0.4, 10),
-          show: true,
-          frame: false,
-          x: 0,
-          y: -parseInt(height * 0.4, 10),
-          icon: path.join(__dirname, '../../../build/icon.png'),
-          vibrancy: profileManager.get('visor.vibrancy')
-        })
-
-        visorWindow.loadURL(url.format({
-          pathname: path.join(__dirname, '../visor/index.html'),
-          protocol: 'file:',
-          slashes: true
-        }))
-        visorWindow.on('blur', hideVisor)
-        visorWindow.on('closed', () => subscriptions.dispose())
-        subscriptions.add(
-          profileManager.onDidChange('visor.vibrancy', value => {
-            if (!visorWindow.isDestroyed()) {
-              visorWindow.setVibrancy(value)
-            }
-          })
-        )
-      }
-
+      create()
       if (isVisorShowing) {
         hideVisor()
       } else {

@@ -1,3 +1,5 @@
+/* global ResizeObserver */
+
 const {Component, createElement} = require('react')
 const {CompositeDisposable} = require('event-kit')
 
@@ -6,6 +8,8 @@ class Terminal extends Component {
   constructor(props) {
     super(props)
     this.subscriptions = new CompositeDisposable()
+    this.resizeObserver = new ResizeObserver(() => this.props.session.fit())
+
     this.bindDataListeners()
   }
 
@@ -20,10 +24,12 @@ class Terminal extends Component {
     session.resetTheme()
     session.xterm.focus()
 
+    this.resizeObserver.observe(this.refs.container)
     this.subscriptions.add(this.props.session.bindScrollListener())
   }
 
   componentWillUnmount() {
+    this.resizeObserver.unobserve(this.refs.container)
     this.subscriptions.dispose()
   }
 

@@ -1,6 +1,6 @@
 /* global window */
 
-const {ipcRenderer} = require('electron')
+const ipc = require('electron-better-ipc')
 const React = require('react')
 
 const Tab = require('../sessions/tab')
@@ -12,10 +12,11 @@ class App extends React.Component {
     super(props)
 
     this.pref = this.props.pref()
+
+    this.pref = this.props.pref()
     this.state = {tab: new Tab(this.pref, 'visor')}
 
-    ipcRenderer.on('split-horizontal', () => this.split('horizontal'))
-    ipcRenderer.on('split-vertical', () => this.split('vertical'))
+    ipc.answerMain('split', direction => this.split(direction))
   }
 
   render() {
@@ -60,9 +61,7 @@ class App extends React.Component {
 
     tab.remove(sessionId)
     if (tab.root === null) {
-      this.state.tab.kill()
-
-      window.close()
+      this.state.tab.kill().then(() => window.close())
     } else {
       this.setState({tab})
     }
