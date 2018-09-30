@@ -74,12 +74,12 @@ class Session {
     this.xterm.dispose()
     this.pref.events.dispose()
 
-    return this.pty.then(id => ipc.callMain('kill-pty', id))
+    return this.pty.then(({id}) => ipc.callMain('kill-pty', id))
   }
 
   fit() {
     this.xterm.fit()
-    this.pty.then(id => ipc.callMain(`resize-${id}`, {cols: this.xterm.cols, rows: this.xterm.rows}))
+    this.pty.then(({id}) => ipc.callMain(`resize-${id}`, {cols: this.xterm.cols, rows: this.xterm.rows}))
   }
 
   on(event, handler) {
@@ -91,7 +91,7 @@ class Session {
     const mapping = this.keymaps.mappings[this.keymaps.keystrokeForKeyboardEvent(e)]
 
     if (mapping) {
-      this.pty.then(id => ipc.callMain(`write-${id}`, mapping))
+      this.pty.then(({id}) => ipc.callMain(`write-${id}`, mapping))
       caught = true
     }
 
@@ -132,11 +132,18 @@ class Session {
   }
 
   bindDataListeners() {
+    this.pty.then(({title}) => {
+      if (!this.title && title) {
+        this.title = title
+        this.emitter.emit('did-change-title', title)
+      }
+    })
+
     this.xterm.attachCustomKeyEventHandler(this.keybindingHandler.bind(this))
     window.addEventListener('resize', this.fit.bind(this))
 
     this.xterm.on('data', data => {
-      this.pty.then(id => ipc.callMain(`write-${id}`, data))
+      this.pty.then(({id}) => ipc.callMain(`write-${id}`, data))
     })
 
     this.xterm.on('focus', () => {
@@ -158,7 +165,7 @@ class Session {
       }
     })
 
-    this.pty.then(id => {
+    this.pty.then(({id}) => {
       ipc.answerMain(`write-${id}`, data => {
         this.xterm.write(data)
         this.emitter.emit('data')

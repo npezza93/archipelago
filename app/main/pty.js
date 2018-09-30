@@ -50,11 +50,21 @@ class Pty {
     this.pty.on('exit', callback)
   }
 
+  onData(callback) {
+    this.pty.on('data', callback)
+  }
+
   bindDataListeners() {
     ipc.answerRenderer(`resize-${this.id}`, ({cols, rows}) => this.pty.resize(cols, rows))
     ipc.answerRenderer(`write-${this.id}`, data => this.pty.write(data))
 
-    this.pty.on('data', data => {
+    this.onExit(() => {
+      for (const window of BrowserWindow.getAllWindows()) {
+        ipc.callRenderer(window, `exit-${this.id}`)
+      }
+    })
+
+    this.onData(data => {
       for (const window of BrowserWindow.getAllWindows()) {
         ipc.callRenderer(window, `write-${this.id}`, data)
       }
