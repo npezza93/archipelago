@@ -32,7 +32,7 @@ describe('Application launch', function () {
 
   it('renders with no main process errors', () => {
     return this.app.client.getWindowCount().then(count => {
-      assert.equal(count, 1)
+      assert.equal(count, 2)
     })
   })
 
