@@ -3,15 +3,14 @@
 const path = require('path')
 const {Application} = require('spectron')
 const {assert} = require('chai')
-const {platform} = require('electron-util')
 
 let electron = './node_modules/electron/dist/'
 
-electron = platform({
-  macos: electron + 'Electron.app/Contents/MacOS/Electron',
+electron = {
+  darwin: electron + 'Electron.app/Contents/MacOS/Electron',
   linux: electron + 'electron',
-  default: electron
-})
+  win32: electron
+}[process.platform]
 
 describe('Settings launch', function () {
   this.timeout(10000)
