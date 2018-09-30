@@ -1,3 +1,5 @@
+const {isDeepStrictEqual} = require('util')
+
 const Profile = require('./profile')
 const {keybindings} = require('./config-file')
 
@@ -74,7 +76,7 @@ class ProfileManager {
 
     const onChange = () => {
       const newValue = this.get(keyPath)
-      if (oldValue !== newValue) {
+      if (!isDeepStrictEqual(oldValue, newValue)) {
         oldValue = newValue
         return callback(newValue)
       }
