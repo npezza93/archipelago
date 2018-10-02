@@ -6,7 +6,7 @@ const ipc = require('electron-better-ipc')
 if (!is.macos) {
   const {createElement} = require('react')
   const {render} = require('react-dom')
-  const TrafficLights = require('../traffic-lights/all')
+  const TrafficLights = require('../common/traffic-lights')
 
   render(
     createElement(TrafficLights), document.querySelector('#traffic-lights')

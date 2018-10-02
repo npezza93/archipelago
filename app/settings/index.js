@@ -7,7 +7,7 @@ const ReactDOM = require('react-dom')
 const ProfileManager = require('../common/profile-manager')
 const {pref} = require('../common/config-file')
 
-const TrafficLights = require('../traffic-lights/all')
+const TrafficLights = require('../common/traffic-lights')
 const PropertiesPane = require('./properties-pane')
 
 const Profiles = require('./profiles')
