@@ -9,9 +9,9 @@ const React = require('react')
 const {mount} = require('enzyme')
 const {assert} = require('chai')
 
-const {pref} = require('../../../app/configuration/config-file')
+const {pref} = require('../../../app/common/config-file')
 const ProfilesComponent = require('../../../app/settings/profiles')
-const ProfileManager = require('../../../app/configuration/profile-manager')
+const ProfileManager = require('../../../app/common/profile-manager')
 
 describe('Profiles Component', () => {
   describe('generic actions', () => {

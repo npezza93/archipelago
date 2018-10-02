@@ -2,9 +2,9 @@
 
 const {assert} = require('chai')
 
-const ProfileManager = require('../../app/configuration/profile-manager')
-const Profile = require('../../app/configuration/profile')
-const {pref, keybindings} = require('../../app/configuration/config-file')
+const ProfileManager = require('../../app/common/profile-manager')
+const Profile = require('../../app/common/profile')
+const {pref, keybindings} = require('../../app/common/config-file')
 
 describe('ProfileManager', () => {
   beforeEach(() => {

@@ -1,8 +1,8 @@
 const {app, BrowserWindow, globalShortcut} = require('electron')
 const electron = require('electron')
 const {CompositeDisposable} = require('event-kit')
-const {pref} = require('../configuration/config-file')
-const ProfileManager = require('../configuration/profile-manager')
+const {pref} = require('../common/config-file')
+const ProfileManager = require('../common/profile-manager')
 
 const preferences = pref()
 const profileManager = new ProfileManager(preferences)

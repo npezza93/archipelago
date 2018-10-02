@@ -4,8 +4,8 @@ const ipc = require('electron-better-ipc')
 const React = require('react')
 const ReactDOM = require('react-dom')
 
-const ProfileManager = require('../configuration/profile-manager')
-const {pref} = require('../configuration/config-file')
+const ProfileManager = require('../common/profile-manager')
+const {pref} = require('../common/config-file')
 
 const TrafficLights = require('../traffic-lights/all')
 const PropertiesPane = require('./properties-pane')

@@ -4,8 +4,8 @@
 const React = require('react')
 const ReactDOM = require('react-dom')
 
-const {pref} = require('../configuration/config-file')
-const ProfileManager = require('../configuration/profile-manager')
+const {pref} = require('../common/config-file')
+const ProfileManager = require('../common/profile-manager')
 const App = require('./app')
 
 global.archipelago = {}

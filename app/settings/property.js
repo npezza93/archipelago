@@ -1,8 +1,8 @@
 const React = require('react')
 const {CompositeDisposable} = require('event-kit')
 
-const ProfileManager = require('../configuration/profile-manager')
-const {pref} = require('../configuration/config-file')
+const ProfileManager = require('../common/profile-manager')
+const {pref} = require('../common/config-file')
 const allFields = require('./all-fields')
 
 module.exports =

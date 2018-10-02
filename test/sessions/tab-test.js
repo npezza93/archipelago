@@ -2,8 +2,8 @@
 
 const {assert} = require('chai')
 
-const {pref} = require('../../app/configuration/config-file')
-const Tab = require('../../app/sessions/tab')
+const {pref} = require('../../app/common/config-file')
+const Tab = require('../../app/common/tab')
 
 describe('Tab', () => {
   beforeEach(() => {

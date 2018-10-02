@@ -3,7 +3,7 @@
 const ipc = require('electron-better-ipc')
 const React = require('react')
 
-const Tab = require('../sessions/tab')
+const Tab = require('../common/tab')
 const TrafficLights = require('../traffic-lights/all')
 const PaneList = require('./pane-list')
 const TabList = require('./tab-list')

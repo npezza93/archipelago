@@ -1,7 +1,7 @@
 const {api} = require('electron-util')
 const ipc = require('electron-better-ipc')
 
-const {pref} = require('../configuration/config-file')
+const {pref} = require('../common/config-file')
 const Pty = require('./pty')
 const TitleTracker = require('./title-tracker')
 

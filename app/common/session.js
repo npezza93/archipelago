@@ -6,8 +6,8 @@ const KeymapManager = require('atom-keymap')
 const unescape = require('unescape-js')
 const ipc = require('electron-better-ipc')
 
-const ProfileManager = require('../configuration/profile-manager')
-const {xtermSettings} = require('../configuration/config-file')
+const ProfileManager = require('../common/profile-manager')
+const {xtermSettings} = require('../common/config-file')
 
 Terminal.applyAddon(require('xterm/lib/addons/fit/fit'))
 

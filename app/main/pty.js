@@ -3,7 +3,7 @@ const {api, platform} = require('electron-util')
 const ipc = require('electron-better-ipc')
 const {spawn} = require('node-pty')
 
-const ProfileManager = require('../configuration/profile-manager')
+const ProfileManager = require('../common/profile-manager')
 
 module.exports =
 class Pty {

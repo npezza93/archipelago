@@ -1,9 +1,9 @@
 /* global describe, it, beforeEach, afterEach */
 
 const {assert} = require('chai')
-const Profile = require('../../app/configuration/profile')
-const ProfileManager = require('../../app/configuration/profile-manager')
-const {pref} = require('../../app/configuration/config-file')
+const Profile = require('../../app/common/profile')
+const ProfileManager = require('../../app/common/profile-manager')
+const {pref} = require('../../app/common/config-file')
 
 describe('Profile', () => {
   beforeEach(() => {

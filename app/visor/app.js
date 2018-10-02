@@ -3,7 +3,7 @@
 const ipc = require('electron-better-ipc')
 const React = require('react')
 
-const Tab = require('../sessions/tab')
+const Tab = require('../common/tab')
 const PaneList = require('./pane-list')
 
 module.exports =

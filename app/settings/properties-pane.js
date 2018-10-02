@@ -1,6 +1,6 @@
 const {Component, createElement} = require('react')
 
-const schema = require('../configuration/schema')
+const schema = require('../common/schema')
 const Header = require('./header')
 const PropertiesSection = require('./properties-section')
 
