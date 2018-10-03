@@ -1,59 +1,55 @@
-module.exports =
-class Profile {
+module.exports = class Profile {
   constructor(attributes, configFile) {
-    this.attributes = attributes
-    this.configFile = configFile
+    this.attributes = attributes;
+    this.configFile = configFile;
   }
 
   get id() {
-    return this.attributes.id
+    return this.attributes.id;
   }
 
   get index() {
-    return this.configFile.get('profiles').findIndex(profile => {
-      return profile.id === this.id
-    })
+    return this.configFile.get('profiles').findIndex(profile => profile.id === this.id);
   }
 
   get name() {
-    return this.get('name')
+    return this.get('name');
   }
 
   set name(newName) {
-    this.configFile.set(`profiles.${this.index}.name`, newName)
-    this.attributes.name = newName
+    this.configFile.set(`profiles.${this.index}.name`, newName);
+    this.attributes.name = newName;
 
-    return newName
+    return newName;
   }
 
   destroy() {
-    const profiles = this.configFile.get('profiles')
-    const filteredProfiles = profiles.filter(profile => profile.id !== this.id)
+    const profiles = this.configFile.get('profiles');
+    const filteredProfiles = profiles.filter(profile => profile.id !== this.id);
 
-    this.configFile.set('profiles', filteredProfiles)
-    return this.configFile.store
+    this.configFile.set('profiles', filteredProfiles);
+    return this.configFile.store;
   }
 
   get(keyPath) {
-    return this.configFile.get(`profiles.${this.index}.${keyPath}`)
+    return this.configFile.get(`profiles.${this.index}.${keyPath}`);
   }
 
   set(keyPath, value) {
-    return this.configFile.set(`profiles.${this.index}.${keyPath}`, value)
+    return this.configFile.set(`profiles.${this.index}.${keyPath}`, value);
   }
 
   onDidChange(keyPath, callback) {
-    let oldValue = this.get(keyPath)
+    let oldValue = this.get(keyPath);
 
-    const disposable =
-      this.configFile.onDidChange(`profiles.${this.index}.${keyPath}`, () => {
-        const newValue = this.get(keyPath)
-        if (oldValue !== newValue) {
-          oldValue = newValue
-          return callback(newValue)
-        }
-      })
+    const disposable = this.configFile.onDidChange(`profiles.${this.index}.${keyPath}`, () => {
+      const newValue = this.get(keyPath);
+      if (oldValue !== newValue) {
+        oldValue = newValue;
+        return callback(newValue);
+      }
+    });
 
-    return disposable
+    return disposable;
   }
-}
+};

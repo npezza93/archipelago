@@ -1,196 +1,247 @@
-const {api, platform} = require('electron-util')
-const ipc = require('electron-better-ipc')
+const {
+  api,
+  platform,
+} = require('electron-util');
+const ipc = require('electron-better-ipc');
 
-const settings = require('./settings')
-const about = require('./about')
+const settings = require('./settings');
+const about = require('./about');
 
 const aboutMenu = {
   label: api.app.getName(),
-  submenu: [
-    {
-      label: 'About Archipelago',
-      click() {
-        about.display()
-      }
+  submenu: [{
+    label: 'About Archipelago',
+    click() {
+      about.display();
+    },
+  },
+  {
+    label: `Version ${api.app.getVersion()}`,
+    enabled: false,
+  },
+  {
+    type: 'separator',
+  },
+  {
+    label: 'Settings',
+    accelerator: 'CmdOrCtrl+,',
+    click() {
+      settings.display();
+    },
+  },
+  {
+    type: 'separator',
+  },
+  ...platform({
+    macos: [{
+      role: 'services',
+      submenu: [],
     },
     {
-      label: `Version ${api.app.getVersion()}`,
-      enabled: false
+      type: 'separator',
     },
-    {type: 'separator'},
     {
-      label: 'Settings',
-      accelerator: 'CmdOrCtrl+,',
-      click() {
-        settings.display()
-      }
+      role: 'hide',
     },
-    {type: 'separator'},
-    ...platform({
-      macos: [
-        {role: 'services', submenu: []},
-        {type: 'separator'},
-        {role: 'hide'},
-        {role: 'hideothers'},
-        {role: 'unhide'},
-        {type: 'separator'}
-      ],
-      default: []
-    }),
-    {role: 'quit'}
-  ]
-}
+    {
+      role: 'hideothers',
+    },
+    {
+      role: 'unhide',
+    },
+    {
+      type: 'separator',
+    },
+    ],
+    default: [],
+  }),
+  {
+    role: 'quit',
+  },
+  ],
+};
 
 const shellMenu = (createWindow, profileManager) => {
   const menu = {
     label: 'Shell',
-    submenu: [
-      {
-        label: 'New Window',
-        accelerator: 'CmdOrCtrl+N',
-        click: createWindow
+    submenu: [{
+      label: 'New Window',
+      accelerator: 'CmdOrCtrl+N',
+      click: createWindow,
+    },
+    {
+      type: 'separator',
+    },
+    {
+      label: 'Split Vertically',
+      accelerator: 'CmdOrCtrl+Shift+S',
+      click(item, focusedWindow) {
+        ipc.callRenderer(focusedWindow, 'split', 'vertical');
       },
-      {type: 'separator'},
-      {
-        label: 'Split Vertically',
-        accelerator: 'CmdOrCtrl+Shift+S',
-        click(item, focusedWindow) {
-          ipc.callRenderer(focusedWindow, 'split', 'vertical')
-        }
+    },
+    {
+      label: 'Split Horizontally',
+      accelerator: 'CmdOrCtrl+S',
+      click(item, focusedWindow) {
+        ipc.callRenderer(focusedWindow, 'split', 'horizontal');
       },
-      {
-        label: 'Split Horizontally',
-        accelerator: 'CmdOrCtrl+S',
-        click(item, focusedWindow) {
-          ipc.callRenderer(focusedWindow, 'split', 'horizontal')
-        }
-      }
-    ]
-  }
+    },
+    ],
+  };
 
   if (profileManager.get('singleTabMode')) {
-    menu.submenu.push(
-      {type: 'separator'},
-      {
-        label: 'Close Window',
-        accelerator: 'CmdOrCtrl+W',
-        click(item, focusedWindow) {
-          if (focusedWindow) {
-            focusedWindow.close()
-          }
+    menu.submenu.push({
+      type: 'separator',
+    }, {
+      label: 'Close Window',
+      accelerator: 'CmdOrCtrl+W',
+      click(item, focusedWindow) {
+        if (focusedWindow) {
+          focusedWindow.close();
         }
-      }
-    )
+      },
+    });
   } else {
-    menu.submenu.push(
-      {type: 'separator'},
-      {
-        label: 'New Tab',
-        accelerator: 'CmdOrCtrl+T',
-        click(item, focusedWindow) {
-          ipc.callRenderer(focusedWindow, 'new-tab')
+    menu.submenu.push({
+      type: 'separator',
+    }, {
+      label: 'New Tab',
+      accelerator: 'CmdOrCtrl+T',
+      click(item, focusedWindow) {
+        ipc.callRenderer(focusedWindow, 'new-tab');
+      },
+    }, {
+      type: 'separator',
+    }, {
+      label: 'Close Tab',
+      accelerator: 'CmdOrCtrl+W',
+      click(item, focusedWindow) {
+        ipc.callRenderer(focusedWindow, 'close-current-tab');
+      },
+    }, {
+      label: 'Close Window',
+      accelerator: 'CmdOrCtrl+Shift+W',
+      click(item, focusedWindow) {
+        if (focusedWindow) {
+          focusedWindow.close();
         }
       },
-      {type: 'separator'},
-      {
-        label: 'Close Tab',
-        accelerator: 'CmdOrCtrl+W',
-        click(item, focusedWindow) {
-          ipc.callRenderer(focusedWindow, 'close-current-tab')
-        }
-      },
-      {
-        label: 'Close Window',
-        accelerator: 'CmdOrCtrl+Shift+W',
-        click(item, focusedWindow) {
-          if (focusedWindow) {
-            focusedWindow.close()
-          }
-        }
-      }
-    )
+    });
   }
 
-  return menu
-}
+  return menu;
+};
 
 const editMenu = {
   label: 'Edit',
-  submenu: [
-    {role: 'undo'},
-    {role: 'redo'},
-    {type: 'separator'},
-    {role: 'cut'},
-    {role: 'copy'},
-    {role: 'paste'},
-    {role: 'selectall'}
-  ]
-}
+  submenu: [{
+    role: 'undo',
+  },
+  {
+    role: 'redo',
+  },
+  {
+    type: 'separator',
+  },
+  {
+    role: 'cut',
+  },
+  {
+    role: 'copy',
+  },
+  {
+    role: 'paste',
+  },
+  {
+    role: 'selectall',
+  },
+  ],
+};
 
 const viewMenu = {
   label: 'View',
-  submenu: [
-    {role: 'reload'},
-    {role: 'forcereload'},
-    {role: 'toggledevtools'},
-    {type: 'separator'},
-    {role: 'resetzoom'},
-    {role: 'zoomin'},
-    {role: 'zoomout'},
-    {type: 'separator'},
-    {role: 'togglefullscreen'}
-  ]
-}
+  submenu: [{
+    role: 'reload',
+  },
+  {
+    role: 'forcereload',
+  },
+  {
+    role: 'toggledevtools',
+  },
+  {
+    type: 'separator',
+  },
+  {
+    role: 'resetzoom',
+  },
+  {
+    role: 'zoomin',
+  },
+  {
+    role: 'zoomout',
+  },
+  {
+    type: 'separator',
+  },
+  {
+    role: 'togglefullscreen',
+  },
+  ],
+};
 
-const profilesMenu = profileManager => {
-  return {
-    label: 'Profiles',
-    submenu:
-      profileManager.all().map(profile => {
-        const profileItem = {
-          label: profile.name,
-          type: 'radio',
-          click() {
-            profileManager.activeProfileId = profile.id
-          }
-        }
+const profilesMenu = profileManager => ({
+  label: 'Profiles',
+  submenu: profileManager.all().map((profile) => {
+    const profileItem = {
+      label: profile.name,
+      type: 'radio',
+      click() {
+        profileManager.activeProfileId = profile.id;
+      },
+    };
 
-        if (profileManager.activeProfileId === profile.id) {
-          profileItem.checked = true
-        }
-        return profileItem
-      })
-  }
-}
+    if (profileManager.activeProfileId === profile.id) {
+      profileItem.checked = true;
+    }
+    return profileItem;
+  }),
+});
 
 const windowMenu = {
   role: 'window',
   submenu: platform({
-    macos: [
-      {role: 'minimize'}, {role: 'zoom'}, {type: 'separator'}, {role: 'front'}
-    ],
-    default: [{role: 'minimize'}]
-  })
-}
+    macos: [{
+      role: 'minimize',
+    }, {
+      role: 'zoom',
+    }, {
+      type: 'separator',
+    }, {
+      role: 'front',
+    }],
+    default: [{
+      role: 'minimize',
+    }],
+  }),
+};
 
 const helpMenu = {
   role: 'help',
   submenu: [{
     label: 'Report Issue',
     click() {
-      api.shell.openExternal('https://github.com/npezza93/archipelago/issues/new')
-    }
-  }]
-}
+      api.shell.openExternal('https://github.com/npezza93/archipelago/issues/new');
+    },
+  }],
+};
 
-exports.template = (createWindow, profileManager) => {
-  return [
-    aboutMenu,
-    shellMenu(createWindow, profileManager),
-    editMenu,
-    viewMenu,
-    profilesMenu(profileManager),
-    windowMenu,
-    helpMenu
-  ]
-}
+exports.template = (createWindow, profileManager) => [
+  aboutMenu,
+  shellMenu(createWindow, profileManager),
+  editMenu,
+  viewMenu,
+  profilesMenu(profileManager),
+  windowMenu,
+  helpMenu,
+];

@@ -1,24 +1,26 @@
-const {Component, createElement} = require('react')
+const {
+  Component,
+  createElement,
+} = require('react');
 
-module.exports =
-class SelectField extends Component {
+module.exports = class SelectField extends Component {
   render() {
     return createElement(
-      'select-field',
-      {},
+      'select-field', {},
       createElement(
-        'select',
-        {onChange: e => this.props.onChange.call(this, e.target.value),
-          value: this.props.value},
-        this.props.options.map(option => {
-          return createElement('option', {key: option, value: option}, option)
-        })
+        'select', {
+          onChange: e => this.props.onChange.call(this, e.target.value),
+          value: this.props.value,
+        },
+        this.props.options.map(option => createElement('option', {
+          key: option,
+          value: option,
+        }, option)),
       ),
       createElement(
-        'label',
-        {},
-        this.props.label
-      )
-    )
+        'label', {},
+        this.props.label,
+      ),
+    );
   }
-}
+};

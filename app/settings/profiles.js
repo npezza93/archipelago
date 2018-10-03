@@ -1,56 +1,57 @@
-const React = require('react')
-const {CompositeDisposable} = require('event-kit')
+const React = require('react');
+const {
+  CompositeDisposable,
+} = require('event-kit');
 
-const Profile = require('./profile')
+const Profile = require('./profile');
 
-module.exports =
-class Profiles extends React.Component {
+module.exports = class Profiles extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       activeProfile: this.props.profileManager.activeProfile(),
-      profiles: this.props.profileManager.all()
-    }
+      profiles: this.props.profileManager.all(),
+    };
 
-    this.subscriptions = new CompositeDisposable()
-    this.bindListener()
+    this.subscriptions = new CompositeDisposable();
+    this.bindListener();
   }
 
   render() {
     return React.createElement(
-      'archipelago-profiles',
-      {},
+      'archipelago-profiles', {},
       this.header(),
       this.list(),
-      this.newProfile()
-    )
+      this.newProfile(),
+    );
   }
 
   componentWillUnmount() {
-    this.subscriptions.dispose()
+    this.subscriptions.dispose();
   }
 
   header() {
-    return React.createElement('div', {className: 'profile-header'}, 'Profiles')
+    return React.createElement('div', {
+      className: 'profile-header',
+    }, 'Profiles');
   }
 
   list() {
     return React.createElement(
-      'div',
-      {className: 'profile-list'},
-      this.state.profiles.map(profile =>
-        React.createElement(
-          Profile, {
-            profile,
-            profileManager: this.props.profileManager,
-            key: profile.id,
-            activeProfile: this.state.activeProfile,
-            removeProfile: this.removeProfile.bind(this),
-            setActiveProfile: this.setActiveProfile.bind(this)
-          }
-        )
-      )
-    )
+      'div', {
+        className: 'profile-list',
+      },
+      this.state.profiles.map(profile => React.createElement(
+        Profile, {
+          profile,
+          profileManager: this.props.profileManager,
+          key: profile.id,
+          activeProfile: this.state.activeProfile,
+          removeProfile: this.removeProfile.bind(this),
+          setActiveProfile: this.setActiveProfile.bind(this),
+        },
+      )),
+    );
   }
 
   newProfile() {
@@ -58,48 +59,54 @@ class Profiles extends React.Component {
       'div', {
         className: 'new-profile',
         onClick: () => {
-          const profile = this.props.profileManager.create()
+          const profile = this.props.profileManager.create();
 
           this.setState({
             activeProfile: profile,
-            profiles: this.props.profileManager.all()
-          })
-        }
+            profiles: this.props.profileManager.all(),
+          });
+        },
       },
-      'Add New Profile'
-    )
+      'Add New Profile',
+    );
   }
 
   removeProfile(profile) {
-    const {profileManager} = this.props
+    const {
+      profileManager,
+    } = this.props;
 
     if (profileManager.activeProfile().id === profile.id) {
-      const newActiveProfileId = profileManager.profileIds.find(profileId => {
-        return profileId !== profile.id
-      })
-      profileManager.resetActiveProfile(newActiveProfileId)
+      const newActiveProfileId = profileManager.profileIds.find(profileId => profileId !== profile.id);
+      profileManager.resetActiveProfile(newActiveProfileId);
     }
 
-    profile.destroy()
+    profile.destroy();
   }
 
   setActiveProfile(activeProfile) {
-    this.setState({activeProfile})
+    this.setState({
+      activeProfile,
+    });
 
-    this.props.profileManager.activeProfileId = activeProfile.id
+    this.props.profileManager.activeProfileId = activeProfile.id;
   }
 
   bindListener() {
     this.subscriptions.add(
-      this.props.profileManager.onActiveProfileChange(activeProfile => {
-        this.setState({activeProfile})
-      })
-    )
+      this.props.profileManager.onActiveProfileChange((activeProfile) => {
+        this.setState({
+          activeProfile,
+        });
+      }),
+    );
 
     this.subscriptions.add(
       this.props.profileManager.onProfileChange(() => {
-        this.setState({profiles: this.props.profileManager.all()})
-      })
-    )
+        this.setState({
+          profiles: this.props.profileManager.all(),
+        });
+      }),
+    );
   }
-}
+};

@@ -1,12 +1,15 @@
-const {activeWindow} = require('electron-util')
-const {Component, createElement} = require('react')
+const {
+  activeWindow,
+} = require('electron-util');
+const {
+  Component,
+  createElement,
+} = require('react');
 
-module.exports =
-class Minimize extends Component {
+module.exports = class Minimize extends Component {
   render() {
     return createElement(
-      'minimize-button',
-      {
+      'minimize-button', {
         style: {
           WebkitAppRegion: 'no-drag',
           flexDirection: 'column',
@@ -19,13 +22,18 @@ class Minimize extends Component {
           position: 'fixed',
           zIndex: 4,
           filter: 'invert(20%)',
-          cursor: 'pointer'
+          cursor: 'pointer',
         },
         onClick() {
-          return activeWindow().minimize()
-        }
+          return activeWindow().minimize();
+        },
       },
-      createElement('div', {style: {height: '1px', background: '#000'}})
-    )
+      createElement('div', {
+        style: {
+          height: '1px',
+          background: '#000',
+        },
+      }),
+    );
   }
-}
+};

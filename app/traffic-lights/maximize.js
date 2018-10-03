@@ -1,12 +1,15 @@
-const {activeWindow} = require('electron-util')
-const {Component, createElement} = require('react')
+const {
+  activeWindow,
+} = require('electron-util');
+const {
+  Component,
+  createElement,
+} = require('react');
 
-module.exports =
-class Maximize extends Component {
+module.exports = class Maximize extends Component {
   render() {
     return createElement(
-      'maximize-button',
-      {
+      'maximize-button', {
         style: {
           WebkitAppRegion: 'no-drag',
           flexDirection: 'column',
@@ -20,12 +23,12 @@ class Maximize extends Component {
           zIndex: 4,
           border: '#000 1px solid',
           filter: 'invert(20%)',
-          cursor: 'pointer'
+          cursor: 'pointer',
         },
         onClick() {
-          activeWindow().maximize()
-        }
-      }
-    )
+          activeWindow().maximize();
+        },
+      },
+    );
   }
-}
+};

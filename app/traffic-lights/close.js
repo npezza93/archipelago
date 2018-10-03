@@ -1,12 +1,15 @@
-const {activeWindow} = require('electron-util')
-const {Component, createElement} = require('react')
+const {
+  activeWindow,
+} = require('electron-util');
+const {
+  Component,
+  createElement,
+} = require('react');
 
-module.exports =
-class Close extends Component {
+module.exports = class Close extends Component {
   render() {
     return createElement(
-      'close-button',
-      {
+      'close-button', {
         style: {
           WebkitAppRegion: 'no-drag',
           height: '16px',
@@ -16,15 +19,14 @@ class Close extends Component {
           position: 'fixed',
           zIndex: 4,
           filter: 'invert(20%)',
-          cursor: 'pointer'
+          cursor: 'pointer',
         },
         onClick() {
-          activeWindow().close()
-        }
+          activeWindow().close();
+        },
       },
       createElement(
-        'div',
-        {
+        'div', {
           style: {
             height: '1px',
             position: 'absolute',
@@ -32,13 +34,12 @@ class Close extends Component {
             top: '7px',
             left: '-2px',
             background: '#000',
-            transform: 'rotate(45deg)'
-          }
-        }
+            transform: 'rotate(45deg)',
+          },
+        },
       ),
       createElement(
-        'div',
-        {
+        'div', {
           style: {
             height: '1px',
             position: 'absolute',
@@ -46,10 +47,10 @@ class Close extends Component {
             top: '7px',
             left: '-2px',
             background: '#000',
-            transform: 'rotate(135deg)'
-          }
-        }
-      )
-    )
+            transform: 'rotate(135deg)',
+          },
+        },
+      ),
+    );
   }
-}
+};

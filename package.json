@@ -58,12 +58,18 @@
     "xterm": "^3.5.1"
   },
   "devDependencies": {
+    "@fellow/eslint-plugin-coffee": "^0.4.13",
     "chai": "^4.1.2",
     "electron": "^3.0.1",
     "electron-builder": "^20.19.1",
     "electron-mocha": "^6.0.4",
     "enzyme": "^3.6.0",
     "enzyme-adapter-react-16": "^1.5.0",
+    "eslint": "^5.6.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.1",
     "jsdom": "^12.0.0",
     "jsdom-global": "^3.0.2",
     "mocha": "^5.2.0",

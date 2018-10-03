@@ -14,7 +14,7 @@ select-field select {
   text-transform: inherit;
   width: 100%;
   border: none;
-  border-bottom: 1px solid rgba(0,0,0,0.4);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
   border-radius: 0;
   outline: none;
   background-color: transparent;
@@ -22,6 +22,7 @@ select-field select {
   cursor: pointer;
   -webkit-appearance: none;
 }
+
 select-field {
   position: relative;
   margin-bottom: 15px;
@@ -31,8 +32,9 @@ select-field {
   background-repeat: no-repeat;
   background-position: right 8px bottom 12px;
 }
+
 select-field label {
-  color: rgba(0,0,0,0.4);
+  color: rgba(0, 0, 0, 0.4);
   font-size: 15px;
   position: absolute;
   left: 0;
@@ -51,20 +53,25 @@ switch-field {
   position: relative;
   margin-bottom: 15px;
 }
-switch-field input {display:none;}
+
+switch-field input {
+  display: none;
+}
+
 switch-field label {
   display: inline-block;
   width: 50px;
   height: 22px;
   position: relative;
 }
+
 switch-field .slider {
   cursor: pointer;
   top: 12px;
   left: 0;
   right: 0;
   bottom: 0;
-  border-bottom: 1px solid rgba(0,0,0,0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   transition: .4s;
   border-radius: 30px;
   height: 1px;
@@ -84,7 +91,8 @@ switch-field .slider:before {
   border-radius: 30px;
   border: 1px solid #FF1744;
 }
-switch-field input:checked + .slider:before {
+
+switch-field input:checked+.slider:before {
   transform: translateX(28px);
   border: 1px solid #00E676;
 }
@@ -94,8 +102,9 @@ input-field {
   display: block;
   margin-bottom: 15px;
 }
+
 input-field label {
-  color: rgba(0,0,0,0.4);
+  color: rgba(0, 0, 0, 0.4);
   font-size: 15px;
   position: absolute;
   left: 0;
@@ -103,11 +112,12 @@ input-field label {
   transition: all 250ms ease-in-out;
   z-index: -1;
 }
+
 input[type='text'] {
   width: 100%;
   margin-top: 5px;
   border: none;
-  border-bottom: 1px solid rgba(0,0,0,0.4);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
   padding: 0px;
   padding-bottom: 5px;
   outline: none;
@@ -118,35 +128,41 @@ input[type='text'] {
   z-index: 1;
   background: transparent;
 }
-input-field input[type='text'][value=''] + label {
+
+input-field input[type='text'][value='']+label {
   bottom: 5px;
   font-size: 24px;
   font-weight: 300;
 }
+
 .input-border:after {
-    display: block;
-    content: '';
-    border-bottom: solid 1px rgba(0,0,0,0.4);
-    transform: scaleX(0);
-    transition: transform 250ms ease-in-out;
-    transform-origin: 0% 50%;
-    z-index: 1;
-  }
-input:focus + label + .input-border:after {
+  display: block;
+  content: '';
+  border-bottom: solid 1px rgba(0, 0, 0, 0.4);
+  transform: scaleX(0);
+  transition: transform 250ms ease-in-out;
+  transform-origin: 0% 50%;
+  z-index: 1;
+}
+
+input:focus+label+.input-border:after {
   transform: scaleX(1);
 }
 
 ::-webkit-scrollbar {
   width: 10px;
 }
+
 ::-webkit-scrollbar-thumb {
   background: #666;
   border: 3px solid #FFF;
 }
+
 ::-webkit-scrollbar,
 ::-webkit-scrollbar-thumb {
   border-radius: 5px;
 }
+
 ::-webkit-scrollbar-thumb:active {
   background: #666;
   border: 0 solid #FFF;
@@ -159,7 +175,7 @@ body {
   color: #424242;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   text-rendering: geometricPrecision;
-  -webkit-font-feature-settings: "liga" off, "calt" off;
+  -webkit-font-feature-settings: "liga"off, "calt"off;
   -webkit-font-smoothing: subpixel-antialiased;
   margin: 0;
 }
@@ -329,7 +345,7 @@ archipelago-properties-pane archipelago-header::before {
 }
 
 archipelago-properties-pane archipelago-header div,
-archipelago-properties-pane archipelago-header div[position = "0"] {
+archipelago-properties-pane archipelago-header div[position="0"] {
   font-size: 32px;
   font-weight: 600;
   color: #424242;
@@ -340,7 +356,7 @@ archipelago-properties-pane archipelago-header div[position = "0"] {
   text-transform: uppercase;
 }
 
-archipelago-properties-pane archipelago-header div[position = "-2"] {
+archipelago-properties-pane archipelago-header div[position="-2"] {
   font-size: 11px;
   font-weight: 500;
   color: #889199;
@@ -349,7 +365,7 @@ archipelago-properties-pane archipelago-header div[position = "-2"] {
   transition: all .3s ease-in-out;
 }
 
-archipelago-properties-pane archipelago-header div[position = "-1"] {
+archipelago-properties-pane archipelago-header div[position="-1"] {
   font-size: 16px;
   font-weight: 500;
   color: #889199;
@@ -357,7 +373,7 @@ archipelago-properties-pane archipelago-header div[position = "-1"] {
   transition: all .3s ease-in-out;
 }
 
-archipelago-properties-pane archipelago-header div[position = "1"] {
+archipelago-properties-pane archipelago-header div[position="1"] {
   opacity: 0;
   top: 113px;
   font-size: 36px;
@@ -376,7 +392,7 @@ archipelago-properties-pane archipelago-header::after {
 
 /* General Options */
 
-archipelago-properties-pane > div {
+archipelago-properties-pane>div {
   height: 100%;
 }
 

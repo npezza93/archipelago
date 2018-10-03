@@ -1,44 +1,47 @@
-const {Component, createElement} = require('react')
-const SplitPane = require('react-split-pane')
-const Terminal = require('./terminal')
+const {
+  Component,
+  createElement,
+} = require('react');
+const SplitPane = require('react-split-pane');
+const Terminal = require('./terminal');
 
-module.exports =
-class Pane extends Component {
+module.exports = class Pane extends Component {
   render() {
     return createElement(
-      'archipelago-pane', {}, this.renderTree(this.props.sessionTree)
-    )
+      'archipelago-pane', {}, this.renderTree(this.props.sessionTree),
+    );
   }
 
   renderTree(object) {
     switch (object.constructor.name) {
       case 'Branch':
-        return this.renderBranch(object)
+        return this.renderBranch(object);
       case 'Session':
-        return this.renderSession(object)
+        return this.renderSession(object);
       default:
-        return null
+        return null;
     }
   }
 
   renderBranch(branch) {
     return createElement(
-      SplitPane,
-      {split: branch.orientation, defaultSize: '50%'},
+      SplitPane, {
+        split: branch.orientation,
+        defaultSize: '50%',
+      },
       this.renderTree(branch.left),
-      this.renderTree(branch.right)
-    )
+      this.renderTree(branch.right),
+    );
   }
 
   renderSession(session) {
     return createElement(
-      Terminal,
-      {
+      Terminal, {
         session,
         key: session.id,
         removeSession: this.props.removeSession,
-        selectSession: this.props.selectSession
-      }
-    )
+        selectSession: this.props.selectSession,
+      },
+    );
   }
-}
+};

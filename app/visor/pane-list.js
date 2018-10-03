@@ -1,12 +1,13 @@
-const {Component, createElement} = require('react')
-const Pane = require('./pane')
+const {
+  Component,
+  createElement,
+} = require('react');
+const Pane = require('./pane');
 
-module.exports =
-class PaneList extends Component {
+module.exports = class PaneList extends Component {
   render() {
     return createElement(
-      'archipelago-pane-list',
-      {},
+      'archipelago-pane-list', {},
       createElement(
         Pane, {
           id: this.props.tab.id,
@@ -14,9 +15,9 @@ class PaneList extends Component {
           sessionTree: this.props.tab.root,
           currentSessionId: this.props.currentSessionId,
           removeSession: this.props.removeSession,
-          selectSession: this.props.selectSession
-        }
-      )
-    )
+          selectSession: this.props.selectSession,
+        },
+      ),
+    );
   }
-}
+};
