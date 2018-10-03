@@ -1,12 +1,11 @@
-/* global requestAnimationFrame, requestIdleCallback, document */
-
-const {Emitter, CompositeDisposable, Disposable} = require('event-kit')
+const {clipboard} = require('electron')
+const {CompositeDisposable, Disposable} = require('event-kit')
 const {Terminal} = require('xterm')
 const KeymapManager = require('atom-keymap')
 const unescape = require('unescape-js')
-const ipc = require('electron-better-ipc')
 
 const ProfileManager = require('../common/profile-manager')
+const Pty = require('../common/pty')
 const {xtermSettings} = require('../common/config-file')
 
 Terminal.applyAddon(require('xterm/lib/addons/fit/fit'))
@@ -16,12 +15,11 @@ class Session {
   constructor(pref, type, branch) {
     this.branch = branch
     this.id = Math.random()
-    this.emitter = new Emitter()
     this.subscriptions = new CompositeDisposable()
     this.profileManager = new ProfileManager(pref)
     this.title = ''
     this.pref = pref
-    this.pty = ipc.callMain('create-pty')
+    this.pty = new Pty(pref)
     this.type = type || 'default'
 
     this.bindDataListeners()
@@ -87,23 +85,23 @@ class Session {
     }
   }
 
+  copySelection() {
+    if (this.profileManager.get('copyOnSelect')) {
+      clipboard.writeText(this.xterm.getSelection())
+    }
+  }
+
   kill() {
     this.subscriptions.dispose()
-    this.emitter.dispose()
     this.xterm.dispose()
     this.pref.events.dispose()
 
-    return this.pty.then(({id}) => ipc.callMain('kill-pty', id))
+    return this.pty.kill()
   }
 
-  async fit() {
+  fit() {
     this.xterm.fit()
-    const {id} = await this.pty
-    ipc.callMain(`resize-${id}`, {cols: this.xterm.cols, rows: this.xterm.rows})
-  }
-
-  on(event, handler) {
-    return this.emitter.on(event, handler)
+    this.pty.resize(this.xterm.cols, this.xterm.rows)
   }
 
   keybindingHandler(e) {
@@ -111,7 +109,7 @@ class Session {
     const mapping = this.keymaps.mappings[this.keymaps.keystrokeForKeyboardEvent(e)]
 
     if (mapping) {
-      this.pty.then(({id}) => ipc.callMain(`write-${id}`, mapping))
+      this.pty.write(mapping)
       caught = true
     }
 
@@ -135,63 +133,35 @@ class Session {
     })
   }
 
-  onDidFocus(callback) {
-    return this.emitter.on('did-focus', callback)
+  onFocus(callback) {
+    return this.xterm.addDisposableListener('focus', callback)
   }
 
-  onDidChangeTitle(callback) {
-    return this.emitter.on('did-change-title', callback)
+  onTitle(callback) {
+    return this.xterm.addDisposableListener('title', callback)
   }
 
-  onDidExit(callback) {
-    return this.emitter.on('did-exit', callback)
+  onExit(callback) {
+    return this.pty.onExit(callback)
   }
 
   onData(callback) {
-    return this.emitter.on('data', callback)
+    return this.xterm.addDisposableListener('data', callback)
+  }
+
+  onSelection(callback) {
+    return this.xterm.addDisposableListener('selection', callback)
   }
 
   bindDataListeners() {
-    this.pty.then(({title}) => {
-      if (!this.title && title) {
-        this.title = title
-        this.emitter.emit('did-change-title', title)
-      }
-    })
-
     this.xterm.attachCustomKeyEventHandler(this.keybindingHandler.bind(this))
 
-    this.xterm.on('data', data => {
-      this.pty.then(({id}) => ipc.callMain(`write-${id}`, data))
-    })
-
-    this.xterm.on('focus', () => {
-      this.fit()
-      requestAnimationFrame(() => {
-        requestIdleCallback(() => this.resetBlink())
-      })
-      this.emitter.emit('did-focus')
-    })
-
-    this.xterm.on('title', title => {
-      this.title = title
-      this.emitter.emit('did-change-title', title)
-    })
-
-    this.xterm.on('selection', () => {
-      if (this.profileManager.get('copyOnSelect')) {
-        document.execCommand('copy')
-      }
-    })
-
-    this.pty.then(({id}) => {
-      ipc.answerMain(`write-${id}`, data => {
-        this.xterm.write(data)
-        this.emitter.emit('data')
-      })
-
-      ipc.answerMain(`exit-${id}`, () => this.emitter.emit('did-exit'))
-    })
+    this.subscriptions.add(this.onData(data => this.pty.write(data)))
+    this.subscriptions.add(this.onTitle(title => this.title = title))
+    this.subscriptions.add(this.pty.onData(data => this.xterm.write(data)))
+    this.subscriptions.add(this.onFocus(this.fit.bind(this)))
+    this.subscriptions.add(this.onFocus(this.resetBlink.bind(this)))
+    this.subscriptions.add(this.onSelection(this.copySelection.bind(this)))
 
     xtermSettings.forEach(field => {
       this.subscriptions.add(

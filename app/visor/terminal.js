@@ -35,13 +35,13 @@ class Terminal extends Component {
 
   bindDataListeners() {
     this.subscriptions.add(
-      this.props.session.onDidFocus(() => {
+      this.props.session.onFocus(() => {
         this.props.selectSession(this.props.session.id)
       })
     )
 
     this.subscriptions.add(
-      this.props.session.onDidExit(() => {
+      this.props.session.onExit(() => {
         this.props.removeSession(this.props.session.id)
       })
     )

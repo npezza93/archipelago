@@ -1,7 +1,6 @@
-const {BrowserWindow} = require('electron')
 const {api, platform} = require('electron-util')
-const ipc = require('electron-better-ipc')
 const {spawn} = require('node-pty')
+const {Disposable} = require('event-kit')
 
 const ProfileManager = require('../common/profile-manager')
 
@@ -17,8 +16,6 @@ class Pty {
       this.profileManager.get('shellArgs').split(','),
       this.sessionArgs
     )
-
-    this.bindDataListeners()
   }
 
   get shell() {
@@ -39,35 +36,33 @@ class Pty {
     }
   }
 
-  kill() {
-    this.pty.removeAllListeners('data')
-    this.pty.removeAllListeners('exit')
-    this.pty.kill()
-    this.pref.events.dispose()
+  async kill() {
+    await new Promise(resolve => {
+      this.pty.removeAllListeners('data')
+      this.pty.removeAllListeners('exit')
+      this.pty.kill()
+      this.pref.events.dispose()
+      resolve()
+    })
   }
 
   onExit(callback) {
     this.pty.on('exit', callback)
+
+    return new Disposable(() => this.pty.removeListener('exit', callback))
   }
 
   onData(callback) {
     this.pty.on('data', callback)
+
+    return new Disposable(() => this.pty.removeListener('data', callback))
   }
 
-  bindDataListeners() {
-    ipc.answerRenderer(`resize-${this.id}`, ({cols, rows}) => this.pty.resize(cols, rows))
-    ipc.answerRenderer(`write-${this.id}`, data => this.pty.write(data))
+  resize(cols, rows) {
+    this.pty.resize(cols, rows)
+  }
 
-    this.onExit(() => {
-      for (const window of BrowserWindow.getAllWindows()) {
-        ipc.callRenderer(window, `exit-${this.id}`)
-      }
-    })
-
-    this.onData(data => {
-      for (const window of BrowserWindow.getAllWindows()) {
-        ipc.callRenderer(window, `write-${this.id}`, data)
-      }
-    })
+  write(data) {
+    this.pty.write(data)
   }
 }
