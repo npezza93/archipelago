@@ -1,7 +1,11 @@
-const {BrowserWindow} = require('electron')
-const {is} = require('electron-util')
+const {
+  BrowserWindow,
+} = require('electron');
+const {
+  is,
+} = require('electron-util');
 
-let settingsWindow = null
+let settingsWindow = null;
 
 exports.display = () => {
   if ((settingsWindow === null) || settingsWindow.isDestroyed()) {
@@ -11,11 +15,13 @@ exports.display = () => {
       show: true,
       titleBarStyle: 'hiddenInset',
       frame: is.macos,
-      webPreferences: {experimentalFeatures: true}
-    })
+      webPreferences: {
+        experimentalFeatures: true,
+      },
+    });
 
-    settingsWindow.loadFile('app/settings/index.html')
+    settingsWindow.loadFile('app/settings/index.html');
   }
 
-  settingsWindow.focus()
-}
+  settingsWindow.focus();
+};

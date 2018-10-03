@@ -7,7 +7,7 @@
     "postinstall": "electron-builder install-app-deps",
     "start": "ELECTRON_DISABLE_SECURITY_WARNINGS=true ./node_modules/.bin/electron .",
     "test": "./node_modules/.bin/mocha test/about test/main test/settings && ./node_modules/.bin/electron-mocha test/configuration && ./node_modules/.bin/electron-mocha test/configuration --renderer && ./node_modules/.bin/electron-mocha test/sessions --renderer && ./node_modules/.bin/electron-mocha --require test/setup.js --recursive test/react --renderer",
-    "lint": "./node_modules/.bin/xo",
+    "lint": "yarn eslint app/",
     "pack": "electron-builder --dir",
     "dist": "electron-builder --publish onTagOrDraft"
   },
@@ -64,6 +64,11 @@
     "electron-mocha": "^6.0.4",
     "enzyme": "^3.6.0",
     "enzyme-adapter-react-16": "^1.5.0",
+    "eslint": "^5.6.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.1",
     "jsdom": "^12.0.0",
     "jsdom-global": "^3.0.2",
     "mocha": "^5.2.0",
@@ -75,8 +80,7 @@
     "productName": "Archipelago",
     "mac": {
       "category": "public.app-category.developer-tools",
-      "target": [
-        {
+      "target": [{
           "target": "dmg",
           "arch": [
             "x64"
@@ -93,8 +97,7 @@
     "dmg": {
       "icon": "build/icon.icns",
       "iconSize": 130,
-      "contents": [
-        {
+      "contents": [{
           "x": 110,
           "y": 200,
           "type": "file"

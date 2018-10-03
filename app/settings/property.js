@@ -1,24 +1,56 @@
-const React = require('react')
-const {CompositeDisposable} = require('event-kit')
+const React = require('react');
+const {
+  CompositeDisposable,
+} = require('event-kit');
 
-const ProfileManager = require('../configuration/profile-manager')
-const {pref} = require('../configuration/config-file')
-const allFields = require('./all-fields')
+const ProfileManager = require('../configuration/profile-manager');
+const {
+  pref,
+} = require('../configuration/config-file');
+const allFields = require('./all-fields');
 
-module.exports =
-class Property extends React.Component {
+module.exports = class Property extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
-    this.pref = pref()
-    this.profileManager = new ProfileManager(this.pref)
-    this.subscriptions = new CompositeDisposable()
+    this.pref = pref();
+    this.profileManager = new ProfileManager(this.pref);
+    this.subscriptions = new CompositeDisposable();
 
     this.state = {
-      [props.property]: this.profileManager.get(props.property)
+      [props.property]: this.profileManager.get(props.property),
+    };
+
+    this.bindListener();
+  }
+
+  fieldType() {
+    let {
+      type,
+    } = this.props.schema;
+
+    if (type === 'string' && this.props.schema.color) {
+      type = 'color';
     }
 
-    this.bindListener()
+    return type;
+  }
+
+  componentWillUnmount() {
+    this.pref.dispose();
+    this.subscriptions.dispose();
+  }
+
+  bindListener() {
+    this.subscriptions.add(
+      this.profileManager.onDidChange(this.props.property, (newValue) => {
+        if (this.state[this.props.property] !== newValue) {
+          return this.setState({
+            [this.props.property]: newValue,
+          });
+        }
+      }),
+    );
   }
 
   render() {
@@ -27,32 +59,7 @@ class Property extends React.Component {
       this.props.property,
       this.state[this.props.property],
       this.props.schema,
-      newValue => this.profileManager.set(this.props.property, newValue)
-    )
+      newValue => this.profileManager.set(this.props.property, newValue),
+    );
   }
-
-  fieldType() {
-    let {type} = this.props.schema
-
-    if (type === 'string' && this.props.schema.color) {
-      type = 'color'
-    }
-
-    return type
-  }
-
-  componentWillUnmount() {
-    this.pref.dispose()
-    this.subscriptions.dispose()
-  }
-
-  bindListener() {
-    this.subscriptions.add(
-      this.profileManager.onDidChange(this.props.property, newValue => {
-        if (this.state[this.props.property] !== newValue) {
-          return this.setState({[this.props.property]: newValue})
-        }
-      })
-    )
-  }
-}
+};

@@ -16,7 +16,7 @@ body,
 #root,
 archipelago-app {
   height: 100%;
-  -webkit-font-feature-settings: "liga" off, "calt" off;
+  -webkit-font-feature-settings: "liga"off, "calt"off;
 }
 
 @keyframes pulse {
@@ -332,9 +332,11 @@ archipelago-tab.is-unread span {
   height: 1px;
   width: 50%;
 }
+
 .mdc-linear-progress__buffer {
   background: var(--tab-color);
 }
+
 .mdc-linear-progress.mdc-linear-progress--indeterminate .mdc-linear-progress__bar-inner {
   background: var(--background-color);
 }

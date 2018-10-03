@@ -1,7 +1,11 @@
-const {BrowserWindow} = require('electron')
-const {is} = require('electron-util')
+const {
+  BrowserWindow,
+} = require('electron');
+const {
+  is,
+} = require('electron-util');
 
-let aboutWindow = null
+let aboutWindow = null;
 
 exports.display = () => {
   if (aboutWindow === null || aboutWindow.isDestroyed()) {
@@ -10,11 +14,11 @@ exports.display = () => {
       height: 500,
       show: true,
       titleBarStyle: 'hiddenInset',
-      frame: is.macos
-    })
+      frame: is.macos,
+    });
 
-    aboutWindow.loadFile('app/about/index.html')
+    aboutWindow.loadFile('app/about/index.html');
   }
 
-  aboutWindow.focus()
-}
+  aboutWindow.focus();
+};

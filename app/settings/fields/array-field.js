@@ -1,40 +1,43 @@
 /* eslint guard-for-in: "off" */
 
-const {Component, createElement} = require('react')
-const {singularize} = require('i')(false)
-const coreFields = require('../core-fields')
+const {
+  Component,
+  createElement,
+} = require('react');
+const {
+  singularize,
+} = require('i')(false);
+const coreFields = require('../core-fields');
 
-module.exports =
-class ArrayField extends Component {
+module.exports = class ArrayField extends Component {
   render() {
-    const elements = this.props.value.map((element, i) =>
-      this.renderElement(element, i))
+    const elements = this.props.value.map((element, i) => this.renderElement(element, i));
 
-    return elements.concat(this.addElement())
+    return elements.concat(this.addElement());
   }
 
   renderElement(element, index) {
     return createElement(
       'div', {
         key: index,
-        className: 'array-element-container'
+        className: 'array-element-container',
       },
       this.renderItems(element, index),
-      this.removeElement(index)
-    )
+      this.removeElement(index),
+    );
   }
 
   renderItems(value, index) {
     if (this.props.schema.items.type === 'object') {
-      const result = []
+      const result = [];
       for (const property in this.props.schema.items.properties) {
-        const propertySchema = this.props.schema.items.properties[property]
-        result.push(this.renderItem(property, value[property], propertySchema, index))
+        const propertySchema = this.props.schema.items.properties[property];
+        result.push(this.renderItem(property, value[property], propertySchema, index));
       }
-      return result
+      return result;
     }
 
-    return this.renderItem(this.props.property, value, this.props.schema.items, index)
+    return this.renderItem(this.props.property, value, this.props.schema.items, index);
   }
 
   renderItem(property, value, schema, index) {
@@ -43,11 +46,11 @@ class ArrayField extends Component {
       property,
       value,
       schema,
-      newValue => {
-        this.props.value[index][property] = newValue
-        return this.props.onChange.call(this, this.props.value)
-      }
-    )
+      (newValue) => {
+        this.props.value[index][property] = newValue;
+        return this.props.onChange.call(this, this.props.value);
+      },
+    );
   }
 
   addElement() {
@@ -55,40 +58,40 @@ class ArrayField extends Component {
       'div', {
         key: Math.random(),
         className: 'create-array-element',
-        onClick: this.createElement.bind(this)
+        onClick: this.createElement.bind(this),
       },
-      `add new ${singularize(this.props.property)}`
-    )
+      `add new ${singularize(this.props.property)}`,
+    );
   }
 
   removeElement(index) {
     return createElement(
       'div', {
         className: 'remove-array-element',
-        onClick: this.destroyElement.bind(this, index)
+        onClick: this.destroyElement.bind(this, index),
       },
-      '\u00D7'
-    )
+      '\u00D7',
+    );
   }
 
   createElement() {
-    let newItem
+    let newItem;
     if (this.props.schema.items.type === 'object') {
-      newItem = {}
+      newItem = {};
       for (const property in this.props.schema.items.properties) {
-        const propertySchema = this.props.schema.items.properties[property]
-        newItem[property] = propertySchema.default || null
+        const propertySchema = this.props.schema.items.properties[property];
+        newItem[property] = propertySchema.default || null;
       }
     } else {
-      newItem = this.props.schema.items.default || null
+      newItem = this.props.schema.items.default || null;
     }
 
-    return this.props.onChange.call(this, this.props.value.concat(newItem))
+    return this.props.onChange.call(this, this.props.value.concat(newItem));
   }
 
   destroyElement(index) {
-    this.props.value.splice(index, 1)
+    this.props.value.splice(index, 1);
 
-    return this.props.onChange.call(this, this.props.value)
+    return this.props.onChange.call(this, this.props.value);
   }
-}
+};

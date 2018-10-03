@@ -1,123 +1,122 @@
-const Branch = require('./branch')
-const Session = require('./session')
+const Branch = require('./branch');
+const Session = require('./session');
 
-module.exports =
-class Tab {
+module.exports = class Tab {
   constructor(pref, type) {
-    this.root = new Session(pref, type)
-    this.id = Math.random()
-    this.title = ''
-    this.isUnread = false
-    this.pref = pref
-    this.type = type
+    this.root = new Session(pref, type);
+    this.id = Math.random();
+    this.title = '';
+    this.isUnread = false;
+    this.pref = pref;
+    this.type = type;
   }
 
   add(sessionId, orientation) {
-    let newBranch
+    let newBranch;
 
     if (this.root.constructor.name === 'Session') {
-      const session = this.root
-      const branch = this.newBranch(session, orientation)
-      this.root = branch
-      newBranch = this.root
+      const session = this.root;
+      const branch = this.newBranch(session, orientation);
+      this.root = branch;
+      newBranch = this.root;
     } else {
-      newBranch = this.newBranch(this.find(this.root, sessionId), orientation)
+      newBranch = this.newBranch(this.find(this.root, sessionId), orientation);
     }
 
-    return newBranch
+    return newBranch;
   }
 
   remove(sessionId) {
     if (this.root.constructor.name === 'Session' && (this.root.id === sessionId)) {
-      this.root = null
+      this.root = null;
     } else {
-      const sessionToRemove = this.find(this.root, sessionId)
-      const sessionToSave = this.sessionToSave(sessionToRemove)
+      const sessionToRemove = this.find(this.root, sessionId);
+      const sessionToSave = this.sessionToSave(sessionToRemove);
 
       if (sessionToRemove) {
-        sessionToRemove.kill()
+        sessionToRemove.kill();
 
         if (sessionToSave.branch === this.root) {
-          this.root = sessionToSave
-          sessionToSave.branch = null
+          this.root = sessionToSave;
+          sessionToSave.branch = null;
         } else {
           if (sessionToSave.branch.branch.left === sessionToSave.branch) {
-            sessionToSave.branch.branch.left = sessionToSave
+            sessionToSave.branch.branch.left = sessionToSave;
           }
           if (sessionToSave.branch.branch.right === sessionToSave.branch) {
-            sessionToSave.branch.branch.right = sessionToSave
+            sessionToSave.branch.branch.right = sessionToSave;
           }
-          sessionToSave.branch = sessionToSave.branch.branch
+          sessionToSave.branch = sessionToSave.branch.branch;
         }
       }
     }
   }
 
   kill() {
-    return (this.root && this.root.kill()) || new Promise(resolve => resolve())
+    return (this.root && this.root.kill()) || new Promise(resolve => resolve());
   }
 
   focusableSession() {
-    let session = this.root
+    let session = this.root;
     while (!session.constructor.name === 'Session') {
-      session = session.left
+      session = session.left;
     }
 
-    return session
+    return session;
   }
 
   find(branch, sessionId) {
-    let foundSession = null
+    let foundSession = null;
 
-    this.traverse(branch, session => {
+    this.traverse(branch, (session) => {
       if (session.id === sessionId) {
-        foundSession = session
+        foundSession = session;
       }
-    })
+    });
 
-    return foundSession
+    return foundSession;
   }
 
   traverse(branch, callback) {
     if (branch === null || branch === undefined) {
-      return
+      return;
     }
 
     if (branch.constructor.name === 'Session') {
-      callback(branch)
+      callback(branch);
     }
 
-    this.traverse(branch.left, callback)
-    this.traverse(branch.right, callback)
+    this.traverse(branch.left, callback);
+    this.traverse(branch.right, callback);
   }
 
   newBranch(session, orientation) {
     const branch = new Branch(
-      session.branch, orientation, session, this.pref, this.type
-    )
+      session.branch, orientation, session, this.pref, this.type,
+    );
 
     if (session.branch && session.branch.left.id === session.id) {
-      session.branch.left = branch
+      session.branch.left = branch;
     } else if (session.branch && session.branch.right.id === session.id) {
-      session.branch.right = branch
+      session.branch.right = branch;
     }
 
-    session.branch = branch
+    session.branch = branch;
 
-    return branch
+    return branch;
   }
 
   sessionToSave(sessionToRemove) {
-    let sessionToSave
+    let sessionToSave;
 
     if (sessionToRemove && sessionToRemove.branch) {
       if (sessionToRemove.branch.left === sessionToRemove) {
-        sessionToSave = sessionToRemove.branch.right
+        sessionToSave = sessionToRemove.branch.right;
       } else if (sessionToRemove.branch.right === sessionToRemove) {
-        sessionToSave = sessionToRemove.branch.left
+        sessionToSave = sessionToRemove.branch.left;
       }
     }
 
-    return sessionToSave
+    return sessionToSave;
   }
-}
+};

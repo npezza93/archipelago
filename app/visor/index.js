@@ -1,34 +1,37 @@
 /* global document */
 /* eslint guard-for-in: "off" */
 
-const React = require('react')
-const ReactDOM = require('react-dom')
+const React = require('react');
+const ReactDOM = require('react-dom');
 
-const {pref} = require('../configuration/config-file')
-const ProfileManager = require('../configuration/profile-manager')
-const App = require('./app')
+const {
+  pref,
+} = require('../configuration/config-file');
+const ProfileManager = require('../configuration/profile-manager');
+const App = require('./app');
 
-global.archipelago = {}
-const profileManager = new ProfileManager(pref())
+global.archipelago = {};
+const profileManager = new ProfileManager(pref());
 const styleProperties = {
   fontFamily: '--font-family',
   'visor.windowBackground': '--background-color',
   fontSize: '--font-size',
   'visor.padding': '--terminal-padding',
-  'theme.selection': '--selection-color'
-}
+  'theme.selection': '--selection-color',
+};
 
 global.archipelago.app = ReactDOM.render(
-  React.createElement(App, {profileManager, pref}), document.getElementById('root')
-)
+  React.createElement(App, {
+    profileManager,
+    pref,
+  }), document.getElementById('root'),
+);
 
 for (const selector in styleProperties) {
-  const cssVar = styleProperties[selector]
-  const element = document.documentElement
+  const cssVar = styleProperties[selector];
+  const element = document.documentElement;
 
-  element.style.setProperty(cssVar, profileManager.get(selector))
+  element.style.setProperty(cssVar, profileManager.get(selector));
 }
 
-Object.entries(styleProperties).forEach(property =>
-  profileManager.onDidChange(property[0], newValue => document.documentElement.style.setProperty(property[1], newValue))
-)
+Object.entries(styleProperties).forEach(property => profileManager.onDidChange(property[0], newValue => document.documentElement.style.setProperty(property[1], newValue)));

@@ -1,64 +1,70 @@
 /* global requestAnimationFrame, requestIdleCallback, document */
 
-const {Emitter, CompositeDisposable, Disposable} = require('event-kit')
-const {Terminal} = require('xterm')
-const KeymapManager = require('atom-keymap')
-const unescape = require('unescape-js')
-const ipc = require('electron-better-ipc')
+const {
+  Emitter,
+  CompositeDisposable,
+  Disposable,
+} = require('event-kit');
+const {
+  Terminal,
+} = require('xterm');
+const KeymapManager = require('atom-keymap');
+const unescape = require('unescape-js');
+const ipc = require('electron-better-ipc');
 
-const ProfileManager = require('../configuration/profile-manager')
-const {xtermSettings} = require('../configuration/config-file')
+const ProfileManager = require('../configuration/profile-manager');
+const {
+  xtermSettings,
+} = require('../configuration/config-file');
 
-Terminal.applyAddon(require('xterm/lib/addons/fit/fit'))
+Terminal.applyAddon(require('xterm/lib/addons/fit/fit'));
 
-module.exports =
-class Session {
+module.exports = class Session {
   constructor(pref, type, branch) {
-    this.branch = branch
-    this.id = Math.random()
-    this.emitter = new Emitter()
-    this.subscriptions = new CompositeDisposable()
-    this.profileManager = new ProfileManager(pref)
-    this.title = ''
-    this.pref = pref
-    this.pty = ipc.callMain('create-pty')
-    this.type = type || 'default'
+    this.branch = branch;
+    this.id = Math.random();
+    this.emitter = new Emitter();
+    this.subscriptions = new CompositeDisposable();
+    this.profileManager = new ProfileManager(pref);
+    this.title = '';
+    this.pref = pref;
+    this.pty = ipc.callMain('create-pty');
+    this.type = type || 'default';
 
-    this.bindDataListeners()
+    this.bindDataListeners();
   }
 
   get xterm() {
     if (this._xterm) {
-      return this._xterm
+      return this._xterm;
     }
 
-    this._xterm = new Terminal(this.settings())
+    this._xterm = new Terminal(this.settings());
 
-    return this._xterm
+    return this._xterm;
   }
 
   get keymaps() {
     if (this._keymaps) {
-      return this._keymaps
+      return this._keymaps;
     }
 
-    this._keymaps = new KeymapManager()
-    this._keymaps.mappings =
-      this.profileManager.get('keybindings').reduce((result, item) => {
-        result[item.keystroke] = unescape(item.command)
-        return result
-      }, {})
+    this._keymaps = new KeymapManager();
+    this._keymaps.mappings = this.profileManager.get('keybindings').reduce((result, item) => {
+      result[item.keystroke] = unescape(item.command);
+      return result;
+    }, {});
 
-    return this._keymaps
+    return this._keymaps;
   }
 
   settings() {
     return this.applySettingModifiers(
       xtermSettings.reduce((settings, property) => {
-        settings[property] = this.profileManager.get(property)
-        return settings
-      }, {})
-    )
+        settings[property] = this.profileManager.get(property);
+        return settings;
+      }, {}),
+    );
   }
 
   applySettingModifiers(defaultSettings) {
@@ -68,137 +74,156 @@ class Session {
         allowTransparency: this.profileManager.get('visor.allowTransparency'),
         theme: {
           ...this.profileManager.get('theme'),
-          background: this.profileManager.get('visor.background')
-        }
-      }
+          background: this.profileManager.get('visor.background'),
+        },
+      };
     }
 
-    return defaultSettings
+    return defaultSettings;
   }
 
   resetTheme() {
-    this.xterm.setOption('theme', this.profileManager.get('theme'))
+    this.xterm.setOption('theme', this.profileManager.get('theme'));
   }
 
   resetBlink() {
     if (this.profileManager.get('cursorBlink')) {
-      this.xterm.setOption('cursorBlink', false)
-      this.xterm.setOption('cursorBlink', true)
+      this.xterm.setOption('cursorBlink', false);
+      this.xterm.setOption('cursorBlink', true);
     }
   }
 
   kill() {
-    this.subscriptions.dispose()
-    this.emitter.dispose()
-    this.xterm.dispose()
-    this.pref.events.dispose()
+    this.subscriptions.dispose();
+    this.emitter.dispose();
+    this.xterm.dispose();
+    this.pref.events.dispose();
 
-    return this.pty.then(({id}) => ipc.callMain('kill-pty', id))
+    return this.pty.then(({
+      id,
+    }) => ipc.callMain('kill-pty', id));
   }
 
   async fit() {
-    this.xterm.fit()
-    const {id} = await this.pty
-    ipc.callMain(`resize-${id}`, {cols: this.xterm.cols, rows: this.xterm.rows})
+    this.xterm.fit();
+    const {
+      id,
+    } = await this.pty;
+    ipc.callMain(`resize-${id}`, {
+      cols: this.xterm.cols,
+      rows: this.xterm.rows,
+    });
   }
 
   on(event, handler) {
-    return this.emitter.on(event, handler)
+    return this.emitter.on(event, handler);
   }
 
   keybindingHandler(e) {
-    let caught = false
-    const mapping = this.keymaps.mappings[this.keymaps.keystrokeForKeyboardEvent(e)]
+    let caught = false;
+    const mapping = this.keymaps.mappings[this.keymaps.keystrokeForKeyboardEvent(e)];
 
     if (mapping) {
-      this.pty.then(({id}) => ipc.callMain(`write-${id}`, mapping))
-      caught = true
+      this.pty.then(({
+        id,
+      }) => ipc.callMain(`write-${id}`, mapping));
+      caught = true;
     }
 
-    return !caught
+    return !caught;
   }
 
   bindScrollListener() {
     const scrollbarFadeEffect = () => {
-      clearTimeout(this.scrollbarFade)
+      clearTimeout(this.scrollbarFade);
       this.scrollbarFade = setTimeout(
         () => this.xterm.element.classList.remove('scrolling'),
-        600
-      )
-      this.xterm.element.classList.add('scrolling')
-    }
+        600,
+      );
+      this.xterm.element.classList.add('scrolling');
+    };
 
-    this.xterm.element.addEventListener('wheel', scrollbarFadeEffect.bind(this), {passive: true})
+    this.xterm.element.addEventListener('wheel', scrollbarFadeEffect.bind(this), {
+      passive: true,
+    });
 
     return new Disposable(() => {
-      this.xterm.element.removeEventListener('wheel', scrollbarFadeEffect.bind(this), {passive: true})
-    })
+      this.xterm.element.removeEventListener('wheel', scrollbarFadeEffect.bind(this), {
+        passive: true,
+      });
+    });
   }
 
   onDidFocus(callback) {
-    return this.emitter.on('did-focus', callback)
+    return this.emitter.on('did-focus', callback);
   }
 
   onDidChangeTitle(callback) {
-    return this.emitter.on('did-change-title', callback)
+    return this.emitter.on('did-change-title', callback);
   }
 
   onDidExit(callback) {
-    return this.emitter.on('did-exit', callback)
+    return this.emitter.on('did-exit', callback);
   }
 
   onData(callback) {
-    return this.emitter.on('data', callback)
+    return this.emitter.on('data', callback);
   }
 
   bindDataListeners() {
-    this.pty.then(({title}) => {
+    this.pty.then(({
+      title,
+    }) => {
       if (!this.title && title) {
-        this.title = title
-        this.emitter.emit('did-change-title', title)
+        this.title = title;
+        this.emitter.emit('did-change-title', title);
       }
-    })
+    });
 
-    this.xterm.attachCustomKeyEventHandler(this.keybindingHandler.bind(this))
+    this.xterm.attachCustomKeyEventHandler(this.keybindingHandler.bind(this));
 
-    this.xterm.on('data', data => {
-      this.pty.then(({id}) => ipc.callMain(`write-${id}`, data))
-    })
+    this.xterm.on('data', (data) => {
+      this.pty.then(({
+        id,
+      }) => ipc.callMain(`write-${id}`, data));
+    });
 
     this.xterm.on('focus', () => {
-      this.fit()
+      this.fit();
       requestAnimationFrame(() => {
-        requestIdleCallback(() => this.resetBlink())
-      })
-      this.emitter.emit('did-focus')
-    })
+        requestIdleCallback(() => this.resetBlink());
+      });
+      this.emitter.emit('did-focus');
+    });
 
-    this.xterm.on('title', title => {
-      this.title = title
-      this.emitter.emit('did-change-title', title)
-    })
+    this.xterm.on('title', (title) => {
+      this.title = title;
+      this.emitter.emit('did-change-title', title);
+    });
 
     this.xterm.on('selection', () => {
       if (this.profileManager.get('copyOnSelect')) {
-        document.execCommand('copy')
+        document.execCommand('copy');
       }
-    })
+    });
 
-    this.pty.then(({id}) => {
-      ipc.answerMain(`write-${id}`, data => {
-        this.xterm.write(data)
-        this.emitter.emit('data')
-      })
+    this.pty.then(({
+      id,
+    }) => {
+      ipc.answerMain(`write-${id}`, (data) => {
+        this.xterm.write(data);
+        this.emitter.emit('data');
+      });
 
-      ipc.answerMain(`exit-${id}`, () => this.emitter.emit('did-exit'))
-    })
+      ipc.answerMain(`exit-${id}`, () => this.emitter.emit('did-exit'));
+    });
 
-    xtermSettings.forEach(field => {
+    xtermSettings.forEach((field) => {
       this.subscriptions.add(
-        this.profileManager.onDidChange(field, newValue => {
-          this.xterm.setOption(field, newValue)
-        })
-      )
-    })
+        this.profileManager.onDidChange(field, (newValue) => {
+          this.xterm.setOption(field, newValue);
+        }),
+      );
+    });
   }
-}
+};
