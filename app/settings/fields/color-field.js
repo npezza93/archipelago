@@ -15,20 +15,6 @@ module.exports = class ColorField extends Component {
     };
   }
 
-  render() {
-    return createElement(
-      'div', {
-        className: 'color-container',
-        key: this.props.datakey,
-        style: this.state.active ? {
-          zIndex: 2,
-        } : undefined,
-      },
-      this.backdrop(),
-      this.text(),
-    );
-  }
-
   backdrop() {
     if (this.state.active) {
       return createElement(
@@ -93,5 +79,19 @@ module.exports = class ColorField extends Component {
         ),
       );
     }
+  }
+
+  render() {
+    return createElement(
+      'div', {
+        className: 'color-container',
+        key: this.props.datakey,
+        style: this.state.active ? {
+          zIndex: 2,
+        } : undefined,
+      },
+      this.backdrop(),
+      this.text(),
+    );
   }
 };

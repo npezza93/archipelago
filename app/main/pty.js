@@ -28,8 +28,8 @@ module.exports = class Pty {
   }
 
   get shell() {
-    return this.profileManager.get('shell')
-      || process.env[platform({
+    return this.profileManager.get('shell') ||
+      process.env[platform({
         windows: 'COMSPEC',
         default: 'SHELL',
       })];

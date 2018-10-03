@@ -6,12 +6,6 @@ const SplitPane = require('react-split-pane');
 const Terminal = require('./terminal');
 
 module.exports = class Pane extends Component {
-  render() {
-    return createElement(
-      'archipelago-pane', {}, this.renderTree(this.props.sessionTree),
-    );
-  }
-
   renderTree(object) {
     switch (object.constructor.name) {
       case 'Branch':
@@ -42,6 +36,12 @@ module.exports = class Pane extends Component {
         removeSession: this.props.removeSession,
         selectSession: this.props.selectSession,
       },
+    );
+  }
+
+  render() {
+    return createElement(
+      'archipelago-pane', {}, this.renderTree(this.props.sessionTree),
     );
   }
 };

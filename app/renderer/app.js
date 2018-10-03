@@ -26,42 +26,6 @@ module.exports = class App extends React.Component {
     ipc.answerMain('close-current-tab', () => this.removeTab(this.state.currentTabId));
   }
 
-  render() {
-    return React.createElement(
-      'archipelago-app', {
-        class: process.platform,
-        'data-single-tab-mode': (this.props.profileManager.get('singleTabMode') ? '' : undefined),
-      },
-      React.createElement(HamburgerMenu, {
-        key: 'hamburger',
-      }),
-      React.createElement(
-        TabList, {
-          key: 'tabs',
-          tabs: this.state.tabs,
-          currentTabId: this.state.currentTabId,
-          selectTab: this.selectTab.bind(this),
-          removeTab: this.removeTab.bind(this),
-        },
-      ),
-      React.createElement(TrafficLights, {
-        key: 'traffic-lights',
-      }),
-      React.createElement(
-        PaneList, {
-          key: 'panes',
-          tabs: this.state.tabs,
-          currentTabId: this.state.currentTabId,
-          currentSessionId: this.state.currentSessionId,
-          changeTitle: this.changeTitle.bind(this),
-          markUnread: this.markUnread.bind(this),
-          removeSession: this.removeSession.bind(this),
-          selectSession: this.selectSession.bind(this),
-        },
-      ),
-    );
-  }
-
   componentWillUnmount() {
     this.state.tabs.map(tab => tab.kill());
     this.pref.dispose();
@@ -225,5 +189,41 @@ module.exports = class App extends React.Component {
       tabs,
       currentSessionId: newSessionId,
     });
+  }
+
+  render() {
+    return React.createElement(
+      'archipelago-app', {
+        class: process.platform,
+        'data-single-tab-mode': (this.props.profileManager.get('singleTabMode') ? '' : undefined),
+      },
+      React.createElement(HamburgerMenu, {
+        key: 'hamburger',
+      }),
+      React.createElement(
+        TabList, {
+          key: 'tabs',
+          tabs: this.state.tabs,
+          currentTabId: this.state.currentTabId,
+          selectTab: this.selectTab.bind(this),
+          removeTab: this.removeTab.bind(this),
+        },
+      ),
+      React.createElement(TrafficLights, {
+        key: 'traffic-lights',
+      }),
+      React.createElement(
+        PaneList, {
+          key: 'panes',
+          tabs: this.state.tabs,
+          currentTabId: this.state.currentTabId,
+          currentSessionId: this.state.currentSessionId,
+          changeTitle: this.changeTitle.bind(this),
+          markUnread: this.markUnread.bind(this),
+          removeSession: this.removeSession.bind(this),
+          selectSession: this.selectSession.bind(this),
+        },
+      ),
+    );
   }
 };

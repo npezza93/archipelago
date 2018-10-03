@@ -21,19 +21,6 @@ module.exports = class Profile extends React.Component {
     );
   }
 
-  render() {
-    return React.createElement(
-      'archipelago-profile', {
-        class: this.props.activeProfile.id === this.props.profile.id ? 'active' : undefined,
-        onDoubleClick: () => this.setState({
-          editMode: true,
-        }),
-        onClick: () => this.props.setActiveProfile(this.props.profile),
-      },
-      this.textOrInput(),
-      this.removeProfile(),
-    );
-  }
 
   componentWillUnmount() {
     this.subscriptions.dispose();
@@ -83,6 +70,20 @@ module.exports = class Profile extends React.Component {
         },
       },
       '\u00D7',
+    );
+  }
+
+  render() {
+    return React.createElement(
+      'archipelago-profile', {
+        class: this.props.activeProfile.id === this.props.profile.id ? 'active' : undefined,
+        onDoubleClick: () => this.setState({
+          editMode: true,
+        }),
+        onClick: () => this.props.setActiveProfile(this.props.profile),
+      },
+      this.textOrInput(),
+      this.removeProfile(),
     );
   }
 };

@@ -34,4 +34,4 @@ for (const selector in styleProperties) {
   element.style.setProperty(cssVar, profileManager.get(selector));
 }
 
-Object.entries(styleProperties).forEach(property => profileManager.onDidChange(property[0], newValue => document.documentElement.style.setProperty(property[1], newValue)), );
+Object.entries(styleProperties).forEach(property => profileManager.onDidChange(property[0], newValue => document.documentElement.style.setProperty(property[1], newValue)));

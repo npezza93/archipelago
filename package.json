@@ -7,7 +7,7 @@
     "postinstall": "electron-builder install-app-deps",
     "start": "ELECTRON_DISABLE_SECURITY_WARNINGS=true ./node_modules/.bin/electron .",
     "test": "./node_modules/.bin/mocha test/about test/main test/settings && ./node_modules/.bin/electron-mocha test/configuration && ./node_modules/.bin/electron-mocha test/configuration --renderer && ./node_modules/.bin/electron-mocha test/sessions --renderer && ./node_modules/.bin/electron-mocha --require test/setup.js --recursive test/react --renderer",
-    "lint": "./node_modules/.bin/xo",
+    "lint": "yarn eslint app/",
     "pack": "electron-builder --dir",
     "dist": "electron-builder --publish onTagOrDraft"
   },

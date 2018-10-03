@@ -11,26 +11,6 @@ const {
 const Property = require('./property');
 
 module.exports = class PropertiesSection extends Component {
-  render() {
-    return createElement(
-      Observer, {
-        tag: 'archipelago-properties-section',
-        onChange: (event) => {
-          requestIdleCallback(() => {
-            this.props.handleChange(event.isIntersecting, this.props.scope);
-          });
-        },
-      },
-      createElement(
-        'archipelago-properties-section', {},
-        createElement(
-          'archipelago-properties-section-container', {},
-          this.renderProperties(this.props.properties, ''),
-        ),
-      ),
-    );
-  }
-
   renderProperties(properties, prefix) {
     return Object.keys(properties).map((propertyName) => {
       const schema = properties[propertyName];
@@ -50,5 +30,25 @@ module.exports = class PropertiesSection extends Component {
 
       return property;
     });
+  }
+
+  render() {
+    return createElement(
+      Observer, {
+        tag: 'archipelago-properties-section',
+        onChange: (event) => {
+          requestIdleCallback(() => {
+            this.props.handleChange(event.isIntersecting, this.props.scope);
+          });
+        },
+      },
+      createElement(
+        'archipelago-properties-section', {},
+        createElement(
+          'archipelago-properties-section-container', {},
+          this.renderProperties(this.props.properties, ''),
+        ),
+      ),
+    );
   }
 };

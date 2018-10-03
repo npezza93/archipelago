@@ -20,23 +20,6 @@ module.exports = class PropertiesPane extends Component {
     };
   }
 
-  render() {
-    return createElement(
-      'archipelago-properties-pane', {},
-      createElement(Header, {
-        headings: this.state.headings,
-      }),
-      this.headings.map(scope => createElement(
-        PropertiesSection, {
-          scope,
-          key: scope,
-          properties: this.scopes()[scope],
-          handleChange: this.handleChange.bind(this),
-        },
-      )),
-    );
-  }
-
   handleChange(inView, scope) {
     if (inView) {
       const enteringIndex = this.headings.indexOf(scope);
@@ -86,5 +69,22 @@ module.exports = class PropertiesPane extends Component {
       }
       return accumulator;
     }, {});
+  }
+
+  render() {
+    return createElement(
+      'archipelago-properties-pane', {},
+      createElement(Header, {
+        headings: this.state.headings,
+      }),
+      this.headings.map(scope => createElement(
+        PropertiesSection, {
+          scope,
+          key: scope,
+          properties: this.scopes()[scope],
+          handleChange: this.handleChange.bind(this),
+        },
+      )),
+    );
   }
 };

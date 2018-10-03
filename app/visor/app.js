@@ -20,24 +20,6 @@ module.exports = class App extends React.Component {
     ipc.answerMain('split', direction => this.split(direction));
   }
 
-  render() {
-    return React.createElement(
-      'archipelago-app', {
-        class: process.platform,
-        'data-single-tab-mode': '',
-      },
-      React.createElement(
-        PaneList, {
-          key: 'panes',
-          tab: this.state.tab,
-          currentSessionId: this.state.currentSessionId,
-          removeSession: this.removeSession.bind(this),
-          selectSession: this.selectSession.bind(this),
-        },
-      ),
-    );
-  }
-
   componentWillUnmount() {
     this.state.tab.kill();
     this.pref.dispose();
@@ -86,5 +68,23 @@ module.exports = class App extends React.Component {
       tab,
       currentSessionId,
     });
+  }
+
+  render() {
+    return React.createElement(
+      'archipelago-app', {
+        class: process.platform,
+        'data-single-tab-mode': '',
+      },
+      React.createElement(
+        PaneList, {
+          key: 'panes',
+          tab: this.state.tab,
+          currentSessionId: this.state.currentSessionId,
+          removeSession: this.removeSession.bind(this),
+          selectSession: this.selectSession.bind(this),
+        },
+      ),
+    );
   }
 };

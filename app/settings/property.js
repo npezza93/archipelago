@@ -24,16 +24,6 @@ module.exports = class Property extends React.Component {
     this.bindListener();
   }
 
-  render() {
-    return allFields[this.fieldType()].call(
-      this,
-      this.props.property,
-      this.state[this.props.property],
-      this.props.schema,
-      newValue => this.profileManager.set(this.props.property, newValue),
-    );
-  }
-
   fieldType() {
     let {
       type,
@@ -60,6 +50,16 @@ module.exports = class Property extends React.Component {
           });
         }
       }),
+    );
+  }
+
+  render() {
+    return allFields[this.fieldType()].call(
+      this,
+      this.props.property,
+      this.state[this.props.property],
+      this.props.schema,
+      newValue => this.profileManager.set(this.props.property, newValue),
     );
   }
 };

@@ -17,12 +17,6 @@ module.exports = class Terminal extends Component {
     this.bindDataListeners();
   }
 
-  render() {
-    return createElement('archipelago-terminal', {
-      ref: 'container',
-    });
-  }
-
   componentDidMount() {
     const {
       session,
@@ -68,5 +62,11 @@ module.exports = class Terminal extends Component {
         }
       }),
     );
+  }
+
+  render() {
+    return createElement('archipelago-terminal', {
+      ref: 'container',
+    });
   }
 };
