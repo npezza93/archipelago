@@ -58,7 +58,6 @@
     "xterm": "^3.5.1"
   },
   "devDependencies": {
-    "@fellow/eslint-plugin-coffee": "^0.4.13",
     "chai": "^4.1.2",
     "electron": "^3.0.1",
     "electron-builder": "^20.19.1",
@@ -81,8 +80,7 @@
     "productName": "Archipelago",
     "mac": {
       "category": "public.app-category.developer-tools",
-      "target": [
-        {
+      "target": [{
           "target": "dmg",
           "arch": [
             "x64"
@@ -99,8 +97,7 @@
     "dmg": {
       "icon": "build/icon.icns",
       "iconSize": 130,
-      "contents": [
-        {
+      "contents": [{
           "x": 110,
           "y": 200,
           "type": "file"
