@@ -7,7 +7,7 @@
     "postinstall": "electron-builder install-app-deps",
     "start": "ELECTRON_DISABLE_SECURITY_WARNINGS=true ./node_modules/.bin/electron .",
     "test": "./node_modules/.bin/mocha test/about test/main test/settings && ./node_modules/.bin/electron-mocha test/common --renderer && ./node_modules/.bin/electron-mocha --require test/setup.js --recursive test/react --renderer",
-    "lint": "./node_modules/.bin/xo",
+    "lint": "./node_modules/.bin/xo --ignore app/common/keymapper.js",
     "pack": "electron-builder --dir",
     "dist": "electron-builder --publish onTagOrDraft"
   },
@@ -41,12 +41,12 @@
   "license": "MIT",
   "dependencies": {
     "@researchgate/react-intersection-observer": "^0.7.3",
-    "atom-keymap": "^8.2.10",
     "color": "^3.0.0",
     "electron-better-ipc": "^0.1.1",
     "electron-util": "^0.9.1",
     "event-kit": "^2.5.0",
     "i": "^0.3.6",
+    "keyboard-layout": "^2.0.14",
     "node-pty": "^0.7.6",
     "pref": "^3.1.0",
     "react": "^16.4.1",

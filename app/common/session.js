@@ -1,12 +1,12 @@
 const {clipboard} = require('electron')
 const {CompositeDisposable, Disposable} = require('event-kit')
 const {Terminal} = require('xterm')
-const KeymapManager = require('atom-keymap')
 const unescape = require('unescape-js')
 
 const ProfileManager = require('../common/profile-manager')
 const Pty = require('../common/pty')
 const {xtermSettings} = require('../common/config-file')
+const {keystrokeForKeyboardEvent} = require('./keymapper')
 
 Terminal.applyAddon(require('xterm/lib/addons/fit/fit'))
 
@@ -40,8 +40,7 @@ class Session {
       return this._keymaps
     }
 
-    this._keymaps = new KeymapManager()
-    this._keymaps.mappings =
+    this._keymaps =
       this.profileManager.get('keybindings').reduce((result, item) => {
         result[item.keystroke] = unescape(item.command)
         return result
@@ -106,7 +105,7 @@ class Session {
 
   keybindingHandler(e) {
     let caught = false
-    const mapping = this.keymaps.mappings[this.keymaps.keystrokeForKeyboardEvent(e)]
+    const mapping = this.keymaps[keystrokeForKeyboardEvent(e)]
 
     if (mapping) {
       this.pty.write(mapping)
