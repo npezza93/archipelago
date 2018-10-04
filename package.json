@@ -46,7 +46,7 @@
     "electron-util": "^0.9.1",
     "event-kit": "^2.5.0",
     "i": "^0.3.6",
-    "keyboard-layout": "^2.0.14",
+    "keystroke-for-keyboard-event": "^1.0.0",
     "node-pty": "^0.7.6",
     "pref": "^3.1.0",
     "react": "^16.4.1",

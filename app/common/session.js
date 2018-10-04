@@ -2,11 +2,11 @@ const {clipboard} = require('electron')
 const {CompositeDisposable, Disposable} = require('event-kit')
 const {Terminal} = require('xterm')
 const unescape = require('unescape-js')
+const keystrokeForKeyboardEvent = require('keystroke-for-keyboard-event')
 
 const ProfileManager = require('../common/profile-manager')
 const Pty = require('../common/pty')
 const {xtermSettings} = require('../common/config-file')
-const {keystrokeForKeyboardEvent} = require('./keymapper')
 
 Terminal.applyAddon(require('xterm/lib/addons/fit/fit'))
 

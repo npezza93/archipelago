@@ -2998,6 +2998,12 @@ keyboard-layout@^2.0.14:
     event-kit "^2.0.0"
     nan "^2.10.0"
 
+keystroke-for-keyboard-event@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/keystroke-for-keyboard-event/-/keystroke-for-keyboard-event-1.0.0.tgz#a99494c54c23e39e5a6773c87c1733841c003e6f"
+  dependencies:
+    keyboard-layout "^2.0.14"
+
 kind-of@^3.0.2, kind-of@^3.0.3, kind-of@^3.2.0:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-3.2.2.tgz#31ea21a734bab9bbb0f32466d893aea51e4a3c64"
@@ -3555,8 +3561,8 @@ nan@2.10.0:
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.10.0.tgz#96d0cd610ebd58d4b4de9cc0c6828cda99c7548f"
 
 nan@^2.10.0:
-  version "2.11.0"
-  resolved "https://registry.yarnpkg.com/nan/-/nan-2.11.0.tgz#574e360e4d954ab16966ec102c0c049fd961a099"
+  version "2.11.1"
+  resolved "https://registry.yarnpkg.com/nan/-/nan-2.11.1.tgz#90e22bccb8ca57ea4cd37cc83d3819b52eea6766"
 
 nanomatch@^1.2.9:
   version "1.2.13"
