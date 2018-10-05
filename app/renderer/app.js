@@ -30,20 +30,18 @@ class App extends React.Component {
         class: process.platform,
         'data-single-tab-mode': (this.props.profileManager.get('singleTabMode') ? '' : undefined)
       },
-      React.createElement(HamburgerMenu, {key: 'hamburger'}),
+      React.createElement(HamburgerMenu),
       React.createElement(
         TabList, {
-          key: 'tabs',
           tabs: this.state.tabs,
           currentTabId: this.state.currentTabId,
           selectTab: this.selectTab.bind(this),
           removeTab: this.removeTab.bind(this)
         }
       ),
-      React.createElement(TrafficLights, {key: 'traffic-lights'}),
+      React.createElement(TrafficLights),
       React.createElement(
         PaneList, {
-          key: 'panes',
           tabs: this.state.tabs,
           currentTabId: this.state.currentTabId,
           currentSessionId: this.state.currentSessionId,

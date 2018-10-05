@@ -21,18 +21,9 @@ class Session {
     this.pref = pref
     this.pty = new Pty(pref)
     this.type = type || 'default'
+    this.xterm = new Terminal(this.settings())
 
     this.bindDataListeners()
-  }
-
-  get xterm() {
-    if (this._xterm) {
-      return this._xterm
-    }
-
-    this._xterm = new Terminal(this.settings())
-
-    return this._xterm
   }
 
   get keymaps() {
@@ -77,19 +68,6 @@ class Session {
     this.xterm.setOption('theme', this.profileManager.get('theme'))
   }
 
-  resetBlink() {
-    if (this.profileManager.get('cursorBlink')) {
-      this.xterm.setOption('cursorBlink', false)
-      this.xterm.setOption('cursorBlink', true)
-    }
-  }
-
-  copySelection() {
-    if (this.profileManager.get('copyOnSelect')) {
-      clipboard.writeText(this.xterm.getSelection())
-    }
-  }
-
   kill() {
     this.subscriptions.dispose()
     this.xterm.dispose()
@@ -132,6 +110,23 @@ class Session {
     })
   }
 
+  setTitle(title) {
+    this.title = title
+  }
+
+  resetBlink() {
+    if (this.profileManager.get('cursorBlink')) {
+      this.xterm.setOption('cursorBlink', false)
+      this.xterm.setOption('cursorBlink', true)
+    }
+  }
+
+  copySelection() {
+    if (this.profileManager.get('copyOnSelect')) {
+      clipboard.writeText(this.xterm.getSelection())
+    }
+  }
+
   onFocus(callback) {
     return this.xterm.addDisposableListener('focus', callback)
   }
@@ -156,7 +151,7 @@ class Session {
     this.xterm.attachCustomKeyEventHandler(this.keybindingHandler.bind(this))
 
     this.subscriptions.add(this.onData(data => this.pty.write(data)))
-    this.subscriptions.add(this.onTitle(title => this.title = title))
+    this.subscriptions.add(this.onTitle(title => this.setTitle(title)))
     this.subscriptions.add(this.pty.onData(data => this.xterm.write(data)))
     this.subscriptions.add(this.onFocus(this.fit.bind(this)))
     this.subscriptions.add(this.onFocus(this.resetBlink.bind(this)))

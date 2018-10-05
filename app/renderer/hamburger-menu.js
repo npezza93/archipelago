@@ -14,9 +14,7 @@ class HamburgerMenu extends Component {
             ipc.callMain('open-hamburger-menu', {x: right, y: bottom})
           }
         },
-        createElement('div'),
-        createElement('div'),
-        createElement('div')
+        createElement('div'), createElement('div'), createElement('div')
       )
     })
   }

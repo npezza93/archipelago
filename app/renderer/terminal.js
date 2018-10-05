@@ -36,7 +36,6 @@ class Terminal extends Component {
   bindDataListeners() {
     this.subscriptions.add(
       this.props.session.onFocus(() => {
-        console.log('focused');
         this.props.selectSession(this.props.session.id)
         this.props.changeTitle(this.props.tabId, this.props.session.title)
       })

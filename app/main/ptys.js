@@ -1,41 +1,25 @@
-const {api} = require('electron-util')
 const ipc = require('electron-better-ipc')
 
 const {pref} = require('../common/config-file')
-const Pty = require('../common/pty')
-const TitleTracker = require('./title-tracker')
+const Session = require('../common/session')
 
 module.exports = () => {
-  const ptys = {}
-
-  const kill = id => {
-    if (ptys[id]) {
-      ptys[id].kill()
-      delete ptys[id]
-    }
-  }
-
   const create = () => {
     return new Promise(resolve => {
-      const newPty = new Pty(pref())
-      const titleTracker = new TitleTracker(newPty)
+      const session = new Session(pref())
 
-      resolve({pty: newPty, titleTracker})
+      resolve(session)
     })
   }
-  let preppedPty = create()
 
-  ipc.answerRenderer('create-pty', async () => {
-    const {pty, titleTracker} = await preppedPty
+  let preppedSession = create()
 
-    pty.onExit(() => kill(pty.id))
-    ptys[pty.id] = pty
-    preppedPty = create()
-    titleTracker.dispose()
+  ipc.answerRenderer('create-session', async (branch, type) => {
+    const session = await preppedSession
+    session.branch = branch
 
-    return {id: pty.id, title: titleTracker.title}
+    preppedSession = create()
+
+    return session
   })
-  ipc.answerRenderer('kill-pty', kill)
-
-  api.app.on('quit', () => Object.keys(ptys).forEach(kill))
 }
