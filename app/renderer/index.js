@@ -1,11 +1,13 @@
 /* global document */
 /* eslint guard-for-in: "off" */
 
-const React = require('react')
-const ReactDOM = require('react-dom')
-const ipc = require('electron-better-ipc')
+import css from '@/renderer.css'
+import xtermCss from 'xterm/dist/xterm.css'
 
-const App = require('./app')
+import {createElement} from 'react'
+import ReactDOM from 'react-dom'
+import ipc from 'electron-better-ipc'
+import App from '@/app'
 
 global.archipelago = {}
 const styles = document.documentElement.style
@@ -20,7 +22,7 @@ const styleProperties = {
 }
 
 global.archipelago.app = ReactDOM.render(
-  React.createElement(App), document.getElementById('root')
+  createElement(App), document.getElementById('app')
 )
 
 const preferences = ipc.sendSync('get-preferences-sync', Object.keys(styleProperties))

@@ -1,9 +1,9 @@
-const {Component, createElement} = require('react')
-const SplitPane = require('react-split-pane')
-const Terminal = require('./terminal')
+import {Component, createElement} from 'react'
+import SplitPane from 'react-split-pane'
 
-module.exports =
-class Pane extends Component {
+import Terminal from '@/terminal'
+
+export default class Pane extends Component {
   render() {
     return createElement(
       'archipelago-pane',

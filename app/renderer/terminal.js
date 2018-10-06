@@ -1,10 +1,9 @@
 /* global ResizeObserver */
 
-const {Component, createElement} = require('react')
-const {CompositeDisposable} = require('event-kit')
+import {Component, createElement} from 'react'
+import {CompositeDisposable} from 'event-kit'
 
-module.exports =
-class Terminal extends Component {
+export default class Terminal extends Component {
   constructor(props) {
     super(props)
     this.subscriptions = new CompositeDisposable()

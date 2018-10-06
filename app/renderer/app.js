@@ -1,16 +1,15 @@
 /* global window */
 
-const ipc = require('electron-better-ipc')
-const React = require('react')
+import ipc from 'electron-better-ipc'
+import {createElement, Component} from 'react'
 
-const Tab = require('../common/tab')
-const TrafficLights = require('../common/traffic-lights')
-const PaneList = require('./pane-list')
-const TabList = require('./tab-list')
-const HamburgerMenu = require('./hamburger-menu')
+import Tab from 'common/tab'
+import TrafficLights from 'common/traffic-lights'
+import PaneList from '@/pane-list'
+import TabList from '@/tab-list'
+import HamburgerMenu from '@/hamburger-menu'
 
-module.exports =
-class App extends React.Component {
+export default class App extends Component {
   constructor(props) {
     super(props)
 
@@ -24,13 +23,13 @@ class App extends React.Component {
   }
 
   render() {
-    return React.createElement(
+    return createElement(
       'archipelago-app', {
         class: process.platform,
         'data-single-tab-mode': (ipc.sendSync('get-preferences-sync', 'singleTabMode') ? '' : undefined)
       },
-      React.createElement(HamburgerMenu),
-      React.createElement(
+      createElement(HamburgerMenu),
+      createElement(
         TabList, {
           tabs: this.state.tabs,
           currentTabId: this.state.currentTabId,
@@ -38,8 +37,8 @@ class App extends React.Component {
           removeTab: this.removeTab.bind(this)
         }
       ),
-      React.createElement(TrafficLights),
-      React.createElement(
+      createElement(TrafficLights),
+      createElement(
         PaneList, {
           tabs: this.state.tabs,
           currentTabId: this.state.currentTabId,

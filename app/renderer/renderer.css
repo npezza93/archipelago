@@ -1,45 +1,23 @@
-/* normalization and helpers */
-
 *::selection {
   background: var(--selection-color);
 }
 
 @media (min-resolution: 2dppx) {
-
   * {
     text-rendering: geometricPrecision;
   }
 }
-
-html,
-body,
-#root,
-archipelago-app {
-  height: 100%;
-  -webkit-font-feature-settings: "liga" off, "calt" off;
-}
-
 @keyframes pulse {
-
   from {
     opacity: 1;
   }
-
   50% {
-    opacity: .3;
+    opacity: 0.3;
   }
-
   to {
     opacity: 1;
   }
 }
-
-.hidden {
-  display: none;
-}
-
-/* scrollbar */
-
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -49,14 +27,13 @@ archipelago-app {
   border: 3px solid var(--background-color);
 }
 
-::-webkit-scrollbar,
-::-webkit-scrollbar-thumb {
+::-webkit-scrollbar, ::-webkit-scrollbar-thumb {
   border-radius: 5px;
 }
 
 :root {
   --background-color: #000;
-  --selection-color: rgba(255, 255, 255, .3);
+  --selection-color: rgba(255, 255, 255, 0.3);
   --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --tab-font-size: 15px;
   --terminal-padding: 5px 0 10px 15px;
@@ -68,8 +45,17 @@ archipelago-app {
   border-radius: 0;
 }
 
+html, body, #app, archipelago-app {
+  height: 100%;
+  -webkit-font-feature-settings: "liga" off, "calt" off;
+}
+
+.hidden {
+  display: none;
+}
+
 .xterm .xterm-viewport {
-  -webkit-transition: all .5s;
+  -webkit-transition: all 0.5s;
   opacity: 0;
 }
 
@@ -77,10 +63,9 @@ archipelago-app {
   background-color: transparent;
 }
 
-.xterm .xterm-viewport:hover,
-.xterm.scrolling .xterm-viewport {
+.xterm .xterm-viewport:hover, .xterm.scrolling .xterm-viewport {
   opacity: 1;
-  -webkit-transition: all .5s;
+  -webkit-transition: all 0.5s;
 }
 
 body {
@@ -103,14 +88,10 @@ archipelago-terminal {
   padding: var(--terminal-padding);
 }
 
-/* ArchipelagoApp */
-
 archipelago-app {
   display: flex;
   flex-direction: column;
 }
-
-/* Hamburger Menu */
 
 hamburger-menu {
   -webkit-app-region: no-drag;
@@ -134,13 +115,10 @@ archipelago-app[data-single-tab-mode] hamburger-menu {
 hamburger-menu:hover {
   filter: invert(0%);
 }
-
 hamburger-menu div {
   height: 1px;
   background: var(--tab-color);
 }
-
-/* Minimize Button */
 
 archipelago-app[data-single-tab-mode] minimize-button {
   top: 9px !important;
@@ -149,12 +127,9 @@ archipelago-app[data-single-tab-mode] minimize-button {
 minimize-button:hover {
   filter: invert(0%);
 }
-
 minimize-button div {
   background: var(--tab-color) !important;
 }
-
-/* Maximize Button */
 
 maximize-button {
   border: var(--tab-color) 1px solid !important;
@@ -168,8 +143,6 @@ maximize-button:hover {
   filter: invert(0%);
 }
 
-/* Close Button */
-
 archipelago-app[data-single-tab-mode] close-button {
   top: 9px !important;
 }
@@ -177,18 +150,14 @@ archipelago-app[data-single-tab-mode] close-button {
 close-button:hover {
   filter: invert(0%);
 }
-
 close-button div {
   background: var(--tab-color) !important;
 }
-
-/* Panes */
 
 archipelago-pane-list {
   display: flex;
   flex: 1;
 }
-
 archipelago-pane-list archipelago-pane {
   margin: 0;
   overflow-y: hidden;
@@ -197,8 +166,6 @@ archipelago-pane-list archipelago-pane {
   position: relative;
   width: 100%;
 }
-
-/* Titlebar and Tabs */
 
 archipelago-tab-list {
   -webkit-app-region: drag;
@@ -210,9 +177,7 @@ archipelago-tab-list {
 archipelago-app.darwin archipelago-tab-list {
   margin-left: 70px;
 }
-
-archipelago-app.win32 archipelago-tab-list,
-archipelago-app.linux archipelago-tab-list {
+archipelago-app.win32 archipelago-tab-list, archipelago-app.linux archipelago-tab-list {
   margin-left: 41px;
   width: calc(100% - 184px);
 }
@@ -225,32 +190,28 @@ archipelago-tab-list archipelago-tab {
   justify-content: center;
   align-items: center;
   flex: 1;
-  transition: all .3s ease;
+  transition: all 0.3s ease;
   min-width: 0;
   font-family: var(--font-family);
   font-size: var(--font-size);
   line-height: 18px !important;
   position: relative;
 }
-
 archipelago-tab-list archipelago-tab:not(.active)::after {
   position: absolute;
   content: "";
   height: 1px;
   background: var(--tab-border-color);
-  transition: all .15s linear;
+  transition: all 0.15s linear;
   width: 0;
   bottom: 0;
 }
-
 archipelago-tab-list archipelago-tab:hover::after {
   width: 100%;
 }
-
 archipelago-tab-list archipelago-tab.active {
   filter: invert(0%);
 }
-
 archipelago-tab-list archipelago-tab.active::after {
   position: absolute;
   content: "";
@@ -270,7 +231,6 @@ archipelago-tab div {
 archipelago-tab-list archipelago-tab:first-child:nth-last-child(1) div {
   display: none;
 }
-
 archipelago-tab-list archipelago-tab span {
   text-align: center;
   text-overflow: ellipsis;
@@ -279,15 +239,13 @@ archipelago-tab-list archipelago-tab span {
   max-width: 75%;
 }
 
-archipelago-app[data-single-tab-mode] archipelago-tab-list archipelago-tab {
-  display: none;
-}
-
 archipelago-app[data-single-tab-mode] archipelago-tab-list {
   position: absolute;
   height: 30px;
 }
-
+archipelago-app[data-single-tab-mode] archipelago-tab-list archipelago-tab {
+  display: none;
+}
 archipelago-app.darwin[data-single-tab-mode] archipelago-tab-list {
   width: calc(100% - 70px);
 }
@@ -296,10 +254,7 @@ archipelago-tab.is-unread span {
   animation: pulse 2s infinite;
 }
 
-/* Splitting */
-
-.Resizer.horizontal,
-.Resizer.vertical {
+.Resizer.horizontal, .Resizer.vertical {
   background-color: var(--background-color);
   filter: invert(50%);
   box-sizing: border-box;
@@ -307,7 +262,6 @@ archipelago-tab.is-unread span {
   background-clip: padding-box;
   flex-shrink: 0;
 }
-
 .Resizer.horizontal {
   height: 7px;
   border-top: 3px solid rgba(255, 255, 255, 0);
@@ -326,15 +280,4 @@ archipelago-tab.is-unread span {
   border-left: 3px solid rgba(255, 255, 255, 0);
   border-right: 3px solid rgba(255, 255, 255, 0);
   cursor: col-resize;
-}
-
-.mdc-linear-progress.mdc-linear-progress--indeterminate {
-  height: 1px;
-  width: 50%;
-}
-.mdc-linear-progress__buffer {
-  background: var(--tab-color);
-}
-.mdc-linear-progress.mdc-linear-progress--indeterminate .mdc-linear-progress__bar-inner {
-  background: var(--background-color);
 }

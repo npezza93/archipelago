@@ -1,8 +1,8 @@
-const {Component, createElement} = require('react')
-const Tab = require('./tab')
+import {Component, createElement} from 'react'
 
-module.exports =
-class TabList extends Component {
+import Tab from '@/tab'
+
+export default class TabList extends Component {
   render() {
     return createElement(
       'archipelago-tab-list',

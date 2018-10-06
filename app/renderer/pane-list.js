@@ -1,8 +1,7 @@
-const {Component, createElement} = require('react')
-const Pane = require('./pane')
+import {Component, createElement} from 'react'
+import Pane from '@/pane'
 
-module.exports =
-class PaneList extends Component {
+export default class PaneList extends Component {
   render() {
     return createElement(
       'archipelago-pane-list',

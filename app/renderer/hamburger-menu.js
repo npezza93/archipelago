@@ -1,9 +1,8 @@
-const {Component, createElement} = require('react')
-const {platform} = require('electron-util')
-const ipc = require('electron-better-ipc')
+import {Component, createElement} from 'react'
+import {platform} from 'electron-util'
+import ipc from 'electron-better-ipc'
 
-module.exports =
-class HamburgerMenu extends Component {
+export default class HamburgerMenu extends Component {
   render() {
     return platform({
       macos: null,
