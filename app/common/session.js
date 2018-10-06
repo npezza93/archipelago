@@ -1,10 +1,10 @@
 const {clipboard} = require('electron')
 const {CompositeDisposable, Disposable} = require('event-kit')
+const ipc = require('electron-better-ipc')
 const {Terminal} = require('xterm')
 const unescape = require('unescape-js')
 const keystrokeForKeyboardEvent = require('keystroke-for-keyboard-event')
 
-const ProfileManager = require('../common/profile-manager')
 const Pty = require('../common/pty')
 const {xtermSettings} = require('../common/config-file')
 
@@ -12,14 +12,12 @@ Terminal.applyAddon(require('xterm/lib/addons/fit/fit'))
 
 module.exports =
 class Session {
-  constructor(pref, type, branch) {
+  constructor(type, branch) {
     this.branch = branch
     this.id = Math.random()
     this.subscriptions = new CompositeDisposable()
-    this.profileManager = new ProfileManager(pref)
     this.title = ''
-    this.pref = pref
-    this.pty = new Pty(pref)
+    this.pty = new Pty()
     this.type = type || 'default'
     this.xterm = new Terminal(this.settings())
 
@@ -32,7 +30,7 @@ class Session {
     }
 
     this._keymaps =
-      this.profileManager.get('keybindings').reduce((result, item) => {
+      ipc.sendSync('get-preferences-sync', 'keybindings').reduce((result, item) => {
         result[item.keystroke] = unescape(item.command)
         return result
       }, {})
@@ -43,7 +41,7 @@ class Session {
   settings() {
     return this.applySettingModifiers(
       xtermSettings.reduce((settings, property) => {
-        settings[property] = this.profileManager.get(property)
+        settings[property] = ipc.sendSync('get-preferences-sync', property)
         return settings
       }, {})
     )
@@ -53,10 +51,10 @@ class Session {
     if (this.type === 'visor') {
       defaultSettings = {
         ...defaultSettings,
-        allowTransparency: this.profileManager.get('visor.allowTransparency'),
+        allowTransparency: ipc.sendSync('get-preferences-sync', 'visor.allowTransparency'),
         theme: {
-          ...this.profileManager.get('theme'),
-          background: this.profileManager.get('visor.background')
+          ...ipc.sendSync('get-preferences-sync', 'theme'),
+          background: ipc.sendSync('get-preferences-sync', 'visor.background')
         }
       }
     }
@@ -65,13 +63,12 @@ class Session {
   }
 
   resetTheme() {
-    this.xterm.setOption('theme', this.profileManager.get('theme'))
+    this.xterm.setOption('theme', ipc.sendSync('get-preferences-sync', 'theme'))
   }
 
   kill() {
     this.subscriptions.dispose()
     this.xterm.dispose()
-    this.pref.events.dispose()
 
     return this.pty.kill()
   }
@@ -115,16 +112,20 @@ class Session {
   }
 
   resetBlink() {
-    if (this.profileManager.get('cursorBlink')) {
-      this.xterm.setOption('cursorBlink', false)
-      this.xterm.setOption('cursorBlink', true)
-    }
+    ipc.callMain('get-preferences-async', 'cursorBlink').then(cursorBlink => {
+      if (cursorBlink) {
+        this.xterm.setOption('cursorBlink', false)
+        this.xterm.setOption('cursorBlink', true)
+      }
+    })
   }
 
   copySelection() {
-    if (this.profileManager.get('copyOnSelect')) {
-      clipboard.writeText(this.xterm.getSelection())
-    }
+    ipc.callMain('get-preferences-async', 'copyOnSelect').then(copyOnSelect => {
+      if (copyOnSelect) {
+        clipboard.writeText(this.xterm.getSelection())
+      }
+    })
   }
 
   onFocus(callback) {
@@ -157,12 +158,12 @@ class Session {
     this.subscriptions.add(this.onFocus(this.resetBlink.bind(this)))
     this.subscriptions.add(this.onSelection(this.copySelection.bind(this)))
 
-    xtermSettings.forEach(field => {
-      this.subscriptions.add(
-        this.profileManager.onDidChange(field, newValue => {
-          this.xterm.setOption(field, newValue)
-        })
-      )
-    })
+    // xtermSettings.forEach(field => {
+    //   this.subscriptions.add(
+    //     this.profileManager.onDidChange(field, newValue => {
+    //       this.xterm.setOption(field, newValue)
+    //     })
+    //   )
+    // })
   }
 }

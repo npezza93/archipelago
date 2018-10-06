@@ -14,8 +14,7 @@ class App extends React.Component {
   constructor(props) {
     super(props)
 
-    this.pref = this.props.pref()
-    const initialTab = new Tab(this.pref, 'default')
+    const initialTab = new Tab('default')
 
     this.state = {tabs: [initialTab], currentTabId: initialTab.id}
 
@@ -28,7 +27,7 @@ class App extends React.Component {
     return React.createElement(
       'archipelago-app', {
         class: process.platform,
-        'data-single-tab-mode': (this.props.profileManager.get('singleTabMode') ? '' : undefined)
+        'data-single-tab-mode': (ipc.sendSync('get-preferences-sync', 'singleTabMode') ? '' : undefined)
       },
       React.createElement(HamburgerMenu),
       React.createElement(
@@ -56,7 +55,6 @@ class App extends React.Component {
 
   componentWillUnmount() {
     this.state.tabs.map(tab => tab.kill())
-    this.pref.dispose()
   }
 
   componentDidUpdate() {
@@ -105,14 +103,16 @@ class App extends React.Component {
   }
 
   addTab() {
-    if (!this.props.profileManager.get('singleTabMode')) {
-      const newTab = new Tab(this.props.pref(), 'default')
+    ipc.callMain('get-preferences-async', 'singleTabMode').then(singleTabMode => {
+      if (!singleTabMode) {
+        const newTab = new Tab('default')
 
-      return this.setState({
-        tabs: this.state.tabs.concat(newTab),
-        currentTabId: newTab.id
-      })
-    }
+        return this.setState({
+          tabs: this.state.tabs.concat(newTab),
+          currentTabId: newTab.id
+        })
+      }
+    })
   }
 
   removeTab(id) {

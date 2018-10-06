@@ -3,13 +3,12 @@
 
 const React = require('react')
 const ReactDOM = require('react-dom')
+const ipc = require('electron-better-ipc')
 
-const {pref} = require('../common/config-file')
-const ProfileManager = require('../common/profile-manager')
 const App = require('./app')
 
 global.archipelago = {}
-const profileManager = new ProfileManager(pref())
+const styles = document.documentElement.style
 const styleProperties = {
   fontFamily: '--font-family',
   windowBackground: '--background-color',
@@ -21,16 +20,16 @@ const styleProperties = {
 }
 
 global.archipelago.app = ReactDOM.render(
-  React.createElement(App, {profileManager, pref}), document.getElementById('root')
+  React.createElement(App), document.getElementById('root')
 )
 
-for (const selector in styleProperties) {
-  const cssVar = styleProperties[selector]
-  const element = document.documentElement
+const preferences = ipc.sendSync('get-preferences-sync', Object.keys(styleProperties))
+Object.keys(preferences).forEach(preference => {
+  styles.setProperty(styleProperties[preference], preferences[preference])
+})
 
-  element.style.setProperty(cssVar, profileManager.get(selector))
-}
-
-Object.entries(styleProperties).forEach(property =>
-  profileManager.onDidChange(property[0], newValue => document.documentElement.style.setProperty(property[1], newValue))
-)
+ipc.answerMain('preference-change', (preference, newValue) => {
+  if (styleProperties[preference]) {
+    styles.setProperty(styleProperties[preference], newValue)
+  }
+})

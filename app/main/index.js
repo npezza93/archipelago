@@ -83,3 +83,26 @@ subscriptions.add(profileManager.onDidChange('singleTabMode', resetApplicationMe
 subscriptions.add(profileManager.onActiveProfileChange(resetApplicationMenu))
 
 ipc.answerRenderer('open-hamburger-menu', args => Menu.getApplicationMenu().popup(args))
+
+const getPreferences = preferences => {
+  switch (preferences.constructor.name) {
+    case 'String':
+      return profileManager.get(preferences)
+    case 'Array':
+      return preferences.reduce((foundPreferences, setting) => {
+        foundPreferences[setting] = profileManager.get(setting)
+
+        return foundPreferences
+      }, {})
+    default:
+      return null
+  }
+}
+
+ipc.on('get-preferences-sync', (event, preferences) => {
+  event.returnValue = getPreferences(preferences)
+})
+
+ipc.answerRenderer('get-preferences-async', preferences => {
+  return getPreferences(preferences)
+})

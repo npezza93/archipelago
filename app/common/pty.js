@@ -1,25 +1,22 @@
 const {api, platform} = require('electron-util')
 const {spawn} = require('node-pty')
 const {Disposable} = require('event-kit')
-
-const ProfileManager = require('../common/profile-manager')
+const ipc = require('electron-better-ipc')
 
 module.exports =
 class Pty {
-  constructor(pref) {
+  constructor() {
     this.id = Math.random()
-    this.profileManager = new ProfileManager(pref)
-    this.pref = pref
 
     this.pty = spawn(
       this.shell,
-      this.profileManager.get('shellArgs').split(','),
+      ipc.sendSync('get-preferences-sync', 'shellArgs').split(','),
       this.sessionArgs
     )
   }
 
   get shell() {
-    return this.profileManager.get('shell') ||
+    return ipc.sendSync('get-preferences-sync', 'shell') ||
       process.env[platform({windows: 'COMSPEC', default: 'SHELL'})]
   }
 
@@ -41,7 +38,6 @@ class Pty {
       this.pty.removeAllListeners('data')
       this.pty.removeAllListeners('exit')
       this.pty.kill()
-      this.pref.events.dispose()
       resolve()
     })
   }
