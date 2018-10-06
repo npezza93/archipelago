@@ -1,9 +1,9 @@
 /* global ResizeObserver */
 
-import {Component, createElement} from 'react'
+import React from 'react'
 import {CompositeDisposable} from 'event-kit'
 
-export default class Terminal extends Component {
+export default class Terminal extends React.Component {
   constructor(props) {
     super(props)
     this.subscriptions = new CompositeDisposable()
@@ -13,7 +13,7 @@ export default class Terminal extends Component {
   }
 
   render() {
-    return createElement('archipelago-terminal', {ref: 'container'})
+    return <archipelago-terminal ref="container" />
   }
 
   componentDidMount() {
