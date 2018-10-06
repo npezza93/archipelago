@@ -32,7 +32,12 @@ const createWindow = () => {
     vibrancy: profileManager.get('vibrancy')
   })
 
-  win.loadFile('app/renderer/index.html')
+  if (is.development) {
+    win.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`)
+  } else {
+    win.loadFile('dist/renderer/index.html')
+  }
+
   win.focus()
   windows.push(win)
 }

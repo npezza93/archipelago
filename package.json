@@ -60,6 +60,7 @@
     "xterm": "^3.5.1"
   },
   "devDependencies": {
+    "@babel/preset-react": "^7.0.0",
     "chai": "^4.1.2",
     "css-loader": "^1.0.0",
     "electron": "^3.0.2",
