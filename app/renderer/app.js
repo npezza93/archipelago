@@ -5,7 +5,7 @@ import {createElement, Component} from 'react'
 
 import Tab from 'common/tab'
 import TrafficLights from 'common/traffic-lights'
-import PaneList from '@/pane-list'
+import PaneList from '@/pane-list.jsx'
 import TabList from '@/tab-list'
 import HamburgerMenu from '@/hamburger-menu'
 
