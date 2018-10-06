@@ -1,5 +1,5 @@
 import {Component, createElement} from 'react'
-import Pane from '@/pane'
+import Pane from '@/pane.jsx'
 
 export default class PaneList extends Component {
   render() {
