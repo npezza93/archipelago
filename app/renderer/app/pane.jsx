@@ -35,7 +35,6 @@ export default class Pane extends React.Component {
   renderSession(session) {
     return <Terminal
       session={session}
-      key={session.id}
       tabId={this.props.id}
       currentTabId={this.props.currentTabId}
       changeTitle={this.props.changeTitle}

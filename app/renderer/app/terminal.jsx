@@ -7,7 +7,11 @@ export default class Terminal extends React.Component {
   constructor(props) {
     super(props)
     this.subscriptions = new CompositeDisposable()
-    this.resizeObserver = new ResizeObserver(() => this.props.session.fit())
+    this.resizeObserver = new ResizeObserver(() => {
+      if (this.props.tabId === this.props.currentTabId) {
+        this.props.session.fit()
+      }
+    })
 
     this.bindDataListeners()
   }
