@@ -6,7 +6,7 @@ export default class HamburgerMenu extends React.Component {
   render() {
     return platform({
       macos: null,
-      default: <hamburger-menu onClick={this.handleClick}>
+      default: <hamburger-menu onClick={this.handleClick.bind(this)}>
         <div></div>
         <div></div>
         <div></div>
