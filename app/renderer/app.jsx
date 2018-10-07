@@ -1,7 +1,7 @@
 /* global window */
 
 import ipc from 'electron-better-ipc'
-import {createElement, Component} from 'react'
+import React from 'react'
 
 import Tab from 'common/tab'
 import TrafficLights from 'common/traffic-lights'
@@ -9,7 +9,7 @@ import PaneList from '@/pane-list'
 import TabList from '@/tab-list'
 import HamburgerMenu from '@/hamburger-menu'
 
-export default class App extends Component {
+export default class App extends React.Component {
   constructor(props) {
     super(props)
 
@@ -23,33 +23,23 @@ export default class App extends Component {
   }
 
   render() {
-    return createElement(
-      'archipelago-app', {
-        class: process.platform,
-        'data-single-tab-mode': (ipc.sendSync('get-preferences-sync', 'singleTabMode') ? '' : undefined)
-      },
-      createElement(HamburgerMenu),
-      createElement(
-        TabList, {
-          tabs: this.state.tabs,
-          currentTabId: this.state.currentTabId,
-          selectTab: this.selectTab.bind(this),
-          removeTab: this.removeTab.bind(this)
-        }
-      ),
-      createElement(TrafficLights),
-      createElement(
-        PaneList, {
-          tabs: this.state.tabs,
-          currentTabId: this.state.currentTabId,
-          currentSessionId: this.state.currentSessionId,
-          changeTitle: this.changeTitle.bind(this),
-          markUnread: this.markUnread.bind(this),
-          removeSession: this.removeSession.bind(this),
-          selectSession: this.selectSession.bind(this)
-        }
-      )
-    )
+    return <archipelago-app class={process.platform} data-single-tab-mode={ ipc.sendSync('get-preferences-sync', 'singleTabMode') ? '' : undefined}>
+      <HamburgerMenu />
+      <TabList
+        tabs={this.state.tabs}
+        currentTabId={this.state.currentTabId}
+        selectTab={this.selectTab.bind(this)}
+        removeTab={this.removeTab.bind(this)} />
+      <TrafficLights />
+      <PaneList
+        tabs={this.state.tabs}
+        currentTabId={this.state.currentTabId}
+        currentSessionId={this.state.currentSessionId}
+        changeTitle={this.changeTitle.bind(this)}
+        markUnread={this.markUnread.bind(this)}
+        removeSession={this.removeSession.bind(this)}
+        selectSession={this.selectSession.bind(this)} />
+    </archipelago-app>
   }
 
   componentWillUnmount() {

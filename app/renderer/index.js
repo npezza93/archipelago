@@ -4,7 +4,7 @@
 import css from '@/renderer.css'
 import xtermCss from 'xterm/dist/xterm.css'
 
-import {createElement} from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom'
 import ipc from 'electron-better-ipc'
 import App from '@/app'
@@ -22,7 +22,7 @@ const styleProperties = {
 }
 
 global.archipelago.app = ReactDOM.render(
-  createElement(App), document.getElementById('app')
+  <App />, document.getElementById('app')
 )
 
 const preferences = ipc.sendSync('get-preferences-sync', Object.keys(styleProperties))
