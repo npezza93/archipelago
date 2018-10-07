@@ -4,13 +4,13 @@
   "description": "Archipelago is an open-source terminal emulator built on web technology",
   "main": "app/main/index.js",
   "scripts": {
-    "postinstall": "electron-builder install-app-deps",
+    "postinstall": " ./node_modules/.bin/electron-builder install-app-deps",
     "test": "./node_modules/.bin/mocha test/about test/main test/settings && ./node_modules/.bin/electron-mocha test/common --renderer --require-main app/main/index.js && ./node_modules/.bin/electron-mocha test/common/tab-test.js --renderer --require-main app/main/index.js && ./node_modules/.bin/electron-mocha --require test/setup.js --recursive test/react --renderer",
     "start": "./node_modules/.bin/electron-webpack dev",
     "compile": "./node_modules/.bin/electron-webpack",
     "lint": "./node_modules/.bin/xo --ignore app/renderer/index.js",
-    "pack": "electron-builder --dir",
-    "dist": "yarn compile && electron-builder --publish onTagOrDraft"
+    "pack": " ./node_modules/.bin/electron-builder --dir",
+    "dist": "yarn compile &&  ./node_modules/.bin/electron-builder --publish onTagOrDraft"
   },
   "xo": {
     "space": true,
