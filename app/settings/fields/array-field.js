@@ -1,5 +1,3 @@
-/* eslint guard-for-in: "off" */
-
 const {Component, createElement} = require('react')
 const {singularize} = require('i')(false)
 const coreFields = require('../core-fields')

@@ -13,22 +13,26 @@ export default class Terminal extends React.Component {
   }
 
   render() {
-    return <archipelago-terminal ref="container" />
+    return <archipelago-terminal ref={this.setRef.bind(this) } />
+  }
+
+  setRef(container) {
+    this.container = container
   }
 
   componentDidMount() {
     const {session} = this.props
 
-    session.xterm.open(this.refs.container)
+    session.xterm.open(this.container)
     session.resetTheme()
     session.xterm.focus()
 
-    this.resizeObserver.observe(this.refs.container)
+    this.resizeObserver.observe(this.container)
     this.subscriptions.add(this.props.session.bindScrollListener())
   }
 
   componentWillUnmount() {
-    this.resizeObserver.unobserve(this.refs.container)
+    this.resizeObserver.unobserve(this.container)
     this.subscriptions.dispose()
   }
 

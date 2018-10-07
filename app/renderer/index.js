@@ -1,13 +1,14 @@
 /* global document */
-/* eslint guard-for-in: "off" */
-
-import css from '@/renderer.css'
-import xtermCss from 'xterm/dist/xterm.css'
 
 import React from 'react'
 import ReactDOM from 'react-dom'
 import ipc from 'electron-better-ipc'
+
+/* eslint-disable import/no-unresolved */
 import App from '@/app'
+import 'xterm/dist/xterm.css' // eslint-disable-line import/no-unassigned-import
+import '@/renderer.css' // eslint-disable-line import/no-unassigned-import, import/extensions
+/* eslint-enable import/no-unresolved */
 
 global.archipelago = {}
 const styles = document.documentElement.style
