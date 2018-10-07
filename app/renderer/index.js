@@ -1,10 +1,12 @@
-/* global document */
-
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-/* eslint-disable import/no-unresolved */
-import App from '@/app/app'
-/* eslint-enable import/no-unresolved */
+const mountRoute = (route) => {
+  ReactDOM.render(React.createElement(route), document.getElementById('app'))
+}
 
-ReactDOM.render(<App />, document.getElementById('app'))
+if (window.location.hash === '#about') {
+  import('@/about/about').then(about => mountRoute(about.default))
+} else {
+  import('@/app/app').then(app => mountRoute(app.default))
+}
