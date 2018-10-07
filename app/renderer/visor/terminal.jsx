@@ -1,10 +1,9 @@
 /* global ResizeObserver */
 
-const {Component, createElement} = require('react')
-const {CompositeDisposable} = require('event-kit')
+import React from 'react'
+import {CompositeDisposable} from 'event-kit'
 
-module.exports =
-class Terminal extends Component {
+export default class Terminal extends React.Component {
   constructor(props) {
     super(props)
     this.subscriptions = new CompositeDisposable()
@@ -14,22 +13,26 @@ class Terminal extends Component {
   }
 
   render() {
-    return createElement('archipelago-terminal', {ref: 'container'})
+    return <archipelago-terminal ref={this.setRef.bind(this) } />
+  }
+
+  setRef(container) {
+    this.container = container
   }
 
   componentDidMount() {
     const {session} = this.props
 
-    session.xterm.open(this.refs.container)
+    session.xterm.open(this.container)
     session.resetTheme()
     session.xterm.focus()
 
-    this.resizeObserver.observe(this.refs.container)
+    this.resizeObserver.observe(this.container)
     this.subscriptions.add(this.props.session.bindScrollListener())
   }
 
   componentWillUnmount() {
-    this.resizeObserver.unobserve(this.refs.container)
+    this.resizeObserver.unobserve(this.container)
     this.subscriptions.dispose()
   }
 

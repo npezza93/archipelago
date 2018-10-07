@@ -46,7 +46,11 @@ const create = () => {
       vibrancy: profileManager.get('visor.vibrancy')
     })
 
-    visorWindow.loadFile('app/visor/index.html')
+    if (is.development) {
+      visorWindow.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}#visor`)
+    } else {
+      visorWindow.loadFile('dist/renderer/index.html#visor')
+    }
 
     visorWindow.on('blur', hideVisor)
     visorWindow.on('closed', () => subscriptions.dispose())
