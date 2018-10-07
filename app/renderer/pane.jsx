@@ -1,7 +1,7 @@
 import React from 'react'
 import SplitPane from 'react-split-pane'
 
-import Terminal from '@/terminal.jsx'
+import Terminal from '@/terminal'
 
 export default class Pane extends React.Component {
   render() {

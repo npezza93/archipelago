@@ -1,5 +1,5 @@
 import React from 'react'
-import Pane from '@/pane.jsx'
+import Pane from '@/pane'
 
 export default class PaneList extends React.Component {
   render() {
