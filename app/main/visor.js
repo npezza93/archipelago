@@ -3,13 +3,6 @@ const electron = require('electron')
 const {CompositeDisposable} = require('event-kit')
 const {is} = require('electron-util')
 
-/* eslint-disable import/no-unresolved */
-const {pref} = require('common/config-file')
-const ProfileManager = require('common/profile-manager')
-/* eslint-enable import/no-unresolved */
-
-const preferences = pref()
-const profileManager = new ProfileManager(preferences)
 const subscriptions = new CompositeDisposable()
 
 let visorWindow = null
@@ -30,7 +23,7 @@ const showVisor = () => {
   visorWindow.setPosition(0, 22, true)
 }
 
-const create = () => {
+const create = profileManager => {
   const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize
 
   if (visorWindow === null || visorWindow.isDestroyed()) {
@@ -64,23 +57,17 @@ const create = () => {
   }
 }
 
-app.on('quit', () => {
-  subscriptions.dispose()
-  preferences.dispose()
-})
-
+app.on('quit', () => subscriptions.dispose())
 app.on('will-quit', () => globalShortcut.unregisterAll())
 
-module.exports = {
-  register() {
-    create()
-    globalShortcut.register('F1', () => {
-      create()
-      if (isVisorShowing) {
-        hideVisor()
-      } else {
-        showVisor()
-      }
-    })
-  }
+exports.register = profileManager => {
+  create(profileManager)
+  globalShortcut.register('F1', () => {
+    create(profileManager)
+    if (isVisorShowing) {
+      hideVisor()
+    } else {
+      showVisor()
+    }
+  })
 }

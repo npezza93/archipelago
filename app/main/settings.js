@@ -14,7 +14,11 @@ exports.display = () => {
       webPreferences: {experimentalFeatures: true}
     })
 
-    settingsWindow.loadFile('app/settings/index.html')
+    if (is.development) {
+      settingsWindow.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}#settings`)
+    } else {
+      settingsWindow.loadFile('dist/renderer/index.html#settings')
+    }
   }
 
   settingsWindow.focus()

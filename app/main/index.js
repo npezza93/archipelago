@@ -45,7 +45,7 @@ const createWindow = () => {
 }
 
 app.on('ready', () => {
-  visor.register()
+  visor.register(profileManager)
   createWindow()
   resetApplicationMenu()
   if (is.macos) {
