@@ -24,7 +24,29 @@ export default class App extends React.Component {
     ipc.answerMain('split', direction => this.split(direction))
     ipc.answerMain('new-tab', this.addTab.bind(this))
     ipc.answerMain('close-current-tab', () => this.removeTab(this.state.currentTabId))
+  }
 
+  render() {
+    return <archipelago-app class={process.platform} data-single-tab-mode={ ipc.sendSync('get-preferences-sync', 'singleTabMode') ? '' : undefined}>
+      <HamburgerMenu />
+      <TabList
+        tabs={this.state.tabs}
+        currentTabId={this.state.currentTabId}
+        selectTab={this.selectTab.bind(this)}
+        removeTab={this.removeTab.bind(this)} />
+      <TrafficLights />
+      <PaneList
+        tabs={this.state.tabs}
+        currentTabId={this.state.currentTabId}
+        currentSessionId={this.state.currentSessionId}
+        changeTitle={this.changeTitle.bind(this)}
+        markUnread={this.markUnread.bind(this)}
+        removeSession={this.removeSession.bind(this)}
+        selectSession={this.selectSession.bind(this)} />
+    </archipelago-app>
+  }
+
+  componentDidMount() {
     const styles = document.documentElement.style
     const styleProperties = {
       fontFamily: '--font-family',
@@ -46,26 +68,6 @@ export default class App extends React.Component {
         styles.setProperty(styleProperties[preference], newValue)
       }
     })
-  }
-
-  render() {
-    return <archipelago-app class={process.platform} data-single-tab-mode={ ipc.sendSync('get-preferences-sync', 'singleTabMode') ? '' : undefined}>
-      <HamburgerMenu />
-      <TabList
-        tabs={this.state.tabs}
-        currentTabId={this.state.currentTabId}
-        selectTab={this.selectTab.bind(this)}
-        removeTab={this.removeTab.bind(this)} />
-      <TrafficLights />
-      <PaneList
-        tabs={this.state.tabs}
-        currentTabId={this.state.currentTabId}
-        currentSessionId={this.state.currentSessionId}
-        changeTitle={this.changeTitle.bind(this)}
-        markUnread={this.markUnread.bind(this)}
-        removeSession={this.removeSession.bind(this)}
-        selectSession={this.selectSession.bind(this)} />
-    </archipelago-app>
   }
 
   componentWillUnmount() {
