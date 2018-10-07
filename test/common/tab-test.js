@@ -2,21 +2,14 @@
 
 const {assert} = require('chai')
 
-const {pref} = require('../../app/common/config-file')
 const Tab = require('../../app/common/tab')
 
 describe('Tab', () => {
   beforeEach(() => {
-    this.pref = pref()
-    this.pref.store = {activeProfileId: 1, profiles: [{id: 1, theme: {}}]}
-    this.tab = new Tab(this.pref, 'default')
+    this.tab = new Tab('default')
   })
 
-  afterEach(() => {
-    this.tab.kill()
-    this.pref.dispose()
-    this.pref.clear()
-  })
+  afterEach(() => this.tab.kill())
 
   describe('add', () => {
     it('adds a new session by branching when root is a session', () => {
