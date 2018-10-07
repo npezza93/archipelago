@@ -1,9 +1,9 @@
-const {BrowserWindow} = require('electron')
-const {is} = require('electron-util')
+import {BrowserWindow} from 'electron'
+import {is} from 'electron-util'
 
 let settingsWindow = null
 
-exports.display = () => {
+export default () => {
   if ((settingsWindow === null) || settingsWindow.isDestroyed()) {
     settingsWindow = new BrowserWindow({
       width: 600,

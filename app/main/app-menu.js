@@ -1,9 +1,9 @@
-const {api, platform} = require('electron-util')
-const ipc = require('electron-better-ipc')
+import {api, platform} from 'electron-util'
+import ipc from 'electron-better-ipc'
 
 /* eslint-disable import/no-unresolved */
-const settings = require('@/settings')
-const about = require('@/about')
+import displaySettings from '@/settings'
+import displayAbout from '@/about'
 /* eslint-enable import/no-unresolved */
 
 const aboutMenu = {
@@ -11,9 +11,7 @@ const aboutMenu = {
   submenu: [
     {
       label: 'About Archipelago',
-      click() {
-        about.display()
-      }
+      click: displayAbout
     },
     {
       label: `Version ${api.app.getVersion()}`,
@@ -23,9 +21,7 @@ const aboutMenu = {
     {
       label: 'Settings',
       accelerator: 'CmdOrCtrl+,',
-      click() {
-        settings.display()
-      }
+      click: displaySettings
     },
     {type: 'separator'},
     ...platform({
@@ -185,7 +181,7 @@ const helpMenu = {
   }]
 }
 
-exports.template = (createWindow, profileManager) => {
+export default (createWindow, profileManager) => {
   return [
     aboutMenu,
     shellMenu(createWindow, profileManager),

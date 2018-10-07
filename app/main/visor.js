@@ -1,7 +1,6 @@
-const {app, BrowserWindow, globalShortcut} = require('electron')
-const electron = require('electron')
-const {CompositeDisposable} = require('event-kit')
-const {is} = require('electron-util')
+import electron, {app, BrowserWindow, globalShortcut} from 'electron'
+import {CompositeDisposable} from 'event-kit'
+import {is} from 'electron-util'
 
 const subscriptions = new CompositeDisposable()
 
@@ -60,7 +59,7 @@ const create = profileManager => {
 app.on('quit', () => subscriptions.dispose())
 app.on('will-quit', () => globalShortcut.unregisterAll())
 
-exports.register = profileManager => {
+export default profileManager => {
   create(profileManager)
   globalShortcut.register('F1', () => {
     create(profileManager)

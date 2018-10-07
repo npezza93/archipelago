@@ -1,13 +1,12 @@
-const {app, BrowserWindow, Menu} = require('electron')
-const {is, platform} = require('electron-util')
-const ipc = require('electron-better-ipc')
-const {CompositeDisposable} = require('event-kit')
+import {app, BrowserWindow, Menu} from 'electron'
+import {is, platform} from 'electron-util'
+import {CompositeDisposable} from 'event-kit'
 
 /* eslint-disable import/no-unresolved */
-const {pref} = require('common/config-file')
-const ProfileManager = require('common/profile-manager')
-const {template} = require('@/app-menu')
-const visor = require('@/visor')
+import {pref} from 'common/config-file'
+import ProfileManager from 'common/profile-manager'
+import template from '@/app-menu'
+import registerVisor from '@/visor'
 /* eslint-enable import/no-unresolved */
 
 const windows = []
@@ -45,7 +44,7 @@ const createWindow = () => {
 }
 
 app.on('ready', () => {
-  visor.register(profileManager)
+  registerVisor(profileManager)
   createWindow()
   resetApplicationMenu()
   if (is.macos) {
