@@ -1,8 +1,10 @@
 const {api, platform} = require('electron-util')
 const ipc = require('electron-better-ipc')
 
-const settings = require('./settings')
-const about = require('./about')
+/* eslint-disable import/no-unresolved */
+const settings = require('@/settings')
+const about = require('@/about')
+/* eslint-enable import/no-unresolved */
 
 const aboutMenu = {
   label: api.app.getName(),

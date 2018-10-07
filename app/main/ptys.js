@@ -1,7 +1,9 @@
 const ipc = require('electron-better-ipc')
 
-const {pref} = require('../common/config-file')
-const Session = require('../common/session')
+/* eslint-disable import/no-unresolved */
+const {pref} = require('common/config-file')
+const Session = require('common/session')
+/* eslint-enable import/no-unresolved */
 
 module.exports = () => {
   const create = () => {

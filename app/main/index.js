@@ -3,10 +3,12 @@ const {is, platform} = require('electron-util')
 const ipc = require('electron-better-ipc')
 const {CompositeDisposable} = require('event-kit')
 
-const {pref} = require('../common/config-file')
-const ProfileManager = require('../common/profile-manager')
-const {template} = require('./app-menu')
-const visor = require('./visor')
+/* eslint-disable import/no-unresolved */
+const {pref} = require('common/config-file')
+const ProfileManager = require('common/profile-manager')
+const {template} = require('@/app-menu')
+const visor = require('@/visor')
+/* eslint-enable import/no-unresolved */
 
 const windows = []
 const subscriptions = new CompositeDisposable()
