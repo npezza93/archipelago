@@ -15,8 +15,12 @@
   "xo": {
     "space": true,
     "semicolon": false,
-    "plugins": ["react"],
-    "extends": ["plugin:react/recommended"],
+    "plugins": [
+      "react"
+    ],
+    "extends": [
+      "plugin:react/recommended"
+    ],
     "rules": {
       "react/prop-types": 0,
       "guard-for-in": 0
