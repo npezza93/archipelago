@@ -13,7 +13,11 @@ exports.display = () => {
       frame: is.macos
     })
 
-    aboutWindow.loadFile('app/about/index.html')
+    if (is.development) {
+      aboutWindow.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}#about`)
+    } else {
+      aboutWindow.loadFile('dist/renderer/index.html#about')
+    }
   }
 
   aboutWindow.focus()
