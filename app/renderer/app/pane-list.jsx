@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Pane from '@/pane' // eslint-disable-line import/no-unresolved
+import Pane from '@/app/pane' // eslint-disable-line import/no-unresolved
 
 export default class PaneList extends React.Component {
   render() {

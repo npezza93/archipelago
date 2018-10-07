@@ -5,9 +5,9 @@ import ReactDOM from 'react-dom'
 import ipc from 'electron-better-ipc'
 
 /* eslint-disable import/no-unresolved */
-import App from '@/app'
+import App from '@/app/app'
 import 'xterm/dist/xterm.css' // eslint-disable-line import/no-unassigned-import
-import '@/renderer.css' // eslint-disable-line import/no-unassigned-import, import/extensions
+import '@/app/styles' // eslint-disable-line import/no-unassigned-import
 /* eslint-enable import/no-unresolved */
 
 global.archipelago = {}
