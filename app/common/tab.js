@@ -56,15 +56,6 @@ class Tab {
     return (this.root && this.root.kill()) || new Promise(resolve => resolve())
   }
 
-  focusableSession() {
-    let session = this.root
-    while (!session.constructor.name === 'Session') {
-      session = session.left
-    }
-
-    return session
-  }
-
   find(branch, sessionId) {
     let foundSession = null
 

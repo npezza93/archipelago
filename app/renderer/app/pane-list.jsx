@@ -11,7 +11,6 @@ export default class PaneList extends React.Component {
           key={tab.id}
           sessionTree={tab.root}
           currentTabId={this.props.currentTabId}
-          currentSessionId={this.props.currentSessionId}
           changeTitle={this.props.changeTitle}
           markUnread={this.props.markUnread}
           removeSession={this.props.removeSession}

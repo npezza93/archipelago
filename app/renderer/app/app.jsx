@@ -38,7 +38,6 @@ export default class App extends React.Component {
       <PaneList
         tabs={this.state.tabs}
         currentTabId={this.state.currentTabId}
-        currentSessionId={this.state.currentSessionId}
         changeTitle={this.changeTitle.bind(this)}
         markUnread={this.markUnread.bind(this)}
         removeSession={this.removeSession.bind(this)}
@@ -103,10 +102,7 @@ export default class App extends React.Component {
       if (tab.id === id) {
         tab.isUnread = false
         const {root} = tab
-        session = tab.find(root, this.state.currentSessionId)
-        if (!session) {
-          session = tab.focusableSession()
-        }
+        session = tab.find(root, this.state.currentSessionId) || tab.find(root, tab.lastActiveSessionId)
       }
 
       return tab
@@ -116,6 +112,8 @@ export default class App extends React.Component {
   }
 
   selectSession(id) {
+    this.currentTab().lastActiveSessionId = id
+
     return this.setState({currentSessionId: id})
   }
 
@@ -149,7 +147,7 @@ export default class App extends React.Component {
         this.setState({
           currentTabId: remaining[0].id,
           tabs: remaining,
-          currentSessionId: remaining[0].focusableSession().id
+          currentSessionId: remaining[0].lastActiveSessionId
         })
       } else {
         this.setState({tabs: remaining})

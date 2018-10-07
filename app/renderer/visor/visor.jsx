@@ -24,7 +24,6 @@ export default class Visor extends React.Component {
       <Pane
         id={this.state.tab.id}
         sessionTree={this.state.tab.root}
-        currentSessionId={this.state.currentSessionId}
         removeSession={this.removeSession.bind(this)}
         selectSession={this.selectSession.bind(this)} />
     </archipelago-visor>
@@ -54,16 +53,6 @@ export default class Visor extends React.Component {
 
   componentWillUnmount() {
     this.state.tab.kill()
-  }
-
-  componentDidUpdate() {
-    const currentSession = this.state.tab.find(
-      this.state.tab.root, this.state.currentSessionId
-    )
-
-    if (currentSession && !currentSession.isFocused) {
-      return currentSession.xterm.focus()
-    }
   }
 
   selectSession(id) {
