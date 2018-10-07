@@ -1,4 +1,4 @@
-/* global window */
+/* global window, document */
 
 import ipc from 'electron-better-ipc'
 import React from 'react'
@@ -9,6 +9,8 @@ import TrafficLights from 'common/traffic-lights'
 import PaneList from '@/app/pane-list'
 import TabList from '@/app/tab-list'
 import HamburgerMenu from '@/app/hamburger-menu'
+import 'xterm/dist/xterm.css' // eslint-disable-line import/no-unassigned-import
+import '@/app/styles' // eslint-disable-line import/no-unassigned-import
 /* eslint-enable import/no-unresolved */
 
 export default class App extends React.Component {
@@ -22,6 +24,28 @@ export default class App extends React.Component {
     ipc.answerMain('split', direction => this.split(direction))
     ipc.answerMain('new-tab', this.addTab.bind(this))
     ipc.answerMain('close-current-tab', () => this.removeTab(this.state.currentTabId))
+
+    const styles = document.documentElement.style
+    const styleProperties = {
+      fontFamily: '--font-family',
+      windowBackground: '--background-color',
+      tabColor: '--tab-color',
+      tabBorderColor: '--tab-border-color',
+      fontSize: '--font-size',
+      padding: '--terminal-padding',
+      'theme.selection': '--selection-color'
+    }
+
+    const preferences = ipc.sendSync('get-preferences-sync', Object.keys(styleProperties))
+    Object.keys(preferences).forEach(preference => {
+      styles.setProperty(styleProperties[preference], preferences[preference])
+    })
+
+    ipc.answerMain('preference-change', (preference, newValue) => {
+      if (styleProperties[preference]) {
+        styles.setProperty(styleProperties[preference], newValue)
+      }
+    })
   }
 
   render() {
