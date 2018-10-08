@@ -7,6 +7,7 @@ import {pref} from 'common/config-file'
 import ProfileManager from 'common/profile-manager'
 import template from '@/app-menu'
 import registerVisor from '@/visor'
+import listeners from '@/listeners'
 /* eslint-enable import/no-unresolved */
 
 const windows = []
@@ -17,6 +18,7 @@ if (!is.development) {
   require('update-electron-app')()
 }
 
+listeners(profileManager)
 profileManager.validate()
 
 const resetApplicationMenu = () =>
@@ -87,28 +89,3 @@ subscriptions.add(
 
 subscriptions.add(profileManager.onDidChange('singleTabMode', resetApplicationMenu))
 subscriptions.add(profileManager.onActiveProfileChange(resetApplicationMenu))
-
-ipc.answerRenderer('open-hamburger-menu', args => Menu.getApplicationMenu().popup(args))
-
-const getPreferences = preferences => {
-  switch (preferences.constructor.name) {
-    case 'String':
-      return profileManager.get(preferences)
-    case 'Array':
-      return preferences.reduce((foundPreferences, setting) => {
-        foundPreferences[setting] = profileManager.get(setting)
-
-        return foundPreferences
-      }, {})
-    default:
-      return null
-  }
-}
-
-ipc.on('get-preferences-sync', (event, preferences) => {
-  event.returnValue = getPreferences(preferences)
-})
-
-ipc.answerRenderer('get-preferences-async', preferences => {
-  return getPreferences(preferences)
-})

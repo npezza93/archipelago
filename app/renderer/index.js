@@ -10,7 +10,7 @@ if (window.location.hash === '#about') {
 } else if (window.location.hash === '#visor') {
   import('@/visor/visor').then(visor => mountRoute(visor.default))
 } else if (window.location.hash === '#settings') {
-  // import('@/settings/settings').then(settings => mountRoute(settings.default))  
+  import('@/settings/settings').then(settings => mountRoute(settings.default))  
 } else {
   import('@/app/app').then(app => mountRoute(app.default))
 }

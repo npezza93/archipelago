@@ -3,6 +3,7 @@ class Profile {
   constructor(attributes, configFile) {
     this.attributes = attributes
     this.configFile = configFile
+    this.attributes.name = this.get('name')
   }
 
   get id() {
