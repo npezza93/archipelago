@@ -1,7 +1,7 @@
 import React from 'react'
 
 /* eslint-disable import/no-unresolved */
-import {boolean, color, select, string, integer, number} from '@/settings/fields/core-fields'
+import * as coreFields from '@/settings/fields/core-fields'
 import ArrayField from '@/settings/fields/array-field'
 /* eslint-enable import/no-unresolved */
 
@@ -13,4 +13,4 @@ const array = (property, value, schema, onChange) => {
     onChange={onChange.bind(this)} />
 }
 
-export default {array, boolean, color, select, string, integer, number}
+export default {array, ...coreFields}

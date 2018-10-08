@@ -22,7 +22,10 @@ export default class Property extends React.Component {
       this.props.property,
       this.state[this.props.property],
       this.props.schema,
-      newValue => this.profileManager.set(this.props.property, newValue)
+      newValue => {
+        this.setState({[this.props.property]: newValue})
+        ipc.callMain('set-pref', {prefName: this.props.property, prefValue: newValue})
+      }
     )
   }
 

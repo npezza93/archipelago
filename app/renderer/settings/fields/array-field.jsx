@@ -1,7 +1,7 @@
 import React from 'react'
 
 /* eslint-disable import/no-unresolved */
-import coreFields from '@/settings/fields/core-fields'
+import * as coreFields from '@/settings/fields/core-fields'
 /* eslint-enable import/no-unresolved */
 
 export default class ArrayField extends React.Component {
@@ -46,7 +46,7 @@ export default class ArrayField extends React.Component {
   }
 
   addElement() {
-    return <div className="create-array-element" onClick={this.createElement.bind(this)}>
+    return <div className="create-array-element" onClick={this.createElement.bind(this)} key="create-array-el">
       add new {this.props.property.substring(0, this.props.property.length - 1)}
     </div>
   }

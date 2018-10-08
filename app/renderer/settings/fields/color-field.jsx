@@ -29,7 +29,7 @@ export default class ColorField extends React.Component {
       <input
         type="text"
         datakey={this.props.datakey}
-        value={this.props.value}
+        value={this.props.value || ''}
         onClick={() => this.setState({active: true})}
         onChange={() => {}} />
       <label>{this.props.label}</label>
