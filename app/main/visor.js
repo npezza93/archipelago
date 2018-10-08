@@ -41,7 +41,7 @@ const create = profileManager => {
     if (is.development) {
       visorWindow.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}#visor`)
     } else {
-      visorWindow.loadFile('dist/renderer/index.html#visor')
+      visorWindow.loadURL(`file:///${__dirname}/index.html#visor`)
     }
 
     visorWindow.on('blur', hideVisor)

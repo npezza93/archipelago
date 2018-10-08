@@ -30,18 +30,24 @@ const createWindow = () => {
   const win = new BrowserWindow({
     width: 1000,
     height: 600,
+    show: false,
     titleBarStyle: platform({macos: 'hiddenInset', default: 'hidden'}),
     frame: is.macos,
+    backgroundColor: profileManager.get('windowBackground'),
     vibrancy: profileManager.get('vibrancy')
   })
 
   if (is.development) {
     win.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`)
   } else {
-    win.loadFile('dist/renderer/index.html')
+    win.loadURL(`file:///${__dirname}/index.html`)
   }
 
-  win.focus()
+  win.once('ready-to-show', () => {
+    win.show()
+    win.focus()
+  })
+
   windows.push(win)
 }
 

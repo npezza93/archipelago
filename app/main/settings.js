@@ -8,18 +8,21 @@ export default () => {
     settingsWindow = new BrowserWindow({
       width: 600,
       height: 600,
-      show: true,
+      show: false,
       titleBarStyle: 'hiddenInset',
       frame: is.macos,
+      backgroundColor: '#fff',
       webPreferences: {experimentalFeatures: true}
     })
 
     if (is.development) {
       settingsWindow.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}#settings`)
     } else {
-      settingsWindow.loadFile('dist/renderer/index.html#settings')
+      settingsWindow.loadURL(`file:///${__dirname}/index.html#settings`)
     }
-  }
 
-  settingsWindow.focus()
+    settingsWindow.once('ready-to-show', () => settingsWindow.show())
+  } else {
+    settingsWindow.focus()
+  }
 }

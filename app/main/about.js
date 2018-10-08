@@ -8,17 +8,20 @@ export default () => {
     aboutWindow = new BrowserWindow({
       width: 300,
       height: 500,
-      show: true,
+      show: false,
       titleBarStyle: 'hiddenInset',
+      backgroundColor: '#fff',
       frame: is.macos
     })
 
     if (is.development) {
       aboutWindow.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}#about`)
     } else {
-      aboutWindow.loadFile('dist/renderer/index.html#about')
+      aboutWindow.loadURL(`file:///${__dirname}/index.html#about`)
     }
-  }
 
-  aboutWindow.focus()
+    aboutWindow.once('ready-to-show', () => aboutWindow.show())
+  } else {
+    aboutWindow.focus()
+  }
 }
