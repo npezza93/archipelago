@@ -1,9 +1,7 @@
 <p align="center">
   <a href="https://github.com/npezza93/archipelago">
-    <img src="https://github.com/npezza93/archipelago/blob/master/.github/logo.png" width="150">
+    <img src="https://raw.githubusercontent.com/npezza93/archipelago/master/.github/logo.png" width="350">
   </a>
-
-  <h3 align="center">Archipelago</h3>
 
   <p align="center">
     Archipelago is an open-source terminal emulator built on web technology.
