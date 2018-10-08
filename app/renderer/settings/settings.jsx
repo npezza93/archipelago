@@ -21,7 +21,7 @@ export default class Settings extends React.Component {
     return <div>
       <div id="titlebar"><TrafficLights /></div>
       <div className="form-container">
-        <HamburgerMenu toggleProfiles={this.toggleProfiles.bind(this)}/>
+        <HamburgerMenu toggleProfilesDrawer={this.toggleProfilesDrawer.bind(this)}/>
         <Profiles showProfiles={this.state.showProfiles} />
         <div className="options-container"></div>
       </div>
@@ -32,7 +32,7 @@ export default class Settings extends React.Component {
     ipc.answerMain('close-current-tab', () => window.close())
   }
 
-  toggleProfiles(active) {
+  toggleProfilesDrawer(active) {
     this.setState({showProfiles: active})
   }
 }
