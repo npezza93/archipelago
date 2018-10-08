@@ -2,7 +2,7 @@ import React from 'react'
 import Observer from '@researchgate/react-intersection-observer'
 
 /* eslint-disable import/no-unresolved */
-const Property = require('@/settings/property')
+import Property from '@/settings/property'
 /* eslint-enable import/no-unresolved */
 
 export default class PropertiesSection extends React.Component {

@@ -48,4 +48,4 @@ const number = (property, value, schema, onChange) => {
   return string(property, value, schema, onChange)
 }
 
-export default {boolean, color, select, string, integer, number}
+export {boolean, color, select, string, integer, number}

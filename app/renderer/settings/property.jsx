@@ -2,7 +2,7 @@ import React from 'react'
 import ipc from 'electron-better-ipc'
 
 /* eslint-disable import/no-unresolved */
-const allFields = require('@/settings/all-fields')
+import allFields from '@/settings/all-fields'
 /* eslint-enable import/no-unresolved */
 
 export default class Property extends React.Component {
