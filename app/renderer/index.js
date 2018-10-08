@@ -6,11 +6,11 @@ const mountRoute = (route) => {
 }
 
 if (window.location.hash === '#about') {
-  import('@/about/about').then(about => mountRoute(about.default))
+  import('@/about/about').then(({default: about}) => mountRoute(about))
 } else if (window.location.hash === '#visor') {
-  import('@/visor/visor').then(visor => mountRoute(visor.default))
+  import('@/visor/visor').then(({default: visor}) => mountRoute(visor))
 } else if (window.location.hash === '#settings') {
-  import('@/settings/settings').then(settings => mountRoute(settings.default))  
+  import('@/settings/settings').then(({default: settings}) => mountRoute(settings))
 } else {
-  import('@/app/app').then(app => mountRoute(app.default))
+  import('@/app/app').then(({default: app}) => mountRoute(app))
 }
