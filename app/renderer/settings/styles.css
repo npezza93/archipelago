@@ -222,9 +222,9 @@ archipelago-profiles ::-webkit-scrollbar-thumb:active {
 }
 
 archipelago-profiles .profile-header {
-  text-transform: uppercase;
+  font-family: AdamPro;
+  letter-spacing: 1px;
   color: #889199;
-  font-weight: 500;
   font-size: 14px;
   padding: 80px 36px 24px 36px;
 }
@@ -283,12 +283,12 @@ archipelago-profiles .new-profile {
   display: flex;
   justify-content: center;
   align-items: center;
-  text-transform: uppercase;
-  font-weight: 500;
   font-size: 14px;
   transition: all .2s ease-in-out;
   cursor: pointer;
   color: #889199;
+  font-family: AdamPro;
+  letter-spacing: 2px;
 }
 
 archipelago-profiles .new-profile:hover {
@@ -338,13 +338,11 @@ archipelago-properties-pane archipelago-header::before {
 archipelago-properties-pane archipelago-header div,
 archipelago-properties-pane archipelago-header div[position = "0"] {
   font-size: 32px;
-  font-weight: 600;
   color: #424242;
   position: absolute;
   top: 60px;
   transition: all .3s ease-in-out;
   opacity: 1;
-  text-transform: uppercase;
 }
 
 archipelago-properties-pane archipelago-header div[position = "-2"] {
@@ -358,7 +356,6 @@ archipelago-properties-pane archipelago-header div[position = "-2"] {
 
 archipelago-properties-pane archipelago-header div[position = "-1"] {
   font-size: 16px;
-  font-weight: 500;
   color: #889199;
   top: 37px;
   transition: all .3s ease-in-out;
@@ -462,12 +459,12 @@ archipelago-properties-pane .create-array-element {
   display: flex;
   justify-content: center;
   align-items: center;
-  text-transform: uppercase;
-  font-weight: 600;
   font-size: 14px;
   transition: all .2s ease-in-out;
   cursor: pointer;
   color: #889199;
+  font-family: AdamPro;
+  letter-spacing: 2px;
 }
 
 archipelago-properties-pane .create-array-element:hover {
@@ -476,7 +473,7 @@ archipelago-properties-pane .create-array-element:hover {
 
 #hamburger {
   width: 16px;
-  height: 16px;
+  height: 11px;
   top: 46px;
   left: 32px;
   cursor: pointer;
@@ -493,7 +490,7 @@ archipelago-properties-pane .create-array-element:hover {
 #hamburger div {
   height: 2px;
   background: #212121;
-  border-radius: 3px;
+  border-radius: 1px;
 }
 
 #backdrop {

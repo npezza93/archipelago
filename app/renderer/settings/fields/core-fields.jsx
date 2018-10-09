@@ -1,4 +1,5 @@
 import React from 'react'
+import i from 'i'
 
 /* eslint-disable import/no-unresolved */
 import BooleanField from '@/settings/fields/boolean-field'
@@ -10,21 +11,21 @@ import TextField from '@/settings/fields/text-field'
 const boolean = (property, value, schema, onChange) => {
   return <BooleanField key={property} property={property}
     value={value}
-    label={schema.title || property.split('.').pop()}
+    label={schema.title || i(false).titleize(property.split('.').pop())}
     onChange={onChange.bind(this)} />
 }
 
 const color = (property, value, schema, onChange) => {
   return <ColorField key={property} property={property}
     value={value}
-    label={schema.title || property.split('.').pop()}
+    label={schema.title || i(false).titleize(property.split('.').pop())}
     onChange={onChange.bind(this)} />
 }
 
 const select = (property, value, schema, onChange) => {
   return <SelectField key={property} property={property}
     value={value}
-    label={schema.title || property.split('.').pop()}
+    label={schema.title || i(false).titleize(property.split('.').pop())}
     onChange={onChange.bind(this)}
     options={schema.enum} />
 }
@@ -36,7 +37,7 @@ const string = (property, value, schema, onChange) => {
 
   return <TextField key={property} property={property}
     value={value}
-    label={schema.title || property.split('.').pop()}
+    label={schema.title || i(false).titleize(property.split('.').pop())}
     onChange={onChange.bind(this)} />
 }
 

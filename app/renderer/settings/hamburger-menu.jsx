@@ -11,8 +11,7 @@ export default class HamburgerMenu extends React.Component {
       {this.backdrop()}
       <div id="hamburger" onClick={this.handleHamburgerClick.bind(this)}>
         <div></div>
-        <div></div>
-        <div></div>
+        <div style={{width: '11px'}}></div>
       </div>
     </div>
   }
