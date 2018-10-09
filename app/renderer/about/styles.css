@@ -2,15 +2,22 @@
   font-family: AdamPro;
   src: url("./adam_pro.otf") format("opentype");
 }
+#about {
+  --color: #424242;
+  --background-color: #F5F5F5;
+}
+#about[data-theme^="dark"] {
+  --color: #eee;
+  --background-color: #393736;
+}
+
 .title {
   font-family: AdamPro;
   font-size: 26px;
   letter-spacing: 4px;
   margin-bottom: 25px !important;
 }
-
 html, body {
-  background-color: #FFF;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   text-rendering: geometricPrecision;
   -webkit-font-feature-settings: "liga" off, "calt" off;
@@ -19,10 +26,16 @@ html, body {
   height: 100%;
   margin: 0;
 }
+
+svg g {
+  fill: var(--color) !important;
+}
 #app {
   height: 100%;
 }
 #about {
+  background-color: var(--background-color);
+  color: var(--color);
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -50,9 +63,11 @@ html, body {
   flex-direction: column;
   align-items: center;
 }
-#about a { text-decoration: none; }
+#about a {
+  text-decoration: none;
+  color: var(--color);
+}
 #about .font-weight-500 { font-weight: 500; }
-#about .black { color: #000; }
 #about .m-0 { margin: 0; }
 
 #about minimize-button { z-index: 100 !important; }

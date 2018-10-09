@@ -1,5 +1,6 @@
 /* global window */
 
+import {remote} from 'electron'
 import ipc from 'electron-better-ipc'
 import {api} from 'electron-util'
 import React from 'react'
@@ -10,8 +11,20 @@ import '@/about/styles' // eslint-disable-line import/no-unassigned-import
 /* eslint-enable import/no-unresolved */
 
 export default class About extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {isDarkMode: remote.systemPreferences.isDarkMode()}
+
+    ipc.answerMain('close-current-tab', () => window.close())
+    remote.systemPreferences.subscribeNotification(
+      'AppleInterfaceThemeChangedNotification',
+      () => this.setState({isDarkMode: remote.systemPreferences.isDarkMode()}),
+    )
+  }
+
   render() {
-    return <div id="about">
+    return <div id="about" data-theme={this.theme}>
       <TrafficLights />
       <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="1200.000000pt" height="1200.000000pt" viewBox="0 0 1200.000000 1200.000000" preserveAspectRatio="xMidYMid meet" className="project-logo">
         <g transform="translate(0.000000,1200.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
@@ -32,7 +45,7 @@ export default class About extends React.Component {
       </svg>
 
       <div className="centered_column">
-        <div className="black font-weight-500 m-0 title">Archipelago</div>
+        <div className="font-weight-500 m-0 title">Archipelago</div>
         <div>v{api.app.getVersion()}</div>
       </div>
 
@@ -42,12 +55,12 @@ export default class About extends React.Component {
 
       <p className="m-0">
         Bug reports and pull requests are welcome on
-        <a className="font-weight-500 black" rel="noopener noreferrer" target="_blank" href="https://github.com/npezza93/archipelago/"> GitHub</a>.
+        <a className="font-weight-500" rel="noopener noreferrer" target="_blank" href="https://github.com/npezza93/archipelago/"> GitHub</a>.
       </p>
 
       <p className="m-0">
         This app is available as open source under the terms of the
-        <a className="font-weight-500 black" rel="noopener noreferrer" target="_blank" href="http://opensource.org/licenses/MIT"> MIT License</a>.
+        <a className="font-weight-500" rel="noopener noreferrer" target="_blank" href="http://opensource.org/licenses/MIT"> MIT License</a>.
       </p>
 
       <p className="m-0 font-weight-500">
@@ -70,7 +83,11 @@ export default class About extends React.Component {
     </div>
   }
 
-  componentDidMount() {
-    ipc.answerMain('close-current-tab', () => window.close())
+  get theme() {
+    if (this.state.isDarkMode) {
+      return 'dark'
+    }
+
+    return 'light'
   }
 }
