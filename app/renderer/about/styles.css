@@ -1,6 +1,6 @@
 @font-face {
   font-family: AdamPro;
-  src: url("./adam_pro.otf") format("opentype");
+  src: url("../fonts/adam_pro.otf") format("opentype");
 }
 #about {
   --color: #424242;

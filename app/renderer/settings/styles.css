@@ -1,3 +1,8 @@
+@font-face {
+  font-family: AdamPro;
+  src: url("../fonts/adam_pro.otf") format("opentype");
+}
+
 select-field select {
   width: 100%;
   transition: transform 250ms ease-in-out;
@@ -315,6 +320,8 @@ archipelago-properties-pane archipelago-header {
   width: calc(100% - 362px);
   background-color: rgba(255, 255, 255, .2);
   z-index: 2;
+  font-family: AdamPro;
+  letter-spacing: 2px;
 }
 
 archipelago-properties-pane archipelago-header::before {
