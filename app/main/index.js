@@ -1,14 +1,11 @@
 import {app, BrowserWindow, Menu} from 'electron'
 import {is, platform} from 'electron-util'
 import {CompositeDisposable} from 'event-kit'
-
-/* eslint-disable import/no-unresolved */
-import {pref} from 'common/config-file'
-import ProfileManager from 'common/profile-manager'
-import template from '@/app-menu'
-import registerVisor from '@/visor'
-import listeners from '@/listeners'
-/* eslint-enable import/no-unresolved */
+import {pref} from '../common/config-file'
+import ProfileManager from '../common/profile-manager'
+import template from './app-menu'
+import registerVisor from './visor'
+import listeners from './listeners'
 
 const windows = []
 const subscriptions = new CompositeDisposable()

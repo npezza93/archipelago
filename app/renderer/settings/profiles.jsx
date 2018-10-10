@@ -1,9 +1,6 @@
 import React from 'react'
 import ipc from 'electron-better-ipc'
-
-/* eslint-disable import/no-unresolved */
-import Profile from '@/settings/profile'
-/* eslint-enable import/no-unresolved */
+import Profile from './profile.jsx'
 
 export default class Profiles extends React.Component {
   constructor(props) {

@@ -1,10 +1,7 @@
 import {api, platform} from 'electron-util'
 import ipc from 'electron-better-ipc'
-
-/* eslint-disable import/no-unresolved */
-import displaySettings from '@/settings'
-import displayAbout from '@/about'
-/* eslint-enable import/no-unresolved */
+import displaySettings from './settings'
+import displayAbout from './about'
 
 const aboutMenu = {
   label: api.app.getName(),

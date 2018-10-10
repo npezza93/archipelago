@@ -4,11 +4,8 @@ import {remote} from 'electron'
 import ipc from 'electron-better-ipc'
 import {api} from 'electron-util'
 import React from 'react'
-
-/* eslint-disable import/no-unresolved */
-import TrafficLights from 'common/traffic-lights'
-import '@/about/styles' // eslint-disable-line import/no-unassigned-import
-/* eslint-enable import/no-unresolved */
+import TrafficLights from '../../common/traffic-lights'
+import './styles.css' // eslint-disable-line import/no-unassigned-import
 
 export default class About extends React.Component {
   constructor(props) {

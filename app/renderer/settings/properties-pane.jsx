@@ -1,12 +1,9 @@
 /* global requestIdleCallback */
 
 import React from 'react'
-
-/* eslint-disable import/no-unresolved */
-import schema from 'common/schema'
-import Header from '@/settings/header'
-import PropertiesSection from '@/settings/properties-section'
-/* eslint-enable import/no-unresolved */
+import schema from '../../common/schema'
+import Header from './header.jsx'
+import PropertiesSection from './properties-section.jsx'
 
 export default class PropertiesPane extends React.Component {
   constructor(props) {

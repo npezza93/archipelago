@@ -1,9 +1,6 @@
 import React from 'react'
 import ipc from 'electron-better-ipc'
-
-/* eslint-disable import/no-unresolved */
-import allFields from '@/settings/all-fields'
-/* eslint-enable import/no-unresolved */
+import allFields from './all-fields.jsx'
 
 export default class Property extends React.Component {
   constructor(props) {

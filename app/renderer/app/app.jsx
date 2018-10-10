@@ -2,16 +2,13 @@
 
 import ipc from 'electron-better-ipc'
 import React from 'react'
-
-/* eslint-disable import/no-unresolved */
-import Tab from 'common/tab'
-import TrafficLights from 'common/traffic-lights'
-import PaneList from '@/app/pane-list'
-import TabList from '@/app/tab-list'
-import HamburgerMenu from '@/app/hamburger-menu'
+import Tab from '../../common/tab'
+import TrafficLights from '../../common/traffic-lights'
+import PaneList from './pane-list.jsx'
+import TabList from './tab-list.jsx'
+import HamburgerMenu from './hamburger-menu.jsx'
 import 'xterm/dist/xterm.css' // eslint-disable-line import/no-unassigned-import
-import '@/app/styles' // eslint-disable-line import/no-unassigned-import
-/* eslint-enable import/no-unresolved */
+import './styles.css' // eslint-disable-line import/no-unassigned-import
 
 export default class App extends React.Component {
   constructor(props) {

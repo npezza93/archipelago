@@ -1,9 +1,6 @@
 import React from 'react'
 import Observer from '@researchgate/react-intersection-observer'
-
-/* eslint-disable import/no-unresolved */
-import Property from '@/settings/property'
-/* eslint-enable import/no-unresolved */
+import Property from './property.jsx'
 
 export default class PropertiesSection extends React.Component {
   render() {

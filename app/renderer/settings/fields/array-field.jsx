@@ -1,8 +1,5 @@
 import React from 'react'
-
-/* eslint-disable import/no-unresolved */
-import * as coreFields from '@/settings/fields/core-fields'
-/* eslint-enable import/no-unresolved */
+import * as coreFields from './core-fields.jsx'
 
 export default class ArrayField extends React.Component {
   render() {

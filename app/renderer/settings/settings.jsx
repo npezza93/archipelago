@@ -2,14 +2,11 @@
 
 import ipc from 'electron-better-ipc'
 import React from 'react'
-
-/* eslint-disable import/no-unresolved */
-import TrafficLights from 'common/traffic-lights'
-import HamburgerMenu from '@/settings/hamburger-menu'
-import Profiles from '@/settings/profiles'
-import PropertiesPane from '@/settings/properties-pane'
-import '@/settings/styles' // eslint-disable-line import/no-unassigned-import
-/* eslint-enable import/no-unresolved */
+import TrafficLights from '../../common/traffic-lights'
+import HamburgerMenu from './hamburger-menu.jsx'
+import Profiles from './profiles.jsx'
+import PropertiesPane from './properties-pane.jsx'
+import './styles.css' // eslint-disable-line import/no-unassigned-import
 
 export default class Settings extends React.Component {
   constructor(props) {

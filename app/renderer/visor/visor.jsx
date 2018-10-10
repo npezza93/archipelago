@@ -2,13 +2,10 @@
 
 import ipc from 'electron-better-ipc'
 import React from 'react'
-
-/* eslint-disable import/no-unresolved */
-import Tab from 'common/tab'
-import Pane from '@/visor/pane'
+import Tab from '../../common/tab'
+import Pane from './pane.jsx'
 import 'xterm/dist/xterm.css' // eslint-disable-line import/no-unassigned-import
-import '@/visor/styles' // eslint-disable-line import/no-unassigned-import
-/* eslint-enable import/no-unresolved */
+import './styles.css' // eslint-disable-line import/no-unassigned-import
 
 export default class Visor extends React.Component {
   constructor(props) {

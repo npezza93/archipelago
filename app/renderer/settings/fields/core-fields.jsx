@@ -1,12 +1,9 @@
 import React from 'react'
 import i from 'i'
-
-/* eslint-disable import/no-unresolved */
-import BooleanField from '@/settings/fields/boolean-field'
-import ColorField from '@/settings/fields/color-field'
-import SelectField from '@/settings/fields/select-field'
-import TextField from '@/settings/fields/text-field'
-/* eslint-enable import/no-unresolved */
+import BooleanField from './boolean-field.jsx'
+import ColorField from './color-field.jsx'
+import SelectField from './select-field.jsx'
+import TextField from './text-field.jsx'
 
 const boolean = (property, value, schema, onChange) => {
   return <BooleanField key={property} property={property}
