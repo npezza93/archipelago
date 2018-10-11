@@ -1,5 +1,6 @@
 /* global window, document */
 
+import {remote} from 'electron'
 import ipc from 'electron-better-ipc'
 import React from 'react'
 import Tab from '../../common/tab'
@@ -24,7 +25,7 @@ export default class App extends React.Component {
   }
 
   render() {
-    return <archipelago-app class={process.platform} data-single-tab-mode={ ipc.sendSync('get-preferences-sync', 'singleTabMode') ? '' : undefined}>
+    return <archipelago-app class={process.platform} data-single-tab-mode={ this.isSingleTabMode() || undefined}>
       <HamburgerMenu />
       <TabList
         tabs={this.state.tabs}
@@ -115,16 +116,14 @@ export default class App extends React.Component {
   }
 
   addTab() {
-    ipc.callMain('get-preferences-async', 'singleTabMode').then(singleTabMode => {
-      if (!singleTabMode) {
-        const newTab = new Tab('default')
+    if (!this.isSingleTabMode()) {
+      const newTab = new Tab('default')
 
-        return this.setState({
-          tabs: this.state.tabs.concat(newTab),
-          currentTabId: newTab.id
-        })
-      }
-    })
+      this.setState({
+        tabs: this.state.tabs.concat(newTab),
+        currentTabId: newTab.id
+      })
+    }
   }
 
   removeTab(id) {
@@ -210,5 +209,9 @@ export default class App extends React.Component {
     })
 
     this.setState({tabs, currentSessionId: newSessionId})
+  }
+
+  isSingleTabMode() {
+    return remote.getGlobal('profileManager').get('singleTabMode')
   }
 }
