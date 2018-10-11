@@ -2,7 +2,7 @@
 
 import ipc from 'electron-better-ipc'
 import React from 'react'
-import TrafficLights from '../../common/traffic-lights'
+import TrafficLights from '../traffic-lights.jsx'
 import HamburgerMenu from './hamburger-menu.jsx'
 import Profiles from './profiles.jsx'
 import PropertiesPane from './properties-pane.jsx'
