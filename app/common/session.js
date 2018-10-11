@@ -66,11 +66,11 @@ class Session {
     this.xterm.setOption('theme', ipc.sendSync('get-preferences-sync', 'theme'))
   }
 
-  kill() {
+  async kill() {
     this.subscriptions.dispose()
     this.xterm.dispose()
 
-    return this.pty.kill()
+    await this.pty.kill()
   }
 
   fit() {

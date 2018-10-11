@@ -1,10 +1,9 @@
-const Branch = require('./branch')
-const Session = require('./session')
+import Branch from './branch'
+import Session from './session'
 
-module.exports =
-class Tab {
+export default class Tab {
   constructor(type) {
-    this.root = new Session(type)
+    this.root = new Promise(resolve => resolve(new Session(type)))
     this.id = Math.random()
     this.title = ''
     this.isUnread = false
@@ -14,7 +13,7 @@ class Tab {
   add(sessionId, orientation) {
     let newBranch
 
-    if (this.root.constructor.name === 'Session') {
+    if (this.root.constructor.name === 'Promise') {
       const session = this.root
       const branch = this.newBranch(session, orientation)
       this.root = branch
@@ -52,14 +51,25 @@ class Tab {
     }
   }
 
-  kill() {
-    return (this.root && this.root.kill()) || new Promise(resolve => resolve())
+  async kill() {
+    if (this.root && this.root.contructor) {
+      switch (this.root.contructor.name) {
+        case 'Branch':
+          await this.root.kill()
+          break
+        case 'Promise':
+          await this.root.then(session => session.kill())
+          break
+        default:
+          break
+      }
+    }
   }
 
-  find(branch, sessionId) {
+  async find(branch, sessionId) {
     let foundSession = null
 
-    this.traverse(branch, session => {
+    await this.traverse(branch, session => {
       if (session.id === sessionId) {
         foundSession = session
       }
@@ -68,17 +78,17 @@ class Tab {
     return foundSession
   }
 
-  traverse(branch, callback) {
+  async traverse(branch, callback) {
     if (branch === null || branch === undefined) {
       return
     }
 
-    if (branch.constructor.name === 'Session') {
+    if ((await branch).constructor.name === 'Session') {
       callback(branch)
     }
 
-    this.traverse(branch.left, callback)
-    this.traverse(branch.right, callback)
+    await this.traverse(branch.left, callback)
+    await this.traverse(branch.right, callback)
   }
 
   newBranch(session, orientation) {

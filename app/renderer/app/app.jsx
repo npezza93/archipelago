@@ -72,13 +72,13 @@ export default class App extends React.Component {
   }
 
   componentDidUpdate() {
-    const currentSession = this.currentTab().find(
+    this.currentTab().find(
       this.currentTab().root, this.state.currentSessionId
-    )
-
-    if (currentSession && !currentSession.isFocused) {
-      return currentSession.xterm.focus()
-    }
+    ).then(currentSession => {
+      if (currentSession && !currentSession.isFocused) {
+        return currentSession.xterm.focus()
+      }
+    })
   }
 
   currentTab(id) {
@@ -126,7 +126,7 @@ export default class App extends React.Component {
     }
   }
 
-  removeTab(id) {
+  async removeTab(id) {
     const [found, remaining] = this.state.tabs.reduce((partition, tab) => {
       if (tab.id === id) {
         partition[0] = tab
@@ -136,19 +136,19 @@ export default class App extends React.Component {
       return partition
     }, [null, []])
 
-    found.kill().then(() => {
-      if (remaining.length === 0) {
-        window.close()
-      } else if (this.state.currentTabId === id) {
-        this.setState({
-          currentTabId: remaining[0].id,
-          tabs: remaining,
-          currentSessionId: remaining[0].lastActiveSessionId
-        })
-      } else {
-        this.setState({tabs: remaining})
-      }
-    })
+    await found.kill()
+
+    if (remaining.length === 0) {
+      window.close()
+    } else if (this.state.currentTabId === id) {
+      this.setState({
+        currentTabId: remaining[0].id,
+        tabs: remaining,
+        currentSessionId: remaining[0].lastActiveSessionId
+      })
+    } else {
+      this.setState({tabs: remaining})
+    }
   }
 
   changeTitle(id, title) {
