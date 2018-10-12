@@ -2,7 +2,7 @@
 
 import ipc from 'electron-better-ipc'
 import React from 'react'
-import Tab from '../../common/tab'
+import Tab from '../sessions/tab'
 import Pane from './pane.jsx'
 import 'xterm/dist/xterm.css' // eslint-disable-line import/no-unassigned-import
 import './styles.css' // eslint-disable-line import/no-unassigned-import

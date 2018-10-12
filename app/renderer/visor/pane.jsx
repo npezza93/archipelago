@@ -1,7 +1,6 @@
 import React from 'react'
 import SplitPane from 'react-split-pane'
-
-import Terminal from '@/visor/terminal' // eslint-disable-line import/no-unresolved
+import Terminal from './terminal.jsx'
 
 export default class Pane extends React.Component {
   render() {

@@ -1,10 +1,9 @@
-const {remote} = require('electron')
-const {api, platform} = require('electron-util')
-const {spawn} = require('node-pty')
-const {Disposable} = require('event-kit')
+import {remote} from 'electron'
+import {api, platform} from 'electron-util'
+import {spawn} from 'node-pty'
+import {Disposable} from 'event-kit'
 
-module.exports =
-class Pty {
+export default class Pty {
   constructor() {
     this.id = Math.random()
     this.profileManager = remote.getGlobal('profileManager')

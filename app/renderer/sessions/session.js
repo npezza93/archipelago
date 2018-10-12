@@ -3,8 +3,8 @@ import {CompositeDisposable, Disposable} from 'event-kit'
 import {Terminal} from 'xterm'
 import unescape from 'unescape-js'
 import keystrokeForKeyboardEvent from 'keystroke-for-keyboard-event'
+import {xtermSettings} from '../../common/config-file'
 import Pty from './pty'
-import {xtermSettings} from './config-file'
 
 Terminal.applyAddon(require('xterm/lib/addons/fit/fit'))
 

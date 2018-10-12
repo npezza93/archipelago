@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Tab from '@/app/tab' // eslint-disable-line import/no-unresolved
+import Tab from './tab.jsx'
 
 export default class TabList extends React.Component {
   render() {
