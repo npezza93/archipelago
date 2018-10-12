@@ -1,10 +1,8 @@
-const {isDeepStrictEqual} = require('util')
+import {isDeepStrictEqual} from 'util'
+import Profile from './profile'
+import {keybindings} from './config-file'
 
-const Profile = require('./profile')
-const {keybindings} = require('./config-file')
-
-module.exports =
-class ProfileManager {
+export default class ProfileManager {
   constructor(configFile) {
     this.configFile = configFile
   }

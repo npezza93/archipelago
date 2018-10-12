@@ -1,22 +1,23 @@
+const {remote} = require('electron')
 const {api, platform} = require('electron-util')
 const {spawn} = require('node-pty')
 const {Disposable} = require('event-kit')
-const ipc = require('electron-better-ipc')
 
 module.exports =
 class Pty {
   constructor() {
     this.id = Math.random()
+    this.profileManager = remote.getGlobal('profileManager')
 
     this.pty = spawn(
       this.shell,
-      ipc.sendSync('get-preferences-sync', 'shellArgs').split(','),
+      this.profileManager.get('shellArgs').split(','),
       this.sessionArgs
     )
   }
 
   get shell() {
-    return ipc.sendSync('get-preferences-sync', 'shell') ||
+    return this.profileManager.get('shell') ||
       process.env[platform({windows: 'COMSPEC', default: 'SHELL'})]
   }
 

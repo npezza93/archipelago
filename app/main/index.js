@@ -9,7 +9,7 @@ import listeners from './listeners'
 
 const windows = []
 const subscriptions = new CompositeDisposable()
-const profileManager = new ProfileManager(pref())
+global.profileManager = new ProfileManager(pref())
 
 if (!is.development) {
   require('update-electron-app')()

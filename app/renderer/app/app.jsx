@@ -72,13 +72,13 @@ export default class App extends React.Component {
   }
 
   componentDidUpdate() {
-    this.currentTab().find(
+    const currentSession = this.currentTab().find(
       this.currentTab().root, this.state.currentSessionId
-    ).then(currentSession => {
-      if (currentSession && !currentSession.isFocused) {
-        return currentSession.xterm.focus()
-      }
-    })
+    )
+
+    if (currentSession && !currentSession.isFocused) {
+      return currentSession.xterm.focus()
+    }
   }
 
   currentTab(id) {

@@ -3,7 +3,7 @@ import Session from './session'
 
 export default class Tab {
   constructor(type) {
-    this.root = new Promise(resolve => resolve(new Session(type)))
+    this.root = new Session(type)
     this.id = Math.random()
     this.title = ''
     this.isUnread = false
@@ -13,7 +13,7 @@ export default class Tab {
   add(sessionId, orientation) {
     let newBranch
 
-    if (this.root.constructor.name === 'Promise') {
+    if (this.root.constructor.name === 'Session') {
       const session = this.root
       const branch = this.newBranch(session, orientation)
       this.root = branch
@@ -57,8 +57,8 @@ export default class Tab {
         case 'Branch':
           await this.root.kill()
           break
-        case 'Promise':
-          await this.root.then(session => session.kill())
+        case 'Session':
+          await this.root.kill()
           break
         default:
           break
@@ -66,10 +66,10 @@ export default class Tab {
     }
   }
 
-  async find(branch, sessionId) {
+  find(branch, sessionId) {
     let foundSession = null
 
-    await this.traverse(branch, session => {
+    this.traverse(branch, session => {
       if (session.id === sessionId) {
         foundSession = session
       }
@@ -78,17 +78,17 @@ export default class Tab {
     return foundSession
   }
 
-  async traverse(branch, callback) {
+  traverse(branch, callback) {
     if (branch === null || branch === undefined) {
       return
     }
 
-    if ((await branch).constructor.name === 'Session') {
+    if (branch.constructor.name === 'Session') {
       callback(branch)
     }
 
-    await this.traverse(branch.left, callback)
-    await this.traverse(branch.right, callback)
+    this.traverse(branch.left, callback)
+    this.traverse(branch.right, callback)
   }
 
   newBranch(session, orientation) {

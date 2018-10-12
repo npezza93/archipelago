@@ -1,7 +1,6 @@
-const Session = require('./session')
+import Session from './session'
 
-module.exports =
-class Branch {
+export default class Branch {
   constructor(branch, orientation, left, type) {
     this.branch = branch
     this.orientation = orientation
