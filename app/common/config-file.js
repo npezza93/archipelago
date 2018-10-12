@@ -1,10 +1,9 @@
-const fs = require('fs')
-const {homedir} = require('os')
-const {join} = require('path')
-const {platform} = require('electron-util')
-const Pref = require('pref')
-
-const schema = require('./schema.json')
+import fs from 'fs'
+import {homedir} from 'os'
+import {join} from 'path'
+import {platform} from 'electron-util'
+import Pref from 'pref'
+import schema from './schema'
 
 const pref = () => {
   return new Pref({

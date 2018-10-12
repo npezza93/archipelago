@@ -1,3 +1,5 @@
+/* global profileManager */
+
 import {app, BrowserWindow, Menu} from 'electron'
 import {is, platform} from 'electron-util'
 import {CompositeDisposable} from 'event-kit'
