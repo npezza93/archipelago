@@ -1,4 +1,5 @@
-import {remote} from 'electron'
+/* global profileManager */
+
 import {api, platform} from 'electron-util'
 import {spawn} from 'node-pty'
 import {Disposable} from 'event-kit'
@@ -6,17 +7,16 @@ import {Disposable} from 'event-kit'
 export default class Pty {
   constructor() {
     this.id = Math.random()
-    this.profileManager = remote.getGlobal('profileManager')
 
     this.pty = spawn(
       this.shell,
-      this.profileManager.get('shellArgs').split(','),
+      profileManager.get('shellArgs').split(','),
       this.sessionArgs
     )
   }
 
   get shell() {
-    return this.profileManager.get('shell') ||
+    return profileManager.get('shell') ||
       process.env[platform({windows: 'COMSPEC', default: 'SHELL'})]
   }
 

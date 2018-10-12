@@ -8,10 +8,12 @@ import ProfileManager from './profile-manager'
 import template from './app-menu'
 import registerVisor from './visor'
 import listeners from './listeners'
+import ptyManager from './pty-manager'
 
 const windows = []
 const subscriptions = new CompositeDisposable()
 global.profileManager = new ProfileManager(pref())
+ptyManager()
 
 if (!is.development) {
   require('update-electron-app')()

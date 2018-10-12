@@ -52,17 +52,8 @@ export default class Tab {
   }
 
   async kill() {
-    if (this.root && this.root.contructor) {
-      switch (this.root.contructor.name) {
-        case 'Branch':
-          await this.root.kill()
-          break
-        case 'Session':
-          await this.root.kill()
-          break
-        default:
-          break
-      }
+    if (this.root) {
+      await this.root.kill()
     }
   }
 

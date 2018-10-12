@@ -60,7 +60,6 @@ app.on('quit', () => subscriptions.dispose())
 app.on('will-quit', () => globalShortcut.unregisterAll())
 
 export default profileManager => {
-  create(profileManager)
   globalShortcut.register('F1', () => {
     create(profileManager)
     if (isVisorShowing) {

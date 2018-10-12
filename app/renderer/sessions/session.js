@@ -4,7 +4,6 @@ import {Terminal} from 'xterm'
 import unescape from 'unescape-js'
 import keystrokeForKeyboardEvent from 'keystroke-for-keyboard-event'
 import {xtermSettings} from '../../common/config-file'
-import Pty from './pty'
 
 Terminal.applyAddon(require('xterm/lib/addons/fit/fit'))
 
@@ -15,7 +14,7 @@ export default class Session {
     this.id = Math.random()
     this.subscriptions = new CompositeDisposable()
     this.title = ''
-    this.pty = new Pty()
+    this.pty = remote.getGlobal('ptyManager').make()
     this.type = type || 'default'
     this.xterm = new Terminal(this.settings())
 
@@ -68,12 +67,14 @@ export default class Session {
     this.subscriptions.dispose()
     this.xterm.dispose()
 
-    await this.pty.kill()
+    const pty = await this.pty
+
+    remote.getGlobal('ptyManager').kill(pty.id)
   }
 
   fit() {
     this.xterm.fit()
-    this.pty.resize(this.xterm.cols, this.xterm.rows)
+    this.pty.then(pty => pty.resize(this.xterm.cols, this.xterm.rows))
   }
 
   keybindingHandler(e) {
@@ -81,7 +82,7 @@ export default class Session {
     const mapping = this.keymaps[keystrokeForKeyboardEvent(e)]
 
     if (mapping) {
-      this.pty.write(mapping)
+      this.pty.then(pty => pty.write(mapping))
       caught = true
     }
 
@@ -131,7 +132,7 @@ export default class Session {
   }
 
   onExit(callback) {
-    return this.pty.onExit(callback)
+    return this.pty.then(pty => pty.onExit(callback))
   }
 
   onData(callback) {
@@ -145,9 +146,11 @@ export default class Session {
   bindDataListeners() {
     this.xterm.attachCustomKeyEventHandler(this.keybindingHandler.bind(this))
 
-    this.subscriptions.add(this.onData(data => this.pty.write(data)))
+    this.pty.then(pty => {
+      this.subscriptions.add(pty.onData(data => this.xterm.write(data)))
+    })
+    this.subscriptions.add(this.onData(data => this.pty.then(pty => pty.write(data))))
     this.subscriptions.add(this.onTitle(title => this.setTitle(title)))
-    this.subscriptions.add(this.pty.onData(data => this.xterm.write(data)))
     this.subscriptions.add(this.onFocus(this.fit.bind(this)))
     this.subscriptions.add(this.onFocus(this.resetBlink.bind(this)))
     this.subscriptions.add(this.onSelection(this.copySelection.bind(this)))
