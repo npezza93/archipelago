@@ -1,6 +1,6 @@
 import {isDeepStrictEqual} from 'util'
+import {platform} from 'electron-util'
 import Profile from './profile'
-import {keybindings} from './config-file'
 
 export default class ProfileManager {
   constructor(configFile) {
@@ -43,7 +43,7 @@ export default class ProfileManager {
     const id = Math.max(0, Math.max(...this.profileIds)) + 1
     const index = this.profileIds.length
 
-    this.configFile.set(`profiles.${index}`, {id, keybindings, theme: {}})
+    this.configFile.set(`profiles.${index}`, {id, keybindings: this.defaultKeybindings, theme: {}})
     this.configFile.set('activeProfileId', id)
 
     return this.find(id)
@@ -56,7 +56,7 @@ export default class ProfileManager {
 
     this.all().forEach(profile => {
       if (profile.get('keybindings') === undefined) {
-        profile.set('keybindings', keybindings)
+        profile.set('keybindings', this.defaultKeybindings)
       }
     })
   }
@@ -116,5 +116,33 @@ export default class ProfileManager {
       this.configFile.set('profiles', [])
       this.create()
     }
+  }
+
+  get defaultKeybindings() {
+    return platform({
+      linux: [
+        {keystroke: 'home', command: '\\x1bOH'},
+        {keystroke: 'end', command: '\\x1bOF'},
+        {keystroke: 'ctrl-backspace', command: '\\x1b\\x08'},
+        {keystroke: 'ctrl-del', command: '\\x1bd'},
+        {keystroke: 'ctrl-home', command: '\\x1bw'},
+        {keystroke: 'ctrl-end', command: '\\x10B'}
+      ],
+      windows: [
+        {keystroke: 'home', command: '\\x1bOH'},
+        {keystroke: 'end', command: '\\x1bOF'},
+        {keystroke: 'ctrl-backspace', command: '\\x1b\\x08'},
+        {keystroke: 'cltr-del', command: '\\x1bd'},
+        {keystroke: 'ctrl-home', command: '\\x1bw'},
+        {keystroke: 'ctrl-end', command: '\\x10B'}
+      ],
+      macos: [
+        {keystroke: 'cmd-left', command: '\\x1bOH'},
+        {keystroke: 'cmd-right', command: '\\x1bOF'},
+        {keystroke: 'alt-delete', command: '\\x1bd'},
+        {keystroke: 'cmd-backspace', command: '\\x1bw'},
+        {keystroke: 'cmd-delete', command: '\\x10B'}
+      ]
+    })
   }
 }

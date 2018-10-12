@@ -1,9 +1,8 @@
-import fs from 'fs'
-import {homedir} from 'os'
-import {join} from 'path'
-import {platform} from 'electron-util'
-import Pref from 'pref'
-import schema from './schema'
+const fs = require('fs')
+const {homedir} = require('os')
+const {join} = require('path')
+const Pref = require('pref')
+const schema = require('./schema')
 
 const pref = () => {
   return new Pref({
@@ -32,36 +31,10 @@ const pref = () => {
   })
 }
 
-const keybindings = platform({
-  linux: [
-    {keystroke: 'home', command: '\\x1bOH'},
-    {keystroke: 'end', command: '\\x1bOF'},
-    {keystroke: 'ctrl-backspace', command: '\\x1b\\x08'},
-    {keystroke: 'ctrl-del', command: '\\x1bd'},
-    {keystroke: 'ctrl-home', command: '\\x1bw'},
-    {keystroke: 'ctrl-end', command: '\\x10B'}
-  ],
-  windows: [
-    {keystroke: 'home', command: '\\x1bOH'},
-    {keystroke: 'end', command: '\\x1bOF'},
-    {keystroke: 'ctrl-backspace', command: '\\x1b\\x08'},
-    {keystroke: 'cltr-del', command: '\\x1bd'},
-    {keystroke: 'ctrl-home', command: '\\x1bw'},
-    {keystroke: 'ctrl-end', command: '\\x10B'}
-  ],
-  macos: [
-    {keystroke: 'cmd-left', command: '\\x1bOH'},
-    {keystroke: 'cmd-right', command: '\\x1bOF'},
-    {keystroke: 'alt-delete', command: '\\x1bd'},
-    {keystroke: 'cmd-backspace', command: '\\x1bw'},
-    {keystroke: 'cmd-delete', command: '\\x10B'}
-  ]
-})
-
 const allProperties = schema.properties.profiles.items.properties
 
 const xtermSettings = Object.keys(allProperties).filter(property => {
   return allProperties[property].scope === 'xterm'
 })
 
-module.exports = {pref, xtermSettings, keybindings}
+module.exports = {pref, xtermSettings}

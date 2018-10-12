@@ -1,5 +1,4 @@
-module.exports =
-class Profile {
+export default class Profile {
   constructor(attributes, configFile) {
     this.attributes = attributes
     this.configFile = configFile
