@@ -70,7 +70,7 @@ export default class App extends React.Component {
       styles.setProperty(styleProperties[property], profileManager.get(property))
       this.subscriptions.add(
         profileManager.onDidChange(property, newValue => {
-          styles.setProperty(property, newValue)
+          styles.setProperty(styleProperties[property], newValue)
         })
       )
     }
