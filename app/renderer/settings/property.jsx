@@ -1,29 +1,37 @@
+import {remote} from 'electron'
 import React from 'react'
-import ipc from 'electron-better-ipc'
+import {CompositeDisposable} from 'event-kit'
 import allFields from './all-fields.jsx'
 
 export default class Property extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      [props.property]: ipc.sendSync('get-preferences-sync', props.property)
-    }
-
-    this.bindListener()
+    this.subscriptions = new CompositeDisposable()
+    this.profileManager = remote.getGlobal('profileManager')
+    this.state = {value: this.profileManager.get(props.property)}
+    this.profileManager.onDidChange(this.props.property, newValue => {
+      if (this.state.value !== newValue) {
+        this.setState({value: newValue})
+      }
+    })
   }
 
   render() {
     return allFields[this.fieldType()].call(
       this,
       this.props.property,
-      this.state[this.props.property],
+      this.state.value,
       this.props.schema,
       newValue => {
-        this.setState({[this.props.property]: newValue})
-        ipc.callMain('set-pref', {prefName: this.props.property, prefValue: newValue})
+        this.setState({value: newValue})
+        this.profileManager.set(this.props.property, newValue)
       }
     )
+  }
+
+  componentWillUnmount() {
+    this.subscriptions.dispose()
   }
 
   fieldType() {
@@ -34,13 +42,5 @@ export default class Property extends React.Component {
     }
 
     return type
-  }
-
-  bindListener() {
-    // this.profileManager.onDidChange(this.props.property, newValue => {
-    //   if (this.state[this.props.property] !== newValue) {
-    //     return this.setState({[this.props.property]: newValue})
-    //   }
-    // })
   }
 }
