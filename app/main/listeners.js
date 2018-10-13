@@ -2,10 +2,6 @@ import {Menu} from 'electron'
 import ipc from 'electron-better-ipc'
 
 export default function (profileManager) {
-  ipc.answerRenderer('get-preferences-async', preferences => {
-    return getPreferences(profileManager, preferences)
-  })
-
   ipc.answerRenderer('create-profile', () => {
     const profile = profileManager.create()
 
@@ -32,14 +28,12 @@ export default function (profileManager) {
     profileManager.find(id).set(prefName, prefValue)
   })
 
-  ipc.answerRenderer('set-active-profile', activeProfileId => {
-    profileManager.activeProfileId = activeProfileId
+  ipc.answerRenderer('set-pref', ({prefName, prefValue}) => {
+    profileManager.set(prefName, prefValue)
   })
 
-  ipc.answerRenderer('open-hamburger-menu', args => Menu.getApplicationMenu().popup(args))
-
-  ipc.on('get-preferences-sync', (event, preferences) => {
-    event.returnValue = getPreferences(profileManager, preferences)
+  ipc.answerRenderer('set-active-profile', activeProfileId => {
+    profileManager.activeProfileId = activeProfileId
   })
 
   ipc.on('activeProfileId', event => {
@@ -49,19 +43,6 @@ export default function (profileManager) {
   ipc.on('profiles', event => {
     event.returnValue = profileManager.all()
   })
-}
 
-const getPreferences = (profileManager, preferences) => {
-  switch (preferences.constructor.name) {
-    case 'String':
-      return profileManager.get(preferences)
-    case 'Array':
-      return preferences.reduce((foundPreferences, setting) => {
-        foundPreferences[setting] = profileManager.get(setting)
-
-        return foundPreferences
-      }, {})
-    default:
-      return null
-  }
+  ipc.answerRenderer('open-hamburger-menu', args => Menu.getApplicationMenu().popup(args))
 }
