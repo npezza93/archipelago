@@ -3,6 +3,7 @@
 import {remote} from 'electron'
 import ipc from 'electron-better-ipc'
 import React from 'react'
+import {CompositeDisposable} from 'event-kit'
 import Tab from '../sessions/tab'
 import TrafficLights from '../traffic-lights.jsx'
 import PaneList from './pane-list.jsx'
@@ -17,6 +18,7 @@ export default class App extends React.Component {
 
     const initialTab = new Tab('default')
 
+    this.subscriptions = new CompositeDisposable()
     this.state = {tabs: [initialTab], currentTabId: initialTab.id}
 
     ipc.answerMain('split', direction => this.split(direction))
@@ -45,6 +47,7 @@ export default class App extends React.Component {
 
   componentDidMount() {
     const styles = document.documentElement.style
+    const profileManager = remote.getGlobal('profileManager')
     const styleProperties = {
       fontFamily: '--font-family',
       windowBackground: '--background-color',
@@ -55,19 +58,18 @@ export default class App extends React.Component {
       'theme.selection': '--selection-color'
     }
 
-    const preferences = ipc.sendSync('get-preferences-sync', Object.keys(styleProperties))
-    Object.keys(preferences).forEach(preference => {
-      styles.setProperty(styleProperties[preference], preferences[preference])
-    })
-
-    ipc.answerMain('preference-change', (preference, newValue) => {
-      if (styleProperties[preference]) {
-        styles.setProperty(styleProperties[preference], newValue)
-      }
-    })
+    for (const property in styleProperties) {
+      styles.setProperty(styleProperties[property], profileManager.get(property))
+      this.subscriptions.add(
+        profileManager.onDidChange(property, newValue => {
+          styles.setProperty(property, newValue)
+        })
+      )
+    }
   }
 
   componentWillUnmount() {
+    this.subscriptions.dispose()
     this.state.tabs.map(tab => tab.kill())
   }
 

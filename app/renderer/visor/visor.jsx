@@ -1,5 +1,7 @@
 /* global document, window */
 
+import {remote} from 'electron'
+import {CompositeDisposable} from 'event-kit'
 import ipc from 'electron-better-ipc'
 import React from 'react'
 import Tab from '../sessions/tab'
@@ -12,6 +14,7 @@ export default class Visor extends React.Component {
     super(props)
 
     this.state = {tab: new Tab('visor')}
+    this.subscriptions = new CompositeDisposable()
 
     ipc.answerMain('split', direction => this.split(direction))
   }
@@ -28,6 +31,7 @@ export default class Visor extends React.Component {
 
   componentDidMount() {
     const styles = document.documentElement.style
+    const profileManager = remote.getGlobal('profileManager')
     const styleProperties = {
       fontFamily: '--font-family',
       'visor.windowBackground': '--background-color',
@@ -36,19 +40,18 @@ export default class Visor extends React.Component {
       'theme.selection': '--selection-color'
     }
 
-    const preferences = ipc.sendSync('get-preferences-sync', Object.keys(styleProperties))
-    Object.keys(preferences).forEach(preference => {
-      styles.setProperty(styleProperties[preference], preferences[preference])
-    })
-
-    ipc.answerMain('preference-change', (preference, newValue) => {
-      if (styleProperties[preference]) {
-        styles.setProperty(styleProperties[preference], newValue)
-      }
-    })
+    for (const property in styleProperties) {
+      styles.setProperty(styleProperties[property], profileManager.get(property))
+      this.subscriptions.add(
+        profileManager.onDidChange(property, newValue => {
+          styles.setProperty(property, newValue)
+        })
+      )
+    }
   }
 
   componentWillUnmount() {
+    this.subscriptions.dispose()
     this.state.tab.kill()
   }
 
