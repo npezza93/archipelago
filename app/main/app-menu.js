@@ -150,7 +150,7 @@ const profilesMenu = profileManager => {
           }
         }
 
-        if (profileManager.activeProfileId === profile.id) {
+        if (profileManager.activeProfile().id === profile.id) {
           profileItem.checked = true
         }
         return profileItem
