@@ -3,6 +3,7 @@
 import {app, BrowserWindow, Menu} from 'electron'
 import {is, platform} from 'electron-util'
 import {CompositeDisposable} from 'event-kit'
+import ipc from 'electron-better-ipc'
 import {pref} from '../common/config-file'
 import ProfileManager from './profile-manager'
 import template from './app-menu'
@@ -49,6 +50,12 @@ const createWindow = () => {
     win.focus()
   })
 
+  win.once('close', () => {
+    ipc.callRenderer(win, 'close').then(() => {
+      win.hide()
+      win.close()
+    })
+  })
   windows.push(win)
 }
 

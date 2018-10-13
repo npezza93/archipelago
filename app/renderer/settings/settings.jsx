@@ -3,6 +3,7 @@
 import {remote} from 'electron'
 import ipc from 'electron-better-ipc'
 import React from 'react'
+import {CompositeDisposable} from 'event-kit'
 import TrafficLights from '../traffic-lights.jsx'
 import HamburgerMenu from './hamburger-menu.jsx'
 import Profiles from './profiles.jsx'
@@ -13,11 +14,19 @@ export default class Settings extends React.Component {
   constructor(props) {
     super(props)
 
+    this.subscriptions = new CompositeDisposable()
     this.state = {isDarkMode: remote.systemPreferences.isDarkMode()}
     remote.systemPreferences.subscribeNotification(
       'AppleInterfaceThemeChangedNotification',
       () => this.setState({isDarkMode: remote.systemPreferences.isDarkMode()}),
     )
+
+    ipc.answerMain('close', () => {
+      return new Promise(resolve => {
+        this.subscriptions.dispose()
+        resolve()
+      })
+    })
   }
 
   render() {
@@ -26,7 +35,7 @@ export default class Settings extends React.Component {
       <div className="form-container">
         <HamburgerMenu toggleProfilesDrawer={this.toggleProfilesDrawer.bind(this)}/>
         <Profiles showProfiles={this.state.showProfiles} />
-        <div className="options-container"><PropertiesPane /></div>
+        <div className="options-container"><PropertiesPane addSubscription={this.addSubscription.bind(this)} /></div>
       </div>
     </div>
   }
@@ -35,8 +44,16 @@ export default class Settings extends React.Component {
     ipc.answerMain('close-current-tab', () => window.close())
   }
 
+  componentWillUnmount() {
+    this.subscriptions.dispose()
+  }
+
   toggleProfilesDrawer(active) {
     this.setState({showProfiles: active})
+  }
+
+  addSubscription(listener) {
+    this.subscriptions.add(listener)
   }
 
   get theme() {

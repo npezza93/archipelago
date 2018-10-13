@@ -24,6 +24,14 @@ export default class App extends React.Component {
     ipc.answerMain('split', direction => this.split(direction))
     ipc.answerMain('new-tab', this.addTab.bind(this))
     ipc.answerMain('close-current-tab', () => this.removeTab(this.state.currentTabId))
+    ipc.answerMain('close', async () => {
+      this.subscriptions.dispose()
+      const killers = []
+      for (const tab of this.state.tabs) {
+        killers.push(tab.kill())
+      }
+      await Promise.all(killers)
+    })
   }
 
   render() {

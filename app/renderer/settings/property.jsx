@@ -1,20 +1,20 @@
 import {remote} from 'electron'
 import React from 'react'
-import {CompositeDisposable} from 'event-kit'
 import allFields from './all-fields.jsx'
 
 export default class Property extends React.Component {
   constructor(props) {
     super(props)
 
-    this.subscriptions = new CompositeDisposable()
     this.profileManager = remote.getGlobal('profileManager')
     this.state = {value: this.profileManager.get(props.property)}
-    this.profileManager.onDidChange(this.props.property, newValue => {
-      if (this.state.value !== newValue) {
-        this.setState({value: newValue})
-      }
-    })
+    this.props.addSubscription(
+      this.profileManager.onDidChange(this.props.property, newValue => {
+        if (this.state.value !== newValue) {
+          this.setState({value: newValue})
+        }
+      })
+    )
   }
 
   render() {
@@ -28,10 +28,6 @@ export default class Property extends React.Component {
         this.profileManager.set(this.props.property, newValue)
       }
     )
-  }
-
-  componentWillUnmount() {
-    this.subscriptions.dispose()
   }
 
   fieldType() {

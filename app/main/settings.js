@@ -1,5 +1,6 @@
 import {BrowserWindow, systemPreferences} from 'electron'
 import {is} from 'electron-util'
+import ipc from 'electron-better-ipc'
 
 let settingsWindow = null
 
@@ -20,6 +21,12 @@ export default () => {
     } else {
       settingsWindow.loadURL(`file:///${__dirname}/index.html#settings`)
     }
+    settingsWindow.once('close', () => {
+      ipc.callRenderer(settingsWindow, 'close').then(() => {
+        settingsWindow.hide()
+        settingsWindow.destroy()
+      })
+    })
 
     settingsWindow.once('ready-to-show', () => settingsWindow.show())
   } else {

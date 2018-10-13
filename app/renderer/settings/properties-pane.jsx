@@ -23,6 +23,7 @@ export default class PropertiesPane extends React.Component {
       <Header headings={this.state.headings} />
       {this.headings.map(scope =>
         <PropertiesSection
+          addSubscription={this.props.addSubscription}
           scope={scope}
           key={scope}
           properties={this.scopes()[scope]}
