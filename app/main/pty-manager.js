@@ -34,5 +34,5 @@ export default () => {
     }
   }
 
-  app.on('quit', () => Object.keys(ptys).forEach(kill))
+  app.on('before-quit', () => Object.keys(ptys).forEach(kill))
 }
