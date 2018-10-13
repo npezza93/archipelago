@@ -7,6 +7,7 @@ const schema = require('./schema')
 const pref = () => {
   return new Pref({
     schema,
+    watch: false,
     migrations: {
       '3.0.0': store => {
         const filePath = join(homedir(), '.archipelago.json')
