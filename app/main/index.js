@@ -10,16 +10,15 @@ import template from './app-menu'
 import registerVisor from './visor'
 import ptyManager from './pty-manager'
 
-const windows = []
-const subscriptions = new CompositeDisposable()
-global.profileManager = new ProfileManager(pref())
-ptyManager()
-
 if (!is.development) {
   require('update-electron-app')()
 }
 
+const windows = []
+const subscriptions = new CompositeDisposable()
+global.profileManager = new ProfileManager(pref())
 profileManager.validate()
+ptyManager()
 
 const resetApplicationMenu = () =>
   Menu.setApplicationMenu(
@@ -48,7 +47,8 @@ const createWindow = () => {
     win.focus()
   })
 
-  win.once('close', () => {
+  win.once('close', e => {
+    e.preventDefault()
     ipc.callRenderer(win, 'close').then(() => {
       win.hide()
       win.close()
@@ -75,6 +75,12 @@ app.on('window-all-closed', () => {
 })
 
 app.on('quit', () => subscriptions.dispose())
+
+app.on('before-quit', () => {
+  windows.forEach(win => {
+    win.removeAllListeners('close')
+  })
+})
 
 app.on('activate', () => {
   let windowCount = 0

@@ -21,7 +21,8 @@ export default () => {
     } else {
       settingsWindow.loadURL(`file:///${__dirname}/index.html#settings`)
     }
-    settingsWindow.once('close', () => {
+    settingsWindow.once('close', e => {
+      e.preventDefault()
       ipc.callRenderer(settingsWindow, 'close').then(() => {
         settingsWindow.hide()
         settingsWindow.destroy()
