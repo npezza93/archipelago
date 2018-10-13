@@ -9,7 +9,7 @@
     "start": "./node_modules/.bin/electron-webpack dev",
     "compile": "./node_modules/.bin/electron-webpack",
     "lint": "./node_modules/.bin/xo --ignore app/renderer/index.js",
-    "pack": " ./node_modules/.bin/electron-builder --dir",
+    "pack": "./node_modules/.bin/electron-builder --dir",
     "dist": "yarn compile &&  ./node_modules/.bin/electron-builder --publish onTagOrDraft"
   },
   "xo": {
@@ -93,6 +93,9 @@
     "productName": "Archipelago",
     "mac": {
       "category": "public.app-category.developer-tools",
+      "extendInfo": {
+        "NSRequiresAquaSystemAppearance": false
+      },
       "target": [
         {
           "target": "dmg",
