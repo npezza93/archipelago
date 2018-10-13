@@ -1,18 +1,17 @@
 import React from 'react'
-import ipc from 'electron-better-ipc'
 
 export default class Profile extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = {editMode: false, name: this.props.profile.attributes.name}
+    this.state = {editMode: false, name: this.props.profile.name}
   }
 
   render() {
     return (
       <archipelago-profile class={this.className}
         onDoubleClick={() => this.setState({editMode: true})}
-        onClick={() => this.props.setActiveProfile(this.props.profile.attributes.id)}>
+        onClick={() => this.props.setActiveProfile(this.props.profile)}>
         {this.textOrInput()}
         {this.removeProfile()}
       </archipelago-profile>
@@ -21,7 +20,7 @@ export default class Profile extends React.Component {
 
   get className() {
     return (
-      this.props.activeProfileId === this.props.profile.attributes.id && 'active'
+      this.props.activeProfile.id === this.props.profile.id && 'active'
     ) || ''
   }
 
@@ -37,14 +36,12 @@ export default class Profile extends React.Component {
   }
 
   handleInputChange(event) {
-    const data = {
-      id: this.props.profile.attributes.id,
-      prefName: 'name',
-      prefValue: event.target.value
-    }
+    this.setState({name: event.target.value})
 
-    this.setState({name: data.prefValue})
-    ipc.callMain('set-profile-pref', data)
+    return new Promise(resolve => {
+      this.props.profile.name = event.target.value
+      resolve()
+    })
   }
 
   removeProfile() {
@@ -57,6 +54,6 @@ export default class Profile extends React.Component {
 
   handleRemoveProfile(event) {
     event.stopPropagation()
-    this.props.removeProfile(this.props.profile.attributes.id)
+    this.props.removeProfile(this.props.profile)
   }
 }

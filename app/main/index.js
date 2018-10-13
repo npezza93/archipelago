@@ -8,7 +8,6 @@ import {pref} from '../common/config-file'
 import ProfileManager from './profile-manager'
 import template from './app-menu'
 import registerVisor from './visor'
-import listeners from './listeners'
 import ptyManager from './pty-manager'
 
 const windows = []
@@ -20,7 +19,6 @@ if (!is.development) {
   require('update-electron-app')()
 }
 
-listeners(profileManager)
 profileManager.validate()
 
 const resetApplicationMenu = () =>
@@ -103,3 +101,4 @@ subscriptions.add(
 
 subscriptions.add(profileManager.onDidChange('singleTabMode', resetApplicationMenu))
 subscriptions.add(profileManager.onActiveProfileChange(resetApplicationMenu))
+ipc.answerRenderer('open-hamburger-menu', args => Menu.getApplicationMenu().popup(args))
