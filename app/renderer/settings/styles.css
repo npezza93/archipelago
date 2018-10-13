@@ -2,6 +2,20 @@
   font-family: AdamPro;
   src: url("../fonts/adam_pro.otf") format("opentype");
 }
+#settings {
+  --color: #424242;
+  --accent-color: #9E9E9E;
+  --background-color: #F5F5F5;
+  --opaque-background: rgba(245, 245, 245, 0.2);
+  --opaque-color: rgba(66, 66, 66, 0.5);
+}
+#settings[data-theme^="dark"] {
+  --color: #F5F5F5;
+  --accent-color: #BDBDBD;
+  --background-color: #393736;
+  --opaque-background: rgba(57, 55, 54, 0.2);
+  --opaque-color: rgba(238, 238, 238, 0.5);
+}
 
 select-field select {
   width: 100%;
@@ -11,39 +25,41 @@ select-field select {
   font-weight: 300;
   z-index: 1;
   padding: 20px 26px 4px 0;
-  -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  line-height: 1.75rem;
-  letter-spacing: .00937em;
-  text-decoration: inherit;
-  text-transform: inherit;
   width: 100%;
   border: none;
-  border-bottom: 1px solid rgba(0,0,0,0.4);
+  border-bottom: 1px solid var(--accent-color);
   border-radius: 0;
   outline: none;
   background-color: transparent;
   white-space: nowrap;
   cursor: pointer;
   -webkit-appearance: none;
+  color: var(--color);
 }
 select-field {
   position: relative;
   margin-bottom: 15px;
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='10' height='5' viewBox='7 10 10 5' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%230' fill-rule='evenodd' opacity='.54' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
   box-sizing: border-box;
   height: 52px;
-  background-repeat: no-repeat;
-  background-position: right 8px bottom 12px;
+}
+select-field svg {
+  position: absolute;
+  right: 8px;
+  bottom: 12px;
+  content: '\25BE';
+}
+select-field svg path {
+  fill: var(--accent-color);
 }
 select-field label {
-  color: rgba(0,0,0,0.4);
+  color: var(--accent-color);
   font-size: 15px;
   position: absolute;
   left: 0;
   bottom: 34px;
   transition: all 250ms ease-in-out;
-  z-index: -1;
+  z-index: 1;
 }
 
 switch-field {
@@ -55,8 +71,11 @@ switch-field {
   font-weight: 300;
   position: relative;
   margin-bottom: 15px;
+  color: var(--color);
 }
-switch-field input {display:none;}
+switch-field input {
+  display:none;
+}
 switch-field label {
   display: inline-block;
   width: 50px;
@@ -69,14 +88,13 @@ switch-field .slider {
   left: 0;
   right: 0;
   bottom: 0;
-  border-bottom: 1px solid rgba(0,0,0,0.2);
+  border-bottom: 1px solid var(--accent-color);
   transition: .4s;
   border-radius: 30px;
   height: 1px;
   width: 50px;
   position: absolute;
 }
-
 switch-field .slider:before {
   position: absolute;
   content: "";
@@ -84,7 +102,7 @@ switch-field .slider:before {
   width: 20px;
   left: 0px;
   top: -10px;
-  background-color: white;
+  background-color: var(--background-color);
   transition: .4s;
   border-radius: 30px;
   border: 1px solid #FF1744;
@@ -100,19 +118,20 @@ input-field {
   margin-bottom: 15px;
 }
 input-field label {
-  color: rgba(0,0,0,0.4);
+  color: var(--accent-color);
   font-size: 15px;
   position: absolute;
   left: 0;
   bottom: 34px;
   transition: all 250ms ease-in-out;
-  z-index: -1;
+  z-index: 1;
 }
 input[type='text'] {
   width: 100%;
+  color: var(--color);
   margin-top: 5px;
   border: none;
-  border-bottom: 1px solid rgba(0,0,0,0.4);
+  border-bottom: 1px solid var(--accent-color);
   padding: 0px;
   padding-bottom: 5px;
   outline: none;
@@ -131,7 +150,7 @@ input-field input[type='text'][value=''] + label {
 .input-border:after {
     display: block;
     content: '';
-    border-bottom: solid 1px rgba(0,0,0,0.4);
+    border-bottom: solid 1px var(--accent-color);
     transform: scaleX(0);
     transition: transform 250ms ease-in-out;
     transform-origin: 0% 50%;
@@ -144,31 +163,33 @@ input:focus + label + .input-border:after {
 ::-webkit-scrollbar {
   width: 10px;
 }
-::-webkit-scrollbar-thumb {
-  background: #666;
-  border: 3px solid #FFF;
-}
-::-webkit-scrollbar,
-::-webkit-scrollbar-thumb {
+::-webkit-scrollbar, ::-webkit-scrollbar-thumb {
   border-radius: 5px;
 }
+::-webkit-scrollbar-track {
+  background: var(--background-color);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color);
+  border: 3px solid var(--background-color);
+}
 ::-webkit-scrollbar-thumb:active {
-  background: #666;
-  border: 0 solid #FFF;
+  background: var(--color);
+  border: 0 solid var(--background-color);
   border-radius: 0;
 }
 
-html,
-body {
-  background-color: #FFF;
-  color: #424242;
+html, body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   text-rendering: geometricPrecision;
   -webkit-font-feature-settings: "liga" off, "calt" off;
   -webkit-font-smoothing: subpixel-antialiased;
   margin: 0;
 }
-
+#settings .options-container {
+  background-color: var(--background-color);
+  color: #424242;
+}
 #titlebar {
   height: 40px;
   width: 100%;
@@ -189,7 +210,6 @@ body {
 }
 
 /* Profiles */
-
 archipelago-profiles {
   height: 100vh;
   width: 275px;
@@ -209,18 +229,14 @@ archipelago-profiles ::-webkit-scrollbar-thumb {
   background: #666;
   border: 3px solid #ECEEF2;
 }
-
-archipelago-profiles ::-webkit-scrollbar,
-archipelago-profiles ::-webkit-scrollbar-thumb {
+archipelago-profiles ::-webkit-scrollbar, archipelago-profiles ::-webkit-scrollbar-thumb {
   border-radius: 5px;
 }
-
 archipelago-profiles ::-webkit-scrollbar-thumb:active {
   background: #666;
   border: 0 solid #ECEEF2;
   border-radius: 0;
 }
-
 archipelago-profiles .profile-header {
   font-family: AdamPro;
   letter-spacing: 1px;
@@ -228,14 +244,12 @@ archipelago-profiles .profile-header {
   font-size: 14px;
   padding: 80px 36px 24px 36px;
 }
-
 archipelago-profiles .profile-list {
   flex: 1;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
 }
-
 archipelago-profiles .profile-list archipelago-profile {
   padding: 16px 36px 16px 36px;
   cursor: pointer;
@@ -246,7 +260,6 @@ archipelago-profiles .profile-list archipelago-profile {
   position: relative;
   z-index: 15;
 }
-
 archipelago-profiles .profile-list archipelago-profile .profile-remove {
   position: absolute;
   left: 15px;
@@ -257,17 +270,13 @@ archipelago-profiles .profile-list archipelago-profile .profile-remove {
   cursor: pointer;
   opacity: 0;
 }
-
 archipelago-profiles .profile-list archipelago-profile:hover .profile-remove {
   opacity: 1;
   visibility: visible;
 }
-
-archipelago-profiles .profile-list archipelago-profile.active,
-archipelago-profiles .profile-list archipelago-profile:hover {
+archipelago-profiles .profile-list archipelago-profile.active, archipelago-profiles .profile-list archipelago-profile:hover {
   background: rgba(0, 0, 0, .16);
 }
-
 archipelago-profiles .profile-list archipelago-profile input {
   border: 0;
   background: transparent;
@@ -277,7 +286,6 @@ archipelago-profiles .profile-list archipelago-profile input {
   padding: 0;
   margin-top: 0;
 }
-
 archipelago-profiles .new-profile {
   height: 55px;
   display: flex;
@@ -290,7 +298,6 @@ archipelago-profiles .new-profile {
   font-family: AdamPro;
   letter-spacing: 2px;
 }
-
 archipelago-profiles .new-profile:hover {
   color: #424242;
 }
@@ -306,6 +313,7 @@ archipelago-profiles .new-profile:hover {
   width: calc(100% - 275px);
   flex: 1;
   transition: left .5s ease-in-out, width .5s ease-in-out;
+  overflow-y: scroll;
 }
 
 archipelago-properties-pane {
@@ -318,7 +326,7 @@ archipelago-properties-pane archipelago-header {
   height: 125px;
   position: fixed;
   width: calc(100% - 362px);
-  background-color: rgba(255, 255, 255, .2);
+  background-color: var(--opaque-background);
   z-index: 2;
   font-family: AdamPro;
   letter-spacing: 2px;
@@ -338,7 +346,7 @@ archipelago-properties-pane archipelago-header::before {
 archipelago-properties-pane archipelago-header div,
 archipelago-properties-pane archipelago-header div[position = "0"] {
   font-size: 32px;
-  color: #424242;
+  color: var(--color);
   position: absolute;
   top: 60px;
   transition: all .3s ease-in-out;
@@ -489,7 +497,7 @@ archipelago-properties-pane .create-array-element:hover {
 
 #hamburger div {
   height: 2px;
-  background: #212121;
+  background: var(--color);
   border-radius: 1px;
 }
 
@@ -499,14 +507,13 @@ archipelago-properties-pane .create-array-element:hover {
   left: 0;
   bottom: 0;
   right: 0;
-  background: rgba(0, 0, 0, .5);
+  background: var(--opaque-color);
   z-index: 3;
   visibility: hidden;
   opacity: 0;
   transition: opacity .5s ease-in-out, visibility .5s ease-in-out;
   width: 100vw;
 }
-
 #backdrop.active {
   visibility: visible;
   opacity: 1;
@@ -545,30 +552,25 @@ archipelago-properties-pane .create-array-element:hover {
 }
 
 /* Traffic Lights */
-
 minimize-button {
   top: 46px !important;
   right: 128px !important;
   z-index: 100 !important;
 }
-
 minimize-button div {
   height: 2px !important;
 }
-
 maximize-button {
   top: 46px !important;
   right: 80px !important;
   z-index: 100 !important;
   border: 2px solid #000 !important;
 }
-
 close-button {
   top: 46px !important;
   right: 32px !important;
   z-index: 100 !important;
 }
-
 close-button div {
   height: 2px !important;
 }

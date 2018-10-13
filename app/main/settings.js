@@ -1,4 +1,4 @@
-import {BrowserWindow} from 'electron'
+import {BrowserWindow, systemPreferences} from 'electron'
 import {is} from 'electron-util'
 
 let settingsWindow = null
@@ -11,7 +11,7 @@ export default () => {
       show: false,
       titleBarStyle: 'hiddenInset',
       frame: is.macos,
-      backgroundColor: '#fff',
+      backgroundColor: systemPreferences.isDarkMode() ? '#393736' : '#F5F5F5',
       webPreferences: {experimentalFeatures: true}
     })
 

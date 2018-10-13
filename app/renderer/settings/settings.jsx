@@ -1,5 +1,6 @@
 /* global window */
 
+import {remote} from 'electron'
 import ipc from 'electron-better-ipc'
 import React from 'react'
 import TrafficLights from '../traffic-lights.jsx'
@@ -12,11 +13,15 @@ export default class Settings extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = {}
+    this.state = {isDarkMode: remote.systemPreferences.isDarkMode()}
+    remote.systemPreferences.subscribeNotification(
+      'AppleInterfaceThemeChangedNotification',
+      () => this.setState({isDarkMode: remote.systemPreferences.isDarkMode()}),
+    )
   }
 
   render() {
-    return <div>
+    return <div id="settings" data-theme={this.theme}>
       <div id="titlebar"><TrafficLights /></div>
       <div className="form-container">
         <HamburgerMenu toggleProfilesDrawer={this.toggleProfilesDrawer.bind(this)}/>
@@ -32,5 +37,13 @@ export default class Settings extends React.Component {
 
   toggleProfilesDrawer(active) {
     this.setState({showProfiles: active})
+  }
+
+  get theme() {
+    if (this.state.isDarkMode) {
+      return 'dark'
+    }
+
+    return 'light'
   }
 }

@@ -7,7 +7,7 @@
   --background-color: #F5F5F5;
 }
 #about[data-theme^="dark"] {
-  --color: #eee;
+  --color: #F5F5F5;
   --background-color: #393736;
 }
 
