@@ -8,14 +8,17 @@ matrix:
         - ELECTRON_CACHE=$HOME/.cache/electron
         - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
     - os: linux
-      services: docker
-      language: generic
-      env:
-        - YARN_COMMAND=build
-      apt:
-        packages:
-          - libx11-dev
-          - libxkbfile-dev
+      language: node_js
+      node_js: "10"
+      addons:
+        apt:
+          packages:
+            - libx11-dev
+            - libxkbfile-dev
+            - rpm
+    - os: windows
+      language: node_js
+      node_js: "10"
     - os: linux
       language: node_js
       node_js: "10"
@@ -44,13 +47,6 @@ cache:
   - $HOME/.cache/electron-builder
 
 script: ./script/travis.sh
-
-before_cache:
-  - rm -rf $HOME/.cache/electron-builder/wine
-
-branches:
-  except:
-    - "/^v\\d+\\.\\d+\\.\\d+$/"
 
 notifications:
   email: false

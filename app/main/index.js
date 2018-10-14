@@ -1,24 +1,24 @@
-require('./ptys')()
+/* global profileManager */
 
-const {app, BrowserWindow, Menu} = require('electron')
-const {is, platform} = require('electron-util')
-const ipc = require('electron-better-ipc')
-const {CompositeDisposable} = require('event-kit')
-
-const {pref} = require('../configuration/config-file')
-const ProfileManager = require('../configuration/profile-manager')
-const {template} = require('./app-menu')
-const visor = require('./visor')
-
-const windows = []
-const subscriptions = new CompositeDisposable()
-const profileManager = new ProfileManager(pref())
+import {app, BrowserWindow, Menu} from 'electron'
+import {is, platform} from 'electron-util'
+import {CompositeDisposable} from 'event-kit'
+import ipc from 'electron-better-ipc'
+import {pref} from '../common/config-file'
+import ProfileManager from './profile-manager'
+import template from './app-menu'
+import registerVisor from './visor'
+import ptyManager from './pty-manager'
 
 if (!is.development) {
   require('update-electron-app')()
 }
 
+const windows = []
+const subscriptions = new CompositeDisposable()
+global.profileManager = new ProfileManager(pref())
 profileManager.validate()
+ptyManager()
 
 const resetApplicationMenu = () =>
   Menu.setApplicationMenu(
@@ -29,18 +29,36 @@ const createWindow = () => {
   const win = new BrowserWindow({
     width: 1000,
     height: 600,
+    show: false,
     titleBarStyle: platform({macos: 'hiddenInset', default: 'hidden'}),
     frame: is.macos,
+    backgroundColor: profileManager.get('windowBackground'),
     vibrancy: profileManager.get('vibrancy')
   })
 
-  win.loadFile('app/renderer/index.html')
-  win.focus()
+  if (is.development) {
+    win.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`)
+  } else {
+    win.loadURL(`file:///${__dirname}/index.html`)
+  }
+
+  win.once('ready-to-show', () => {
+    win.show()
+    win.focus()
+  })
+
+  win.once('close', e => {
+    e.preventDefault()
+    ipc.callRenderer(win, 'close').then(() => {
+      win.hide()
+      win.close()
+    })
+  })
   windows.push(win)
 }
 
 app.on('ready', () => {
-  visor.register()
+  registerVisor(profileManager)
   createWindow()
   resetApplicationMenu()
   if (is.macos) {
@@ -57,6 +75,12 @@ app.on('window-all-closed', () => {
 })
 
 app.on('quit', () => subscriptions.dispose())
+
+app.on('before-quit', () => {
+  windows.forEach(win => {
+    win.removeAllListeners('close')
+  })
+})
 
 app.on('activate', () => {
   let windowCount = 0
@@ -83,5 +107,4 @@ subscriptions.add(
 
 subscriptions.add(profileManager.onDidChange('singleTabMode', resetApplicationMenu))
 subscriptions.add(profileManager.onActiveProfileChange(resetApplicationMenu))
-
 ipc.answerRenderer('open-hamburger-menu', args => Menu.getApplicationMenu().popup(args))

@@ -1,11 +1,7 @@
-const {app, BrowserWindow, globalShortcut} = require('electron')
-const electron = require('electron')
-const {CompositeDisposable} = require('event-kit')
-const {pref} = require('../configuration/config-file')
-const ProfileManager = require('../configuration/profile-manager')
+import electron, {app, BrowserWindow, globalShortcut} from 'electron'
+import {CompositeDisposable} from 'event-kit'
+import {is} from 'electron-util'
 
-const preferences = pref()
-const profileManager = new ProfileManager(preferences)
 const subscriptions = new CompositeDisposable()
 
 let visorWindow = null
@@ -26,7 +22,7 @@ const showVisor = () => {
   visorWindow.setPosition(0, 22, true)
 }
 
-const create = () => {
+const create = profileManager => {
   const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize
 
   if (visorWindow === null || visorWindow.isDestroyed()) {
@@ -42,7 +38,11 @@ const create = () => {
       vibrancy: profileManager.get('visor.vibrancy')
     })
 
-    visorWindow.loadFile('app/visor/index.html')
+    if (is.development) {
+      visorWindow.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}#visor`)
+    } else {
+      visorWindow.loadURL(`file:///${__dirname}/index.html#visor`)
+    }
 
     visorWindow.on('blur', hideVisor)
     visorWindow.on('closed', () => subscriptions.dispose())
@@ -56,23 +56,16 @@ const create = () => {
   }
 }
 
-app.on('quit', () => {
-  subscriptions.dispose()
-  preferences.dispose()
-})
-
+app.on('quit', () => subscriptions.dispose())
 app.on('will-quit', () => globalShortcut.unregisterAll())
 
-module.exports = {
-  register() {
-    create()
-    globalShortcut.register('F1', () => {
-      create()
-      if (isVisorShowing) {
-        hideVisor()
-      } else {
-        showVisor()
-      }
-    })
-  }
+export default profileManager => {
+  globalShortcut.register('F1', () => {
+    create(profileManager)
+    if (isVisorShowing) {
+      hideVisor()
+    } else {
+      showVisor()
+    }
+  })
 }

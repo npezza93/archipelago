@@ -1,9 +1,7 @@
 <p align="center">
   <a href="https://github.com/npezza93/archipelago">
-    <img src="https://github.com/npezza93/archipelago/blob/master/.github/logo.png" width="150">
+    <img src="https://raw.githubusercontent.com/npezza93/archipelago/master/.github/logo.png" width="350">
   </a>
-
-  <h3 align="center">Archipelago</h3>
 
   <p align="center">
     Archipelago is an open-source terminal emulator built on web technology.
@@ -23,7 +21,6 @@ Hyper was by far the coolest, best looking, and extensible terminal emulator I h
 ## Download
 
 - [macOS](https://archipelago-terminal.herokuapp.com/download/osx)
-- [Windows](https://archipelago-terminal.herokuapp.com/download/win)
 - [Debian](https://archipelago-terminal.herokuapp.com/download/linux_deb_64)
 - [Fedora](https://archipelago-terminal.herokuapp.com/download/linux_rpm_64)
 - [Other Linux distros](https://archipelago-terminal.herokuapp.com/download/64)
@@ -34,7 +31,6 @@ Archipelago is compatible with:
 
 - macOS
 - Linux
-- A Windows package is available but not yet tested
 
 ## Contributing
 

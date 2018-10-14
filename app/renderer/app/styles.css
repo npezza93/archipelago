@@ -1,0 +1,283 @@
+*::selection {
+  background: var(--selection-color);
+}
+
+@media (min-resolution: 2dppx) {
+  * {
+    text-rendering: geometricPrecision;
+  }
+}
+@keyframes pulse {
+  from {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  to {
+    opacity: 1;
+  }
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #666;
+  border: 3px solid var(--background-color);
+}
+
+::-webkit-scrollbar, ::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+}
+
+:root {
+  --background-color: #000;
+  --selection-color: rgba(255, 255, 255, 0.3);
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --tab-font-size: 15px;
+  --terminal-padding: 5px 0 10px 15px;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: #666;
+  border: 0 solid var(--background-color);
+  border-radius: 0;
+}
+
+html, body, #app, archipelago-app {
+  height: 100%;
+  -webkit-font-feature-settings: "liga" off, "calt" off;
+}
+
+.hidden {
+  display: none;
+}
+
+.xterm .xterm-viewport {
+  -webkit-transition: all 0.5s;
+  opacity: 0;
+}
+
+.terminal .xterm-viewport {
+  background-color: transparent;
+}
+
+.xterm .xterm-viewport:hover, .xterm.scrolling .xterm-viewport {
+  opacity: 1;
+  -webkit-transition: all 0.5s;
+}
+
+body {
+  margin: 0;
+  background-color: var(--background-color);
+}
+
+archipelago-terminal {
+  display: flex;
+  flex: 1;
+  height: 100%;
+}
+
+.terminal {
+  width: 100%;
+}
+
+.xterm {
+  background-color: transparent;
+  padding: var(--terminal-padding);
+}
+
+archipelago-app {
+  display: flex;
+  flex-direction: column;
+}
+
+hamburger-menu {
+  -webkit-app-region: no-drag;
+  flex-direction: column;
+  justify-content: space-between;
+  display: flex;
+  height: 12px;
+  width: 15px;
+  left: 13px;
+  top: 14px;
+  position: fixed;
+  z-index: 4;
+  filter: invert(20%);
+  cursor: pointer;
+}
+
+archipelago-app[data-single-tab-mode] hamburger-menu {
+  top: 9px;
+}
+
+hamburger-menu:hover {
+  filter: invert(0%);
+}
+hamburger-menu div {
+  height: 1px;
+  background: var(--tab-color);
+}
+
+archipelago-app[data-single-tab-mode] minimize-button {
+  top: 9px !important;
+}
+
+minimize-button:hover {
+  filter: invert(0%);
+}
+minimize-button div {
+  background: var(--tab-color) !important;
+}
+
+maximize-button {
+  border: var(--tab-color) 1px solid !important;
+}
+
+archipelago-app[data-single-tab-mode] maximize-button {
+  top: 9px !important;
+}
+
+maximize-button:hover {
+  filter: invert(0%);
+}
+
+archipelago-app[data-single-tab-mode] close-button {
+  top: 9px !important;
+}
+
+close-button:hover {
+  filter: invert(0%);
+}
+close-button div {
+  background: var(--tab-color) !important;
+}
+
+archipelago-pane-list {
+  display: flex;
+  flex: 1;
+}
+archipelago-pane-list archipelago-pane {
+  margin: 0;
+  overflow-y: hidden;
+  display: block;
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+
+archipelago-tab-list {
+  -webkit-app-region: drag;
+  display: flex;
+  flex-direction: row;
+  height: 40px;
+}
+
+archipelago-app.darwin archipelago-tab-list {
+  margin-left: 70px;
+}
+archipelago-app.win32 archipelago-tab-list, archipelago-app.linux archipelago-tab-list {
+  margin-left: 41px;
+  width: calc(100% - 184px);
+}
+
+archipelago-tab-list archipelago-tab {
+  color: var(--tab-color);
+  filter: invert(50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  transition: all 0.3s ease;
+  min-width: 0;
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  line-height: 18px !important;
+  position: relative;
+}
+archipelago-tab-list archipelago-tab:not(.active)::after {
+  position: absolute;
+  content: "";
+  height: 1px;
+  background: var(--tab-border-color);
+  transition: all 0.15s linear;
+  width: 0;
+  bottom: 0;
+}
+archipelago-tab-list archipelago-tab:hover::after {
+  width: 100%;
+}
+archipelago-tab-list archipelago-tab.active {
+  filter: invert(0%);
+}
+archipelago-tab-list archipelago-tab.active::after {
+  position: absolute;
+  content: "";
+  height: 1px;
+  background: var(--tab-border-color);
+  width: 100%;
+  bottom: 0;
+}
+
+archipelago-tab div {
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  font-size: 20px;
+}
+
+archipelago-tab-list archipelago-tab:first-child:nth-last-child(1) div {
+  display: none;
+}
+archipelago-tab-list archipelago-tab span {
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 75%;
+}
+
+archipelago-app[data-single-tab-mode] archipelago-tab-list {
+  position: absolute;
+  height: 30px;
+}
+archipelago-app[data-single-tab-mode] archipelago-tab-list archipelago-tab {
+  display: none;
+}
+archipelago-app.darwin[data-single-tab-mode] archipelago-tab-list {
+  width: calc(100% - 70px);
+}
+
+archipelago-tab.is-unread span {
+  animation: pulse 2s infinite;
+}
+
+.Resizer.horizontal, .Resizer.vertical {
+  background-color: var(--background-color);
+  filter: invert(50%);
+  box-sizing: border-box;
+  z-index: 1;
+  background-clip: padding-box;
+  flex-shrink: 0;
+}
+.Resizer.horizontal {
+  height: 7px;
+  border-top: 3px solid rgba(255, 255, 255, 0);
+  border-bottom: 3px solid rgba(255, 255, 255, 0);
+  cursor: row-resize;
+  width: 100%;
+}
+
+.Pane.Pane2.horizontal {
+  display: flex;
+}
+
+.Resizer.vertical {
+  width: 7px;
+  margin: 0 -3px;
+  border-left: 3px solid rgba(255, 255, 255, 0);
+  border-right: 3px solid rgba(255, 255, 255, 0);
+  cursor: col-resize;
+}

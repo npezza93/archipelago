@@ -1,17 +1,14 @@
-const {api, platform} = require('electron-util')
-const ipc = require('electron-better-ipc')
-
-const settings = require('./settings')
-const about = require('./about')
+import {api, platform} from 'electron-util'
+import ipc from 'electron-better-ipc'
+import displaySettings from './settings'
+import displayAbout from './about'
 
 const aboutMenu = {
   label: api.app.getName(),
   submenu: [
     {
       label: 'About Archipelago',
-      click() {
-        about.display()
-      }
+      click: displayAbout
     },
     {
       label: `Version ${api.app.getVersion()}`,
@@ -21,9 +18,7 @@ const aboutMenu = {
     {
       label: 'Settings',
       accelerator: 'CmdOrCtrl+,',
-      click() {
-        settings.display()
-      }
+      click: displaySettings
     },
     {type: 'separator'},
     ...platform({
@@ -155,7 +150,7 @@ const profilesMenu = profileManager => {
           }
         }
 
-        if (profileManager.activeProfileId === profile.id) {
+        if (profileManager.activeProfile().id === profile.id) {
           profileItem.checked = true
         }
         return profileItem
@@ -183,7 +178,7 @@ const helpMenu = {
   }]
 }
 
-exports.template = (createWindow, profileManager) => {
+export default (createWindow, profileManager) => {
   return [
     aboutMenu,
     shellMenu(createWindow, profileManager),
