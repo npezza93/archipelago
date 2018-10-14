@@ -10,9 +10,9 @@ const {mount} = require('enzyme')
 const {assert} = require('chai')
 
 const {pref} = require('../../../app/common/config-file')
-const ProfileComponent = require('../../../app/settings/profile')
-const Profile = require('../../../app/common/profile')
-const ProfileManager = require('../../../app/common/profile-manager')
+const ProfileComponent = require('../../../app/renderer/settings/profile.jsx')
+const Profile = require('../../../app/main/profile')
+const ProfileManager = require('../../../app/main/profile-manager')
 
 describe('Profile Component', () => {
   describe('more than 1 profile', () => {

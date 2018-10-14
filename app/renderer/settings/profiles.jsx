@@ -1,6 +1,5 @@
 import {remote} from 'electron'
 import React from 'react'
-import ipc from 'electron-better-ipc'
 import Profile from './profile.jsx'
 
 export default class Profiles extends React.Component {
