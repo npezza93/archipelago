@@ -8,14 +8,15 @@ matrix:
         - ELECTRON_CACHE=$HOME/.cache/electron
         - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
     - os: linux
-      services: docker
-      language: generic
+      language: node_js
+      node_js: "10"
       env:
         - YARN_COMMAND=build
-      apt:
-        packages:
-          - libx11-dev
-          - libxkbfile-dev
+      addons:
+        apt:
+          packages:
+            - libx11-dev
+            - libxkbfile-dev
     - os: linux
       language: node_js
       node_js: "10"
