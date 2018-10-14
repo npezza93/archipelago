@@ -51,6 +51,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@githubprimer/octicons-react": "^8.1.0",
     "@researchgate/react-intersection-observer": "^0.7.3",
     "color": "^3.0.0",
     "electron-better-ipc": "^0.1.1",

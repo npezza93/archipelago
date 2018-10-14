@@ -9,7 +9,7 @@ export default {
     if (searchWindow === null || searchWindow.isDestroyed()) {
       searchWindow = new BrowserWindow({
         width: 300,
-        height: 250,
+        height: 280,
         show: false,
         x: currentPosition[0] - 300,
         y: currentPosition[1],

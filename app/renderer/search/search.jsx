@@ -3,6 +3,7 @@
 import {remote} from 'electron'
 import ipc from 'electron-better-ipc'
 import React from 'react'
+import Octicon, {ChevronLeft, ChevronRight} from '@githubprimer/octicons-react'
 import TrafficLights from '../traffic-lights.jsx'
 import './styles.css' // eslint-disable-line import/no-unassigned-import
 
@@ -39,6 +40,16 @@ export default class Search extends React.Component {
         <label>Search</label>
         <div className="input-border"></div>
       </input-field>
+      <div id="search-buttons">
+        <div id="search-previous-button" onClick={this.searchPrevious.bind(this)}>
+          <Octicon icon={ChevronLeft} />
+          Previous
+        </div>
+        <div id="search-next-button" onClick={this.searchNext.bind(this)}>
+          Next
+          <Octicon icon={ChevronRight} />
+        </div>
+      </div>
       <switch-field>
         <div>Use regex</div>
         <label>
