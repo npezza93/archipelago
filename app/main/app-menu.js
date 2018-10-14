@@ -2,6 +2,7 @@ import {api, platform} from 'electron-util'
 import ipc from 'electron-better-ipc'
 import displaySettings from './settings'
 import displayAbout from './about'
+import search from './search'
 
 const aboutMenu = {
   label: api.app.getName(),
@@ -44,6 +45,35 @@ const shellMenu = (createWindow, profileManager) => {
         label: 'New Window',
         accelerator: 'CmdOrCtrl+N',
         click: createWindow
+      },
+      {type: 'separator'},
+      {
+        label: 'Search',
+        accelerator: 'CmdOrCtrl+F',
+        click(item, focusedWindow) {
+          search.display(focusedWindow.getPosition())
+        }
+      },
+      {
+        label: 'Hide Search',
+        accelerator: 'CmdOrCtrl+Shift+F',
+        click() {
+          search.hide()
+        }
+      },
+      {
+        label: 'Search Next',
+        accelerator: 'CmdOrCtrl+G',
+        click() {
+          search.next()
+        }
+      },
+      {
+        label: 'Search Previous',
+        accelerator: 'CmdOrCtrl+Shift+G',
+        click() {
+          search.previous()
+        }
       },
       {type: 'separator'},
       {

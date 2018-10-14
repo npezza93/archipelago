@@ -6,6 +6,7 @@ import keystrokeForKeyboardEvent from 'keystroke-for-keyboard-event'
 import {xtermSettings} from '../../common/config-file'
 
 Terminal.applyAddon(require('xterm/lib/addons/fit/fit'))
+Terminal.applyAddon(require('xterm/lib/addons/search/search'))
 
 export default class Session {
   constructor(type, branch) {
@@ -75,6 +76,14 @@ export default class Session {
   fit() {
     this.xterm.fit()
     this.pty.then(pty => pty.resize(this.xterm.cols, this.xterm.rows))
+  }
+
+  searchNext(query, options) {
+    this.xterm.searchNext(query, options)
+  }
+
+  searchPrevious(query, options) {
+    this.xterm.searchPrevious(query, options)
   }
 
   keybindingHandler(e) {

@@ -11,6 +11,8 @@ if (window.location.hash === '#about') {
   import('@/visor/visor').then(({default: visor}) => mountRoute(visor))
 } else if (window.location.hash === '#settings') {
   import('@/settings/settings').then(({default: settings}) => mountRoute(settings))
+} else if (window.location.hash === '#search') {
+  import('@/search/search').then(({default: search}) => mountRoute(search))
 } else {
   import('@/app/app').then(({default: app}) => mountRoute(app))
 }
