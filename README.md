@@ -40,36 +40,7 @@ Bug reports and pull requests are welcome on [GitHub](https://github.com/npezza9
 
 Regardless of the platform you are working on, you will need to have Yarn installed. If you have never installed Yarn before, you can find out how [here](https://yarnpkg.com/en/docs/install).
 
-##### macOS
-
-Clone the repo then run `yarn && yarn start` in your console:
-
-```bash
-$ yarn
-
-yarn install v1.10.1
-[1/4] 🔍  Resolving packages...
-[2/4] 🚚  Fetching packages...
-[3/4] 🔗  Linking dependencies...
-[4/4] 📃  Building fresh packages...
-success Saved lockfile.
-$ electron-builder install-app-deps
-  • electron-builder version=20.28.4
-  • loaded configuration file=package.json ("build" field)
-  • rebuilding native production dependencies platform=darwin arch=x64
-  • rebuilding native dependency name=keyboard-layout
-  • rebuilding native dependency name=node-pty
-  • rebuilding native dependency name=pathwatcher
-```
-
-```bash
-$ yarn start
-
-yarn run v1.10.1
-ELECTRON_DISABLE_SECURITY_WARNINGS=true ./node_modules/.bin/electron .
-2018-10-02 21:22:24.583 Electron[78826:4102660] *** WARNING: Textured window <AtomNSWindow: 0x7fc29bc2b1c0>
-is getting an implicitly transparent titlebar. This will break when linking against newer SDKs. Use NSWindows -titlebarAppearsTransparent=YES instead.
-```
+Clone the repo then run `yarn && yarn start` in your console.
 
 ## License
 
