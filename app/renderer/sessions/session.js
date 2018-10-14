@@ -78,12 +78,12 @@ export default class Session {
     this.pty.then(pty => pty.resize(this.xterm.cols, this.xterm.rows))
   }
 
-  findNext(query, options) {
-    this.xterm.findNext(query, options)
+  searchNext(query, options) {
+    this.xterm.searchNext(query, options)
   }
 
-  findPrevious(query, options) {
-    this.xterm.findPrevious(query, options)
+  searchPrevious(query, options) {
+    this.xterm.searchPrevious(query, options)
   }
 
   keybindingHandler(e) {

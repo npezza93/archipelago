@@ -234,12 +234,12 @@ export default class App extends React.Component {
   searchNext(query, options) {
     const currentTab = this.currentTab()
     const session = currentTab.find(currentTab.root, currentTab.lastActiveSessionId)
-    session.findNext(query, options)
+    session.searchNext(query, options)
   }
 
   searchPrevious(query, options) {
     const currentTab = this.currentTab()
     const session = currentTab.find(currentTab.root, currentTab.lastActiveSessionId)
-    session.findPrevious(query, options)
+    session.searchPrevious(query, options)
   }
 }
