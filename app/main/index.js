@@ -14,6 +14,7 @@ if (!is.development) {
   require('update-electron-app')()
 }
 
+let currentTerminalWindow = null
 const windows = []
 const subscriptions = new CompositeDisposable()
 global.profileManager = new ProfileManager(pref())
@@ -46,7 +47,9 @@ const createWindow = () => {
     win.show()
     win.focus()
   })
-
+  win.on('focus', () => {
+    currentTerminalWindow = win
+  })
   win.once('close', e => {
     e.preventDefault()
     ipc.callRenderer(win, 'close').then(() => {
@@ -108,3 +111,9 @@ subscriptions.add(
 subscriptions.add(profileManager.onDidChange('singleTabMode', resetApplicationMenu))
 subscriptions.add(profileManager.onActiveProfileChange(resetApplicationMenu))
 ipc.answerRenderer('open-hamburger-menu', args => Menu.getApplicationMenu().popup(args))
+ipc.answerRenderer('search-next', ({query, options}) => {
+  ipc.callRenderer(currentTerminalWindow, 'search-next', {query, options})
+})
+ipc.answerRenderer('search-previous', ({query, options}) => {
+  ipc.callRenderer(currentTerminalWindow, 'search-previous', {query, options})
+})
