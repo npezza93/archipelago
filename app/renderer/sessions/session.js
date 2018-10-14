@@ -79,11 +79,11 @@ export default class Session {
   }
 
   searchNext(query, options) {
-    this.xterm.searchNext(query, options)
+    this.xterm.findNext(query, options)
   }
 
   searchPrevious(query, options) {
-    this.xterm.searchPrevious(query, options)
+    this.xterm.findPrevious(query, options)
   }
 
   keybindingHandler(e) {
