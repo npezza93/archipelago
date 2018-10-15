@@ -24,9 +24,9 @@ const showVisor = () => {
 }
 
 const create = profileManager => {
-  const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize
-
   if (visorWindow === null || visorWindow.isDestroyed()) {
+    const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize
+
     isVisorShowing = false
     visorWindow = new BrowserWindow({
       width,
