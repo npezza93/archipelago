@@ -12,4 +12,8 @@ export default class Branch {
     await this.left.kill()
     await this.right.kill()
   }
+
+  get type() {
+    return 'branch'
+  }
 }
