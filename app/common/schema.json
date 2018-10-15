@@ -476,6 +476,10 @@
                 "type": "string",
                 "color": true,
                 "default": "#000000"
+              },
+              "keybinding": {
+                "type": "string",
+                "default": "F1"
               }
             }
           }

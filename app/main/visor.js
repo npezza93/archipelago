@@ -56,11 +56,8 @@ const create = profileManager => {
   }
 }
 
-app.on('quit', () => subscriptions.dispose())
-app.on('will-quit', () => globalShortcut.unregisterAll())
-
-export default profileManager => {
-  globalShortcut.register('F1', () => {
+const register = profileManager => {
+  globalShortcut.register(profileManager.get('visor.keybinding'), () => {
     create(profileManager)
     if (isVisorShowing) {
       hideVisor()
@@ -68,4 +65,18 @@ export default profileManager => {
       showVisor()
     }
   })
+}
+
+app.on('quit', () => subscriptions.dispose())
+app.on('will-quit', () => globalShortcut.unregisterAll())
+
+export default profileManager => {
+  subscriptions.add(
+    profileManager.onDidChange('visor.keybinding', () => {
+      globalShortcut.unregisterAll()
+      register(profileManager)
+    })
+  )
+
+  register(profileManager)
 }
