@@ -51,21 +51,15 @@ export default class Session {
 
   applySettingModifiers(defaultSettings) {
     if (this.type === 'visor') {
-      defaultSettings = {
-        ...defaultSettings,
-        allowTransparency: this.profileManager.get('visor.allowTransparency'),
-        theme: {
-          ...this.profileManager.get('theme'),
-          background: this.profileManager.get('visor.background')
-        }
-      }
+      defaultSettings.allowTransparency = this.profileManager.get('visor.allowTransparency')
+      defaultSettings.theme.background = this.profileManager.get('visor.background')
     }
 
     return defaultSettings
   }
 
   resetTheme() {
-    this.xterm.setOption('theme', this.profileManager.get('theme'))
+    this.xterm.setOption('theme', this.settings().theme)
   }
 
   async kill() {
