@@ -15,6 +15,7 @@ export default class Pane extends React.Component {
   }
 
   renderTree(object) {
+    console.log(object.constructor);
     switch (object.constructor.name) {
       case 'Branch':
         return this.renderBranch(object)
