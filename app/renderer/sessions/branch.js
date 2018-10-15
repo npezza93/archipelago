@@ -13,7 +13,7 @@ export default class Branch {
     await this.right.kill()
   }
 
-  get type() {
-    return 'branch'
+  get className() {
+    return 'Branch'
   }
 }

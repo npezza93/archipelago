@@ -22,8 +22,8 @@ export default class Session {
     this.bindDataListeners()
   }
 
-  get type() {
-    return 'session'
+  get className() {
+    return 'Session'
   }
 
   get keymaps() {

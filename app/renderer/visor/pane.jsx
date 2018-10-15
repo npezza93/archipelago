@@ -10,10 +10,10 @@ export default class Pane extends React.Component {
   }
 
   renderTree(object) {
-    switch (object.type) {
-      case 'branch':
+    switch (object.className) {
+      case 'Branch':
         return this.renderBranch(object)
-      case 'session':
+      case 'Session':
         return this.renderSession(object)
       default:
         return null

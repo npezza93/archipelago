@@ -13,7 +13,7 @@ export default class Tab {
   add(sessionId, orientation) {
     let newBranch
 
-    if (this.root.type === 'session') {
+    if (this.root.className === 'Session') {
       const session = this.root
       const branch = this.newBranch(session, orientation)
       this.root = branch
@@ -26,7 +26,7 @@ export default class Tab {
   }
 
   remove(sessionId) {
-    if (this.root.type === 'session' && (this.root.id === sessionId)) {
+    if (this.root.className === 'Session' && (this.root.id === sessionId)) {
       this.root = null
     } else {
       const sessionToRemove = this.find(this.root, sessionId)
@@ -74,7 +74,7 @@ export default class Tab {
       return
     }
 
-    if (branch.type === 'session') {
+    if (branch.className === 'session') {
       callback(branch)
     }
 
