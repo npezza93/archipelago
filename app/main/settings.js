@@ -1,4 +1,4 @@
-import {BrowserWindow, systemPreferences} from 'electron'
+import {BrowserWindow, systemPreferences, app} from 'electron'
 import {is} from 'electron-util'
 import ipc from 'electron-better-ipc'
 
@@ -34,3 +34,9 @@ export default () => {
     settingsWindow.focus()
   }
 }
+
+app.on('before-quit', () => {
+  if ((settingsWindow !== null) && !settingsWindow.isDestroyed()) {
+    settingsWindow.removeAllListeners('close')
+  }
+})
