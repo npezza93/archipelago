@@ -59,7 +59,7 @@ const create = profileManager => {
 }
 
 const register = profileManager => {
-  globalShortcut.register(profileManager.get('visor.keybinding'), () => {
+  globalShortcut.register(profileManager.get('visor.keybinding') || 'F1', () => {
     create(profileManager)
     if (isVisorShowing) {
       hideVisor()
