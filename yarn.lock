@@ -7913,9 +7913,9 @@ posthtml@^0.11.2, posthtml@^0.11.3:
     posthtml-render "^1.1.0"
 
 pref@^3.1.0:
-  version "3.1.4"
-  resolved "https://registry.yarnpkg.com/pref/-/pref-3.1.4.tgz#ffb1535735ab384642f6b2d6b80c05e8bf7e4882"
-  integrity sha512-y8Kcu0ljAfWgq1D/JxiZY8Po47CNC4rvH9CT/MZ7UOH4BUm5qMM1YrlngrQPTVQd6W04n1BXXN0AYPEC7eLsbQ==
+  version "3.1.5"
+  resolved "https://registry.yarnpkg.com/pref/-/pref-3.1.5.tgz#7429877a687bff06a36a3c42291638179a963ddf"
+  integrity sha512-sGpivIVd1jC1arXJua1m8LE/vJX37h6EIUhCPHqra8YX2lyD57T+oQluU5QEC+tveJ8hrEvWiWlbmb/V50EwHw==
   dependencies:
     ajv "^6.5.3"
     color "^3.1.0"
