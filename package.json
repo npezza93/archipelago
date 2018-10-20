@@ -5,7 +5,7 @@
   "main": "app/main/index.js",
   "scripts": {
     "postinstall": " ./node_modules/.bin/electron-builder install-app-deps",
-    "test": "./node_modules/.bin/mocha test/about test/main test/settings && ./node_modules/.bin/electron-mocha test/common --renderer --require-main app/main/index.js && ./node_modules/.bin/electron-mocha test/common/tab-test.js --renderer --require-main app/main/index.js && ./node_modules/.bin/electron-mocha --require test/setup.js --recursive test/react --renderer",
+    "test": "yarn compile && ./node_modules/.bin/mocha test/main/main-test.js",
     "start": "./node_modules/.bin/electron-webpack dev",
     "compile": "./node_modules/.bin/electron-webpack",
     "lint": "./node_modules/.bin/xo --ignore app/renderer/index.js",

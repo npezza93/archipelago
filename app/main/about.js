@@ -14,6 +14,14 @@ export default () => {
       frame: is.macos
     })
 
+    if (is.development && process.env.ELECTRON_WEBPACK_WDS_PORT) {
+      aboutWindow.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}#about`)
+    } else if (process.env.NODE_ENV === 'test') {
+      aboutWindow.loadURL(`file://${__dirname}/../renderer/index.html#about`)
+    } else {
+      aboutWindow.loadURL(`file:///${__dirname}/index.html#about`)
+    }
+
     if (is.development) {
       aboutWindow.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}#about`)
     } else {
