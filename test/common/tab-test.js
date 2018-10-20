@@ -2,7 +2,7 @@
 
 const {assert} = require('chai')
 
-const Tab = require('../../app/common/tab')
+const Tab = require('../../app/renderer/sessions/tab')
 
 describe('Tab', () => {
   beforeEach(() => {

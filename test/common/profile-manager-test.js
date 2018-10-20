@@ -2,8 +2,8 @@
 
 const {assert} = require('chai')
 
-const ProfileManager = require('../../app/common/profile-manager')
-const Profile = require('../../app/common/profile')
+const ProfileManager = require('../../app/main/profile-manager')
+const Profile = require('../../app/main/profile')
 const {pref, keybindings} = require('../../app/common/config-file')
 
 describe('ProfileManager', () => {
