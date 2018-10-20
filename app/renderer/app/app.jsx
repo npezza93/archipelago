@@ -74,11 +74,11 @@ export default class App extends React.Component {
 
     for (const property in styleProperties) {
       styles.setProperty(styleProperties[property], profileManager.get(property))
-      this.subscriptions.add(
-        profileManager.onDidChange(property, newValue => {
-          styles.setProperty(styleProperties[property], newValue)
-        })
-      )
+      ipc.answerMain('setting-changed', ({property, value}) => {
+        if (property in styleProperties) {
+          styles.setProperty(styleProperties[property], value)
+        }
+      })
     }
   }
 

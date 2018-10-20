@@ -1,10 +1,19 @@
+import {BrowserWindow} from 'electron'
 import {isDeepStrictEqual} from 'util'
 import {platform} from 'electron-util'
+import ipc from 'electron-better-ipc'
 import Profile from './profile'
 
 export default class ProfileManager {
   constructor(configFile) {
     this.configFile = configFile
+
+    ipc.answerRenderer('change-setting', ({property, value}) => {
+      this.set(property, value)
+      for (const window of BrowserWindow.getAllWindows()) {
+        ipc.callRenderer(window, 'setting-changed', {property, value})
+      }
+    })
   }
 
   set activeProfileId(id) {

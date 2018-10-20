@@ -1,4 +1,5 @@
 import {clipboard, remote} from 'electron'
+import ipc from 'electron-better-ipc'
 import {CompositeDisposable, Disposable} from 'event-kit'
 import {Terminal} from 'xterm'
 import unescape from 'unescape-js'
@@ -162,12 +163,10 @@ export default class Session {
     this.subscriptions.add(this.onFocus(this.resetBlink.bind(this)))
     this.subscriptions.add(this.onSelection(this.copySelection.bind(this)))
 
-    xtermSettings.forEach(field => {
-      this.subscriptions.add(
-        this.profileManager.onDidChange(field, newValue => {
-          this.xterm.setOption(field, newValue)
-        })
-      )
+    ipc.answerMain('setting-changed', ({property, value}) => {
+      if (xtermSettings.indexOf(property) >= 0) {
+        this.xterm.setOption(property, value)
+      }
     })
   }
 }
