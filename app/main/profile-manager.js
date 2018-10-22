@@ -15,6 +15,12 @@ export default class ProfileManager {
         ipc.callRenderer(window, 'setting-changed', {property, value})
       }
     })
+    ipc.answerRenderer('css-settings', () => {
+      return this.cssSettings.reduce((settings, property) => {
+        settings[property] = this.get(property)
+        return settings
+      }, {})
+    })
   }
 
   set activeProfileId(id) {
@@ -126,6 +132,16 @@ export default class ProfileManager {
       this.configFile.set('profiles', [])
       this.create()
     }
+  }
+
+  get cssSettings() {
+    return ['fontFamily',
+      'windowBackground',
+      'tabColor',
+      'tabBorderColor',
+      'fontSize',
+      'padding',
+      'theme.selection']
   }
 
   get defaultKeybindings() {

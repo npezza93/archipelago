@@ -1,9 +1,7 @@
 /* global window, document */
 
-import {remote} from 'electron'
 import ipc from 'electron-better-ipc'
 import React from 'react'
-import {CompositeDisposable} from 'event-kit'
 import Tab from '../sessions/tab'
 import TrafficLights from '../traffic-lights.jsx'
 import PaneList from './pane-list.jsx'
@@ -18,25 +16,20 @@ export default class App extends React.Component {
 
     const initialTab = new Tab('default')
 
-    this.subscriptions = new CompositeDisposable()
     this.state = {tabs: [initialTab], currentTabId: initialTab.id, singleTabMode: false}
 
     ipc.callMain('single-tab-mode').then(value => this.setState({singleTabMode: value}))
     ipc.answerMain('split', direction => this.split(direction))
     ipc.answerMain('new-tab', this.addTab.bind(this))
     ipc.answerMain('close-current-tab', () => this.removeTab(this.state.currentTabId))
-    ipc.answerMain('search-next', ({query, options}) => {
-      this.searchNext(query, options)
-    })
-    ipc.answerMain('search-previous', ({query, options}) => {
-      this.searchPrevious(query, options)
+    ipc.answerMain('search-next', ({query, options}) => this.searchNext(query, options))
+    ipc.answerMain('search-previous', ({query, options}) => this.searchPrevious(query, options))
     ipc.answerMain('setting-changed', ({property, value}) => {
       if (property === 'singleTabMode') {
         this.setState({singleTabMode: value})
       }
     })
     ipc.answerMain('close', async () => {
-      this.subscriptions.dispose()
       const killers = []
       for (const tab of this.state.tabs) {
         killers.push(tab.kill())
@@ -66,7 +59,6 @@ export default class App extends React.Component {
 
   componentDidMount() {
     const styles = document.documentElement.style
-    const profileManager = remote.getGlobal('profileManager')
     const styleProperties = {
       fontFamily: '--font-family',
       windowBackground: '--background-color',
@@ -76,19 +68,19 @@ export default class App extends React.Component {
       padding: '--terminal-padding',
       'theme.selection': '--selection-color'
     }
-
-    for (const property in styleProperties) {
-      styles.setProperty(styleProperties[property], profileManager.get(property))
-      ipc.answerMain('setting-changed', ({property, value}) => {
-        if (property in styleProperties) {
-          styles.setProperty(styleProperties[property], value)
-        }
-      })
-    }
+    ipc.callMain('css-settings').then(settings => {
+      for (const property in styleProperties) {
+        styles.setProperty(styleProperties[property], settings[property])
+      }
+    })
+    ipc.answerMain('setting-changed', ({property, value}) => {
+      if (property in styleProperties) {
+        styles.setProperty(styleProperties[property], value)
+      }
+    })
   }
 
   componentWillUnmount() {
-    this.subscriptions.dispose()
     this.state.tabs.map(tab => tab.kill())
   }
 
