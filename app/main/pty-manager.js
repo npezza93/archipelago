@@ -1,3 +1,5 @@
+/* global profileManager */
+
 import {app} from 'electron'
 import Pty from './pty'
 
@@ -13,7 +15,7 @@ export default () => {
 
   const create = () => {
     return new Promise(resolve => {
-      const pty = new Pty()
+      const pty = new Pty(profileManager)
 
       resolve(pty)
     })

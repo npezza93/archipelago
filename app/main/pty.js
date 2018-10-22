@@ -1,22 +1,21 @@
-/* global profileManager */
-
 import {api, platform} from 'electron-util'
 import {spawn} from 'node-pty'
 import {Disposable} from 'event-kit'
 
 export default class Pty {
-  constructor() {
+  constructor(profileManager) {
     this.id = Math.random()
+    this.profileManager = profileManager
 
     this.pty = spawn(
       this.shell,
-      profileManager.get('shellArgs').split(','),
+      this.profileManager.get('shellArgs').split(','),
       this.sessionArgs
     )
   }
 
   get shell() {
-    return profileManager.get('shell') ||
+    return this.profileManager.get('shell') ||
       process.env[platform({windows: 'COMSPEC', default: 'SHELL'})]
   }
 
