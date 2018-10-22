@@ -25,11 +25,13 @@ export default () => {
 
   global.ptyManager = {
     kill,
-    async make() {
+    async make(sessionId, sessionWindow) {
       const pty = await preppedPty
 
       pty.onExit(() => kill(pty.id))
       ptys[pty.id] = pty
+      pty.sessionId = sessionId
+      pty.sessionWindow = sessionWindow
       preppedPty = create()
 
       return pty

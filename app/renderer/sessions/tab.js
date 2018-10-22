@@ -74,7 +74,7 @@ export default class Tab {
       return
     }
 
-    if (branch.className === 'session') {
+    if (branch.className === 'Session') {
       callback(branch)
     }
 

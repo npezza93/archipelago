@@ -1,4 +1,5 @@
 import {api, platform} from 'electron-util'
+import ipc from 'electron-better-ipc'
 import {spawn} from 'node-pty'
 import {Disposable} from 'event-kit'
 
@@ -12,6 +13,9 @@ export default class Pty {
       this.profileManager.get('shellArgs').split(','),
       this.sessionArgs
     )
+    this.pty.on('exit', () => {
+      ipc.callRenderer(this.sessionWindow, `pty-exit-${this.sessionId}`)
+    })
   }
 
   get shell() {

@@ -1,5 +1,6 @@
 import {clipboard, remote} from 'electron'
 import ipc from 'electron-better-ipc'
+import {activeWindow} from 'electron-util'
 import {CompositeDisposable, Disposable} from 'event-kit'
 import {Terminal} from 'xterm'
 import unescape from 'unescape-js'
@@ -16,7 +17,7 @@ export default class Session {
     this.id = Math.random()
     this.subscriptions = new CompositeDisposable()
     this.title = ''
-    this.pty = remote.getGlobal('ptyManager').make()
+    this.pty = remote.getGlobal('ptyManager').make(this.id, activeWindow())
     this.type = type || 'default'
     this.xterm = new Terminal(this.settings())
 
@@ -140,7 +141,7 @@ export default class Session {
   }
 
   onExit(callback) {
-    return this.pty.then(pty => pty.onExit(callback))
+    ipc.answerMain(`pty-exit-${this.id}`, callback)
   }
 
   onData(callback) {
