@@ -1,5 +1,5 @@
-import {BrowserWindow, systemPreferences, app} from 'electron'
-import {is} from 'electron-util'
+import {BrowserWindow, app} from 'electron'
+import {is, darkMode} from 'electron-util'
 import ipc from 'electron-better-ipc'
 
 let settingsWindow = null
@@ -12,7 +12,7 @@ export default () => {
       show: false,
       titleBarStyle: 'hiddenInset',
       frame: is.macos,
-      backgroundColor: systemPreferences.isDarkMode() ? '#393736' : '#F5F5F5',
+      backgroundColor: darkMode.isEnabled ? '#393736' : '#F5F5F5',
       webPreferences: {experimentalFeatures: true}
     })
 

@@ -1,8 +1,8 @@
 /* global window */
 
-import {remote} from 'electron'
 import ipc from 'electron-better-ipc'
 import React from 'react'
+import {darkMode} from 'electron-util'
 import {CompositeDisposable} from 'event-kit'
 import TrafficLights from '../traffic-lights.jsx'
 import HamburgerMenu from './hamburger-menu.jsx'
@@ -15,11 +15,8 @@ export default class Settings extends React.Component {
     super(props)
 
     this.subscriptions = new CompositeDisposable()
-    this.state = {isDarkMode: remote.systemPreferences.isDarkMode()}
-    remote.systemPreferences.subscribeNotification(
-      'AppleInterfaceThemeChangedNotification',
-      () => this.setState({isDarkMode: remote.systemPreferences.isDarkMode()}),
-    )
+    this.state = {isDarkMode: darkMode.isEnabled}
+    darkMode.onChange(() => this.setState({isDarkMode: darkMode.isEnabled}))
 
     ipc.answerMain('close', () => {
       return new Promise(resolve => {

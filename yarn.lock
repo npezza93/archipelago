@@ -3270,6 +3270,11 @@ electron-is-dev@^0.3.0:
   resolved "https://registry.yarnpkg.com/electron-is-dev/-/electron-is-dev-0.3.0.tgz#14e6fda5c68e9e4ecbeff9ccf037cbd7c05c5afe"
   integrity sha1-FOb9pcaOnk7L7/nM8DfL18BcWv4=
 
+electron-is-dev@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/electron-is-dev/-/electron-is-dev-1.0.1.tgz#6e0a184736fe7aea77d18210b0b0f6a02402c4bc"
+  integrity sha512-iwM3EotA9HTXqMGpQRkR/kT8OZqBbdfHTnlwcxsjSLYqY8svvsq0MuujsWCn3/vtgRmDv/PC/gKUUpoZvi5C1w==
+
 electron-mocha@^6.0.4:
   version "6.0.4"
   resolved "https://registry.yarnpkg.com/electron-mocha/-/electron-mocha-6.0.4.tgz#5130ff3ed1ffc2971de26881cd7d18c0c0179baf"
@@ -3311,12 +3316,12 @@ electron-to-chromium@^1.2.7, electron-to-chromium@^1.3.73:
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.74.tgz#443f60655e0de630491ca4e48e4436bc375debd1"
   integrity sha512-MJm7r64Kt1jQCLEiyfgfcu9lbO6/7jjfpH8x2FrutQ4Cb93aS+6dlfW+G65rPhVTjlTmwCfjQGCKZVEaaltOwQ==
 
-electron-util@^0.9.1:
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/electron-util/-/electron-util-0.9.1.tgz#b69a0615375808ef08b89cadb82804fbcf205997"
-  integrity sha512-NiLvkxVIqO7XkV1NUoVTb9A/w+PqTjpocptsMzrqYDmwjKXPUI4Mw9Fagb88tbP5cMIoQdqNEjvs/J8oY6vzIg==
+electron-util@^0.10.1:
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/electron-util/-/electron-util-0.10.1.tgz#3318134cafdef7c15bb69ac5dc8e80d0f23f9049"
+  integrity sha512-fuuI357P0F7zMiGo6NsO2j6SQ9mI2HtOTiAN0ZxvSNpLoe1fjQEDzyMBMXsqtHfOzyfsokue6534MdzJihbksw==
   dependencies:
-    electron-is-dev "^0.3.0"
+    electron-is-dev "^1.0.0"
 
 electron-webpack-js@~2.2.0:
   version "2.2.0"

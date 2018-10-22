@@ -1,8 +1,8 @@
 /* global window */
 
-import {remote} from 'electron'
 import ipc from 'electron-better-ipc'
 import React from 'react'
+import {darkMode} from 'electron-util'
 import Octicon, {ChevronLeft, ChevronRight} from '@githubprimer/octicons-react'
 import TrafficLights from '../traffic-lights.jsx'
 import './styles.css' // eslint-disable-line import/no-unassigned-import
@@ -12,7 +12,7 @@ export default class Search extends React.Component {
     super(props)
 
     this.state = {
-      isDarkMode: remote.systemPreferences.isDarkMode(),
+      isDarkMode: darkMode.isEnabled,
       query: '',
       regex: false,
       caseSensitive: false,
@@ -22,10 +22,7 @@ export default class Search extends React.Component {
     ipc.answerMain('close-current-tab', () => window.close())
     ipc.answerMain('search-next', () => this.searchNext())
     ipc.answerMain('search-previous', () => this.searchPrevious())
-    remote.systemPreferences.subscribeNotification(
-      'AppleInterfaceThemeChangedNotification',
-      () => this.setState({isDarkMode: remote.systemPreferences.isDarkMode()}),
-    )
+    darkMode.onChange(() => this.setState({isDarkMode: darkMode.isEnabled}))
   }
 
   render() {
