@@ -21,6 +21,12 @@ export default class ProfileManager {
         return settings
       }, {})
     })
+    ipc.answerRenderer('visor-css-settings', () => {
+      return this.visorCssSettings.reduce((settings, property) => {
+        settings[property] = this.get(property)
+        return settings
+      }, {})
+    })
   }
 
   set activeProfileId(id) {
@@ -141,6 +147,14 @@ export default class ProfileManager {
       'tabBorderColor',
       'fontSize',
       'padding',
+      'theme.selection']
+  }
+
+  get visorCssSettings() {
+    return ['fontFamily',
+      'visor.windowBackground',
+      'fontSize',
+      'visor.padding',
       'theme.selection']
   }
 
