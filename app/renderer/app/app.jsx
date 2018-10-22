@@ -19,8 +19,9 @@ export default class App extends React.Component {
     const initialTab = new Tab('default')
 
     this.subscriptions = new CompositeDisposable()
-    this.state = {tabs: [initialTab], currentTabId: initialTab.id}
+    this.state = {tabs: [initialTab], currentTabId: initialTab.id, singleTabMode: false}
 
+    ipc.callMain('single-tab-mode').then(value => this.setState({singleTabMode: value}))
     ipc.answerMain('split', direction => this.split(direction))
     ipc.answerMain('new-tab', this.addTab.bind(this))
     ipc.answerMain('close-current-tab', () => this.removeTab(this.state.currentTabId))
@@ -29,6 +30,10 @@ export default class App extends React.Component {
     })
     ipc.answerMain('search-previous', ({query, options}) => {
       this.searchPrevious(query, options)
+    ipc.answerMain('setting-changed', ({property, value}) => {
+      if (property === 'singleTabMode') {
+        this.setState({singleTabMode: value})
+      }
     })
     ipc.answerMain('close', async () => {
       this.subscriptions.dispose()
@@ -41,7 +46,7 @@ export default class App extends React.Component {
   }
 
   render() {
-    return <archipelago-app class={process.platform} data-single-tab-mode={ this.isSingleTabMode() || undefined}>
+    return <archipelago-app class={process.platform} data-single-tab-mode={ this.state.singleTabMode || undefined}>
       <HamburgerMenu />
       <TabList
         tabs={this.state.tabs}
@@ -132,7 +137,7 @@ export default class App extends React.Component {
   }
 
   addTab() {
-    if (!this.isSingleTabMode()) {
+    if (!this.state.singleTabMode) {
       const newTab = new Tab('default')
 
       this.setState({
@@ -225,10 +230,6 @@ export default class App extends React.Component {
     })
 
     this.setState({tabs, currentSessionId: newSessionId})
-  }
-
-  isSingleTabMode() {
-    return remote.getGlobal('profileManager').get('singleTabMode')
   }
 
   searchNext(query, options) {

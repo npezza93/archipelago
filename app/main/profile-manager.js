@@ -8,6 +8,7 @@ export default class ProfileManager {
   constructor(configFile) {
     this.configFile = configFile
 
+    ipc.answerRenderer('single-tab-mode', () => this.get('singleTabMode'))
     ipc.answerRenderer('change-setting', ({property, value}) => {
       this.set(property, value)
       for (const window of BrowserWindow.getAllWindows()) {
