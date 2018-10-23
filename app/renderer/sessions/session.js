@@ -70,7 +70,7 @@ export default class Session {
 
     const pty = await this.pty
 
-    remote.getGlobal('ptyManager').kill(pty.id)
+    await ipc.callMain('pty-kill', pty.id)
   }
 
   fit() {
