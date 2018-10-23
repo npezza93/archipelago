@@ -52,6 +52,7 @@ export default class Pty {
     ipc.answerRenderer(`pty-resize-${this.sessionId}`, ({cols, rows}) => {
       this.resize(cols, rows)
     })
+    ipc.answerRenderer(`pty-write-${this.sessionId}`, data => this.write(data))
   }
 
   onExit(callback) {

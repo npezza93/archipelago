@@ -91,7 +91,7 @@ export default class Session {
     const mapping = this.keymaps[keystrokeForKeyboardEvent(e)]
 
     if (mapping) {
-      this.pty.then(pty => pty.write(mapping))
+      ipc.callMain(`pty-write-${this.id}`, mapping)
       caught = true
     }
 
@@ -158,7 +158,9 @@ export default class Session {
     this.pty.then(pty => {
       this.subscriptions.add(pty.onData(data => this.xterm.write(data)))
     })
-    this.subscriptions.add(this.onData(data => this.pty.then(pty => pty.write(data))))
+    this.subscriptions.add(this.onData(data => {
+      ipc.callMain(`pty-write-${this.id}`, data)
+    }))
     this.subscriptions.add(this.onTitle(title => this.setTitle(title)))
     this.subscriptions.add(this.onFocus(this.fit.bind(this)))
     this.subscriptions.add(this.onFocus(this.resetBlink.bind(this)))
