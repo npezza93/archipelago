@@ -75,7 +75,7 @@ export default class Session {
 
   fit() {
     this.xterm.fit()
-    this.pty.then(pty => pty.resize(this.xterm.cols, this.xterm.rows))
+    ipc.callMain(`pty-resize-${this.id}`, {cols: this.xterm.cols, rows: this.xterm.rows})
   }
 
   searchNext(query, options) {

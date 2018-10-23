@@ -45,6 +45,15 @@ export default class Pty {
     })
   }
 
+  created(sessionId, sessionWindow) {
+    this.sessionId = sessionId
+    this.sessionWindow = sessionWindow
+
+    ipc.answerRenderer(`pty-resize-${this.sessionId}`, ({cols, rows}) => {
+      this.resize(cols, rows)
+    })
+  }
+
   onExit(callback) {
     this.pty.on('exit', callback)
 

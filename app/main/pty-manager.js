@@ -32,8 +32,7 @@ export default () => {
       const pty = await preppedPty
 
       ptys[pty.id] = pty
-      pty.sessionId = sessionId
-      pty.sessionWindow = sessionWindow
+      pty.created(sessionId, sessionWindow)
       preppedPty = create()
 
       return pty
