@@ -17,7 +17,7 @@ export default class Session {
     this.id = Math.random()
     this.subscriptions = new CompositeDisposable()
     this.title = ''
-    this.pty = remote.getGlobal('ptyManager').make(this.id, activeWindow())
+    this.ptyId = ipc.callMain('pty-create', {sessionId: this.id, sessionWindowId: activeWindow().id})
     this.type = type || 'default'
     this.xterm = new Terminal(this.settings())
 
@@ -68,9 +68,9 @@ export default class Session {
     this.subscriptions.dispose()
     this.xterm.dispose()
 
-    const pty = await this.pty
+    const ptyId = await this.ptyId
 
-    await ipc.callMain('pty-kill', pty.id)
+    await ipc.callMain('pty-kill', ptyId)
   }
 
   fit() {
@@ -159,9 +159,7 @@ export default class Session {
   bindDataListeners() {
     this.xterm.attachCustomKeyEventHandler(this.keybindingHandler.bind(this))
 
-    this.pty.then(pty => {
-      this.subscriptions.add(pty.onData(data => this.xterm.write(data)))
-    })
+    ipc.answerMain(`pty-data-${this.id}`, data => this.xterm.write(data))
     this.subscriptions.add(this.onData(data => {
       ipc.callMain(`pty-write-${this.id}`, data)
     }))

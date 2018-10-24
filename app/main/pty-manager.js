@@ -27,17 +27,14 @@ export default () => {
 
   let preppedPty = create()
 
-  global.ptyManager = {
-    async make(sessionId, sessionWindow) {
-      const pty = await preppedPty
+  ipc.answerRenderer('pty-create', async ({sessionId, sessionWindowId}) => {
+    const pty = await preppedPty
+    ptys[pty.id] = pty
+    pty.created(sessionId, sessionWindowId)
+    preppedPty = create()
 
-      ptys[pty.id] = pty
-      pty.created(sessionId, sessionWindow)
-      preppedPty = create()
-
-      return pty
-    }
-  }
+    return pty.id
+  })
 
   app.on('before-quit', () => Object.keys(ptys).forEach(kill))
 }

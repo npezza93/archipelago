@@ -1,3 +1,4 @@
+import {BrowserWindow} from 'electron'
 import {api, platform} from 'electron-util'
 import ipc from 'electron-better-ipc'
 import {spawn} from 'node-pty'
@@ -13,9 +14,6 @@ export default class Pty {
       this.profileManager.get('shellArgs').split(','),
       this.sessionArgs
     )
-    this.pty.on('exit', () => {
-      ipc.callRenderer(this.sessionWindow, `pty-exit-${this.sessionId}`)
-    })
   }
 
   get shell() {
@@ -45,14 +43,21 @@ export default class Pty {
     })
   }
 
-  created(sessionId, sessionWindow) {
+  created(sessionId, sessionWindowId) {
     this.sessionId = sessionId
-    this.sessionWindow = sessionWindow
-
+    this.sessionWindow = BrowserWindow.getAllWindows().find(browserWindow => {
+      return browserWindow.id === sessionWindowId
+    })
     ipc.answerRenderer(`pty-resize-${this.sessionId}`, ({cols, rows}) => {
       this.resize(cols, rows)
     })
     ipc.answerRenderer(`pty-write-${this.sessionId}`, data => this.write(data))
+    this.pty.on('exit', () => {
+      ipc.callRenderer(this.sessionWindow, `pty-exit-${this.sessionId}`)
+    })
+    this.pty.on('data', data => {
+      ipc.callRenderer(this.sessionWindow, `pty-data-${this.sessionId}`, data)
+    })
   }
 
   onExit(callback) {
