@@ -120,16 +120,20 @@ export default class Session {
   }
 
   resetBlink() {
-    if (this.profileManager.get('cursorBlink')) {
-      this.xterm.setOption('cursorBlink', false)
-      this.xterm.setOption('cursorBlink', true)
-    }
+    ipc.callMain('cursor-blink').then(cursorBlink => {
+      if (cursorBlink) {
+        this.xterm.setOption('cursorBlink', false)
+        this.xterm.setOption('cursorBlink', true)
+      }
+    })
   }
 
   copySelection() {
-    if (this.profileManager.get('copyOnSelect')) {
-      clipboard.writeText(this.xterm.getSelection())
-    }
+    ipc.callMain('copy-on-select').then(copyOnSelect => {
+      if (copyOnSelect) {
+        clipboard.writeText(this.xterm.getSelection())
+      }
+    })
   }
 
   onFocus(callback) {

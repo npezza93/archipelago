@@ -27,6 +27,8 @@ export default class ProfileManager {
         return settings
       }, {})
     })
+    ipc.answerRenderer('copy-on-select', () => this.get('copyOnSelect'))
+    ipc.answerRenderer('cursor-blink', () => this.get('cursorBlink'))
   }
 
   set activeProfileId(id) {
