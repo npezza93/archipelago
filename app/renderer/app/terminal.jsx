@@ -2,16 +2,13 @@
 
 import React from 'react'
 import {CompositeDisposable} from 'event-kit'
+import {debouncer} from '../../common/config-file'
 
 export default class Terminal extends React.Component {
   constructor(props) {
     super(props)
     this.subscriptions = new CompositeDisposable()
-    this.resizeObserver = new ResizeObserver(() => {
-      if (this.props.tabId === this.props.currentTabId) {
-        this.props.session.fit()
-      }
-    })
+    this.resizeObserver = new ResizeObserver(this.fit)
 
     this.bindDataListeners()
   }
@@ -22,6 +19,12 @@ export default class Terminal extends React.Component {
 
   setRef(container) {
     this.container = container
+  }
+
+  fit() {
+    if (this.props.tabId === this.props.currentTabId) {
+      debouncer(() => this.props.session.fit(), 200)()
+    }
   }
 
   componentDidMount() {
