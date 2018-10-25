@@ -2,6 +2,7 @@
 
 import ipc from 'electron-better-ipc'
 import React from 'react'
+import autoBind from 'auto-bind'
 import Tab from '../sessions/tab'
 import TrafficLights from '../traffic-lights.jsx'
 import PaneList from './pane-list.jsx'
@@ -13,6 +14,7 @@ import './styles.css' // eslint-disable-line import/no-unassigned-import
 export default class App extends React.Component {
   constructor(props) {
     super(props)
+    autoBind(this)
 
     const initialTab = new Tab('default')
 
@@ -20,7 +22,7 @@ export default class App extends React.Component {
 
     ipc.callMain('single-tab-mode').then(value => this.setState({singleTabMode: value}))
     ipc.answerMain('split', direction => this.split(direction))
-    ipc.answerMain('new-tab', this.addTab.bind(this))
+    ipc.answerMain('new-tab', this.addTab)
     ipc.answerMain('close-current-tab', () => this.removeTab(this.state.currentTabId))
     ipc.answerMain('search-next', ({query, options}) => this.searchNext(query, options))
     ipc.answerMain('search-previous', ({query, options}) => this.searchPrevious(query, options))
@@ -36,28 +38,7 @@ export default class App extends React.Component {
       }
       await Promise.all(killers)
     })
-  }
 
-  render() {
-    return <archipelago-app class={process.platform} data-single-tab-mode={ this.state.singleTabMode || undefined}>
-      <HamburgerMenu />
-      <TabList
-        tabs={this.state.tabs}
-        currentTabId={this.state.currentTabId}
-        selectTab={this.selectTab.bind(this)}
-        removeTab={this.removeTab.bind(this)} />
-      <TrafficLights />
-      <PaneList
-        tabs={this.state.tabs}
-        currentTabId={this.state.currentTabId}
-        changeTitle={this.changeTitle.bind(this)}
-        markUnread={this.markUnread.bind(this)}
-        removeSession={this.removeSession.bind(this)}
-        selectSession={this.selectSession.bind(this)} />
-    </archipelago-app>
-  }
-
-  componentDidMount() {
     const styles = document.documentElement.style
     const styleProperties = {
       fontFamily: '--font-family',
@@ -78,6 +59,25 @@ export default class App extends React.Component {
         styles.setProperty(styleProperties[property], value)
       }
     })
+  }
+
+  render() {
+    return <archipelago-app class={process.platform} data-single-tab-mode={ this.state.singleTabMode || undefined}>
+      <HamburgerMenu />
+      <TabList
+        tabs={this.state.tabs}
+        currentTabId={this.state.currentTabId}
+        selectTab={this.selectTab}
+        removeTab={this.removeTab} />
+      <TrafficLights />
+      <PaneList
+        tabs={this.state.tabs}
+        currentTabId={this.state.currentTabId}
+        changeTitle={this.changeTitle}
+        markUnread={this.markUnread}
+        removeSession={this.removeSession}
+        selectSession={this.selectSession} />
+    </archipelago-app>
   }
 
   componentWillUnmount() {

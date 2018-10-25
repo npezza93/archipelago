@@ -1,15 +1,18 @@
 import React from 'react'
+import autoBind from 'auto-bind'
 
 export default class HamburgerMenu extends React.Component {
   constructor(props) {
     super(props)
+    autoBind(this)
+
     this.state = {}
   }
 
   render() {
     return <div>
       {this.backdrop()}
-      <div id="hamburger" onClick={this.handleHamburgerClick.bind(this)}>
+      <div id="hamburger" onClick={this.handleHamburgerClick}>
         <div></div>
         <div style={{width: '11px'}}></div>
       </div>
@@ -18,7 +21,7 @@ export default class HamburgerMenu extends React.Component {
 
   backdrop() {
     return (
-      <div id="backdrop" onClick={this.handleBackdropClick.bind(this)} className={this.backdropClass}>
+      <div id="backdrop" onClick={this.handleBackdropClick} className={this.backdropClass}>
       </div>
     )
   }

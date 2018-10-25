@@ -1,9 +1,11 @@
 import React from 'react'
+import autoBind from 'auto-bind'
 import {ChromePicker} from 'react-color'
 
 export default class ColorField extends React.Component {
   constructor(props) {
     super(props)
+    autoBind(this)
 
     this.state = {active: false}
   }
@@ -43,7 +45,7 @@ export default class ColorField extends React.Component {
       return <div className="color-picker">
         <ChromePicker
           color={this.props.value}
-          onChangeComplete={this.handleChangeComplete.bind(this)} />
+          onChangeComplete={this.handleChangeComplete} />
       </div>
     }
   }

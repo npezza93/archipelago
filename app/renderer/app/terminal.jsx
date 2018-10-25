@@ -2,11 +2,13 @@
 
 import React from 'react'
 import {CompositeDisposable} from 'event-kit'
+import autoBind from 'auto-bind'
 import {debouncer} from '../../common/config-file'
 
 export default class Terminal extends React.Component {
   constructor(props) {
     super(props)
+    autoBind(this)
     this.subscriptions = new CompositeDisposable()
     this.resizeObserver = new ResizeObserver(this.fit)
 
@@ -14,7 +16,7 @@ export default class Terminal extends React.Component {
   }
 
   render() {
-    return <archipelago-terminal ref={this.setRef.bind(this) } />
+    return <archipelago-terminal ref={this.setRef} />
   }
 
   setRef(container) {

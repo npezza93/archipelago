@@ -1,10 +1,12 @@
 import {remote} from 'electron'
 import React from 'react'
+import autoBind from 'auto-bind'
 import Profile from './profile.jsx'
 
 export default class Profiles extends React.Component {
   constructor(props) {
     super(props)
+    autoBind(this)
 
     this.profileManager = remote.getGlobal('profileManager')
     this.state = {
@@ -22,12 +24,12 @@ export default class Profiles extends React.Component {
             <Profile
               key={profile.id}
               profile={profile}
-              removeProfile={this.removeProfile.bind(this)}
-              setActiveProfile={this.setActiveProfile.bind(this)}
+              removeProfile={this.removeProfile}
+              setActiveProfile={this.setActiveProfile}
               activeProfile={this.state.activeProfile} />
           )}
         </div>
-        <div className="new-profile" onClick={this.createProfile.bind(this)}>
+        <div className="new-profile" onClick={this.createProfile}>
           Add New Profile
         </div>
       </archipelago-profiles>

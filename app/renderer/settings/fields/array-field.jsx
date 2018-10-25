@@ -1,7 +1,13 @@
 import React from 'react'
+import autoBind from 'auto-bind'
 import * as coreFields from './core-fields.jsx'
 
 export default class ArrayField extends React.Component {
+  constructor(props) {
+    super(props)
+    autoBind(this)
+  }
+
   render() {
     const elements = this.props.value.map((element, i) =>
       this.renderElement(element, i))
@@ -43,7 +49,7 @@ export default class ArrayField extends React.Component {
   }
 
   addElement() {
-    return <div className="create-array-element" onClick={this.createElement.bind(this)} key="create-array-el">
+    return <div className="create-array-element" onClick={this.createElement} key="create-array-el">
       add new {this.props.property.substring(0, this.props.property.length - 1)}
     </div>
   }

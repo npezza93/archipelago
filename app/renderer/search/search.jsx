@@ -3,6 +3,7 @@
 import ipc from 'electron-better-ipc'
 import React from 'react'
 import {darkMode} from 'electron-util'
+import autoBind from 'auto-bind'
 import Octicon, {ChevronLeft, ChevronRight} from '@githubprimer/octicons-react'
 import TrafficLights from '../traffic-lights.jsx'
 import './styles.css' // eslint-disable-line import/no-unassigned-import
@@ -10,6 +11,7 @@ import './styles.css' // eslint-disable-line import/no-unassigned-import
 export default class Search extends React.Component {
   constructor(props) {
     super(props)
+    autoBind(this)
 
     this.state = {
       isDarkMode: darkMode.isEnabled,
@@ -32,17 +34,17 @@ export default class Search extends React.Component {
         <input autoFocus
           type="text"
           value={this.state.query}
-          onChange={this.handleQueryChange.bind(this)}
-          onKeyPress={this.handleKeyPress.bind(this)} />
+          onChange={this.handleQueryChange}
+          onKeyPress={this.handleKeyPress} />
         <label>Search</label>
         <div className="input-border"></div>
       </input-field>
       <div id="search-buttons">
-        <div id="search-previous-button" onClick={this.searchPrevious.bind(this)}>
+        <div id="search-previous-button" onClick={this.searchPrevious}>
           <Octicon icon={ChevronLeft} />
           Previous
         </div>
-        <div id="search-next-button" onClick={this.searchNext.bind(this)}>
+        <div id="search-next-button" onClick={this.searchNext}>
           Next
           <Octicon icon={ChevronRight} />
         </div>
@@ -53,7 +55,7 @@ export default class Search extends React.Component {
           <input
             type="checkbox"
             checked={this.state.regex}
-            onChange={this.handleRegexChange.bind(this)} />
+            onChange={this.handleRegexChange} />
           <span className="slider"></span>
         </label>
       </switch-field>
@@ -63,7 +65,7 @@ export default class Search extends React.Component {
           <input
             type="checkbox"
             checked={this.state.caseSensitive}
-            onChange={this.handlecaseSensitiveChange.bind(this)} />
+            onChange={this.handlecaseSensitiveChange} />
           <span className="slider"></span>
         </label>
       </switch-field>
@@ -73,7 +75,7 @@ export default class Search extends React.Component {
           <input
             type="checkbox"
             checked={this.state.wholeWord}
-            onChange={this.handlewholeWordChange.bind(this)} />
+            onChange={this.handlewholeWordChange} />
           <span className="slider"></span>
         </label>
       </switch-field>

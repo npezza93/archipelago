@@ -5,6 +5,7 @@ import {CompositeDisposable, Disposable} from 'event-kit'
 import {Terminal} from 'xterm'
 import unescape from 'unescape-js'
 import keystrokeForKeyboardEvent from 'keystroke-for-keyboard-event'
+import autoBind from 'auto-bind'
 import {xtermSettings} from '../../common/config-file'
 
 Terminal.applyAddon(require('xterm/lib/addons/fit/fit'))
@@ -20,8 +21,9 @@ export default class Session {
     this.ptyId = ipc.callMain('pty-create', {sessionId: this.id, sessionWindowId: activeWindow().id})
     this.type = type || 'default'
     this.xterm = new Terminal(this.settings())
+    autoBind(this)
 
-    this.bindDataListeners()
+    this.bindListeners()
   }
 
   get className() {
@@ -156,17 +158,17 @@ export default class Session {
     return this.xterm.addDisposableListener('selection', callback)
   }
 
-  bindDataListeners() {
-    this.xterm.attachCustomKeyEventHandler(this.keybindingHandler.bind(this))
+  bindListeners() {
+    this.xterm.attachCustomKeyEventHandler(this.keybindingHandler)
 
     ipc.on(`pty-data-${this.id}`, (event, data) => this.xterm.write(data))
     this.subscriptions.add(this.onData(data => {
       ipc.send(`pty-write-${this.id}`, data)
     }))
     this.subscriptions.add(this.onTitle(title => this.setTitle(title)))
-    this.subscriptions.add(this.onFocus(this.fit.bind(this)))
-    this.subscriptions.add(this.onFocus(this.resetBlink.bind(this)))
-    this.subscriptions.add(this.onSelection(this.copySelection.bind(this)))
+    this.subscriptions.add(this.onFocus(this.fit))
+    this.subscriptions.add(this.onFocus(this.resetBlink))
+    this.subscriptions.add(this.onSelection(this.copySelection))
 
     ipc.answerMain('setting-changed', ({property, value}) => {
       if (xtermSettings.indexOf(property) >= 0) {

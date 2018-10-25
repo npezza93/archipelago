@@ -1,8 +1,10 @@
 import React from 'react'
+import autoBind from 'auto-bind'
 
 export default class Profile extends React.Component {
   constructor(props) {
     super(props)
+    autoBind(this)
 
     this.state = {editMode: false, name: this.props.profile.name}
   }
@@ -29,7 +31,7 @@ export default class Profile extends React.Component {
       return <input autoFocus type="text" value={this.state.name}
         onFocus={e => e.target.select()}
         onBlur={() => this.setState({editMode: false})}
-        onChange={this.handleInputChange.bind(this)} />
+        onChange={this.handleInputChange} />
     }
 
     return this.state.name
@@ -46,7 +48,7 @@ export default class Profile extends React.Component {
 
   removeProfile() {
     return (
-      <span className="profile-remove" onClick={this.handleRemoveProfile.bind(this)}>
+      <span className="profile-remove" onClick={this.handleRemoveProfile}>
         ×
       </span>
     )

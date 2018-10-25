@@ -2,6 +2,7 @@
 
 import ipc from 'electron-better-ipc'
 import React from 'react'
+import autoBind from 'auto-bind'
 import Tab from '../sessions/tab'
 import Pane from './pane.jsx'
 import 'xterm/dist/xterm.css' // eslint-disable-line import/no-unassigned-import
@@ -10,24 +11,12 @@ import './styles.css' // eslint-disable-line import/no-unassigned-import
 export default class Visor extends React.Component {
   constructor(props) {
     super(props)
+    autoBind(this)
 
     this.state = {tab: new Tab('visor')}
 
     ipc.answerMain('split', direction => this.split(direction))
     ipc.answerMain('close', () => this.state.tab.kill())
-  }
-
-  render() {
-    return <archipelago-visor class={process.platform} data-single-tab-mode>
-      <Pane
-        id={this.state.tab.id}
-        sessionTree={this.state.tab.root}
-        removeSession={this.removeSession.bind(this)}
-        selectSession={this.selectSession.bind(this)} />
-    </archipelago-visor>
-  }
-
-  componentDidMount() {
     const styles = document.documentElement.style
     const styleProperties = {
       fontFamily: '--font-family',
@@ -47,6 +36,16 @@ export default class Visor extends React.Component {
         styles.setProperty(styleProperties[property], value)
       }
     })
+  }
+
+  render() {
+    return <archipelago-visor class={process.platform} data-single-tab-mode>
+      <Pane
+        id={this.state.tab.id}
+        sessionTree={this.state.tab.root}
+        removeSession={this.removeSession}
+        selectSession={this.selectSession} />
+    </archipelago-visor>
   }
 
   componentWillUnmount() {
