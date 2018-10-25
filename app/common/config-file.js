@@ -38,4 +38,24 @@ const xtermSettings = Object.keys(allProperties).filter(property => {
   return allProperties[property].scope === 'xterm'
 })
 
-module.exports = {pref, xtermSettings}
+const debouncer = function (func, wait, immediate) {
+  let timeout
+  return function () {
+    const context = this
+
+    const later = function () {
+      timeout = null
+      if (!immediate) {
+        func.apply(context)
+      }
+    }
+    const callNow = immediate && !timeout
+    clearTimeout(timeout)
+    timeout = setTimeout(later, wait)
+    if (callNow) {
+      func.apply(context)
+    }
+  }
+}
+
+module.exports = {pref, xtermSettings, debouncer}

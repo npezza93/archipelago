@@ -5,7 +5,7 @@ import {CompositeDisposable, Disposable} from 'event-kit'
 import {Terminal} from 'xterm'
 import unescape from 'unescape-js'
 import keystrokeForKeyboardEvent from 'keystroke-for-keyboard-event'
-import {xtermSettings} from '../../common/config-file'
+import {xtermSettings, debouncer} from '../../common/config-file'
 
 Terminal.applyAddon(require('xterm/lib/addons/fit/fit'))
 Terminal.applyAddon(require('xterm/lib/addons/search/search'))
@@ -74,8 +74,10 @@ export default class Session {
   }
 
   fit() {
-    this.xterm.fit()
-    ipc.callMain(`pty-resize-${this.id}`, {cols: this.xterm.cols, rows: this.xterm.rows})
+    debouncer(() => {
+      this.xterm.fit()
+      ipc.callMain(`pty-resize-${this.id}`, {cols: this.xterm.cols, rows: this.xterm.rows})
+    }, 200)()
   }
 
   searchNext(query, options) {
