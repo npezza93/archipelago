@@ -76,7 +76,7 @@ export default class Session {
   fit() {
     debouncer(() => {
       this.xterm.fit()
-      ipc.callMain(`pty-resize-${this.id}`, {cols: this.xterm.cols, rows: this.xterm.rows})
+      ipc.send(`pty-resize-${this.id}`, {cols: this.xterm.cols, rows: this.xterm.rows})
     }, 200)()
   }
 
@@ -161,9 +161,9 @@ export default class Session {
   bindDataListeners() {
     this.xterm.attachCustomKeyEventHandler(this.keybindingHandler.bind(this))
 
-    ipc.answerMain(`pty-data-${this.id}`, data => this.xterm.write(data))
+    ipc.on(`pty-data-${this.id}`, (event, data) => this.xterm.write(data))
     this.subscriptions.add(this.onData(data => {
-      ipc.callMain(`pty-write-${this.id}`, data)
+      ipc.send(`pty-write-${this.id}`, data)
     }))
     this.subscriptions.add(this.onTitle(title => this.setTitle(title)))
     this.subscriptions.add(this.onFocus(this.fit.bind(this)))

@@ -48,15 +48,15 @@ export default class Pty {
     this.sessionWindow = BrowserWindow.getAllWindows().find(browserWindow => {
       return browserWindow.id === sessionWindowId
     })
-    ipc.answerRenderer(`pty-resize-${this.sessionId}`, ({cols, rows}) => {
+    ipc.on(`pty-resize-${this.sessionId}`, (event, {cols, rows}) => {
       this.resize(cols, rows)
     })
-    ipc.answerRenderer(`pty-write-${this.sessionId}`, data => this.write(data))
+    ipc.on(`pty-write-${this.sessionId}`, (event, data) => this.write(data))
     this.pty.on('exit', () => {
       ipc.callRenderer(this.sessionWindow, `pty-exit-${this.sessionId}`)
     })
     this.pty.on('data', data => {
-      ipc.callRenderer(this.sessionWindow, `pty-data-${this.sessionId}`, data)
+      this.sessionWindow.webContents.send(`pty-data-${this.sessionId}`, data)
     })
   }
 
@@ -73,7 +73,9 @@ export default class Pty {
   }
 
   resize(cols, rows) {
-    this.pty.resize(cols, rows)
+    if (Number.isInteger(cols) && Number.isInteger(rows)) {
+      this.pty.resize(cols, rows)
+    }
   }
 
   write(data) {
