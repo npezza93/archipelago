@@ -30,7 +30,6 @@ $ brew cask install archipelago
 ### Download
 
 - [macOS](https://archipelago-terminal.herokuapp.com/download/osx)
-- [Windows](https://archipelago-terminal.herokuapp.com/download/win)
 - [Debian](https://archipelago-terminal.herokuapp.com/download/linux_deb_64)
 - [Fedora](https://archipelago-terminal.herokuapp.com/download/linux_rpm_64)
 - [Other Linux distros](https://archipelago-terminal.herokuapp.com/download/64)
