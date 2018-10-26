@@ -7,6 +7,5 @@
 ## OS Used
 - [ ] Linux
 - [ ] Mac
-- [ ] Windows
 
 ## Version Used

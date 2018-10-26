@@ -1,9 +1,7 @@
 <p align="center">
   <a href="https://github.com/npezza93/archipelago">
-    <img src="https://github.com/npezza93/archipelago/blob/master/.github/logo.png" width="150">
+    <img src="https://raw.githubusercontent.com/npezza93/archipelago/master/.github/logo.png" width="350">
   </a>
-
-  <h3 align="center">Archipelago</h3>
 
   <p align="center">
     Archipelago is an open-source terminal emulator built on web technology.
@@ -43,7 +41,6 @@ Archipelago is compatible with:
 
 - macOS
 - Linux
-- A Windows package is available but not yet tested
 
 ## Contributing
 
@@ -53,11 +50,7 @@ Bug reports and pull requests are welcome on [GitHub](https://github.com/npezza9
 
 Regardless of the platform you are working on, you will need to have Yarn installed. If you have never installed Yarn before, you can find out how [here](https://yarnpkg.com/en/docs/install).
 
-### macOS
-
-1. Clone the repo
-2. yarn
-3. yarn start
+Clone the repo then run `yarn && yarn start` in your console.
 
 ## License
 

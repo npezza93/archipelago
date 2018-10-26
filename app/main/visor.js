@@ -1,11 +1,8 @@
-const {app, BrowserWindow, globalShortcut} = require('electron')
-const electron = require('electron')
-const {CompositeDisposable} = require('event-kit')
-const {pref} = require('../configuration/config-file')
-const ProfileManager = require('../configuration/profile-manager')
+import electron, {app, BrowserWindow, globalShortcut} from 'electron'
+import {CompositeDisposable} from 'event-kit'
+import Color from 'color'
+import {is} from 'electron-util'
 
-const preferences = pref()
-const profileManager = new ProfileManager(preferences)
 const subscriptions = new CompositeDisposable()
 
 let visorWindow = null
@@ -26,10 +23,10 @@ const showVisor = () => {
   visorWindow.setPosition(0, 22, true)
 }
 
-const create = () => {
-  const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize
-
+const create = profileManager => {
   if (visorWindow === null || visorWindow.isDestroyed()) {
+    const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize
+
     isVisorShowing = false
     visorWindow = new BrowserWindow({
       width,
@@ -39,10 +36,15 @@ const create = () => {
       frame: false,
       x: 0,
       y: -parseInt(height * 0.4, 10),
+      backgroundColor: (new Color(profileManager.get('visor.windowBackground'))).hex(),
       vibrancy: profileManager.get('visor.vibrancy')
     })
 
-    visorWindow.loadFile('app/visor/index.html')
+    if (is.development) {
+      visorWindow.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}#visor`)
+    } else {
+      visorWindow.loadURL(`file:///${__dirname}/index.html#visor`)
+    }
 
     visorWindow.on('blur', hideVisor)
     visorWindow.on('closed', () => subscriptions.dispose())
@@ -56,23 +58,27 @@ const create = () => {
   }
 }
 
-app.on('quit', () => {
-  subscriptions.dispose()
-  preferences.dispose()
-})
+const register = profileManager => {
+  globalShortcut.register(profileManager.get('visor.keybinding') || 'F1', () => {
+    create(profileManager)
+    if (isVisorShowing) {
+      hideVisor()
+    } else {
+      showVisor()
+    }
+  })
+}
 
+app.on('quit', () => subscriptions.dispose())
 app.on('will-quit', () => globalShortcut.unregisterAll())
 
-module.exports = {
-  register() {
-    create()
-    globalShortcut.register('F1', () => {
-      create()
-      if (isVisorShowing) {
-        hideVisor()
-      } else {
-        showVisor()
-      }
+export default profileManager => {
+  subscriptions.add(
+    profileManager.onDidChange('visor.keybinding', () => {
+      globalShortcut.unregisterAll()
+      register(profileManager)
     })
-  }
+  )
+
+  register(profileManager)
 }

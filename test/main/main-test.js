@@ -19,7 +19,8 @@ describe('Application launch', function () {
     this.app = new Application({
       path: electron,
       verbose: true,
-      args: [path.join(__dirname, '../../app/main/index.js')]
+      env: {NODE_ENV: 'test'},
+      args: [path.join(__dirname, '../../dist/main/main.js')]
     })
     return this.app.start()
   })
@@ -32,7 +33,7 @@ describe('Application launch', function () {
 
   it('renders with no main process errors', () => {
     return this.app.client.getWindowCount().then(count => {
-      assert.equal(count, 2)
+      assert.equal(count, 1)
     })
   })
 

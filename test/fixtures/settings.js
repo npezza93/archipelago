@@ -3,8 +3,8 @@ const path = require('path')
 const url = require('url')
 const {is} = require('electron-util')
 
-const ProfileManager = require('../../app/configuration/profile-manager')
-const {pref} = require('../../app/configuration/config-file')
+const ProfileManager = require('../../app/main/profile-manager')
+const {pref} = require('../../app/common/config-file')
 
 let settings = null
 const preferences = pref()

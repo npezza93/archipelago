@@ -1,0 +1,119 @@
+*::selection {
+  background: var(--selection-color);
+}
+
+@media (min-resolution: 2dppx) {
+  * {
+    text-rendering: geometricPrecision;
+  }
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #666;
+  border: 3px solid var(--background-color);
+}
+
+::-webkit-scrollbar, ::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+}
+
+:root {
+  --background-color: #000;
+  --selection-color: rgba(255, 255, 255, 0.3);
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --terminal-padding: 5px 0 10px 15px;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: #666;
+  border: 0 solid var(--background-color);
+  border-radius: 0;
+}
+
+html, body, #app, archipelago-visor {
+  height: 100%;
+  -webkit-font-feature-settings: "liga" off, "calt" off;
+}
+
+.hidden {
+  display: none;
+}
+
+.xterm .xterm-viewport {
+  -webkit-transition: all 0.5s;
+  opacity: 0;
+}
+
+.terminal .xterm-viewport {
+  background-color: transparent;
+}
+
+.xterm .xterm-viewport:hover, .xterm.scrolling .xterm-viewport {
+  opacity: 1;
+  -webkit-transition: all 0.5s;
+}
+
+body {
+  margin: 0;
+  background-color: var(--background-color);
+}
+
+archipelago-terminal {
+  display: flex;
+  flex: 1;
+  height: 100%;
+}
+
+.terminal {
+  width: 100%;
+}
+
+.xterm {
+  background-color: transparent;
+  padding: var(--terminal-padding);
+}
+
+archipelago-visor {
+  display: flex;
+  flex-direction: column;
+}
+
+archipelago-pane {
+  margin: 0;
+  overflow-y: hidden;
+  display: block;
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+
+.Resizer.horizontal, .Resizer.vertical {
+  background-color: var(--background-color);
+  filter: invert(50%);
+  box-sizing: border-box;
+  z-index: 1;
+  background-clip: padding-box;
+  flex-shrink: 0;
+}
+.Resizer.horizontal {
+  height: 7px;
+  border-top: 3px solid rgba(255, 255, 255, 0);
+  border-bottom: 3px solid rgba(255, 255, 255, 0);
+  cursor: row-resize;
+  width: 100%;
+}
+
+.Pane.Pane2.horizontal {
+  display: flex;
+}
+
+.Resizer.vertical {
+  width: 7px;
+  margin: 0 -3px;
+  border-left: 3px solid rgba(255, 255, 255, 0);
+  border-right: 3px solid rgba(255, 255, 255, 0);
+  cursor: col-resize;
+}

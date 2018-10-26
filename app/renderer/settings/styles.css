@@ -1,0 +1,576 @@
+@font-face {
+  font-family: AdamPro;
+  src: url("../fonts/adam_pro.otf") format("opentype");
+}
+#settings {
+  --color: #424242;
+  --accent-color: #9E9E9E;
+  --background-color: #F5F5F5;
+  --opaque-background: rgba(245, 245, 245, 0.2);
+  --opaque-color: rgba(66, 66, 66, 0.5);
+}
+#settings[data-theme^="dark"] {
+  --color: #F5F5F5;
+  --accent-color: #BDBDBD;
+  --background-color: #393736;
+  --opaque-background: rgba(57, 55, 54, 0.2);
+  --opaque-color: rgba(238, 238, 238, 0.5);
+}
+
+select-field select {
+  width: 100%;
+  transition: transform 250ms ease-in-out;
+  font-size: 24px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !important;
+  font-weight: 300;
+  z-index: 1;
+  padding: 20px 26px 4px 0;
+  -webkit-font-smoothing: antialiased;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid var(--accent-color);
+  border-radius: 0;
+  outline: none;
+  background-color: transparent;
+  white-space: nowrap;
+  cursor: pointer;
+  -webkit-appearance: none;
+  color: var(--color);
+}
+select-field {
+  position: relative;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+  height: 52px;
+}
+select-field svg {
+  position: absolute;
+  right: 8px;
+  bottom: 12px;
+  content: '\25BE';
+}
+select-field svg path {
+  fill: var(--accent-color);
+}
+select-field label {
+  color: var(--accent-color);
+  font-size: 15px;
+  position: absolute;
+  left: 0;
+  bottom: 34px;
+  transition: all 250ms ease-in-out;
+  z-index: 1;
+}
+
+switch-field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 24px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !important;
+  font-weight: 300;
+  position: relative;
+  margin-bottom: 15px;
+  color: var(--color);
+}
+switch-field input {
+  display:none;
+}
+switch-field label {
+  display: inline-block;
+  width: 50px;
+  height: 22px;
+  position: relative;
+}
+switch-field .slider {
+  cursor: pointer;
+  top: 12px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-bottom: 1px solid var(--accent-color);
+  transition: .4s;
+  border-radius: 30px;
+  height: 1px;
+  width: 50px;
+  position: absolute;
+}
+switch-field .slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 0px;
+  top: -10px;
+  background-color: var(--background-color);
+  transition: .4s;
+  border-radius: 30px;
+  border: 1px solid #FF1744;
+}
+switch-field input:checked + .slider:before {
+  transform: translateX(28px);
+  border: 1px solid #00E676;
+}
+
+input-field {
+  position: relative;
+  display: block;
+  margin-bottom: 15px;
+}
+input-field label {
+  color: var(--accent-color);
+  font-size: 15px;
+  position: absolute;
+  left: 0;
+  bottom: 34px;
+  transition: all 250ms ease-in-out;
+  z-index: 1;
+}
+input[type='text'] {
+  width: 100%;
+  color: var(--color);
+  margin-top: 5px;
+  border: none;
+  border-bottom: 1px solid var(--accent-color);
+  padding: 0px;
+  padding-bottom: 5px;
+  outline: none;
+  transition: transform 250ms ease-in-out;
+  font-size: 24px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !important;
+  font-weight: 300;
+  z-index: 1;
+  background: transparent;
+}
+input-field input[type='text'][value=''] + label {
+  bottom: 5px;
+  font-size: 24px;
+  font-weight: 300;
+}
+.input-border:after {
+    display: block;
+    content: '';
+    border-bottom: solid 1px var(--accent-color);
+    transform: scaleX(0);
+    transition: transform 250ms ease-in-out;
+    transform-origin: 0% 50%;
+    z-index: 1;
+  }
+input:focus + label + .input-border:after {
+  transform: scaleX(1);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar, ::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background-color);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color);
+  border: 3px solid var(--background-color);
+}
+::-webkit-scrollbar-thumb:active {
+  background: var(--color);
+  border: 0 solid var(--background-color);
+  border-radius: 0;
+}
+
+html, body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  text-rendering: geometricPrecision;
+  -webkit-font-feature-settings: "liga" off, "calt" off;
+  -webkit-font-smoothing: subpixel-antialiased;
+  margin: 0;
+}
+#settings .options-container {
+  background-color: var(--background-color);
+  color: #424242;
+}
+#titlebar {
+  height: 40px;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-app-region: drag;
+  align-items: center;
+  user-select: none;
+  cursor: default;
+  font-size: 15px;
+}
+
+.form-container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+}
+
+/* Profiles */
+archipelago-profiles {
+  height: 100vh;
+  width: 275px;
+  background-image: linear-gradient(to right, #F7F7FA, #ECEEF2);
+  transition: left .5s ease-in-out;
+  left: -275px;
+  position: fixed;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+archipelago-profiles.active {
+  left: 0px;
+}
+archipelago-profiles ::-webkit-scrollbar-thumb {
+  background: #666;
+  border: 3px solid #ECEEF2;
+}
+archipelago-profiles ::-webkit-scrollbar, archipelago-profiles ::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+}
+archipelago-profiles ::-webkit-scrollbar-thumb:active {
+  background: #666;
+  border: 0 solid #ECEEF2;
+  border-radius: 0;
+}
+archipelago-profiles .profile-header {
+  font-family: AdamPro;
+  letter-spacing: 1px;
+  color: #889199;
+  font-size: 14px;
+  padding: 80px 36px 24px 36px;
+}
+archipelago-profiles .profile-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+archipelago-profiles .profile-list archipelago-profile {
+  padding: 16px 36px 16px 36px;
+  cursor: pointer;
+  transition: all .2s ease-in-out;
+  font-weight: 400;
+  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 16px;
+  position: relative;
+  z-index: 15;
+}
+archipelago-profiles .profile-list archipelago-profile .profile-remove {
+  position: absolute;
+  left: 15px;
+  bottom: 17px;
+  visibility: hidden;
+  z-index: 20;
+  transition: opacity .5s ease-in-out, visibility .5s ease-in-out;
+  cursor: pointer;
+  opacity: 0;
+}
+archipelago-profiles .profile-list archipelago-profile:hover .profile-remove {
+  opacity: 1;
+  visibility: visible;
+}
+archipelago-profiles .profile-list archipelago-profile.active, archipelago-profiles .profile-list archipelago-profile:hover {
+  background: rgba(0, 0, 0, .16);
+}
+archipelago-profiles .profile-list archipelago-profile input {
+  border: 0;
+  background: transparent;
+  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 16px;
+  font-weight: 400;
+  padding: 0;
+  margin-top: 0;
+}
+archipelago-profiles .new-profile {
+  height: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  transition: all .2s ease-in-out;
+  cursor: pointer;
+  color: #889199;
+  font-family: AdamPro;
+  letter-spacing: 2px;
+}
+archipelago-profiles .new-profile:hover {
+  color: #424242;
+}
+
+/* Options */
+
+.options-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 275px;
+  width: calc(100% - 275px);
+  flex: 1;
+  transition: left .5s ease-in-out, width .5s ease-in-out;
+  overflow-y: scroll;
+}
+
+archipelago-properties-pane {
+  display: block;
+  height: 100%;
+}
+
+archipelago-properties-pane archipelago-header {
+  padding-left: 75px;
+  height: 125px;
+  position: fixed;
+  width: calc(100% - 362px);
+  background-color: var(--opaque-background);
+  z-index: 2;
+  font-family: AdamPro;
+  letter-spacing: 2px;
+}
+
+archipelago-properties-pane archipelago-header::before {
+  content: " ";
+  backdrop-filter: blur(4px);
+  position: absolute;
+  top: 0;
+  left: 1px;
+  width: calc(100% - 2px);
+  height: 100%;
+  z-index: -1;
+}
+
+archipelago-properties-pane archipelago-header div,
+archipelago-properties-pane archipelago-header div[position = "0"] {
+  font-size: 32px;
+  color: var(--color);
+  position: absolute;
+  top: 60px;
+  transition: all .3s ease-in-out;
+  opacity: 1;
+}
+
+archipelago-properties-pane archipelago-header div[position = "-2"] {
+  font-size: 11px;
+  font-weight: 500;
+  color: #889199;
+  top: 27px;
+  opacity: 0;
+  transition: all .3s ease-in-out;
+}
+
+archipelago-properties-pane archipelago-header div[position = "-1"] {
+  font-size: 16px;
+  color: #889199;
+  top: 37px;
+  transition: all .3s ease-in-out;
+}
+
+archipelago-properties-pane archipelago-header div[position = "1"] {
+  opacity: 0;
+  top: 113px;
+  font-size: 36px;
+}
+
+archipelago-properties-pane archipelago-header::after {
+  content: " ";
+  backdrop-filter: blur(2px);
+  position: absolute;
+  bottom: -5px;
+  left: 1px;
+  width: calc(100% - 2px);
+  height: 10px;
+  z-index: -1;
+}
+
+/* General Options */
+
+archipelago-properties-pane > div {
+  height: 100%;
+}
+
+archipelago-properties-pane archipelago-properties-section {
+  margin: 130px 75px 0 75px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100% - 130px);
+}
+
+archipelago-properties-pane archipelago-properties-section archipelago-properties-section-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-column-gap: 100px;
+  grid-row-gap: 20px;
+  width: 100%;
+  max-width: 350px;
+}
+
+archipelago-properties-pane archipelago-properties-section .vibrancy-option {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+  color: rgba(0, 0, 0, .5);
+  width: 100%;
+}
+
+archipelago-properties-pane .color-picker {
+  position: absolute;
+  top: 39px;
+  width: 100%;
+}
+
+archipelago-properties-pane .color-picker .chrome-picker {
+  width: 100% !important;
+  border-radius: 0px !important;
+}
+
+archipelago-properties-pane .color-picker .chrome-picker div:first-child {
+  border-radius: 0px !important;
+}
+
+/* Keybindings */
+
+archipelago-properties-pane .array-element-container {
+  display: flex;
+  position: relative;
+}
+
+archipelago-properties-pane .array-element-container .remove-array-element {
+  position: absolute;
+  right: 0;
+  top: -10px;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .5s ease-in-out, visibility .5s ease-in-out;
+}
+
+archipelago-properties-pane .array-element-container:hover .remove-array-element {
+  opacity: 1;
+  visibility: visible;
+}
+
+archipelago-properties-pane .array-element-container div:first-child {
+  margin-right: 5px;
+}
+
+archipelago-properties-pane .array-element-container div:nth-child(2) {
+  margin-left: 5px;
+}
+
+archipelago-properties-pane .create-array-element {
+  height: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  transition: all .2s ease-in-out;
+  cursor: pointer;
+  color: #889199;
+  font-family: AdamPro;
+  letter-spacing: 2px;
+}
+
+archipelago-properties-pane .create-array-element:hover {
+  color: #424242;
+}
+
+#hamburger {
+  width: 16px;
+  height: 11px;
+  top: 46px;
+  left: 32px;
+  cursor: pointer;
+  visibility: hidden;
+  opacity: 0;
+  flex-direction: column;
+  justify-content: space-around;
+  position: fixed;
+  display: flex;
+  transition: opacity .5s ease-in-out, visibility .5s ease-in-out;
+  z-index: 10;
+}
+
+#hamburger div {
+  height: 2px;
+  background: var(--color);
+  border-radius: 1px;
+}
+
+#backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: var(--opaque-color);
+  z-index: 3;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .5s ease-in-out, visibility .5s ease-in-out;
+  width: 100vw;
+}
+#backdrop.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+@media (max-width: 700px) {
+
+  archipelago-profiles {
+    left: -275px;
+  }
+
+  .options-container {
+    left: 0;
+    width: 100%;
+  }
+
+  #hamburger {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  archipelago-properties-pane archipelago-header {
+    width: calc(100% - 87px);
+  }
+}
+
+@media (min-width: 699px) {
+
+  archipelago-profiles {
+    left: 0 !important;
+  }
+
+  #backdrop {
+    display: none !important;
+  }
+}
+
+/* Traffic Lights */
+minimize-button {
+  top: 46px !important;
+  right: 128px !important;
+  z-index: 100 !important;
+}
+minimize-button div {
+  height: 2px !important;
+}
+maximize-button {
+  top: 46px !important;
+  right: 80px !important;
+  z-index: 100 !important;
+  border: 2px solid #000 !important;
+}
+close-button {
+  top: 46px !important;
+  right: 32px !important;
+  z-index: 100 !important;
+}
+close-button div {
+  height: 2px !important;
+}

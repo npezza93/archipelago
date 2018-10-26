@@ -1,28 +1,22 @@
-const {BrowserWindow} = require('electron')
-const {api, platform} = require('electron-util')
-const ipc = require('electron-better-ipc')
-const {spawn} = require('node-pty')
+/* global profileManager */
 
-const ProfileManager = require('../configuration/profile-manager')
+import {api, platform} from 'electron-util'
+import {spawn} from 'node-pty'
+import {Disposable} from 'event-kit'
 
-module.exports =
-class Pty {
-  constructor(pref) {
+export default class Pty {
+  constructor() {
     this.id = Math.random()
-    this.profileManager = new ProfileManager(pref)
-    this.pref = pref
 
     this.pty = spawn(
       this.shell,
-      this.profileManager.get('shellArgs').split(','),
+      profileManager.get('shellArgs').split(','),
       this.sessionArgs
     )
-
-    this.bindDataListeners()
   }
 
   get shell() {
-    return this.profileManager.get('shell') ||
+    return profileManager.get('shell') ||
       process.env[platform({windows: 'COMSPEC', default: 'SHELL'})]
   }
 
@@ -39,35 +33,32 @@ class Pty {
     }
   }
 
-  kill() {
-    this.pty.removeAllListeners('data')
-    this.pty.removeAllListeners('exit')
-    this.pty.kill()
-    this.pref.events.dispose()
+  async kill() {
+    await new Promise(resolve => {
+      this.pty.removeAllListeners('data')
+      this.pty.removeAllListeners('exit')
+      this.pty.kill()
+      resolve()
+    })
   }
 
   onExit(callback) {
     this.pty.on('exit', callback)
+
+    return new Disposable(() => this.pty.removeListener('exit', callback))
   }
 
   onData(callback) {
     this.pty.on('data', callback)
+
+    return new Disposable(() => this.pty.removeListener('data', callback))
   }
 
-  bindDataListeners() {
-    ipc.answerRenderer(`resize-${this.id}`, ({cols, rows}) => this.pty.resize(cols, rows))
-    ipc.answerRenderer(`write-${this.id}`, data => this.pty.write(data))
+  resize(cols, rows) {
+    this.pty.resize(cols, rows)
+  }
 
-    this.onExit(() => {
-      for (const window of BrowserWindow.getAllWindows()) {
-        ipc.callRenderer(window, `exit-${this.id}`)
-      }
-    })
-
-    this.onData(data => {
-      for (const window of BrowserWindow.getAllWindows()) {
-        ipc.callRenderer(window, `write-${this.id}`, data)
-      }
-    })
+  write(data) {
+    this.pty.write(data)
   }
 }
