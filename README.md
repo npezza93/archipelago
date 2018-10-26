@@ -19,7 +19,15 @@ Hyper was by far the coolest, best looking, and extensible terminal emulator I h
 
 ![Screenshot](https://raw.githubusercontent.com/npezza93/archipelago/master/.github/screenshot.png)
 
-## Download
+## Get Archipelago
+
+### Homebrew
+```
+$ brew tap caskroom/cask
+$ brew cask install archipelago
+```
+
+### Download
 -   [macOS](https://archipelago-terminal.herokuapp.com/download/osx)
 -   [Windows](https://archipelago-terminal.herokuapp.com/download/win)
 -   [Debian](https://archipelago-terminal.herokuapp.com/download/linux_deb_64)
