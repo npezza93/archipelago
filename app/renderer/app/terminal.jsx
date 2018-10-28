@@ -3,7 +3,7 @@
 import React from 'react'
 import {CompositeDisposable} from 'event-kit'
 import autoBind from 'auto-bind'
-import {debouncer} from '../../common/config-file'
+import debouncer from 'debounce-fn'
 
 export default class Terminal extends React.Component {
   constructor(props) {
@@ -25,7 +25,7 @@ export default class Terminal extends React.Component {
 
   fit() {
     if (this.props.tabId === this.props.currentTabId) {
-      debouncer(() => this.props.session.fit(), 200)()
+      debouncer(() => this.props.session.fit(), {wait: 200})()
     }
   }
 

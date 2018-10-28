@@ -32,18 +32,4 @@ const pref = () => {
   })
 }
 
-const debouncer = function (func, wait) {
-  let timeout
-  return function () {
-    const context = this
-
-    const later = function () {
-      timeout = null
-      func.apply(context)
-    }
-    clearTimeout(timeout)
-    timeout = setTimeout(later, wait)
-  }
-}
-
-module.exports = {pref, debouncer}
+module.exports = {pref}
