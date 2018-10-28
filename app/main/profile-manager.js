@@ -7,28 +7,7 @@ import Profile from './profile'
 export default class ProfileManager {
   constructor(configFile) {
     this.configFile = configFile
-
-    ipc.answerRenderer('single-tab-mode', () => this.get('singleTabMode'))
-    ipc.answerRenderer('change-setting', ({property, value}) => {
-      this.set(property, value)
-      for (const window of BrowserWindow.getAllWindows()) {
-        ipc.callRenderer(window, 'setting-changed', {property, value})
-      }
-    })
-    ipc.answerRenderer('css-settings', () => {
-      return this.cssSettings.reduce((settings, property) => {
-        settings[property] = this.get(property)
-        return settings
-      }, {})
-    })
-    ipc.answerRenderer('visor-css-settings', () => {
-      return this.visorCssSettings.reduce((settings, property) => {
-        settings[property] = this.get(property)
-        return settings
-      }, {})
-    })
-    ipc.answerRenderer('copy-on-select', () => this.get('copyOnSelect'))
-    ipc.answerRenderer('cursor-blink', () => this.get('cursorBlink'))
+    this.bindListeners()
   }
 
   set activeProfileId(id) {
@@ -140,6 +119,30 @@ export default class ProfileManager {
       this.configFile.set('profiles', [])
       this.create()
     }
+  }
+
+  bindListeners() {
+    ipc.answerRenderer('single-tab-mode', () => this.get('singleTabMode'))
+    ipc.answerRenderer('change-setting', ({property, value}) => {
+      this.set(property, value)
+      for (const window of BrowserWindow.getAllWindows()) {
+        ipc.callRenderer(window, 'setting-changed', {property, value})
+      }
+    })
+    ipc.answerRenderer('css-settings', () => {
+      return this.cssSettings.reduce((settings, property) => {
+        settings[property] = this.get(property)
+        return settings
+      }, {})
+    })
+    ipc.answerRenderer('visor-css-settings', () => {
+      return this.visorCssSettings.reduce((settings, property) => {
+        settings[property] = this.get(property)
+        return settings
+      }, {})
+    })
+    ipc.answerRenderer('copy-on-select', () => this.get('copyOnSelect'))
+    ipc.answerRenderer('cursor-blink', () => this.get('cursorBlink'))
   }
 
   get cssSettings() {
