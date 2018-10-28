@@ -32,12 +32,6 @@ const pref = () => {
   })
 }
 
-const allProperties = schema.properties.profiles.items.properties
-
-const xtermSettings = Object.keys(allProperties).filter(property => {
-  return allProperties[property].scope === 'xterm'
-})
-
 const debouncer = function (func, wait) {
   let timeout
   return function () {
@@ -52,4 +46,4 @@ const debouncer = function (func, wait) {
   }
 }
 
-module.exports = {pref, xtermSettings, debouncer}
+module.exports = {pref, debouncer}
