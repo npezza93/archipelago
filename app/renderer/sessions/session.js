@@ -1,4 +1,4 @@
-import {clipboard, remote} from 'electron'
+import {clipboard} from 'electron'
 import ipc from 'electron-better-ipc'
 import {activeWindow} from 'electron-util'
 import {CompositeDisposable, Disposable} from 'event-kit'
@@ -6,7 +6,7 @@ import {Terminal} from 'xterm'
 import unescape from 'unescape-js'
 import keystrokeForKeyboardEvent from 'keystroke-for-keyboard-event'
 import autoBind from 'auto-bind'
-import {xtermSettings} from '../../common/config-file'
+import CurrentProfile from './current-profile'
 
 Terminal.applyAddon(require('xterm/lib/addons/fit/fit'))
 Terminal.applyAddon(require('xterm/lib/addons/search/search'))
@@ -14,7 +14,7 @@ Terminal.applyAddon(require('xterm/lib/addons/search/search'))
 export default class Session {
   constructor(type, branch) {
     this.branch = branch
-    this.profileManager = remote.getGlobal('profileManager')
+    this.currentProfile = new CurrentProfile()
     this.id = Math.random()
     this.subscriptions = new CompositeDisposable()
     this.title = ''
@@ -36,7 +36,7 @@ export default class Session {
     }
 
     this._keymaps =
-      this.profileManager.get('keybindings').reduce((result, item) => {
+      this.currentProfile.get('keybindings').reduce((result, item) => {
         result[item.keystroke] = unescape(item.command)
         return result
       }, {})
@@ -46,8 +46,8 @@ export default class Session {
 
   settings() {
     return this.applySettingModifiers(
-      xtermSettings.reduce((settings, property) => {
-        settings[property] = this.profileManager.get(property)
+      this.currentProfile.xtermSettings.reduce((settings, property) => {
+        settings[property] = this.currentProfile.get(property)
         return settings
       }, {})
     )
@@ -55,8 +55,8 @@ export default class Session {
 
   applySettingModifiers(defaultSettings) {
     if (this.type === 'visor') {
-      defaultSettings.allowTransparency = this.profileManager.get('visor.allowTransparency')
-      defaultSettings.theme.background = this.profileManager.get('visor.background')
+      defaultSettings.allowTransparency = this.currentProfile.get('visor.allowTransparency')
+      defaultSettings.theme.background = this.currentProfile.get('visor.background')
     }
 
     return defaultSettings
@@ -93,7 +93,7 @@ export default class Session {
     const mapping = this.keymaps[keystrokeForKeyboardEvent(e)]
 
     if (mapping) {
-      ipc.callMain(`pty-write-${this.id}`, mapping)
+      ipc.send(`pty-write-${this.id}`, mapping)
       caught = true
     }
 
@@ -171,7 +171,7 @@ export default class Session {
     this.subscriptions.add(this.onSelection(this.copySelection))
 
     ipc.answerMain('setting-changed', ({property, value}) => {
-      if (xtermSettings.indexOf(property) >= 0) {
+      if (this.currentProfile.xtermSettings.indexOf(property) >= 0) {
         this.xterm.setOption(property, value)
       }
     })
