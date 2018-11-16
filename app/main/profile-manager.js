@@ -1,10 +1,13 @@
+import {BrowserWindow} from 'electron'
 import {isDeepStrictEqual} from 'util'
 import {platform} from 'electron-util'
+import ipc from 'electron-better-ipc'
 import Profile from './profile'
 
 export default class ProfileManager {
   constructor(configFile) {
     this.configFile = configFile
+    this.bindListeners()
   }
 
   set activeProfileId(id) {
@@ -46,7 +49,7 @@ export default class ProfileManager {
     this.configFile.set(`profiles.${index}`, {id, keybindings: this.defaultKeybindings, theme: {}, visor: {}})
     this.configFile.set('activeProfileId', id)
 
-    return this.find(id)
+    return id
   }
 
   validate() {
@@ -116,6 +119,72 @@ export default class ProfileManager {
       this.configFile.set('profiles', [])
       this.create()
     }
+  }
+
+  bindListeners() {
+    ipc.answerRenderer('single-tab-mode', () => this.get('singleTabMode'))
+    ipc.answerRenderer('change-setting', ({property, value}) => {
+      this.set(property, value)
+      for (const window of BrowserWindow.getAllWindows()) {
+        ipc.callRenderer(window, 'setting-changed', {property, value})
+      }
+    })
+    ipc.answerRenderer('css-settings', () => {
+      return this.cssSettings.reduce((settings, property) => {
+        settings[property] = this.get(property)
+        return settings
+      }, {})
+    })
+    ipc.answerRenderer('visor-css-settings', () => {
+      return this.visorCssSettings.reduce((settings, property) => {
+        settings[property] = this.get(property)
+        return settings
+      }, {})
+    })
+    ipc.answerRenderer('copy-on-select', () => this.get('copyOnSelect'))
+    ipc.answerRenderer('cursor-blink', () => this.get('cursorBlink'))
+    ipc.answerRenderer('set-profile-name', ({id, name}) => {
+      this.find(id).name = name
+    })
+    ipc.answerRenderer('set-active-profile', id => {
+      this.activeProfileId = id
+    })
+    ipc.answerRenderer('create-profile', () => {
+      const newProfileId = this.create()
+      const profiles = this.rawProfiles
+
+      return {profiles, activeProfileId: newProfileId}
+    })
+    ipc.answerRenderer('remove-profile', id => {
+      if (this.activeProfile().id === id) {
+        const newActiveProfileId = this.profileIds.find(profileId => {
+          return profileId !== id
+        })
+        this.resetActiveProfile(newActiveProfileId)
+      }
+
+      this.find(id).destroy()
+
+      return {profiles: this.rawProfiles, activeProfileId: this.activeProfile().id}
+    })
+  }
+
+  get cssSettings() {
+    return ['fontFamily',
+      'windowBackground',
+      'tabColor',
+      'tabBorderColor',
+      'fontSize',
+      'padding',
+      'theme.selection']
+  }
+
+  get visorCssSettings() {
+    return ['fontFamily',
+      'visor.windowBackground',
+      'fontSize',
+      'visor.padding',
+      'theme.selection']
   }
 
   get defaultKeybindings() {

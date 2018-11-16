@@ -1,5 +1,5 @@
-import {BrowserWindow, systemPreferences} from 'electron'
-import {is} from 'electron-util'
+import {BrowserWindow} from 'electron'
+import {is, darkMode} from 'electron-util'
 import ipc from 'electron-better-ipc'
 
 let searchWindow = null
@@ -14,7 +14,7 @@ export default {
         x: currentPosition[0] - 300,
         y: currentPosition[1],
         titleBarStyle: 'hiddenInset',
-        backgroundColor: systemPreferences.isDarkMode() ? '#393736' : '#F5F5F5',
+        backgroundColor: darkMode.isEnabled ? '#393736' : '#F5F5F5',
         frame: is.macos
       })
 

@@ -1,22 +1,23 @@
-/* global profileManager */
-
+import {BrowserWindow} from 'electron'
 import {api, platform} from 'electron-util'
+import ipc from 'electron-better-ipc'
 import {spawn} from 'node-pty'
 import {Disposable} from 'event-kit'
 
 export default class Pty {
-  constructor() {
+  constructor(profileManager) {
     this.id = Math.random()
+    this.profileManager = profileManager
 
     this.pty = spawn(
       this.shell,
-      profileManager.get('shellArgs').split(','),
+      this.profileManager.get('shellArgs').split(','),
       this.sessionArgs
     )
   }
 
   get shell() {
-    return profileManager.get('shell') ||
+    return this.profileManager.get('shell') ||
       process.env[platform({windows: 'COMSPEC', default: 'SHELL'})]
   }
 
@@ -42,6 +43,23 @@ export default class Pty {
     })
   }
 
+  created(sessionId, sessionWindowId) {
+    this.sessionId = sessionId
+    this.sessionWindow = BrowserWindow.getAllWindows().find(browserWindow => {
+      return browserWindow.id === sessionWindowId
+    })
+    ipc.on(`pty-resize-${this.sessionId}`, (event, {cols, rows}) => {
+      this.resize(cols, rows)
+    })
+    ipc.on(`pty-write-${this.sessionId}`, (event, data) => this.write(data))
+    this.pty.on('exit', () => {
+      ipc.callRenderer(this.sessionWindow, `pty-exit-${this.sessionId}`)
+    })
+    this.pty.on('data', data => {
+      this.sessionWindow.webContents.send(`pty-data-${this.sessionId}`, data)
+    })
+  }
+
   onExit(callback) {
     this.pty.on('exit', callback)
 
@@ -55,7 +73,9 @@ export default class Pty {
   }
 
   resize(cols, rows) {
-    this.pty.resize(cols, rows)
+    if (Number.isInteger(cols) && Number.isInteger(rows)) {
+      this.pty.resize(cols, rows)
+    }
   }
 
   write(data) {

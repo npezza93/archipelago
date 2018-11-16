@@ -1,8 +1,7 @@
 /* global window */
 
-import {remote} from 'electron'
 import ipc from 'electron-better-ipc'
-import {api} from 'electron-util'
+import {api, darkMode} from 'electron-util'
 import React from 'react'
 import TrafficLights from '../traffic-lights.jsx'
 import './styles.css' // eslint-disable-line import/no-unassigned-import
@@ -11,13 +10,10 @@ export default class About extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = {isDarkMode: remote.systemPreferences.isDarkMode()}
+    this.state = {isDarkMode: darkMode.isEnabled}
 
     ipc.answerMain('close-current-tab', () => window.close())
-    remote.systemPreferences.subscribeNotification(
-      'AppleInterfaceThemeChangedNotification',
-      () => this.setState({isDarkMode: remote.systemPreferences.isDarkMode()}),
-    )
+    darkMode.onChange(() => this.setState({isDarkMode: darkMode.isEnabled}))
   }
 
   render() {

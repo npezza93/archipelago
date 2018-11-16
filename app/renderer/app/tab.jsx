@@ -1,10 +1,16 @@
 import React from 'react'
+import autoBind from 'auto-bind'
 
 export default class Tab extends React.Component {
+  constructor(props) {
+    super(props)
+    autoBind(this)
+  }
+
   render() {
-    return <archipelago-tab class={this.className} onClick={this.handleClick.bind(this)}>
+    return <archipelago-tab class={this.className} onClick={this.handleClick}>
       <span>{this.props.title || 'Loading...'}</span>
-      <div onClick={this.handleExit.bind(this)}>×</div>
+      <div onClick={this.handleExit}>×</div>
     </archipelago-tab>
   }
 

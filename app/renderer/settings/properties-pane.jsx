@@ -1,6 +1,7 @@
 /* global requestIdleCallback */
 
 import React from 'react'
+import autoBind from 'auto-bind'
 import schema from '../../common/schema'
 import Header from './header.jsx'
 import PropertiesSection from './properties-section.jsx'
@@ -8,8 +9,9 @@ import PropertiesSection from './properties-section.jsx'
 export default class PropertiesPane extends React.Component {
   constructor(props) {
     super(props)
-    this.headings = Object.keys(this.scopes())
+    autoBind(this)
 
+    this.headings = Object.keys(this.scopes())
     this.state = {
       headings: this.headings.reduce((headingState, heading) => {
         headingState[this.headings.indexOf(heading)] = heading
@@ -27,7 +29,8 @@ export default class PropertiesPane extends React.Component {
           scope={scope}
           key={scope}
           properties={this.scopes()[scope]}
-          handleChange={this.handleChange.bind(this)} />
+          handleChange={this.handleChange}
+          currentProfile={this.props.currentProfile} />
       )}
     </archipelago-properties-pane>
   }

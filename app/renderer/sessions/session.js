@@ -1,9 +1,12 @@
-import {clipboard, remote} from 'electron'
+import {clipboard} from 'electron'
+import ipc from 'electron-better-ipc'
+import {activeWindow} from 'electron-util'
 import {CompositeDisposable, Disposable} from 'event-kit'
 import {Terminal} from 'xterm'
 import unescape from 'unescape-js'
 import keystrokeForKeyboardEvent from 'keystroke-for-keyboard-event'
-import {xtermSettings} from '../../common/config-file'
+import autoBind from 'auto-bind'
+import CurrentProfile from './current-profile'
 
 Terminal.applyAddon(require('xterm/lib/addons/fit/fit'))
 Terminal.applyAddon(require('xterm/lib/addons/search/search'))
@@ -11,15 +14,16 @@ Terminal.applyAddon(require('xterm/lib/addons/search/search'))
 export default class Session {
   constructor(type, branch) {
     this.branch = branch
-    this.profileManager = remote.getGlobal('profileManager')
+    this.currentProfile = new CurrentProfile()
     this.id = Math.random()
     this.subscriptions = new CompositeDisposable()
     this.title = ''
-    this.pty = remote.getGlobal('ptyManager').make()
+    this.ptyId = ipc.callMain('pty-create', {sessionId: this.id, sessionWindowId: activeWindow().id})
     this.type = type || 'default'
     this.xterm = new Terminal(this.settings())
+    autoBind(this)
 
-    this.bindDataListeners()
+    this.bindListeners()
   }
 
   get className() {
@@ -32,7 +36,7 @@ export default class Session {
     }
 
     this._keymaps =
-      this.profileManager.get('keybindings').reduce((result, item) => {
+      this.currentProfile.get('keybindings').reduce((result, item) => {
         result[item.keystroke] = unescape(item.command)
         return result
       }, {})
@@ -42,8 +46,8 @@ export default class Session {
 
   settings() {
     return this.applySettingModifiers(
-      xtermSettings.reduce((settings, property) => {
-        settings[property] = this.profileManager.get(property)
+      this.currentProfile.xtermSettings.reduce((settings, property) => {
+        settings[property] = this.currentProfile.get(property)
         return settings
       }, {})
     )
@@ -51,8 +55,8 @@ export default class Session {
 
   applySettingModifiers(defaultSettings) {
     if (this.type === 'visor') {
-      defaultSettings.allowTransparency = this.profileManager.get('visor.allowTransparency')
-      defaultSettings.theme.background = this.profileManager.get('visor.background')
+      defaultSettings.allowTransparency = this.currentProfile.get('visor.allowTransparency')
+      defaultSettings.theme.background = this.currentProfile.get('visor.background')
     }
 
     return defaultSettings
@@ -66,14 +70,14 @@ export default class Session {
     this.subscriptions.dispose()
     this.xterm.dispose()
 
-    const pty = await this.pty
+    const ptyId = await this.ptyId
 
-    remote.getGlobal('ptyManager').kill(pty.id)
+    await ipc.callMain('pty-kill', ptyId)
   }
 
   fit() {
     this.xterm.fit()
-    this.pty.then(pty => pty.resize(this.xterm.cols, this.xterm.rows))
+    ipc.send(`pty-resize-${this.id}`, {cols: this.xterm.cols, rows: this.xterm.rows})
   }
 
   searchNext(query, options) {
@@ -89,7 +93,7 @@ export default class Session {
     const mapping = this.keymaps[keystrokeForKeyboardEvent(e)]
 
     if (mapping) {
-      this.pty.then(pty => pty.write(mapping))
+      ipc.send(`pty-write-${this.id}`, mapping)
       caught = true
     }
 
@@ -118,16 +122,20 @@ export default class Session {
   }
 
   resetBlink() {
-    if (this.profileManager.get('cursorBlink')) {
-      this.xterm.setOption('cursorBlink', false)
-      this.xterm.setOption('cursorBlink', true)
-    }
+    ipc.callMain('cursor-blink').then(cursorBlink => {
+      if (cursorBlink) {
+        this.xterm.setOption('cursorBlink', false)
+        this.xterm.setOption('cursorBlink', true)
+      }
+    })
   }
 
   copySelection() {
-    if (this.profileManager.get('copyOnSelect')) {
-      clipboard.writeText(this.xterm.getSelection())
-    }
+    ipc.callMain('copy-on-select').then(copyOnSelect => {
+      if (copyOnSelect) {
+        clipboard.writeText(this.xterm.getSelection())
+      }
+    })
   }
 
   onFocus(callback) {
@@ -139,7 +147,7 @@ export default class Session {
   }
 
   onExit(callback) {
-    return this.pty.then(pty => pty.onExit(callback))
+    ipc.answerMain(`pty-exit-${this.id}`, callback)
   }
 
   onData(callback) {
@@ -150,24 +158,22 @@ export default class Session {
     return this.xterm.addDisposableListener('selection', callback)
   }
 
-  bindDataListeners() {
-    this.xterm.attachCustomKeyEventHandler(this.keybindingHandler.bind(this))
+  bindListeners() {
+    this.xterm.attachCustomKeyEventHandler(this.keybindingHandler)
 
-    this.pty.then(pty => {
-      this.subscriptions.add(pty.onData(data => this.xterm.write(data)))
-    })
-    this.subscriptions.add(this.onData(data => this.pty.then(pty => pty.write(data))))
+    ipc.on(`pty-data-${this.id}`, (event, data) => this.xterm.write(data))
+    this.subscriptions.add(this.onData(data => {
+      ipc.send(`pty-write-${this.id}`, data)
+    }))
     this.subscriptions.add(this.onTitle(title => this.setTitle(title)))
-    this.subscriptions.add(this.onFocus(this.fit.bind(this)))
-    this.subscriptions.add(this.onFocus(this.resetBlink.bind(this)))
-    this.subscriptions.add(this.onSelection(this.copySelection.bind(this)))
+    this.subscriptions.add(this.onFocus(this.fit))
+    this.subscriptions.add(this.onFocus(this.resetBlink))
+    this.subscriptions.add(this.onSelection(this.copySelection))
 
-    xtermSettings.forEach(field => {
-      this.subscriptions.add(
-        this.profileManager.onDidChange(field, newValue => {
-          this.xterm.setOption(field, newValue)
-        })
-      )
+    ipc.answerMain('setting-changed', ({property, value}) => {
+      if (this.currentProfile.xtermSettings.indexOf(property) >= 0) {
+        this.xterm.setOption(property, value)
+      }
     })
   }
 }

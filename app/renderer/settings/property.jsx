@@ -1,4 +1,4 @@
-import {remote} from 'electron'
+import ipc from 'electron-better-ipc'
 import React from 'react'
 import allFields from './all-fields.jsx'
 
@@ -6,15 +6,7 @@ export default class Property extends React.Component {
   constructor(props) {
     super(props)
 
-    this.profileManager = remote.getGlobal('profileManager')
-    this.state = {value: this.profileManager.get(props.property)}
-    this.props.addSubscription(
-      this.profileManager.onDidChange(this.props.property, newValue => {
-        if (this.state.value !== newValue) {
-          this.setState({value: newValue})
-        }
-      })
-    )
+    this.state = {value: this.props.currentProfile.get(props.property)}
   }
 
   render() {
@@ -25,7 +17,7 @@ export default class Property extends React.Component {
       this.props.schema,
       newValue => {
         this.setState({value: newValue})
-        this.profileManager.set(this.props.property, newValue)
+        ipc.callMain('change-setting', {property: this.props.property, value: newValue})
       }
     )
   }

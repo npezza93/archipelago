@@ -1,9 +1,8 @@
 /* global window, document */
 
-import {remote} from 'electron'
 import ipc from 'electron-better-ipc'
 import React from 'react'
-import {CompositeDisposable} from 'event-kit'
+import autoBind from 'auto-bind'
 import Tab from '../sessions/tab'
 import TrafficLights from '../traffic-lights.jsx'
 import PaneList from './pane-list.jsx'
@@ -15,53 +14,32 @@ import './styles.css' // eslint-disable-line import/no-unassigned-import
 export default class App extends React.Component {
   constructor(props) {
     super(props)
+    autoBind(this)
 
     const initialTab = new Tab('default')
 
-    this.subscriptions = new CompositeDisposable()
-    this.state = {tabs: [initialTab], currentTabId: initialTab.id}
+    this.state = {tabs: [initialTab], currentTabId: initialTab.id, singleTabMode: false}
 
+    ipc.callMain('single-tab-mode').then(value => this.setState({singleTabMode: value}))
     ipc.answerMain('split', direction => this.split(direction))
-    ipc.answerMain('new-tab', this.addTab.bind(this))
+    ipc.answerMain('new-tab', this.addTab)
     ipc.answerMain('close-current-tab', () => this.removeTab(this.state.currentTabId))
-    ipc.answerMain('search-next', ({query, options}) => {
-      this.searchNext(query, options)
-    })
-    ipc.answerMain('search-previous', ({query, options}) => {
-      this.searchPrevious(query, options)
+    ipc.answerMain('search-next', ({query, options}) => this.searchNext(query, options))
+    ipc.answerMain('search-previous', ({query, options}) => this.searchPrevious(query, options))
+    ipc.answerMain('setting-changed', ({property, value}) => {
+      if (property === 'singleTabMode') {
+        this.setState({singleTabMode: value})
+      }
     })
     ipc.answerMain('close', async () => {
-      this.subscriptions.dispose()
       const killers = []
       for (const tab of this.state.tabs) {
         killers.push(tab.kill())
       }
       await Promise.all(killers)
     })
-  }
 
-  render() {
-    return <archipelago-app class={process.platform} data-single-tab-mode={ this.isSingleTabMode() || undefined}>
-      <HamburgerMenu />
-      <TabList
-        tabs={this.state.tabs}
-        currentTabId={this.state.currentTabId}
-        selectTab={this.selectTab.bind(this)}
-        removeTab={this.removeTab.bind(this)} />
-      <TrafficLights />
-      <PaneList
-        tabs={this.state.tabs}
-        currentTabId={this.state.currentTabId}
-        changeTitle={this.changeTitle.bind(this)}
-        markUnread={this.markUnread.bind(this)}
-        removeSession={this.removeSession.bind(this)}
-        selectSession={this.selectSession.bind(this)} />
-    </archipelago-app>
-  }
-
-  componentDidMount() {
     const styles = document.documentElement.style
-    const profileManager = remote.getGlobal('profileManager')
     const styleProperties = {
       fontFamily: '--font-family',
       windowBackground: '--background-color',
@@ -71,19 +49,38 @@ export default class App extends React.Component {
       padding: '--terminal-padding',
       'theme.selection': '--selection-color'
     }
+    ipc.callMain('css-settings').then(settings => {
+      for (const property in styleProperties) {
+        styles.setProperty(styleProperties[property], settings[property])
+      }
+    })
+    ipc.answerMain('setting-changed', ({property, value}) => {
+      if (property in styleProperties) {
+        styles.setProperty(styleProperties[property], value)
+      }
+    })
+  }
 
-    for (const property in styleProperties) {
-      styles.setProperty(styleProperties[property], profileManager.get(property))
-      this.subscriptions.add(
-        profileManager.onDidChange(property, newValue => {
-          styles.setProperty(styleProperties[property], newValue)
-        })
-      )
-    }
+  render() {
+    return <archipelago-app class={process.platform} data-single-tab-mode={ this.state.singleTabMode || undefined}>
+      <HamburgerMenu />
+      <TabList
+        tabs={this.state.tabs}
+        currentTabId={this.state.currentTabId}
+        selectTab={this.selectTab}
+        removeTab={this.removeTab} />
+      <TrafficLights />
+      <PaneList
+        tabs={this.state.tabs}
+        currentTabId={this.state.currentTabId}
+        changeTitle={this.changeTitle}
+        markUnread={this.markUnread}
+        removeSession={this.removeSession}
+        selectSession={this.selectSession} />
+    </archipelago-app>
   }
 
   componentWillUnmount() {
-    this.subscriptions.dispose()
     this.state.tabs.map(tab => tab.kill())
   }
 
@@ -132,7 +129,7 @@ export default class App extends React.Component {
   }
 
   addTab() {
-    if (!this.isSingleTabMode()) {
+    if (!this.state.singleTabMode) {
       const newTab = new Tab('default')
 
       this.setState({
@@ -225,10 +222,6 @@ export default class App extends React.Component {
     })
 
     this.setState({tabs, currentSessionId: newSessionId})
-  }
-
-  isSingleTabMode() {
-    return remote.getGlobal('profileManager').get('singleTabMode')
   }
 
   searchNext(query, options) {

@@ -32,10 +32,4 @@ const pref = () => {
   })
 }
 
-const allProperties = schema.properties.profiles.items.properties
-
-const xtermSettings = Object.keys(allProperties).filter(property => {
-  return allProperties[property].scope === 'xterm'
-})
-
-module.exports = {pref, xtermSettings}
+module.exports = {pref}

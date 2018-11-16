@@ -1,8 +1,13 @@
+/* global profileManager */
+
 import {app} from 'electron'
+import ipc from 'electron-better-ipc'
 import Pty from './pty'
 
 export default () => {
   const ptys = {}
+
+  ipc.answerRenderer('pty-kill', id => kill(id))
 
   const kill = id => {
     if (ptys[id]) {
@@ -13,7 +18,8 @@ export default () => {
 
   const create = () => {
     return new Promise(resolve => {
-      const pty = new Pty()
+      const pty = new Pty(profileManager)
+      pty.onExit(() => kill(pty.id))
 
       resolve(pty)
     })
@@ -21,18 +27,14 @@ export default () => {
 
   let preppedPty = create()
 
-  global.ptyManager = {
-    kill,
-    async make() {
-      const pty = await preppedPty
+  ipc.answerRenderer('pty-create', async ({sessionId, sessionWindowId}) => {
+    const pty = await preppedPty
+    ptys[pty.id] = pty
+    pty.created(sessionId, sessionWindowId)
+    preppedPty = create()
 
-      pty.onExit(() => kill(pty.id))
-      ptys[pty.id] = pty
-      preppedPty = create()
-
-      return pty
-    }
-  }
+    return pty.id
+  })
 
   app.on('before-quit', () => Object.keys(ptys).forEach(kill))
 }

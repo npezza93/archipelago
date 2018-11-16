@@ -2,26 +2,31 @@
 
 import React from 'react'
 import {CompositeDisposable} from 'event-kit'
+import autoBind from 'auto-bind'
+import debouncer from 'debounce-fn'
 
 export default class Terminal extends React.Component {
   constructor(props) {
     super(props)
+    autoBind(this)
     this.subscriptions = new CompositeDisposable()
-    this.resizeObserver = new ResizeObserver(() => {
-      if (this.props.tabId === this.props.currentTabId) {
-        this.props.session.fit()
-      }
-    })
+    this.resizeObserver = new ResizeObserver(this.fit)
 
     this.bindDataListeners()
   }
 
   render() {
-    return <archipelago-terminal ref={this.setRef.bind(this) } />
+    return <archipelago-terminal ref={this.setRef} />
   }
 
   setRef(container) {
     this.container = container
+  }
+
+  fit() {
+    if (this.props.tabId === this.props.currentTabId) {
+      debouncer(() => this.props.session.fit(), {wait: 200})()
+    }
   }
 
   componentDidMount() {

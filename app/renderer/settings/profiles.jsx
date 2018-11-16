@@ -1,15 +1,16 @@
-import {remote} from 'electron'
+import ipc from 'electron-better-ipc'
 import React from 'react'
+import autoBind from 'auto-bind'
 import Profile from './profile.jsx'
 
 export default class Profiles extends React.Component {
   constructor(props) {
     super(props)
+    autoBind(this)
 
-    this.profileManager = remote.getGlobal('profileManager')
     this.state = {
-      activeProfile: this.profileManager.activeProfile(),
-      profiles: this.profileManager.all()
+      activeProfileId: this.props.activeProfileId,
+      profiles: this.props.profiles
     }
   }
 
@@ -21,13 +22,14 @@ export default class Profiles extends React.Component {
           {this.state.profiles.map(profile =>
             <Profile
               key={profile.id}
-              profile={profile}
-              removeProfile={this.removeProfile.bind(this)}
-              setActiveProfile={this.setActiveProfile.bind(this)}
-              activeProfile={this.state.activeProfile} />
+              id={profile.id}
+              name={profile.name}
+              removeProfile={this.removeProfile}
+              setActiveProfile={this.setActiveProfile}
+              activeProfileId={this.state.activeProfileId} />
           )}
         </div>
-        <div className="new-profile" onClick={this.createProfile.bind(this)}>
+        <div className="new-profile" onClick={this.createProfile}>
           Add New Profile
         </div>
       </archipelago-profiles>
@@ -35,32 +37,20 @@ export default class Profiles extends React.Component {
   }
 
   createProfile() {
-    const newProfile = this.profileManager.create()
-    const profiles = this.profileManager.all()
-
-    this.setState({profiles, activeProfile: newProfile})
-  }
-
-  removeProfile(profile) {
-    if (this.profileManager.activeProfile().id === profile.id) {
-      const newActiveProfileId = this.profileManager.profileIds.find(profileId => {
-        return profileId !== profile.id
-      })
-      this.profileManager.resetActiveProfile(newActiveProfileId)
-    }
-
-    profile.destroy()
-
-    this.setState({activeProfile: this.profileManager.activeProfile(),
-      profiles: this.profileManager.all()})
-  }
-
-  setActiveProfile(activeProfile) {
-    this.setState({activeProfile})
-
-    return new Promise(resolve => {
-      this.profileManager.activeProfileId = activeProfile.id
-      resolve()
+    ipc.callMain('create-profile').then(({profiles, activeProfileId}) => {
+      this.setState({profiles, activeProfileId})
     })
+  }
+
+  removeProfile(profileId) {
+    ipc.callMain('remove-profile', profileId).then(({profiles, activeProfileId}) => {
+      this.setState({profiles, activeProfileId})
+    })
+  }
+
+  setActiveProfile(activeProfileId) {
+    this.setState({activeProfileId})
+
+    ipc.callMain('set-active-profile', activeProfileId)
   }
 }

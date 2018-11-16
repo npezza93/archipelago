@@ -1,10 +1,10 @@
-/* global window */
-
-import {remote} from 'electron'
 import ipc from 'electron-better-ipc'
 import React from 'react'
+import {darkMode} from 'electron-util'
 import {CompositeDisposable} from 'event-kit'
+import autoBind from 'auto-bind'
 import TrafficLights from '../traffic-lights.jsx'
+import CurrentSettings from '../sessions/current-profile'
 import HamburgerMenu from './hamburger-menu.jsx'
 import Profiles from './profiles.jsx'
 import PropertiesPane from './properties-pane.jsx'
@@ -15,11 +15,9 @@ export default class Settings extends React.Component {
     super(props)
 
     this.subscriptions = new CompositeDisposable()
-    this.state = {isDarkMode: remote.systemPreferences.isDarkMode()}
-    remote.systemPreferences.subscribeNotification(
-      'AppleInterfaceThemeChangedNotification',
-      () => this.setState({isDarkMode: remote.systemPreferences.isDarkMode()}),
-    )
+    this.state = {isDarkMode: darkMode.isEnabled}
+    this.currentProfile = new CurrentSettings()
+    darkMode.onChange(() => this.setState({isDarkMode: darkMode.isEnabled}))
 
     ipc.answerMain('close', () => {
       return new Promise(resolve => {
@@ -27,21 +25,23 @@ export default class Settings extends React.Component {
         resolve()
       })
     })
+    autoBind(this)
   }
 
   render() {
     return <div id="settings" data-theme={this.theme}>
       <div id="titlebar"><TrafficLights /></div>
-      <div className="form-container">
-        <HamburgerMenu toggleProfilesDrawer={this.toggleProfilesDrawer.bind(this)}/>
-        <Profiles showProfiles={this.state.showProfiles} />
-        <div className="options-container"><PropertiesPane addSubscription={this.addSubscription.bind(this)} /></div>
+      <HamburgerMenu toggleProfilesDrawer={this.toggleProfilesDrawer}/>
+      <Profiles
+        showProfiles={this.state.showProfiles}
+        profiles={this.currentProfile.allProfiles}
+        activeProfileId={this.currentProfile.activeProfileId} />
+      <div className="options-container">
+        <PropertiesPane
+          currentProfile={this.currentProfile}
+          addSubscription={this.addSubscription} />
       </div>
     </div>
-  }
-
-  componentDidMount() {
-    ipc.answerMain('close-current-tab', () => window.close())
   }
 
   componentWillUnmount() {

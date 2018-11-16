@@ -1,9 +1,8 @@
 /* global document, window */
 
-import {remote} from 'electron'
-import {CompositeDisposable} from 'event-kit'
 import ipc from 'electron-better-ipc'
 import React from 'react'
+import autoBind from 'auto-bind'
 import Tab from '../sessions/tab'
 import Pane from './pane.jsx'
 import 'xterm/dist/xterm.css' // eslint-disable-line import/no-unassigned-import
@@ -12,26 +11,13 @@ import './styles.css' // eslint-disable-line import/no-unassigned-import
 export default class Visor extends React.Component {
   constructor(props) {
     super(props)
+    autoBind(this)
 
     this.state = {tab: new Tab('visor')}
-    this.subscriptions = new CompositeDisposable()
 
     ipc.answerMain('split', direction => this.split(direction))
-  }
-
-  render() {
-    return <archipelago-visor class={process.platform} data-single-tab-mode>
-      <Pane
-        id={this.state.tab.id}
-        sessionTree={this.state.tab.root}
-        removeSession={this.removeSession.bind(this)}
-        selectSession={this.selectSession.bind(this)} />
-    </archipelago-visor>
-  }
-
-  componentDidMount() {
+    ipc.answerMain('close', () => this.state.tab.kill())
     const styles = document.documentElement.style
-    const profileManager = remote.getGlobal('profileManager')
     const styleProperties = {
       fontFamily: '--font-family',
       'visor.windowBackground': '--background-color',
@@ -40,18 +26,29 @@ export default class Visor extends React.Component {
       'theme.selection': '--selection-color'
     }
 
-    for (const property in styleProperties) {
-      styles.setProperty(styleProperties[property], profileManager.get(property))
-      this.subscriptions.add(
-        profileManager.onDidChange(property, newValue => {
-          styles.setProperty(property, newValue)
-        })
-      )
-    }
+    ipc.callMain('visor-css-settings').then(settings => {
+      for (const property in styleProperties) {
+        styles.setProperty(styleProperties[property], settings[property])
+      }
+    })
+    ipc.answerMain('setting-changed', ({property, value}) => {
+      if (property in styleProperties) {
+        styles.setProperty(styleProperties[property], value)
+      }
+    })
+  }
+
+  render() {
+    return <archipelago-visor class={process.platform} data-single-tab-mode>
+      <Pane
+        id={this.state.tab.id}
+        sessionTree={this.state.tab.root}
+        removeSession={this.removeSession}
+        selectSession={this.selectSession} />
+    </archipelago-visor>
   }
 
   componentWillUnmount() {
-    this.subscriptions.dispose()
     this.state.tab.kill()
   }
 
