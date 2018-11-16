@@ -4,9 +4,9 @@ import autoBind from 'auto-bind'
 export default class Profile extends React.Component {
   constructor(props) {
     super(props)
-    autoBind(this)
 
-    this.state = {editMode: false, name: this.props.profile.name}
+    this.state = {editMode: false, name: this.props.name || 'New Profile'}
+    autoBind(this)
   }
 
   render() {

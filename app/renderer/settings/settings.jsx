@@ -14,7 +14,6 @@ import './styles.css' // eslint-disable-line import/no-unassigned-import
 export default class Settings extends React.Component {
   constructor(props) {
     super(props)
-    autoBind(this)
 
     this.subscriptions = new CompositeDisposable()
     this.state = {isDarkMode: darkMode.isEnabled}
@@ -26,6 +25,7 @@ export default class Settings extends React.Component {
         resolve()
       })
     })
+    autoBind(this)
   }
 
   render() {

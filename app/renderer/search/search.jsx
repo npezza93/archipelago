@@ -11,7 +11,6 @@ import './styles.css' // eslint-disable-line import/no-unassigned-import
 export default class Search extends React.Component {
   constructor(props) {
     super(props)
-    autoBind(this)
 
     this.state = {
       isDarkMode: darkMode.isEnabled,
@@ -25,6 +24,7 @@ export default class Search extends React.Component {
     ipc.answerMain('search-next', () => this.searchNext())
     ipc.answerMain('search-previous', () => this.searchPrevious())
     darkMode.onChange(() => this.setState({isDarkMode: darkMode.isEnabled}))
+    autoBind(this)
   }
 
   render() {

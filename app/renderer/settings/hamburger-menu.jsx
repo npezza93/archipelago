@@ -4,9 +4,9 @@ import autoBind from 'auto-bind'
 export default class HamburgerMenu extends React.Component {
   constructor(props) {
     super(props)
-    autoBind(this)
 
     this.state = {}
+    autoBind(this)
   }
 
   render() {
