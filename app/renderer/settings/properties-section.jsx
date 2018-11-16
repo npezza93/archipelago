@@ -26,7 +26,10 @@ export default class PropertiesSection extends React.Component {
           return partialPath.length > 0
         }).join('.')
 
-        property = <Property addSubscription={this.props.addSubscription} schema={schema} key={path} property={path} />
+        property = <Property
+          addSubscription={this.props.addSubscription}
+          currentProfile={this.props.currentProfile}
+          schema={schema} key={path} property={path} />
       }
 
       return property

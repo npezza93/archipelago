@@ -29,7 +29,8 @@ export default class PropertiesPane extends React.Component {
           scope={scope}
           key={scope}
           properties={this.scopes()[scope]}
-          handleChange={this.handleChange} />
+          handleChange={this.handleChange}
+          currentProfile={this.props.currentProfile} />
       )}
     </archipelago-properties-pane>
   }

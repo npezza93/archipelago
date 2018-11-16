@@ -49,7 +49,7 @@ export default class ProfileManager {
     this.configFile.set(`profiles.${index}`, {id, keybindings: this.defaultKeybindings, theme: {}, visor: {}})
     this.configFile.set('activeProfileId', id)
 
-    return this.find(id)
+    return id
   }
 
   validate() {
@@ -143,6 +143,30 @@ export default class ProfileManager {
     })
     ipc.answerRenderer('copy-on-select', () => this.get('copyOnSelect'))
     ipc.answerRenderer('cursor-blink', () => this.get('cursorBlink'))
+    ipc.answerRenderer('set-profile-name', ({id, name}) => {
+      this.find(id).name = name
+    })
+    ipc.answerRenderer('set-active-profile', id => {
+      this.activeProfileId = id
+    })
+    ipc.answerRenderer('create-profile', () => {
+      const newProfileId = this.create()
+      const profiles = this.rawProfiles
+
+      return {profiles, activeProfileId: newProfileId}
+    })
+    ipc.answerRenderer('remove-profile', id => {
+      if (this.activeProfile().id === id) {
+        const newActiveProfileId = this.profileIds.find(profileId => {
+          return profileId !== id
+        })
+        this.resetActiveProfile(newActiveProfileId)
+      }
+
+      this.find(id).destroy()
+
+      return {profiles: this.rawProfiles, activeProfileId: this.activeProfile().id}
+    })
   }
 
   get cssSettings() {

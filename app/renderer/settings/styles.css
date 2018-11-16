@@ -203,12 +203,6 @@ html, body {
   font-size: 15px;
 }
 
-.form-container {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-}
-
 /* Profiles */
 archipelago-profiles {
   height: 100vh;
@@ -277,6 +271,9 @@ archipelago-profiles .profile-list archipelago-profile:hover .profile-remove {
 archipelago-profiles .profile-list archipelago-profile.active, archipelago-profiles .profile-list archipelago-profile:hover {
   background: rgba(0, 0, 0, .16);
 }
+archipelago-profiles .profile-list archipelago-profile {
+  color: var(--background-color);
+}
 archipelago-profiles .profile-list archipelago-profile input {
   border: 0;
   background: transparent;
@@ -285,6 +282,7 @@ archipelago-profiles .profile-list archipelago-profile input {
   font-weight: 400;
   padding: 0;
   margin-top: 0;
+  color: var(--background-color);
 }
 archipelago-profiles .new-profile {
   height: 55px;

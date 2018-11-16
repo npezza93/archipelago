@@ -1,4 +1,3 @@
-import {remote} from 'electron'
 import ipc from 'electron-better-ipc'
 import React from 'react'
 import allFields from './all-fields.jsx'
@@ -7,8 +6,7 @@ export default class Property extends React.Component {
   constructor(props) {
     super(props)
 
-    this.profileManager = remote.getGlobal('profileManager')
-    this.state = {value: this.profileManager.get(props.property)}
+    this.state = {value: this.props.currentProfile.get(props.property)}
   }
 
   render() {

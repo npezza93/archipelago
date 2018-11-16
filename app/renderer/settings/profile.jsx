@@ -1,3 +1,4 @@
+import ipc from 'electron-better-ipc'
 import React from 'react'
 import autoBind from 'auto-bind'
 
@@ -12,38 +13,49 @@ export default class Profile extends React.Component {
   render() {
     return (
       <archipelago-profile class={this.className}
-        onDoubleClick={() => this.setState({editMode: true})}
-        onClick={() => this.props.setActiveProfile(this.props.profile)}>
+        onDoubleClick={this.enableEditMode}
+        onClick={this.handleClick}>
         {this.textOrInput()}
         {this.removeProfile()}
       </archipelago-profile>
     )
   }
 
+  enableEditMode() {
+    this.setState({editMode: true})
+  }
+
+  disableEditMode() {
+    this.setState({editMode: false})
+  }
+
+  handleClick() {
+    this.props.setActiveProfile(this.props.id)
+  }
+
   get className() {
-    return (
-      this.props.activeProfile.id === this.props.profile.id && 'active'
-    ) || ''
+    return (this.props.activeProfileId === this.props.id && 'active') || ''
   }
 
   textOrInput() {
     if (this.state.editMode) {
       return <input autoFocus type="text" value={this.state.name}
-        onFocus={e => e.target.select()}
-        onBlur={() => this.setState({editMode: false})}
+        onFocus={this.handleFocus}
+        onBlur={this.disableEditMode}
         onChange={this.handleInputChange} />
     }
 
     return this.state.name
   }
 
+  handleFocus(event) {
+    event.target.select()
+  }
+
   handleInputChange(event) {
     this.setState({name: event.target.value})
 
-    return new Promise(resolve => {
-      this.props.profile.name = event.target.value
-      resolve()
-    })
+    ipc.callMain('set-profile-name', {id: this.props.id, name: event.target.value})
   }
 
   removeProfile() {
@@ -56,6 +68,6 @@ export default class Profile extends React.Component {
 
   handleRemoveProfile(event) {
     event.stopPropagation()
-    this.props.removeProfile(this.props.profile)
+    this.props.removeProfile(this.props.id)
   }
 }

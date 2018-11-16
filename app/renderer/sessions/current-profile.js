@@ -7,11 +7,19 @@ export default class CurrentProfile {
   }
 
   get(keyPath) {
-    const index = this.pref.store.profiles.findIndex(profile => {
-      return profile.id === this.pref.get('activeProfileId')
+    const index = this.allProfiles.findIndex(profile => {
+      return profile.id === this.activeProfileId
     })
 
     return this.pref.get(`profiles.${index}.${keyPath}`)
+  }
+
+  get allProfiles() {
+    return this.pref.store.profiles
+  }
+
+  get activeProfileId() {
+    return this.pref.get('activeProfileId')
   }
 
   get allProperties() {
