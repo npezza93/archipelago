@@ -38,12 +38,13 @@ const createWindow = () => {
     vibrancy: profileManager.get('vibrancy')
   })
 
+  const anchor = process.env.PAGE
   if (is.development && process.env.ELECTRON_WEBPACK_WDS_PORT) {
-    win.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`)
+    win.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}#${anchor}`)
   } else if (process.env.NODE_ENV === 'test') {
-    win.loadURL(`file://${__dirname}/../renderer/index.html`)
+    win.loadURL(`file://${__dirname}/../renderer/index.html#${anchor}`)
   } else {
-    win.loadURL(`file:///${__dirname}/index.html`)
+    win.loadURL(`file:///${__dirname}/index.html#${anchor}`)
   }
 
   win.once('ready-to-show', () => {

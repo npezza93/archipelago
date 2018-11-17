@@ -5,7 +5,7 @@
   "main": "app/main/index.js",
   "scripts": {
     "postinstall": " ./node_modules/.bin/electron-builder install-app-deps",
-    "test": "yarn compile && ./node_modules/.bin/mocha test/main/main-test.js",
+    "test": "yarn compile && ./node_modules/.bin/mocha test/main/",
     "start": "./node_modules/.bin/electron-webpack dev",
     "compile": "./node_modules/.bin/electron-webpack",
     "lint": "./node_modules/.bin/xo --ignore app/renderer/index.js",
