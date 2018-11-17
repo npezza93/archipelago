@@ -19,7 +19,7 @@ describe('Settings', function () {
     this.app = new Application({
       path: electron,
       verbose: true,
-      env: {NODE_ENV: 'test', PAGE: 'settings'},
+      env: {PAGE: 'settings'},
       args: [path.join(__dirname, '../../dist/main/main.js')]
     })
     return this.app.start()

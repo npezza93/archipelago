@@ -41,7 +41,7 @@ const createWindow = () => {
   const anchor = process.env.PAGE
   if (is.development && process.env.ELECTRON_WEBPACK_WDS_PORT) {
     win.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}#${anchor}`)
-  } else if (process.env.NODE_ENV === 'test') {
+  } else if (is.development && !process.env.ELECTRON_WEBPACK_WDS_PORT) {
     win.loadURL(`file://${__dirname}/../renderer/index.html#${anchor}`)
   } else {
     win.loadURL(`file:///${__dirname}/index.html#${anchor}`)

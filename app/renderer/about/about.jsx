@@ -39,7 +39,7 @@ export default class About extends React.Component {
 
       <div className="centered_column">
         <div className="font-weight-500 m-0 title">Archipelago</div>
-        <div>v{api.app.getVersion()}</div>
+        <div id="version">v{api.app.getVersion()}</div>
       </div>
 
       <p className="m-0">

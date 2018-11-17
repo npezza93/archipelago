@@ -19,7 +19,7 @@ describe('About', function () {
     this.app = new Application({
       path: electron,
       verbose: true,
-      env: {NODE_ENV: 'test', PAGE: 'about'},
+      env: {PAGE: 'about'},
       args: [path.join(__dirname, '../../dist/main/main.js')]
     })
     return this.app.start()
@@ -42,6 +42,14 @@ describe('About', function () {
       const filteredLogs = logs.filter(log => log.level === 'SEVERE')
 
       assert.isEmpty(filteredLogs, 'Exception in renderer process encountered')
+    })
+  })
+
+  it('displays the current app version', () => {
+    return this.app.client.waitForVisible('#version').getText('#version').then(text => {
+      this.app.electron.remote.app.getVersion().then(currentVersion => {
+        assert.equal(text, currentVersion)
+      })
     })
   })
 })
