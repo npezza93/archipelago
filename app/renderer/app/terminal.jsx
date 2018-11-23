@@ -32,9 +32,7 @@ export default class Terminal extends React.Component {
   componentDidMount() {
     const {session} = this.props
 
-    session.xterm.open(this.container)
-    session.resetTheme()
-    session.xterm.focus()
+    session.open(this.container)
 
     this.resizeObserver.observe(this.container)
     this.subscriptions.add(this.props.session.bindScrollListener())

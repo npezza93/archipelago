@@ -6,8 +6,10 @@ import {Terminal} from 'xterm'
 import unescape from 'unescape-js'
 import keystrokeForKeyboardEvent from 'keystroke-for-keyboard-event'
 import autoBind from 'auto-bind'
+import * as ligatures from 'xterm-addon-ligatures'
 import CurrentProfile from './current-profile'
 
+Terminal.applyAddon(ligatures)
 Terminal.applyAddon(require('xterm/lib/addons/fit/fit'))
 Terminal.applyAddon(require('xterm/lib/addons/search/search'))
 
@@ -73,6 +75,15 @@ export default class Session {
     const ptyId = await this.ptyId
 
     await ipc.callMain('pty-kill', ptyId)
+  }
+
+  open(container) {
+    this.xterm.open(container)
+    if (this.currentProfile.get('ligatures')) {
+      this.xterm.enableLigatures()
+    }
+    this.resetTheme()
+    this.xterm.focus()
   }
 
   fit() {

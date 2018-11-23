@@ -230,6 +230,13 @@
               "title": "modes"
             }
           },
+          "ligatures": {
+            "type": "boolean",
+            "default": false,
+            "settings": {
+              "title": "modes"
+            }
+          },
           "windowBackground": {
             "type": "string",
             "color": true,
