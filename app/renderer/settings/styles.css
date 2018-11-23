@@ -185,6 +185,8 @@ html, body {
   -webkit-font-feature-settings: "liga" off, "calt" off;
   -webkit-font-smoothing: subpixel-antialiased;
   margin: 0;
+  overflow-y: hidden;
+  height: 100%;
 }
 #settings .options-container {
   background-color: var(--background-color);
