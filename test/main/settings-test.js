@@ -44,4 +44,8 @@ describe('Settings', function () {
       assert.isEmpty(filteredLogs, 'Exception in renderer process encountered')
     })
   })
+
+  it('renders settings', () => {
+    assert(this.app.client.isExisting('#settings'))
+  })
 })

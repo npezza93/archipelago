@@ -36,6 +36,10 @@ describe('Application launch', function () {
     })
   })
 
+  it('renders the app', () => {
+    assert(this.app.client.isExisting('archipelago-app'))
+  })
+
   it('renders with no renderer process errors', () => {
     return this.app.client.getRenderProcessLogs().then(logs => {
       const filteredLogs = logs.filter(log => log.level === 'SEVERE')
