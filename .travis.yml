@@ -17,6 +17,9 @@ matrix:
           packages:
             - libx11-dev
             - libxkbfile-dev
+            - libxtst-dev
+            - libpng++-dev
+            - make
             - rpm
     - os: windows
       language: node_js
@@ -31,6 +34,9 @@ matrix:
           packages:
             - libx11-dev
             - libxkbfile-dev
+            - libxtst-dev
+            - libpng++-dev
+            - make
     - os: linux
       language: node_js
       node_js: "10"
@@ -41,6 +47,9 @@ matrix:
           packages:
             - libx11-dev
             - libxkbfile-dev
+            - libxtst-dev
+            - libpng++-dev
+            - make
 
 cache:
   directories:
