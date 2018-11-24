@@ -111,4 +111,30 @@ describe('Application launch', function () {
     const tabElements = await this.app.client.elements('archipelago-tab')
     return assert.equal(tabElements.value.length, 2)
   })
+
+  it('doesnt add a new tab in single tab mode', async () => {
+    let modifier
+    if (process.platform === 'darwin') {
+      modifier = 'command'
+    } else {
+      modifier = 'control'
+    }
+    robot.keyTap(',', modifier)
+    await this.app.client.pause(2000)
+    const windowHandles = await this.app.client.windowHandles()
+    await this.app.client.window(windowHandles.value[1])
+    await this.app.client.waitForVisible('switch-field#singleTabMode')
+    const checked = await this.app.client.getAttribute('switch-field#singleTabMode input', 'checked')
+    if (!checked) {
+      await this.app.client.click('switch-field#singleTabMode label')
+    }
+    await this.app.client.close()
+    const initalElements = await this.app.client.elements('archipelago-terminal')
+    assert.equal(initalElements.value.length, 1)
+    robot.keyTap('t', modifier)
+    const afterElements = await this.app.client.elements('archipelago-terminal')
+    assert.equal(afterElements.value.length, 1)
+    const tabElements = await this.app.client.elements('archipelago-tab')
+    return assert.equal(tabElements.value.length, 1)
+  })
 })
