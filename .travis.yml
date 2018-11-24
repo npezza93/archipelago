@@ -37,19 +37,12 @@ matrix:
             - libxtst-dev
             - libpng++-dev
             - make
-    - os: linux
+    - os: osx
+      osx_image: xcode9.0
       language: node_js
       node_js: "10"
       env:
         - YARN_COMMAND=test
-      addons:
-        apt:
-          packages:
-            - libx11-dev
-            - libxkbfile-dev
-            - libxtst-dev
-            - libpng++-dev
-            - make
 
 cache:
   directories:
