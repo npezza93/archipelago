@@ -3,6 +3,7 @@
 const path = require('path')
 const {Application} = require('spectron')
 const {assert} = require('chai')
+const robot = require('robotjs')
 
 let electron = './node_modules/electron/dist/'
 
@@ -21,6 +22,7 @@ describe('Application launch', function () {
       verbose: true,
       args: [path.join(__dirname, '../../dist/main/main.js')]
     })
+
     return this.app.start()
   })
 
@@ -48,44 +50,67 @@ describe('Application launch', function () {
     })
   })
 
-  it('splits the terminal horizontally', () => {
-    let keys
+  it('splits the terminal horizontally', async () => {
+    let modifier
     if (process.platform === 'darwin') {
-      keys = ['cmd', 's']
+      modifier = 'command'
     } else {
-      keys = ['ctrl', 's']
+      modifier = 'control'
     }
-    assertElementCount(this.app, 'archipelago-terminal', 1, () => {
-      return this.app.client.keys(keys).then(() => {
-        assertElementCount(this.app, 'archipelago-terminal', 2)
-        assert(this.app.client.isExisting('.SplitPane.horizontal'))
-        assert.isFalse(this.app.client.isExisting('.SplitPane.vertical'))
-      })
-    })
+
+    const initalElements = await this.app.client.elements('archipelago-terminal')
+    assert.equal(initalElements.value.length, 1)
+    robot.keyTap('s', modifier)
+    const afterElements = await this.app.client.elements('archipelago-terminal')
+    assert.equal(afterElements.value.length, 2)
+    assert(await this.app.client.isExisting('.SplitPane.horizontal'))
+    return assert.isFalse(await this.app.client.isExisting('.SplitPane.vertical'))
   })
 
-  it('splits the terminal vertically', () => {
-    let keys
+  it('splits the terminal vertically', async () => {
+    let modifier
     if (process.platform === 'darwin') {
-      keys = ['cmd', 'shift', 's']
+      modifier = 'command'
     } else {
-      keys = ['ctrl', 'shift', 's']
+      modifier = 'control'
     }
-    assertElementCount(this.app, 'archipelago-terminal', 1, () => {
-      return this.app.client.keys(keys).then(() => {
-        assertElementCount(this.app, 'archipelago-terminal', 2)
-        assert(this.app.client.isExisting('.SplitPane.vertical'))
-        assert.isFalse(this.app.client.isExisting('.SplitPane.horizontal'))
-      })
+
+    const initalElements = await this.app.client.elements('archipelago-terminal')
+    assert.equal(initalElements.value.length, 1)
+    robot.keyTap('s', ['shift', modifier])
+    const afterElements = await this.app.client.elements('archipelago-terminal')
+    assert.equal(afterElements.value.length, 2)
+    assert(await this.app.client.isExisting('.SplitPane.vertical'))
+    return assert.isFalse(await this.app.client.isExisting('.SplitPane.horizontal'))
+  })
+
+  it('adds a new tab', async () => {
+    let modifier
+    if (process.platform === 'darwin') {
+      modifier = 'command'
+    } else {
+      modifier = 'control'
+    }
+    const settings = new Application({
+      path: electron,
+      verbose: true,
+      env: {PAGE: 'settings'},
+      args: [path.join(__dirname, '../../dist/main/main.js')]
     })
+    await settings.start()
+    await settings.client.waitForVisible('switch-field#singleTabMode')
+    const checked = await settings.client.getAttribute('switch-field#singleTabMode input', 'checked')
+    if (checked) {
+      await settings.client.click('switch-field#singleTabMode label')
+      await settings.client.pause(1000)
+    }
+    await settings.stop()
+    const initalElements = await this.app.client.elements('archipelago-terminal')
+    assert.equal(initalElements.value.length, 1)
+    robot.keyTap('t', modifier)
+    const afterElements = await this.app.client.elements('archipelago-terminal')
+    assert.equal(afterElements.value.length, 2)
+    const tabElements = await this.app.client.elements('archipelago-tab')
+    return assert.equal(tabElements.value.length, 2)
   })
 })
-
-function assertElementCount(app, selector, length, callback) {
-  app.client.elements(selector).then(elements => {
-    assert.equal(elements.length, length)
-    if (callback) {
-      callback()
-    }
-  })
-}
