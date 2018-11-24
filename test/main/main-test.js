@@ -51,13 +51,7 @@ describe('Application launch', function () {
   })
 
   it('splits the terminal horizontally', async () => {
-    let modifier
-    if (process.platform === 'darwin') {
-      modifier = 'command'
-    } else {
-      modifier = 'control'
-    }
-
+    const modifier = cmdOrCtrl()
     const initalElements = await this.app.client.elements('archipelago-terminal')
     assert.equal(initalElements.value.length, 1)
     robot.keyTap('s', modifier)
@@ -69,13 +63,7 @@ describe('Application launch', function () {
   })
 
   it('splits the terminal vertically', async () => {
-    let modifier
-    if (process.platform === 'darwin') {
-      modifier = 'command'
-    } else {
-      modifier = 'control'
-    }
-
+    const modifier = cmdOrCtrl()
     const initalElements = await this.app.client.elements('archipelago-terminal')
     assert.equal(initalElements.value.length, 1)
     robot.keyTap('s', ['shift', modifier])
@@ -87,22 +75,8 @@ describe('Application launch', function () {
   })
 
   it('adds a new tab', async () => {
-    let modifier
-    if (process.platform === 'darwin') {
-      modifier = 'command'
-    } else {
-      modifier = 'control'
-    }
-    robot.keyTap(',', modifier)
-    await this.app.client.pause(2000)
-    const windowHandles = await this.app.client.windowHandles()
-    await this.app.client.window(windowHandles.value[1])
-    await this.app.client.waitForVisible('switch-field#singleTabMode')
-    const checked = await this.app.client.getAttribute('switch-field#singleTabMode input', 'checked')
-    if (checked) {
-      await this.app.client.click('switch-field#singleTabMode label')
-    }
-    await this.app.client.close()
+    const modifier = cmdOrCtrl()
+    await setSingleTabMode(false, this.app)
     const initalElements = await this.app.client.elements('archipelago-terminal')
     assert.equal(initalElements.value.length, 1)
     robot.keyTap('t', modifier)
@@ -113,22 +87,8 @@ describe('Application launch', function () {
   })
 
   it('doesnt add a new tab in single tab mode', async () => {
-    let modifier
-    if (process.platform === 'darwin') {
-      modifier = 'command'
-    } else {
-      modifier = 'control'
-    }
-    robot.keyTap(',', modifier)
-    await this.app.client.pause(2000)
-    const windowHandles = await this.app.client.windowHandles()
-    await this.app.client.window(windowHandles.value[1])
-    await this.app.client.waitForVisible('switch-field#singleTabMode')
-    const checked = await this.app.client.getAttribute('switch-field#singleTabMode input', 'checked')
-    if (!checked) {
-      await this.app.client.click('switch-field#singleTabMode label')
-    }
-    await this.app.client.close()
+    const modifier = cmdOrCtrl()
+    await setSingleTabMode(true, this.app)
     const initalElements = await this.app.client.elements('archipelago-terminal')
     assert.equal(initalElements.value.length, 1)
     robot.keyTap('t', modifier)
@@ -138,3 +98,28 @@ describe('Application launch', function () {
     return assert.equal(tabElements.value.length, 1)
   })
 })
+
+async function setSingleTabMode(checked, app) {
+  const modifier = cmdOrCtrl()
+  robot.keyTap(',', modifier)
+  await app.client.pause(2000)
+  const windowHandles = await app.client.windowHandles()
+  await app.client.window(windowHandles.value[1])
+  await app.client.waitForVisible('switch-field#singleTabMode')
+  const currentChecked = await app.client.getAttribute('switch-field#singleTabMode input', 'checked')
+  if (currentChecked !== checked) {
+    await app.client.click('switch-field#singleTabMode label')
+  }
+  await app.client.close()
+}
+
+function cmdOrCtrl() {
+  let modifier
+  if (process.platform === 'darwin') {
+    modifier = 'command'
+  } else {
+    modifier = 'control'
+  }
+
+  return modifier
+}
