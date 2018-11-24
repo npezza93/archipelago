@@ -39,13 +39,17 @@ export default class Visor extends React.Component {
   }
 
   render() {
-    return <archipelago-visor class={process.platform} data-single-tab-mode>
+    return <archipelago-visor class={this.htmlClasses()}>
       <Pane
         id={this.state.tab.id}
         sessionTree={this.state.tab.root}
         removeSession={this.removeSession}
         selectSession={this.selectSession} />
     </archipelago-visor>
+  }
+
+  htmlClasses() {
+    return `${process.platform} single-tab-mode`
   }
 
   componentWillUnmount() {

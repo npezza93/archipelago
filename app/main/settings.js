@@ -16,11 +16,14 @@ export default () => {
       webPreferences: {experimentalFeatures: true}
     })
 
-    if (is.development) {
+    if (is.development && process.env.ELECTRON_WEBPACK_WDS_PORT) {
       settingsWindow.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}#settings`)
+    } else if (is.development && !process.env.ELECTRON_WEBPACK_WDS_PORT) {
+      settingsWindow.loadURL(`file://${__dirname}/../renderer/index.html#settings`)
     } else {
       settingsWindow.loadURL(`file:///${__dirname}/index.html#settings`)
     }
+
     settingsWindow.once('close', e => {
       e.preventDefault()
       ipc.callRenderer(settingsWindow, 'close').then(() => {

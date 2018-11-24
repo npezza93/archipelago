@@ -93,20 +93,16 @@ describe('Application launch', function () {
     } else {
       modifier = 'control'
     }
-    const settings = new Application({
-      path: electron,
-      verbose: true,
-      env: {PAGE: 'settings'},
-      args: [path.join(__dirname, '../../dist/main/main.js')]
-    })
-    await settings.start()
-    await settings.client.waitForVisible('switch-field#singleTabMode')
-    const checked = await settings.client.getAttribute('switch-field#singleTabMode input', 'checked')
+    robot.keyTap(',', modifier)
+    await this.app.client.pause(2000)
+    const windowHandles = await this.app.client.windowHandles()
+    await this.app.client.window(windowHandles.value[1])
+    await this.app.client.waitForVisible('switch-field#singleTabMode')
+    const checked = await this.app.client.getAttribute('switch-field#singleTabMode input', 'checked')
     if (checked) {
-      await settings.client.click('switch-field#singleTabMode label')
-      await settings.client.pause(1000)
+      await this.app.client.click('switch-field#singleTabMode label')
     }
-    await settings.stop()
+    await this.app.client.close()
     const initalElements = await this.app.client.elements('archipelago-terminal')
     assert.equal(initalElements.value.length, 1)
     robot.keyTap('t', modifier)

@@ -109,7 +109,7 @@ hamburger-menu {
   cursor: pointer;
 }
 
-archipelago-app[data-single-tab-mode] hamburger-menu {
+archipelago-app.single-tab-mode hamburger-menu {
   top: 9px;
 }
 
@@ -121,7 +121,7 @@ hamburger-menu div {
   background: var(--tab-color);
 }
 
-archipelago-app[data-single-tab-mode] minimize-button {
+archipelago-app.single-tab-mode minimize-button {
   top: 9px !important;
 }
 
@@ -136,7 +136,7 @@ maximize-button {
   border: var(--tab-color) 1px solid !important;
 }
 
-archipelago-app[data-single-tab-mode] maximize-button {
+archipelago-app.single-tab-mode maximize-button {
   top: 9px !important;
 }
 
@@ -144,7 +144,7 @@ maximize-button:hover {
   filter: invert(0%);
 }
 
-archipelago-app[data-single-tab-mode] close-button {
+archipelago-app.single-tab-mode close-button {
   top: 9px !important;
 }
 
@@ -240,14 +240,14 @@ archipelago-tab-list archipelago-tab span {
   max-width: 75%;
 }
 
-archipelago-app[data-single-tab-mode] archipelago-tab-list {
+archipelago-app.single-tab-mode archipelago-tab-list {
   position: absolute;
   height: 30px;
 }
-archipelago-app[data-single-tab-mode] archipelago-tab-list archipelago-tab {
+archipelago-app.single-tab-mode archipelago-tab-list archipelago-tab {
   display: none;
 }
-archipelago-app.darwin[data-single-tab-mode] archipelago-tab-list {
+archipelago-app.darwin.single-tab-mode archipelago-tab-list {
   width: calc(100% - 70px);
 }
 

@@ -62,7 +62,7 @@ export default class App extends React.Component {
   }
 
   render() {
-    return <archipelago-app class={process.platform} data-single-tab-mode={ this.state.singleTabMode || undefined}>
+    return <archipelago-app class={this.htmlClasses()}>
       <HamburgerMenu />
       <TabList
         tabs={this.state.tabs}
@@ -78,6 +78,15 @@ export default class App extends React.Component {
         removeSession={this.removeSession}
         selectSession={this.selectSession} />
     </archipelago-app>
+  }
+
+  htmlClasses() {
+    let classNames = process.platform
+    if (this.state.singleTabMode) {
+      classNames += ' single-tab-mode'
+    }
+
+    return classNames
   }
 
   componentWillUnmount() {
