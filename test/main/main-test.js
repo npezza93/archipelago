@@ -14,7 +14,7 @@ electron = {
 }[process.platform]
 
 describe('Application launch', function () {
-  this.timeout(10000)
+  this.timeout(20000)
 
   beforeEach(() => {
     this.app = new Application({
