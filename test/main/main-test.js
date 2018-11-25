@@ -51,10 +51,9 @@ describe('Application launch', function () {
   })
 
   it('splits the terminal horizontally', async () => {
-    const modifier = cmdOrCtrl()
     const initalElements = await this.app.client.elements('archipelago-terminal')
     assert.equal(initalElements.value.length, 1)
-    robot.keyTap('s', modifier)
+    robot.keyTap('s', cmdOrCtrl())
     const afterElements = await this.app.client.elements('archipelago-terminal')
     await this.app.client.waitForVisible('.SplitPane.horizontal')
     assert.equal(afterElements.value.length, 2)
@@ -63,10 +62,9 @@ describe('Application launch', function () {
   })
 
   it('splits the terminal vertically', async () => {
-    const modifier = cmdOrCtrl()
     const initalElements = await this.app.client.elements('archipelago-terminal')
     assert.equal(initalElements.value.length, 1)
-    robot.keyTap('s', ['shift', modifier])
+    robot.keyTap('s', ['shift', cmdOrCtrl()])
     const afterElements = await this.app.client.elements('archipelago-terminal')
     await this.app.client.waitForVisible('.SplitPane.vertical')
     assert.equal(afterElements.value.length, 2)
@@ -75,11 +73,10 @@ describe('Application launch', function () {
   })
 
   it('adds a new tab', async () => {
-    const modifier = cmdOrCtrl()
     await setSingleTabMode(false, this.app)
     const initalElements = await this.app.client.elements('archipelago-terminal')
     assert.equal(initalElements.value.length, 1)
-    robot.keyTap('t', modifier)
+    robot.keyTap('t', cmdOrCtrl())
     const afterElements = await this.app.client.elements('archipelago-terminal')
     assert.equal(afterElements.value.length, 2)
     const tabElements = await this.app.client.elements('archipelago-tab')
@@ -87,11 +84,10 @@ describe('Application launch', function () {
   })
 
   it('doesnt add a new tab in single tab mode', async () => {
-    const modifier = cmdOrCtrl()
     await setSingleTabMode(true, this.app)
     const initalElements = await this.app.client.elements('archipelago-terminal')
     assert.equal(initalElements.value.length, 1)
-    robot.keyTap('t', modifier)
+    robot.keyTap('t', cmdOrCtrl())
     const afterElements = await this.app.client.elements('archipelago-terminal')
     assert.equal(afterElements.value.length, 1)
     const tabElements = await this.app.client.elements('archipelago-tab')
@@ -120,8 +116,7 @@ describe('Application launch', function () {
 })
 
 async function setSingleTabMode(checked, app) {
-  const modifier = cmdOrCtrl()
-  robot.keyTap(',', modifier)
+  robot.keyTap(',', cmdOrCtrl())
   await app.client.pause(2000)
   const windowHandles = await app.client.windowHandles()
   await app.client.window(windowHandles.value[1])
