@@ -97,6 +97,26 @@ describe('Application launch', function () {
     const tabElements = await this.app.client.elements('archipelago-tab')
     return assert.equal(tabElements.value.length, 1)
   })
+
+  describe('tab closures', () => {
+    it('closes a tab', async () => {
+      await setSingleTabMode(false, this.app)
+      robot.keyTap('t', cmdOrCtrl())
+      let tabElements = await this.app.client.elements('archipelago-tab')
+      assert.equal(tabElements.value.length, 2)
+      await this.app.client.click('archipelago-tab div')
+      tabElements = await this.app.client.elements('archipelago-tab')
+      assert.equal(tabElements.value.length, 1)
+    })
+
+    it('close button doesnt appear on last tab', async () => {
+      await setSingleTabMode(false, this.app)
+      const tabElements = await this.app.client.elements('archipelago-tab')
+      assert.equal(tabElements.value.length, 1)
+      const closeButton = await this.app.client.isVisible('archipelago-tab div')
+      assert.isFalse(closeButton)
+    })
+  })
 })
 
 async function setSingleTabMode(checked, app) {
