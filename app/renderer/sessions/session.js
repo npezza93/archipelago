@@ -173,6 +173,12 @@ export default class Session {
     ipc.answerMain('setting-changed', ({property, value}) => {
       if (this.currentProfile.xtermSettings.indexOf(property) >= 0) {
         this.xterm.setOption(property, value)
+      } else if (property === 'keybindings') {
+        this._keymaps =
+          value.reduce((result, item) => {
+            result[item.keystroke] = unescape(item.command)
+            return result
+          }, {})
       }
     })
   }

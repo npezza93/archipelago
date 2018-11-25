@@ -190,7 +190,7 @@ html, body {
 }
 #settings .options-container {
   background-color: var(--background-color);
-  color: #424242;
+  color: var(--color);
 }
 #titlebar {
   height: 40px;
@@ -476,7 +476,7 @@ archipelago-properties-pane .create-array-element {
 }
 
 archipelago-properties-pane .create-array-element:hover {
-  color: #424242;
+  color: var(--color);
 }
 
 #hamburger {
