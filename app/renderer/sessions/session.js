@@ -179,6 +179,8 @@ export default class Session {
             result[item.keystroke] = unescape(item.command)
             return result
           }, {})
+      } else if (property.startsWith('theme.')) {
+        this.resetTheme()
       }
     })
   }
