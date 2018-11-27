@@ -43,6 +43,11 @@ matrix:
       node_js: "10"
       env:
         - YARN_COMMAND=test
+    - os: linux
+      language: node_js
+      node_js: "10"
+      env:
+        - YARN_COMMAND=test
 
 cache:
   directories:
