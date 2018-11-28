@@ -15,27 +15,11 @@ export default class Visor extends React.Component {
 
     this.state = {tab: new Tab('visor')}
 
-    ipc.answerMain('split', direction => this.split(direction))
+    ipc.answerMain('split', this.split)
     ipc.answerMain('close', () => this.state.tab.kill())
-    const styles = document.documentElement.style
-    const styleProperties = {
-      fontFamily: '--font-family',
-      'visor.windowBackground': '--background-color',
-      fontSize: '--font-size',
-      'visor.padding': '--terminal-padding',
-      'theme.selection': '--selection-color'
-    }
-
-    ipc.callMain('visor-css-settings').then(settings => {
-      for (const property in styleProperties) {
-        styles.setProperty(styleProperties[property], settings[property])
-      }
-    })
-    ipc.answerMain('setting-changed', ({property, value}) => {
-      if (property in styleProperties) {
-        styles.setProperty(styleProperties[property], value)
-      }
-    })
+    ipc.answerMain('setting-changed', this.handleSettingChanged)
+    ipc.answerMain('active-profile-changed', this.resetCssSettings)
+    this.resetCssSettings()
   }
 
   render() {
@@ -78,5 +62,33 @@ export default class Visor extends React.Component {
     const currentSessionId = newGroup.right.id
 
     this.setState({tab, currentSessionId})
+  }
+
+  get docStyles() {
+    return document.documentElement.style
+  }
+
+  get styleProperties() {
+    return {
+      fontFamily: '--font-family',
+      'visor.windowBackground': '--background-color',
+      fontSize: '--font-size',
+      'visor.padding': '--terminal-padding',
+      'theme.selection': '--selection-color'
+    }
+  }
+
+  resetCssSettings() {
+    ipc.callMain('visor-css-settings').then(settings => {
+      for (const property in this.styleProperties) {
+        this.docStyles.setProperty(this.styleProperties[property], settings[property])
+      }
+    })
+  }
+
+  handleSettingChanged({property, value}) {
+    if (property in this.styleProperties) {
+      this.docStyles.setProperty(this.styleProperties[property], value)
+    }
   }
 }

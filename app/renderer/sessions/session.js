@@ -31,17 +31,19 @@ export default class Session {
   }
 
   get keymaps() {
-    if (this._keymaps) {
-      return this._keymaps
+    if (this._keymaps === undefined) {
+      this.resetKeymaps()
     }
 
+    return this._keymaps
+  }
+
+  resetKeymaps() {
     this._keymaps =
       this.currentProfile.get('keybindings').reduce((result, item) => {
         result[item.keystroke] = unescape(item.command)
         return result
       }, {})
-
-    return this._keymaps
   }
 
   settings() {
@@ -158,6 +160,23 @@ export default class Session {
     return this.xterm.addDisposableListener('selection', callback)
   }
 
+  onSettingChange({property, value}) {
+    if (this.currentProfile.xtermSettings.indexOf(property) >= 0) {
+      this.xterm.setOption(property, value)
+    } else if (property === 'keybindings') {
+      this.resetKeymaps()
+    } else if (property.startsWith('theme.')) {
+      this.resetTheme()
+    }
+  }
+
+  onActiveProfileChange() {
+    this.resetKeymaps()
+    for (const property in this.settings()) {
+      this.xterm.setOption(property, this.settings()[property])
+    }
+  }
+
   bindListeners() {
     this.xterm.attachCustomKeyEventHandler(this.keybindingHandler)
 
@@ -169,19 +188,7 @@ export default class Session {
     this.subscriptions.add(this.onFocus(this.fit))
     this.subscriptions.add(this.onFocus(this.resetBlink))
     this.subscriptions.add(this.onSelection(this.copySelection))
-
-    ipc.answerMain('setting-changed', ({property, value}) => {
-      if (this.currentProfile.xtermSettings.indexOf(property) >= 0) {
-        this.xterm.setOption(property, value)
-      } else if (property === 'keybindings') {
-        this._keymaps =
-          value.reduce((result, item) => {
-            result[item.keystroke] = unescape(item.command)
-            return result
-          }, {})
-      } else if (property.startsWith('theme.')) {
-        this.resetTheme()
-      }
-    })
+    ipc.answerMain('active-profile-changed', this.onActiveProfileChange)
+    ipc.answerMain('setting-changed', this.onSettingChanged)
   }
 }
