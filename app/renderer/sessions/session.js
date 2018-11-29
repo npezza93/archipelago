@@ -10,6 +10,7 @@ import CurrentProfile from './current-profile'
 
 Terminal.applyAddon(require('xterm/lib/addons/fit/fit'))
 Terminal.applyAddon(require('xterm/lib/addons/search/search'))
+Terminal.applyAddon(require('xterm/lib/addons/webLinks/webLinks'))
 
 export default class Session {
   constructor(type, branch) {
@@ -178,6 +179,15 @@ export default class Session {
   }
 
   bindListeners() {
+    this.xterm.webLinksInit((event, uri) => {
+      if (document.querySelector('webview')) {
+        document.querySelector('webview').remove()
+      }
+
+      const webview = document.createElement('webview')
+      webview.setAttribute('src', uri)
+      document.querySelector('body').appendChild(webview)
+    })
     this.xterm.attachCustomKeyEventHandler(this.keybindingHandler)
 
     ipc.on(`pty-data-${this.id}`, (event, data) => this.xterm.write(data))

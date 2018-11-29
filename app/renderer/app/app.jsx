@@ -23,7 +23,13 @@ export default class App extends React.Component {
     ipc.callMain('single-tab-mode').then(value => this.setState({singleTabMode: value}))
     ipc.answerMain('split', direction => this.split(direction))
     ipc.answerMain('new-tab', this.addTab)
-    ipc.answerMain('close-current-tab', () => this.removeTab(this.state.currentTabId))
+    ipc.answerMain('close-current-tab', () => {
+      if (document.querySelector('webview')) {
+        document.querySelector('webview').remove()
+      } else {
+        this.removeTab(this.state.currentTabId)
+      }
+    })
     ipc.answerMain('search-next', this.searchNext)
     ipc.answerMain('search-previous', this.searchPrevious)
     ipc.answerMain('setting-changed', this.handleSettingChanged)
