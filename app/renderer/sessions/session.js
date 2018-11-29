@@ -1,7 +1,7 @@
 /* global document */
 import {clipboard} from 'electron'
 import ipc from 'electron-better-ipc'
-import {activeWindow} from 'electron-util'
+import {activeWindow, platform} from 'electron-util'
 import {CompositeDisposable, Disposable} from 'event-kit'
 import {Terminal} from 'xterm'
 import unescape from 'unescape-js'
@@ -185,9 +185,11 @@ export default class Session {
         document.querySelector('webview').remove()
       }
 
-      const webview = document.createElement('webview')
-      webview.setAttribute('src', uri)
-      document.querySelector('body').appendChild(webview)
+      if (platform({macos: event.metaKey, default: event.ctrlKey})) {
+        const webview = document.createElement('webview')
+        webview.setAttribute('src', uri)
+        document.querySelector('body').appendChild(webview)
+      }
     })
     this.xterm.attachCustomKeyEventHandler(this.keybindingHandler)
 
