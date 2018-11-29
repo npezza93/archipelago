@@ -7,11 +7,14 @@ matrix:
       language: node_js
       node_js: "10"
       env:
+        - YARN_COMMAND=dist
         - ELECTRON_CACHE=$HOME/.cache/electron
         - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
     - os: linux
       language: node_js
       node_js: "10"
+      env:
+        - YARN_COMMAND=dist
       addons:
         apt:
           packages:
@@ -24,6 +27,8 @@ matrix:
     - os: windows
       language: node_js
       node_js: "10"
+      env:
+        - YARN_COMMAND=dist
     - os: linux
       language: node_js
       node_js: "10"
@@ -50,7 +55,7 @@ cache:
   - $HOME/.cache/electron
   - $HOME/.cache/electron-builder
 
-script: ./script/travis.sh
+script: yarn --link-duplicates --pure-lockfile --ignore-engines; yarn $YARN_COMMAND
 
 notifications:
   email: false
