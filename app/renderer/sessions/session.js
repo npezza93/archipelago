@@ -1,3 +1,4 @@
+/* global document */
 import {clipboard} from 'electron'
 import ipc from 'electron-better-ipc'
 import {activeWindow} from 'electron-util'
