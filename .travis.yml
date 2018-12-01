@@ -22,20 +22,6 @@ matrix:
             - libpng++-dev
             - make
             - rpm
-    - os: linux
-      services: docker
-      language: generic
-      env:
-        - YARN_COMMAND=dist-windows
-      addons:
-        apt:
-          packages:
-            - libx11-dev
-            - libxkbfile-dev
-            - libxtst-dev
-            - libpng++-dev
-            - make
-            - rpm
     - os: windows
       language: node_js
       node_js: "10"
@@ -67,7 +53,7 @@ cache:
   - $HOME/.cache/electron
   - $HOME/.cache/electron-builder
 
-script: ./script/travis.sh
+script: yarn --link-duplicates --pure-lockfile --ignore-engines; yarn $YARN_COMMAND
 
 notifications:
   email: false
