@@ -116,7 +116,7 @@ const shellMenu = (createWindow, profileManager) => {
       {type: 'separator'},
       {
         label: 'Close',
-        accelerator: 'CmdOrCtrl+W',
+        accelerator: accelerators.close,
         click(item, focusedWindow) {
           ipc.callRenderer(focusedWindow, 'close-via-menu')
         }
