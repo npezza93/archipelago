@@ -33,6 +33,7 @@ Use Homebrew Cask to download the app by running the following
 - [macOS](https://archipelago-terminal.herokuapp.com/download/osx)
 - [Debian](https://archipelago-terminal.herokuapp.com/download/linux_deb_64)
 - [Fedora](https://archipelago-terminal.herokuapp.com/download/linux_rpm_64)
+- [Windows](https://archipelago-terminal.herokuapp.com/download/win)
 - [Other Linux distros](https://archipelago-terminal.herokuapp.com/download/64)
 
 ## Platforms
@@ -41,6 +42,7 @@ Archipelago is compatible with:
 
 - macOS
 - Linux
+- Windows
 
 ## Contributing
 
