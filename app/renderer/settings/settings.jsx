@@ -1,3 +1,4 @@
+/* global window */
 import ipc from 'electron-better-ipc'
 import React from 'react'
 import {darkMode} from 'electron-util'
@@ -19,6 +20,10 @@ export default class Settings extends React.Component {
     this.currentProfile = new CurrentSettings()
     darkMode.onChange(() => this.setState({isDarkMode: darkMode.isEnabled}))
 
+    ipc.answerMain('close-via-menu', () => {
+      this.subscriptions.dispose()
+      window.close()
+    })
     ipc.answerMain('close', () => {
       return new Promise(resolve => {
         this.subscriptions.dispose()

@@ -23,7 +23,7 @@ export default class App extends React.Component {
     ipc.callMain('single-tab-mode').then(value => this.setState({singleTabMode: value}))
     ipc.answerMain('split', direction => this.split(direction))
     ipc.answerMain('new-tab', this.addTab)
-    ipc.answerMain('close-current-tab', () => {
+    ipc.answerMain('close-via-menu', () => {
       if (document.querySelector('webview')) {
         document.querySelector('webview').remove()
       } else {
