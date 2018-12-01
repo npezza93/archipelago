@@ -12,6 +12,7 @@ import CurrentProfile from './current-profile'
 Terminal.applyAddon(require('xterm/lib/addons/fit/fit'))
 Terminal.applyAddon(require('xterm/lib/addons/search/search'))
 Terminal.applyAddon(require('xterm/lib/addons/webLinks/webLinks'))
+Terminal.applyAddon(require('xterm/lib/addons/winptyCompat/winptyCompat'))
 
 export default class Session {
   constructor(type, branch) {
@@ -180,6 +181,7 @@ export default class Session {
   }
 
   bindListeners() {
+    this.xterm.winptyCompatInit()
     this.xterm.webLinksInit((event, uri) => {
       if (document.querySelector('webview')) {
         document.querySelector('webview').remove()
