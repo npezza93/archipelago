@@ -183,6 +183,12 @@ archipelago-app.win32 archipelago-tab-list, archipelago-app.linux archipelago-ta
   width: calc(100% - 184px);
 }
 
+archipelago-app.win32 archipelago-tab-list archipelago-tab span,
+archipelago-app.win32 archipelago-tab-list archipelago-tab div,
+archipelago-app.linux archipelago-tab-list archipelago-tab span,
+archipelago-app.linux archipelago-tab-list archipelago-tab div {
+  -webkit-app-region: no-drag;
+}
 archipelago-tab-list archipelago-tab {
   color: var(--tab-color);
   filter: invert(50%);
