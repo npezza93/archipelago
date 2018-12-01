@@ -25,11 +25,14 @@ export default class PropertiesSection extends React.Component {
         const path = [prefix, propertyName].filter(partialPath => {
           return partialPath.length > 0
         }).join('.')
+        const enabledPlatforms = schema.enabledOn || [process.platform]
 
-        property = <Property
-          addSubscription={this.props.addSubscription}
-          currentProfile={this.props.currentProfile}
-          schema={schema} key={path} property={path} />
+        if (enabledPlatforms.includes(process.platform)) {
+          property = <Property
+            addSubscription={this.props.addSubscription}
+            currentProfile={this.props.currentProfile}
+            schema={schema} key={path} property={path} />
+        }
       }
 
       return property
