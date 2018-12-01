@@ -5,9 +5,12 @@ import displayAbout from './about'
 import search from './search'
 import darwinAccelerators from './accelerators/darwin'
 import linuxAccelerators from './accelerators/linux'
+import windowsAccelerators from './accelerators/windows'
 
 const accelerators = platform({
-  macos: darwinAccelerators, linux: linuxAccelerators
+  macos: darwinAccelerators,
+  linux: linuxAccelerators,
+  windows: windowsAccelerators
 })
 
 const aboutMenu = {
