@@ -70,11 +70,19 @@ svg g {
 #about .font-weight-500 { font-weight: 500; }
 #about .m-0 { margin: 0; }
 
-#about minimize-button { z-index: 100 !important; }
-#about minimize-button div { height: 2px !important; }
-#about close-button div { height: 2px !important; }
-#about close-button { z-index: 100 !important; }
+#about minimize-button {
+  z-index: 100 !important;
+}
+#about minimize-button div {
+  background: var(--color) !important;
+}
+#about close-button div {
+  background: var(--color) !important;
+}
+#about close-button {
+  z-index: 100 !important;
+}
 #about maximize-button {
   z-index: 100 !important;
-  border: 2px solid #000 !important;
+  border: 2px solid var(--color) !important;
 }

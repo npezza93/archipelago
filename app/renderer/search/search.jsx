@@ -20,7 +20,7 @@ export default class Search extends React.Component {
       wholeWord: false
     }
 
-    ipc.answerMain('close-current-tab', () => window.close())
+    ipc.answerMain('close-via-menu', () => window.close())
     ipc.answerMain('search-next', () => this.searchNext())
     ipc.answerMain('search-previous', () => this.searchPrevious())
     darkMode.onChange(() => this.setState({isDarkMode: darkMode.isEnabled}))

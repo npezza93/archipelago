@@ -5,7 +5,7 @@ import ipc from 'electron-better-ipc'
 let searchWindow = null
 
 export default {
-  display(currentPosition) {
+  toggle(currentPosition) {
     if (searchWindow === null || searchWindow.isDestroyed()) {
       searchWindow = new BrowserWindow({
         width: 300,
@@ -26,11 +26,8 @@ export default {
 
       searchWindow.once('ready-to-show', () => searchWindow.show())
     } else {
-      searchWindow.focus()
+      searchWindow.close()
     }
-  },
-  hide() {
-    this.callOnWindow(() => searchWindow.close())
   },
   next() {
     this.callOnWindow(() => ipc.callRenderer(searchWindow, 'search-next'))

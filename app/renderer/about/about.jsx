@@ -12,7 +12,7 @@ export default class About extends React.Component {
 
     this.state = {isDarkMode: darkMode.isEnabled}
 
-    ipc.answerMain('close-current-tab', () => window.close())
+    ipc.answerMain('close-via-menu', () => window.close())
     darkMode.onChange(() => this.setState({isDarkMode: darkMode.isEnabled}))
   }
 
