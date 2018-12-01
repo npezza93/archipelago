@@ -25,8 +25,8 @@ matrix:
             - make
             - rpm
     - os: linux
-      language: node_js
-      node_js: "10"
+      services: docker
+      language: generic
       env:
         - YARN_COMMAND=dist-windows
       addons:
@@ -85,3 +85,5 @@ script:
 
 notifications:
   email: false
+before_cache:
+   - rm -rf $HOME/.cache/electron-builder/wine
