@@ -556,7 +556,6 @@ minimize-button {
   z-index: 100 !important;
 }
 minimize-button div {
-  height: 2px !important;
   background-color: var(--color) !important;
 }
 maximize-button {
@@ -569,6 +568,5 @@ close-button {
   z-index: 100 !important;
 }
 close-button div {
-  height: 2px !important;
   background-color: var(--color) !important;
 }

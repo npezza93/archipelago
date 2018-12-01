@@ -133,7 +133,7 @@ minimize-button div {
 }
 
 maximize-button {
-  border: var(--tab-color) 1px solid !important;
+  border: var(--tab-color) 2px solid !important;
 }
 
 archipelago-app.single-tab-mode maximize-button {
