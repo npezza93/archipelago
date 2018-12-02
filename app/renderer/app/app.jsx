@@ -36,6 +36,7 @@ export default class App extends React.Component {
     ipc.answerMain('active-profile-changed', this.handleActiveProfileChanged)
     ipc.answerMain('close', this.handleClose)
     this.resetCssSettings()
+    window.addEventListener('beforeunload', this.componentCleanup)
   }
 
   render() {
@@ -66,8 +67,13 @@ export default class App extends React.Component {
     return classNames
   }
 
-  componentWillUnmount() {
+  componentCleanup() {
     this.state.tabs.map(tab => tab.kill())
+  }
+
+  componentWillUnmount() {
+    this.componentCleanup()
+    window.removeEventListener('beforeunload', this.componentCleanup)
   }
 
   componentDidUpdate() {
