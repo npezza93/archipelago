@@ -38,7 +38,7 @@ export default class Pty {
     await new Promise(resolve => {
       this.pty.removeAllListeners('data')
       this.pty.removeAllListeners('exit')
-      this.pty.kill()
+      this.pty.destroy()
       resolve()
     })
   }
