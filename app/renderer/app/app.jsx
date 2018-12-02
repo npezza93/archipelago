@@ -260,8 +260,8 @@ export default class App extends React.Component {
     }
   }
 
-  handleActiveProfileChanged(profile) {
-    this.setState({singleTabMode: profile.singleTabMode})
+  handleActiveProfileChanged() {
+    ipc.callMain('single-tab-mode').then(value => this.setState({singleTabMode: value}))
     this.resetCssSettings()
   }
 

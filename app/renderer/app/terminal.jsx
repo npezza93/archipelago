@@ -37,7 +37,7 @@ export default class Terminal extends React.Component {
     session.xterm.focus()
 
     this.resizeObserver.observe(this.container)
-    this.subscriptions.add(this.props.session.bindScrollListener())
+    this.subscriptions.add(session.bindScrollListener())
   }
 
   componentWillUnmount() {
