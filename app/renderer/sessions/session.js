@@ -180,6 +180,10 @@ export default class Session {
     }
   }
 
+  writePtyData(event, data) {
+    this.xterm.write(data)
+  }
+
   bindListeners() {
     this.xterm.winptyCompatInit()
     this.xterm.webLinksInit((event, uri) => {
@@ -195,7 +199,10 @@ export default class Session {
     })
     this.xterm.attachCustomKeyEventHandler(this.keybindingHandler)
 
-    ipc.on(`pty-data-${this.id}`, (event, data) => this.xterm.write(data))
+    ipc.on(`pty-data-${this.id}`, this.writePtyData)
+    this.subscriptions.add(new Disposable(() => {
+      ipc.removeListener(`pty-data-${this.id}`, this.writePtyData)
+    }))
     this.subscriptions.add(this.onData(data => {
       ipc.send(`pty-write-${this.id}`, data)
     }))
