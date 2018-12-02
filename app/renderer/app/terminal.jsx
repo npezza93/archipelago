@@ -59,9 +59,11 @@ export default class Terminal extends React.Component {
       })
     )
 
-    this.props.session.onExit(() => {
-      this.props.removeSession(this.props.tabId, this.props.session.id)
-    })
+    this.subscriptions.add(
+      this.props.session.onExit(() => {
+        this.props.removeSession(this.props.tabId, this.props.session.id)
+      })
+    )
 
     this.subscriptions.add(
       this.props.session.onData(() => {

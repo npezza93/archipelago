@@ -77,7 +77,7 @@ export default class Session {
 
     const ptyId = await this.ptyId
 
-    await ipc.callMain('pty-kill', ptyId)
+    await ipc.callMain(`pty-kill-${ptyId}`)
   }
 
   fit() {
@@ -152,7 +152,10 @@ export default class Session {
   }
 
   onExit(callback) {
-    ipc.answerMain(`pty-exit-${this.id}`, callback)
+    ipc.on(`pty-exit-${this.id}`, callback)
+    return new Disposable(() => {
+      ipc.removeListener(`pty-exit-${this.id}`, callback)
+    })
   }
 
   onData(callback) {

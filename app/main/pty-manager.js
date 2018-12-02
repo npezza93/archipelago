@@ -7,8 +7,6 @@ import Pty from './pty'
 export default () => {
   const ptys = {}
 
-  ipc.answerRenderer('pty-kill', id => kill(id))
-
   const kill = id => {
     if (ptys[id]) {
       ptys[id].kill()
@@ -20,6 +18,7 @@ export default () => {
     return new Promise(resolve => {
       const pty = new Pty(profileManager)
       pty.onExit(() => kill(pty.id))
+      ipc.answerRenderer(`pty-kill-${pty.id}`, () => kill(pty.id))
 
       resolve(pty)
     })

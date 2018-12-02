@@ -53,7 +53,7 @@ export default class Pty {
     })
     ipc.on(`pty-write-${this.sessionId}`, (event, data) => this.write(data))
     this.pty.on('exit', () => {
-      ipc.callRenderer(this.sessionWindow, `pty-exit-${this.sessionId}`)
+      this.sessionWindow.webContents.send(`pty-exit-${this.sessionId}`)
     })
     this.pty.on('data', data => {
       this.sessionWindow.webContents.send(`pty-data-${this.sessionId}`, data)
