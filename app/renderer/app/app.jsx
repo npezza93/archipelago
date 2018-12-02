@@ -23,46 +23,23 @@ export default class App extends React.Component {
     ipc.callMain('single-tab-mode').then(value => this.setState({singleTabMode: value}))
     ipc.answerMain('split', direction => this.split(direction))
     ipc.answerMain('new-tab', this.addTab)
-    ipc.answerMain('close-current-tab', () => this.removeTab(this.state.currentTabId))
-    ipc.answerMain('search-next', ({query, options}) => this.searchNext(query, options))
-    ipc.answerMain('search-previous', ({query, options}) => this.searchPrevious(query, options))
-    ipc.answerMain('setting-changed', ({property, value}) => {
-      if (property === 'singleTabMode') {
-        this.setState({singleTabMode: value})
+    ipc.answerMain('close-via-menu', () => {
+      if (document.querySelector('webview')) {
+        document.querySelector('webview').remove()
+      } else {
+        this.removeTab(this.state.currentTabId)
       }
     })
-    ipc.answerMain('close', async () => {
-      const killers = []
-      for (const tab of this.state.tabs) {
-        killers.push(tab.kill())
-      }
-      await Promise.all(killers)
-    })
-
-    const styles = document.documentElement.style
-    const styleProperties = {
-      fontFamily: '--font-family',
-      windowBackground: '--background-color',
-      tabColor: '--tab-color',
-      tabBorderColor: '--tab-border-color',
-      fontSize: '--font-size',
-      padding: '--terminal-padding',
-      'theme.selection': '--selection-color'
-    }
-    ipc.callMain('css-settings').then(settings => {
-      for (const property in styleProperties) {
-        styles.setProperty(styleProperties[property], settings[property])
-      }
-    })
-    ipc.answerMain('setting-changed', ({property, value}) => {
-      if (property in styleProperties) {
-        styles.setProperty(styleProperties[property], value)
-      }
-    })
+    ipc.answerMain('search-next', this.searchNext)
+    ipc.answerMain('search-previous', this.searchPrevious)
+    ipc.answerMain('setting-changed', this.handleSettingChanged)
+    ipc.answerMain('active-profile-changed', this.handleActiveProfileChanged)
+    ipc.answerMain('close', this.handleClose)
+    this.resetCssSettings()
   }
 
   render() {
-    return <archipelago-app class={process.platform} data-single-tab-mode={ this.state.singleTabMode || undefined}>
+    return <archipelago-app class={this.htmlClasses()}>
       <HamburgerMenu />
       <TabList
         tabs={this.state.tabs}
@@ -78,6 +55,15 @@ export default class App extends React.Component {
         removeSession={this.removeSession}
         selectSession={this.selectSession} />
     </archipelago-app>
+  }
+
+  htmlClasses() {
+    let classNames = process.platform
+    if (this.state.singleTabMode) {
+      classNames += ' single-tab-mode'
+    }
+
+    return classNames
   }
 
   componentWillUnmount() {
@@ -224,15 +210,60 @@ export default class App extends React.Component {
     this.setState({tabs, currentSessionId: newSessionId})
   }
 
-  searchNext(query, options) {
+  searchNext({query, options}) {
     const currentTab = this.currentTab()
     const session = currentTab.find(currentTab.root, currentTab.lastActiveSessionId)
     session.searchNext(query, options)
   }
 
-  searchPrevious(query, options) {
+  searchPrevious({query, options}) {
     const currentTab = this.currentTab()
     const session = currentTab.find(currentTab.root, currentTab.lastActiveSessionId)
     session.searchPrevious(query, options)
+  }
+
+  get docStyles() {
+    return document.documentElement.style
+  }
+
+  get styleProperties() {
+    return {
+      fontFamily: '--font-family',
+      windowBackground: '--background-color',
+      tabColor: '--tab-color',
+      tabBorderColor: '--tab-border-color',
+      fontSize: '--font-size',
+      padding: '--terminal-padding',
+      'theme.selection': '--selection-color'
+    }
+  }
+
+  resetCssSettings() {
+    ipc.callMain('css-settings').then(settings => {
+      for (const property in this.styleProperties) {
+        this.docStyles.setProperty(this.styleProperties[property], settings[property])
+      }
+    })
+  }
+
+  handleSettingChanged({property, value}) {
+    if (property === 'singleTabMode') {
+      this.setState({singleTabMode: value})
+    } else if (property in this.styleProperties) {
+      this.docStyles.setProperty(this.styleProperties[property], value)
+    }
+  }
+
+  handleActiveProfileChanged(profile) {
+    this.setState({singleTabMode: profile.singleTabMode})
+    this.resetCssSettings()
+  }
+
+  async handleClose() {
+    const killers = []
+    for (const tab of this.state.tabs) {
+      killers.push(tab.kill())
+    }
+    await Promise.all(killers)
   }
 }

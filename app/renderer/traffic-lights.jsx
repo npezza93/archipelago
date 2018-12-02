@@ -17,7 +17,7 @@ class Minimize extends React.Component {
       filter: 'invert(20%)',
       cursor: 'pointer'
     }} onClick={() => activeWindow().minimize()}>
-      <div style={{height: '1px', background: '#000'}}></div>
+      <div style={{height: '2px', background: '#000'}}></div>
     </minimize-button>
   }
 }
@@ -35,7 +35,7 @@ class Maximize extends React.Component {
       top: '14px',
       position: 'fixed',
       zIndex: 4,
-      border: '#000 1px solid',
+      border: '#000 2px solid',
       filter: 'invert(20%)',
       cursor: 'pointer'}} onClick={() => activeWindow().maximize()} />
   }
@@ -55,7 +55,7 @@ class Close extends React.Component {
       cursor: 'pointer'
     }} onClick={() => activeWindow().close()}>
       <div style={{
-        height: '1px',
+        height: '2px',
         position: 'absolute',
         width: '20px',
         top: '7px',
@@ -63,7 +63,7 @@ class Close extends React.Component {
         background: '#000',
         transform: 'rotate(45deg)'}}></div>
       <div style={{
-        height: '1px',
+        height: '2px',
         position: 'absolute',
         width: '20px',
         top: '7px',

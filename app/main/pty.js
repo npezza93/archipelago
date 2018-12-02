@@ -38,7 +38,7 @@ export default class Pty {
     await new Promise(resolve => {
       this.pty.removeAllListeners('data')
       this.pty.removeAllListeners('exit')
-      this.pty.kill()
+      this.pty.destroy()
       resolve()
     })
   }
@@ -74,7 +74,9 @@ export default class Pty {
 
   resize(cols, rows) {
     if (Number.isInteger(cols) && Number.isInteger(rows)) {
-      this.pty.resize(cols, rows)
+      try {
+        this.pty.resize(cols, rows)
+      } catch (error) {}
     }
   }
 

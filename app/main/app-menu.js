@@ -3,6 +3,15 @@ import ipc from 'electron-better-ipc'
 import displaySettings from './settings'
 import displayAbout from './about'
 import search from './search'
+import darwinAccelerators from './accelerators/darwin'
+import linuxAccelerators from './accelerators/linux'
+import windowsAccelerators from './accelerators/windows'
+
+const accelerators = platform({
+  macos: darwinAccelerators,
+  linux: linuxAccelerators,
+  windows: windowsAccelerators
+})
 
 const aboutMenu = {
   label: api.app.getName(),
@@ -18,7 +27,7 @@ const aboutMenu = {
     {type: 'separator'},
     {
       label: 'Settings',
-      accelerator: 'CmdOrCtrl+,',
+      accelerator: accelerators.settings,
       click: displaySettings
     },
     {type: 'separator'},
@@ -33,7 +42,7 @@ const aboutMenu = {
       ],
       default: []
     }),
-    {role: 'quit'}
+    {role: 'quit', accelerator: accelerators.quitApp}
   ]
 }
 
@@ -43,34 +52,27 @@ const shellMenu = (createWindow, profileManager) => {
     submenu: [
       {
         label: 'New Window',
-        accelerator: 'CmdOrCtrl+N',
+        accelerator: accelerators.newWindow,
         click: createWindow
       },
       {type: 'separator'},
       {
         label: 'Search',
-        accelerator: 'CmdOrCtrl+F',
+        accelerator: accelerators.search,
         click(item, focusedWindow) {
-          search.display(focusedWindow.getPosition())
-        }
-      },
-      {
-        label: 'Hide Search',
-        accelerator: 'CmdOrCtrl+Shift+F',
-        click() {
-          search.hide()
+          search.toggle(focusedWindow.getPosition())
         }
       },
       {
         label: 'Search Next',
-        accelerator: 'CmdOrCtrl+G',
+        accelerator: accelerators.searchNext,
         click() {
           search.next()
         }
       },
       {
         label: 'Search Previous',
-        accelerator: 'CmdOrCtrl+Shift+G',
+        accelerator: accelerators.searchPrev,
         click() {
           search.previous()
         }
@@ -78,14 +80,14 @@ const shellMenu = (createWindow, profileManager) => {
       {type: 'separator'},
       {
         label: 'Split Vertically',
-        accelerator: 'CmdOrCtrl+Shift+S',
+        accelerator: accelerators.splitVertically,
         click(item, focusedWindow) {
           ipc.callRenderer(focusedWindow, 'split', 'vertical')
         }
       },
       {
         label: 'Split Horizontally',
-        accelerator: 'CmdOrCtrl+S',
+        accelerator: accelerators.splitHorizontally,
         click(item, focusedWindow) {
           ipc.callRenderer(focusedWindow, 'split', 'horizontal')
         }
@@ -97,12 +99,10 @@ const shellMenu = (createWindow, profileManager) => {
     menu.submenu.push(
       {type: 'separator'},
       {
-        label: 'Close Window',
-        accelerator: 'CmdOrCtrl+W',
+        label: 'Close',
+        accelerator: accelerators.close,
         click(item, focusedWindow) {
-          if (focusedWindow) {
-            focusedWindow.close()
-          }
+          ipc.callRenderer(focusedWindow, 'close-via-menu')
         }
       }
     )
@@ -111,26 +111,17 @@ const shellMenu = (createWindow, profileManager) => {
       {type: 'separator'},
       {
         label: 'New Tab',
-        accelerator: 'CmdOrCtrl+T',
+        accelerator: accelerators.newTab,
         click(item, focusedWindow) {
           ipc.callRenderer(focusedWindow, 'new-tab')
         }
       },
       {type: 'separator'},
       {
-        label: 'Close Tab',
-        accelerator: 'CmdOrCtrl+W',
+        label: 'Close',
+        accelerator: accelerators.close,
         click(item, focusedWindow) {
-          ipc.callRenderer(focusedWindow, 'close-current-tab')
-        }
-      },
-      {
-        label: 'Close Window',
-        accelerator: 'CmdOrCtrl+Shift+W',
-        click(item, focusedWindow) {
-          if (focusedWindow) {
-            focusedWindow.close()
-          }
+          ipc.callRenderer(focusedWindow, 'close-via-menu')
         }
       }
     )
@@ -142,28 +133,28 @@ const shellMenu = (createWindow, profileManager) => {
 const editMenu = {
   label: 'Edit',
   submenu: [
-    {role: 'undo'},
-    {role: 'redo'},
+    {role: 'undo', accelerator: accelerators.undo},
+    {role: 'redo', accelerator: accelerators.redo},
     {type: 'separator'},
-    {role: 'cut'},
-    {role: 'copy'},
-    {role: 'paste'},
-    {role: 'selectall'}
+    {role: 'cut', accelerator: accelerators.cut},
+    {role: 'copy', accelerator: accelerators.copy},
+    {role: 'paste', accelerator: accelerators.paste},
+    {role: 'selectall', accelerator: accelerators.selectAll}
   ]
 }
 
 const viewMenu = {
   label: 'View',
   submenu: [
-    {role: 'reload'},
-    {role: 'forcereload'},
-    {role: 'toggledevtools'},
+    {role: 'reload', accelerator: accelerators.reload},
+    {role: 'forcereload', accelerator: accelerators.forceReload},
+    {role: 'toggledevtools', accelerator: accelerators.toggleDevtools},
     {type: 'separator'},
-    {role: 'resetzoom'},
-    {role: 'zoomin'},
-    {role: 'zoomout'},
+    {role: 'resetzoom', accelerator: accelerators.resetZoom},
+    {role: 'zoomin', accelerator: accelerators.zoomIn},
+    {role: 'zoomout', accelerator: accelerators.zoomOut},
     {type: 'separator'},
-    {role: 'togglefullscreen'}
+    {role: 'togglefullscreen', accelerator: accelerators.toggleFullscreen}
   ]
 }
 
@@ -192,9 +183,12 @@ const windowMenu = {
   role: 'window',
   submenu: platform({
     macos: [
-      {role: 'minimize'}, {role: 'zoom'}, {type: 'separator'}, {role: 'front'}
+      {role: 'minimize', accelerator: accelerators.minimize},
+      {role: 'zoom'},
+      {type: 'separator'},
+      {role: 'front'}
     ],
-    default: [{role: 'minimize'}]
+    default: [{role: 'minimize', accelerator: accelerators.minimize}]
   })
 }
 

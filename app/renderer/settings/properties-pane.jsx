@@ -66,8 +66,9 @@ export default class PropertiesPane extends React.Component {
 
     return Object.keys(properties).reduce((accumulator, property) => {
       const schema = properties[property]
+      const enabledPlatforms = schema.enabledOn || [process.platform]
 
-      if (schema.settings) {
+      if (schema.settings && enabledPlatforms.includes(process.platform)) {
         const {title} = schema.settings
 
         if (accumulator[title] === undefined) {

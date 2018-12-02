@@ -109,7 +109,7 @@ hamburger-menu {
   cursor: pointer;
 }
 
-archipelago-app[data-single-tab-mode] hamburger-menu {
+archipelago-app.single-tab-mode hamburger-menu {
   top: 9px;
 }
 
@@ -121,7 +121,7 @@ hamburger-menu div {
   background: var(--tab-color);
 }
 
-archipelago-app[data-single-tab-mode] minimize-button {
+archipelago-app.single-tab-mode minimize-button {
   top: 9px !important;
 }
 
@@ -133,10 +133,10 @@ minimize-button div {
 }
 
 maximize-button {
-  border: var(--tab-color) 1px solid !important;
+  border: var(--tab-color) 2px solid !important;
 }
 
-archipelago-app[data-single-tab-mode] maximize-button {
+archipelago-app.single-tab-mode maximize-button {
   top: 9px !important;
 }
 
@@ -144,7 +144,7 @@ maximize-button:hover {
   filter: invert(0%);
 }
 
-archipelago-app[data-single-tab-mode] close-button {
+archipelago-app.single-tab-mode close-button {
   top: 9px !important;
 }
 
@@ -183,6 +183,12 @@ archipelago-app.win32 archipelago-tab-list, archipelago-app.linux archipelago-ta
   width: calc(100% - 184px);
 }
 
+archipelago-app.win32 archipelago-tab-list archipelago-tab span,
+archipelago-app.win32 archipelago-tab-list archipelago-tab div,
+archipelago-app.linux archipelago-tab-list archipelago-tab span,
+archipelago-app.linux archipelago-tab-list archipelago-tab div {
+  -webkit-app-region: no-drag;
+}
 archipelago-tab-list archipelago-tab {
   color: var(--tab-color);
   filter: invert(50%);
@@ -240,14 +246,14 @@ archipelago-tab-list archipelago-tab span {
   max-width: 75%;
 }
 
-archipelago-app[data-single-tab-mode] archipelago-tab-list {
+archipelago-app.single-tab-mode archipelago-tab-list {
   position: absolute;
   height: 30px;
 }
-archipelago-app[data-single-tab-mode] archipelago-tab-list archipelago-tab {
+archipelago-app.single-tab-mode archipelago-tab-list archipelago-tab {
   display: none;
 }
-archipelago-app.darwin[data-single-tab-mode] archipelago-tab-list {
+archipelago-app.darwin.single-tab-mode archipelago-tab-list {
   width: calc(100% - 70px);
 }
 
@@ -281,4 +287,13 @@ archipelago-tab.is-unread span {
   border-left: 3px solid rgba(255, 255, 255, 0);
   border-right: 3px solid rgba(255, 255, 255, 0);
   cursor: col-resize;
+}
+
+webview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
 }

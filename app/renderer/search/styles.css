@@ -33,13 +33,21 @@ html, body {
   -webkit-app-region: drag;
   margin-top: 50px;
 }
-#search minimize-button { z-index: 100 !important; }
-#search minimize-button div { height: 2px !important; }
-#search close-button div { height: 2px !important; }
-#search close-button { z-index: 100 !important; }
+#search minimize-button {
+  z-index: 100 !important;
+}
+#search minimize-button div {
+  background: var(--color) !important;
+}
+#search close-button div {
+  background: var(--color) !important;
+}
+#search close-button {
+  z-index: 100 !important;
+}
 #search maximize-button {
   z-index: 100 !important;
-  border: 2px solid #000 !important;
+  border: 2px solid var(--color) !important;
 }
 
 input-field {

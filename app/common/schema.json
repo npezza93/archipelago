@@ -132,7 +132,7 @@
           "experimentalCharAtlas": {
             "type": "string",
             "title": "Choose the type of character atlas",
-            "default": "dynamic",
+            "default": "static",
             "scope": "xterm",
             "settings": {
               "title": "shell"

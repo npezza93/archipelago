@@ -89,7 +89,9 @@
     "jsdom-global": "^3.0.2",
     "mocha": "^5.2.0",
     "raf": "^3.4.0",
+    "robotjs": "^0.5.1",
     "spectron": "^5.0.0",
+    "spectron-keys": "^0.0.1",
     "webpack": "^4.20.2",
     "xo": "^0.23.0"
   },

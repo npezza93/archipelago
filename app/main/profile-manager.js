@@ -92,6 +92,10 @@ export default class ProfileManager {
       const newValue = this.activeProfile()
       if (oldValue && newValue && oldValue.id !== newValue.id) {
         oldValue = newValue
+        for (const window of BrowserWindow.getAllWindows()) {
+          ipc.callRenderer(window, 'active-profile-changed', newValue.attributes)
+        }
+
         return callback(newValue)
       }
     })

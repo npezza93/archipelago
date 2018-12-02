@@ -7,20 +7,26 @@ matrix:
       language: node_js
       node_js: "10"
       env:
-        - ELECTRON_CACHE=$HOME/.cache/electron
-        - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
+        - YARN_COMMAND=dist
     - os: linux
       language: node_js
       node_js: "10"
+      env:
+        - YARN_COMMAND=dist
       addons:
         apt:
           packages:
             - libx11-dev
             - libxkbfile-dev
+            - libxtst-dev
+            - libpng++-dev
+            - make
             - rpm
     - os: windows
       language: node_js
       node_js: "10"
+      env:
+        - YARN_COMMAND=dist
     - os: linux
       language: node_js
       node_js: "10"
@@ -31,16 +37,15 @@ matrix:
           packages:
             - libx11-dev
             - libxkbfile-dev
-    - os: linux
+            - libxtst-dev
+            - libpng++-dev
+            - make
+    - os: osx
+      osx_image: xcode9.0
       language: node_js
       node_js: "10"
       env:
         - YARN_COMMAND=test
-      addons:
-        apt:
-          packages:
-            - libx11-dev
-            - libxkbfile-dev
 
 cache:
   directories:
@@ -48,7 +53,9 @@ cache:
   - $HOME/.cache/electron
   - $HOME/.cache/electron-builder
 
-script: ./script/travis.sh
+script: yarn --link-duplicates --pure-lockfile --ignore-engines; yarn $YARN_COMMAND
 
 notifications:
   email: false
+before_cache:
+   - rm -rf $HOME/.cache/electron-builder/wine
