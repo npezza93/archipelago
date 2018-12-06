@@ -3,30 +3,13 @@
 import ipc from 'electron-better-ipc'
 import React from 'react'
 import {darkMode} from 'electron-util'
-import autoBind from 'auto-bind'
+import {Disposable} from 'event-kit'
 import Octicon, {ChevronLeft, ChevronRight} from '@githubprimer/octicons-react'
+import Component from '../utils/component.jsx'
 import TrafficLights from '../traffic-lights.jsx'
 import './styles.css' // eslint-disable-line import/no-unassigned-import
 
-export default class Search extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      isDarkMode: darkMode.isEnabled,
-      query: '',
-      regex: false,
-      caseSensitive: false,
-      wholeWord: false
-    }
-
-    ipc.answerMain('close-via-menu', () => window.close())
-    ipc.answerMain('search-next', () => this.searchNext())
-    ipc.answerMain('search-previous', () => this.searchPrevious())
-    darkMode.onChange(() => this.setState({isDarkMode: darkMode.isEnabled}))
-    autoBind(this)
-  }
-
+export default class Search extends Component {
   render() {
     return <div id="search" data-theme={this.theme}>
       <TrafficLights />
@@ -82,6 +65,16 @@ export default class Search extends React.Component {
     </div>
   }
 
+  initialState() {
+    return {
+      isDarkMode: darkMode.isEnabled,
+      query: '',
+      regex: false,
+      caseSensitive: false,
+      wholeWord: false
+    }
+  }
+
   handleQueryChange(event) {
     this.setState({query: event.target.value})
   }
@@ -120,11 +113,17 @@ export default class Search extends React.Component {
     })
   }
 
-  get theme() {
-    if (this.state.isDarkMode) {
-      return 'dark'
-    }
+  bindListeners() {
+    ipc.answerMain('search-next', this.searchNext)
+    ipc.answerMain('search-previous', this.searchPrevious)
 
-    return 'light'
+    this.addSubscription(
+      new Disposable(darkMode.onChange(this.handleDarkModeChange))
+    )
+
+    ipc.on('close-via-menu', window.close)
+    this.addSubscription(
+      new Disposable(() => ipc.removeListener('close-via-menu', window.close))
+    )
   }
 }
