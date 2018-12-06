@@ -175,7 +175,7 @@ export default class Session {
     return this.xterm.addDisposableListener('selection', callback)
   }
 
-  onSettingChange({property, value}) {
+  onSettingChanged({property, value}) {
     if (this.currentProfile.xtermSettings.indexOf(property) >= 0) {
       this.xterm.setOption(property, value)
     } else if (property === 'keybindings') {
