@@ -95,18 +95,7 @@ const shellMenu = (createWindow, profileManager) => {
     ]
   }
 
-  if (profileManager.get('singleTabMode')) {
-    menu.submenu.push(
-      {type: 'separator'},
-      {
-        label: 'Close',
-        accelerator: accelerators.close,
-        click(item, focusedWindow) {
-          ipc.callRenderer(focusedWindow, 'close-via-menu')
-        }
-      }
-    )
-  } else {
+  if (!profileManager.get('singleTabMode')) {
     menu.submenu.push(
       {type: 'separator'},
       {
@@ -115,17 +104,24 @@ const shellMenu = (createWindow, profileManager) => {
         click(item, focusedWindow) {
           ipc.callRenderer(focusedWindow, 'new-tab')
         }
-      },
-      {type: 'separator'},
-      {
-        label: 'Close',
-        accelerator: accelerators.close,
-        click(item, focusedWindow) {
-          ipc.callRenderer(focusedWindow, 'close-via-menu')
-        }
       }
     )
   }
+
+  menu.submenu.push(
+    {type: 'separator'},
+    {
+      label: 'Close',
+      accelerator: accelerators.close,
+      click(item, focusedWindow) {
+        if (focusedWindow.name === 'visor') {
+          focusedWindow.hideVisor()
+        } else {
+          focusedWindow.webContents.send('close-via-menu')
+        }
+      }
+    }
+  )
 
   return menu
 }

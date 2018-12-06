@@ -39,6 +39,8 @@ const create = profileManager => {
       backgroundColor: (new Color(profileManager.get('visor.windowBackground'))).hex(),
       vibrancy: profileManager.get('visor.vibrancy')
     })
+    visorWindow.name = 'visor'
+    visorWindow.hideVisor = hideVisor
 
     if (is.development) {
       visorWindow.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}#visor`)
