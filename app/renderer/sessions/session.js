@@ -24,6 +24,7 @@ export default class Session {
     this.ptyId = ipc.callMain('pty-create', {sessionId: this.id, sessionWindowId: activeWindow().id})
     this.type = type || 'default'
     this.xterm = new Terminal(this.settings())
+    this.resetKeymaps()
     autoBind(this)
 
     this.bindListeners()
@@ -42,11 +43,13 @@ export default class Session {
   }
 
   resetKeymaps() {
-    this._keymaps =
-      this.currentProfile.get('keybindings').reduce((result, item) => {
-        result[item.keystroke] = unescape(item.command)
-        return result
-      }, {})
+    ipc.callMain('keybindings').then(keybindings => {
+      this._keymaps =
+        keybindings.reduce((result, item) => {
+          result[item.keystroke] = unescape(item.command)
+          return result
+        }, {})
+    })
   }
 
   settings() {

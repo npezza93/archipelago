@@ -146,6 +146,7 @@ export default class ProfileManager {
       }, {})
     })
     ipc.answerRenderer('copy-on-select', () => this.get('copyOnSelect'))
+    ipc.answerRenderer('keybindings', () => this.get('keybindings'))
     ipc.answerRenderer('cursor-blink', () => this.get('cursorBlink'))
     ipc.answerRenderer('set-profile-name', ({id, name}) => {
       this.find(id).name = name
