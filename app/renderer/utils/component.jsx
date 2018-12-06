@@ -10,9 +10,9 @@ export default class Component extends React.Component {
     super(props)
     autoBind(this)
 
+    this.initialize()
     this.state = this.initialState()
     this.subscriptions = new CompositeDisposable()
-    this.initialize()
 
     window.addEventListener('beforeunload', this.cleanup)
     this.bindListeners()
