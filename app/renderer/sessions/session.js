@@ -74,6 +74,9 @@ export default class Session {
 
   open(container) {
     this.xterm.open(container)
+    if (this.currentProfile.get('ligatures')) {
+      this.xterm.enableLigatures()
+    }
     this.resetTheme()
     this.xterm.focus()
   }
@@ -89,15 +92,6 @@ export default class Session {
     const ptyId = await this.ptyId
 
     await ipc.callMain(`pty-kill-${ptyId}`)
-  }
-
-  open(container) {
-    this.xterm.open(container)
-    if (this.currentProfile.get('ligatures')) {
-      this.xterm.enableLigatures()
-    }
-    this.resetTheme()
-    this.xterm.focus()
   }
 
   fit() {
