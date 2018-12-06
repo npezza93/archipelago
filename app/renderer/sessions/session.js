@@ -67,6 +67,12 @@ export default class Session {
     return defaultSettings
   }
 
+  open(container) {
+    this.xterm.open(container)
+    this.resetTheme()
+    this.xterm.focus()
+  }
+
   resetTheme() {
     this.xterm.setOption('theme', this.settings().theme)
   }
