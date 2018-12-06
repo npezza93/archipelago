@@ -215,7 +215,7 @@ export default class Session {
     this.subscriptions.add(this.onData(data => {
       ipc.send(`pty-write-${this.id}`, data)
     }))
-    this.subscriptions.add(this.onTitle(title => this.setTitle(title)))
+    this.subscriptions.add(this.onTitle(this.setTitle))
     this.subscriptions.add(this.onFocus(this.fit))
     this.subscriptions.add(this.onFocus(this.resetBlink))
     this.subscriptions.add(this.onSelection(this.copySelection))
