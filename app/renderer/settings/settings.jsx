@@ -30,6 +30,7 @@ export default class Settings extends React.Component {
         resolve()
       })
     })
+    window.addEventListener('beforeunload', this.cleanup)
     autoBind(this)
   }
 
@@ -49,8 +50,13 @@ export default class Settings extends React.Component {
     </div>
   }
 
-  componentWillUnmount() {
+  cleanup() {
     this.subscriptions.dispose()
+  }
+
+  componentWillUnmount() {
+    this.cleanup()
+    window.removeEventListener('beforeunload', this.cleanup)
   }
 
   toggleProfilesDrawer(active) {

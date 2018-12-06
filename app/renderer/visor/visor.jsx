@@ -20,6 +20,7 @@ export default class Visor extends React.Component {
     ipc.answerMain('setting-changed', this.handleSettingChanged)
     ipc.answerMain('active-profile-changed', this.resetCssSettings)
     this.resetCssSettings()
+    window.addEventListener('beforeunload', this.cleanup)
   }
 
   render() {
@@ -36,8 +37,13 @@ export default class Visor extends React.Component {
     return `${process.platform} single-tab-mode`
   }
 
-  componentWillUnmount() {
+  cleanup() {
     this.state.tab.kill()
+  }
+
+  componentWillUnmount() {
+    this.cleanup()
+    window.removeEventListener('beforeunload', this.cleanup)
   }
 
   selectSession(id) {
