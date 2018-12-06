@@ -26,6 +26,7 @@ export default class Session {
     this.ptyId = ipc.callMain('pty-create', {sessionId: this.id, sessionWindowId: activeWindow().id})
     this.type = type || 'default'
     this.xterm = new Terminal(this.settings())
+    this.resetKeymaps()
     autoBind(this)
 
     this.bindListeners()
@@ -44,11 +45,13 @@ export default class Session {
   }
 
   resetKeymaps() {
-    this._keymaps =
-      this.currentProfile.get('keybindings').reduce((result, item) => {
-        result[item.keystroke] = unescape(item.command)
-        return result
-      }, {})
+    ipc.callMain('keybindings').then(keybindings => {
+      this._keymaps =
+        keybindings.reduce((result, item) => {
+          result[item.keystroke] = unescape(item.command)
+          return result
+        }, {})
+    })
   }
 
   settings() {
@@ -69,6 +72,12 @@ export default class Session {
     return defaultSettings
   }
 
+  open(container) {
+    this.xterm.open(container)
+    this.resetTheme()
+    this.xterm.focus()
+  }
+
   resetTheme() {
     this.xterm.setOption('theme', this.settings().theme)
   }
@@ -79,7 +88,7 @@ export default class Session {
 
     const ptyId = await this.ptyId
 
-    await ipc.callMain('pty-kill', ptyId)
+    await ipc.callMain(`pty-kill-${ptyId}`)
   }
 
   open(container) {
@@ -163,7 +172,10 @@ export default class Session {
   }
 
   onExit(callback) {
-    ipc.answerMain(`pty-exit-${this.id}`, callback)
+    ipc.on(`pty-exit-${this.id}`, callback)
+    return new Disposable(() => {
+      ipc.removeListener(`pty-exit-${this.id}`, callback)
+    })
   }
 
   onData(callback) {
@@ -174,7 +186,7 @@ export default class Session {
     return this.xterm.addDisposableListener('selection', callback)
   }
 
-  onSettingChange({property, value}) {
+  onSettingChanged({property, value}) {
     if (this.currentProfile.xtermSettings.indexOf(property) >= 0) {
       this.xterm.setOption(property, value)
     } else if (property === 'keybindings') {
@@ -189,6 +201,10 @@ export default class Session {
     for (const property in this.settings()) {
       this.xterm.setOption(property, this.settings()[property])
     }
+  }
+
+  writePtyData(event, data) {
+    this.xterm.write(data)
   }
 
   bindListeners() {
@@ -206,11 +222,14 @@ export default class Session {
     })
     this.xterm.attachCustomKeyEventHandler(this.keybindingHandler)
 
-    ipc.on(`pty-data-${this.id}`, (event, data) => this.xterm.write(data))
+    ipc.on(`pty-data-${this.id}`, this.writePtyData)
+    this.subscriptions.add(new Disposable(() => {
+      ipc.removeListener(`pty-data-${this.id}`, this.writePtyData)
+    }))
     this.subscriptions.add(this.onData(data => {
       ipc.send(`pty-write-${this.id}`, data)
     }))
-    this.subscriptions.add(this.onTitle(title => this.setTitle(title)))
+    this.subscriptions.add(this.onTitle(this.setTitle))
     this.subscriptions.add(this.onFocus(this.fit))
     this.subscriptions.add(this.onFocus(this.resetBlink))
     this.subscriptions.add(this.onSelection(this.copySelection))

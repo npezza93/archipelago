@@ -1,13 +1,8 @@
 import React from 'react'
-import autoBind from 'auto-bind'
+import Component from '../../utils/component.jsx'
 import * as coreFields from './core-fields.jsx'
 
-export default class ArrayField extends React.Component {
-  constructor(props) {
-    super(props)
-    autoBind(this)
-  }
-
+export default class ArrayField extends Component {
   render() {
     const elements = this.props.value.map((element, i) =>
       this.renderElement(element, i))

@@ -2,37 +2,16 @@
 import ipc from 'electron-better-ipc'
 import React from 'react'
 import {darkMode} from 'electron-util'
-import {CompositeDisposable} from 'event-kit'
-import autoBind from 'auto-bind'
+import {Disposable} from 'event-kit'
 import TrafficLights from '../traffic-lights.jsx'
+import Component from '../utils/component.jsx'
 import CurrentSettings from '../sessions/current-profile'
 import HamburgerMenu from './hamburger-menu.jsx'
 import Profiles from './profiles.jsx'
 import PropertiesPane from './properties-pane.jsx'
 import './styles.css' // eslint-disable-line import/no-unassigned-import
 
-export default class Settings extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.subscriptions = new CompositeDisposable()
-    this.state = {isDarkMode: darkMode.isEnabled}
-    this.currentProfile = new CurrentSettings()
-    darkMode.onChange(() => this.setState({isDarkMode: darkMode.isEnabled}))
-
-    ipc.answerMain('close-via-menu', () => {
-      this.subscriptions.dispose()
-      window.close()
-    })
-    ipc.answerMain('close', () => {
-      return new Promise(resolve => {
-        this.subscriptions.dispose()
-        resolve()
-      })
-    })
-    autoBind(this)
-  }
-
+export default class Settings extends Component {
   render() {
     return <div id="settings" data-theme={this.theme}>
       <div id="titlebar"><TrafficLights /></div>
@@ -49,23 +28,33 @@ export default class Settings extends React.Component {
     </div>
   }
 
-  componentWillUnmount() {
-    this.subscriptions.dispose()
+  initialState() {
+    return {isDarkMode: darkMode.isEnabled}
+  }
+
+  initialize() {
+    this.currentProfile = new CurrentSettings()
   }
 
   toggleProfilesDrawer(active) {
     this.setState({showProfiles: active})
   }
 
-  addSubscription(listener) {
-    this.subscriptions.add(listener)
-  }
+  bindListeners() {
+    this.addSubscription(
+      new Disposable(darkMode.onChange(this.handleDarkModeChange))
+    )
 
-  get theme() {
-    if (this.state.isDarkMode) {
-      return 'dark'
-    }
+    ipc.on('close-via-menu', window.close)
+    this.addSubscription(
+      new Disposable(() => ipc.removeListener('close-via-menu', window.close))
+    )
 
-    return 'light'
+    ipc.answerMain('close', () => {
+      return new Promise(resolve => {
+        this.cleanup()
+        resolve()
+      })
+    })
   }
 }

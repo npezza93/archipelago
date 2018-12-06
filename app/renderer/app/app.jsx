@@ -2,42 +2,17 @@
 
 import ipc from 'electron-better-ipc'
 import React from 'react'
-import autoBind from 'auto-bind'
+import {Disposable} from 'event-kit'
 import Tab from '../sessions/tab'
 import TrafficLights from '../traffic-lights.jsx'
+import Component from '../utils/component.jsx'
 import PaneList from './pane-list.jsx'
 import TabList from './tab-list.jsx'
 import HamburgerMenu from './hamburger-menu.jsx'
 import 'xterm/dist/xterm.css' // eslint-disable-line import/no-unassigned-import
 import './styles.css' // eslint-disable-line import/no-unassigned-import
 
-export default class App extends React.Component {
-  constructor(props) {
-    super(props)
-    autoBind(this)
-
-    const initialTab = new Tab('default')
-
-    this.state = {tabs: [initialTab], currentTabId: initialTab.id, singleTabMode: false}
-
-    ipc.callMain('single-tab-mode').then(value => this.setState({singleTabMode: value}))
-    ipc.answerMain('split', direction => this.split(direction))
-    ipc.answerMain('new-tab', this.addTab)
-    ipc.answerMain('close-via-menu', () => {
-      if (document.querySelector('webview')) {
-        document.querySelector('webview').remove()
-      } else {
-        this.removeTab(this.state.currentTabId)
-      }
-    })
-    ipc.answerMain('search-next', this.searchNext)
-    ipc.answerMain('search-previous', this.searchPrevious)
-    ipc.answerMain('setting-changed', this.handleSettingChanged)
-    ipc.answerMain('active-profile-changed', this.handleActiveProfileChanged)
-    ipc.answerMain('close', this.handleClose)
-    this.resetCssSettings()
-  }
-
+export default class App extends Component {
   render() {
     return <archipelago-app class={this.htmlClasses()}>
       <HamburgerMenu />
@@ -57,6 +32,16 @@ export default class App extends React.Component {
     </archipelago-app>
   }
 
+  initialState() {
+    const initialTab = new Tab('default')
+
+    return {tabs: [initialTab], currentTabId: initialTab.id, singleTabMode: false}
+  }
+
+  initialize() {
+    this.resetCssSettings()
+  }
+
   htmlClasses() {
     let classNames = process.platform
     if (this.state.singleTabMode) {
@@ -66,8 +51,13 @@ export default class App extends React.Component {
     return classNames
   }
 
-  componentWillUnmount() {
+  cleanup() {
     this.state.tabs.map(tab => tab.kill())
+  }
+
+  componentWillUnmount() {
+    this.cleanup()
+    window.removeEventListener('beforeunload', this.cleanup)
   }
 
   componentDidUpdate() {
@@ -111,7 +101,7 @@ export default class App extends React.Component {
   selectSession(id) {
     this.currentTab().lastActiveSessionId = id
 
-    return this.setState({currentSessionId: id})
+    this.setState({currentSessionId: id})
   }
 
   addTab() {
@@ -159,7 +149,7 @@ export default class App extends React.Component {
       return tab
     })
 
-    return this.setState({tabs})
+    this.setState({tabs})
   }
 
   markUnread(id) {
@@ -171,7 +161,7 @@ export default class App extends React.Component {
       return tab
     })
 
-    return this.setState({tabs})
+    this.setState({tabs})
   }
 
   removeSession(tabId, sessionId) {
@@ -191,9 +181,10 @@ export default class App extends React.Component {
     })
 
     if (removeTab) {
-      return this.removeTab(tabId)
+      this.removeTab(tabId)
+    } else {
+      this.setState({tabs})
     }
-    return this.setState({tabs})
   }
 
   split(orientation) {
@@ -254,8 +245,8 @@ export default class App extends React.Component {
     }
   }
 
-  handleActiveProfileChanged(profile) {
-    this.setState({singleTabMode: profile.singleTabMode})
+  handleActiveProfileChanged() {
+    ipc.callMain('single-tab-mode').then(value => this.setState({singleTabMode: value}))
     this.resetCssSettings()
   }
 
@@ -265,5 +256,28 @@ export default class App extends React.Component {
       killers.push(tab.kill())
     }
     await Promise.all(killers)
+  }
+
+  closeViaMenu() {
+    if (document.querySelector('webview')) {
+      document.querySelector('webview').remove()
+    } else {
+      this.removeTab(this.state.currentTabId)
+    }
+  }
+
+  bindListeners() {
+    ipc.callMain('single-tab-mode').then(value => this.setState({singleTabMode: value}))
+    this.addSubscription(
+      new Disposable(() => ipc.removeListener('close-via-menu', this.closeViaMenu))
+    )
+    ipc.on('close-via-menu', this.closeViaMenu)
+    ipc.answerMain('split', this.split)
+    ipc.answerMain('new-tab', this.addTab)
+    ipc.answerMain('search-next', this.searchNext)
+    ipc.answerMain('search-previous', this.searchPrevious)
+    ipc.answerMain('setting-changed', this.handleSettingChanged)
+    ipc.answerMain('active-profile-changed', this.handleActiveProfileChanged)
+    ipc.answerMain('close', this.handleClose)
   }
 }

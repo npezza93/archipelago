@@ -1,20 +1,11 @@
 /* global ResizeObserver */
 
 import React from 'react'
-import {CompositeDisposable} from 'event-kit'
-import autoBind from 'auto-bind'
+import {Disposable} from 'event-kit'
 import debouncer from 'debounce-fn'
+import Component from '../utils/component.jsx'
 
-export default class Terminal extends React.Component {
-  constructor(props) {
-    super(props)
-    autoBind(this)
-    this.subscriptions = new CompositeDisposable()
-    this.resizeObserver = new ResizeObserver(this.fit)
-
-    this.bindDataListeners()
-  }
-
+export default class Terminal extends Component {
   render() {
     return <archipelago-terminal ref={this.setRef} />
   }
@@ -35,33 +26,38 @@ export default class Terminal extends React.Component {
     session.open(this.container)
 
     this.resizeObserver.observe(this.container)
-    this.subscriptions.add(this.props.session.bindScrollListener())
+    this.addSubscription(session.bindScrollListener())
   }
 
-  componentWillUnmount() {
-    this.resizeObserver.unobserve(this.container)
-    this.subscriptions.dispose()
+  initialize() {
+    this.resizeObserver = new ResizeObserver(this.fit)
   }
 
-  bindDataListeners() {
-    this.subscriptions.add(
+  bindListeners() {
+    this.addSubscription(
+      new Disposable(() => this.resizeObserver.unobserve(this.container))
+    )
+
+    this.addSubscription(
       this.props.session.onFocus(() => {
         this.props.selectSession(this.props.session.id)
         this.props.changeTitle(this.props.tabId, this.props.session.title)
       })
     )
 
-    this.subscriptions.add(
+    this.addSubscription(
       this.props.session.onTitle(title => {
         this.props.changeTitle(this.props.tabId, title)
       })
     )
 
-    this.props.session.onExit(() => {
-      this.props.removeSession(this.props.tabId, this.props.session.id)
-    })
+    this.addSubscription(
+      this.props.session.onExit(() => {
+        this.props.removeSession(this.props.tabId, this.props.session.id)
+      })
+    )
 
-    this.subscriptions.add(
+    this.addSubscription(
       this.props.session.onData(() => {
         if (this.props.currentTabId !== this.props.tabId) {
           this.props.markUnread(this.props.tabId)

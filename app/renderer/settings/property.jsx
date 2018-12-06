@@ -1,14 +1,8 @@
 import ipc from 'electron-better-ipc'
-import React from 'react'
+import Component from '../utils/component.jsx'
 import allFields from './all-fields.jsx'
 
-export default class Property extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {value: this.props.currentProfile.get(props.property)}
-  }
-
+export default class Property extends Component {
   render() {
     return allFields[this.fieldType()].call(
       this,
@@ -20,6 +14,10 @@ export default class Property extends React.Component {
         ipc.callMain('change-setting', {property: this.props.property, value: newValue})
       }
     )
+  }
+
+  initialState() {
+    return {value: this.props.currentProfile.get(this.props.property)}
   }
 
   fieldType() {

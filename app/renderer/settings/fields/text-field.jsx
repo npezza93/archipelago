@@ -1,6 +1,7 @@
 import React from 'react'
+import Component from '../../utils/component.jsx'
 
-export default class TextField extends React.Component {
+export default class TextField extends Component {
   render() {
     return <input-field>
       <input type="text" id={this.props.property}

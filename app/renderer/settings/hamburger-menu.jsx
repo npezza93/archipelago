@@ -1,14 +1,7 @@
 import React from 'react'
-import autoBind from 'auto-bind'
+import Component from '../utils/component.jsx'
 
-export default class HamburgerMenu extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {}
-    autoBind(this)
-  }
-
+export default class HamburgerMenu extends Component {
   render() {
     return <div>
       {this.backdrop()}
@@ -27,7 +20,7 @@ export default class HamburgerMenu extends React.Component {
   }
 
   get backdropClass() {
-    return (this.state.active && 'active') || ''
+    return ((this.state || {}).active && 'active') || ''
   }
 
   handleHamburgerClick() {

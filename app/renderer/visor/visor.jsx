@@ -2,26 +2,13 @@
 
 import ipc from 'electron-better-ipc'
 import React from 'react'
-import autoBind from 'auto-bind'
+import Component from '../utils/component.jsx'
 import Tab from '../sessions/tab'
 import Pane from './pane.jsx'
 import 'xterm/dist/xterm.css' // eslint-disable-line import/no-unassigned-import
 import './styles.css' // eslint-disable-line import/no-unassigned-import
 
-export default class Visor extends React.Component {
-  constructor(props) {
-    super(props)
-    autoBind(this)
-
-    this.state = {tab: new Tab('visor')}
-
-    ipc.answerMain('split', this.split)
-    ipc.answerMain('close', () => this.state.tab.kill())
-    ipc.answerMain('setting-changed', this.handleSettingChanged)
-    ipc.answerMain('active-profile-changed', this.resetCssSettings)
-    this.resetCssSettings()
-  }
-
+export default class Visor extends Component {
   render() {
     return <archipelago-visor class={this.htmlClasses()}>
       <Pane
@@ -32,11 +19,16 @@ export default class Visor extends React.Component {
     </archipelago-visor>
   }
 
+  initialState() {
+    return {tab: new Tab('visor')}
+  }
+
   htmlClasses() {
     return `${process.platform} single-tab-mode`
   }
 
-  componentWillUnmount() {
+  cleanup() {
+    super.cleanup()
     this.state.tab.kill()
   }
 
@@ -49,7 +41,7 @@ export default class Visor extends React.Component {
 
     tab.remove(sessionId)
     if (tab.root === null) {
-      this.state.tab.kill().then(() => window.close())
+      this.state.tab.kill().then(window.close)
     } else {
       this.setState({tab})
     }
@@ -90,5 +82,16 @@ export default class Visor extends React.Component {
     if (property in this.styleProperties) {
       this.docStyles.setProperty(this.styleProperties[property], value)
     }
+  }
+
+  initialize() {
+    this.resetCssSettings()
+  }
+
+  bindListeners() {
+    ipc.answerMain('split', this.split)
+    ipc.answerMain('close', this.state.tab.kill)
+    ipc.answerMain('setting-changed', this.handleSettingChanged)
+    ipc.answerMain('active-profile-changed', this.resetCssSettings)
   }
 }

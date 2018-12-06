@@ -1,21 +1,18 @@
 import React from 'react'
-import autoBind from 'auto-bind'
 import {ChromePicker} from 'react-color'
+import Component from '../../utils/component.jsx'
 
-export default class ColorField extends React.Component {
-  constructor(props) {
-    super(props)
-    autoBind(this)
-
-    this.state = {active: false}
-  }
-
+export default class ColorField extends Component {
   render() {
     return <div className="color-container" key={this.props.datakey}
       style={this.state.active ? {zIndex: 2} : undefined}>
       {this.backdrop()}
       {this.text()}
     </div>
+  }
+
+  initialState() {
+    return {active: false}
   }
 
   backdrop() {

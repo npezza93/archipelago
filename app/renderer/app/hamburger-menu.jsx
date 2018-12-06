@@ -1,14 +1,9 @@
 import React from 'react'
 import {platform} from 'electron-util'
 import ipc from 'electron-better-ipc'
-import autoBind from 'auto-bind'
+import Component from '../utils/component.jsx'
 
-export default class HamburgerMenu extends React.Component {
-  constructor(props) {
-    super(props)
-    autoBind(this)
-  }
-
+export default class HamburgerMenu extends Component {
   render() {
     return platform({
       macos: null,

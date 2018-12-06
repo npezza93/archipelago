@@ -1,15 +1,8 @@
 import ipc from 'electron-better-ipc'
 import React from 'react'
-import autoBind from 'auto-bind'
+import Component from '../utils/component.jsx'
 
-export default class Profile extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {editMode: false, name: this.props.name || 'New Profile'}
-    autoBind(this)
-  }
-
+export default class Profile extends Component {
   render() {
     return (
       <archipelago-profile class={this.className}
@@ -19,6 +12,10 @@ export default class Profile extends React.Component {
         {this.removeProfile()}
       </archipelago-profile>
     )
+  }
+
+  initialState() {
+    return {editMode: false, name: this.props.name || 'New Profile'}
   }
 
   enableEditMode() {

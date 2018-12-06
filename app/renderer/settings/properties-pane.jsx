@@ -1,25 +1,12 @@
 /* global requestIdleCallback */
 
 import React from 'react'
-import autoBind from 'auto-bind'
 import schema from '../../common/schema'
+import Component from '../utils/component.jsx'
 import Header from './header.jsx'
 import PropertiesSection from './properties-section.jsx'
 
-export default class PropertiesPane extends React.Component {
-  constructor(props) {
-    super(props)
-    autoBind(this)
-
-    this.headings = Object.keys(this.scopes())
-    this.state = {
-      headings: this.headings.reduce((headingState, heading) => {
-        headingState[this.headings.indexOf(heading)] = heading
-        return headingState
-      }, {})
-    }
-  }
-
+export default class PropertiesPane extends Component {
   render() {
     return <archipelago-properties-pane>
       <Header headings={this.state.headings} />
@@ -33,6 +20,19 @@ export default class PropertiesPane extends React.Component {
           currentProfile={this.props.currentProfile} />
       )}
     </archipelago-properties-pane>
+  }
+
+  initialState() {
+    return {
+      headings: this.headings.reduce((headingState, heading) => {
+        headingState[this.headings.indexOf(heading)] = heading
+        return headingState
+      }, {})
+    }
+  }
+
+  initialize() {
+    this.headings = Object.keys(this.scopes())
   }
 
   handleChange(inView, scope) {
