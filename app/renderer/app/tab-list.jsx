@@ -1,8 +1,8 @@
 import React from 'react'
-
+import Component from '../utils/component.jsx'
 import Tab from './tab.jsx'
 
-export default class TabList extends React.Component {
+export default class TabList extends Component {
   render() {
     return <archipelago-tab-list>
       {this.props.tabs.map(tab => (

@@ -1,8 +1,8 @@
 import React from 'react'
-
+import Component from '../utils/component.jsx'
 import Pane from './pane.jsx'
 
-export default class PaneList extends React.Component {
+export default class PaneList extends Component {
   render() {
     return <archipelago-pane-list>
       {this.props.tabs.map(tab => (

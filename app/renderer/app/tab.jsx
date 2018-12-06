@@ -1,12 +1,7 @@
 import React from 'react'
-import autoBind from 'auto-bind'
+import Component from '../utils/component.jsx'
 
-export default class Tab extends React.Component {
-  constructor(props) {
-    super(props)
-    autoBind(this)
-  }
-
+export default class Tab extends Component {
   render() {
     return <archipelago-tab class={this.className} onClick={this.handleClick}>
       <span>{this.props.title || 'Loading...'}</span>
