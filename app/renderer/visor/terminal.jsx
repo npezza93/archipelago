@@ -24,7 +24,7 @@ export default class Terminal extends Component {
     session.open(this.container)
 
     this.resizeObserver.observe(this.container)
-    this.addSubscription(this.props.session.bindScrollListener())
+    this.addSubscription(session.bindScrollListener())
   }
 
   initialize() {
