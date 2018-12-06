@@ -1,6 +1,7 @@
 import React from 'react'
+import Component from '../../utils/component.jsx'
 
-export default class BooleanField extends React.Component {
+export default class BooleanField extends Component {
   render() {
     return <switch-field id={this.props.property}>
       {this.props.label}

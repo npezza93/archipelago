@@ -1,8 +1,9 @@
 import React from 'react'
 import Observer from '@researchgate/react-intersection-observer'
+import Component from '../utils/component.jsx'
 import Property from './property.jsx'
 
-export default class PropertiesSection extends React.Component {
+export default class PropertiesSection extends Component {
   render() {
     return <Observer tag="archipelago-properties-section" threshold={[0, 0.50, 1]}
       onChange={e => this.props.handleChange(e.isIntersecting, this.props.scope)}>

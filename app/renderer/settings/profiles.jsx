@@ -1,19 +1,9 @@
 import ipc from 'electron-better-ipc'
 import React from 'react'
-import autoBind from 'auto-bind'
+import Component from '../utils/component.jsx'
 import Profile from './profile.jsx'
 
-export default class Profiles extends React.Component {
-  constructor(props) {
-    super(props)
-    autoBind(this)
-
-    this.state = {
-      activeProfileId: this.props.activeProfileId,
-      profiles: this.props.profiles
-    }
-  }
-
+export default class Profiles extends Component {
   render() {
     return (
       <archipelago-profiles class={(this.props.showProfiles && 'active') || ''}>
@@ -34,6 +24,12 @@ export default class Profiles extends React.Component {
         </div>
       </archipelago-profiles>
     )
+  }
+
+  initialState() {
+    return {
+      activeProfileId: this.props.activeProfileId, profiles: this.props.profiles
+    }
   }
 
   createProfile() {

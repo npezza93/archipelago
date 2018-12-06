@@ -1,6 +1,7 @@
 import React from 'react'
+import Component from '../../utils/component.jsx'
 
-export default class SelectField extends React.Component {
+export default class SelectField extends Component {
   render() {
     return <select-field>
       <svg xmlns="http://www.w3.org/2000/svg" width="10" height="5" viewBox="7 10 10 5">
