@@ -1,8 +1,9 @@
 import React from 'react'
 import SplitPane from 'react-split-pane'
+import Component from '../utils/component.jsx'
 import Terminal from './terminal.jsx'
 
-export default class Pane extends React.Component {
+export default class Pane extends Component {
   render() {
     return <archipelago-pane>
       {this.renderTree(this.props.sessionTree)}
