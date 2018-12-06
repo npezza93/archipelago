@@ -43,6 +43,10 @@ export default class Component extends React.Component {
     this.setState({isDarkMode: darkMode.isEnabled})
   }
 
+  addSubscription(listener) {
+    this.subscriptions.add(listener)
+  }
+
   bindListeners() {}
 
   initialize() {}

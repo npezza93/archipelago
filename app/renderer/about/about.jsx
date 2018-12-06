@@ -74,12 +74,12 @@ export default class About extends Component {
   }
 
   bindListeners() {
-    this.subscriptions.add(
+    this.addSubscription(
       new Disposable(darkMode.onChange(this.handleDarkModeChange))
     )
 
     ipc.on('close-via-menu', window.close)
-    this.subscriptions.add(
+    this.addSubscription(
       new Disposable(() => ipc.removeListener('close-via-menu', window.close))
     )
   }

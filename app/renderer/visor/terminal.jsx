@@ -24,7 +24,7 @@ export default class Terminal extends Component {
     session.open(this.container)
 
     this.resizeObserver.observe(this.container)
-    this.subscriptions.add(this.props.session.bindScrollListener())
+    this.addSubscription(this.props.session.bindScrollListener())
   }
 
   initialize() {
@@ -32,10 +32,10 @@ export default class Terminal extends Component {
   }
 
   bindDataListeners() {
-    this.subscriptions.add(
+    this.addSubscription(
       new Disposable(() => this.resizeObserver.unobserve(this.container))
     )
-    this.subscriptions.add(
+    this.addSubscription(
       this.props.session.onFocus(() => {
         this.props.selectSession(this.props.session.id)
       })
