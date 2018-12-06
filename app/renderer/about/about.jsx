@@ -3,19 +3,12 @@
 import ipc from 'electron-better-ipc'
 import {api, darkMode} from 'electron-util'
 import React from 'react'
+import {Disposable} from 'event-kit'
 import TrafficLights from '../traffic-lights.jsx'
+import Component from '../utils/component.jsx'
 import './styles.css' // eslint-disable-line import/no-unassigned-import
 
-export default class About extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {isDarkMode: darkMode.isEnabled}
-
-    ipc.answerMain('close-via-menu', () => window.close())
-    darkMode.onChange(() => this.setState({isDarkMode: darkMode.isEnabled}))
-  }
-
+export default class About extends Component {
   render() {
     return <div id="about" data-theme={this.theme}>
       <TrafficLights />
@@ -76,11 +69,18 @@ export default class About extends React.Component {
     </div>
   }
 
-  get theme() {
-    if (this.state.isDarkMode) {
-      return 'dark'
-    }
+  initialState() {
+    return {isDarkMode: darkMode.isEnabled}
+  }
 
-    return 'light'
+  bindListeners() {
+    this.subscriptions.add(
+      new Disposable(darkMode.onChange(this.handleDarkModeChange))
+    )
+
+    ipc.on('close-via-menu', window.close)
+    this.subscriptions.add(
+      new Disposable(() => ipc.removeListener('close-via-menu', window.close))
+    )
   }
 }
