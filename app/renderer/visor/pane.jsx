@@ -29,6 +29,7 @@ export default class Pane extends React.Component {
 
   renderSession(session) {
     return <Terminal
+      key={session.id}
       session={session}
       removeSession={this.props.removeSession}
       selectSession={this.props.selectSession} />
