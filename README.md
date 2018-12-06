@@ -12,8 +12,6 @@
 
 ## Why?
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/npezza93/archipelago.svg)](https://greenkeeper.io/)
-
 I'm a fan of web technologies, so I started using
 [Hyper](https://github.com/zeit/hyper) as my default terminal while it was in beta.
 Hyper was by far the coolest, best looking, and extensible terminal emulator I had used and being an Electron app, it was cross-platform.
