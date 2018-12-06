@@ -20,7 +20,7 @@ export default class HamburgerMenu extends Component {
   }
 
   get backdropClass() {
-    return (this.state.active && 'active') || ''
+    return ((this.state || {}).active && 'active') || ''
   }
 
   handleHamburgerClick() {
