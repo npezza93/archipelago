@@ -254,7 +254,7 @@
               "selection": {
                 "type": "string",
                 "color": true,
-                "default": "rgba(255, 255, 255, 0.3)",
+                "default": "rgba(151, 151, 155, 0.2)",
                 "settings": {
                   "title": "theme"
                 }
@@ -262,7 +262,7 @@
               "foreground": {
                 "type": "string",
                 "color": true,
-                "default": "#FFFFFF",
+                "default": "#eff0eb",
                 "settings": {
                   "title": "theme"
                 }
@@ -270,7 +270,7 @@
               "background": {
                 "type": "string",
                 "color": true,
-                "default": "#000000",
+                "default": "#282a36",
                 "settings": {
                   "title": "theme"
                 }
@@ -278,7 +278,7 @@
               "black": {
                 "type": "string",
                 "color": true,
-                "default": "#000000",
+                "default": "#282a36",
                 "settings": {
                   "title": "theme"
                 }
@@ -350,7 +350,7 @@
               "cyan": {
                 "type": "string",
                 "color": true,
-                "default": "#5fcbd8",
+                "default": "#9aedfe",
                 "settings": {
                   "title": "theme"
                 }
@@ -358,7 +358,7 @@
               "brightCyan": {
                 "type": "string",
                 "color": true,
-                "default": "#5fcbd8",
+                "default": "#9aedfe",
                 "settings": {
                   "title": "theme"
                 }
@@ -382,7 +382,7 @@
               "white": {
                 "type": "string",
                 "color": true,
-                "default": "#ffffff",
+                "default": "#f1f1f0",
                 "settings": {
                   "title": "theme"
                 }
@@ -390,7 +390,7 @@
               "brightWhite": {
                 "type": "string",
                 "color": true,
-                "default": "#FFFFFF",
+                "default": "#eff0eb",
                 "settings": {
                   "title": "theme"
                 }
@@ -398,7 +398,7 @@
               "brightBlack": {
                 "type": "string",
                 "color": true,
-                "default": "#808080",
+                "default": "#686868",
                 "settings": {
                   "title": "theme"
                 }
@@ -406,7 +406,7 @@
               "cursorAccent": {
                 "type": "string",
                 "color": true,
-                "default": "#000000",
+                "default": "#282a36",
                 "settings": {
                   "title": "theme"
                 }
@@ -414,7 +414,7 @@
               "cursor": {
                 "type": "string",
                 "color": true,
-                "default": "#FFFFFF",
+                "default": "#97979b",
                 "settings": {
                   "title": "theme"
                 }
