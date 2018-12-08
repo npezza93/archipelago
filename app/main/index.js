@@ -113,6 +113,7 @@ subscriptions.add(
 )
 
 subscriptions.add(profileManager.onDidChange('singleTabMode', resetApplicationMenu))
+subscriptions.add(profileManager.onDidChange('name', resetApplicationMenu))
 subscriptions.add(profileManager.onActiveProfileChange(resetApplicationMenu))
 ipc.answerRenderer('open-hamburger-menu', args => Menu.getApplicationMenu().popup(args))
 ipc.answerRenderer('search-next', ({query, options}) => {
