@@ -230,14 +230,6 @@
               "title": "modes"
             }
           },
-          "windowBackground": {
-            "type": "string",
-            "color": true,
-            "default": "#000000",
-            "settings": {
-              "title": "theme"
-            }
-          },
           "tabColor": {
             "type": "string",
             "color": true,
@@ -466,11 +458,6 @@
               "padding": {
                 "type": "string",
                 "default": "5px 0 10px 15px"
-              },
-              "windowBackground": {
-                "type": "string",
-                "color": true,
-                "default": "#000000"
               },
               "background": {
                 "type": "string",

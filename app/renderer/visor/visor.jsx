@@ -63,7 +63,7 @@ export default class Visor extends Component {
   get styleProperties() {
     return {
       fontFamily: '--font-family',
-      'visor.windowBackground': '--background-color',
+      'visor.background': '--background-color',
       fontSize: '--font-size',
       'visor.padding': '--terminal-padding',
       'theme.selection': '--selection-color'

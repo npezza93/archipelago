@@ -176,7 +176,7 @@ export default class ProfileManager {
 
   get cssSettings() {
     return ['fontFamily',
-      'windowBackground',
+      'theme.background',
       'tabColor',
       'tabBorderColor',
       'fontSize',
@@ -186,7 +186,7 @@ export default class ProfileManager {
 
   get visorCssSettings() {
     return ['fontFamily',
-      'visor.windowBackground',
+      'visor.background',
       'fontSize',
       'visor.padding',
       'theme.selection']

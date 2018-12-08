@@ -220,7 +220,7 @@ export default class App extends Component {
   get styleProperties() {
     return {
       fontFamily: '--font-family',
-      windowBackground: '--background-color',
+      'theme.background': '--background-color',
       tabColor: '--tab-color',
       tabBorderColor: '--tab-border-color',
       fontSize: '--font-size',

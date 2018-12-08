@@ -36,7 +36,7 @@ const create = profileManager => {
       frame: false,
       x: 0,
       y: -parseInt(height * 0.4, 10),
-      backgroundColor: (new Color(profileManager.get('visor.windowBackground'))).hex(),
+      backgroundColor: (new Color(profileManager.get('visor.background'))).hex(),
       vibrancy: profileManager.get('visor.vibrancy')
     })
     visorWindow.name = 'visor'

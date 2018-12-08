@@ -34,7 +34,7 @@ const createWindow = () => {
     show: false,
     titleBarStyle: platform({macos: 'hiddenInset', default: 'hidden'}),
     frame: is.macos,
-    backgroundColor: (new Color(profileManager.get('windowBackground'))).hex(),
+    backgroundColor: (new Color(profileManager.get('theme.background'))).hex(),
     vibrancy: profileManager.get('vibrancy')
   })
 
