@@ -462,6 +462,7 @@
               "background": {
                 "type": "string",
                 "color": true,
+                "scope": "xterm",
                 "default": "#000000"
               },
               "keybinding": {
