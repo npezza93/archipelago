@@ -1,4 +1,4 @@
-import {api, platform} from 'electron-util'
+import {api, platform, openNewGitHubIssue} from 'electron-util'
 import ipc from 'electron-better-ipc'
 import displaySettings from './settings'
 import displayAbout from './about'
@@ -193,7 +193,7 @@ const helpMenu = {
   submenu: [{
     label: 'Report Issue',
     click() {
-      api.shell.openExternal('https://github.com/npezza93/archipelago/issues/new')
+      openNewGitHubIssue({user: 'npezza93', repo: 'archipelago'})
     }
   }]
 }
