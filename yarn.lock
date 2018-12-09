@@ -940,20 +940,10 @@ ajv-keywords@^3.1.0, ajv-keywords@^3.2.0:
   resolved "https://registry.yarnpkg.com/ajv-keywords/-/ajv-keywords-3.2.0.tgz#e86b819c602cf8821ad637413698f1dec021847a"
   integrity sha1-6GuBnGAs+IIa1jdBNpjx3sAhhHo=
 
-ajv@^6.1.0, ajv@^6.5.5:
+ajv@^6.1.0, ajv@^6.5.3, ajv@^6.5.5:
   version "6.6.1"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.6.1.tgz#6360f5ed0d80f232cc2b294c362d5dc2e538dd61"
   integrity sha512-ZoJjft5B+EJBjUyu9C9Hc0OZyPZSSlOF+plzouTrg6UlA8f+e/n8NIgBFG/9tppJtpPWfthHakK7juJdNDODww==
-  dependencies:
-    fast-deep-equal "^2.0.1"
-    fast-json-stable-stringify "^2.0.0"
-    json-schema-traverse "^0.4.1"
-    uri-js "^4.2.2"
-
-ajv@^6.5.3:
-  version "6.5.5"
-  resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.5.5.tgz#cf97cdade71c6399a92c6d6c4177381291b781a1"
-  integrity sha512-7q7gtRQDJSyuEHjuVgHoUa2VuemFiCMrfQc9Tc08XTAc4Zj/5U1buQJ0HU6i7fKjXU09SVgSmxa4sLvuvS8Iyg==
   dependencies:
     fast-deep-equal "^2.0.1"
     fast-json-stable-stringify "^2.0.0"
@@ -7194,9 +7184,9 @@ prebuild-install@^2.1.1:
     which-pm-runs "^1.0.0"
 
 pref@^3.1.0:
-  version "3.1.5"
-  resolved "https://registry.yarnpkg.com/pref/-/pref-3.1.5.tgz#7429877a687bff06a36a3c42291638179a963ddf"
-  integrity sha512-sGpivIVd1jC1arXJua1m8LE/vJX37h6EIUhCPHqra8YX2lyD57T+oQluU5QEC+tveJ8hrEvWiWlbmb/V50EwHw==
+  version "3.1.6"
+  resolved "https://registry.yarnpkg.com/pref/-/pref-3.1.6.tgz#b4243071a238228c20d99cc4c55155416205ae71"
+  integrity sha512-6gBWwvhsubtDprHpjt/VeL9GXQzmQTNCP+jCrKAbwoOkvHNZ0C4NUhWoDaB8pwNS2xIicJ2E26KT5e3VmYpAFw==
   dependencies:
     ajv "^6.5.3"
     color "^3.1.0"
