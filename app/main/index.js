@@ -4,12 +4,12 @@ import {app, BrowserWindow, Menu} from 'electron'
 import {is, platform} from 'electron-util'
 import {CompositeDisposable} from 'event-kit'
 import ipc from 'electron-better-ipc'
-import Color from 'color'
 import {pref} from '../common/config-file'
 import ProfileManager from './profile-manager'
 import template from './app-menu'
 import registerVisor from './visor'
 import ptyManager from './pty-manager'
+import {argbBackground} from './utils'
 
 if (!is.development) {
   require('update-electron-app')()
@@ -34,7 +34,7 @@ const createWindow = () => {
     show: false,
     titleBarStyle: platform({macos: 'hiddenInset', default: 'hidden'}),
     frame: is.macos,
-    backgroundColor: (new Color(profileManager.get('theme.background'))).hex(),
+    backgroundColor: argbBackground(profileManager, 'theme.background'),
     vibrancy: profileManager.get('vibrancy')
   })
 

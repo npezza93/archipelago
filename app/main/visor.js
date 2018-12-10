@@ -1,7 +1,7 @@
 import electron, {app, BrowserWindow, globalShortcut} from 'electron'
 import {CompositeDisposable} from 'event-kit'
-import Color from 'color'
 import {is} from 'electron-util'
+import {argbBackground} from './utils'
 
 const subscriptions = new CompositeDisposable()
 
@@ -36,7 +36,7 @@ const create = profileManager => {
       frame: false,
       x: 0,
       y: -parseInt(height * 0.4, 10),
-      backgroundColor: (new Color(profileManager.get('visor.background'))).hex(),
+      backgroundColor: argbBackground(profileManager, 'visor.background'),
       vibrancy: profileManager.get('visor.vibrancy')
     })
     visorWindow.name = 'visor'
