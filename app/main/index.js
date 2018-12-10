@@ -1,7 +1,7 @@
 /* global profileManager */
 
 import {app, BrowserWindow, Menu} from 'electron'
-import {is, platform, enforceMacOSAppLocation} from 'electron-util'
+import {is, platform} from 'electron-util'
 import {CompositeDisposable} from 'event-kit'
 import ipc from 'electron-better-ipc'
 import Color from 'color'
@@ -68,7 +68,6 @@ app.on('ready', () => {
   registerVisor(profileManager)
   createWindow()
   resetApplicationMenu()
-  enforceMacOSAppLocation()
   if (is.macos) {
     app.dock.setMenu(Menu.buildFromTemplate([
       {label: 'New Window', click: createWindow}
