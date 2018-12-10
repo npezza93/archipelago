@@ -189,6 +189,26 @@ archipelago-app.linux archipelago-tab-list archipelago-tab span,
 archipelago-app.linux archipelago-tab-list archipelago-tab div {
   -webkit-app-region: no-drag;
 }
+archipelago-tab-list > span {
+  width: 100%;
+  display: flex;
+}
+
+.archipelago-tab-enter {
+  flex: 0.0001;
+}
+.archipelago-tab-enter.archipelago-tab-enter-active {
+  flex: 1;
+  transition: all 500ms linear;
+}
+.archipelago-tab-leave {
+  flex: 1;
+}
+.archipelago-tab-leave.archipelago-tab-leave-active {
+  flex: 0.0001;
+  transition: all 300ms linear;
+}
+
 archipelago-tab-list archipelago-tab {
   color: var(--tab-color);
   filter: invert(50%);
@@ -197,7 +217,7 @@ archipelago-tab-list archipelago-tab {
   justify-content: center;
   align-items: center;
   flex: 1;
-  transition: all 0.3s ease;
+  transition: all 0.3s linear;
   min-width: 0;
   font-family: var(--font-family);
   font-size: var(--font-size);
