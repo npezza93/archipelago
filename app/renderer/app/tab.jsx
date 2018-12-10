@@ -3,7 +3,10 @@ import Component from '../utils/component.jsx'
 
 export default class Tab extends Component {
   render() {
-    return <archipelago-tab class={this.className} onClick={this.handleClick}>
+    return <archipelago-tab
+      class={this.className}
+      onClick={this.handleClick}
+      onMouseDown={this.handleMouseDown}>
       <span>{this.props.title || 'Loading...'}</span>
       <div onClick={this.handleExit}>×</div>
     </archipelago-tab>
@@ -16,6 +19,12 @@ export default class Tab extends Component {
   handleExit(event) {
     event.stopPropagation()
     this.props.removeTab(this.props.id)
+  }
+
+  handleMouseDown(event) {
+    if (event.button === 1) {
+      this.props.removeTab(this.props.id)
+    }
   }
 
   get className() {
