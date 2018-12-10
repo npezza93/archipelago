@@ -104,7 +104,7 @@
             "settings": {
               "title": "bell"
             },
-            "enum": ["none", "visual", "sound", "both"]
+            "enum": ["none", "sound"]
           },
           "shell": {
             "type": "string",
