@@ -9,7 +9,7 @@ const React = require('react')
 const {mount} = require('enzyme')
 const {assert} = require('chai')
 
-const {pref} = require('../../../app/common/config-file')
+const {pref} = require('../../../app/main/config-file')
 const ProfileComponent = require('../../../app/renderer/settings/profile.jsx')
 const Profile = require('../../../app/main/profile')
 const ProfileManager = require('../../../app/main/profile-manager')

@@ -3,7 +3,7 @@
 const {assert} = require('chai')
 const Profile = require('../../app/main/profile')
 const ProfileManager = require('../../app/main/profile-manager')
-const {pref} = require('../../app/common/config-file')
+const {pref} = require('../../app/main/config-file')
 
 describe('Profile', () => {
   beforeEach(() => {
