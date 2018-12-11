@@ -7,6 +7,7 @@ import TrafficLights from '../traffic-lights.jsx'
 import Component from '../utils/component.jsx'
 import CurrentSettings from '../sessions/current-profile'
 import HamburgerMenu from './hamburger-menu.jsx'
+import OpenConfig from './open-config.jsx'
 import Profiles from './profiles.jsx'
 import PropertiesPane from './properties-pane.jsx'
 import './styles.css' // eslint-disable-line import/no-unassigned-import
@@ -16,6 +17,7 @@ export default class Settings extends Component {
     return <div id="settings" data-theme={this.theme}>
       <div id="titlebar"><TrafficLights /></div>
       <HamburgerMenu toggleProfilesDrawer={this.toggleProfilesDrawer}/>
+      <OpenConfig />
       <Profiles
         showProfiles={this.state.showProfiles}
         profiles={this.currentProfile.allProfiles}
