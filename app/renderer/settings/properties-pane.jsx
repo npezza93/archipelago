@@ -1,6 +1,7 @@
 /* global requestIdleCallback */
 
 import React from 'react'
+import ipc from 'electron-better-ipc'
 import schema from '../../common/schema'
 import Component from '../utils/component.jsx'
 import Header from './header.jsx'
@@ -27,7 +28,8 @@ export default class PropertiesPane extends Component {
       headings: this.headings.reduce((headingState, heading) => {
         headingState[this.headings.indexOf(heading)] = heading
         return headingState
-      }, {})
+      }, {}),
+      activeProfileId: this.props.currentProfile.activeProfileId
     }
   }
 
@@ -79,5 +81,13 @@ export default class PropertiesPane extends Component {
       }
       return accumulator
     }, {})
+  }
+
+  onActiveProfileChange() {
+    this.setState({activeProfileId: this.props.currentProfile.activeProfileId})
+  }
+
+  bindListeners() {
+    ipc.answerMain('active-profile-changed', this.onActiveProfileChange)
   }
 }

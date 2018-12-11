@@ -17,7 +17,13 @@ export default class Property extends Component {
   }
 
   initialState() {
-    return {value: this.props.currentProfile.get(this.props.property)}
+    return {value: this.props.value, activeProfileId: this.props.activeProfileId}
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.activeProfileId !== prevProps.activeProfileId) {
+      this.setState({value: this.props.value})
+    }
   }
 
   fieldType() {
@@ -28,13 +34,5 @@ export default class Property extends Component {
     }
 
     return type
-  }
-
-  onActiveProfileChange() {
-    this.setState({value: this.props.currentProfile.get(this.props.property)})
-  }
-
-  bindListeners() {
-    ipc.answerMain('active-profile-changed', this.onActiveProfileChange)
   }
 }
