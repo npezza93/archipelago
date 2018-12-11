@@ -2,7 +2,7 @@ const fs = require('fs')
 const {homedir} = require('os')
 const {join} = require('path')
 const Pref = require('pref')
-const schema = require('./schema')
+const schema = require('../common/schema')
 
 const pref = () => {
   return new Pref({
