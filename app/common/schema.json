@@ -99,7 +99,7 @@
           "bellStyle": {
             "type": "string",
             "title": "Choose a bell style",
-            "default": "both",
+            "default": "sound",
             "scope": "xterm",
             "settings": {
               "title": "bell"
