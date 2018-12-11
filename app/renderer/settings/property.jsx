@@ -17,12 +17,15 @@ export default class Property extends Component {
   }
 
   initialState() {
-    return {value: this.props.value, activeProfileId: this.props.activeProfileId}
+    return {
+      value: this.props.currentProfile.get(this.props.property),
+      activeProfileId: this.props.activeProfileId
+    }
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.activeProfileId !== prevProps.activeProfileId) {
-      this.setState({value: this.props.value})
+      this.setState({value: this.props.currentProfile.get(this.props.property)})
     }
   }
 

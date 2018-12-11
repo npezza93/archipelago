@@ -18,6 +18,7 @@ export default class PropertiesPane extends Component {
           key={scope}
           properties={this.scopes()[scope]}
           handleChange={this.handleChange}
+          activeProfileId={this.state.activeProfileId}
           currentProfile={this.props.currentProfile} />
       )}
     </archipelago-properties-pane>

@@ -31,11 +31,9 @@ export default class PropertiesSection extends Component {
         if (enabledPlatforms.includes(process.platform)) {
           property = <Property
             addSubscription={this.props.addSubscription}
-            schema={schema}
-            key={path}
-            activeProfileId={this.props.currentProfile.activeProfileId}
-            value={this.props.currentProfile.get(path)}
-            property={path} />
+            currentProfile={this.props.currentProfile}
+            activeProfileId={this.props.activeProfileId}
+            schema={schema} key={path} property={path} />
         }
       }
 
