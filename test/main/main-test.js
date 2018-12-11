@@ -98,9 +98,11 @@ describe('Application launch', function () {
     it('closes a tab', async () => {
       await setSingleTabMode(false, this.app)
       robot.keyTap('t', cmdOrCtrl())
+      await this.app.client.pause(1000)
       let tabElements = await this.app.client.elements('archipelago-tab')
       assert.equal(tabElements.value.length, 2)
       await this.app.client.click('archipelago-tab div')
+      await this.app.client.pause(1000)
       tabElements = await this.app.client.elements('archipelago-tab')
       assert.equal(tabElements.value.length, 1)
     })
