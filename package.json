@@ -79,7 +79,7 @@
     "chai": "^4.1.2",
     "css-loader": "^2.0.0",
     "electron": "^3.0.5",
-    "electron-builder": "^20.38.3",
+    "electron-builder": "^20.19.1",
     "electron-mocha": "^6.0.4",
     "electron-webpack": "^2.3.1",
     "enzyme": "^3.6.0",
