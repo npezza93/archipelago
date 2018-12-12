@@ -6,6 +6,7 @@ import {Disposable} from 'event-kit'
 import Tab from '../sessions/tab'
 import TrafficLights from '../traffic-lights.jsx'
 import Component from '../utils/component.jsx'
+import CurrentProfile from '../sessions/current-profile'
 import PaneList from './pane-list.jsx'
 import TabList from './tab-list.jsx'
 import HamburgerMenu from './hamburger-menu.jsx'
@@ -20,6 +21,7 @@ export default class App extends Component {
         tabs={this.state.tabs}
         currentTabId={this.state.currentTabId}
         selectTab={this.selectTab}
+        currentProfile={this.currentProfile}
         removeTab={this.removeTab} />
       <TrafficLights />
       <PaneList
@@ -40,6 +42,7 @@ export default class App extends Component {
 
   initialize() {
     this.resetCssSettings()
+    this.currentProfile = new CurrentProfile()
   }
 
   htmlClasses() {
@@ -219,13 +222,9 @@ export default class App extends Component {
 
   get styleProperties() {
     return {
-      fontFamily: '--font-family',
       'theme.background': '--background-color',
-      tabColor: '--tab-color',
       tabBorderColor: '--tab-border-color',
-      fontSize: '--font-size',
-      padding: '--terminal-padding',
-      'theme.selection': '--selection-color'
+      padding: '--terminal-padding'
     }
   }
 

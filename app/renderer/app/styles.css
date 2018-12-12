@@ -1,7 +1,3 @@
-*::selection {
-  background: var(--selection-color);
-}
-
 @media (min-resolution: 2dppx) {
   * {
     text-rendering: geometricPrecision;
@@ -33,9 +29,7 @@
 
 :root {
   --background-color: none;
-  --selection-color: rgba(255, 255, 255, 0.3);
   --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  --tab-font-size: 15px;
   --terminal-padding: 5px 0 10px 15px;
 }
 
@@ -210,7 +204,6 @@ archipelago-tab-list > span {
 }
 
 archipelago-tab-list archipelago-tab {
-  color: var(--tab-color);
   filter: invert(50%);
   display: flex;
   flex-direction: column;
@@ -219,8 +212,7 @@ archipelago-tab-list archipelago-tab {
   flex: 1;
   transition: all 0.3s linear;
   min-width: 0;
-  font-family: var(--font-family);
-  font-size: var(--font-size);
+  font-size: 14px;
   line-height: 18px !important;
   position: relative;
 }

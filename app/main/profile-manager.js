@@ -175,21 +175,11 @@ export default class ProfileManager {
   }
 
   get cssSettings() {
-    return ['fontFamily',
-      'theme.background',
-      'tabColor',
-      'tabBorderColor',
-      'fontSize',
-      'padding',
-      'theme.selection']
+    return ['theme.background', 'tabBorderColor', 'padding']
   }
 
   get visorCssSettings() {
-    return ['fontFamily',
-      'visor.background',
-      'fontSize',
-      'visor.padding',
-      'theme.selection']
+    return ['visor.background', 'visor.padding']
   }
 
   get defaultKeybindings() {
