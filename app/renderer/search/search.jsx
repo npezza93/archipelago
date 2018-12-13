@@ -118,7 +118,7 @@ export default class Search extends Component {
     ipc.answerMain('search-previous', this.searchPrevious)
 
     this.addSubscription(
-      new Disposable(darkMode.onChange(this.handleDarkModeChange))
+      new Disposable(darkMode.onChange(this.handleDarkModeChange.bind(this)))
     )
 
     ipc.on('close-via-menu', window.close)

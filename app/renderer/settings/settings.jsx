@@ -44,7 +44,7 @@ export default class Settings extends Component {
 
   bindListeners() {
     this.addSubscription(
-      new Disposable(darkMode.onChange(this.handleDarkModeChange))
+      new Disposable(darkMode.onChange(this.handleDarkModeChange.bind(this)))
     )
 
     ipc.on('close-via-menu', window.close)

@@ -2,7 +2,7 @@
   font-family: AdamPro;
   src: url("../fonts/adam_pro.otf") format("opentype");
 }
-#about {
+#about, #about[data-theme^="light"] {
   --color: #424242;
   --background-color: #F5F5F5;
 }

@@ -1,4 +1,4 @@
-#search {
+#search, #search[data-theme^="light"] {
   --color: #424242;
   --accent-color: #9E9E9E;
   --background-color: #F5F5F5;
@@ -20,8 +20,12 @@ html, body {
   -webkit-font-smoothing: subpixel-antialiased;
   -webkit-app-region: drag;
   margin: 0;
+  height: 100%;
 }
 
+#app {
+  height: 100%;
+}
 #search {
   background-color: var(--background-color);
   color: var(--color);
@@ -31,7 +35,8 @@ html, body {
   padding: 0 10px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   -webkit-app-region: drag;
-  margin-top: 50px;
+  padding-top: 50px;
+  height: 100%;
 }
 #search minimize-button, #search close-button, #search maximize-button {
   z-index: 100 !important;
