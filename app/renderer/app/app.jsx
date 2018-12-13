@@ -16,7 +16,7 @@ import './styles.css' // eslint-disable-line import/no-unassigned-import
 export default class App extends Component {
   render() {
     return <archipelago-app class={this.htmlClasses()}>
-      <HamburgerMenu />
+      <HamburgerMenu currentProfile={this.currentProfile} />
       <TabList
         tabs={this.state.tabs}
         currentTabId={this.state.currentTabId}

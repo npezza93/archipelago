@@ -112,7 +112,6 @@ hamburger-menu:hover {
 }
 hamburger-menu div {
   height: 1px;
-  background: var(--tab-color);
 }
 
 archipelago-app.single-tab-mode minimize-button {
