@@ -122,13 +122,6 @@ archipelago-app.single-tab-mode minimize-button {
 minimize-button:hover {
   filter: invert(0%);
 }
-minimize-button div {
-  background: var(--tab-color) !important;
-}
-
-maximize-button {
-  border: var(--tab-color) 2px solid !important;
-}
 
 archipelago-app.single-tab-mode maximize-button {
   top: 9px !important;
@@ -144,9 +137,6 @@ archipelago-app.single-tab-mode close-button {
 
 close-button:hover {
   filter: invert(0%);
-}
-close-button div {
-  background: var(--tab-color) !important;
 }
 
 archipelago-pane-list {

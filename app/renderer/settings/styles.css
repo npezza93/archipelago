@@ -552,23 +552,14 @@ archipelago-properties-pane .create-array-element:hover {
 }
 
 /* Traffic Lights */
-minimize-button {
+minimize-button, maximize-button, close-button {
   z-index: 100 !important;
-}
-minimize-button div {
-  background-color: var(--color) !important;
 }
 maximize-button {
   right: 80px !important;
-  z-index: 100 !important;
-  border: 2px solid var(--color) !important;
 }
 close-button {
   right: 32px !important;
-  z-index: 100 !important;
-}
-close-button div {
-  background-color: var(--color) !important;
 }
 
 #open-config {

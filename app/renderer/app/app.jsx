@@ -23,7 +23,7 @@ export default class App extends Component {
         selectTab={this.selectTab}
         currentProfile={this.currentProfile}
         removeTab={this.removeTab} />
-      <TrafficLights />
+      <TrafficLights currentProfile={this.currentProfile} />
       <PaneList
         tabs={this.state.tabs}
         currentTabId={this.state.currentTabId}
