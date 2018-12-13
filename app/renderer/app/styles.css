@@ -67,7 +67,7 @@ body {
   background-color: var(--background-color);
 }
 
-archipelago-terminal {
+archipelago-terminal, archipelago-terminal .wrapper {
   display: flex;
   flex: 1;
   height: 100%;

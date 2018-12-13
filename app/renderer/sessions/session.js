@@ -70,9 +70,29 @@ export default class Session {
     return defaultSettings
   }
 
-  open(container) {
-    this.xterm.open(container)
-    this.resetTheme()
+  attach(container) {
+    // The container did not change, do nothing
+    if (this._container === container) {
+      return
+    }
+
+    // Attach has not occured yet
+    if (!this._wrapperElement) {
+      this._container = container
+      this._wrapperElement = document.createElement('div')
+      this._wrapperElement.classList = 'wrapper'
+      this._xtermElement = document.createElement('div')
+      this._xtermElement.classList = 'wrapper'
+      this._wrapperElement.appendChild(this._xtermElement)
+      this._container.appendChild(this._wrapperElement)
+      this.xterm.open(this._xtermElement)
+      this.xterm.focus()
+      return
+    }
+
+    this._container.removeChild(this._wrapperElement)
+    this._container = container
+    this._container.appendChild(this._wrapperElement)
     this.xterm.focus()
   }
 
@@ -83,6 +103,11 @@ export default class Session {
   async kill() {
     this.subscriptions.dispose()
     this.xterm.dispose()
+
+    if (this._wrapperElement) {
+      this._container.removeChild(this._wrapperElement)
+      this._wrapperElement = null
+    }
 
     const ptyId = await this.ptyId
 

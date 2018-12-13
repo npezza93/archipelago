@@ -23,7 +23,7 @@ export default class Terminal extends Component {
   componentDidMount() {
     const {session} = this.props
 
-    session.open(this.container)
+    session.attach(this.container)
 
     this.resizeObserver.observe(this.container)
     this.addSubscription(session.bindScrollListener())
