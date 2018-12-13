@@ -1,3 +1,4 @@
+import ipc from 'electron-better-ipc'
 import React from 'react'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import Component from '../utils/component.jsx'
@@ -16,11 +17,30 @@ export default class TabList extends Component {
             key={tab.id}
             title={tab.title}
             isUnread={tab.isUnread}
+            currentStyles={this.state.styles}
             active={this.props.currentTabId === tab.id}
             selectTab={this.props.selectTab}
             removeTab={this.props.removeTab} />
         ))}
       </ReactCSSTransitionGroup>
     </archipelago-tab-list>
+  }
+
+  initialState() {
+    return {
+      styles: {
+        fontFamily: this.props.currentProfile.get('fontFamily'),
+        color: this.props.currentProfile.get('tabColor')
+      }
+    }
+  }
+
+  resetStyles() {
+    this.setState(this.initialState())
+  }
+
+  bindListeners() {
+    ipc.answerMain('setting-changed', this.resetStyles)
+    ipc.answerMain('active-profile-changed', this.resetStyles)
   }
 }

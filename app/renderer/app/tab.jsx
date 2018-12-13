@@ -6,7 +6,8 @@ export default class Tab extends Component {
     return <archipelago-tab
       class={this.className}
       onClick={this.handleClick}
-      onMouseDown={this.handleMouseDown}>
+      onMouseDown={this.handleMouseDown}
+      style={this.props.currentStyles}>
       <span>{this.props.title || 'Loading...'}</span>
       <div onClick={this.handleExit}>×</div>
     </archipelago-tab>
