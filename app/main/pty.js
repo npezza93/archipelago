@@ -3,11 +3,14 @@ import {api, platform} from 'electron-util'
 import ipc from 'electron-better-ipc'
 import {spawn} from 'node-pty'
 import {Disposable} from 'event-kit'
+import debouncer from 'debounce-fn'
 
 export default class Pty {
   constructor(profileManager) {
     this.id = Math.random()
     this.profileManager = profileManager
+    this.bufferedData = ''
+    this.bufferTimeout = null
 
     this.pty = spawn(
       this.shell,
@@ -55,9 +58,7 @@ export default class Pty {
     this.pty.on('exit', () => {
       this.sessionWindow.webContents.send(`pty-exit-${this.sessionId}`)
     })
-    this.pty.on('data', data => {
-      this.sessionWindow.webContents.send(`pty-data-${this.sessionId}`, data)
-    })
+    this.pty.on('data', data => this.bufferData(data))
   }
 
   onExit(callback) {
@@ -82,5 +83,16 @@ export default class Pty {
 
   write(data) {
     this.pty.write(data)
+  }
+
+  bufferData(data) {
+    this.bufferedData += data
+    if (!this.bufferTimeout) {
+      this.bufferTimeout = debouncer(() => {
+        this.sessionWindow.webContents.send(`pty-data-${this.sessionId}`, this.bufferedData)
+        this.bufferedData = ''
+        this.bufferTimeout = null
+      }, {wait: 10})()
+    }
   }
 }
