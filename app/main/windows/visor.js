@@ -1,7 +1,7 @@
 import electron, {app, BrowserWindow, globalShortcut} from 'electron'
 import {CompositeDisposable} from 'event-kit'
 import {is} from 'electron-util'
-import {argbBackground} from './utils'
+import {argbBackground} from '../utils'
 
 const subscriptions = new CompositeDisposable()
 

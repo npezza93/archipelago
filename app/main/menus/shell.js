@@ -1,5 +1,5 @@
 import ipc from 'electron-better-ipc'
-import search from '../search'
+import search from '../windows/search'
 import {accelerators} from '../utils'
 
 export default (createWindow, profileManager) => {

@@ -1,13 +1,13 @@
 import ipc from 'electron-better-ipc'
 import {darkMode} from 'electron-util'
-import {makeWindow} from './utils'
+import {makeWindow} from '../utils'
 
 let searchWindow = null
 
 export default {
   toggle(currentPosition) {
     if (searchWindow === null || searchWindow.isDestroyed()) {
-      searchWindow = makeWindow('about', {
+      searchWindow = makeWindow('search', {
         width: 300,
         height: 280,
         x: currentPosition[0] - 300,

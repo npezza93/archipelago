@@ -1,5 +1,5 @@
 import {darkMode} from 'electron-util'
-import {makeWindow} from './utils'
+import {makeWindow} from '../utils'
 
 let aboutWindow = null
 const windowOptions = {

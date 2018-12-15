@@ -1,5 +1,5 @@
 import {darkMode} from 'electron-util'
-import {makeWindow} from './utils'
+import {makeWindow} from '../utils'
 
 let settingsWindow = null
 const windowOptions = {
@@ -10,7 +10,7 @@ const windowOptions = {
 export default {
   toggle() {
     if (settingsWindow === null || settingsWindow.isDestroyed()) {
-      settingsWindow = makeWindow('about', windowOptions)
+      settingsWindow = makeWindow('settings', windowOptions)
     } else {
       settingsWindow.focus()
     }

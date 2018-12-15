@@ -1,6 +1,6 @@
 import {api, platform} from 'electron-util'
-import about from '../about'
-import settings from '../settings'
+import about from '../windows/about'
+import settings from '../windows/settings'
 import {accelerators} from '../utils'
 
 export default {
