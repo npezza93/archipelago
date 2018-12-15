@@ -1,10 +1,8 @@
-/* global profileManager */
-
 import {app} from 'electron'
 import ipc from 'electron-better-ipc'
 import Pty from './pty'
 
-export default () => {
+export default profileManager => {
   const ptys = {}
 
   const kill = id => {

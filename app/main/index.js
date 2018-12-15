@@ -1,7 +1,5 @@
-/* global profileManager */
-
-import {app, BrowserWindow, Menu} from 'electron'
-import {is, platform} from 'electron-util'
+import {app, Menu} from 'electron'
+import {is} from 'electron-util'
 import {CompositeDisposable} from 'event-kit'
 import ipc from 'electron-better-ipc'
 import {pref} from './config-file'
@@ -9,7 +7,7 @@ import ProfileManager from './profile-manager'
 import template from './app-menu'
 import registerVisor from './windows/visor'
 import ptyManager from './pty-manager'
-import {argbBackground} from './utils'
+import {argbBackground, makeWindow} from './utils'
 
 if (!is.development) {
   require('update-electron-app')()
@@ -18,9 +16,9 @@ if (!is.development) {
 let currentTerminalWindow = null
 const windows = []
 const subscriptions = new CompositeDisposable()
-global.profileManager = new ProfileManager(pref())
+const profileManager = new ProfileManager(pref())
 profileManager.validate()
-ptyManager()
+ptyManager(profileManager)
 
 const resetApplicationMenu = () =>
   Menu.setApplicationMenu(
@@ -28,38 +26,13 @@ const resetApplicationMenu = () =>
   )
 
 const createWindow = () => {
-  const win = new BrowserWindow({
+  const win = makeWindow(process.env.PAGE, {
     width: 1000,
-    height: 600,
-    show: false,
-    titleBarStyle: platform({macos: 'hiddenInset', default: 'hidden'}),
-    frame: is.macos,
     backgroundColor: argbBackground(profileManager, 'theme.background'),
     vibrancy: profileManager.get('vibrancy')
   })
-
-  const anchor = process.env.PAGE
-  if (is.development && process.env.ELECTRON_WEBPACK_WDS_PORT) {
-    win.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}#${anchor}`)
-  } else if (is.development && !process.env.ELECTRON_WEBPACK_WDS_PORT) {
-    win.loadURL(`file://${__dirname}/../renderer/index.html#${anchor}`)
-  } else {
-    win.loadURL(`file:///${__dirname}/index.html#${anchor}`)
-  }
-
-  win.once('ready-to-show', () => {
-    win.show()
-    win.focus()
-  })
   win.on('focus', () => {
     currentTerminalWindow = win
-  })
-  win.once('close', e => {
-    e.preventDefault()
-    ipc.callRenderer(win, 'close').then(() => {
-      win.hide()
-      win.close()
-    })
   })
   windows.push(win)
 }
@@ -90,27 +63,20 @@ app.on('before-quit', () => {
 })
 
 app.on('activate', () => {
-  let windowCount = 0
-  windows.forEach(win => {
-    if (!win.isDestroyed()) {
-      windowCount += 1
-    }
-  })
+  const activeWindow = windows.find(win => !win.isDestroyed())
 
-  if (windowCount === 0) {
+  if (!activeWindow) {
     createWindow()
   }
 })
 
-subscriptions.add(
-  profileManager.onDidChange('vibrancy', value =>
-    windows.forEach(win => {
-      if (!win.isDestroyed()) {
-        win.setVibrancy(value)
-      }
-    })
-  )
-)
+subscriptions.add(profileManager.onDidChange('vibrancy', value =>
+  windows.forEach(win => {
+    if (!win.isDestroyed()) {
+      win.setVibrancy(value)
+    }
+  })
+))
 
 subscriptions.add(profileManager.onDidChange('singleTabMode', resetApplicationMenu))
 subscriptions.add(profileManager.onDidChange('name', resetApplicationMenu))

@@ -1,7 +1,10 @@
 import {BrowserWindow, app} from 'electron'
-import {is} from 'electron-util'
+import {is, platform} from 'electron-util'
 import Color from 'color'
 import ipc from 'electron-better-ipc'
+import darwinAccelerators from './accelerators/darwin'
+import linuxAccelerators from './accelerators/linux'
+import windowsAccelerators from './accelerators/windows'
 
 export const argbBackground = (profileManager, property) => {
   const color = new Color(profileManager.get(property))
@@ -42,12 +45,18 @@ export const makeWindow = (name, options) => {
   return newWindow
 }
 
-export const loadUrl = (browserWindow, anchor) => {
+export const accelerators = platform({
+  macos: darwinAccelerators,
+  linux: linuxAccelerators,
+  windows: windowsAccelerators
+})
+
+const loadUrl = (browserWindow, anchor) => {
   let url
 
   if (is.development && process.env.ELECTRON_WEBPACK_WDS_PORT) {
     url = `http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}#${anchor}`
-  } else if (process.env.NODE_ENV === 'test') {
+  } else if (is.development && !process.env.ELECTRON_WEBPACK_WDS_PORT) {
     url = `file://${__dirname}/../renderer/index.html#${anchor}`
   } else {
     url = `file:///${__dirname}/index.html#${anchor}`
