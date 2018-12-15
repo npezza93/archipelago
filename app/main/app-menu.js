@@ -1,7 +1,7 @@
 import {api, platform, openNewGitHubIssue} from 'electron-util'
 import ipc from 'electron-better-ipc'
 import displaySettings from './settings'
-import displayAbout from './about'
+import about from './about'
 import search from './search'
 import darwinAccelerators from './accelerators/darwin'
 import linuxAccelerators from './accelerators/linux'
@@ -18,7 +18,7 @@ const aboutMenu = {
   submenu: [
     {
       label: 'About Archipelago',
-      click: displayAbout
+      click: about.toggle
     },
     {
       label: `Version ${api.app.getVersion()}`,
