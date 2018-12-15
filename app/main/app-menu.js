@@ -1,6 +1,6 @@
 import {api, platform, openNewGitHubIssue} from 'electron-util'
 import ipc from 'electron-better-ipc'
-import displaySettings from './settings'
+import settings from './settings'
 import about from './about'
 import search from './search'
 import darwinAccelerators from './accelerators/darwin'
@@ -28,7 +28,7 @@ const aboutMenu = {
     {
       label: 'Settings',
       accelerator: accelerators.settings,
-      click: displaySettings
+      click: settings.toggle
     },
     {type: 'separator'},
     ...platform({
