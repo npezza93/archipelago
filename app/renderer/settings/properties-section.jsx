@@ -5,14 +5,18 @@ import Property from './property.jsx'
 
 export default class PropertiesSection extends Component {
   render() {
-    return <Observer tag="archipelago-properties-section" threshold={[0, 0.50, 1]}
-      onChange={e => this.props.handleChange(e.isIntersecting, this.props.scope)}>
+    return <Observer tag="archipelago-properties-section" threshold={this.thresholds}
+      onChange={this.handleInstersection}>
       <archipelago-properties-section>
         <archipelago-properties-section-container>
           {this.renderProperties(this.props.properties, '')}
         </archipelago-properties-section-container>
       </archipelago-properties-section>
     </Observer>
+  }
+
+  get thresholds() {
+    return [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
   }
 
   renderProperties(properties, prefix) {
@@ -39,5 +43,15 @@ export default class PropertiesSection extends Component {
 
       return property
     })
+  }
+
+  handleInstersection(event) {
+    const {intersectionRatio, isIntersecting} = event
+
+    if (isIntersecting && intersectionRatio > this.previousRatio) {
+      this.props.handleChange(this.props.scope)
+    }
+
+    this.previousRatio = intersectionRatio
   }
 }

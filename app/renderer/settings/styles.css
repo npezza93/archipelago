@@ -343,8 +343,7 @@ archipelago-properties-pane archipelago-header::before {
   z-index: -1;
 }
 
-archipelago-properties-pane archipelago-header div,
-archipelago-properties-pane archipelago-header div[position = "0"] {
+archipelago-properties-pane archipelago-header div.root {
   font-size: 32px;
   color: var(--color);
   position: absolute;
@@ -353,7 +352,7 @@ archipelago-properties-pane archipelago-header div[position = "0"] {
   opacity: 1;
 }
 
-archipelago-properties-pane archipelago-header div[position = "-2"] {
+archipelago-properties-pane archipelago-header div.root ~ div {
   font-size: 11px;
   font-weight: 500;
   color: #889199;
@@ -362,14 +361,18 @@ archipelago-properties-pane archipelago-header div[position = "-2"] {
   transition: all .3s ease-in-out;
 }
 
-archipelago-properties-pane archipelago-header div[position = "-1"] {
-  font-size: 16px;
-  color: #889199;
-  top: 37px;
-  transition: all .3s ease-in-out;
+archipelago-properties-pane archipelago-header div.root + div {
+  font-size: 16px !important;
+  color: #889199 !important;
+  top: 37px !important;
+  opacity: 1 !important;
+  transition: all .3s ease-in-out !important;
 }
 
-archipelago-properties-pane archipelago-header div[position = "1"] {
+archipelago-properties-pane archipelago-header div {
+  color: var(--color);
+  position: absolute;
+  transition: all .3s ease-in-out;
   opacity: 0;
   top: 113px;
   font-size: 36px;
