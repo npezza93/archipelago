@@ -348,7 +348,6 @@ archipelago-properties-pane archipelago-header div.root {
   color: var(--color);
   position: absolute;
   top: 60px;
-  transition: all .3s ease-in-out;
   opacity: 1;
 }
 
@@ -358,7 +357,6 @@ archipelago-properties-pane archipelago-header div.root ~ div {
   color: #889199;
   top: 27px;
   opacity: 0;
-  transition: all .3s ease-in-out;
 }
 
 archipelago-properties-pane archipelago-header div.root + div {
@@ -366,7 +364,6 @@ archipelago-properties-pane archipelago-header div.root + div {
   color: #889199 !important;
   top: 37px !important;
   opacity: 1 !important;
-  transition: all .3s ease-in-out !important;
 }
 
 archipelago-properties-pane archipelago-header div {
