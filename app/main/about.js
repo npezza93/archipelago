@@ -1,5 +1,6 @@
 import {BrowserWindow} from 'electron'
 import {is, darkMode} from 'electron-util'
+import {loadUrl} from './utils'
 
 let aboutWindow = null
 
@@ -14,21 +15,9 @@ export default () => {
       frame: is.macos
     })
 
-    if (is.development && process.env.ELECTRON_WEBPACK_WDS_PORT) {
-      aboutWindow.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}#about`)
-    } else if (process.env.NODE_ENV === 'test') {
-      aboutWindow.loadURL(`file://${__dirname}/../renderer/index.html#about`)
-    } else {
-      aboutWindow.loadURL(`file:///${__dirname}/index.html#about`)
-    }
+    loadUrl(aboutWindow, 'about')
 
-    if (is.development) {
-      aboutWindow.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}#about`)
-    } else {
-      aboutWindow.loadURL(`file:///${__dirname}/index.html#about`)
-    }
-
-    aboutWindow.once('ready-to-show', () => aboutWindow.show())
+    aboutWindow.once('ready-to-show', aboutWindow.show)
   } else {
     aboutWindow.focus()
   }
