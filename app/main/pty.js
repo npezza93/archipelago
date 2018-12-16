@@ -4,6 +4,7 @@ import ipc from 'electron-better-ipc'
 import {spawn} from 'node-pty'
 import {Disposable} from 'event-kit'
 import debouncer from 'debounce-fn'
+import defaultShell from 'default-shell'
 
 export default class Pty {
   constructor(profileManager) {
@@ -20,8 +21,7 @@ export default class Pty {
   }
 
   get shell() {
-    return this.profileManager.get('shell') ||
-      process.env[platform({windows: 'COMSPEC', default: 'SHELL'})]
+    return this.profileManager.get('shell') || defaultShell
   }
 
   get sessionArgs() {
