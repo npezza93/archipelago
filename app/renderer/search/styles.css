@@ -71,3 +71,8 @@ html, body {
 #search-buttons #search-next-button:active, #search-buttons #search-previous-button:active {
   filter: invert(50%);
 }
+
+input-field, switch-field {
+  width: 100%;
+  margin-bottom: 10px;
+}
