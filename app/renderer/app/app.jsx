@@ -37,7 +37,11 @@ export default class App extends Component {
   initialState() {
     const initialTab = new Tab('default')
 
-    return {tabs: [initialTab], currentTabId: initialTab.id, singleTabMode: false}
+    return {
+      tabs: [initialTab],
+      currentTabId: initialTab.id,
+      singleTabMode: this.currentProfile.get('singleTabMode')
+    }
   }
 
   initialize() {
@@ -267,7 +271,6 @@ export default class App extends Component {
   }
 
   bindListeners() {
-    ipc.callMain('single-tab-mode').then(value => this.setState({singleTabMode: value}))
     this.addSubscription(
       new Disposable(() => ipc.removeListener('close-via-menu', this.closeViaMenu))
     )

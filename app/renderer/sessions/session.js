@@ -5,6 +5,7 @@ import {activeWindow, platform} from 'electron-util'
 import {CompositeDisposable, Disposable} from 'event-kit'
 import {Terminal} from 'xterm'
 import unescape from 'unescape-js'
+import debouncer from 'debounce-fn'
 import keystrokeForKeyboardEvent from 'keystroke-for-keyboard-event'
 import autoBind from 'auto-bind'
 import CurrentProfile from '../utils/current-profile'
@@ -85,7 +86,6 @@ export default class Session {
       this._container.appendChild(this._wrapperElement)
       this.xterm.open(this._xtermElement)
       this.xterm.focus()
-      this.resetBlink()
       return
     }
 
@@ -160,10 +160,12 @@ export default class Session {
   }
 
   resetBlink() {
-    if (this.currentProfile.get('cursorBlink')) {
-      this.xterm.setOption('cursorBlink', false)
-      this.xterm.setOption('cursorBlink', true)
-    }
+    debouncer(() => {
+      if (this.currentProfile.get('cursorBlink')) {
+        this.xterm.setOption('cursorBlink', false)
+        this.xterm.setOption('cursorBlink', true)
+      }
+    }, {wait: 50})()
   }
 
   copySelection() {
