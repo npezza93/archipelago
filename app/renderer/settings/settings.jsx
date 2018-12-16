@@ -17,7 +17,7 @@ export default class Settings extends Component {
     return <div id="settings" data-theme={this.theme}>
       <div id="titlebar"><TrafficLights /></div>
       <HamburgerMenu toggleProfilesDrawer={this.toggleProfilesDrawer}/>
-      <OpenConfig />
+      <OpenConfig pref={this.currentProfile.pref} />
       <Profiles
         showProfiles={this.state.showProfiles}
         profiles={this.currentProfile.allProfiles}

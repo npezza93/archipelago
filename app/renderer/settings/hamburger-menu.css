@@ -1,0 +1,48 @@
+hamburger-menu {
+  width: 16px;
+  height: 11px;
+  top: 46px;
+  left: 32px;
+  cursor: pointer;
+  visibility: hidden;
+  opacity: 0;
+  flex-direction: column;
+  justify-content: space-around;
+  position: fixed;
+  display: flex;
+  transition: opacity .5s ease-in-out, visibility .5s ease-in-out;
+  z-index: 10;
+}
+hamburger-menu div {
+  height: 2px;
+  background: var(--color);
+  border-radius: 1px;
+}
+back-drop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: var(--opaque-color);
+  z-index: 3;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .5s ease-in-out, visibility .5s ease-in-out;
+  width: 100vw;
+}
+back-drop.active {
+  visibility: visible;
+  opacity: 1;
+}
+@media (max-width: 700px) {
+  hamburger-menu {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+@media (min-width: 699px) {
+  back-drop {
+    display: none !important;
+  }
+}

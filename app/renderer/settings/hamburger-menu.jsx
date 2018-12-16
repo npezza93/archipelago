@@ -1,21 +1,23 @@
 import React from 'react'
 import Component from '../utils/component.jsx'
+import './hamburger-menu.css'
 
 export default class HamburgerMenu extends Component {
   render() {
-    return <div>
+    return <hamburger-container>
       {this.backdrop()}
-      <div id="hamburger" onClick={this.handleHamburgerClick}>
+      <hamburger-menu onClick={this.handleHamburgerClick}>
         <div></div>
         <div style={{width: '11px'}}></div>
-      </div>
-    </div>
+      </hamburger-menu>
+    </hamburger-container>
   }
 
   backdrop() {
     return (
-      <div id="backdrop" onClick={this.handleBackdropClick} className={this.backdropClass}>
-      </div>
+      <back-drop
+        onClick={this.handleBackdropClick}
+        class={this.backdropClass} />
     )
   }
 

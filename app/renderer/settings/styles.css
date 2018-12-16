@@ -266,45 +266,6 @@ archipelago-properties-pane archipelago-properties-section archipelago-propertie
   max-width: 350px;
 }
 
-#hamburger {
-  width: 16px;
-  height: 11px;
-  top: 46px;
-  left: 32px;
-  cursor: pointer;
-  visibility: hidden;
-  opacity: 0;
-  flex-direction: column;
-  justify-content: space-around;
-  position: fixed;
-  display: flex;
-  transition: opacity .5s ease-in-out, visibility .5s ease-in-out;
-  z-index: 10;
-}
-
-#hamburger div {
-  height: 2px;
-  background: var(--color);
-  border-radius: 1px;
-}
-
-#backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: var(--opaque-color);
-  z-index: 3;
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity .5s ease-in-out, visibility .5s ease-in-out;
-  width: 100vw;
-}
-#backdrop.active {
-  visibility: visible;
-  opacity: 1;
-}
 
 @media (max-width: 700px) {
   archipelago-profiles {
@@ -315,12 +276,6 @@ archipelago-properties-pane archipelago-properties-section archipelago-propertie
     left: 0;
     width: 100%;
   }
-
-  #hamburger {
-    opacity: 1;
-    visibility: visible;
-  }
-
   archipelago-properties-pane archipelago-header {
     width: calc(100% - 87px);
   }
@@ -329,10 +284,6 @@ archipelago-properties-pane archipelago-properties-section archipelago-propertie
 @media (min-width: 699px) {
   archipelago-profiles {
     left: 0 !important;
-  }
-
-  #backdrop {
-    display: none !important;
   }
 }
 
@@ -345,13 +296,4 @@ maximize-button {
 }
 close-button {
   right: 32px !important;
-}
-
-#open-config {
-  position: absolute;
-  top: 46px;
-  color: var(--color);
-  right: 32px;
-  cursor: pointer;
-  z-index: 12;
 }
