@@ -15,13 +15,13 @@ export default class Terminal extends Component {
   }
 
   fit() {
-    debouncer(() => this.props.session.fit(), {wait: 200})()
+    debouncer(this.props.session.fit, {wait: 150})()
   }
 
   componentDidMount() {
     const {session} = this.props
 
-    session.open(this.container)
+    session.attach(this.container)
 
     this.resizeObserver.observe(this.container)
     this.addSubscription(session.bindScrollListener())

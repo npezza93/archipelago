@@ -1,7 +1,7 @@
 import electron, {app, BrowserWindow, globalShortcut} from 'electron'
 import {CompositeDisposable} from 'event-kit'
 import {is} from 'electron-util'
-import {argbBackground} from '../utils'
+import {argbBackground, makeWindow} from '../utils'
 
 const subscriptions = new CompositeDisposable()
 
@@ -28,11 +28,10 @@ const create = profileManager => {
     const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize
 
     isVisorShowing = false
-    visorWindow = new BrowserWindow({
+    visorWindow = makeWindow('visor', {
       width,
       enableLargerThanScreen: true,
       height: parseInt(height * 0.4, 10),
-      show: false,
       frame: false,
       x: 0,
       y: -parseInt(height * 0.4, 10),
@@ -41,12 +40,6 @@ const create = profileManager => {
     })
     visorWindow.name = 'visor'
     visorWindow.hideVisor = hideVisor
-
-    if (is.development) {
-      visorWindow.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}#visor`)
-    } else {
-      visorWindow.loadURL(`file:///${__dirname}/index.html#visor`)
-    }
 
     visorWindow.on('blur', hideVisor)
     visorWindow.on('closed', () => subscriptions.dispose())

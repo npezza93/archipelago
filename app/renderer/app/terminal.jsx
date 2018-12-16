@@ -16,7 +16,7 @@ export default class Terminal extends Component {
 
   fit() {
     if (this.props.tabId === this.props.currentTabId) {
-      debouncer(() => this.props.session.fit(), {wait: 200})()
+      debouncer(this.props.session.fit, {wait: 150})()
     }
   }
 
