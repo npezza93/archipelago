@@ -110,5 +110,11 @@ export default class Search extends Component {
     this.addSubscription(
       new Disposable(() => ipc.removeListener('close-via-menu', window.close))
     )
+    ipc.answerMain('close', () => {
+      return new Promise(resolve => {
+        this.cleanup()
+        resolve()
+      })
+    })
   }
 }
