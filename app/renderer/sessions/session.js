@@ -202,7 +202,7 @@ export default class Session {
       this.xterm.setOption(property, value)
     } else if (property === 'keybindings') {
       this.resetKeymaps()
-    } else if (property.startsWith('theme.')) {
+    } else if (property.startsWith('theme.') || property === 'visor.background') {
       this.resetTheme()
     }
   }
