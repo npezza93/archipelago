@@ -41,8 +41,8 @@ export default class App extends Component {
   }
 
   initialize() {
-    this.resetCssSettings()
     this.currentProfile = new CurrentProfile()
+    this.resetCssSettings()
   }
 
   htmlClasses() {
@@ -229,11 +229,12 @@ export default class App extends Component {
   }
 
   resetCssSettings() {
-    ipc.callMain('css-settings').then(settings => {
-      for (const property in this.styleProperties) {
-        this.docStyles.setProperty(this.styleProperties[property], settings[property])
-      }
-    })
+    for (const property in this.styleProperties) {
+      this.docStyles.setProperty(
+        this.styleProperties[property],
+        this.currentProfile.get(property)
+      )
+    }
   }
 
   handleSettingChanged({property, value}) {
@@ -245,7 +246,7 @@ export default class App extends Component {
   }
 
   handleActiveProfileChanged() {
-    ipc.callMain('single-tab-mode').then(value => this.setState({singleTabMode: value}))
+    this.setState({singleTabMode: this.currentProfile.get('singleTabMode')})
     this.resetCssSettings()
   }
 

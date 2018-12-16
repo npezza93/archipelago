@@ -43,13 +43,11 @@ export default class Session {
   }
 
   resetKeymaps() {
-    ipc.callMain('keybindings').then(keybindings => {
-      this._keymaps =
-        keybindings.reduce((result, item) => {
-          result[item.keystroke] = unescape(item.command)
-          return result
-        }, {})
-    })
+    this._keymaps =
+      this.currentProfile.get('keybindings').reduce((result, item) => {
+        result[item.keystroke] = unescape(item.command)
+        return result
+      }, {})
   }
 
   settings() {
@@ -87,6 +85,7 @@ export default class Session {
       this._container.appendChild(this._wrapperElement)
       this.xterm.open(this._xtermElement)
       this.xterm.focus()
+      this.resetBlink()
       return
     }
 
@@ -161,20 +160,16 @@ export default class Session {
   }
 
   resetBlink() {
-    ipc.callMain('cursor-blink').then(cursorBlink => {
-      if (cursorBlink) {
-        this.xterm.setOption('cursorBlink', false)
-        this.xterm.setOption('cursorBlink', true)
-      }
-    })
+    if (this.currentProfile.get('cursorBlink')) {
+      this.xterm.setOption('cursorBlink', false)
+      this.xterm.setOption('cursorBlink', true)
+    }
   }
 
   copySelection() {
-    ipc.callMain('copy-on-select').then(copyOnSelect => {
-      if (copyOnSelect) {
-        clipboard.writeText(this.xterm.getSelection())
-      }
-    })
+    if (this.currentProfile.get('copyOnSelect')) {
+      clipboard.writeText(this.xterm.getSelection())
+    }
   }
 
   onFocus(callback) {

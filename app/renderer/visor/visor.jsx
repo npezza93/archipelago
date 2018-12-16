@@ -3,6 +3,7 @@
 import ipc from 'electron-better-ipc'
 import React from 'react'
 import Component from '../utils/component.jsx'
+import CurrentProfile from '../sessions/current-profile'
 import Tab from '../sessions/tab'
 import Pane from './pane.jsx'
 import 'xterm/lib/xterm.css'
@@ -21,6 +22,11 @@ export default class Visor extends Component {
 
   initialState() {
     return {tab: new Tab('visor')}
+  }
+
+  initialize() {
+    this.currentProfile = new CurrentProfile()
+    this.resetCssSettings()
   }
 
   htmlClasses() {
@@ -68,21 +74,18 @@ export default class Visor extends Component {
   }
 
   resetCssSettings() {
-    ipc.callMain('visor-css-settings').then(settings => {
-      for (const property in this.styleProperties) {
-        this.docStyles.setProperty(this.styleProperties[property], settings[property])
-      }
-    })
+    for (const property in this.styleProperties) {
+      this.docStyles.setProperty(
+        this.styleProperties[property],
+        this.currentProfile.get(property)
+      )
+    }
   }
 
   handleSettingChanged({property, value}) {
     if (property in this.styleProperties) {
       this.docStyles.setProperty(this.styleProperties[property], value)
     }
-  }
-
-  initialize() {
-    this.resetCssSettings()
   }
 
   bindListeners() {

@@ -126,28 +126,12 @@ export default class ProfileManager {
   }
 
   bindListeners() {
-    ipc.answerRenderer('single-tab-mode', () => this.get('singleTabMode'))
     ipc.answerRenderer('change-setting', ({property, value}) => {
       this.set(property, value)
       for (const window of BrowserWindow.getAllWindows()) {
         ipc.callRenderer(window, 'setting-changed', {property, value})
       }
     })
-    ipc.answerRenderer('css-settings', () => {
-      return this.cssSettings.reduce((settings, property) => {
-        settings[property] = this.get(property)
-        return settings
-      }, {})
-    })
-    ipc.answerRenderer('visor-css-settings', () => {
-      return this.visorCssSettings.reduce((settings, property) => {
-        settings[property] = this.get(property)
-        return settings
-      }, {})
-    })
-    ipc.answerRenderer('copy-on-select', () => this.get('copyOnSelect'))
-    ipc.answerRenderer('keybindings', () => this.get('keybindings'))
-    ipc.answerRenderer('cursor-blink', () => this.get('cursorBlink'))
     ipc.answerRenderer('set-profile-name', ({id, name}) => {
       this.find(id).name = name
     })
@@ -172,14 +156,6 @@ export default class ProfileManager {
 
       return {profiles: this.rawProfiles, activeProfileId: this.activeProfile().id}
     })
-  }
-
-  get cssSettings() {
-    return ['theme.background', 'tabBorderColor', 'padding']
-  }
-
-  get visorCssSettings() {
-    return ['visor.background', 'visor.padding']
   }
 
   get defaultKeybindings() {
