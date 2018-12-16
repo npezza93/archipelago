@@ -177,17 +177,17 @@ archipelago-tab-list > span {
   display: flex;
 }
 
-.archipelago-tab-enter {
+archipelago-tab-list .archipelago-tab-enter {
   flex: 0.0001;
 }
-.archipelago-tab-enter.archipelago-tab-enter-active {
+archipelago-tab-list .archipelago-tab-enter.archipelago-tab-enter-active {
   flex: 1;
   transition: all 500ms linear;
 }
-.archipelago-tab-leave {
+archipelago-tab-list .archipelago-tab-leave {
   flex: 1;
 }
-.archipelago-tab-leave.archipelago-tab-leave-active {
+archipelago-tab-list .archipelago-tab-leave.archipelago-tab-leave-active {
   flex: 0.0001;
   transition: all 300ms linear;
 }
