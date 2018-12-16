@@ -10,8 +10,8 @@ import CurrentProfile from '../sessions/current-profile'
 import PaneList from './pane-list.jsx'
 import TabList from './tab-list.jsx'
 import HamburgerMenu from './hamburger-menu.jsx'
-import 'xterm/lib/xterm.css' // eslint-disable-line import/no-unassigned-import
-import './styles.css' // eslint-disable-line import/no-unassigned-import
+import 'xterm/lib/xterm.css'
+import './styles.css'
 
 export default class App extends Component {
   render() {

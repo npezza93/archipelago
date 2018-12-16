@@ -23,7 +23,8 @@
     ],
     "rules": {
       "react/prop-types": 0,
-      "guard-for-in": 0
+      "guard-for-in": 0,
+      "import/no-unassigned-import": 0
     }
   },
   "repository": {

@@ -10,7 +10,7 @@ import HamburgerMenu from './hamburger-menu.jsx'
 import OpenConfig from './open-config.jsx'
 import Profiles from './profiles.jsx'
 import PropertiesPane from './properties-pane.jsx'
-import './styles.css' // eslint-disable-line import/no-unassigned-import
+import './styles.css'
 
 export default class Settings extends Component {
   render() {

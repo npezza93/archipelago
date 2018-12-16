@@ -6,7 +6,7 @@ import React from 'react'
 import {Disposable} from 'event-kit'
 import TrafficLights from '../traffic-lights.jsx'
 import Component from '../utils/component.jsx'
-import './styles.css' // eslint-disable-line import/no-unassigned-import
+import './styles.css'
 
 export default class About extends Component {
   render() {

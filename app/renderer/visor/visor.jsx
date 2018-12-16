@@ -5,8 +5,8 @@ import React from 'react'
 import Component from '../utils/component.jsx'
 import Tab from '../sessions/tab'
 import Pane from './pane.jsx'
-import 'xterm/lib/xterm.css' // eslint-disable-line import/no-unassigned-import
-import './styles.css' // eslint-disable-line import/no-unassigned-import
+import 'xterm/lib/xterm.css'
+import './styles.css'
 
 export default class Visor extends Component {
   render() {

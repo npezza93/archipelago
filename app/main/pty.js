@@ -1,5 +1,5 @@
 import {BrowserWindow} from 'electron'
-import {api, platform} from 'electron-util'
+import {api} from 'electron-util'
 import ipc from 'electron-better-ipc'
 import {spawn} from 'node-pty'
 import {Disposable} from 'event-kit'
