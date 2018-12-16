@@ -1,20 +1,22 @@
 import React from 'react'
-import Component from '../../utils/component.jsx'
+import Octicon, {X} from '@githubprimer/octicons-react'
+import Component from '../component.jsx'
 import * as coreFields from './core-fields.jsx'
+import './array-field.css'
 
 export default class ArrayField extends Component {
   render() {
-    const elements = this.props.value.map((element, i) =>
-      this.renderElement(element, i))
-
-    return elements.concat(this.addElement())
+    return <array-field>
+      {this.props.value.map((element, i) => this.renderElement(element, i))}
+      {this.addElement()}
+    </array-field>
   }
 
   renderElement(element, index) {
-    return <div key={index} className="array-element-container">
+    return <array-element key={index}>
       {this.renderItems(element, index)}
       {this.removeElement(index)}
-    </div>
+    </array-element>
   }
 
   renderItems(value, index) {
@@ -38,19 +40,21 @@ export default class ArrayField extends Component {
       schema,
       newValue => {
         this.props.value[index][property] = newValue
-        return this.props.onChange.call(this, this.props.value)
+        this.props.onChange.call(this, this.props.value)
       }
     )
   }
 
   addElement() {
-    return <div className="create-array-element" onClick={this.createElement} key="create-array-el">
+    return <create-element onClick={this.createElement} key="create-array-el">
       add new {this.props.property.substring(0, this.props.property.length - 1)}
-    </div>
+    </create-element>
   }
 
   removeElement(index) {
-    return <div className="remove-array-element" onClick={this.destroyElement.bind(this, index)}>×</div>
+    return <remove-element onClick={this.destroyElement.bind(this, index)}>
+      <Octicon icon={X} />
+    </remove-element>
   }
 
   createElement() {

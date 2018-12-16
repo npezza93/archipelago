@@ -1,10 +1,10 @@
 import ipc from 'electron-better-ipc'
 import Component from '../utils/component.jsx'
-import allFields from './all-fields.jsx'
+import fields from '../utils/form/fields.jsx'
 
 export default class Property extends Component {
   render() {
-    return allFields[this.fieldType()].call(
+    return fields[this.fieldType()].call(
       this,
       this.props.property,
       this.state.value,

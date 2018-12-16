@@ -6,22 +6,22 @@ import {darkMode} from 'electron-util'
 import {Disposable} from 'event-kit'
 import Octicon, {ChevronLeft, ChevronRight} from '@githubprimer/octicons-react'
 import Component from '../utils/component.jsx'
+import TextField from '../utils/form/text-field.jsx'
+import BooleanField from '../utils/form/boolean-field.jsx'
 import TrafficLights from '../traffic-lights.jsx'
-import './styles.css' // eslint-disable-line import/no-unassigned-import
+import './styles.css'
 
 export default class Search extends Component {
   render() {
     return <div id="search" data-theme={this.theme}>
       <TrafficLights />
-      <input-field>
-        <input autoFocus
-          type="text"
-          value={this.state.query}
-          onChange={this.handleQueryChange}
-          onKeyPress={this.handleKeyPress} />
-        <label>Search</label>
-        <div className="input-border"></div>
-      </input-field>
+      <TextField
+        property="search-query"
+        autoFocus={true}
+        value={this.state.query}
+        onChange={this.handleQueryChange}
+        onKeyPress={this.handleKeyPress}
+        label="Search" />
       <div id="search-buttons">
         <div id="search-previous-button" onClick={this.searchPrevious}>
           <Octicon icon={ChevronLeft} />
@@ -32,36 +32,21 @@ export default class Search extends Component {
           <Octicon icon={ChevronRight} />
         </div>
       </div>
-      <switch-field>
-        <div>Use regex</div>
-        <label>
-          <input
-            type="checkbox"
-            checked={this.state.regex}
-            onChange={this.handleRegexChange} />
-          <span className="slider"></span>
-        </label>
-      </switch-field>
-      <switch-field>
-        <div>Case sensitive</div>
-        <label>
-          <input
-            type="checkbox"
-            checked={this.state.caseSensitive}
-            onChange={this.handlecaseSensitiveChange} />
-          <span className="slider"></span>
-        </label>
-      </switch-field>
-      <switch-field>
-        <div>Whole word</div>
-        <label>
-          <input
-            type="checkbox"
-            checked={this.state.wholeWord}
-            onChange={this.handlewholeWordChange} />
-          <span className="slider"></span>
-        </label>
-      </switch-field>
+      <BooleanField
+        property="regex"
+        label="Use regex"
+        value={this.state.regex}
+        onChange={this.handleRegexChange} />
+      <BooleanField
+        property="case"
+        label="Case sensitive"
+        value={this.state.caseSensitive}
+        onChange={this.handlecaseSensitiveChange} />
+      <BooleanField
+        property="whole"
+        label="Whole word"
+        value={this.state.wholeWord}
+        onChange={this.handlewholeWordChange} />
     </div>
   }
 
@@ -75,20 +60,20 @@ export default class Search extends Component {
     }
   }
 
-  handleQueryChange(event) {
-    this.setState({query: event.target.value})
+  handleQueryChange(query) {
+    this.setState({query})
   }
 
-  handleRegexChange(event) {
-    this.setState({regex: event.target.checked})
+  handleRegexChange(regex) {
+    this.setState({regex})
   }
 
-  handlecaseSensitiveChange(event) {
-    this.setState({caseSensitive: event.target.checked})
+  handlecaseSensitiveChange(caseSensitive) {
+    this.setState({caseSensitive})
   }
 
-  handlewholeWordChange(event) {
-    this.setState({wholeWord: event.target.checked})
+  handlewholeWordChange(wholeWord) {
+    this.setState({wholeWord})
   }
 
   handleKeyPress(event) {

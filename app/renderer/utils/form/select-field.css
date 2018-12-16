@@ -1,0 +1,44 @@
+select-field select {
+  width: 100%;
+  transition: transform 250ms ease-in-out;
+  font-size: 24px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !important;
+  font-weight: 300;
+  z-index: 1;
+  padding: 20px 26px 4px 0;
+  -webkit-font-smoothing: antialiased;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid var(--accent-color);
+  border-radius: 0;
+  outline: none;
+  background-color: transparent;
+  white-space: nowrap;
+  cursor: pointer;
+  -webkit-appearance: none;
+  color: var(--color);
+}
+select-field {
+  position: relative;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+  height: 52px;
+}
+select-field svg {
+  position: absolute;
+  right: 8px;
+  bottom: 12px;
+  content: '\25BE';
+}
+select-field svg path {
+  fill: var(--accent-color);
+}
+select-field label {
+  color: var(--accent-color);
+  font-size: 15px;
+  position: absolute;
+  left: 0;
+  bottom: 34px;
+  transition: all 250ms ease-in-out;
+  z-index: 1;
+}

@@ -1,14 +1,17 @@
 import React from 'react'
 import {ChromePicker} from 'react-color'
-import Component from '../../utils/component.jsx'
+import Component from '../component.jsx'
+import TextField from './text-field.jsx'
+import './color-field.css'
 
 export default class ColorField extends Component {
   render() {
-    return <div className="color-container" key={this.props.datakey}
+    return <color-field
+      key={this.props.datakey}
       style={this.state.active ? {zIndex: 2} : undefined}>
       {this.backdrop()}
       {this.text()}
-    </div>
+    </color-field>
   }
 
   initialState() {
@@ -19,22 +22,20 @@ export default class ColorField extends Component {
     const styles = {position: 'fixed', top: 0, left: 0, right: 0, bottom: 0}
 
     if (this.state.active) {
-      return <div style={styles} onClick={() => this.setState({active: false})}></div>
+      return <div style={styles} onClick={this.deactivate}></div>
     }
   }
 
   text() {
-    return <input-field>
-      <input
-        type="text"
-        datakey={this.props.datakey}
-        value={this.props.value || ''}
-        onClick={() => this.setState({active: true})}
-        onChange={() => {}} />
-      <label>{this.props.label}</label>
-      <div className="input-border"></div>
+    return <TextField
+      key={this.props.datakey}
+      property={this.props.datakey}
+      value={this.props.value || ''}
+      label={this.props.label}
+      onChange={() => {}}
+      onClick={this.activate}>
       {this.picker()}
-    </input-field>
+    </TextField>
   }
 
   picker() {
@@ -56,5 +57,13 @@ export default class ColorField extends Component {
     }
 
     this.props.onChange.call(this, rgba)
+  }
+
+  activate() {
+    this.setState({active: true})
+  }
+
+  deactivate() {
+    this.setState({active: false})
   }
 }

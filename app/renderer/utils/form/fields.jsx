@@ -1,6 +1,6 @@
 import React from 'react'
-import * as coreFields from './fields/core-fields.jsx'
-import ArrayField from './fields/array-field.jsx'
+import * as coreFields from './core-fields.jsx'
+import ArrayField from './array-field.jsx'
 
 const array = (property, value, schema, onChange) => {
   return <ArrayField
