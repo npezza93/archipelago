@@ -7,7 +7,7 @@ import {Terminal} from 'xterm'
 import unescape from 'unescape-js'
 import keystrokeForKeyboardEvent from 'keystroke-for-keyboard-event'
 import autoBind from 'auto-bind'
-import CurrentProfile from './current-profile'
+import CurrentProfile from '../utils/current-profile'
 
 Terminal.applyAddon(require('xterm/lib/addons/fit/fit'))
 Terminal.applyAddon(require('xterm/lib/addons/search/search'))

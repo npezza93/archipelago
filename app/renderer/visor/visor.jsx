@@ -3,7 +3,7 @@
 import ipc from 'electron-better-ipc'
 import React from 'react'
 import Component from '../utils/component.jsx'
-import CurrentProfile from '../sessions/current-profile'
+import CurrentProfile from '../utils/current-profile'
 import Tab from '../sessions/tab'
 import Pane from './pane.jsx'
 import 'xterm/lib/xterm.css'

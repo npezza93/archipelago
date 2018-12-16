@@ -5,7 +5,7 @@ import {darkMode} from 'electron-util'
 import {Disposable} from 'event-kit'
 import TrafficLights from '../traffic-lights.jsx'
 import Component from '../utils/component.jsx'
-import CurrentSettings from '../sessions/current-profile'
+import CurrentProfile from '../utils/current-profile'
 import HamburgerMenu from './hamburger-menu.jsx'
 import OpenConfig from './open-config.jsx'
 import Profiles from './profiles.jsx'
@@ -35,7 +35,7 @@ export default class Settings extends Component {
   }
 
   initialize() {
-    this.currentProfile = new CurrentSettings()
+    this.currentProfile = new CurrentProfile()
   }
 
   toggleProfilesDrawer(active) {
