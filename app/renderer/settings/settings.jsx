@@ -8,7 +8,7 @@ import Component from '../utils/component.jsx'
 import CurrentProfile from '../utils/current-profile'
 import HamburgerMenu from './hamburger-menu.jsx'
 import OpenConfig from './open-config.jsx'
-import Profiles from './profiles.jsx'
+import ProfilesDrawer from './profiles-drawer.jsx'
 import PropertiesPane from './properties-pane.jsx'
 import './styles.css'
 
@@ -18,15 +18,13 @@ export default class Settings extends Component {
       <div id="titlebar"><TrafficLights /></div>
       <HamburgerMenu toggleProfilesDrawer={this.toggleProfilesDrawer}/>
       <OpenConfig pref={this.currentProfile.pref} />
-      <Profiles
+      <ProfilesDrawer
         showProfiles={this.state.showProfiles}
         profiles={this.currentProfile.allProfiles}
         activeProfileId={this.currentProfile.activeProfileId} />
-      <div className="options-container">
-        <PropertiesPane
-          currentProfile={this.currentProfile}
-          addSubscription={this.addSubscription} />
-      </div>
+      <PropertiesPane
+        currentProfile={this.currentProfile}
+        addSubscription={this.addSubscription} />
     </div>
   }
 

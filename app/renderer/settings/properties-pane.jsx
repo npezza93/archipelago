@@ -2,24 +2,27 @@ import React from 'react'
 import ipc from 'electron-better-ipc'
 import schema from '../../common/schema'
 import Component from '../utils/component.jsx'
-import Header from './header.jsx'
+import SectionHeaders from './section-headers.jsx'
 import PropertiesSection from './properties-section.jsx'
+import './properties-pane.css'
 
 export default class PropertiesPane extends Component {
   render() {
-    return <archipelago-properties-pane>
-      <Header headings={this.headings} root={this.state.headingRoot} />
-      {this.headings.map(scope =>
-        <PropertiesSection
-          addSubscription={this.props.addSubscription}
-          scope={scope}
-          key={scope}
-          properties={this._scopes[scope]}
-          handleChange={this.handleChange}
-          activeProfileId={this.state.activeProfileId}
-          currentProfile={this.props.currentProfile} />
-      )}
-    </archipelago-properties-pane>
+    return <properties-pane-container>
+      <properties-pane>
+        <SectionHeaders headings={this.headings} root={this.state.headingRoot} />
+        {this.headings.map(scope =>
+          <PropertiesSection
+            addSubscription={this.props.addSubscription}
+            scope={scope}
+            key={scope}
+            properties={this._scopes[scope]}
+            handleChange={this.handleChange}
+            activeProfileId={this.state.activeProfileId}
+            currentProfile={this.props.currentProfile} />
+        )}
+      </properties-pane>
+    </properties-pane-container>
   }
 
   initialState() {

@@ -1,16 +1,18 @@
 import ipc from 'electron-better-ipc'
 import React from 'react'
+import Octicon, {X} from '@githubprimer/octicons-react'
 import Component from '../utils/component.jsx'
+import './profile.css'
 
 export default class Profile extends Component {
   render() {
     return (
-      <archipelago-profile class={this.className}
+      <profile-container class={this.className}
         onDoubleClick={this.enableEditMode}
         onClick={this.handleClick}>
         {this.textOrInput()}
         {this.removeProfile()}
-      </archipelago-profile>
+      </profile-container>
     )
   }
 
@@ -57,9 +59,9 @@ export default class Profile extends Component {
 
   removeProfile() {
     return (
-      <span className="profile-remove" onClick={this.handleRemoveProfile}>
-        ×
-      </span>
+      <remove-profile onClick={this.handleRemoveProfile}>
+        <Octicon icon={X} />
+      </remove-profile>
     )
   }
 

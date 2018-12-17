@@ -2,13 +2,14 @@ import ipc from 'electron-better-ipc'
 import React from 'react'
 import Component from '../utils/component.jsx'
 import Profile from './profile.jsx'
+import './profiles-drawer.css'
 
-export default class Profiles extends Component {
+export default class ProfilesDrawer extends Component {
   render() {
     return (
-      <archipelago-profiles class={(this.props.showProfiles && 'active') || ''}>
-        <div className="profile-header">Profiles</div>
-        <div className="profile-list">
+      <profiles-drawer class={(this.props.showProfiles && 'active') || ''}>
+        <profiles-header>Profiles</profiles-header>
+        <profiles-list>
           {this.state.profiles.map(profile =>
             <Profile
               key={profile.id}
@@ -18,11 +19,9 @@ export default class Profiles extends Component {
               setActiveProfile={this.setActiveProfile}
               activeProfileId={this.state.activeProfileId} />
           )}
-        </div>
-        <div className="new-profile" onClick={this.createProfile}>
-          Add New Profile
-        </div>
-      </archipelago-profiles>
+        </profiles-list>
+        <create-profile onClick={this.createProfile}>Add New Profile</create-profile>
+      </profiles-drawer>
     )
   }
 

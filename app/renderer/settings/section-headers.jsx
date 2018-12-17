@@ -1,15 +1,16 @@
 import React from 'react'
 import Component from '../utils/component.jsx'
+import './section-headers.css'
 
-export default class Header extends Component {
+export default class SectionHeaders extends Component {
   render() {
-    return <archipelago-header>
+    return <section-headers>
       {this.headings.map(heading => (
         <div key={heading} className={this.className(heading)}>
           {heading}
         </div>
       ))}
-    </archipelago-header>
+    </section-headers>
   }
 
   initialize() {
