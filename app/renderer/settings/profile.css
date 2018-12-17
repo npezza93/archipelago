@@ -26,6 +26,11 @@ profiles-list profile-container:hover remove-profile {
   opacity: 1;
   visibility: visible;
 }
+profiles-list profile-container:only-child remove-profile {
+  opacity: 0;
+  visibility: hidden;
+}
+
 profiles-list profile-container input {
   border: 0;
   background: transparent;
