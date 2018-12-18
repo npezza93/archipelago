@@ -1,5 +1,6 @@
 import electron, {app, globalShortcut} from 'electron'
-import {CompositeDisposable} from 'event-kit'
+import ipc from 'electron-better-ipc'
+import {Disposable, CompositeDisposable} from 'event-kit'
 import {argbBackground, makeWindow} from '../utils'
 
 const subscriptions = new CompositeDisposable()
@@ -67,12 +68,24 @@ app.on('quit', () => subscriptions.dispose())
 app.on('will-quit', () => globalShortcut.unregisterAll())
 
 export default profileManager => {
+  const enableShortcuts = () => register(profileManager)
+  const disableShortcuts = () => globalShortcut.unregisterAll()
+
   subscriptions.add(
     profileManager.onDidChange('visor.keybinding', () => {
-      globalShortcut.unregisterAll()
-      register(profileManager)
+      disableShortcuts()
+      enableShortcuts()
     })
   )
 
-  register(profileManager)
+  ipc.on('disable-shortcuts', disableShortcuts)
+  subscriptions.add(
+    new Disposable(() => ipc.removeListener('disable-shortcuts', disableShortcuts))
+  )
+  ipc.on('enable-shortcuts', enableShortcuts)
+  subscriptions.add(
+    new Disposable(() => ipc.removeListener('enable-shortcuts', enableShortcuts))
+  )
+
+  enableShortcuts()
 }
