@@ -8,6 +8,7 @@ export default class TextField extends Component {
       <input
         type="text"
         autoFocus={this.props.autoFocus}
+        readOnly={this.props.readOnly}
         id={this.props.property}
         value={this.props.value || ''}
         onChange={this.handleChange}

@@ -29,6 +29,7 @@ export default class ColorField extends Component {
   text() {
     return <TextField
       key={this.props.datakey}
+      readOnly={true}
       property={this.props.datakey}
       value={this.props.value || ''}
       label={this.props.label}
