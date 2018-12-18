@@ -52,44 +52,44 @@ describe('Settings', function () {
 
   describe('profiles', () => {
     it('shows the profiles', async () => {
-      if (await this.app.client.isVisible('#hamburger')) {
-        await this.app.client.click('#hamburger')
+      if (await this.app.client.isVisible('hamburger-menu')) {
+        await this.app.client.click('hamburger-menu')
       }
-      const profiles = await this.app.client.elements('archipelago-profile')
+      const profiles = await this.app.client.elements('profile-container')
 
       assert(profiles.value.length >= 1)
     })
 
     it('creates a profile', async () => {
-      if (await this.app.client.isVisible('#hamburger')) {
-        await this.app.client.click('#hamburger')
+      if (await this.app.client.isVisible('hamburger-menu')) {
+        await this.app.client.click('hamburger-menu')
       }
-      const initialProfiles = await this.app.client.elements('archipelago-profile')
-      await this.app.client.click('.new-profile')
-      const afterProfiles = await this.app.client.elements('archipelago-profile')
+      const initialProfiles = await this.app.client.elements('profile-container')
+      await this.app.client.click('create-profile')
+      const afterProfiles = await this.app.client.elements('profile-container')
 
       assert.equal(initialProfiles.value.length + 1, afterProfiles.value.length)
 
       robot.keyTap('r', cmdOrCtrl())
-      await this.app.client.waitForVisible('archipelago-profiles')
-      const afterReloadProfiles = await this.app.client.elements('archipelago-profile')
+      await this.app.client.waitForVisible('profiles-list')
+      const afterReloadProfiles = await this.app.client.elements('profile-container')
       assert.equal(afterReloadProfiles.value.length, afterProfiles.value.length)
     })
 
     it('destroys a profile', async () => {
-      if (await this.app.client.isVisible('#hamburger')) {
-        await this.app.client.click('#hamburger')
+      if (await this.app.client.isVisible('hamburger-menu')) {
+        await this.app.client.click('hamburger-menu')
       }
-      const initialProfiles = await this.app.client.elements('archipelago-profile')
-      await this.app.client.moveToObject('.profile-remove')
-      await this.app.client.click('.profile-remove')
-      const afterProfiles = await this.app.client.elements('archipelago-profile')
+      const initialProfiles = await this.app.client.elements('profile-container')
+      await this.app.client.moveToObject('remove-profile')
+      await this.app.client.click('remove-profile')
+      const afterProfiles = await this.app.client.elements('profile-container')
 
       assert.equal(initialProfiles.value.length - 1, afterProfiles.value.length)
 
       robot.keyTap('r', cmdOrCtrl())
-      await this.app.client.waitForVisible('archipelago-profiles')
-      const afterReloadProfiles = await this.app.client.elements('archipelago-profile')
+      await this.app.client.waitForVisible('profiles-list')
+      const afterReloadProfiles = await this.app.client.elements('profile-container')
       assert.equal(afterReloadProfiles.value.length, afterProfiles.value.length)
     })
   })
