@@ -1,10 +1,11 @@
 import ipc from 'electron-better-ipc'
 import Component from '../utils/component.jsx'
 import fields from '../utils/form/fields.jsx'
+import fieldType from '../utils/field-type'
 
 export default class Property extends Component {
   render() {
-    return fields[this.fieldType()].call(
+    return fields[fieldType(this.props.schema)].call(
       this,
       this.props.property,
       this.state.value,
@@ -27,15 +28,5 @@ export default class Property extends Component {
     if (this.props.activeProfileId !== prevProps.activeProfileId) {
       this.setState({value: this.props.currentProfile.get(this.props.property)})
     }
-  }
-
-  fieldType() {
-    let {type} = this.props.schema
-
-    if (type === 'string' && this.props.schema.color) {
-      type = 'color'
-    }
-
-    return type
   }
 }

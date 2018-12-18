@@ -1,6 +1,7 @@
 import React from 'react'
 import Octicon, {X} from '@githubprimer/octicons-react'
 import Component from '../component.jsx'
+import fieldType from '../field-type'
 import * as coreFields from './core-fields.jsx'
 import './array-field.css'
 
@@ -33,7 +34,7 @@ export default class ArrayField extends Component {
   }
 
   renderItem(property, value, schema, index) {
-    return coreFields[schema.type].call(
+    return coreFields[fieldType(schema)].call(
       this,
       property,
       value,
