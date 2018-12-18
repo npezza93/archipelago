@@ -14,7 +14,7 @@ export default class Component extends React.Component {
     this.state = this.initialState()
     this.subscriptions = new CompositeDisposable()
 
-    window.addEventListener('beforeunload', this.cleanup)
+    window.addEventListener('beforeunload', () => this.cleanup())
     this.bindListeners()
   }
 
@@ -28,7 +28,7 @@ export default class Component extends React.Component {
 
   componentWillUnmount() {
     this.cleanup()
-    window.removeEventListener('beforeunload', this.cleanup)
+    window.removeEventListener('beforeunload', () => this.cleanup())
   }
 
   get theme() {
