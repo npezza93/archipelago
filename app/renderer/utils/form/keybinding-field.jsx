@@ -1,6 +1,7 @@
 import React from 'react'
 import formatAccelerator from '../format-accelerator'
 import Component from '../component.jsx'
+import KeybindingCapturer from '../keybinding-capturer.jsx'
 import TextField from './text-field.jsx'
 
 export default class KeybindingField extends Component {
@@ -40,6 +41,10 @@ export default class KeybindingField extends Component {
 
   capturer() {
     if (this.state.active) {
+      return <KeybindingCapturer
+        deactivate={this.deactivate}
+        currentKeybinding={this.state.value}
+        captureKeybinding={this.captureKeybinding} />
     }
   }
 
@@ -53,5 +58,6 @@ export default class KeybindingField extends Component {
 
   captureKeybinding(value) {
     this.setState({value})
+    this.props.onChange.call(this, value)
   }
 }
