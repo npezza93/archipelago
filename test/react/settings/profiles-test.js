@@ -10,7 +10,7 @@ const {mount} = require('enzyme')
 const {assert} = require('chai')
 
 const {pref} = require('../../../app/main/config-file')
-const ProfilesComponent = require('../../../app/renderer/settings/profiles.jsx')
+const ProfilesComponent = require('../../../app/renderer/settings/profiles-drawer.jsx')
 const ProfileManager = require('../../../app/main/profile-manager')
 
 describe('Profiles Component', () => {
