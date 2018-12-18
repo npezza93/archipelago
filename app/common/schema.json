@@ -431,7 +431,8 @@
               "type": "object",
               "properties": {
                 "keystroke": {
-                  "type": "string"
+                  "type": "string",
+                  "keybinding": true
                 },
                 "command": {
                   "type": "string"
@@ -444,6 +445,11 @@
             "scope": "visor",
             "settings": {"title": "visor"},
             "properties": {
+              "keybinding": {
+                "type": "string",
+                "default": "F1",
+                "keybinding": true
+              },
               "vibrancy": {
                 "type": "string",
                 "default": "",
@@ -464,10 +470,6 @@
                 "color": true,
                 "scope": "xterm",
                 "default": "#000000"
-              },
-              "keybinding": {
-                "type": "string",
-                "default": "F1"
               }
             }
           }

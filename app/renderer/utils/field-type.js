@@ -5,5 +5,9 @@ export default schema => {
     type = 'color'
   }
 
+  if (type === 'string' && keybinding) {
+    type = 'keybinding'
+  }
+
   return type
 }

@@ -4,6 +4,7 @@ import BooleanField from './boolean-field.jsx'
 import ColorField from './color-field.jsx'
 import SelectField from './select-field.jsx'
 import TextField from './text-field.jsx'
+import KeybindingField from './keybinding-field.jsx'
 
 const boolean = (property, value, schema, onChange) => {
   return <BooleanField key={property} property={property}
@@ -46,4 +47,13 @@ const number = (property, value, schema, onChange) => {
   return string(property, value, schema, onChange)
 }
 
-export {boolean, color, select, string, integer, number}
+const keybinding = (property, value, schema, onChange) => {
+  return <KeybindingField
+    key={property}
+    property={property}
+    value={value}
+    label={schema.title || i(false).titleize(property.split('.').pop())}
+    onChange={onChange.bind(this)} />
+}
+
+export {boolean, color, select, string, integer, number, keybinding}
