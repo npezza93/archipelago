@@ -1,10 +1,16 @@
 #search, #search[data-theme^="light"] {
   --color: #424242;
+  --accent-color: #9E9E9E;
   --background-color: #F5F5F5;
+  --opaque-background: rgba(245, 245, 245, 0.2);
+  --opaque-color: rgba(66, 66, 66, 0.5);
 }
 #search[data-theme^="dark"] {
   --color: #F5F5F5;
+  --accent-color: #BDBDBD;
   --background-color: #393736;
+  --opaque-background: rgba(57, 55, 54, 0.2);
+  --opaque-color: rgba(238, 238, 238, 0.5);
 }
 
 html, body {
