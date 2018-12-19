@@ -2,6 +2,7 @@ import {app, Menu} from 'electron'
 import {is} from 'electron-util'
 import {CompositeDisposable} from 'event-kit'
 import ipc from 'electron-better-ipc'
+import contextMenu from 'electron-context-menu'
 import {pref} from './config-file'
 import ProfileManager from './profile-manager'
 import template from './app-menu'
@@ -31,6 +32,11 @@ const createWindow = () => {
     backgroundColor: argbBackground(profileManager, 'theme.background'),
     vibrancy: profileManager.get('vibrancy')
   })
+  contextMenu({
+    window: win,
+    shouldShowMenu: (event, params) => params.isEditable
+  })
+
   win.on('focus', () => {
     currentTerminalWindow = win
   })

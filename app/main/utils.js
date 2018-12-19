@@ -37,6 +37,7 @@ export const makeWindow = (name, options) => {
   app.on('before-quit', () => {
     if ((newWindow !== null) && !newWindow.isDestroyed()) {
       newWindow.removeAllListeners('close')
+      newWindow.removeAllListeners('context-menu')
     }
   })
 

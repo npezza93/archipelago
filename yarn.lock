@@ -3077,6 +3077,14 @@ electron-chromedriver@~3.0.0:
     electron-download "^4.1.0"
     extract-zip "^1.6.5"
 
+electron-context-menu@^0.10.1:
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/electron-context-menu/-/electron-context-menu-0.10.1.tgz#9e202f1f65c0972cca8c0ef2047a13a100770368"
+  integrity sha512-KFkKwFbT6iJUgarEknYuXQlJAT+naJZtSWFBtHf9RiSb70wscWdDNpYoUERzF7FgqYE1Mil4npfRWsjqGLwtog==
+  dependencies:
+    electron-dl "^1.2.0"
+    electron-is-dev "^1.0.1"
+
 electron-devtools-installer@^2.2.4:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/electron-devtools-installer/-/electron-devtools-installer-2.2.4.tgz#261a50337e37121d338b966f07922eb4939a8763"
@@ -3086,6 +3094,15 @@ electron-devtools-installer@^2.2.4:
     cross-unzip "0.0.2"
     rimraf "^2.5.2"
     semver "^5.3.0"
+
+electron-dl@^1.2.0:
+  version "1.12.0"
+  resolved "https://registry.yarnpkg.com/electron-dl/-/electron-dl-1.12.0.tgz#328c7f12d3e458ed4ddc773d8ffc28d59ab35d2e"
+  integrity sha512-UMc2CL45Ybpvu66LDPYzwmDRmYK4Ivz+wdnTM0eXcNMztvQwhixAk2UPme1c7McqG8bAlKEkQpZn3epmQy4EWg==
+  dependencies:
+    ext-name "^5.0.0"
+    pupa "^1.0.0"
+    unused-filename "^1.0.0"
 
 electron-download@^4.1.0:
   version "4.1.1"
@@ -3107,7 +3124,7 @@ electron-is-dev@^0.3.0:
   resolved "https://registry.yarnpkg.com/electron-is-dev/-/electron-is-dev-0.3.0.tgz#14e6fda5c68e9e4ecbeff9ccf037cbd7c05c5afe"
   integrity sha1-FOb9pcaOnk7L7/nM8DfL18BcWv4=
 
-electron-is-dev@^1.0.0:
+electron-is-dev@^1.0.0, electron-is-dev@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/electron-is-dev/-/electron-is-dev-1.0.1.tgz#6e0a184736fe7aea77d18210b0b0f6a02402c4bc"
   integrity sha512-iwM3EotA9HTXqMGpQRkR/kT8OZqBbdfHTnlwcxsjSLYqY8svvsq0MuujsWCn3/vtgRmDv/PC/gKUUpoZvi5C1w==
@@ -3791,6 +3808,21 @@ express@^4.16.2:
     type-is "~1.6.16"
     utils-merge "1.0.1"
     vary "~1.1.2"
+
+ext-list@^2.0.0:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/ext-list/-/ext-list-2.2.2.tgz#0b98e64ed82f5acf0f2931babf69212ef52ddd37"
+  integrity sha512-u+SQgsubraE6zItfVA0tBuCBhfU9ogSRnsvygI7wht9TS510oLkBRXBsqopeUG/GBOIQyKZO9wjTqIu/sf5zFA==
+  dependencies:
+    mime-db "^1.28.0"
+
+ext-name@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/ext-name/-/ext-name-5.0.0.tgz#70781981d183ee15d13993c8822045c506c8f0a6"
+  integrity sha512-yblEwXAbGv1VQDmow7s38W77hzAgJAO50ztBLMcUyUBfxv1HC+LGwtiEN+Co6LtlqT/5uwVOxsD4TNIilWhwdQ==
+  dependencies:
+    ext-list "^2.0.0"
+    sort-keys-length "^1.0.0"
 
 extend-shallow@^2.0.1:
   version "2.0.1"
@@ -5845,7 +5877,7 @@ miller-rabin@^4.0.0:
     bn.js "^4.0.0"
     brorand "^1.0.1"
 
-"mime-db@>= 1.36.0 < 2", mime-db@~1.37.0:
+"mime-db@>= 1.36.0 < 2", mime-db@^1.28.0, mime-db@~1.37.0:
   version "1.37.0"
   resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.37.0.tgz#0b6a0ce6fdbe9576e25f1f2d2fde8830dc0ad0d8"
   integrity sha512-R3C4db6bgQhlIhPU48fUtdVmKnflq+hRdad7IyKhtFj06VPNVdk2RhiYL3UjQIlso8L+YxAtFkobT0VK+S/ybg==
@@ -5988,6 +6020,11 @@ mocha@^5.2.0:
     minimatch "3.0.4"
     mkdirp "0.5.1"
     supports-color "5.4.0"
+
+modify-filename@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/modify-filename/-/modify-filename-1.1.0.tgz#9a2dec83806fbb2d975f22beec859ca26b393aa1"
+  integrity sha1-mi3sg4Bvuy2XXyK+7IWcoms5OqE=
 
 moo@^0.4.3:
   version "0.4.3"
@@ -7401,6 +7438,11 @@ punycode@^2.1.0, punycode@^2.1.1:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
 
+pupa@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/pupa/-/pupa-1.0.0.tgz#9a9568a5af7e657b8462a6e9d5328743560ceff6"
+  integrity sha1-mpVopa9+ZXuEYqbp1TKHQ1YM7/Y=
+
 q@^1.1.2, q@~1.5.0:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
@@ -8352,6 +8394,13 @@ sockjs@0.3.19:
     faye-websocket "^0.10.0"
     uuid "^3.0.1"
 
+sort-keys-length@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/sort-keys-length/-/sort-keys-length-1.0.1.tgz#9cb6f4f4e9e48155a6aa0671edd336ff1479a188"
+  integrity sha1-nLb09OnkgVWmqgZx7dM2/xR5oYg=
+  dependencies:
+    sort-keys "^1.0.0"
+
 sort-keys@^1.0.0:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/sort-keys/-/sort-keys-1.1.2.tgz#441b6d4d346798f1b4e49e8920adfba0e543f9ad"
@@ -9177,6 +9226,14 @@ unset-value@^1.0.0:
   dependencies:
     has-value "^0.3.1"
     isobject "^3.0.0"
+
+unused-filename@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/unused-filename/-/unused-filename-1.0.0.tgz#d340880f71ae2115ebaa1325bef05cc6684469c6"
+  integrity sha1-00CID3GuIRXrqhMlvvBcxmhEacY=
+  dependencies:
+    modify-filename "^1.1.0"
+    path-exists "^3.0.0"
 
 unzip-response@^2.0.1:
   version "2.0.1"

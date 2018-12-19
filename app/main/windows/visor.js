@@ -1,4 +1,5 @@
 import electron, {app, globalShortcut} from 'electron'
+import contextMenu from 'electron-context-menu'
 import ipc from 'electron-better-ipc'
 import {Disposable, CompositeDisposable} from 'event-kit'
 import {argbBackground, makeWindow} from '../utils'
@@ -40,6 +41,7 @@ const create = profileManager => {
     })
     visorWindow.name = 'visor'
     visorWindow.hideVisor = hideVisor
+    contextMenu({window: visorWindow})
 
     visorWindow.on('blur', hideVisor)
     visorWindow.on('closed', () => subscriptions.dispose())
