@@ -36,6 +36,7 @@ export default class ColorField extends Component {
       onChange={() => {}}
       onClick={this.activate}>
       {this.picker()}
+      <color-swatch style={{background: this.props.value}}></color-swatch>
     </TextField>
   }
 
