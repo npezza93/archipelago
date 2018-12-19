@@ -1,90 +1,52 @@
-@media (min-resolution: 2dppx) {
-  * {
-    text-rendering: geometricPrecision;
-  }
-}
 ::-webkit-scrollbar {
   width: 10px;
 }
-
 ::-webkit-scrollbar-thumb {
   background: #666;
   border: 3px solid var(--background-color);
 }
-
 ::-webkit-scrollbar, ::-webkit-scrollbar-thumb {
   border-radius: 5px;
 }
-
-:root {
-  --background-color: none;
-  --terminal-padding: 5px 0 10px 15px;
-}
-
 ::-webkit-scrollbar-thumb:active {
   background: #666;
   border: 0 solid var(--background-color);
   border-radius: 0;
 }
-
+:root {
+  --background-color: none;
+  --terminal-padding: 5px 0 10px 15px;
+}
 html, body, #app, archipelago-visor {
   height: 100%;
-  -webkit-font-feature-settings: "liga" off, "calt" off;
+  margin: 0;
+  background-color: var(--background-color);
 }
-
-.hidden {
-  display: none;
+.terminal.xterm {
+  width: 100%;
+  padding: var(--terminal-padding);
 }
-
 .xterm .xterm-viewport {
   -webkit-transition: all 0.5s;
   opacity: 0;
 }
-
-.terminal .xterm-viewport {
-  background-color: transparent;
-}
-
 .xterm .xterm-viewport:hover, .xterm.scrolling .xterm-viewport {
   opacity: 1;
   -webkit-transition: all 0.5s;
 }
-
-body {
-  margin: 0;
-  background-color: var(--background-color);
-}
-
 archipelago-terminal, archipelago-terminal .wrapper {
   display: flex;
   flex: 1;
   height: 100%;
   overflow-x: hidden;
 }
-
-.terminal {
-  width: 100%;
-}
-
-.xterm {
-  background-color: transparent;
-  padding: var(--terminal-padding);
-}
-
-archipelago-visor {
-  display: flex;
-  flex-direction: column;
-}
-
 archipelago-pane {
-  margin: 0;
   overflow-y: hidden;
   display: block;
   height: 100%;
   position: relative;
   width: 100%;
 }
-
 .Resizer.horizontal, .Resizer.vertical {
   background-color: var(--background-color);
   filter: invert(50%);
@@ -100,11 +62,9 @@ archipelago-pane {
   cursor: row-resize;
   width: 100%;
 }
-
 .Pane.Pane2.horizontal {
   display: flex;
 }
-
 .Resizer.vertical {
   width: 7px;
   margin: 0 -3px;
