@@ -43,6 +43,12 @@ export const makeWindow = (name, options) => {
 
   newWindow.once('ready-to-show', newWindow.show)
 
+  newWindow.webContents.once('did-finish-load', () => {
+    if (newWindow.title) {
+      newWindow.setTitle(newWindow.title)
+    }
+  })
+
   return newWindow
 }
 

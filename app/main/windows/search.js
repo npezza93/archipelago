@@ -14,6 +14,7 @@ export default {
         y: currentPosition[1],
         backgroundColor: darkMode.isEnabled ? '#393736' : '#F5F5F5'
       })
+      searchWindow.title = 'Search'
     } else {
       searchWindow.focus()
     }

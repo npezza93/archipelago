@@ -11,6 +11,7 @@ export default {
   toggle() {
     if (settingsWindow === null || settingsWindow.isDestroyed()) {
       settingsWindow = makeWindow('settings', windowOptions)
+      settingsWindow.title = 'Settings'
     } else {
       settingsWindow.focus()
     }

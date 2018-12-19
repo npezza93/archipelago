@@ -12,6 +12,7 @@ export default {
   toggle() {
     if (aboutWindow === null || aboutWindow.isDestroyed()) {
       aboutWindow = makeWindow('about', windowOptions)
+      aboutWindow.title = 'About'
     } else {
       aboutWindow.focus()
     }
