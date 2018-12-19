@@ -7,7 +7,7 @@ profiles-list profile-container {
   font-size: 16px;
   position: relative;
   z-index: 15;
-  color: var(--background-color);
+  color: #393736;
 }
 profiles-list profile-container.active, profiles-list profile-container:hover {
   background: rgba(0, 0, 0, .16);
