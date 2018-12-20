@@ -1,6 +1,7 @@
-import ipc from 'electron-better-ipc'
+import ipc from 'npezza93-electron-better-ipc'
 import React from 'react'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import {Disposable} from 'event-kit'
 import Component from '../utils/component.jsx'
 import Tab from './tab.jsx'
 
@@ -40,7 +41,7 @@ export default class TabList extends Component {
   }
 
   bindListeners() {
-    ipc.answerMain('setting-changed', this.resetStyles)
-    ipc.answerMain('active-profile-changed', this.resetStyles)
+    this.addSubscription(new Disposable(ipc.answerMain('setting-changed', this.resetStyles)))
+    this.addSubscription(new Disposable(ipc.answerMain('active-profile-changed', this.resetStyles)))
   }
 }

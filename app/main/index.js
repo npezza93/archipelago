@@ -1,7 +1,7 @@
 import {app, Menu} from 'electron'
 import {is} from 'electron-util'
-import {CompositeDisposable} from 'event-kit'
-import ipc from 'electron-better-ipc'
+import {CompositeDisposable, Disposable} from 'event-kit'
+import ipc from 'npezza93-electron-better-ipc'
 import contextMenu from 'electron-context-menu'
 import {pref} from './config-file'
 import ProfileManager from './profile-manager'
@@ -19,6 +19,7 @@ const windows = []
 const subscriptions = new CompositeDisposable()
 const profileManager = new ProfileManager(pref())
 profileManager.validate()
+subscriptions.add(new Disposable(() => profileManager.dispose()))
 ptyManager(profileManager)
 
 const resetApplicationMenu = () =>
@@ -87,10 +88,16 @@ subscriptions.add(profileManager.onDidChange('vibrancy', value =>
 subscriptions.add(profileManager.onDidChange('singleTabMode', resetApplicationMenu))
 subscriptions.add(profileManager.onDidChange('name', resetApplicationMenu))
 subscriptions.add(profileManager.onActiveProfileChange(resetApplicationMenu))
-ipc.answerRenderer('open-hamburger-menu', args => Menu.getApplicationMenu().popup(args))
-ipc.answerRenderer('search-next', ({query, options}) => {
-  ipc.callRenderer(currentTerminalWindow, 'search-next', {query, options})
-})
-ipc.answerRenderer('search-previous', ({query, options}) => {
-  ipc.callRenderer(currentTerminalWindow, 'search-previous', {query, options})
-})
+subscriptions.add(new Disposable(
+  ipc.answerRenderer('open-hamburger-menu', args => Menu.getApplicationMenu().popup(args))
+))
+subscriptions.add(new Disposable(
+  ipc.answerRenderer('search-next', ({query, options}) => {
+    ipc.callRenderer(currentTerminalWindow, 'search-next', {query, options})
+  })
+))
+subscriptions.add(new Disposable(
+  ipc.answerRenderer('search-previous', ({query, options}) => {
+    ipc.callRenderer(currentTerminalWindow, 'search-previous', {query, options})
+  })
+))

@@ -1,6 +1,6 @@
 import {BrowserWindow} from 'electron'
 import {api} from 'electron-util'
-import ipc from 'electron-better-ipc'
+import ipc from 'npezza93-electron-better-ipc'
 import {spawn} from 'node-pty'
 import {Disposable} from 'event-kit'
 import debouncer from 'debounce-fn'
@@ -41,6 +41,8 @@ export default class Pty {
     await new Promise(resolve => {
       this.pty.removeAllListeners('data')
       this.pty.removeAllListeners('exit')
+      ipc.removeListener(`pty-resize-${this.sessionId}`, this.handleResize)
+      ipc.removeListener(`pty-write-${this.sessionId}`, this.handleWrite)
       this.pty.destroy()
       resolve()
     })
@@ -51,10 +53,8 @@ export default class Pty {
     this.sessionWindow = BrowserWindow.getAllWindows().find(browserWindow => {
       return browserWindow.id === sessionWindowId
     })
-    ipc.on(`pty-resize-${this.sessionId}`, (event, {cols, rows}) => {
-      this.resize(cols, rows)
-    })
-    ipc.on(`pty-write-${this.sessionId}`, (event, data) => this.write(data))
+    ipc.on(`pty-resize-${this.sessionId}`, this.handleResize.bind(this))
+    ipc.on(`pty-write-${this.sessionId}`, this.handleWrite.bind(this))
     this.pty.on('exit', () => {
       this.sessionWindow.webContents.send(`pty-exit-${this.sessionId}`)
     })
@@ -83,6 +83,14 @@ export default class Pty {
 
   write(data) {
     this.pty.write(data)
+  }
+
+  handleWrite(event, data) {
+    this.write(data)
+  }
+
+  handleResize(event, {cols, rows}) {
+    this.resize(cols, rows)
   }
 
   bufferData(data) {

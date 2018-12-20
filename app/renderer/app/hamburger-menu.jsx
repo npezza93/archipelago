@@ -1,6 +1,7 @@
 import React from 'react'
 import {platform, is} from 'electron-util'
-import ipc from 'electron-better-ipc'
+import ipc from 'npezza93-electron-better-ipc'
+import {Disposable} from 'event-kit'
 import Component from '../utils/component.jsx'
 
 export default class HamburgerMenu extends Component {
@@ -33,14 +34,18 @@ export default class HamburgerMenu extends Component {
 
   bindListeners() {
     if (!is.macos) {
-      ipc.answerMain('setting-changed', ({property, value}) => {
-        if (property === 'tabColor') {
-          this.setState({backgroundColor: value})
-        }
-      })
-      ipc.answerMain('active-profile-changed', () => {
-        this.setState({backgroundColor: this.backgroundColor})
-      })
+      this.addSubscription(new Disposable(
+        ipc.answerMain('setting-changed', ({property, value}) => {
+          if (property === 'tabColor') {
+            this.setState({backgroundColor: value})
+          }
+        })
+      ))
+      this.addSubscription(new Disposable(
+        ipc.answerMain('active-profile-changed', () => {
+          this.setState({backgroundColor: this.backgroundColor})
+        })
+      ))
     }
   }
 }

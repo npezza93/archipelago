@@ -1,5 +1,5 @@
 import {app} from 'electron'
-import ipc from 'electron-better-ipc'
+import ipc from 'npezza93-electron-better-ipc'
 import Pty from './pty'
 
 export default profileManager => {
@@ -16,7 +16,7 @@ export default profileManager => {
     return new Promise(resolve => {
       const pty = new Pty(profileManager)
       pty.onExit(() => kill(pty.id))
-      ipc.answerRenderer(`pty-kill-${pty.id}`, () => kill(pty.id))
+      ipc.once(`pty-kill-${pty.id}`, () => kill(pty.id))
 
       resolve(pty)
     })
@@ -24,7 +24,7 @@ export default profileManager => {
 
   let preppedPty = create()
 
-  ipc.answerRenderer('pty-create', async ({sessionId, sessionWindowId}) => {
+  const disposeOfCreate = ipc.answerRenderer('pty-create', async ({sessionId, sessionWindowId}) => {
     const pty = await preppedPty
     ptys[pty.id] = pty
     pty.created(sessionId, sessionWindowId)
@@ -33,5 +33,8 @@ export default profileManager => {
     return pty.id
   })
 
-  app.on('before-quit', () => Object.keys(ptys).forEach(kill))
+  app.on('before-quit', () => {
+    disposeOfCreate()
+    Object.keys(ptys).forEach(kill)
+  })
 }

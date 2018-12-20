@@ -1,5 +1,5 @@
 /* global window */
-import ipc from 'electron-better-ipc'
+import ipc from 'npezza93-electron-better-ipc'
 import React from 'react'
 import {darkMode} from 'electron-util'
 import {Disposable} from 'event-kit'
@@ -50,11 +50,13 @@ export default class Settings extends Component {
       new Disposable(() => ipc.removeListener('close-via-menu', window.close))
     )
 
-    ipc.answerMain('close', () => {
-      return new Promise(resolve => {
-        this.cleanup()
-        resolve()
+    this.addSubscription(new Disposable(
+      ipc.answerMain('close', () => {
+        return new Promise(resolve => {
+          this.cleanup()
+          resolve()
+        })
       })
-    })
+    ))
   }
 }

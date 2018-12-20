@@ -1,6 +1,6 @@
 /* global window */
 
-import ipc from 'electron-better-ipc'
+import ipc from 'npezza93-electron-better-ipc'
 import React from 'react'
 import {darkMode} from 'electron-util'
 import {Disposable} from 'event-kit'
@@ -99,8 +99,8 @@ export default class Search extends Component {
   }
 
   bindListeners() {
-    ipc.answerMain('search-next', this.searchNext)
-    ipc.answerMain('search-previous', this.searchPrevious)
+    this.addSubscription(new Disposable(ipc.answerMain('search-next', this.searchNext)))
+    this.addSubscription(new Disposable(ipc.answerMain('search-previous', this.searchPrevious)))
 
     this.addSubscription(
       new Disposable(darkMode.onChange(this.handleDarkModeChange.bind(this)))
