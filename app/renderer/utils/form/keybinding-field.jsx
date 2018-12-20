@@ -26,6 +26,12 @@ export default class KeybindingField extends Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.value !== prevProps.value) {
+      this.setState({value: this.props.value})
+    }
+  }
+
   text() {
     return <TextField
       key={this.props.property}
