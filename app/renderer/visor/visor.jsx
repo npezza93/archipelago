@@ -1,7 +1,8 @@
 /* global document, window */
 
-import ipc from 'electron-better-ipc'
+import ipc from 'npezza93-electron-better-ipc'
 import React from 'react'
+import {Disposable} from 'event-kit'
 import Component from '../utils/component.jsx'
 import CurrentProfile from '../utils/current-profile'
 import Tab from '../sessions/tab'
@@ -89,9 +90,9 @@ export default class Visor extends Component {
   }
 
   bindListeners() {
-    ipc.answerMain('split', this.split)
-    ipc.answerMain('close', this.state.tab.kill)
-    ipc.answerMain('setting-changed', this.handleSettingChanged)
-    ipc.answerMain('active-profile-changed', this.resetCssSettings)
+    this.addSubscription(new Disposable(ipc.answerMain('split', this.split)))
+    this.addSubscription(new Disposable(ipc.answerMain('close', this.state.tab.kill)))
+    this.addSubscription(new Disposable(ipc.answerMain('setting-changed', this.handleSettingChanged)))
+    this.addSubscription(new Disposable(ipc.answerMain('active-profile-changed', this.resetCssSettings)))
   }
 }

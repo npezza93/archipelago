@@ -1,12 +1,15 @@
 import {BrowserWindow} from 'electron'
 import {isDeepStrictEqual} from 'util'
 import {platform} from 'electron-util'
-import ipc from 'electron-better-ipc'
+import ipc from 'npezza93-electron-better-ipc'
+import {CompositeDisposable, Disposable} from 'event-kit'
 import Profile from './profile'
 
 export default class ProfileManager {
   constructor(configFile) {
     this.configFile = configFile
+    this.subscriptions = new CompositeDisposable()
+
     this.bindListeners()
   }
 
@@ -125,37 +128,55 @@ export default class ProfileManager {
     }
   }
 
+  addIpcSubscription(disposable) {
+    this.subscriptions.add(new Disposable(disposable))
+  }
+
+  dispose() {
+    this.subscriptions.dispose()
+  }
+
   bindListeners() {
-    ipc.answerRenderer('change-setting', ({property, value}) => {
-      this.set(property, value)
-      for (const window of BrowserWindow.getAllWindows()) {
-        ipc.callRenderer(window, 'setting-changed', {property, value})
-      }
-    })
-    ipc.answerRenderer('set-profile-name', ({id, name}) => {
-      this.find(id).name = name
-    })
-    ipc.answerRenderer('set-active-profile', id => {
-      this.activeProfileId = id
-    })
-    ipc.answerRenderer('create-profile', () => {
-      const newProfileId = this.create()
-      const profiles = this.rawProfiles
+    this.addIpcSubscription(
+      ipc.answerRenderer('change-setting', ({property, value}) => {
+        this.set(property, value)
+        for (const window of BrowserWindow.getAllWindows()) {
+          ipc.callRenderer(window, 'setting-changed', {property, value})
+        }
+      })
+    )
+    this.addIpcSubscription(
+      ipc.answerRenderer('set-profile-name', ({id, name}) => {
+        this.find(id).name = name
+      })
+    )
+    this.addIpcSubscription(
+      ipc.answerRenderer('set-active-profile', id => {
+        this.activeProfileId = id
+      })
+    )
+    this.addIpcSubscription(
+      ipc.answerRenderer('create-profile', () => {
+        const newProfileId = this.create()
+        const profiles = this.rawProfiles
 
-      return {profiles, activeProfileId: newProfileId}
-    })
-    ipc.answerRenderer('remove-profile', id => {
-      if (this.activeProfile().id === id) {
-        const newActiveProfileId = this.profileIds.find(profileId => {
-          return profileId !== id
-        })
-        this.resetActiveProfile(newActiveProfileId)
-      }
+        return {profiles, activeProfileId: newProfileId}
+      })
+    )
+    this.addIpcSubscription(
+      ipc.answerRenderer('remove-profile', id => {
+        if (this.activeProfile().id === id) {
+          const newActiveProfileId = this.profileIds.find(profileId => {
+            return profileId !== id
+          })
+          this.resetActiveProfile(newActiveProfileId)
+        }
 
-      this.find(id).destroy()
+        this.find(id).destroy()
 
-      return {profiles: this.rawProfiles, activeProfileId: this.activeProfile().id}
-    })
+        return {profiles: this.rawProfiles, activeProfileId: this.activeProfile().id}
+      })
+    )
   }
 
   get defaultKeybindings() {

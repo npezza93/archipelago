@@ -1,5 +1,6 @@
-import ipc from 'electron-better-ipc'
+import ipc from 'npezza93-electron-better-ipc'
 import React from 'react'
+import {Disposable} from 'event-kit'
 import {platform, activeWindow, darkMode} from 'electron-util'
 import Component from './utils/component.jsx'
 
@@ -23,14 +24,18 @@ class TrafficLight extends Component {
 
   bindListeners() {
     if (this.props.currentProfile) {
-      ipc.answerMain('setting-changed', ({property, value}) => {
-        if (property === 'tabColor') {
-          this.setState({backgroundColor: value})
-        }
-      })
-      ipc.answerMain('active-profile-changed', () => {
-        this.setState({backgroundColor: this.backgroundColor})
-      })
+      this.addSubscription(new Disposable(
+        ipc.answerMain('setting-changed', ({property, value}) => {
+          if (property === 'tabColor') {
+            this.setState({backgroundColor: value})
+          }
+        })
+      ))
+      this.addSubscription(new Disposable(
+        ipc.answerMain('active-profile-changed', () => {
+          this.setState({backgroundColor: this.backgroundColor})
+        })
+      ))
     }
   }
 }

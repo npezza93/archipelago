@@ -3022,11 +3022,6 @@ ejs@~2.5.6:
   resolved "https://registry.yarnpkg.com/ejs/-/ejs-2.5.9.tgz#7ba254582a560d267437109a68354112475b0ce5"
   integrity sha512-GJCAeDBKfREgkBtgrYSf9hQy9kTb3helv0zGdzqhM7iAkW8FA/ZF97VQDbwFiwIT8MQLLOe5VlPZOEvZAqtUAQ==
 
-electron-better-ipc@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/electron-better-ipc/-/electron-better-ipc-0.1.1.tgz#36c54a20499ecb061564ac82c054e88611b90efb"
-  integrity sha512-RuhrTV2zKwxP3/N9I8L28VL60TUJZbtI5V1SRftUB6MrzrkQQXSiCCJCrC2l9qhxQHOXwDlMOI5F+WF5G0RQ2Q==
-
 electron-builder@20.38.4:
   version "20.38.4"
   resolved "https://registry.yarnpkg.com/electron-builder/-/electron-builder-20.38.4.tgz#67727529ffb87e7fdd78b3a84ea0d6c22bf04ec2"
@@ -6265,6 +6260,11 @@ normalize-url@^1.4.0, normalize-url@^1.9.1:
     prepend-http "^1.0.0"
     query-string "^4.1.0"
     sort-keys "^1.0.0"
+
+npezza93-electron-better-ipc@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/npezza93-electron-better-ipc/-/npezza93-electron-better-ipc-0.3.0.tgz#bcf3674ffdd038c1851e2f0ee9f0f47cd4b81506"
+  integrity sha512-VWZpILKaDX7Gmsz54oTeZZvHSILZBY5izVL7UhZa87bMC6PgoFbYfYRwP/mAFQbR/VN+HgaKTax0FB92KQePmQ==
 
 npm-bundled@^1.0.1:
   version "1.0.5"

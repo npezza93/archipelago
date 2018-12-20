@@ -1,5 +1,6 @@
 import React from 'react'
-import ipc from 'electron-better-ipc'
+import ipc from 'npezza93-electron-better-ipc'
+import {Disposable} from 'event-kit'
 import schema from '../../common/schema'
 import Component from '../utils/component.jsx'
 import SectionHeaders from './section-headers.jsx'
@@ -66,6 +67,6 @@ export default class PropertiesPane extends Component {
   }
 
   bindListeners() {
-    ipc.answerMain('active-profile-changed', this.onActiveProfileChange)
+    this.addSubscription(new Disposable(ipc.answerMain('active-profile-changed', this.onActiveProfileChange)))
   }
 }

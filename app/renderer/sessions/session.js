@@ -1,6 +1,6 @@
 /* global document */
 import {clipboard} from 'electron'
-import ipc from 'electron-better-ipc'
+import ipc from 'npezza93-electron-better-ipc'
 import {activeWindow, platform} from 'electron-util'
 import {CompositeDisposable, Disposable} from 'event-kit'
 import {Terminal} from 'xterm'
@@ -110,7 +110,7 @@ export default class Session {
 
     const ptyId = await this.ptyId
 
-    await ipc.callMain(`pty-kill-${ptyId}`)
+    await ipc.send(`pty-kill-${ptyId}`)
   }
 
   fit() {
@@ -244,7 +244,7 @@ export default class Session {
     this.subscriptions.add(this.onFocus(this.fit))
     this.subscriptions.add(this.onFocus(this.resetBlink))
     this.subscriptions.add(this.onSelection(this.copySelection))
-    ipc.answerMain('active-profile-changed', this.onActiveProfileChange)
-    ipc.answerMain('setting-changed', this.onSettingChanged)
+    this.subscriptions.add(new Disposable(ipc.answerMain('active-profile-changed', this.onActiveProfileChange)))
+    this.subscriptions.add(new Disposable(ipc.answerMain('setting-changed', this.onSettingChanged)))
   }
 }

@@ -1,4 +1,4 @@
-import ipc from 'electron-better-ipc'
+import ipc from 'npezza93-electron-better-ipc'
 import search from '../windows/search'
 import {accelerators} from '../utils'
 

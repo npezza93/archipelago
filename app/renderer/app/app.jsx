@@ -1,6 +1,6 @@
 /* global window, document */
 
-import ipc from 'electron-better-ipc'
+import ipc from 'npezza93-electron-better-ipc'
 import React from 'react'
 import {Disposable} from 'event-kit'
 import Tab from '../sessions/tab'
@@ -275,12 +275,12 @@ export default class App extends Component {
       new Disposable(() => ipc.removeListener('close-via-menu', this.closeViaMenu))
     )
     ipc.on('close-via-menu', this.closeViaMenu)
-    ipc.answerMain('split', this.split)
-    ipc.answerMain('new-tab', this.addTab)
-    ipc.answerMain('search-next', this.searchNext)
-    ipc.answerMain('search-previous', this.searchPrevious)
-    ipc.answerMain('setting-changed', this.handleSettingChanged)
-    ipc.answerMain('active-profile-changed', this.handleActiveProfileChanged)
-    ipc.answerMain('close', this.handleClose)
+    this.addSubscription(new Disposable(ipc.answerMain('split', this.split)))
+    this.addSubscription(new Disposable(ipc.answerMain('new-tab', this.addTab)))
+    this.addSubscription(new Disposable(ipc.answerMain('search-next', this.searchNext)))
+    this.addSubscription(new Disposable(ipc.answerMain('search-previous', this.searchPrevious)))
+    this.addSubscription(new Disposable(ipc.answerMain('setting-changed', this.handleSettingChanged)))
+    this.addSubscription(new Disposable(ipc.answerMain('active-profile-changed', this.handleActiveProfileChanged)))
+    this.addSubscription(new Disposable(ipc.answerMain('close', this.handleClose)))
   }
 }
