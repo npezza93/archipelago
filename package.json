@@ -66,7 +66,7 @@
     "keystroke-for-keyboard-event": "^1.0.0",
     "node-pty": "^0.7.6",
     "pref": "^3.1.0",
-    "react": "^16.4.1",
+    "react": "^16.7.0",
     "react-addons-css-transition-group": "^15.6.2",
     "react-color": "^2.14.1",
     "react-dom": "^16.4.1",
