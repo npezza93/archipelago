@@ -2,5 +2,5 @@
 
 require "middleman-gh-pages"
 
-ENV["PROJECT_ROOT"] = "../doc-build"
+ENV["PROJECT_ROOT"] = "../docs"
 ENV["ALLOW_DIRTY"] = "true"
