@@ -12,15 +12,25 @@
 
 ## Why?
 
-I'm a fan of web technologies, so I started using
-[Hyper](https://github.com/zeit/hyper) as my default terminal while it was in beta.
-Hyper was by far the coolest, best looking, and extensible terminal emulator I had used and being an Electron app, it was cross-platform.
+Archipelago is inspired by [Hyper](https://github.com/zeit/hyper). I
+started using Hyper as my default terminal while it was in beta and into
+v1. It was by far the coolest, best looking, minimal, and extensible
+terminal emulator I had used. But, I found it to be really slow, to the
+point where if I was going to run a command that I knew would have a lot of
+output, I would opt for using a different terminal. Along with that,
+occasionally buffers would overlap making the terminal unreadable and
+force me to restart.
 
-But, I found Hyper(beta and version 1) to be extremely slow, to the point that if I was going to run a command that I knew would have a lot of output, I would opt for using the OS default. Along with that, occasionally buffers would overlap making the terminal unreadable and force me to restart the terminal.
+At the time Hyper was using [Hterm](https://github.com/chromium/hterm)
+which was the culprit of all my issues, so I found the
+[Xterm.js](https://xtermjs.org/) project which solved all these problems
+and I started making Archipelago. Archipelago works on macOS, Linux, and
+Windows, supports theming which can be saved to a profile, searching
+through the scroll-back, a visor pop over, pane splitting, system tests,
+and much more. Visit [archipelago.pezza.co](https://archipelago.pezza.co) to see
+more gifs!
 
-After using Hyper for a while and then finding the [Xterm.js](https://xtermjs.org/) project(Hyper was using [Hterm](https://github.com/chromium/hterm) at this point, it has since switched to Xterm.js as of v2), I thought perhaps I can make a terminal that performs faster than Hyper. So that's what Archipelago is, my perfect terminal, fast, pretty, extensible, and stable.
-
-![Screenshot](https://raw.githubusercontent.com/npezza93/archipelago/master/.github/screenshot.png)
+![Screenshot](https://raw.githubusercontent.com/npezza93/archipelago/master/.github/screenshot.gif)
 
 ## Get Archipelago
 
