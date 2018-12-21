@@ -1,6 +1,6 @@
 import React from 'react'
 import {platform, is} from 'electron-util'
-import ipc from 'npezza93-electron-better-ipc'
+import ipc from 'electron-better-ipc'
 import {Disposable} from 'event-kit'
 import Component from '../utils/component.jsx'
 

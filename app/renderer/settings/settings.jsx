@@ -1,5 +1,5 @@
 /* global window */
-import ipc from 'npezza93-electron-better-ipc'
+import ipc from 'electron-better-ipc'
 import React from 'react'
 import {darkMode} from 'electron-util'
 import {Disposable} from 'event-kit'

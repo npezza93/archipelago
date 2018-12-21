@@ -1,4 +1,4 @@
-import ipc from 'npezza93-electron-better-ipc'
+import ipc from 'electron-better-ipc'
 import Component from '../utils/component.jsx'
 import fields from '../utils/form/fields.jsx'
 import fieldType from '../utils/field-type'

@@ -1,4 +1,4 @@
-import ipc from 'npezza93-electron-better-ipc'
+import ipc from 'electron-better-ipc'
 import {darkMode} from 'electron-util'
 import {makeWindow} from '../utils'
 

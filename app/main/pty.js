@@ -1,6 +1,6 @@
 import {BrowserWindow} from 'electron'
 import {api} from 'electron-util'
-import ipc from 'npezza93-electron-better-ipc'
+import ipc from 'electron-better-ipc'
 import {spawn} from 'node-pty'
 import {Disposable} from 'event-kit'
 import debouncer from 'debounce-fn'

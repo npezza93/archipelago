@@ -1,6 +1,6 @@
 /* global window, document */
 
-import ipc from 'npezza93-electron-better-ipc'
+import ipc from 'electron-better-ipc'
 import React from 'react'
 import {Disposable} from 'event-kit'
 import Tab from '../sessions/tab'

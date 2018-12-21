@@ -1,5 +1,5 @@
 import {app} from 'electron'
-import ipc from 'npezza93-electron-better-ipc'
+import ipc from 'electron-better-ipc'
 import Pty from './pty'
 
 export default profileManager => {

@@ -1,7 +1,7 @@
 import {BrowserWindow} from 'electron'
 import {isDeepStrictEqual} from 'util'
 import {platform} from 'electron-util'
-import ipc from 'npezza93-electron-better-ipc'
+import ipc from 'electron-better-ipc'
 import {CompositeDisposable, Disposable} from 'event-kit'
 import Profile from './profile'
 
