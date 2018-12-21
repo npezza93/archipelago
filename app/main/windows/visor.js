@@ -17,11 +17,10 @@ const hideVisor = () => {
   visorWindow.hide()
 }
 
-const showVisor = profileManager => {
+const showVisor = () => {
   isVisorShowing = true
   visorWindow.show()
   visorWindow.focus()
-  visorWindow.setVibrancy(profileManager.get('visor.vibrancy'))
   visorWindow.setPosition(0, 22, true)
 }
 
@@ -62,7 +61,7 @@ const register = profileManager => {
     if (isVisorShowing) {
       hideVisor()
     } else {
-      showVisor(profileManager)
+      showVisor()
     }
   })
 }

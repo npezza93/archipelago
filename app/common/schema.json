@@ -450,6 +450,12 @@
                 "default": "F1",
                 "keybinding": true
               },
+              "background": {
+                "type": "string",
+                "color": true,
+                "scope": "xterm",
+                "default": "#000000"
+              },
               "vibrancy": {
                 "type": "string",
                 "default": "",
@@ -464,12 +470,6 @@
               "padding": {
                 "type": "string",
                 "default": "5px 0 10px 15px"
-              },
-              "background": {
-                "type": "string",
-                "color": true,
-                "scope": "xterm",
-                "default": "#000000"
               }
             }
           }

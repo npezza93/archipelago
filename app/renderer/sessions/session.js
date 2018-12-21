@@ -198,10 +198,12 @@ export default class Session {
   }
 
   onSettingChanged({property, value}) {
-    if (this.currentProfile.xtermSettings.indexOf(property) >= 0) {
+    if (this.currentProfile.xtermSettings.includes(property)) {
       this.xterm.setOption(property, value)
     } else if (property === 'keybindings') {
       this.resetKeymaps()
+    } else if (property === 'visor.allowTransparency') {
+      this.xterm.setOption('allowTransparency', value)
     } else if (property.startsWith('theme.') || property === 'visor.background') {
       this.resetTheme()
     }
