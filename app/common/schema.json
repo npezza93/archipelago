@@ -208,7 +208,7 @@
               "darwin"
             ],
             "settings": {
-              "title": "vibrancy"
+              "title": "theme"
             },
             "enum": ["", "light", "medium-light", "dark", "ultra-dark"]
           },
