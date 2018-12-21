@@ -1,0 +1,6 @@
+# frozen_string_literal: true
+
+require "middleman-gh-pages"
+
+ENV["PROJECT_ROOT"] = "../doc-build"
+ENV["ALLOW_DIRTY"] = "true"
