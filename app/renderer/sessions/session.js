@@ -8,6 +8,7 @@ import unescape from 'unescape-js'
 import debouncer from 'debounce-fn'
 import keystrokeForKeyboardEvent from 'keystroke-for-keyboard-event'
 import autoBind from 'auto-bind'
+import Color from 'color'
 import CurrentProfile from '../utils/current-profile'
 
 Terminal.applyAddon(require('xterm/lib/addons/fit/fit'))
@@ -62,8 +63,12 @@ export default class Session {
 
   applySettingModifiers(defaultSettings) {
     if (this.type === 'visor') {
-      defaultSettings.allowTransparency = this.currentProfile.get('visor.allowTransparency')
-      defaultSettings.theme.background = this.currentProfile.get('visor.background')
+      const background = this.currentProfile.get('visor.background')
+      defaultSettings.allowTransparency = this.allowTransparency(background)
+      defaultSettings.theme.background = background
+    } else {
+      const {background} = defaultSettings.theme
+      defaultSettings.allowTransparency = this.allowTransparency(background)
     }
 
     return defaultSettings
@@ -96,6 +101,7 @@ export default class Session {
   }
 
   resetTheme() {
+    this.xterm.setOption('allowTransparency', this.settings().allowTransparency)
     this.xterm.setOption('theme', this.settings().theme)
   }
 
@@ -116,6 +122,19 @@ export default class Session {
   fit() {
     this.xterm.fit()
     ipc.send(`pty-resize-${this.id}`, {cols: this.xterm.cols, rows: this.xterm.rows})
+  }
+
+  allowTransparency(background) {
+    const color = new Color(background)
+    let allowTransparency
+
+    if (color.alpha() === 1) {
+      allowTransparency = false
+    } else {
+      allowTransparency = true
+    }
+
+    return allowTransparency
   }
 
   searchNext(query, options) {
@@ -202,8 +221,6 @@ export default class Session {
       this.xterm.setOption(property, value)
     } else if (property === 'keybindings') {
       this.resetKeymaps()
-    } else if (property === 'visor.allowTransparency') {
-      this.xterm.setOption('allowTransparency', value)
     } else if (property.startsWith('theme.') || property === 'visor.background') {
       this.resetTheme()
     }
@@ -211,6 +228,7 @@ export default class Session {
 
   onActiveProfileChange() {
     this.resetKeymaps()
+    this.xterm.setOption('allowTransparency', this.settings().allowTransparency)
     for (const property in this.settings()) {
       this.xterm.setOption(property, this.settings()[property])
     }

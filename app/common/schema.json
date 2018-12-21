@@ -212,17 +212,6 @@
             },
             "enum": ["", "light", "medium-light", "dark", "ultra-dark"]
           },
-          "allowTransparency": {
-            "type": "boolean",
-            "default": false,
-            "scope": "xterm",
-            "enabledOn": [
-              "darwin"
-            ],
-            "settings": {
-              "title": "vibrancy"
-            }
-          },
           "singleTabMode": {
             "type": "boolean",
             "default": false,
