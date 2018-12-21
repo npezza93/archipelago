@@ -55,7 +55,9 @@
     .video-container
       .wrapper-1
         .wrapper-2
-          %video{ src: image_path('visor.mov'), loop: true }
+          %video{ loop: true }
+            %source{ src: image_path('visor.mov'), type: "video/mp4" }
+            %source{ src: image_path('visor.webm'), type: "video/webm" }
           .overlay
     .description
       %h2 Visor
@@ -65,7 +67,9 @@
     .video-container
       .wrapper-1
         .wrapper-2
-          %video{ src: image_path('profiles.mov'), loop: true }
+          %video{ loop: true }
+            %source{ src: image_path('profiles.mov'), type: "video/mp4" }
+            %source{ src: image_path('profiles.webm'), type: "video/webm" }
           .overlay
     .description
       %h2 Profiles

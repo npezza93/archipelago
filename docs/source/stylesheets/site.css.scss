@@ -36,7 +36,7 @@ body {
 }
 
 #tabs-video, #search-video, #visor-video, #profiles-video {
-  height: 95vh;
+  min-height: 95vh;
   display: flex;
   flex-direction: row;
   .video-container {
@@ -111,6 +111,9 @@ body {
   #tabs-video, #search-video, #visor-video, #profiles-video {
     flex-direction: column-reverse;
     justify-content: center;
+  }
+  .video-container {
+    margin-top: 30px;
   }
   .video-container, .description {
     width: calc(100% - 30px) !important;
