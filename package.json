@@ -68,7 +68,7 @@
     "pref": "^3.1.0",
     "react": "^16.7.0",
     "react-addons-css-transition-group": "^15.6.2",
-    "react-color": "^2.14.1",
+    "react-color": "^2.17.0",
     "react-dom": "^16.7.0",
     "react-split-pane": "^0.1.81",
     "source-map-support": "^0.5.9",
@@ -80,7 +80,7 @@
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "chai": "^4.1.2",
-    "css-loader": "^2.0.1",
+    "css-loader": "^2.0.2",
     "electron": "^3.0.12",
     "electron-builder": "20.38.4",
     "electron-mocha": "^6.0.4",
@@ -95,7 +95,7 @@
     "robotjs": "^0.5.1",
     "spectron": "^5.0.0",
     "spectron-keys": "^0.0.1",
-    "webpack": "^4.28.1",
+    "webpack": "^4.28.2",
     "xo": "^0.23.0"
   },
   "build": {
