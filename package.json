@@ -54,7 +54,7 @@
   "dependencies": {
     "@githubprimer/octicons-react": "^8.1.0",
     "@researchgate/react-intersection-observer": "^0.7.3",
-    "auto-bind": "^1.2.1",
+    "auto-bind": "^2.0.0",
     "color": "^3.1.0",
     "debounce-fn": "^1.0.0",
     "default-shell": "^1.0.1",
