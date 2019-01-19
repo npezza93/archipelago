@@ -14,6 +14,7 @@ export default profileManager => {
         if (profileManager.activeProfile().id === profile.id) {
           profileItem.checked = true
         }
+
         return profileItem
       })
   }

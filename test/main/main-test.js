@@ -127,6 +127,7 @@ async function setSingleTabMode(checked, app) {
   if (Boolean(currentChecked) !== checked) {
     await app.client.click('switch-field#singleTabMode label')
   }
+
   await app.client.close()
 }
 

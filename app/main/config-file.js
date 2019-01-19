@@ -26,6 +26,7 @@ const pref = () => {
           if (store.get(`profiles.${index}.visor`) === undefined) {
             store.set(`profiles.${index}.visor`, {})
           }
+
           if (!['none', 'sound'].includes(store.get(`profiles.${index}.bellStyle`))) {
             store.set(`profiles.${index}.bellStyle`, 'sound')
           }

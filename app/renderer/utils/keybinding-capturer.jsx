@@ -51,6 +51,7 @@ export default class KeybindingCapturer extends Component {
       this.progress.style.strokeDashoffset = '1000'
       setTimeout(this.triggerProgress, 50)
     }
+
     this.timeout = setTimeout(() => {
       this.props.captureKeybinding(this.state.value)
       this.cleanup()

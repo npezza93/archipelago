@@ -55,6 +55,7 @@ describe('Settings', function () {
       if (await this.app.client.isVisible('hamburger-menu')) {
         await this.app.client.click('hamburger-menu')
       }
+
       const profiles = await this.app.client.elements('profile-container')
 
       assert(profiles.value.length >= 1)
@@ -64,6 +65,7 @@ describe('Settings', function () {
       if (await this.app.client.isVisible('hamburger-menu')) {
         await this.app.client.click('hamburger-menu')
       }
+
       const initialProfiles = await this.app.client.elements('profile-container')
       await this.app.client.click('create-profile')
       const afterProfiles = await this.app.client.elements('profile-container')
@@ -80,6 +82,7 @@ describe('Settings', function () {
       if (await this.app.client.isVisible('hamburger-menu')) {
         await this.app.client.click('hamburger-menu')
       }
+
       const initialProfiles = await this.app.client.elements('profile-container')
       await this.app.client.moveToObject('remove-profile')
       await this.app.client.click('remove-profile')

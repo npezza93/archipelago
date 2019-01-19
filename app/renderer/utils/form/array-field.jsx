@@ -27,6 +27,7 @@ export default class ArrayField extends Component {
         const propertySchema = this.props.schema.items.properties[property]
         result.push(this.renderItem(property, value[property], propertySchema, index))
       }
+
       return result
     }
 

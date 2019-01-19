@@ -129,6 +129,7 @@ export default class App extends Component {
       } else {
         partition[1].push(tab)
       }
+
       return partition
     }, [null, []])
 
@@ -184,6 +185,7 @@ export default class App extends Component {
 
         return tab
       }
+
       return tab
     })
 
@@ -259,6 +261,7 @@ export default class App extends Component {
     for (const tab of this.state.tabs) {
       killers.push(tab.kill())
     }
+
     await Promise.all(killers)
   }
 

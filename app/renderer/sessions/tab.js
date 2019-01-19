@@ -42,9 +42,11 @@ export default class Tab {
           if (sessionToSave.branch.branch.left === sessionToSave.branch) {
             sessionToSave.branch.branch.left = sessionToSave
           }
+
           if (sessionToSave.branch.branch.right === sessionToSave.branch) {
             sessionToSave.branch.branch.right = sessionToSave
           }
+
           sessionToSave.branch = sessionToSave.branch.branch
         }
       }

@@ -58,6 +58,7 @@ export default class PropertiesPane extends Component {
           accumulator[title][property] = schema
         }
       }
+
       return accumulator
     }, {})
   }

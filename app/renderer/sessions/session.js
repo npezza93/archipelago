@@ -87,8 +87,8 @@ export default class Session {
       this._wrapperElement.classList = 'wrapper'
       this._xtermElement = document.createElement('div')
       this._xtermElement.classList = 'wrapper'
-      this._wrapperElement.appendChild(this._xtermElement)
-      this._container.appendChild(this._wrapperElement)
+      this._wrapperElement.append(this._xtermElement)
+      this._container.append(this._wrapperElement)
       this.xterm.open(this._xtermElement)
       this.xterm.focus()
       return
@@ -96,7 +96,7 @@ export default class Session {
 
     this._container.removeChild(this._wrapperElement)
     this._container = container
-    this._container.appendChild(this._wrapperElement)
+    this._container.append(this._wrapperElement)
     this.xterm.focus()
   }
 
@@ -248,7 +248,7 @@ export default class Session {
       if (platform({macos: event.metaKey, default: event.ctrlKey})) {
         const webview = document.createElement('webview')
         webview.setAttribute('src', uri)
-        document.querySelector('body').appendChild(webview)
+        document.querySelector('body').append(webview)
       }
     })
     this.xterm.attachCustomKeyEventHandler(this.keybindingHandler)
