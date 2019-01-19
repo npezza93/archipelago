@@ -82,7 +82,7 @@
     "chai": "^4.1.2",
     "css-loader": "^2.1.0",
     "electron": "^3.0.12",
-    "electron-builder": "20.38.4",
+    "electron-builder": "^20.38.5",
     "electron-mocha": "^6.0.4",
     "electron-webpack": "^2.3.1",
     "enzyme": "^3.6.0",
@@ -96,7 +96,7 @@
     "spectron": "^5.0.0",
     "spectron-keys": "^0.0.1",
     "webpack": "^4.28.3",
-    "xo": "^0.23.0"
+    "xo": "^0.24.0"
   },
   "build": {
     "productName": "Archipelago",
