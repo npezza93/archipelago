@@ -90,6 +90,7 @@ export default class Session {
       this._wrapperElement.append(this._xtermElement)
       this._container.append(this._wrapperElement)
       this.xterm.open(this._xtermElement)
+      this.bindScrollListener()
       this.xterm.focus()
       return
     }
@@ -169,9 +170,9 @@ export default class Session {
 
     this.xterm.element.addEventListener('wheel', scrollbarFadeEffect.bind(this), {passive: true})
 
-    return new Disposable(() => {
+    this.subscriptions.add(new Disposable(() => {
       this.xterm.element.removeEventListener('wheel', scrollbarFadeEffect.bind(this), {passive: true})
-    })
+    }))
   }
 
   setTitle(title) {
