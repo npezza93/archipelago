@@ -116,6 +116,7 @@ export default class Session {
     }
 
     const ptyId = await this.ptyId
+    this.xterm = null
 
     await ipc.send(`pty-kill-${ptyId}`)
   }

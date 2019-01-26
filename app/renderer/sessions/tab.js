@@ -56,6 +56,7 @@ export default class Tab {
   async kill() {
     if (this.root) {
       await this.root.kill()
+      this.root = null
     }
   }
 
