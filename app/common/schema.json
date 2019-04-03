@@ -458,7 +458,7 @@
               },
               "padding": {
                 "type": "string",
-                "default": "5px 0 10px 15px"
+                "default": "40px 0 10px 15px"
               }
             }
           }
