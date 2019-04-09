@@ -3019,10 +3019,10 @@ ejs@~2.5.6:
   resolved "https://registry.yarnpkg.com/ejs/-/ejs-2.5.9.tgz#7ba254582a560d267437109a68354112475b0ce5"
   integrity sha512-GJCAeDBKfREgkBtgrYSf9hQy9kTb3helv0zGdzqhM7iAkW8FA/ZF97VQDbwFiwIT8MQLLOe5VlPZOEvZAqtUAQ==
 
-electron-better-ipc@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/electron-better-ipc/-/electron-better-ipc-0.1.2.tgz#8ff9d216d0a70924bca466699bcb50c5d42911e5"
-  integrity sha512-tn00v9+/kcln2nV7GCffXzaoVUMoH7HHQj0Sya43U7xt2bqgjT1DF5T3+nkG2CChkuCE/TgVTQyFOv2jm0Vogg==
+electron-better-ipc@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/electron-better-ipc/-/electron-better-ipc-0.2.0.tgz#b7af2f54818bead520cdacfe0683a10c9413e729"
+  integrity sha512-9Ll1xotcpjW5Lk1rMzaWjA4VyIlFYqrG+iJUEwEAIg4j9/cU8Y3eU9ehoARgymHAbKQKIFM6CS+0hZcF1qEE6w==
 
 electron-builder@^20.38.5:
   version "20.38.5"
