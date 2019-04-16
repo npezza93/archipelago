@@ -60,8 +60,6 @@
     "default-shell": "^1.0.1",
     "electron-better-ipc": "^0.2.0",
     "electron-context-menu": "^0.12.0",
-    "electron-better-ipc": "^0.1.2",
-    "electron-context-menu": "^0.12.0",
     "electron-util": "^0.11.0",
     "event-kit": "^2.5.0",
     "i": "^0.3.6",
