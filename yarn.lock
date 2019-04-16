@@ -2614,12 +2614,12 @@ date-now@^0.1.4:
   resolved "https://registry.yarnpkg.com/date-now/-/date-now-0.1.4.tgz#eaf439fd4d4848ad74e5cc7dbef200672b9e345b"
   integrity sha1-6vQ5/U1ISK105cx9vvIAZyueNFs=
 
-debounce-fn@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/debounce-fn/-/debounce-fn-1.0.0.tgz#12064584ee6769daa7d33298f2b07f974ca9f3b8"
-  integrity sha1-EgZFhO5nadqn0zKY8rB/l0yp87g=
+debounce-fn@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/debounce-fn/-/debounce-fn-3.0.0.tgz#e0acbc6c9453523cd81289ca7ce386610e65a7aa"
+  integrity sha512-XIFjOpDubtoD2remxvH1EumsE4A+8aAgrLFGeQ4nRUmDSa9dDYFLCbxhd2DpnycKbSI3V4yf8eHTxorlOfm4cA==
   dependencies:
-    mimic-fn "^1.1.0"
+    mimic-fn "^2.1.0"
 
 debug@2.6.9, debug@^2.1.2, debug@^2.1.3, debug@^2.2.0, debug@^2.3.3, debug@^2.6.8, debug@^2.6.9:
   version "2.6.9"
@@ -6026,7 +6026,7 @@ mime@^2.0.3, mime@^2.3.1, mime@^2.4.0:
   resolved "https://registry.yarnpkg.com/mime/-/mime-2.4.0.tgz#e051fd881358585f3279df333fe694da0bcffdd6"
   integrity sha512-ikBcWwyqXQSHKtciCcctu9YfPbFYZ4+gbHEmE0Q8jzcTYQg5dHCr3g2wwAZjPoJfQVXZq6KXAjpXOTf5/cjT7w==
 
-mimic-fn@^1.0.0, mimic-fn@^1.1.0:
+mimic-fn@^1.0.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/mimic-fn/-/mimic-fn-1.2.0.tgz#820c86a39334640e99516928bd03fca88057d022"
   integrity sha512-jf84uxzwiuiIVKiOLpfYk7N46TSy8ubTonmneY9vrpHNAnp0QBt2BxWV9dO3/j+BoVAb+a5G6YDPW3M5HOdMWQ==
@@ -6035,6 +6035,11 @@ mimic-fn@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/mimic-fn/-/mimic-fn-2.0.0.tgz#0913ff0b121db44ef5848242c38bbb35d44cabde"
   integrity sha512-jbex9Yd/3lmICXwYT6gA/j2mNQGU48wCh/VzRd+/Y/PjYQtlg1gLMdZqvu9s/xH7qKvngxRObl56XZR609IMbA==
+
+mimic-fn@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/mimic-fn/-/mimic-fn-2.1.0.tgz#7ed2c2ccccaf84d3ffcb7a69b57711fc2083401b"
+  integrity sha512-OqbOk5oEQeAZ8WXWydlu9HJjz9WVdEIvamMCcXmuqUYjTknH/sqsWvhQ3vgwKFRR1HpjvNBKQ37nbJgYzGqGcg==
 
 mimic-response@^1.0.0:
   version "1.0.1"
