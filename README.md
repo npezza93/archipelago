@@ -27,7 +27,7 @@ which was the culprit of all my issues, so I found the
 and I started making Archipelago. Archipelago works on macOS, Linux, and
 Windows, supports theming which can be saved to a profile, searching
 through the scroll-back, a visor pop over, pane splitting, system tests,
-and much more. Visit [archipelago.pezza.co](https://archipelago.pezza.co) to see
+and much more. Visit [archipelago.dev](https://archipelago.dev) to see
 more gifs!
 
 ![Screenshot](https://raw.githubusercontent.com/npezza93/archipelago/master/.github/screenshot.gif)
