@@ -3061,10 +3061,12 @@ ejs@~2.5.6:
   resolved "https://registry.yarnpkg.com/ejs/-/ejs-2.5.9.tgz#7ba254582a560d267437109a68354112475b0ce5"
   integrity sha512-GJCAeDBKfREgkBtgrYSf9hQy9kTb3helv0zGdzqhM7iAkW8FA/ZF97VQDbwFiwIT8MQLLOe5VlPZOEvZAqtUAQ==
 
-electron-better-ipc@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/electron-better-ipc/-/electron-better-ipc-0.2.0.tgz#b7af2f54818bead520cdacfe0683a10c9413e729"
-  integrity sha512-9Ll1xotcpjW5Lk1rMzaWjA4VyIlFYqrG+iJUEwEAIg4j9/cU8Y3eU9ehoARgymHAbKQKIFM6CS+0hZcF1qEE6w==
+electron-better-ipc@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/electron-better-ipc/-/electron-better-ipc-0.3.0.tgz#e59e2f00195d4391c8c896a557a226b4ffc72fbd"
+  integrity sha512-yfMasvk4wHvgQlPJYgSKfkT8hjzEp/Zw5zVWlBsW0nX7rnHSUMbH3cMy732FOmTNebdhYqXqdVtuOogIJk9lVA==
+  dependencies:
+    type-fest "^0.3.1"
 
 electron-builder@^20.38.5:
   version "20.38.5"
@@ -9373,6 +9375,11 @@ type-detect@^4.0.0, type-detect@^4.0.5:
   version "4.0.8"
   resolved "https://registry.yarnpkg.com/type-detect/-/type-detect-4.0.8.tgz#7646fb5f18871cfbb7749e69bd39a6388eb7450c"
   integrity sha512-0fr/mIH1dlO+x7TlcMy+bIDqKPsw/70tVyeHW787goQjhmqaZe10uwLujubK9q9Lg6Fiho1KUKDYz0Z7k7g5/g==
+
+type-fest@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.3.1.tgz#63d00d204e059474fe5e1b7c011112bbd1dc29e1"
+  integrity sha512-cUGJnCdr4STbePCgqNFbpVNCepa+kAVohJs1sLhxzdH+gnEoOd8VhbYa7pD3zZYGiURWM2xzEII3fQcRizDkYQ==
 
 type-is@~1.6.16:
   version "1.6.16"
