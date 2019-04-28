@@ -1,5 +1,5 @@
 import React from 'react'
-import ipc from 'electron-better-ipc'
+import {ipcRenderer as ipc} from 'electron-better-ipc'
 import {Disposable} from 'event-kit'
 import schema from '../../common/schema'
 import Component from '../utils/component.jsx'

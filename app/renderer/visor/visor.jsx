@@ -1,6 +1,6 @@
 /* global document, window */
 
-import ipc from 'electron-better-ipc'
+import {ipcRenderer as ipc} from 'electron-better-ipc'
 import React from 'react'
 import {Disposable} from 'event-kit'
 import Component from '../utils/component.jsx'

@@ -1,7 +1,7 @@
 /* global window */
 
 import React from 'react'
-import ipc from 'electron-better-ipc'
+import {ipcRenderer as ipc} from 'electron-better-ipc'
 import {Disposable} from 'event-kit'
 import keystrokeForKeyboardEvent from 'keystroke-for-keyboard-event'
 import formatAccelerator from './format-accelerator'

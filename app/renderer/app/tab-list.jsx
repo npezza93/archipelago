@@ -1,4 +1,4 @@
-import ipc from 'electron-better-ipc'
+import {ipcRenderer as ipc} from 'electron-better-ipc'
 import React from 'react'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import {Disposable} from 'event-kit'

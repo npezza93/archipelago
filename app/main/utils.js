@@ -1,7 +1,7 @@
 import {BrowserWindow, app} from 'electron'
 import {is, platform} from 'electron-util'
 import Color from 'color'
-import ipc from 'electron-better-ipc'
+import {ipcMain as ipc} from 'electron-better-ipc'
 import darwinAccelerators from './accelerators/darwin'
 import linuxAccelerators from './accelerators/linux'
 import windowsAccelerators from './accelerators/windows'

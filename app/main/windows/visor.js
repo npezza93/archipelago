@@ -1,6 +1,6 @@
 import electron, {app, globalShortcut} from 'electron'
 import contextMenu from 'electron-context-menu'
-import ipc from 'electron-better-ipc'
+import {ipcMain as ipc} from 'electron-better-ipc'
 import {Disposable, CompositeDisposable} from 'event-kit'
 import {argbBackground, makeWindow} from '../utils'
 

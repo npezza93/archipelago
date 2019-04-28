@@ -1,6 +1,6 @@
 /* global document */
 import {clipboard} from 'electron'
-import ipc from 'electron-better-ipc'
+import {ipcRenderer as ipc} from 'electron-better-ipc'
 import {activeWindow, platform} from 'electron-util'
 import {CompositeDisposable, Disposable} from 'event-kit'
 import {Terminal} from 'xterm'

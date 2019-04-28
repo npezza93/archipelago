@@ -1,7 +1,7 @@
 import {app, Menu} from 'electron'
 import {is} from 'electron-util'
 import {CompositeDisposable, Disposable} from 'event-kit'
-import ipc from 'electron-better-ipc'
+import {ipcMain as ipc} from 'electron-better-ipc'
 import contextMenu from 'electron-context-menu'
 import {pref} from './config-file'
 import ProfileManager from './profile-manager'
