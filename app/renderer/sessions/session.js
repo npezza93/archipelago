@@ -244,7 +244,6 @@ export default class Session {
   }
 
   bindListeners() {
-    this.xterm.winptyCompatInit()
     this.xterm.webLinksInit((event, uri) => {
       if (document.querySelector('webview')) {
         document.querySelector('webview').remove()
