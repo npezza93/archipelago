@@ -1,4 +1,4 @@
-/* global document */
+/* global document, navigator */
 import {clipboard} from 'electron'
 import {ipcRenderer as ipc} from 'electron-better-ipc'
 import {activeWindow, platform} from 'electron-util'
@@ -14,7 +14,6 @@ import CurrentProfile from '../utils/current-profile'
 Terminal.applyAddon(require('xterm/lib/addons/fit/fit'))
 Terminal.applyAddon(require('xterm/lib/addons/search/search'))
 Terminal.applyAddon(require('xterm/lib/addons/webLinks/webLinks'))
-Terminal.applyAddon(require('xterm/lib/addons/winptyCompat/winptyCompat'))
 
 export default class Session {
   constructor(type, branch) {
@@ -57,8 +56,12 @@ export default class Session {
       this.currentProfile.xtermSettings.reduce((settings, property) => {
         settings[property] = this.currentProfile.get(property)
         return settings
-      }, {})
+      }, {windows: this.isWindows()})
     )
+  }
+
+  isWindows() {
+    return ['Windows', 'Win16', 'Win32', 'WinCE'].indexOf(navigator.platform) >= 0
   }
 
   applySettingModifiers(defaultSettings) {
