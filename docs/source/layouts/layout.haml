@@ -9,7 +9,7 @@
     %meta{ name: "description", content: "Archipelago is an open-source terminal emulator built on web technology" }
     %title Archipelago
     = favicon_tag 'archipelago.png'
-    = stylesheet_link_tag "site"
-    = javascript_include_tag "site"
+    = stylesheet_link_tag :site
+    = javascript_include_tag :site
     %script{ async: true, defer: true, src: "https://buttons.github.io/buttons.js" }
   %body= yield
