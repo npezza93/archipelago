@@ -10220,9 +10220,9 @@ xtend@~2.1.1:
     object-keys "~0.4.0"
 
 xterm@^3.10.0:
-  version "3.13.0"
-  resolved "https://registry.yarnpkg.com/xterm/-/xterm-3.13.0.tgz#d0e06c3cf4c1f079aa83f646948457db3b04220b"
-  integrity sha512-FZVmvkkbkky3zldJ2NNOZ9h8jirtbGTlF4sIKMDrejR4wPsVZ3o4F++DQVkdeZqjAwtNOMoR17PMSOTZ+h070g==
+  version "3.14.0"
+  resolved "https://registry.yarnpkg.com/xterm/-/xterm-3.14.0.tgz#cee4c64aa3068955a42a15aad867ef40a20c8f5a"
+  integrity sha512-a5qL7iDLuzAzul6BHADoluO8yN3e8tEVMTACBXyi84WLExiz5Sc+hRrV4XL9gg3J3I3Gnh+C9FlsNuPtiRP7Wg==
 
 y18n@^3.2.1:
   version "3.2.1"
