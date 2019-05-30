@@ -5615,20 +5615,20 @@ jsx-ast-utils@^2.1.0:
   dependencies:
     array-includes "^3.0.3"
 
-keyboard-layout@^2.0.14:
-  version "2.0.14"
-  resolved "https://registry.yarnpkg.com/keyboard-layout/-/keyboard-layout-2.0.14.tgz#ba3eebe3e346790bddbb2cbaeae831e108348416"
-  integrity sha512-QuCfpEC8oai6F8oaNQdxi5+1QIpaQu9HSVI9yzkC2HbIXeBnahzHFDRVGUtwwAWiNnzjNBjUI/djsrMGUTgK1w==
+keyboard-layout@^2.0.16:
+  version "2.0.16"
+  resolved "https://registry.yarnpkg.com/keyboard-layout/-/keyboard-layout-2.0.16.tgz#b8c1036222c3c12f00c1e0296a032529c43e530e"
+  integrity sha512-eGrxmlV6jbm/mbPEOpYGuH53XEC7wIUj9ZxKcT2z9QHJ/RwrT9iVkvxka9zRxqHZHwQzcffgsa5OxoVAKnhK9w==
   dependencies:
     event-kit "^2.0.0"
-    nan "^2.10.0"
+    nan "^2.13.2"
 
 keystroke-for-keyboard-event@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/keystroke-for-keyboard-event/-/keystroke-for-keyboard-event-1.0.0.tgz#a99494c54c23e39e5a6773c87c1733841c003e6f"
-  integrity sha512-ixBVmO14iNrDYgNhVGiMA7Wbj/4jxHcwWdKsIAMSJ8/dZN6vzR44UzyCuBOKEr7hByoByclAk/xj374qLtXTKg==
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/keystroke-for-keyboard-event/-/keystroke-for-keyboard-event-1.1.0.tgz#f86a6fbd86d7d3f698290d55d053b2730ee4b113"
+  integrity sha512-QWFPRWXXJlebnFsDLFRoumbdKkTXAuzBf9VEVsfiWNjeYH2No4Fmluu+O/qmS2GnRiDVU0uvdWgyre3M8Yaq1w==
   dependencies:
-    keyboard-layout "^2.0.14"
+    keyboard-layout "^2.0.16"
 
 killable@^1.0.0:
   version "1.0.1"
@@ -6321,12 +6321,12 @@ mute-stream@0.0.7:
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.7.tgz#3075ce93bc21b8fab43e1bc4da7e8115ed1e7bab"
   integrity sha1-MHXOk7whuPq0PhvE2n6BFe0ee6s=
 
-nan@2.12.1, nan@^2.10.0, nan@^2.2.1:
+nan@2.12.1, nan@^2.2.1:
   version "2.12.1"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.12.1.tgz#7b1aa193e9aa86057e3c7bbd0ac448e770925552"
   integrity sha512-JY7V6lRkStKcKTvHO5NVSQRv+RV+FIL5pvDoLiAtSL9pKlC5x9PKQcZDsq7m4FO4d57mkhC6Z+QhAh3Jdk5JFw==
 
-nan@^2.12.1:
+nan@^2.12.1, nan@^2.13.2:
   version "2.14.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.14.0.tgz#7818f722027b2459a86f0295d434d1fc2336c52c"
   integrity sha512-INOFj37C7k3AfaNTtX8RhsTw7qRy7eLET14cROi9+5HAVbbHuIWUHEauBv5qT4Av2tWasiTY1Jw6puUNqRJXQg==
