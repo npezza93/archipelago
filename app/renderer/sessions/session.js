@@ -193,7 +193,7 @@ export default class Session {
   }
 
   copySelection() {
-    if (this.currentProfile.get('copyOnSelect')) {
+    if (this.currentProfile.get('copyOnSelect') && this.xterm.getSelection()) {
       clipboard.writeText(this.xterm.getSelection())
     }
   }
