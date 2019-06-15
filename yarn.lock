@@ -3241,7 +3241,7 @@ electron-is-dev@^0.3.0:
   resolved "https://registry.yarnpkg.com/electron-is-dev/-/electron-is-dev-0.3.0.tgz#14e6fda5c68e9e4ecbeff9ccf037cbd7c05c5afe"
   integrity sha1-FOb9pcaOnk7L7/nM8DfL18BcWv4=
 
-electron-is-dev@^1.0.1:
+electron-is-dev@^1.0.1, electron-is-dev@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/electron-is-dev/-/electron-is-dev-1.1.0.tgz#b15a2a600bdc48a51a857d460e05f15b19a2522c"
   integrity sha512-Z1qA/1oHNowGtSBIcWk0pcLEqYT/j+13xUw/MYOrBUOL4X7VN0i0KCTf5SqyvMPmW5pSPKbo28wkxMxzZ20YnQ==
@@ -3289,13 +3289,13 @@ electron-to-chromium@^1.2.7, electron-to-chromium@^1.3.113:
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.115.tgz#fdaa56c19b9f7386dbf29abc1cc632ff5468ff3b"
   integrity sha512-mN2qeapQWdi2B9uddxTZ4nl80y46hbyKY5Wt9Yjih+QZFQLdaujEDK4qJky35WhyxMzHF3ZY41Lgjd2BPDuBhg==
 
-electron-util@^0.11.0:
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/electron-util/-/electron-util-0.11.0.tgz#d9b71692241598a5f1e2a6866adf7e1589b783fa"
-  integrity sha512-zfFeBdeBgnKQqXUC4ozmcGqbN5bxSVWH82FZ2Ydpo9PPOen77MAFGrd8+KEloUW36bpuSuMYCtlcp4xejWfKjw==
+electron-util@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/electron-util/-/electron-util-0.12.0.tgz#3ec5d5e3309b6f0d15c6325a431fe0c045521e4a"
+  integrity sha512-j32aHpsFlDpQHCKxUj4CfR80jXJJHT1QTdt+XL3vLFNaZZuZ1vX6gJ4jaP3ByP07M7ZECwemRv5C0pT1Ft131A==
   dependencies:
-    electron-is-dev "^1.0.1"
-    new-github-issue-url "^0.2.0"
+    electron-is-dev "^1.1.0"
+    new-github-issue-url "^0.2.1"
 
 electron-webpack-js@~2.3.1:
   version "2.3.1"
@@ -6497,10 +6497,10 @@ neo-async@^2.5.0:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.1.tgz#ac27ada66167fa8849a6addd837f6b189ad2081c"
   integrity sha512-iyam8fBuCUpWeKPGpaNMetEocMt364qkCsfL9JuhjXX6dRnguRVOfk2GZaDpPjcOKiiXCPINZC1GczQ7iTq3Zw==
 
-new-github-issue-url@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/new-github-issue-url/-/new-github-issue-url-0.2.0.tgz#41263fa3b9e2d96b29252100fd1ef18274c12a74"
-  integrity sha512-LtOjIk0xghnMVjndjfF9JLc1WIDNmgCAfDtvPMsMJcecBMDziaYOyXkwR8Tgli2ZA2mAOP/6C8DpBq+uCmU5aQ==
+new-github-issue-url@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/new-github-issue-url/-/new-github-issue-url-0.2.1.tgz#e17be1f665a92de465926603e44b9f8685630c1d"
+  integrity sha512-md4cGoxuT4T4d/HDOXbrUHkTKrp/vp+m3aOA7XXVYwNsUNMK49g3SQicTSeV5GIz/5QVGAeYRAOlyp9OvlgsYA==
 
 nice-try@^1.0.4:
   version "1.0.5"
