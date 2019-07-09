@@ -21,7 +21,10 @@ export const makeWindow = (name, options) => {
     height: 600,
     show: false,
     titleBarStyle: 'hiddenInset',
-    frame: is.macos
+    frame: is.macos,
+    webPreferences: {
+      nodeIntegration: true
+    }
   }, options))
 
   loadUrl(newWindow, name)

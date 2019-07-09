@@ -4,7 +4,10 @@ import {makeWindow} from '../utils'
 let settingsWindow = null
 const windowOptions = {
   backgroundColor: darkMode.isEnabled ? '#393736' : '#F5F5F5',
-  webPreferences: {experimentalFeatures: true}
+  webPreferences: {
+    experimentalFeatures: true,
+    nodeIntegration: true
+  }
 }
 
 export default {
