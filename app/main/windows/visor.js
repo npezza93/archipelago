@@ -1,4 +1,4 @@
-import electron, {app, globalShortcut} from 'electron'
+import {app, globalShortcut, screen} from 'electron'
 import contextMenu from 'electron-context-menu'
 import {ipcMain as ipc} from 'electron-better-ipc'
 import {Disposable, CompositeDisposable} from 'event-kit'
@@ -10,7 +10,7 @@ let visorWindow = null
 let isVisorShowing = false
 
 const hideVisor = () => {
-  const {height} = electron.screen.getPrimaryDisplay().workAreaSize
+  const {height} = screen.getPrimaryDisplay().workAreaSize
 
   isVisorShowing = false
   visorWindow.setPosition(0, -parseInt(height * 0.4, 10), true)
@@ -18,15 +18,17 @@ const hideVisor = () => {
 }
 
 const showVisor = () => {
+  const menuBarOffset = screen.getPrimaryDisplay().bounds.height - screen.getPrimaryDisplay().workArea.height
+
   isVisorShowing = true
   visorWindow.show()
   visorWindow.focus()
-  visorWindow.setPosition(0, 22, true)
+  visorWindow.setPosition(0, menuBarOffset, true)
 }
 
 const create = profileManager => {
   if (visorWindow === null || visorWindow.isDestroyed()) {
-    const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize
+    const {width, height} = screen.getPrimaryDisplay().workAreaSize
 
     isVisorShowing = false
     visorWindow = makeWindow('visor', {
