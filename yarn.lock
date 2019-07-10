@@ -6023,10 +6023,15 @@ lodash.zip@^4.2.0:
   resolved "https://registry.yarnpkg.com/lodash.zip/-/lodash.zip-4.2.0.tgz#ec6662e4896408ed4ab6c542a3990b72cc080020"
   integrity sha1-7GZi5IlkCO1KtsVCo5kLcswIACA=
 
-lodash@^4.0.1, lodash@^4.13.1, lodash@^4.15.0, lodash@^4.17.11, lodash@^4.17.3, lodash@^4.17.5, lodash@^4.2.0, lodash@^4.3.0, lodash@^4.8.0, lodash@~4.17.10:
+lodash@^4.0.1, lodash@^4.13.1, lodash@^4.15.0, lodash@^4.17.3, lodash@^4.17.5, lodash@^4.2.0:
   version "4.17.13"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.13.tgz#0bdc3a6adc873d2f4e0c4bac285df91b64fc7b93"
   integrity sha512-vm3/XWXfWtRua0FkUyEHBZy8kCPjErNBT9fJx8Zvs+U6zjqPbTUOpkaoum3O5uiA8sm+yNMHXfYkTUHFoMxFNA==
+
+lodash@^4.17.11, lodash@^4.3.0, lodash@^4.8.0, lodash@~4.17.10:
+  version "4.17.14"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.14.tgz#9ce487ae66c96254fe20b599f21b6816028078ba"
+  integrity sha512-mmKYbW3GLuJeX+iGP+Y7Gp1AiGHGbXHCOh/jZmrawMmsE7MS4znI3RL2FsjbqOyMayHInjOeykW7PEajUk1/xw==
 
 log-symbols@2.2.0, log-symbols@^2.0.0:
   version "2.2.0"
@@ -8986,7 +8991,7 @@ spectron-keys@^0.0.1:
 
 spectron@npezza93/spectron:
   version "8.0.0"
-  resolved "https://codeload.github.com/npezza93/spectron/tar.gz/74603c85519eab7aeb328e093da7885c658b8ccd"
+  resolved "https://codeload.github.com/npezza93/spectron/tar.gz/cf1476e00a1fd71e87266bd4705d44b60c60024d"
   dependencies:
     dev-null "^0.1.1"
     electron-chromedriver "^6.0.0-beta.3"
