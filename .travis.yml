@@ -5,12 +5,12 @@ matrix:
     - os: osx
       osx_image: xcode10.1
       language: node_js
-      node_js: "10"
+      node_js: "12"
       env:
         - YARN_COMMAND=dist
     - os: linux
       language: node_js
-      node_js: "10"
+      node_js: "12"
       env:
         - YARN_COMMAND=dist
       addons:
@@ -29,7 +29,7 @@ matrix:
         - YARN_COMMAND=dist
     - os: linux
       language: node_js
-      node_js: "10"
+      node_js: "12"
       env:
         - YARN_COMMAND=lint
       addons:
@@ -43,7 +43,7 @@ matrix:
     - os: osx
       osx_image: xcode10.1
       language: node_js
-      node_js: "10"
+      node_js: "12"
       env:
         - YARN_COMMAND=test
 
