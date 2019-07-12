@@ -138,6 +138,7 @@
       ]
     },
     "linux": {
+      "icon": "build/icon.icns",
       "category": "TerminalEmulator",
       "packageCategory": "TerminalEmulator",
       "description": "Archipelago is a terminal emulator built on open web technologies.",
