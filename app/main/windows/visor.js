@@ -36,6 +36,7 @@ const create = profileManager => {
       enableLargerThanScreen: true,
       height: parseInt(height * 0.4, 10),
       frame: false,
+      titleBarStyle: 'customButtonsOnHover',
       x: 0,
       y: -parseInt(height * 0.4, 10),
       backgroundColor: argbBackground(profileManager, 'visor.background'),
