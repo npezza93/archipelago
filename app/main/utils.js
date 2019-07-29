@@ -23,7 +23,8 @@ export const makeWindow = (name, options) => {
     titleBarStyle: 'hiddenInset',
     frame: is.macos,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      webviewTag: true
     }
   }, options))
 
