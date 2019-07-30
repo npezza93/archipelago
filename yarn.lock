@@ -3401,10 +3401,10 @@ electron-window@^0.8.0:
   dependencies:
     is-electron-renderer "^2.0.0"
 
-electron@6.0.0-beta.13:
-  version "6.0.0-beta.13"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-6.0.0-beta.13.tgz#91a67f978e030c1ea5d89e84352d86923dfbfb86"
-  integrity sha512-q1pX18l4N6PH0iCoHXPmgqDNEX2slvMYZcxWXHlUFQodtvXq7bnsFfr6uvifMT5oSdfsCZtXXPK3/iK6PdODNQ==
+electron@6.0.0-beta.14:
+  version "6.0.0-beta.14"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-6.0.0-beta.14.tgz#5cd54915c573a753bb98195a6395c172d5b4f555"
+  integrity sha512-tQ0zQAAn1HEMyCor8R+zs6Ka0KXfzjeaJIlkIYbihG4nTtctES/y0GIMB1tYhkz6kqgjfUuYkOl4wAm8F0cbAQ==
   dependencies:
     "@types/node" "^10.12.18"
     electron-download "^4.1.0"
