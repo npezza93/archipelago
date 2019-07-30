@@ -86,6 +86,7 @@ describe('Settings', function () {
       await this.app.client.click('create-profile')
       const initialProfiles = await this.app.client.elements('profile-container')
       await this.app.client.moveToObject('remove-profile')
+      await this.app.client.pause(500)
       await this.app.client.click('remove-profile')
       const afterProfiles = await this.app.client.elements('profile-container')
 
