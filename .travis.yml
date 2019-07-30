@@ -1,6 +1,4 @@
 matrix:
-  allow_failures:
-    - os: windows
   include:
     - os: osx
       osx_image: xcode10.1
@@ -22,11 +20,6 @@ matrix:
             - libpng++-dev
             - make
             - rpm
-    - os: windows
-      language: node_js
-      node_js: "10"
-      env:
-        - YARN_COMMAND=dist
     - os: linux
       language: node_js
       node_js: "12"
