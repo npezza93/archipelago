@@ -88,7 +88,7 @@
     "eslint-plugin-react": "^7.12.1",
     "mocha": "^6.0.0",
     "robotjs": "sidharth0094/robotjs",
-    "spectron": "npezza93/spectron",
+    "spectron": "^8.0.0",
     "webpack": "^4.28.3",
     "xo": "^0.24.0"
   },
