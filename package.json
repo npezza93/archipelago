@@ -58,7 +58,7 @@
     "color": "^3.1.0",
     "debounce-fn": "^3.0.0",
     "default-shell": "^1.0.1",
-    "electron-better-ipc": "^0.3.0",
+    "electron-better-ipc": "^0.4.0",
     "electron-context-menu": "^0.14.0",
     "electron-util": "^0.12.0",
     "event-kit": "^2.5.0",
