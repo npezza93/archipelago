@@ -13,7 +13,7 @@ jobs:
         node-version: '12.x'
     - name: Install dependencies
       run:
-        sudo apt-get install libx11-dev libxkbfile-dev libxtst-dev libpng++-dev make rpm -y
+        sudo apt-get install libx11-dev libxkbfile-dev libxtst-dev libpng++-dev make -y
     - name: Lint
       run: |
         yarn --link-duplicates --pure-lockfile --ignore-engines

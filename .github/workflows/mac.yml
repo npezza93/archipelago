@@ -1,4 +1,4 @@
-name: mac_build
+name: mac
 
 on: [push]
 
@@ -17,3 +17,15 @@ jobs:
       run: |
         yarn --link-duplicates --pure-lockfile --ignore-engines
         yarn dist
+  test:
+    runs-on: macOS-10.14
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+    - name: Test
+      run: |
+        yarn --link-duplicates --pure-lockfile --ignore-engines
+        yarn test
