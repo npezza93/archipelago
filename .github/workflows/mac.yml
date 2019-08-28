@@ -12,6 +12,8 @@ jobs:
       with:
         node-version: '12.x'
     - name: Build
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
         yarn --link-duplicates --pure-lockfile --ignore-engines
         yarn dist
