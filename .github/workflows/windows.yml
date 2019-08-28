@@ -1,10 +1,10 @@
-name: mac
+name: windows
 
 on: [push]
 
 jobs:
   build:
-    runs-on: macOS-latest
+    runs-on: windows-latest
     steps:
     - uses: actions/checkout@v1
     - name: Set up Node
@@ -17,15 +17,3 @@ jobs:
       run: |
         yarn --link-duplicates --pure-lockfile --ignore-engines
         yarn dist
-  test:
-    runs-on: macOS-latest
-    steps:
-    - uses: actions/checkout@v1
-    - name: Set up Node
-      uses: actions/setup-node@v1
-      with:
-        node-version: '12.x'
-    - name: Test
-      run: |
-        yarn --link-duplicates --pure-lockfile --ignore-engines
-        yarn test
