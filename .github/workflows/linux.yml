@@ -1,0 +1,37 @@
+name: linux
+
+on: [push]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+    - name: Install dependencies
+      run:
+        sudo apt-get install libx11-dev libxkbfile-dev libxtst-dev libpng++-dev make -y
+    - name: Lint
+      run: |
+        yarn --link-duplicates --pure-lockfile --ignore-engines
+        yarn lint
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+    - name: Install dependencies
+      run:
+        sudo apt-get install libx11-dev libxkbfile-dev libxtst-dev libpng++-dev make rpm -y
+    - name: Build
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      run: |
+        yarn --link-duplicates --pure-lockfile --ignore-engines
+        yarn dist
