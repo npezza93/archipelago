@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   build:
-    runs-on: macOS-latest
+    runs-on: macOS-10.14
     steps:
     - uses: actions/checkout@v1
     - name: Set up Node
@@ -18,7 +18,7 @@ jobs:
         yarn --link-duplicates --pure-lockfile --ignore-engines
         yarn dist
   test:
-    runs-on: macOS-latest
+    runs-on: macOS-10.14
     steps:
     - uses: actions/checkout@v1
     - name: Set up Node
