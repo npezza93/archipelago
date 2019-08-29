@@ -11,9 +11,9 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '12.x'
+    - name: Install
+      run: yarn --link-duplicates --pure-lockfile --ignore-engines
     - name: Build
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
-      run: |
-        yarn --link-duplicates --pure-lockfile --ignore-engines
-        yarn dist
+      run: yarn dist
