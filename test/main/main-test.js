@@ -50,17 +50,17 @@ describe('Application launch', function () {
     })
   })
 
-  // it('splits the terminal horizontally', async () => {
-  //   const initalElements = await this.app.client.elements('archipelago-terminal')
-  //   assert.equal(initalElements.value.length, 1)
-  //   robot.keyTap('s', cmdOrCtrl())
-  //   await this.app.client.waitForVisible('.SplitPane.horizontal')
-  //   const afterElements = await this.app.client.elements('archipelago-terminal')
-  //   assert.equal(afterElements.value.length, 2)
-  //   assert(await this.app.client.isExisting('.SplitPane.horizontal'))
-  //   return assert.isFalse(await this.app.client.isExisting('.SplitPane.vertical'))
-  // })
-  //
+  it('splits the terminal horizontally', async () => {
+    const initalElements = await this.app.client.elements('archipelago-terminal')
+    assert.equal(initalElements.value.length, 1)
+    robot.keyTap('s', cmdOrCtrl())
+    await this.app.client.waitForVisible('.SplitPane.horizontal')
+    const afterElements = await this.app.client.elements('archipelago-terminal')
+    assert.equal(afterElements.value.length, 2)
+    assert(await this.app.client.isExisting('.SplitPane.horizontal'))
+    return assert.isFalse(await this.app.client.isExisting('.SplitPane.vertical'))
+  })
+
   // it('splits the terminal vertically', async () => {
   //   const initalElements = await this.app.client.elements('archipelago-terminal')
   //   assert.equal(initalElements.value.length, 1)
