@@ -83,17 +83,17 @@ describe('Application launch', function () {
   //   return assert.equal(tabElements.value.length, 2)
   // })
   //
-  it('doesnt add a new tab in single tab mode', async () => {
-    await setSingleTabMode(true, this.app)
-    const initalElements = await this.app.client.elements('archipelago-terminal')
-    assert.equal(initalElements.value.length, 1)
-    robot.keyTap('t', cmdOrCtrl())
-    const afterElements = await this.app.client.elements('archipelago-terminal')
-    assert.equal(afterElements.value.length, 1)
-    const tabElements = await this.app.client.elements('archipelago-tab')
-    return assert.equal(tabElements.value.length, 1)
-  })
-
+  // it('doesnt add a new tab in single tab mode', async () => {
+  //   await setSingleTabMode(true, this.app)
+  //   const initalElements = await this.app.client.elements('archipelago-terminal')
+  //   assert.equal(initalElements.value.length, 1)
+  //   robot.keyTap('t', cmdOrCtrl())
+  //   const afterElements = await this.app.client.elements('archipelago-terminal')
+  //   assert.equal(afterElements.value.length, 1)
+  //   const tabElements = await this.app.client.elements('archipelago-tab')
+  //   return assert.equal(tabElements.value.length, 1)
+  // })
+  //
   // describe('tab closures', () => {
   //   it('closes a tab', async () => {
   //     await setSingleTabMode(false, this.app)
