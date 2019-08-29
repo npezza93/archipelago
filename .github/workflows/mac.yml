@@ -11,14 +11,14 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '12.x'
+    - name: Install
+      run: yarn --link-duplicates --pure-lockfile --ignore-engines
     - name: Build
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
         CSC_LINK: ${{ secrets.CSC_LINK }}
         CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
-      run: |
-        yarn --link-duplicates --pure-lockfile --ignore-engines
-        yarn dist
+      run: yarn dist
   test:
     runs-on: macOS-10.14
     steps:
@@ -27,7 +27,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '12.x'
+    - name: Install
+      run: yarn --link-duplicates --pure-lockfile --ignore-engines
     - name: Test
-      run: |
-        yarn --link-duplicates --pure-lockfile --ignore-engines
-        yarn test
+      run: yarn test

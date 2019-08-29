@@ -12,12 +12,11 @@ jobs:
       with:
         node-version: '12.x'
     - name: Install dependencies
-      run:
-        sudo apt-get install libx11-dev libxkbfile-dev libxtst-dev libpng++-dev make -y
+      run: sudo apt-get install libx11-dev libxkbfile-dev libxtst-dev libpng++-dev make -y
+    - name: Install modules
+      run: yarn --link-duplicates --pure-lockfile --ignore-engines
     - name: Lint
-      run: |
-        yarn --link-duplicates --pure-lockfile --ignore-engines
-        yarn lint
+      run: yarn lint
   build:
     runs-on: ubuntu-latest
     steps:
@@ -27,11 +26,10 @@ jobs:
       with:
         node-version: '12.x'
     - name: Install dependencies
-      run:
-        sudo apt-get install libx11-dev libxkbfile-dev libxtst-dev libpng++-dev make rpm -y
+      run: sudo apt-get install libx11-dev libxkbfile-dev libxtst-dev libpng++-dev make rpm -y
+    - name: Install modules
+      run: yarn --link-duplicates --pure-lockfile --ignore-engines
     - name: Build
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
-      run: |
-        yarn --link-duplicates --pure-lockfile --ignore-engines
-        yarn dist
+      run: yarn dist
