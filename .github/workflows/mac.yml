@@ -19,15 +19,15 @@ jobs:
         CSC_LINK: ${{ secrets.CSC_LINK }}
         CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
       run: yarn dist
-  test:
-    runs-on: macOS-10.14
-    steps:
-    - uses: actions/checkout@v1
-    - name: Set up Node
-      uses: actions/setup-node@v1
-      with:
-        node-version: '12.x'
-    - name: Install
-      run: yarn --link-duplicates --pure-lockfile --ignore-engines
-    - name: Test
-      run: yarn test
+  # test:
+  #   runs-on: macOS-10.14
+  #   steps:
+  #   - uses: actions/checkout@v1
+  #   - name: Set up Node
+  #     uses: actions/setup-node@v1
+  #     with:
+  #       node-version: '12.x'
+  #   - name: Install
+  #     run: yarn --link-duplicates --pure-lockfile --ignore-engines
+  #   - name: Test
+  #     run: yarn test
