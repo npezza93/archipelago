@@ -1,0 +1,21 @@
+matrix:
+  include:
+    - os: osx
+      osx_image: xcode10.1
+      language: node_js
+      node_js: "12"
+      env:
+        - YARN_COMMAND=test
+
+cache:
+  directories:
+  - node_modules
+  - $HOME/.cache/electron
+  - $HOME/.cache/electron-builder
+
+script: yarn --link-duplicates --pure-lockfile --ignore-engines; yarn $YARN_COMMAND
+
+notifications:
+  email: false
+before_cache:
+   - rm -rf $HOME/.cache/electron-builder/wine
