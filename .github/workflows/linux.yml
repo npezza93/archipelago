@@ -41,7 +41,9 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '12.x'
-    - name: Install
+    - name: Install dependencies
+      run: sudo apt-get install libx11-dev libxkbfile-dev libxtst-dev libpng++-dev make rpm -y
+    - name: Install modules
       run: yarn --link-duplicates --pure-lockfile --ignore-engines
     - name: Test
       run: yarn test
