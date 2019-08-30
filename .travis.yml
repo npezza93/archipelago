@@ -4,41 +4,6 @@ matrix:
       osx_image: xcode10.1
       language: node_js
       node_js: "12"
-      env:
-        - YARN_COMMAND=dist
-    - os: linux
-      language: node_js
-      node_js: "12"
-      env:
-        - YARN_COMMAND=dist
-      addons:
-        apt:
-          packages:
-            - libx11-dev
-            - libxkbfile-dev
-            - libxtst-dev
-            - libpng++-dev
-            - make
-            - rpm
-    - os: linux
-      language: node_js
-      node_js: "12"
-      env:
-        - YARN_COMMAND=lint
-      addons:
-        apt:
-          packages:
-            - libx11-dev
-            - libxkbfile-dev
-            - libxtst-dev
-            - libpng++-dev
-            - make
-    - os: osx
-      osx_image: xcode10.1
-      language: node_js
-      node_js: "12"
-      env:
-        - YARN_COMMAND=test
 
 cache:
   directories:
@@ -46,7 +11,7 @@ cache:
   - $HOME/.cache/electron
   - $HOME/.cache/electron-builder
 
-script: yarn --link-duplicates --pure-lockfile --ignore-engines; yarn $YARN_COMMAND
+script: yarn --link-duplicates --pure-lockfile --ignore-engines; yarn test
 
 notifications:
   email: false
