@@ -142,6 +142,7 @@ close-button:hover {
 archipelago-pane-list {
   display: flex;
   flex: 1;
+  min-height: 0;
 }
 archipelago-pane-list archipelago-pane {
   margin: 0;
@@ -157,6 +158,7 @@ archipelago-tab-list {
   display: flex;
   flex-direction: row;
   height: 40px;
+  min-height: 0;
 }
 
 archipelago-app.darwin archipelago-tab-list {
