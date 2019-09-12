@@ -9,11 +9,10 @@ import debouncer from 'debounce-fn'
 import keystrokeForKeyboardEvent from 'keystroke-for-keyboard-event'
 import autoBind from 'auto-bind'
 import Color from 'color'
+import {FitAddon} from 'xterm-addon-fit'
+import {SearchAddon} from 'xterm-addon-search'
+import {WebLinksAddon} from 'xterm-addon-web-links'
 import CurrentProfile from '../utils/current-profile'
-
-Terminal.applyAddon(require('xterm/lib/addons/fit/fit'))
-Terminal.applyAddon(require('xterm/lib/addons/search/search'))
-Terminal.applyAddon(require('xterm/lib/addons/webLinks/webLinks'))
 
 export default class Session {
   constructor(type, branch) {
@@ -24,7 +23,12 @@ export default class Session {
     this.title = ''
     this.ptyId = ipc.callMain('pty-create', {sessionId: this.id, sessionWindowId: activeWindow().id})
     this.type = type || 'default'
+    this.fitAddon = new FitAddon()
+    this.searchAddon = new SearchAddon()
     this.xterm = new Terminal(this.settings())
+    this.xterm.loadAddon(this.fitAddon)
+    this.xterm.loadAddon(this.searchAddon)
+
     this.resetKeymaps()
     autoBind(this)
 
@@ -94,6 +98,8 @@ export default class Session {
       this._container.append(this._wrapperElement)
       this.xterm.open(this._xtermElement)
       this.bindScrollListener()
+      this.subscriptions.add(this.onFocus(this.fit))
+      this.subscriptions.add(this.onFocus(this.resetBlink))
       this.xterm.focus()
       return
     }
@@ -125,7 +131,7 @@ export default class Session {
   }
 
   fit() {
-    this.xterm.fit()
+    this.fitAddon.fit()
     ipc.send(`pty-resize-${this.id}`, {cols: this.xterm.cols, rows: this.xterm.rows})
   }
 
@@ -143,11 +149,11 @@ export default class Session {
   }
 
   searchNext(query, options) {
-    this.xterm.findNext(query, options)
+    this.searchAddon.findNext(query, options)
   }
 
   searchPrevious(query, options) {
-    this.xterm.findPrevious(query, options)
+    this.searchAddon.findPrevious(query, options)
   }
 
   keybindingHandler(e) {
@@ -199,11 +205,15 @@ export default class Session {
   }
 
   onFocus(callback) {
-    return this.xterm.addDisposableListener('focus', callback)
+    this.xterm.textarea.addEventListener('focus', callback)
+
+    return new Disposable(() => {
+      this.xterm.textarea.removeEventListener('focus', callback)
+    })
   }
 
   onTitle(callback) {
-    return this.xterm.addDisposableListener('title', callback)
+    return this.xterm.onTitleChange(callback)
   }
 
   onExit(callback) {
@@ -214,11 +224,11 @@ export default class Session {
   }
 
   onData(callback) {
-    return this.xterm.addDisposableListener('data', callback)
+    return this.xterm.onData(callback)
   }
 
   onSelection(callback) {
-    return this.xterm.addDisposableListener('selection', callback)
+    return this.xterm.onSelectionChange(callback)
   }
 
   onSettingChanged({property, value}) {
@@ -244,7 +254,7 @@ export default class Session {
   }
 
   bindListeners() {
-    this.xterm.webLinksInit((event, uri) => {
+    this.webLinksAddon = new WebLinksAddon((event, uri) => {
       if (document.querySelector('webview')) {
         document.querySelector('webview').remove()
       }
@@ -255,6 +265,8 @@ export default class Session {
         document.querySelector('body').append(webview)
       }
     })
+
+    this.xterm.loadAddon(this.webLinksAddon)
     this.xterm.attachCustomKeyEventHandler(this.keybindingHandler)
 
     ipc.on(`pty-data-${this.id}`, this.writePtyData)
@@ -265,8 +277,6 @@ export default class Session {
       ipc.send(`pty-write-${this.id}`, data)
     }))
     this.subscriptions.add(this.onTitle(this.setTitle))
-    this.subscriptions.add(this.onFocus(this.fit))
-    this.subscriptions.add(this.onFocus(this.resetBlink))
     this.subscriptions.add(this.onSelection(this.copySelection))
     this.subscriptions.add(new Disposable(ipc.answerMain('active-profile-changed', this.onActiveProfileChange)))
     this.subscriptions.add(new Disposable(ipc.answerMain('setting-changed', this.onSettingChanged)))

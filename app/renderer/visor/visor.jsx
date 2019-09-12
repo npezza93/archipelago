@@ -7,7 +7,7 @@ import Component from '../utils/component.jsx'
 import CurrentProfile from '../utils/current-profile'
 import Tab from '../sessions/tab'
 import Pane from './pane.jsx'
-import 'xterm/lib/xterm.css'
+import 'xterm/css/xterm.css'
 import './styles.css'
 
 export default class Visor extends Component {
