@@ -208,7 +208,9 @@ export default class Session {
     this.xterm.textarea.addEventListener('focus', callback)
 
     return new Disposable(() => {
-      this.xterm.textarea.removeEventListener('focus', callback)
+      if (this.xterm && this.xterm.textarea) {
+        this.xterm.textarea.removeEventListener('focus', callback)
+      }
     })
   }
 
