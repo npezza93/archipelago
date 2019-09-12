@@ -129,16 +129,6 @@
               "title": "shell"
             }
           },
-          "experimentalCharAtlas": {
-            "type": "string",
-            "title": "Choose the type of character atlas",
-            "default": "dynamic",
-            "scope": "xterm",
-            "settings": {
-              "title": "shell"
-            },
-            "enum": ["none", "static", "dynamic"]
-          },
           "tabStopWidth": {
             "type": "integer",
             "default": 8,
