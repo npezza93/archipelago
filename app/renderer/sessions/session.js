@@ -98,8 +98,6 @@ export default class Session {
       this._container.append(this._wrapperElement)
       this.xterm.open(this._xtermElement)
       this.bindScrollListener()
-      this.subscriptions.add(this.onFocus(this.fit))
-      this.subscriptions.add(this.onFocus(this.resetBlink))
       this.xterm.focus()
       return
     }
@@ -205,13 +203,7 @@ export default class Session {
   }
 
   onFocus(callback) {
-    this.xterm.textarea.addEventListener('focus', callback)
-
-    return new Disposable(() => {
-      if (this.xterm && this.xterm.textarea) {
-        this.xterm.textarea.removeEventListener('focus', callback)
-      }
-    })
+    return this.xterm._core.onFocus(callback)
   }
 
   onTitle(callback) {
@@ -279,6 +271,8 @@ export default class Session {
       ipc.send(`pty-write-${this.id}`, data)
     }))
     this.subscriptions.add(this.onTitle(this.setTitle))
+    this.subscriptions.add(this.onFocus(this.fit))
+    this.subscriptions.add(this.onFocus(this.resetBlink))
     this.subscriptions.add(this.onSelection(this.copySelection))
     this.subscriptions.add(new Disposable(ipc.answerMain('active-profile-changed', this.onActiveProfileChange)))
     this.subscriptions.add(new Disposable(ipc.answerMain('setting-changed', this.onSettingChanged)))

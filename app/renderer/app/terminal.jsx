@@ -25,13 +25,6 @@ export default class Terminal extends Component {
 
     session.attach(this.container)
 
-    this.addSubscription(
-      this.props.session.onFocus(() => {
-        this.props.selectSession(this.props.session.id)
-        this.props.changeTitle(this.props.tabId, this.props.session.title)
-      })
-    )
-
     this.resizeObserver.observe(this.container)
   }
 
@@ -42,6 +35,13 @@ export default class Terminal extends Component {
   bindListeners() {
     this.addSubscription(
       new Disposable(() => this.resizeObserver.unobserve(this.container))
+    )
+
+    this.addSubscription(
+      this.props.session.onFocus(() => {
+        this.props.selectSession(this.props.session.id)
+        this.props.changeTitle(this.props.tabId, this.props.session.title)
+      })
     )
 
     this.addSubscription(
