@@ -92,7 +92,7 @@
     "mocha": "^6.0.0",
     "robotjs": "sidharth0094/robotjs",
     "spectron": "^8.0.0",
-    "webpack": "^4.28.3",
+    "webpack": "^4.40.1",
     "xo": "^0.24.0"
   },
   "build": {
