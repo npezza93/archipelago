@@ -9924,10 +9924,10 @@ xtend@~2.1.1:
   dependencies:
     object-keys "~0.4.0"
 
-xterm-addon-fit@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/xterm-addon-fit/-/xterm-addon-fit-0.2.0.tgz#293d871eb3843cb5373b4cf4a785435ec1c57216"
-  integrity sha512-bGKXbYD8m/qsm9syekfjAc0bUyl9kdEWjnkTmcwR1DrIgfuo7e8M/B51JtEIjkzsHlleSe3uOyyetVgVJYzAPg==
+xterm-addon-fit@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/xterm-addon-fit/-/xterm-addon-fit-0.2.1.tgz#353f43921eb78e3f9ad3f3afbb14e7ac183ca738"
+  integrity sha512-BlR57O3t1/bmVcnS81bn9ZnNf+GiGNbeXdNUKSBa9tKEwNUMcU3S+KFLIRv7rm1Ty0D5pMOu0vbz/RDorKRwKQ==
 
 xterm-addon-search@^0.2.1:
   version "0.2.1"
