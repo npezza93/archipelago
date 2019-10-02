@@ -88,7 +88,7 @@
     "electron-builder": "^21.2.0",
     "electron-mocha": "^8.1.2",
     "electron-webpack": "^2.3.1",
-    "eslint-plugin-react": "^7.12.1",
+    "eslint-plugin-react": "^7.15.1",
     "mocha": "^6.2.1",
     "robotjs": "sidharth0094/robotjs",
     "spectron": "^8.0.0",
