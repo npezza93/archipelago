@@ -55,20 +55,20 @@ export default class Pty {
     })
     ipc.on(`pty-resize-${this.sessionId}`, this.handleResize.bind(this))
     ipc.on(`pty-write-${this.sessionId}`, this.handleWrite.bind(this))
-    this.pty.on('exit', () => {
+    this.pty.onExit(() => {
       this.sessionWindow.webContents.send(`pty-exit-${this.sessionId}`)
     })
-    this.pty.on('data', data => this.bufferData(data))
+    this.pty.onData(data => this.bufferData(data))
   }
 
   onExit(callback) {
-    this.pty.on('exit', callback)
+    this.pty.onExit(callback)
 
     return new Disposable(() => this.pty.removeListener('exit', callback))
   }
 
   onData(callback) {
-    this.pty.on('data', callback)
+    this.pty.onData(callback)
 
     return new Disposable(() => this.pty.removeListener('data', callback))
   }
