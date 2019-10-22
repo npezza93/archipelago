@@ -1,7 +1,7 @@
 import React from 'react'
 import {ipcRenderer as ipc} from 'electron-better-ipc'
 import {Disposable} from 'event-kit'
-import schema from '../../common/schema'
+import schema from '../../common/schema.json'
 import Component from '../utils/component.jsx'
 import SectionHeaders from './section-headers.jsx'
 import PropertiesSection from './properties-section.jsx'

@@ -2,9 +2,9 @@ import {BrowserWindow, app} from 'electron'
 import {is, platform} from 'electron-util'
 import Color from 'color'
 import {ipcMain as ipc} from 'electron-better-ipc'
-import darwinAccelerators from './accelerators/darwin'
-import linuxAccelerators from './accelerators/linux'
-import windowsAccelerators from './accelerators/windows'
+import darwinAccelerators from './accelerators/darwin.json'
+import linuxAccelerators from './accelerators/linux.json'
+import windowsAccelerators from './accelerators/windows.json'
 
 export const argbBackground = (profileManager, property) => {
   const color = new Color(profileManager.get(property))
