@@ -2,13 +2,13 @@ import {BrowserWindow, app} from 'electron'
 import {is, platform} from 'electron-util'
 import Color from 'color'
 import {ipcMain as ipc} from 'electron-better-ipc'
-import darwinAccelerators from './accelerators/darwin'
-import linuxAccelerators from './accelerators/linux'
-import windowsAccelerators from './accelerators/windows'
+import darwinAccelerators from './accelerators/darwin.json'
+import linuxAccelerators from './accelerators/linux.json'
+import windowsAccelerators from './accelerators/windows.json'
 
 export const argbBackground = (profileManager, property) => {
   const color = new Color(profileManager.get(property))
-  const hex = color.hex().substring(1)
+  const hex = color.hex().slice(1)
   let opacity = Math.round(color.alpha() * 255).toString(16)
   opacity = (opacity.length < 2) ? '0' + opacity : opacity
 

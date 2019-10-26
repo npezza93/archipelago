@@ -77,7 +77,9 @@ export default class Pty {
     if (Number.isInteger(cols) && Number.isInteger(rows)) {
       try {
         this.pty.resize(cols, rows)
-      } catch (error) {}
+      } catch (error) {
+        console.error(error)
+      }
     }
   }
 

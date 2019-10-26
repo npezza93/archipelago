@@ -1,5 +1,5 @@
 import Pref from 'pref'
-import schema from '../../common/schema'
+import schema from '../../common/schema.json'
 
 export default class CurrentProfile {
   constructor() {

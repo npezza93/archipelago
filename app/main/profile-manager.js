@@ -19,6 +19,10 @@ export default class ProfileManager {
     return parseInt(id, 10)
   }
 
+  get activeProfileId() {
+    return parseInt(this.configFile.get('activeProfileId'), 10)
+  }
+
   get rawProfiles() {
     return this.configFile.get('profiles') || []
   }
