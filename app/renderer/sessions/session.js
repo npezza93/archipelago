@@ -65,7 +65,7 @@ export default class Session {
   }
 
   isWindows() {
-    return ['Windows', 'Win16', 'Win32', 'WinCE'].indexOf(navigator.platform) >= 0
+    return ['Windows', 'Win16', 'Win32', 'WinCE'].includes(navigator.platform)
   }
 
   applySettingModifiers(defaultSettings) {
