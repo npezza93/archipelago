@@ -11,6 +11,12 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '12.x'
+    - uses: actions/cache@preview
+      with:
+        path: ~/.cache/yarn
+        key: ${{ runner.os }}-yarn-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+        restore-keys: |
+          ${{ runner.os }}-yarn-
     - name: Install dependencies
       run: sudo apt-get install libx11-dev libxkbfile-dev libxtst-dev libpng++-dev make -y
     - name: Install modules
@@ -25,6 +31,12 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '12.x'
+    - uses: actions/cache@preview
+      with:
+        path: ~/.cache/yarn
+        key: ${{ runner.os }}-yarn-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+        restore-keys: |
+          ${{ runner.os }}-yarn-
     - name: Install dependencies
       run: sudo apt-get install libx11-dev libxkbfile-dev libxtst-dev libpng++-dev make rpm -y
     - name: Install modules
