@@ -9544,10 +9544,10 @@ uglify-js@3.4.x:
     commander "~2.19.0"
     source-map "~0.6.1"
 
-unescape-js@^1.1.0:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/unescape-js/-/unescape-js-1.1.1.tgz#a4345e654b857c29fa66469e311ccaf2e93063bd"
-  integrity sha512-2/6CdybfFt9fzYJhCD6SHfBnqCGNfjhMwPK9Pf+sJRloa/WmyAmxdBVOslOIYkvSIRKX+9xGePF5t1tugtZ63g==
+unescape-js@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/unescape-js/-/unescape-js-1.1.4.tgz#4bc6389c499cb055a98364a0b3094e1c3d5da395"
+  integrity sha512-42SD8NOQEhdYntEiUQdYq/1V/YHwr1HLwlHuTJB5InVVdOSbgI6xu8jK5q65yIzuFCfczzyDF/7hbGzVbyCw0g==
   dependencies:
     string.fromcodepoint "^0.2.1"
 
