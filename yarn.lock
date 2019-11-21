@@ -3247,10 +3247,10 @@ electron-to-chromium@^1.2.7, electron-to-chromium@^1.3.295:
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.304.tgz#49b47d961f8143116174c2f70fbfee3aabf43015"
   integrity sha512-a5mqa13jCdBc+Crgk3Gyr7vpXCiFWfFq23YDCEmrPYeiDOQKZDVE6EX/Q4Xdv97n3XkcjiSBDOY0IS19yP2yeA==
 
-electron-util@^0.12.2:
-  version "0.12.2"
-  resolved "https://registry.yarnpkg.com/electron-util/-/electron-util-0.12.2.tgz#ab03458459a3354fc2ea0e22ede714f291c0896d"
-  integrity sha512-AG96dy4o7jgsTmiHwps/CGRzQDbeZYDqxxBprbEwcK0Ao15njIAsZQfcMEPid6D6Mdix+T/Pjs5hxoYPkjKscg==
+electron-util@^0.13.0:
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/electron-util/-/electron-util-0.13.0.tgz#bce9032ab07cab3bc3448451f2a48a766ef51cce"
+  integrity sha512-3jpvw72quwKMI5fBSE+9oQvtcBmjLZZq5wlOuUujEbV6gRD2Vzrfqmiu0PSwO7+ki7E6xsnrWHg85vMJ/rL/GA==
   dependencies:
     electron-is-dev "^1.1.0"
     new-github-issue-url "^0.2.1"
