@@ -1,4 +1,4 @@
-import {app, globalShortcut, screen} from 'electron'
+import {app, globalShortcut, screen, Notification} from 'electron'
 import contextMenu from 'electron-context-menu'
 import {ipcMain as ipc} from 'electron-better-ipc'
 import {Disposable, CompositeDisposable} from 'event-kit'
@@ -60,14 +60,21 @@ const create = profileManager => {
 
 const register = profileManager => {
   const visorAccelerator = profileManager.get('visor.keybinding') || 'F1'
-  globalShortcut.register(visorAccelerator.split('-').join('+'), () => {
-    create(profileManager)
-    if (isVisorShowing) {
-      hideVisor()
-    } else {
-      showVisor()
-    }
-  })
+  try {
+    globalShortcut.register(visorAccelerator.split('-').join('+'), () => {
+      create(profileManager)
+      if (isVisorShowing) {
+        hideVisor()
+      } else {
+        showVisor()
+      }
+    })
+  } catch (e) {
+    (new Notification({
+      title: 'Invalid visor keybinding',
+      body: 'Please change to a valid keybinding which does not just include modifiers'
+    })).show()
+  }
 }
 
 app.on('quit', () => subscriptions.dispose())
