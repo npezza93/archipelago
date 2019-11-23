@@ -69,7 +69,7 @@ const register = profileManager => {
         showVisor()
       }
     })
-  } catch (e) {
+  } catch (error) { // eslint-disable-line no-unused-vars
     (new Notification({
       title: 'Invalid visor keybinding',
       body: 'Please change to a valid keybinding which does not just include modifiers'
