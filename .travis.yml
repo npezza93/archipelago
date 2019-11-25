@@ -11,8 +11,8 @@ cache:
   - $HOME/.cache/electron
   - $HOME/.cache/electron-builder
 
-before_install:
-  - sudo sqlite3 "/Library/Application Support/com.apple.TCC/TCC.db" "INSERT INTO access VALUES ('kTCCServiceAccessibility','com.apple.dt.Xcode-Helper',0,1,1,NULL,NULL);"
+# before_install:
+#   - sudo sqlite3 "/Library/Application Support/com.apple.TCC/TCC.db" "INSERT INTO access VALUES ('kTCCServiceAccessibility','com.apple.dt.Xcode-Helper',0,1,1,NULL,NULL);"
 
 script: yarn --link-duplicates --pure-lockfile --ignore-engines; yarn test
 
