@@ -70,7 +70,7 @@
     "react-addons-css-transition-group": "^15.6.2",
     "react-color": "^2.17.0",
     "react-dom": "^16.10.2",
-    "react-split-pane": "^0.1.81",
+    "react-split-pane": "^0.1.89",
     "source-map-support": "^0.5.16",
     "unescape-js": "^1.1.0",
     "update-electron-app": "^1.3.0",
