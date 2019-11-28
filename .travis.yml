@@ -1,7 +1,7 @@
 matrix:
   include:
     - os: osx
-      osx_image: xcode10.1
+      osx_image: xcode11.2
       language: node_js
       node_js: "12"
 
@@ -10,6 +10,9 @@ cache:
   - node_modules
   - $HOME/.cache/electron
   - $HOME/.cache/electron-builder
+
+# before_install:
+#   - sudo sqlite3 "/Library/Application Support/com.apple.TCC/TCC.db" "INSERT INTO access VALUES ('kTCCServiceAccessibility','com.apple.dt.Xcode-Helper',0,1,1,NULL,NULL);"
 
 script: yarn --link-duplicates --pure-lockfile --ignore-engines; yarn test
 
