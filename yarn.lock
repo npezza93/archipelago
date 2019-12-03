@@ -795,10 +795,10 @@
   resolved "https://registry.yarnpkg.com/@posthtml/esm/-/esm-1.0.0.tgz#09bcb28a02438dcee22ad1970ca1d85a000ae0cf"
   integrity sha512-dEVG+ITnvqKGa4v040tP+n8LOKOqr94qjLva7bE5pnfm2KHJwsKz69J4KMxgWLznbpBJzy8vQfCayEk3vLZnZQ==
 
-"@researchgate/react-intersection-observer@^1.0.0":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@researchgate/react-intersection-observer/-/react-intersection-observer-1.0.4.tgz#cad7817e3c3a20393f0953d79ce216dddf93640c"
-  integrity sha512-+grx5Fb8HXubTOiuk25ckRnfAYwxLIYyGivfuddKIRZU6UD4YXBnlruuwdHoJcKnhSBgWzAzuyPHFNa9sN+qww==
+"@researchgate/react-intersection-observer@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@researchgate/react-intersection-observer/-/react-intersection-observer-1.0.5.tgz#085f104d1f0b21eecc5ef11f30cc5a2ec4426f38"
+  integrity sha512-AR2afu0MM8XuKn05OyT6E4wsxD0xM2521syxQ2mFO3201OE+L0z3BNdxXzlJhxvNLk0+caY3jxKSUObG8DoLCg==
   dependencies:
     invariant "^2.2.4"
     prop-types "^15.7.2"
