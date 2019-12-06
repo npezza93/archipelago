@@ -1,4 +1,4 @@
-import {app, Menu} from 'electron'
+import {nativeTheme, app, Menu} from 'electron'
 import {is} from 'electron-util'
 import {CompositeDisposable, Disposable} from 'event-kit'
 import {ipcMain as ipc} from 'electron-better-ipc'
@@ -101,3 +101,12 @@ subscriptions.add(new Disposable(
     ipc.callRenderer(currentTerminalWindow, 'search-previous', {query, options})
   })
 ))
+
+const darkModeChange = () => {
+  ipc.sendToRenderers('dark-mode-changed')
+}
+
+nativeTheme.on('updated', darkModeChange)
+subscriptions.add(new Disposable(() => {
+  nativeTheme.removeListener('updated', darkModeChange)
+}))

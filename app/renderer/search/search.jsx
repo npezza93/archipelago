@@ -102,8 +102,10 @@ export default class Search extends Component {
     this.addSubscription(new Disposable(ipc.answerMain('search-next', this.searchNext)))
     this.addSubscription(new Disposable(ipc.answerMain('search-previous', this.searchPrevious)))
 
+    const boundChanger = this.handleDarkModeChange.bind(this)
+    ipc.on('dark-mode-changed', boundChanger)
     this.addSubscription(
-      new Disposable(darkMode.onChange(this.handleDarkModeChange.bind(this)))
+      new Disposable(() => ipc.removeListener('dark-mode-changed', boundChanger))
     )
 
     ipc.on('close-via-menu', window.close)
