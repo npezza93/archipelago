@@ -12,6 +12,7 @@ import Color from 'color'
 import {FitAddon} from 'xterm-addon-fit'
 import {SearchAddon} from 'xterm-addon-search'
 import {WebLinksAddon} from 'xterm-addon-web-links'
+import {WebglAddon} from 'xterm-addon-webgl'
 import CurrentProfile from '../utils/current-profile'
 
 export default class Session {
@@ -25,6 +26,7 @@ export default class Session {
     this.type = type || 'default'
     this.fitAddon = new FitAddon()
     this.searchAddon = new SearchAddon()
+    this.webglAddon = new WebglAddon()
     this.xterm = new Terminal(this.settings())
     this.xterm.loadAddon(this.fitAddon)
     this.xterm.loadAddon(this.searchAddon)
@@ -97,6 +99,9 @@ export default class Session {
       this._wrapperElement.append(this._xtermElement)
       this._container.append(this._wrapperElement)
       this.xterm.open(this._xtermElement)
+      if (this.currentProfile.get('webglRenderer')) {
+        this.xterm.loadAddon(this.webglAddon)
+      }
       this.bindScrollListener()
       this.xterm.focus()
       return
