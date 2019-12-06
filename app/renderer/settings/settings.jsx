@@ -41,8 +41,10 @@ export default class Settings extends Component {
   }
 
   bindListeners() {
+    const boundChanger = this.handleDarkModeChange.bind(this)
+    ipc.on('dark-mode-changed', boundChanger)
     this.addSubscription(
-      new Disposable(darkMode.onChange(this.handleDarkModeChange.bind(this)))
+      new Disposable(() => ipc.removeListener('dark-mode-changed', boundChanger))
     )
 
     ipc.on('close-via-menu', window.close)
