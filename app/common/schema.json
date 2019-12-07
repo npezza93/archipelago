@@ -78,6 +78,15 @@
               "title": "cursor"
             }
           },
+          "cursorWidth": {
+            "type": "number",
+            "scope": "xterm",
+            "default": 1,
+            "title": "Choose a bar cursor width",
+            "settings": {
+              "title": "cursor"
+            }
+          },
           "cursorBlink": {
             "type": "boolean",
             "title": "Blink cursor",
