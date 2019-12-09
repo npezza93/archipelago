@@ -10348,9 +10348,9 @@ xterm-addon-web-links@^0.2.1:
   integrity sha512-2KnHtiq0IG7hfwv3jw2/jQeH1RBk2d5CH4zvgwQe00rLofSJqSfgnJ7gwowxxpGHrpbPr6Lv4AmH/joaNw2+HQ==
 
 xterm@^4.4.0-beta.2:
-  version "4.4.0-beta.2"
-  resolved "https://registry.yarnpkg.com/xterm/-/xterm-4.4.0-beta.2.tgz#a78af392bbeffa5b10eae5c72e068cf7e5c798e1"
-  integrity sha512-emsEWcegjbo10HWXDDDM45H0F07No01DbBArVRYuvQzdP8HYThXfJYNQoeztvMWFT2suZ9ic9FFznP06uw/v7A==
+  version "4.4.0-beta.3"
+  resolved "https://registry.yarnpkg.com/xterm/-/xterm-4.4.0-beta.3.tgz#dd84f2225d2a00f7de07c0d991be195cd87ae82a"
+  integrity sha512-Z75mcH9KJgRo0mAV6AshFlbTsMvl3AVMT/YkT+VWn4xevp0E7hg2iPBAK8WvbmZFKnHLk15To/Ku2Dwwry9O1A==
 
 "y18n@^3.2.1 || ^4.0.0", y18n@^4.0.0:
   version "4.0.0"
