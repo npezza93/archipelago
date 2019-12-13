@@ -218,7 +218,7 @@
               "title": "modes"
             }
           },
-          "webglRenderer": {
+          "experimentalWebglRenderer": {
             "type": "boolean",
             "default": false,
             "settings": {

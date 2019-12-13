@@ -99,7 +99,7 @@ export default class Session {
       this._wrapperElement.append(this._xtermElement)
       this._container.append(this._wrapperElement)
       this.xterm.open(this._xtermElement)
-      if (this.currentProfile.get('webglRenderer')) {
+      if (this.currentProfile.get('experimentalWebglRenderer')) {
         this.xterm.loadAddon(this.webglAddon)
       }
 
