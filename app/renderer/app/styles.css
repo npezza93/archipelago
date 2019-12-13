@@ -302,7 +302,3 @@ webview {
   z-index: 100;
   background: #fff;
 }
-
-body > canvas {
-  display: none;
-}
