@@ -218,6 +218,13 @@
               "title": "modes"
             }
           },
+          "experimentalWebglRenderer": {
+            "type": "boolean",
+            "default": false,
+            "settings": {
+              "title": "modes"
+            }
+          },
           "tabColor": {
             "type": "string",
             "color": true,
