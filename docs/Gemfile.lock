@@ -23,7 +23,7 @@ GEM
     execjs (2.7.0)
     fast_blank (1.0.0)
     fastimage (2.1.5)
-    ffi (1.11.0)
+    ffi (1.11.3)
     haml (5.1.0)
       temple (>= 0.8.0)
       tilt
@@ -85,7 +85,7 @@ GEM
     parser (2.6.3.0)
       ast (~> 2.4.0)
     public_suffix (3.0.3)
-    rack (2.0.7)
+    rack (2.0.8)
     rainbow (3.0.0)
     rake (12.3.2)
     rb-fsevent (0.10.3)
