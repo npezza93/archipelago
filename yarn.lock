@@ -10499,25 +10499,25 @@ xterm-addon-fit@^0.4.0-beta2:
   resolved "https://registry.yarnpkg.com/xterm-addon-fit/-/xterm-addon-fit-0.4.0-beta2.tgz#c638ea7d41c55b535825f41b1cdb7358a94dfca4"
   integrity sha512-7EHWk8SPCmKuw9ux1mFek2SfBw1QjJ/ObYA87tubOtJi7mAZ0eIb9IE5ditcma9Nyz/cR/ROQQxoRn4UbDvyfA==
 
-xterm-addon-search@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/xterm-addon-search/-/xterm-addon-search-0.4.0.tgz#a7beadb3caa7330eb31fb1f17d92de25537684a1"
-  integrity sha512-g07qb/Z4aSfrQ25e6Z6rz6KiExm2DvesQXkx+eA715VABBr5VM/9Jf0INoCiDSYy/nn7rpna+kXiGVJejIffKg==
+xterm-addon-search@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/xterm-addon-search/-/xterm-addon-search-0.5.0.tgz#cd3a2f8056084c28e236d4e732da37682010bcc2"
+  integrity sha512-zLVqVTrg5w2nk9fRj3UuVKCPo/dmFe/cLf3EM9Is5Dm6cgOoXmeo9eq2KgD8A0gquAflTFTf0ya2NaFmShHwyg==
 
 xterm-addon-web-links@0.3.0-beta6:
   version "0.3.0-beta6"
   resolved "https://registry.yarnpkg.com/xterm-addon-web-links/-/xterm-addon-web-links-0.3.0-beta6.tgz#055d7295fca5e78e3b714dcdd38bc2f1ad5dbce7"
   integrity sha512-OLCxllecUWLCa4TkIJuwLKUUepZP4QxYJn3+InScVMZUCnNaQbjULzCVdx/TDN20Nh2/Phu57E/28XKfdxviUQ==
 
-xterm-addon-webgl@^0.4.0:
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/xterm-addon-webgl/-/xterm-addon-webgl-0.4.1.tgz#c245f3310e7dbb0759e5eabaf125bbc9c9ab3955"
-  integrity sha512-z/YRmAji7y3ngjvSgoNCQxqYioarNplNqWv/KgtF4nRkBTWkhLHAg1QFNcH7XxUV/O8VuZoGAfp4LPX2hVz/yQ==
+xterm-addon-webgl@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/xterm-addon-webgl/-/xterm-addon-webgl-0.5.0.tgz#c1031dc7599cce3509824643ab5f15361c928e3e"
+  integrity sha512-hQrvabKCnwXFaEZ+YtoJM9Pm0CIBXL5KSwoU+RiGStU3KYTAcqYP2GsH3dWdvKX6kTWhWLS81dtDsGkfbOciuA==
 
-xterm@^4.4.0-beta.5:
-  version "4.4.0-beta.5"
-  resolved "https://registry.yarnpkg.com/xterm/-/xterm-4.4.0-beta.5.tgz#5f658c3e8b4f887297512acde02103a34b1cfeda"
-  integrity sha512-zBSZPmSY7bALvSBBVZgnWUSUrNiLqwQLO8zsqqrF6bscRJ4ZGP+hfrmGihPZRE0xpVA63Ev5HNxC3ttq/RRJ7A==
+xterm@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/xterm/-/xterm-4.4.0.tgz#5915d3c4c8800fadbcf555a0a603c672ab9df589"
+  integrity sha512-JGIpigWM3EBWvnS3rtBuefkiToIILSK1HYMXy4BCsUpO+O4UeeV+/U1AdAXgCB6qJrnPNb7yLgBsVCQUNMteig==
 
 "y18n@^3.2.1 || ^4.0.0", y18n@^4.0.0:
   version "4.0.0"
