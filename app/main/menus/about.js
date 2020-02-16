@@ -4,7 +4,7 @@ import settings from '../windows/settings'
 import {accelerators} from '../utils'
 
 export default {
-  label: api.app.getName(),
+  label: api.app.name,
   submenu: [
     {
       label: 'About Archipelago',
