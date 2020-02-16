@@ -64,7 +64,7 @@
     "default-shell": "^1.0.1",
     "electron-better-ipc": "^0.8.0",
     "electron-context-menu": "^0.16.0",
-    "electron-util": "^0.13.1",
+    "electron-util": "^0.14.0",
     "event-kit": "^2.5.0",
     "i": "^0.3.6",
     "keystroke-for-keyboard-event": "^1.0.0",
