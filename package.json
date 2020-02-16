@@ -85,7 +85,7 @@
     "xterm-addon-webgl": "^0.4.0"
   },
   "devDependencies": {
-    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@babel/preset-react": "^7.8.3",
     "chai": "^4.1.2",
     "css-loader": "^3.4.1",
