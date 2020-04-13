@@ -98,7 +98,7 @@
     "robotjs": "^0.6.0",
     "spectron": "^10.0.0",
     "webpack": "^4.41.5",
-    "xo": "^0.25.3"
+    "xo": "^0.29.1"
   },
   "build": {
     "productName": "Archipelago",
