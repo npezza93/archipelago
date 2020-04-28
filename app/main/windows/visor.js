@@ -13,7 +13,7 @@ const hideVisor = () => {
   const {height} = screen.getPrimaryDisplay().workAreaSize
 
   isVisorShowing = false
-  visorWindow.setPosition(0, -parseInt(height * 0.4, 10), true)
+  visorWindow.setPosition(0, -Number.parseInt(height * 0.4, 10), true)
   visorWindow.hide()
 }
 
@@ -34,11 +34,11 @@ const create = profileManager => {
     visorWindow = makeWindow('visor', {
       width,
       enableLargerThanScreen: true,
-      height: parseInt(height * 0.4, 10),
+      height: Number.parseInt(height * 0.4, 10),
       frame: false,
       titleBarStyle: 'customButtonsOnHover',
       x: 0,
-      y: -parseInt(height * 0.4, 10),
+      y: -Number.parseInt(height * 0.4, 10),
       backgroundColor: argbBackground(profileManager, 'visor.background'),
       vibrancy: profileManager.get('visor.vibrancy')
     })

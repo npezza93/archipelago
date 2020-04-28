@@ -22,7 +22,7 @@ profileManager.validate()
 subscriptions.add(new Disposable(() => profileManager.dispose()))
 ptyManager(profileManager)
 
-const resetApplicationMenu = () =>
+const resetAppMenu = () =>
   Menu.setApplicationMenu(
     Menu.buildFromTemplate(template(createWindow, profileManager))
   )
@@ -35,7 +35,7 @@ const createWindow = () => {
   })
   contextMenu({
     window: win,
-    shouldShowMenu: (event, params) => params.isEditable
+    shouldShowMenu: (event, parameters) => parameters.isEditable
   })
 
   win.on('focus', () => {
@@ -47,7 +47,7 @@ const createWindow = () => {
 app.on('ready', () => {
   registerVisor(profileManager)
   createWindow()
-  resetApplicationMenu()
+  resetAppMenu()
   if (is.macos) {
     app.dock.setMenu(Menu.buildFromTemplate([
       {label: 'New Window', click: createWindow}
@@ -85,9 +85,9 @@ subscriptions.add(profileManager.onDidChange('vibrancy', value =>
   })
 ))
 
-subscriptions.add(profileManager.onDidChange('singleTabMode', resetApplicationMenu))
-subscriptions.add(profileManager.onDidChange('name', resetApplicationMenu))
-subscriptions.add(profileManager.onActiveProfileChange(resetApplicationMenu))
+subscriptions.add(profileManager.onDidChange('singleTabMode', resetAppMenu))
+subscriptions.add(profileManager.onDidChange('name', resetAppMenu))
+subscriptions.add(profileManager.onActiveProfileChange(resetAppMenu))
 subscriptions.add(new Disposable(
   ipc.answerRenderer('open-hamburger-menu', args => Menu.getApplicationMenu().popup(args))
 ))

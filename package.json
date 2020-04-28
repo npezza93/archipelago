@@ -24,7 +24,10 @@
     "rules": {
       "react/prop-types": 0,
       "guard-for-in": 0,
-      "import/no-unassigned-import": 0
+      "import/no-unassigned-import": 0,
+      "import/extensions": 0,
+      "unicorn/no-fn-reference-in-iterator": 0,
+      "no-setter-return": 0
     }
   },
   "repository": {
@@ -98,7 +101,7 @@
     "robotjs": "^0.6.0",
     "spectron": "^10.0.0",
     "webpack": "^4.41.5",
-    "xo": "^0.25.3"
+    "xo": "^0.30.0"
   },
   "build": {
     "productName": "Archipelago",

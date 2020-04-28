@@ -26,8 +26,8 @@ export default class KeybindingField extends Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.value !== prevProps.value) {
+  componentDidUpdate(previousProps) {
+    if (this.props.value !== previousProps.value) {
       this.setState({value: this.props.value})
     }
   }

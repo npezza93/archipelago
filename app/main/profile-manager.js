@@ -13,14 +13,14 @@ export default class ProfileManager {
     this.bindListeners()
   }
 
-  set activeProfileId(id) {
-    this.configFile.set('activeProfileId', parseInt(id, 10))
-
-    return parseInt(id, 10)
+  get activeProfileId() {
+    return Number.parseInt(this.configFile.get('activeProfileId'), 10)
   }
 
-  get activeProfileId() {
-    return parseInt(this.configFile.get('activeProfileId'), 10)
+  set activeProfileId(id) {
+    this.configFile.set('activeProfileId', Number.parseInt(id, 10))
+
+    return Number.parseInt(id, 10)
   }
 
   get rawProfiles() {

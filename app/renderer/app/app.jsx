@@ -89,8 +89,8 @@ export default class App extends Component {
     return currentTab
   }
 
-  selectTab(e, id) {
-    e.preventDefault()
+  selectTab(event, id) {
+    event.preventDefault()
     let session = null
     const tabs = this.state.tabs.map(tab => {
       if (tab.id === id) {

@@ -24,8 +24,8 @@ export default class Property extends Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.activeProfileId !== prevProps.activeProfileId) {
+  componentDidUpdate(previousProps) {
+    if (this.props.activeProfileId !== previousProps.activeProfileId) {
       this.setState({value: this.props.currentProfile.get(this.props.property)})
     }
   }

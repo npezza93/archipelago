@@ -30,8 +30,8 @@ export const makeWindow = (name, options) => {
 
   loadUrl(newWindow, name)
 
-  newWindow.once('close', e => {
-    e.preventDefault()
+  newWindow.once('close', event => {
+    event.preventDefault()
     ipc.callRenderer(newWindow, 'close').then(() => {
       newWindow.hide()
       newWindow.destroy()

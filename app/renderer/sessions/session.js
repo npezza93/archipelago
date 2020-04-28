@@ -108,7 +108,7 @@ export default class Session {
       return
     }
 
-    this._container.removeChild(this._wrapperElement)
+    this._wrapperElement.remove()
     this._container = container
     this._container.append(this._wrapperElement)
     this.xterm.focus()
@@ -124,7 +124,7 @@ export default class Session {
     this.xterm.dispose()
 
     if (this._wrapperElement) {
-      this._container.removeChild(this._wrapperElement)
+      this._wrapperElement.remove()
       this._wrapperElement = null
     }
 
@@ -160,9 +160,9 @@ export default class Session {
     this.searchAddon.findPrevious(query, options)
   }
 
-  keybindingHandler(e) {
+  keybindingHandler(event) {
     let caught = false
-    const mapping = this.keymaps[keystrokeForKeyboardEvent(e)]
+    const mapping = this.keymaps[keystrokeForKeyboardEvent(event)]
 
     if (mapping) {
       ipc.send(`pty-write-${this.id}`, mapping)
