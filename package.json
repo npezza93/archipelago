@@ -110,7 +110,7 @@
   "build": {
     "productName": "Archipelago",
     "appId": "dev.archipelago",
-    "afterSign": "./afterSignHook.js",
+    "afterSign": "./after-sign-hook.js",
     "mac": {
       "category": "public.app-category.developer-tools",
       "extendInfo": {
