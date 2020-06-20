@@ -98,6 +98,7 @@
     "electron": "^9.0.0",
     "electron-builder": "^22.2.0",
     "electron-mocha": "^8.2.0",
+    "electron-notarize": "^1.0.0",
     "electron-webpack": "^2.3.1",
     "eslint-plugin-react": "^7.17.0",
     "mocha": "^7.0.0",
@@ -108,11 +109,15 @@
   },
   "build": {
     "productName": "Archipelago",
+    "appId": "dev.archipelago",
+    "afterSign": "./afterSignHook.js",
     "mac": {
       "category": "public.app-category.developer-tools",
       "extendInfo": {
         "NSRequiresAquaSystemAppearance": false
       },
+      "hardenedRuntime": true,
+      "entitlements": "./build/entitlements.mac.inherit.plist",
       "target": [
         {
           "target": "dmg",
