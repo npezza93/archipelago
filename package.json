@@ -58,7 +58,6 @@
   },
   "license": "MIT",
   "resolutions": {
-    "js-yaml": "3.13.1",
     "serialize-javascript": "3.0.0"
   },
   "dependencies": {
