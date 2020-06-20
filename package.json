@@ -58,7 +58,8 @@
   },
   "license": "MIT",
   "resolutions": {
-    "serialize-javascript": "3.0.0"
+    "serialize-javascript": "3.0.0",
+    "minimist": "^0.2.1"
   },
   "dependencies": {
     "@githubprimer/octicons-react": "^8.1.0",
