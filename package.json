@@ -69,7 +69,7 @@
     "debounce-fn": "^4.0.0",
     "default-shell": "^1.0.1",
     "electron-better-ipc": "^1.0.0",
-    "electron-context-menu": "^2.0.0",
+    "electron-context-menu": "^2.2.0",
     "electron-util": "^0.14.0",
     "event-kit": "^2.5.0",
     "i": "^0.3.6",
