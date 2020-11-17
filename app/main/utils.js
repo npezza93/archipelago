@@ -24,6 +24,7 @@ export const makeWindow = (name, options) => {
     frame: is.macos,
     webPreferences: {
       nodeIntegration: true,
+      enableRemoteModule: true,
       webviewTag: true
     }
   }, options))
