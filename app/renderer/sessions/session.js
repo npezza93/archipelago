@@ -13,6 +13,7 @@ import {FitAddon} from 'xterm-addon-fit'
 import {SearchAddon} from 'xterm-addon-search'
 import {WebLinksAddon} from 'xterm-addon-web-links'
 import {WebglAddon} from 'xterm-addon-webgl'
+import {LigaturesAddon} from 'xterm-addon-ligatures'
 import CurrentProfile from '../utils/current-profile'
 
 export default class Session {
@@ -28,6 +29,7 @@ export default class Session {
     this.searchAddon = new SearchAddon()
     this.webglAddon = new WebglAddon()
     this.xterm = new Terminal(this.settings())
+    this.ligaturesAddon = new LigaturesAddon()
     this.xterm.loadAddon(this.fitAddon)
     this.xterm.loadAddon(this.searchAddon)
 
