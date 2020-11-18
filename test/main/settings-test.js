@@ -3,7 +3,6 @@
 const path = require('path')
 const {Application} = require('spectron')
 const {assert} = require('chai')
-const robot = require('robotjs')
 
 let electron = './node_modules/electron/dist/'
 
@@ -23,6 +22,8 @@ describe('Settings', function () {
       env: {PAGE: 'settings'},
       args: [path.join(__dirname, '../../dist/main/main.js')]
     })
+    this.app.args.unshift(path.join(__dirname, 'fake-menu-preload.js'));
+    this.app.args.unshift('--require');
     return this.app.start()
   })
 
@@ -46,67 +47,67 @@ describe('Settings', function () {
     })
   })
 
-  it('renders settings', () => {
-    assert(this.app.client.isExisting('#settings'))
+  it('renders settings', async () => {
+    const el = await this.app.client.$('#settings')
+    assert.isTrue(await el.isExisting())
   })
 
   describe('profiles', () => {
     it('shows the profiles', async () => {
-      if (await this.app.client.isVisible('hamburger-menu')) {
-        await this.app.client.click('hamburger-menu')
+      const menu = await this.app.client.$('hamburger-menu')
+      if (await menu.isDisplayed()) {
+        await menu.click()
       }
 
-      const profiles = await this.app.client.elements('profile-container')
-
-      assert(profiles.value.length >= 1)
+      const profiles = await this.app.client.$$('profile-container')
+      assert.isTrue(profiles.length >= 1)
     })
 
     it('creates a profile', async () => {
-      if (await this.app.client.isVisible('hamburger-menu')) {
-        await this.app.client.click('hamburger-menu')
+      const menu = await this.app.client.$('hamburger-menu')
+      if (await menu.isDisplayed()) {
+        await menu.click()
       }
 
-      const initialProfiles = await this.app.client.elements('profile-container')
-      await this.app.client.click('create-profile')
-      const afterProfiles = await this.app.client.elements('profile-container')
+      const initialProfiles = await this.app.client.$$('profile-container')
+      const creator = await this.app.client.$('create-profile')
+      await creator.click()
 
-      assert.equal(initialProfiles.value.length + 1, afterProfiles.value.length)
+      const afterProfiles = await this.app.client.$$('profile-container')
+      assert.equal(initialProfiles.length + 1, afterProfiles.length)
 
-      robot.keyTap('r', cmdOrCtrl())
-      await this.app.client.waitForVisible('profiles-list')
-      const afterReloadProfiles = await this.app.client.elements('profile-container')
-      assert.equal(afterReloadProfiles.value.length, afterProfiles.value.length)
+      clickMenu(this.app, ['View', 'Reload'])
+      const list = await this.app.client.$('profiles-list')
+      await list.waitForDisplayed()
+      const reloadedProfiles = await this.app.client.$$('profile-container')
+      assert.equal(reloadedProfiles.length, afterProfiles.length)
     })
 
     it('destroys a profile', async () => {
-      if (await this.app.client.isVisible('hamburger-menu')) {
-        await this.app.client.click('hamburger-menu')
+      const menu = await this.app.client.$('hamburger-menu')
+      if (await menu.isDisplayed()) {
+        await menu.click()
       }
+      const creator = await this.app.client.$('create-profile')
+      await creator.click()
+      const initialProfiles = await this.app.client.$$('profile-container')
 
-      await this.app.client.click('create-profile')
-      const initialProfiles = await this.app.client.elements('profile-container')
-      await this.app.client.moveToObject('remove-profile')
-      await this.app.client.pause(500)
-      await this.app.client.click('remove-profile')
-      const afterProfiles = await this.app.client.elements('profile-container')
+      const remover = await this.app.client.$('remove-profile')
+      await remover.moveTo()
+      await remover.click()
 
-      assert.equal(initialProfiles.value.length - 1, afterProfiles.value.length)
+      const afterProfiles = await this.app.client.$$('profile-container')
+      assert.equal(initialProfiles.length - 1, afterProfiles.length)
 
-      robot.keyTap('r', cmdOrCtrl())
-      await this.app.client.waitForVisible('profiles-list')
-      const afterReloadProfiles = await this.app.client.elements('profile-container')
-      assert.equal(afterReloadProfiles.value.length, afterProfiles.value.length)
+      clickMenu(this.app, ['View', 'Reload'])
+      const list = await this.app.client.$('profiles-list')
+      await list.waitForDisplayed()
+      const reloadedProfiles = await this.app.client.$$('profile-container')
+      assert.equal(reloadedProfiles.length, afterProfiles.length)
     })
   })
 })
 
-function cmdOrCtrl() {
-  let modifier
-  if (process.platform === 'darwin') {
-    modifier = 'command'
-  } else {
-    modifier = 'control'
-  }
-
-  return modifier
+function clickMenu(app, labels) {
+  return app.electron.ipcRenderer.send('SPECTRON_FAKE_MENU/SEND', labels)
 }

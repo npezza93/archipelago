@@ -5,7 +5,7 @@
   "main": "app/main/index.js",
   "scripts": {
     "postinstall": " ./node_modules/.bin/electron-builder install-app-deps",
-    "test": "yarn compile && ./node_modules/.bin/mocha test/main/",
+    "test": "yarn compile && ./node_modules/.bin/mocha test/main/about-test.js test/main/main-test.js test/main/settings-test.js",
     "start": "./node_modules/.bin/electron-webpack dev",
     "compile": "./node_modules/.bin/electron-webpack",
     "lint": "./node_modules/.bin/xo --ignore app/renderer/index.js",
@@ -58,8 +58,8 @@
   },
   "license": "MIT",
   "resolutions": {
-    "serialize-javascript": "3.0.0",
-    "minimist": "^0.2.1"
+    "serialize-javascript": "^5.0.0",
+    "minimist": "^1.2.5"
   },
   "dependencies": {
     "@githubprimer/octicons-react": "^8.1.0",
@@ -76,10 +76,10 @@
     "keystroke-for-keyboard-event": "^1.0.0",
     "node-pty": "^0.9.0",
     "pref": "^3.1.0",
-    "react": "^16.10.2",
+    "react": "^17.0.1",
     "react-addons-css-transition-group": "^15.6.2",
     "react-color": "^2.18.0",
-    "react-dom": "^16.10.2",
+    "react-dom": "^17.0.1",
     "react-split-pane": "^0.1.81",
     "source-map-support": "^0.5.16",
     "unescape-js": "^1.1.0",
@@ -103,7 +103,6 @@
     "electron-webpack": "^2.3.1",
     "eslint-plugin-react": "^7.17.0",
     "mocha": "^7.0.0",
-    "robotjs": "^0.6.0",
     "spectron": "^12.0.0",
     "webpack": "^4.41.5",
     "xo": "^0.32.0"

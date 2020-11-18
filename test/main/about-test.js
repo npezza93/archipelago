@@ -45,11 +45,12 @@ describe('About', function () {
     })
   })
 
-  it('displays the current app version', () => {
-    return this.app.client.waitForVisible('#version').getText('#version').then(text => {
-      this.app.electron.remote.app.getVersion().then(currentVersion => {
-        assert.equal(text, currentVersion)
-      })
-    })
+  it('displays the current app version', async () => {
+    const currentVersion = await this.app.electron.remote.app.getVersion()
+    const elem = await this.app.client.$('#version')
+    await elem.waitForDisplayed()
+    const text = await elem.getText()
+
+    assert.equal(text, `v${currentVersion}`)
   })
 })

@@ -3,7 +3,6 @@
 const path = require('path')
 const {Application} = require('spectron')
 const {assert} = require('chai')
-const robot = require('robotjs')
 
 let electron = './node_modules/electron/dist/'
 
@@ -22,6 +21,8 @@ describe('Application launch', function () {
       verbose: true,
       args: [path.join(__dirname, '../../dist/main/main.js')]
     })
+    this.app.args.unshift(path.join(__dirname, 'fake-menu-preload.js'));
+    this.app.args.unshift('--require');
 
     return this.app.start()
   })
@@ -38,8 +39,9 @@ describe('Application launch', function () {
     })
   })
 
-  it('renders the app', () => {
-    assert(this.app.client.isExisting('archipelago-app'))
+  it('renders the app', async () => {
+    const elem = await this.app.client.$('archipelago-app')
+    assert.isTrue(await elem.isExisting())
   })
 
   it('renders with no renderer process errors', () => {
@@ -51,93 +53,79 @@ describe('Application launch', function () {
   })
 
   it('splits the terminal horizontally', async () => {
-    const initalElements = await this.app.client.elements('archipelago-terminal')
-    assert.equal(initalElements.value.length, 1)
-    Promise.resolve(robot.keyTap('s', cmdOrCtrl()))
-    await this.app.client.waitForVisible('.SplitPane.horizontal')
-    const afterElements = await this.app.client.elements('archipelago-terminal')
-    assert.equal(afterElements.value.length, 2)
-    assert(await this.app.client.isExisting('.SplitPane.horizontal'))
-    return assert.isFalse(await this.app.client.isExisting('.SplitPane.vertical'))
+    const initalElements = await this.app.client.$$('archipelago-terminal')
+    assert.equal(initalElements.length, 1)
+    await clickMenu(this.app, ['Shell', 'Split Horizontally'])
+    const split = await this.app.client.$('.SplitPane.horizontal')
+    await split.waitForDisplayed()
+    const afterElements = await this.app.client.$$('archipelago-terminal')
+    assert.equal(afterElements.length, 2)
   })
 
   it('splits the terminal vertically', async () => {
-    const initalElements = await this.app.client.elements('archipelago-terminal')
-    assert.equal(initalElements.value.length, 1)
-    robot.keyTap('s', ['shift', cmdOrCtrl()])
-    await this.app.client.waitForVisible('.SplitPane.vertical')
-    const afterElements = await this.app.client.elements('archipelago-terminal')
-    assert.equal(afterElements.value.length, 2)
-    assert(await this.app.client.isExisting('.SplitPane.vertical'))
-    return assert.isFalse(await this.app.client.isExisting('.SplitPane.horizontal'))
+    const initalElements = await this.app.client.$$('archipelago-terminal')
+    assert.equal(initalElements.length, 1)
+    await clickMenu(this.app, ['Shell', 'Split Vertically'])
+    const split = await this.app.client.$('.SplitPane.vertical')
+    await split.waitForDisplayed()
+    const afterElements = await this.app.client.$$('archipelago-terminal')
+    assert.equal(afterElements.length, 2)
   })
 
   it('adds a new tab', async () => {
     await setSingleTabMode(false, this.app)
-    const initalElements = await this.app.client.elements('archipelago-terminal')
-    assert.equal(initalElements.value.length, 1)
-    robot.keyTap('t', cmdOrCtrl())
-    const afterElements = await this.app.client.elements('archipelago-terminal')
-    assert.equal(afterElements.value.length, 2)
-    const tabElements = await this.app.client.elements('archipelago-tab')
-    return assert.equal(tabElements.value.length, 2)
+    const initalElements = await this.app.client.$$('archipelago-terminal')
+    assert.equal(initalElements.length, 1)
+
+    await clickMenu(this.app, ['Shell', 'New Tab'])
+
+    const afterElements = await this.app.client.$$('archipelago-terminal')
+    assert.equal(afterElements.length, 2)
+
+    const tabElements = await this.app.client.$$('archipelago-tab')
+    return assert.equal(tabElements.length, 2)
   })
 
   it('doesnt add a new tab in single tab mode', async () => {
-    await setSingleTabMode(true, this.app)
-    const initalElements = await this.app.client.elements('archipelago-terminal')
-    assert.equal(initalElements.value.length, 1)
-    robot.keyTap('t', cmdOrCtrl())
-    const afterElements = await this.app.client.elements('archipelago-terminal')
-    assert.equal(afterElements.value.length, 1)
-    const tabElements = await this.app.client.elements('archipelago-tab')
-    return assert.equal(tabElements.value.length, 1)
+    setSingleTabMode(true, this.app)
+
+    const initalElements = await this.app.client.$$('archipelago-terminal')
+    assert.equal(initalElements.length, 1)
+
+    await clickMenu(this.app, ['Shell', 'New Tab'])
+
+    const afterElements = await this.app.client.$$('archipelago-terminal')
+    assert.equal(afterElements.length, 1)
   })
 
   describe('tab closures', () => {
     it('closes a tab', async () => {
       await setSingleTabMode(false, this.app)
-      robot.keyTap('t', cmdOrCtrl())
-      await this.app.client.pause(2000)
-      let tabElements = await this.app.client.elements('archipelago-tab')
-      assert.equal(tabElements.value.length, 2)
-      await this.app.client.click('archipelago-tab div')
-      await this.app.client.pause(2000)
-      tabElements = await this.app.client.elements('archipelago-tab')
-      assert.equal(tabElements.value.length, 1)
+      await clickMenu(this.app, ['Shell', 'New Tab'])
+      let tabElements = await this.app.client.$$('archipelago-terminal')
+      assert.equal(tabElements.length, 2)
+
+      const closeButton = await this.app.client.$('archipelago-tab div')
+      await closeButton.click()
+      tabElements = await this.app.client.$$('archipelago-terminal')
+      assert.equal(tabElements.length, 1)
     })
 
     it('close button doesnt appear on last tab', async () => {
       await setSingleTabMode(false, this.app)
-      const tabElements = await this.app.client.elements('archipelago-tab')
-      assert.equal(tabElements.value.length, 1)
-      const closeButton = await this.app.client.isVisible('archipelago-tab div')
-      assert.isFalse(closeButton)
+      let tabElements = await this.app.client.$$('archipelago-terminal')
+      assert.equal(tabElements.length, 1)
+
+      const closeButton = await this.app.client.$('archipelago-tab div')
+      assert.isFalse(await closeButton.isDisplayed())
     })
   })
 })
 
-async function setSingleTabMode(checked, app) {
-  robot.keyTap(',', cmdOrCtrl())
-  await app.client.pause(2000)
-  const windowHandles = await app.client.windowHandles()
-  await app.client.window(windowHandles.value[1])
-  await app.client.waitForVisible('switch-field#singleTabMode')
-  const currentChecked = await app.client.getAttribute('switch-field#singleTabMode input', 'checked')
-  if (Boolean(currentChecked) !== checked) {
-    await app.client.click('switch-field#singleTabMode label')
-  }
-
-  await app.client.close()
+function setSingleTabMode(checked, app) {
+  return app.electron.ipcRenderer.send('SPECTRON_SET_PROPERTY/SEND', {property: 'singleTabMode', value: checked})
 }
 
-function cmdOrCtrl() {
-  let modifier
-  if (process.platform === 'darwin') {
-    modifier = 'command'
-  } else {
-    modifier = 'control'
-  }
-
-  return modifier
+function clickMenu(app, labels) {
+  return app.electron.ipcRenderer.send('SPECTRON_FAKE_MENU/SEND', labels)
 }
