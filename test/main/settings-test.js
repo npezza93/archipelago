@@ -22,8 +22,8 @@ describe('Settings', function () {
       env: {PAGE: 'settings'},
       args: [path.join(__dirname, '../../dist/main/main.js')]
     })
-    this.app.args.unshift(path.join(__dirname, 'fake-menu-preload.js'));
-    this.app.args.unshift('--require');
+    this.app.args.unshift(path.join(__dirname, 'fake-menu-preload.js'))
+    this.app.args.unshift('--require')
     return this.app.start()
   })
 
@@ -48,8 +48,8 @@ describe('Settings', function () {
   })
 
   it('renders settings', async () => {
-    const el = await this.app.client.$('#settings')
-    assert.isTrue(await el.isExisting())
+    const element = await this.app.client.$('#settings')
+    assert.isTrue(await element.isExisting())
   })
 
   describe('profiles', () => {
@@ -88,6 +88,7 @@ describe('Settings', function () {
       if (await menu.isDisplayed()) {
         await menu.click()
       }
+
       const creator = await this.app.client.$('create-profile')
       await creator.click()
       const initialProfiles = await this.app.client.$$('profile-container')

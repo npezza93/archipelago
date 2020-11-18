@@ -21,8 +21,8 @@ describe('Application launch', function () {
       verbose: true,
       args: [path.join(__dirname, '../../dist/main/main.js')]
     })
-    this.app.args.unshift(path.join(__dirname, 'fake-menu-preload.js'));
-    this.app.args.unshift('--require');
+    this.app.args.unshift(path.join(__dirname, 'fake-menu-preload.js'))
+    this.app.args.unshift('--require')
 
     return this.app.start()
   })
@@ -40,8 +40,8 @@ describe('Application launch', function () {
   })
 
   it('renders the app', async () => {
-    const elem = await this.app.client.$('archipelago-app')
-    assert.isTrue(await elem.isExisting())
+    const element = await this.app.client.$('archipelago-app')
+    assert.isTrue(await element.isExisting())
   })
 
   it('renders with no renderer process errors', () => {
@@ -113,7 +113,7 @@ describe('Application launch', function () {
 
     it('close button doesnt appear on last tab', async () => {
       await setSingleTabMode(false, this.app)
-      let tabElements = await this.app.client.$$('archipelago-terminal')
+      const tabElements = await this.app.client.$$('archipelago-terminal')
       assert.equal(tabElements.length, 1)
 
       const closeButton = await this.app.client.$('archipelago-tab div')
