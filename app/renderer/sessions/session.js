@@ -145,11 +145,7 @@ export default class Session {
     const color = new Color(background)
     let allowTransparency
 
-    if (color.alpha() === 1) {
-      allowTransparency = false
-    } else {
-      allowTransparency = true
-    }
+    allowTransparency = color.alpha() !== 1
 
     return allowTransparency
   }
