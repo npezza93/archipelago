@@ -7,7 +7,8 @@ const windowOptions = {
   webPreferences: {
     experimentalFeatures: true,
     enableRemoteModule: true,
-    nodeIntegration: true
+    nodeIntegration: true,
+    contextIsolation: false
   }
 }
 
