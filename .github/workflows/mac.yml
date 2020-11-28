@@ -3,6 +3,24 @@ name: mac
 on: [push]
 
 jobs:
+  lint:
+    runs-on: macOS-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+    - uses: actions/cache@v1
+      with:
+        path: ~/.cache/yarn
+        key: ${{ runner.os }}-yarn-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+        restore-keys: |
+          ${{ runner.os }}-yarn-
+    - name: Install
+      run: yarn --link-duplicates --pure-lockfile --ignore-engines
+    - name: Lint
+      run: yarn lint
   test:
     runs-on: macOS-latest
     steps:
