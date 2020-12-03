@@ -3639,10 +3639,10 @@ electron-is-dev@^1.0.1, electron-is-dev@^1.1.0:
   resolved "https://registry.yarnpkg.com/electron-is-dev/-/electron-is-dev-1.2.0.tgz#2e5cea0a1b3ccf1c86f577cee77363ef55deb05e"
   integrity sha512-R1oD5gMBPS7PVU8gJwH6CtT0e6VSoD0+SzSnYpNm+dBkcijgA+K7VAMHDfnRq/lkKPZArpzplTW6jfiMYosdzw==
 
-electron-mocha@^9.3.2:
-  version "9.3.2"
-  resolved "https://registry.yarnpkg.com/electron-mocha/-/electron-mocha-9.3.2.tgz#0aee9b5c59809986289f71a4f5b5eace72b53457"
-  integrity sha512-kUhNGeYfiXgPCETf0nvcGlbOGQR2GJgeB0DEQ9ojDkh3eGu2cyPf0sN7MKbeCv3R79alA+03zBKK0OFcAjNQow==
+electron-mocha@^9.3.3:
+  version "9.3.3"
+  resolved "https://registry.yarnpkg.com/electron-mocha/-/electron-mocha-9.3.3.tgz#8641fba3bdd9893b41d626c32874941ad3267747"
+  integrity sha512-tTUK3VcPcJa+ZcrJaFvm6qDCkDQ65nZyAacTRwRbCfIRjGLtD+JjvKsCf9jlvp1CkA9MRpmH30oeYtJcxWbbJw==
   dependencies:
     ansi-colors "^4.1.1"
     electron-window "^0.8.0"
@@ -3650,7 +3650,7 @@ electron-mocha@^9.3.2:
     log-symbols "^4.0.0"
     mocha "^8.2.1"
     which "^2.0.2"
-    yargs "^16.1.0"
+    yargs "^16.1.1"
 
 electron-notarize@^1.0.0:
   version "1.0.0"
@@ -10297,7 +10297,7 @@ yargs@^15.3.1:
     y18n "^4.0.0"
     yargs-parser "^18.1.2"
 
-yargs@^16.0.3, yargs@^16.1.0:
+yargs@^16.0.3, yargs@^16.1.1:
   version "16.1.1"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-16.1.1.tgz#5a4a095bd1ca806b0a50d0c03611d38034d219a1"
   integrity sha512-hAD1RcFP/wfgfxgMVswPE+z3tlPFtxG8/yWUrG2i17sTWGCGqWnxKcLTF4cUKDUK8fzokwsmO9H0TDkRbMHy8w==
