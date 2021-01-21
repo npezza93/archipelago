@@ -77,7 +77,7 @@
     "event-kit": "^2.5.0",
     "i": "^0.3.6",
     "keystroke-for-keyboard-event": "^1.0.0",
-    "node-pty": "0.10.0-beta18",
+    "node-pty": "0.10.0-beta20",
     "pref": "^3.1.0",
     "react": "^17.0.1",
     "react-addons-css-transition-group": "^15.6.2",
