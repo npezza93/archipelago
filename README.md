@@ -39,7 +39,7 @@ more gifs!
 Use Homebrew Cask to download the app by running the following
 
 ```bash
-❯ brew cask install archipelago
+❯ brew install --cask archipelago
 ```
 
 ### Download Links
