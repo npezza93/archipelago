@@ -98,7 +98,7 @@
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@babel/preset-react": "^7.12.13",
     "chai": "^4.1.2",
-    "css-loader": "^5.0.1",
+    "css-loader": "^5.2.0",
     "electron": "^11.2.2",
     "electron-builder": "^22.2.0",
     "electron-mocha": "^9.3.3",
