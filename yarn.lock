@@ -2616,7 +2616,7 @@ cli-boxes@^2.2.0:
   resolved "https://registry.yarnpkg.com/cli-boxes/-/cli-boxes-2.2.1.tgz#ddd5035d25094fce220e9cab40a45840a440318f"
   integrity sha512-y4coMcylgSCdVinjiDBuR8PCC2bLjyGTwEmPb9NHR/QaNU6EUOXcTY/s6VjGMD6ENSEaeQYHCY0GNGS5jfMwPw==
 
-cli-truncate@^2.0.0:
+cli-truncate@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/cli-truncate/-/cli-truncate-2.1.0.tgz#c39e28bf05edcde5be3b98992a22deed5a2b93c7"
   integrity sha512-n8fOixwDD6b/ObinzTrp1ZKFzbgvKZvuz/TvejnLn1aQfC6r52XEx85FmuC+3HI+JM7coBRXUvNqEU2PHVrHpg==
@@ -3618,14 +3618,14 @@ electron-chromedriver@^11.0.0:
     "@electron/get" "^1.12.2"
     extract-zip "^2.0.0"
 
-electron-context-menu@^2.0.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/electron-context-menu/-/electron-context-menu-2.3.0.tgz#d9af9733b19a76c78c413d8eb7b00b1ae1ead356"
-  integrity sha512-XYsYkNY+jvX4C5o09qMuZoKL6e9frnQzBFehZSIiKp6zK0u3XYowJYDyK3vDKKZxYsOIGiE/Gbx40jERC03Ctw==
+electron-context-menu@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/electron-context-menu/-/electron-context-menu-2.5.0.tgz#b00003890a6ac32c91502f4ee40ba939064f7dce"
+  integrity sha512-kzvp8XUmbp2TG2hELJUl7Yjlq4Ag549JQu/C8mxvy1CmAU15UFmPC3bPdXMGE/e3xbi97shgxfttxeQ/6h4MoQ==
   dependencies:
-    cli-truncate "^2.0.0"
-    electron-dl "^3.0.0"
-    electron-is-dev "^1.0.1"
+    cli-truncate "^2.1.0"
+    electron-dl "^3.1.0"
+    electron-is-dev "^1.2.0"
 
 electron-devtools-installer@^2.2.4:
   version "2.2.4"
@@ -3637,10 +3637,10 @@ electron-devtools-installer@^2.2.4:
     rimraf "^2.5.2"
     semver "^5.3.0"
 
-electron-dl@^3.0.0:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/electron-dl/-/electron-dl-3.0.2.tgz#302a46f9a449ddce720cb8e7f2a24c386e19a26c"
-  integrity sha512-pRgE9Jbhoo5z6Vk3qi+vIrfpMDlCp2oB1UeR96SMnsfz073jj0AZGQwp69EdIcEvlUlwBSGyJK8Jt6OB6JLn+g==
+electron-dl@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/electron-dl/-/electron-dl-3.1.0.tgz#38d31f426a3b8a90e9c35ac03e74e10c2bf52d3e"
+  integrity sha512-nY3vvxX5w11+cFT6JkJwMHtH6dk5sPtjRtzjaj4NrS9CyYF3atvVt8yMfZtXruULU1JAuxEEf2B8O6YgXs9xsQ==
   dependencies:
     ext-name "^5.0.0"
     pupa "^2.0.1"
@@ -3651,7 +3651,7 @@ electron-is-dev@^0.3.0:
   resolved "https://registry.yarnpkg.com/electron-is-dev/-/electron-is-dev-0.3.0.tgz#14e6fda5c68e9e4ecbeff9ccf037cbd7c05c5afe"
   integrity sha1-FOb9pcaOnk7L7/nM8DfL18BcWv4=
 
-electron-is-dev@^1.0.1, electron-is-dev@^1.1.0:
+electron-is-dev@^1.1.0, electron-is-dev@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/electron-is-dev/-/electron-is-dev-1.2.0.tgz#2e5cea0a1b3ccf1c86f577cee77363ef55deb05e"
   integrity sha512-R1oD5gMBPS7PVU8gJwH6CtT0e6VSoD0+SzSnYpNm+dBkcijgA+K7VAMHDfnRq/lkKPZArpzplTW6jfiMYosdzw==
