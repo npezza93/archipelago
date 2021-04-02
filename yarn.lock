@@ -3922,10 +3922,10 @@ electron-is-dev@^1.1.0, electron-is-dev@^1.2.0:
   resolved "https://registry.yarnpkg.com/electron-is-dev/-/electron-is-dev-1.2.0.tgz#2e5cea0a1b3ccf1c86f577cee77363ef55deb05e"
   integrity sha512-R1oD5gMBPS7PVU8gJwH6CtT0e6VSoD0+SzSnYpNm+dBkcijgA+K7VAMHDfnRq/lkKPZArpzplTW6jfiMYosdzw==
 
-electron-mocha@^9.3.3:
-  version "9.3.3"
-  resolved "https://registry.yarnpkg.com/electron-mocha/-/electron-mocha-9.3.3.tgz#8641fba3bdd9893b41d626c32874941ad3267747"
-  integrity sha512-tTUK3VcPcJa+ZcrJaFvm6qDCkDQ65nZyAacTRwRbCfIRjGLtD+JjvKsCf9jlvp1CkA9MRpmH30oeYtJcxWbbJw==
+electron-mocha@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/electron-mocha/-/electron-mocha-10.0.0.tgz#f08513853c02db290df5c1b654016705b5fa7f38"
+  integrity sha512-eCIAPlhSi10wPcwYnZWxRAKoEGKX+UQyco3gjWcWPD6csfwCLT5CTvA1bId8Q8Gb0ss8Rj8y8kuK9eLCJtr0DQ==
   dependencies:
     ansi-colors "^4.1.1"
     electron-window "^0.8.0"
@@ -10708,7 +10708,7 @@ yargs-unparser@2.0.0:
     flat "^5.0.2"
     is-plain-obj "^2.1.0"
 
-yargs@16.2.0, yargs@^16.2.0:
+yargs@16.2.0, yargs@^16.1.1, yargs@^16.2.0:
   version "16.2.0"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-16.2.0.tgz#1c82bf0f6b6a66eafce7ef30e376f49a12477f66"
   integrity sha512-D1mvvtDG0L5ft/jGWkLpG1+m0eQxOfaBvTNELraWj22wSVUMWxZUvYgJYcKh6jGGIkJFhH4IZPQhR4TKpc8mBw==
@@ -10753,19 +10753,6 @@ yargs@^15.3.1:
     which-module "^2.0.0"
     y18n "^4.0.0"
     yargs-parser "^18.1.2"
-
-yargs@^16.1.1:
-  version "16.1.1"
-  resolved "https://registry.yarnpkg.com/yargs/-/yargs-16.1.1.tgz#5a4a095bd1ca806b0a50d0c03611d38034d219a1"
-  integrity sha512-hAD1RcFP/wfgfxgMVswPE+z3tlPFtxG8/yWUrG2i17sTWGCGqWnxKcLTF4cUKDUK8fzokwsmO9H0TDkRbMHy8w==
-  dependencies:
-    cliui "^7.0.2"
-    escalade "^3.1.1"
-    get-caller-file "^2.0.5"
-    require-directory "^2.1.1"
-    string-width "^4.2.0"
-    y18n "^5.0.5"
-    yargs-parser "^20.2.2"
 
 yauzl@^2.10.0:
   version "2.10.0"
