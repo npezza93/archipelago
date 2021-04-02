@@ -33,7 +33,12 @@
       "no-setter-return": 0,
       "import/no-anonymous-default-export": 0,
       "unicorn/no-reduce": 0,
-      "node/no-path-concat": 0
+      "node/no-path-concat": 0,
+      "node/file-extension-in-import": 0,
+      "unicorn/no-array-for-each": 0,
+      "unicorn/no-array-callback-reference": 0,
+      "unicorn/no-array-reduce": 0,
+      "unicorn/explicit-length-check": 0
     }
   },
   "repository": {
