@@ -74,7 +74,7 @@
     "@researchgate/react-intersection-observer": "^1.0.5",
     "auto-bind": "^3.0.0",
     "color": "^3.1.0",
-    "debounce-fn": "^4.0.0",
+    "debounce-fn": "^5.0.0",
     "default-shell": "^1.0.1",
     "electron-better-ipc": "^1.0.0",
     "electron-context-menu": "^2.5.0",
