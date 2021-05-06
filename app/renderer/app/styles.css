@@ -41,7 +41,6 @@
 
 html, body, #app, archipelago-app {
   height: 100%;
-  -webkit-font-feature-settings: "liga" off, "calt" off;
   -webkit-font-smoothing: antialiased;
 }
 
