@@ -225,6 +225,13 @@
               "title": "modes"
             }
           },
+          "ligatures": {
+            "type": "boolean",
+            "default": true,
+            "settings": {
+              "title": "modes"
+            }
+          },
           "tabColor": {
             "type": "string",
             "color": true,
