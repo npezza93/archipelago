@@ -22,7 +22,7 @@ profileManager.validate()
 subscriptions.add(new Disposable(() => profileManager.dispose()))
 ptyManager(profileManager)
 
-app.commandLine.appendSwitch(`enable-features='FontAccess'`)
+app.commandLine.appendSwitch('enable-features=\'FontAccess\'')
 
 const resetAppMenu = () =>
   Menu.setApplicationMenu(

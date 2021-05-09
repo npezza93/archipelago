@@ -104,6 +104,7 @@ export default class Session {
       if (this.currentProfile.get('experimentalWebglRenderer')) {
         this.xterm.loadAddon(this.webglAddon)
       }
+
       if (this.currentProfile.get('ligatures')) {
         this.xterm.loadAddon(this.ligaturesAddon)
       }

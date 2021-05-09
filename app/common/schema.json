@@ -227,7 +227,7 @@
           },
           "ligatures": {
             "type": "boolean",
-            "default": true,
+            "default": false,
             "settings": {
               "title": "modes"
             }
