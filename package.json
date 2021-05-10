@@ -113,7 +113,7 @@
     "mocha": "^8.4.0",
     "spectron": "^14.0.0",
     "webpack": "^4.46.0",
-    "xo": "^0.39.1"
+    "xo": "^0.40.0"
   },
   "build": {
     "productName": "Archipelago",
