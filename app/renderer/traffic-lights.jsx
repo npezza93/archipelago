@@ -121,7 +121,6 @@ export default class TrafficLights extends React.Component {
         <div>
           <Minimize currentProfile={this.props.currentProfile} />
           <Maximize currentProfile={this.props.currentProfile} />
-          <Close currentProfile={this.props.currentProfile} />
         </div>
       )
     })

@@ -441,39 +441,6 @@
                 }
               }
             }
-          },
-          "visor": {
-            "type": "object",
-            "scope": "visor",
-            "settings": {"title": "visor"},
-            "properties": {
-              "keybinding": {
-                "type": "string",
-                "default": "F1",
-                "keybinding": true
-              },
-              "background": {
-                "type": "string",
-                "color": true,
-                "scope": "xterm",
-                "default": "#000000"
-              },
-              "vibrancy": {
-                "type": "string",
-                "default": "",
-                "enabledOn": ["darwin"],
-                "enum": ["", "light", "medium-light", "dark", "ultra-dark"]
-              },
-              "allowTransparency": {
-                "type": "boolean",
-                "default": false,
-                "enabledOn": ["darwin"]
-              },
-              "padding": {
-                "type": "string",
-                "default": "5px 0 10px 15px"
-              }
-            }
           }
         }
       }

@@ -70,9 +70,7 @@ export default (createWindow, profileManager) => {
       label: 'Close',
       accelerator: accelerators.close,
       click(item, focusedWindow) {
-        if (focusedWindow && focusedWindow.name === 'visor') {
-          focusedWindow.hideVisor()
-        } else if (focusedWindow) {
+        if (focusedWindow) {
           focusedWindow.webContents.send('close-via-menu')
         }
       }

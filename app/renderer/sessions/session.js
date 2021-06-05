@@ -73,14 +73,8 @@ export default class Session {
   }
 
   applySettingModifiers(defaultSettings) {
-    if (this.type === 'visor') {
-      const background = this.currentProfile.get('visor.background')
-      defaultSettings.allowTransparency = this.allowTransparency(background)
-      defaultSettings.theme.background = background
-    } else {
-      const {background} = defaultSettings.theme
-      defaultSettings.allowTransparency = this.allowTransparency(background)
-    }
+    const {background} = defaultSettings.theme
+    defaultSettings.allowTransparency = this.allowTransparency(background)
 
     return defaultSettings
   }
@@ -238,7 +232,7 @@ export default class Session {
       this.xterm.setOption(property, value)
     } else if (property === 'keybindings') {
       this.resetKeymaps()
-    } else if (property.startsWith('theme.') || property === 'visor.background') {
+    } else if (property.startsWith('theme.')) {
       this.resetTheme()
     }
   }

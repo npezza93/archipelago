@@ -53,7 +53,7 @@ export default class ProfileManager {
     const id = Math.max(0, Math.max(...this.profileIds)) + 1
     const index = this.profileIds.length
 
-    this.configFile.set(`profiles.${index}`, {id, keybindings: this.defaultKeybindings, theme: {}, visor: {}})
+    this.configFile.set(`profiles.${index}`, {id, keybindings: this.defaultKeybindings, theme: {}})
     this.configFile.set('activeProfileId', id)
 
     return id

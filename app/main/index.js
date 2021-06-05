@@ -6,7 +6,6 @@ import contextMenu from 'electron-context-menu'
 import {pref} from './config-file'
 import ProfileManager from './profile-manager'
 import template from './app-menu'
-import registerVisor from './windows/visor'
 import ptyManager from './pty-manager'
 import {argbBackground, makeWindow} from './utils'
 
@@ -47,7 +46,6 @@ const createWindow = () => {
 }
 
 app.on('ready', () => {
-  registerVisor(profileManager)
   createWindow()
   resetAppMenu()
   if (is.macos) {
