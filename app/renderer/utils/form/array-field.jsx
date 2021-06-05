@@ -49,7 +49,7 @@ export default class ArrayField extends Component {
 
   addElement() {
     return <create-element onClick={this.createElement} key="create-array-el">
-      add new {this.props.property.slice(0, this.props.property.length - 1)}
+      add new {this.props.property.slice(0, -1)}
     </create-element>
   }
 

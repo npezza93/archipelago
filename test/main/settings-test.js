@@ -13,7 +13,7 @@ electron = {
 }[process.platform]
 
 describe('Settings', function () {
-  this.timeout(10000)
+  this.timeout(10_000)
 
   beforeEach(() => {
     this.app = new Application({
