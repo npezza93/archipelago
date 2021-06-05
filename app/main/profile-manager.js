@@ -1,5 +1,5 @@
 import {BrowserWindow} from 'electron'
-import {isDeepStrictEqual} from 'node:util'
+import {isDeepStrictEqual} from 'util'
 import {platform} from 'electron-util'
 import {ipcMain as ipc} from 'electron-better-ipc'
 import {CompositeDisposable, Disposable} from 'event-kit'

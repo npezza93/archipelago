@@ -39,7 +39,8 @@
       "unicorn/no-array-callback-reference": 0,
       "unicorn/no-array-reduce": 0,
       "unicorn/explicit-length-check": 0,
-      "unicorn/prefer-module": 0
+      "unicorn/prefer-module": 0,
+      "unicorn/prefer-node-protocol": 0
     }
   },
   "repository": {
