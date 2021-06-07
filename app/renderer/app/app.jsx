@@ -6,24 +6,24 @@ import {Disposable} from 'event-kit'
 import Tab from '../sessions/tab'
 import Component from '../utils/component.jsx'
 import CurrentProfile from '../utils/current-profile'
-import PaneList from './pane-list.jsx'
 import TabList from './tab-list.jsx'
-import HamburgerMenu from './hamburger-menu.jsx'
 import 'xterm/css/xterm.css'
 import './styles.css'
+import Terminal from './terminal.jsx'
 
 export default class App extends Component {
   render() {
     return <archipelago-app class={this.htmlClasses()}>
-      <HamburgerMenu currentProfile={this.currentProfile} />
       <TabList
         tabs={this.state.tabs}
         currentTabId={this.state.currentTabId}
         selectTab={this.selectTab}
         currentProfile={this.currentProfile}
         removeTab={this.removeTab} />
-      <PaneList
-        tabs={this.state.tabs}
+      <Terminal
+        key={this.state.tabs[0].root.id}
+        session={this.state.tabs[0].root}
+        tabId={this.state.tabs[0].id}
         currentTabId={this.state.currentTabId}
         changeTitle={this.changeTitle}
         markUnread={this.markUnread}

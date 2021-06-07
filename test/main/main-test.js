@@ -52,26 +52,6 @@ describe('Application launch', function () {
     })
   })
 
-  it('splits the terminal horizontally', async () => {
-    const initalElements = await this.app.client.$$('archipelago-terminal')
-    assert.equal(initalElements.length, 1)
-    await clickMenu(this.app, ['Shell', 'Split Horizontally'])
-    const split = await this.app.client.$('.SplitPane.horizontal')
-    await split.waitForDisplayed()
-    const afterElements = await this.app.client.$$('archipelago-terminal')
-    assert.equal(afterElements.length, 2)
-  })
-
-  it('splits the terminal vertically', async () => {
-    const initalElements = await this.app.client.$$('archipelago-terminal')
-    assert.equal(initalElements.length, 1)
-    await clickMenu(this.app, ['Shell', 'Split Vertically'])
-    const split = await this.app.client.$('.SplitPane.vertical')
-    await split.waitForDisplayed()
-    const afterElements = await this.app.client.$$('archipelago-terminal')
-    assert.equal(afterElements.length, 2)
-  })
-
   it('adds a new tab', async () => {
     await setSingleTabMode(false, this.app)
     const initalElements = await this.app.client.$$('archipelago-terminal')
@@ -84,18 +64,6 @@ describe('Application launch', function () {
 
     const tabElements = await this.app.client.$$('archipelago-tab')
     return assert.equal(tabElements.length, 2)
-  })
-
-  it('doesnt add a new tab in single tab mode', async () => {
-    setSingleTabMode(true, this.app)
-
-    const initalElements = await this.app.client.$$('archipelago-terminal')
-    assert.equal(initalElements.length, 1)
-
-    await clickMenu(this.app, ['Shell', 'New Tab'])
-
-    const afterElements = await this.app.client.$$('archipelago-terminal')
-    assert.equal(afterElements.length, 1)
   })
 
   describe('tab closures', () => {

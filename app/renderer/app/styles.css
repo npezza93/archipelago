@@ -88,46 +88,12 @@ archipelago-app {
   flex-direction: column;
 }
 
-hamburger-menu {
-  -webkit-app-region: no-drag;
-  flex-direction: column;
-  justify-content: space-between;
-  display: flex;
-  height: 12px;
-  width: 15px;
-  left: 13px;
-  top: 14px;
-  position: fixed;
-  z-index: 4;
-  filter: invert(20%);
-  cursor: pointer;
-}
-
-archipelago-app.single-tab-mode hamburger-menu {
-  top: 9px;
-}
-
-hamburger-menu:hover {
-  filter: invert(0%);
-}
-hamburger-menu div {
-  height: 1px;
-}
-
 archipelago-app.single-tab-mode minimize-button {
   top: 9px !important;
 }
 
-minimize-button:hover {
-  filter: invert(0%);
-}
-
 archipelago-app.single-tab-mode maximize-button {
   top: 9px !important;
-}
-
-maximize-button:hover {
-  filter: invert(0%);
 }
 
 archipelago-app.single-tab-mode close-button {
@@ -136,20 +102,6 @@ archipelago-app.single-tab-mode close-button {
 
 close-button:hover {
   filter: invert(0%);
-}
-
-archipelago-pane-list {
-  display: flex;
-  flex: 1;
-  min-height: 0;
-}
-archipelago-pane-list archipelago-pane {
-  margin: 0;
-  overflow-y: hidden;
-  display: block;
-  height: 100%;
-  position: relative;
-  width: 100%;
 }
 
 archipelago-tab-list {
@@ -262,34 +214,6 @@ archipelago-app.darwin.single-tab-mode archipelago-tab-list {
 
 archipelago-tab.is-unread span {
   animation: pulse 2s infinite;
-}
-
-.Resizer.horizontal, .Resizer.vertical {
-  background-color: var(--background-color);
-  filter: invert(50%);
-  box-sizing: border-box;
-  z-index: 1;
-  background-clip: padding-box;
-  flex-shrink: 0;
-}
-.Resizer.horizontal {
-  height: 7px;
-  border-top: 3px solid rgba(255, 255, 255, 0);
-  border-bottom: 3px solid rgba(255, 255, 255, 0);
-  cursor: row-resize;
-  width: 100%;
-}
-
-.Pane.Pane2.horizontal {
-  display: flex;
-}
-
-.Resizer.vertical {
-  width: 7px;
-  margin: 0 -3px;
-  border-left: 3px solid rgba(255, 255, 255, 0);
-  border-right: 3px solid rgba(255, 255, 255, 0);
-  cursor: col-resize;
 }
 
 webview {
