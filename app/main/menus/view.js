@@ -1,16 +1,23 @@
-import {accelerators} from '../utils'
+import {is} from 'electron-util'
+
+let dev_menus
+if (is.development) {
+  dev_menus = [
+    {role: 'reload', accelerator: "Cmd+R"},
+    {role: 'forcereload', accelerator: "Cmd+Shift+R"},
+    {role: 'toggledevtools', accelerator: "Cmd+Alt+I"}
+  ]
+}
 
 export default {
   label: 'View',
   submenu: [
-    {role: 'reload', accelerator: accelerators.reload},
-    {role: 'forcereload', accelerator: accelerators.forceReload},
-    {role: 'toggledevtools', accelerator: accelerators.toggleDevtools},
+    ...dev_menus,
     {type: 'separator'},
-    {role: 'resetzoom', accelerator: accelerators.resetZoom},
-    {role: 'zoomin', accelerator: accelerators.zoomIn},
-    {role: 'zoomout', accelerator: accelerators.zoomOut},
+    {role: 'resetzoom', accelerator: "Cmd+0"},
+    {role: 'zoomin', accelerator: "Cmd+Plus"},
+    {role: 'zoomout', accelerator: "Cmd+-"},
     {type: 'separator'},
-    {role: 'togglefullscreen', accelerator: accelerators.toggleFullscreen}
+    {role: 'togglefullscreen', accelerator: "Ctrl+Cmd+F"}
   ]
 }

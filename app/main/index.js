@@ -39,26 +39,16 @@ const createWindow = () => {
     shouldShowMenu: (event, parameters) => parameters.isEditable
   })
 
-  win.on('focus', () => {
-    currentTerminalWindow = win
-  })
+  win.on('focus', () => currentTerminalWindow = win)
   windows.push(win)
 }
 
 app.on('ready', () => {
   createWindow()
   resetAppMenu()
-  if (is.macos) {
-    app.dock.setMenu(Menu.buildFromTemplate([
-      {label: 'New Window', click: createWindow}
-    ]))
-  }
-})
-
-app.on('window-all-closed', () => {
-  if (!is.macos) {
-    app.quit()
-  }
+  app.dock.setMenu(Menu.buildFromTemplate([
+    {label: 'New Window', click: createWindow}
+  ]))
 })
 
 app.on('quit', () => subscriptions.dispose())
@@ -68,6 +58,8 @@ app.on('before-quit', () => {
     win.removeAllListeners('close')
   })
 })
+
+app.on('window-all-closed', () => {})
 
 app.on('activate', () => {
   const activeWindow = windows.find(win => !win.isDestroyed())
@@ -85,26 +77,13 @@ subscriptions.add(profileManager.onDidChange('vibrancy', value =>
   })
 ))
 
-subscriptions.add(profileManager.onDidChange('singleTabMode', resetAppMenu))
 subscriptions.add(profileManager.onDidChange('name', resetAppMenu))
 subscriptions.add(profileManager.onActiveProfileChange(resetAppMenu))
 subscriptions.add(new Disposable(
   ipc.answerRenderer('open-hamburger-menu', args => Menu.getApplicationMenu().popup(args))
 ))
-subscriptions.add(new Disposable(
-  ipc.answerRenderer('search-next', ({query, options}) => {
-    ipc.callRenderer(currentTerminalWindow, 'search-next', {query, options})
-  })
-))
-subscriptions.add(new Disposable(
-  ipc.answerRenderer('search-previous', ({query, options}) => {
-    ipc.callRenderer(currentTerminalWindow, 'search-previous', {query, options})
-  })
-))
 
-const darkModeChange = () => {
-  ipc.sendToRenderers('dark-mode-changed')
-}
+const darkModeChange = () => ipc.sendToRenderers('dark-mode-changed')
 
 nativeTheme.on('updated', darkModeChange)
 subscriptions.add(new Disposable(() => {
