@@ -1,4 +1,3 @@
-import Branch from './branch'
 import Session from './session'
 
 export default class Tab {
@@ -8,49 +7,6 @@ export default class Tab {
     this.title = ''
     this.isUnread = false
     this.type = type
-  }
-
-  add(sessionId, orientation) {
-    let newBranch
-
-    if (this.root.className === 'Session') {
-      const session = this.root
-      const branch = this.newBranch(session, orientation)
-      this.root = branch
-      newBranch = this.root
-    } else {
-      newBranch = this.newBranch(this.find(this.root, sessionId), orientation)
-    }
-
-    return newBranch
-  }
-
-  remove(sessionId) {
-    if (this.root.className === 'Session' && (this.root.id === sessionId)) {
-      this.root = null
-    } else {
-      const sessionToRemove = this.find(this.root, sessionId)
-      const sessionToSave = this.sessionToSave(sessionToRemove)
-
-      if (sessionToRemove) {
-        sessionToRemove.kill()
-
-        if (sessionToSave.branch === this.root) {
-          this.root = sessionToSave
-          sessionToSave.branch = null
-        } else {
-          if (sessionToSave.branch.branch.left === sessionToSave.branch) {
-            sessionToSave.branch.branch.left = sessionToSave
-          }
-
-          if (sessionToSave.branch.branch.right === sessionToSave.branch) {
-            sessionToSave.branch.branch.right = sessionToSave
-          }
-
-          sessionToSave.branch = sessionToSave.branch.branch
-        }
-      }
-    }
   }
 
   async kill() {
@@ -83,22 +39,6 @@ export default class Tab {
 
     this.traverse(branch.left, callback)
     this.traverse(branch.right, callback)
-  }
-
-  newBranch(session, orientation) {
-    const branch = new Branch(
-      session.branch, orientation, session, this.type
-    )
-
-    if (session.branch && session.branch.left.id === session.id) {
-      session.branch.left = branch
-    } else if (session.branch && session.branch.right.id === session.id) {
-      session.branch.right = branch
-    }
-
-    session.branch = branch
-
-    return branch
   }
 
   sessionToSave(sessionToRemove) {

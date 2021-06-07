@@ -16,8 +16,7 @@ import {LigaturesAddon} from 'xterm-addon-ligatures'
 import CurrentProfile from '../utils/current-profile'
 
 export default class Session {
-  constructor(type, branch) {
-    this.branch = branch
+  constructor(type) {
     this.currentProfile = new CurrentProfile()
     this.id = Math.random()
     this.subscriptions = new CompositeDisposable()

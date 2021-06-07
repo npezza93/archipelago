@@ -3,17 +3,6 @@
     text-rendering: geometricPrecision;
   }
 }
-@keyframes pulse {
-  from {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.3;
-  }
-  to {
-    opacity: 1;
-  }
-}
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -88,132 +77,8 @@ archipelago-app {
   flex-direction: column;
 }
 
-archipelago-app.single-tab-mode minimize-button {
-  top: 9px !important;
-}
-
-archipelago-app.single-tab-mode maximize-button {
-  top: 9px !important;
-}
-
-archipelago-app.single-tab-mode close-button {
-  top: 9px !important;
-}
-
 close-button:hover {
   filter: invert(0%);
-}
-
-archipelago-tab-list {
-  -webkit-app-region: drag;
-  display: flex;
-  flex-direction: row;
-  height: 40px;
-  min-height: 0;
-}
-
-archipelago-app.darwin archipelago-tab-list {
-  margin-left: 70px;
-}
-archipelago-app.win32 archipelago-tab-list, archipelago-app.linux archipelago-tab-list {
-  margin-left: 41px;
-  width: calc(100% - 184px);
-}
-
-archipelago-app.win32 archipelago-tab-list archipelago-tab span,
-archipelago-app.win32 archipelago-tab-list archipelago-tab div,
-archipelago-app.linux archipelago-tab-list archipelago-tab span,
-archipelago-app.linux archipelago-tab-list archipelago-tab div {
-  -webkit-app-region: no-drag;
-}
-archipelago-tab-list > span {
-  width: 100%;
-  display: flex;
-}
-
-archipelago-tab-list .archipelago-tab-enter {
-  flex: 0.0001;
-}
-archipelago-tab-list .archipelago-tab-enter.archipelago-tab-enter-active {
-  flex: 1;
-  transition: all 500ms linear;
-}
-archipelago-tab-list .archipelago-tab-leave {
-  flex: 1;
-}
-archipelago-tab-list .archipelago-tab-leave.archipelago-tab-leave-active {
-  flex: 0.0001;
-  transition: all 300ms linear;
-}
-
-archipelago-tab-list archipelago-tab {
-  filter: invert(50%);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-  transition: all 0.3s linear;
-  min-width: 0;
-  font-size: 14px;
-  line-height: 18px !important;
-  position: relative;
-}
-archipelago-tab-list archipelago-tab:not(.active)::after {
-  position: absolute;
-  content: "";
-  height: 1px;
-  background: var(--tab-border-color);
-  transition: all 0.15s linear;
-  width: 0;
-  bottom: 0;
-}
-archipelago-tab-list archipelago-tab:hover::after {
-  width: 100%;
-}
-archipelago-tab-list archipelago-tab.active {
-  filter: invert(0%);
-}
-archipelago-tab-list archipelago-tab.active::after {
-  position: absolute;
-  content: "";
-  height: 1px;
-  background: var(--tab-border-color);
-  width: 100%;
-  bottom: 0;
-}
-
-archipelago-tab div {
-  position: absolute;
-  right: 10px;
-  top: 8px;
-  font-size: 20px;
-}
-
-archipelago-tab-list archipelago-tab:first-child:nth-last-child(1) div {
-  display: none;
-}
-archipelago-tab-list archipelago-tab span {
-  text-align: center;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  max-width: 75%;
-}
-
-archipelago-app.single-tab-mode archipelago-tab-list {
-  position: absolute;
-  height: 30px;
-}
-archipelago-app.single-tab-mode archipelago-tab-list archipelago-tab {
-  display: none;
-}
-archipelago-app.darwin.single-tab-mode archipelago-tab-list {
-  width: calc(100% - 70px);
-}
-
-archipelago-tab.is-unread span {
-  animation: pulse 2s infinite;
 }
 
 webview {
