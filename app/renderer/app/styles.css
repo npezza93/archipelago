@@ -28,13 +28,9 @@
   border-radius: 0;
 }
 
-html, body, #app, archipelago-app {
+html, body, #app {
   height: 100%;
   -webkit-font-smoothing: antialiased;
-}
-
-.hidden {
-  display: none;
 }
 
 .xterm .xterm-viewport {
@@ -70,23 +66,4 @@ archipelago-terminal, archipelago-terminal .wrapper {
 .xterm {
   background-color: transparent;
   padding: var(--terminal-padding);
-}
-
-archipelago-app {
-  display: flex;
-  flex-direction: column;
-}
-
-close-button:hover {
-  filter: invert(0%);
-}
-
-webview {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 100;
-  background: #fff;
 }

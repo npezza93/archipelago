@@ -22,8 +22,7 @@ export const makeWindow = (name, options) => {
     webPreferences: {
       contextIsolation: false,
       nodeIntegration: true,
-      enableRemoteModule: true,
-      webviewTag: true
+      enableRemoteModule: true
     }
   }, options))
 

@@ -53,7 +53,6 @@ describe('Application launch', function () {
   })
 
   it('adds a new tab', async () => {
-    await setSingleTabMode(false, this.app)
     const initalElements = await this.app.client.$$('archipelago-terminal')
     assert.equal(initalElements.length, 1)
 
@@ -68,7 +67,6 @@ describe('Application launch', function () {
 
   describe('tab closures', () => {
     it('closes a tab', async () => {
-      await setSingleTabMode(false, this.app)
       await clickMenu(this.app, ['Shell', 'New Tab'])
       let tabElements = await this.app.client.$$('archipelago-terminal')
       assert.equal(tabElements.length, 2)
@@ -80,7 +78,6 @@ describe('Application launch', function () {
     })
 
     it('close button doesnt appear on last tab', async () => {
-      await setSingleTabMode(false, this.app)
       const tabElements = await this.app.client.$$('archipelago-terminal')
       assert.equal(tabElements.length, 1)
 
@@ -89,10 +86,6 @@ describe('Application launch', function () {
     })
   })
 })
-
-function setSingleTabMode(checked, app) {
-  return app.electron.ipcRenderer.send('SPECTRON_SET_PROPERTY/SEND', {property: 'singleTabMode', value: checked})
-}
 
 function clickMenu(app, labels) {
   return app.electron.ipcRenderer.send('SPECTRON_FAKE_MENU/SEND', labels)

@@ -1,5 +1,5 @@
 /* global document, navigator */
-import {clipboard} from 'electron'
+import {clipboard, shell} from 'electron'
 import {ipcRenderer as ipc} from 'electron-better-ipc'
 import {activeWindow, platform} from 'electron-util'
 import {CompositeDisposable, Disposable} from 'event-kit'
@@ -16,13 +16,12 @@ import {LigaturesAddon} from 'xterm-addon-ligatures'
 import CurrentProfile from '../utils/current-profile'
 
 export default class Session {
-  constructor(type) {
+  constructor() {
     this.currentProfile = new CurrentProfile()
     this.id = Math.random()
     this.subscriptions = new CompositeDisposable()
     this.title = ''
     this.ptyId = ipc.callMain('pty-create', {sessionId: this.id, sessionWindowId: activeWindow().id})
-    this.type = type || 'default'
     this.fitAddon = new FitAddon()
     this.webglAddon = new WebglAddon()
     this.xterm = new Terminal(this.settings())
@@ -238,17 +237,7 @@ export default class Session {
   }
 
   bindListeners() {
-    this.webLinksAddon = new WebLinksAddon((event, uri) => {
-      if (document.querySelector('webview')) {
-        document.querySelector('webview').remove()
-      }
-
-      if (platform({macos: event.metaKey, default: event.ctrlKey})) {
-        const webview = document.createElement('webview')
-        webview.setAttribute('src', uri)
-        document.querySelector('body').append(webview)
-      }
-    })
+    this.webLinksAddon = new WebLinksAddon((event, uri) => shell.openExternal(uri))
 
     this.xterm.loadAddon(this.webLinksAddon)
     this.xterm.attachCustomKeyEventHandler(this.keybindingHandler)
