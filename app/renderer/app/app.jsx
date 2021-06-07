@@ -210,18 +210,6 @@ export default class App extends Component {
     this.setState({tabs, currentSessionId: newSessionId})
   }
 
-  searchNext({query, options}) {
-    const currentTab = this.currentTab()
-    const session = currentTab.find(currentTab.root, currentTab.lastActiveSessionId)
-    session.searchNext(query, options)
-  }
-
-  searchPrevious({query, options}) {
-    const currentTab = this.currentTab()
-    const session = currentTab.find(currentTab.root, currentTab.lastActiveSessionId)
-    session.searchPrevious(query, options)
-  }
-
   get docStyles() {
     return document.documentElement.style
   }
@@ -280,8 +268,6 @@ export default class App extends Component {
     ipc.on('close-via-menu', this.closeViaMenu)
     this.addSubscription(new Disposable(ipc.answerMain('split', this.split)))
     this.addSubscription(new Disposable(ipc.answerMain('new-tab', this.addTab)))
-    this.addSubscription(new Disposable(ipc.answerMain('search-next', this.searchNext)))
-    this.addSubscription(new Disposable(ipc.answerMain('search-previous', this.searchPrevious)))
     this.addSubscription(new Disposable(ipc.answerMain('setting-changed', this.handleSettingChanged)))
     this.addSubscription(new Disposable(ipc.answerMain('active-profile-changed', this.handleActiveProfileChanged)))
     this.addSubscription(new Disposable(ipc.answerMain('close', this.handleClose)))

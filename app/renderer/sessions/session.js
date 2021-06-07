@@ -10,7 +10,6 @@ import keystrokeForKeyboardEvent from 'keystroke-for-keyboard-event'
 import autoBind from 'auto-bind'
 import Color from 'color'
 import {FitAddon} from 'xterm-addon-fit'
-import {SearchAddon} from 'xterm-addon-search'
 import {WebLinksAddon} from 'xterm-addon-web-links'
 import {WebglAddon} from 'xterm-addon-webgl'
 import {LigaturesAddon} from 'xterm-addon-ligatures'
@@ -26,12 +25,10 @@ export default class Session {
     this.ptyId = ipc.callMain('pty-create', {sessionId: this.id, sessionWindowId: activeWindow().id})
     this.type = type || 'default'
     this.fitAddon = new FitAddon()
-    this.searchAddon = new SearchAddon()
     this.webglAddon = new WebglAddon()
     this.xterm = new Terminal(this.settings())
     this.ligaturesAddon = new LigaturesAddon()
     this.xterm.loadAddon(this.fitAddon)
-    this.xterm.loadAddon(this.searchAddon)
 
     this.resetKeymaps()
     autoBind(this)
@@ -146,14 +143,6 @@ export default class Session {
     allowTransparency = color.alpha() !== 1
 
     return allowTransparency
-  }
-
-  searchNext(query, options) {
-    this.searchAddon.findNext(query, options)
-  }
-
-  searchPrevious(query, options) {
-    this.searchAddon.findPrevious(query, options)
   }
 
   keybindingHandler(event) {
