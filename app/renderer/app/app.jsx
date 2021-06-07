@@ -4,7 +4,6 @@ import {ipcRenderer as ipc} from 'electron-better-ipc'
 import React from 'react'
 import {Disposable} from 'event-kit'
 import Tab from '../sessions/tab'
-import TrafficLights from '../traffic-lights.jsx'
 import Component from '../utils/component.jsx'
 import CurrentProfile from '../utils/current-profile'
 import PaneList from './pane-list.jsx'
@@ -23,7 +22,6 @@ export default class App extends Component {
         selectTab={this.selectTab}
         currentProfile={this.currentProfile}
         removeTab={this.removeTab} />
-      <TrafficLights currentProfile={this.currentProfile} />
       <PaneList
         tabs={this.state.tabs}
         currentTabId={this.state.currentTabId}

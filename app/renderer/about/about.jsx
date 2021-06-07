@@ -4,14 +4,12 @@ import {ipcRenderer as ipc} from 'electron-better-ipc'
 import {api, darkMode} from 'electron-util'
 import React from 'react'
 import {Disposable} from 'event-kit'
-import TrafficLights from '../traffic-lights.jsx'
 import Component from '../utils/component.jsx'
 import './styles.css'
 
 export default class About extends Component {
   render() {
     return <div id="about" data-theme={this.theme}>
-      <TrafficLights />
       <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="1200.000000pt" height="1200.000000pt" viewBox="0 0 1200.000000 1200.000000" preserveAspectRatio="xMidYMid meet" className="project-logo">
         <g transform="translate(0.000000,1200.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
           <path d="M5088 8625 c-38 -21 -2931 -5083 -2936 -5137 -5 -45 25 -99 63 -116
