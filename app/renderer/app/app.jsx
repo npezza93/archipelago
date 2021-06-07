@@ -1,4 +1,4 @@
-/* global window, document, ResizeObserver */
+/* global window, document */
 
 import {ipcRenderer as ipc} from 'electron-better-ipc'
 import debouncer from 'debounce-fn'
@@ -21,7 +21,6 @@ export default class App extends Component {
 
   initialize() {
     this.currentProfile = new CurrentProfile()
-    this.resizeObserver = new ResizeObserver(this.fit)
     this.resetCssSettings()
   }
 
@@ -32,6 +31,7 @@ export default class App extends Component {
   componentWillUnmount() {
     this.cleanup()
     window.removeEventListener('beforeunload', this.cleanup)
+    window.removeEventListener('resize', this.fit)
   }
 
   componentDidUpdate() {
@@ -41,7 +41,7 @@ export default class App extends Component {
   componentDidMount() {
     this.state.session.attach(this.container)
 
-    this.resizeObserver.observe(this.container)
+    window.addEventListener('resize', this.fit)
   }
 
   setRef(container) {
@@ -87,7 +87,6 @@ export default class App extends Component {
     this.addSubscription(new Disposable(ipc.answerMain('setting-changed', this.handleSettingChanged)))
     this.addSubscription(new Disposable(ipc.answerMain('active-profile-changed', this.resetCssSettings)))
     this.addSubscription(new Disposable(ipc.answerMain('close', this.close)))
-    this.addSubscription(new Disposable(() => this.resizeObserver.unobserve(this.container)))
     this.addSubscription(this.state.session.onExit(this.close))
   }
 }
