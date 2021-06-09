@@ -55,15 +55,5 @@ export const makeWindow = (name, options) => {
 }
 
 const loadUrl = (browserWindow, anchor) => {
-  let url
-
-  if (is.development && process.env.ELECTRON_WEBPACK_WDS_PORT) {
-    url = `http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}#${anchor}`
-  } else if (is.development && !process.env.ELECTRON_WEBPACK_WDS_PORT) {
-    url = `file://${__dirname}/../renderer/index.html#${anchor}`
-  } else {
-    url = `file:///${__dirname}/index.html#${anchor}`
-  }
-
-  browserWindow.loadURL(url)
+  browserWindow.loadURL(`file://${__dirname}/../renderer/${anchor}/index.html`)
 }

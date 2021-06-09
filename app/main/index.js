@@ -13,7 +13,6 @@ if (!is.development) {
   require('update-electron-app')()
 }
 
-let currentTerminalWindow = null
 const windows = []
 const subscriptions = new CompositeDisposable()
 const profileManager = new ProfileManager(pref())
@@ -22,6 +21,7 @@ subscriptions.add(new Disposable(() => profileManager.dispose()))
 ptyManager(profileManager)
 
 app.commandLine.appendSwitch('enable-features=\'FontAccess\'')
+// app.commandLine.appendSwitch('enable-features', 'Metal')
 
 const resetAppMenu = () =>
   Menu.setApplicationMenu(
@@ -29,7 +29,7 @@ const resetAppMenu = () =>
   )
 
 const createWindow = () => {
-  const win = makeWindow(process.env.PAGE, {
+  const win = makeWindow("app", {
     width: 1000,
     backgroundColor: argbBackground(profileManager, 'theme.background'),
     vibrancy: profileManager.get('vibrancy')
@@ -39,7 +39,6 @@ const createWindow = () => {
     shouldShowMenu: (event, parameters) => parameters.isEditable
   })
 
-  win.on('focus', () => currentTerminalWindow = win)
   windows.push(win)
 }
 

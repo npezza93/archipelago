@@ -2,12 +2,11 @@
   "name": "Archipelago",
   "version": "3.16.0",
   "description": "Archipelago is an open-source terminal emulator built on web technology",
-  "main": "app/main/index.js",
+  "main": "app/main/esm.js",
   "scripts": {
     "postinstall": " ./node_modules/.bin/electron-builder install-app-deps",
     "test": "yarn compile && ./node_modules/.bin/mocha test/main/about-test.js test/main/main-test.js test/main/settings-test.js",
-    "start": "./node_modules/.bin/electron-webpack dev",
-    "compile": "./node_modules/.bin/electron-webpack",
+    "start": "./node_modules/.bin/electron .",
     "lint": "./node_modules/.bin/xo --ignore app/renderer/index.js",
     "pack": "./node_modules/.bin/electron-builder --dir",
     "dist": "yarn compile &&  ./node_modules/.bin/electron-builder --publish onTagOrDraft"
@@ -73,24 +72,19 @@
   },
   "dependencies": {
     "@githubprimer/octicons-react": "^8.1.0",
-    "@researchgate/react-intersection-observer": "^1.0.5",
-    "auto-bind": "^3.0.0",
+    "auto-bind": "^4.0.0",
     "color": "^3.1.0",
-    "debounce-fn": "^4.0.0",
+    "debounce-fn": "< 5.0",
     "default-shell": "^1.0.1",
     "electron-better-ipc": "^2.0.0",
     "electron-context-menu": "^3.1.0",
     "electron-util": "^0.16.0",
+    "esm": "^3.2.25",
     "event-kit": "^2.5.0",
     "i": "^0.3.6",
     "keystroke-for-keyboard-event": "^1.0.0",
     "node-pty": "0.10.1",
     "pref": "^3.1.0",
-    "react": "^17.0.1",
-    "react-addons-css-transition-group": "^15.6.2",
-    "react-color": "^2.18.0",
-    "react-dom": "^17.0.1",
-    "source-map-support": "^0.5.16",
     "unescape-js": "^1.1.0",
     "update-electron-app": "^2.0.1",
     "xterm": "^4.12.0",
@@ -100,18 +94,13 @@
     "xterm-addon-webgl": "^0.11.1"
   },
   "devDependencies": {
-    "@babel/preset-react": "^7.12.13",
     "chai": "^4.3.4",
-    "css-loader": "^5.2.5",
     "electron": "^13.0.0",
     "electron-builder": "^22.11.5",
     "electron-mocha": "^10.0.0",
     "electron-notarize": "^1.0.0",
-    "electron-webpack": "^2.3.1",
-    "eslint-plugin-react": "^7.23.2",
     "mocha": "^8.4.0",
     "spectron": "^15.0.0",
-    "webpack": "^4.46.0",
     "xo": "^0.40.2"
   },
   "build": {
@@ -181,17 +170,6 @@
       "perMachine": true,
       "oneClick": false,
       "allowToChangeInstallationDirectory": true
-    }
-  },
-  "electronWebpack": {
-    "commonSourceDirectory": "app/common",
-    "title": true,
-    "main": {
-      "sourceDirectory": "app/main"
-    },
-    "renderer": {
-      "webpackConfig": "webpack.renderer.additions.js",
-      "sourceDirectory": "app/renderer"
     }
   }
 }

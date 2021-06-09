@@ -28,7 +28,7 @@
   border-radius: 0;
 }
 
-html, body, #app {
+html, body {
   height: 100%;
   -webkit-font-smoothing: antialiased;
 }
@@ -36,9 +36,6 @@ html, body, #app {
 .xterm .xterm-viewport {
   -webkit-transition: all 0.5s;
   opacity: 0;
-}
-
-.terminal .xterm-viewport {
   background-color: transparent;
 }
 

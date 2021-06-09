@@ -116,7 +116,8 @@ export default class Session {
 
   async kill() {
     this.subscriptions.dispose()
-    this.xterm.dispose()
+
+    if (this.xterm) { this.xterm.dispose() } // use safe nav
 
     if (this._wrapperElement) {
       this._wrapperElement.remove()
