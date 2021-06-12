@@ -4,7 +4,6 @@ import {ipcMain as ipc} from 'electron-better-ipc'
 import {spawn} from 'node-pty'
 import {Disposable} from 'event-kit'
 import debouncer from 'debounce-fn'
-import defaultShell from 'default-shell'
 
 export default class Pty {
   constructor(profileManager) {
@@ -21,7 +20,7 @@ export default class Pty {
   }
 
   get shell() {
-    return this.profileManager.get('shell') || defaultShell
+    return this.profileManager.get('shell') || process.env.SHELL || '/bin/bash'
   }
 
   get sessionArgs() {
@@ -74,11 +73,11 @@ export default class Pty {
   }
 
   resize(cols, rows) {
-    if (Number.isInteger(cols) && Number.isInteger(rows)) {
+    if (Number.isInteger(cols) && Number.isInteger(rows) && !this.pty._emittedClose) {
       try {
         this.pty.resize(cols, rows)
       } catch (error) {
-        console.error(error)
+        console.log(error)
       }
     }
   }
