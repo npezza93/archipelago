@@ -66,10 +66,6 @@
     "url": "https://github.com/npezza93/archipelago/issues"
   },
   "license": "MIT",
-  "resolutions": {
-    "serialize-javascript": "^5.0.0",
-    "minimist": "^1.2.5"
-  },
   "dependencies": {
     "auto-bind": "^4.0.0",
     "color": "^3.1.0",
@@ -86,7 +82,7 @@
     "stimulus": "^2.0.0",
     "unescape-js": "^1.1.0",
     "update-electron-app": "^2.0.1",
-    "xterm": "^4.12.0",
+    "xterm": "^4.13.0",
     "xterm-addon-fit": "^0.5.0",
     "xterm-addon-ligatures": "^0.5.0",
     "xterm-addon-web-links": "^0.4.0",
@@ -115,7 +111,6 @@
       "extendInfo": {
         "NSRequiresAquaSystemAppearance": false
       },
-      "gatekeeperAssess": false,
       "type": "distribution",
       "hardenedRuntime": true,
       "entitlements": "./build/entitlements.mac.inherit.plist",
@@ -150,31 +145,6 @@
           "path": "/Applications"
         }
       ]
-    },
-    "linux": {
-      "icon": "build/icon.icns",
-      "category": "TerminalEmulator",
-      "packageCategory": "TerminalEmulator",
-      "description": "Archipelago is a terminal emulator built on open web technologies.",
-      "target": [
-        "AppImage",
-        "deb",
-        "rpm"
-      ],
-      "maintainer": "Nick Pezza <npezza93@gmail.com>"
-    },
-    "deb": {
-      "synopsis": "Archipelago"
-    },
-    "win": {
-      "target": "nsis",
-      "icon": "build/icon.ico",
-      "publisherName": "Nick Pezza"
-    },
-    "nsis": {
-      "perMachine": true,
-      "oneClick": false,
-      "allowToChangeInstallationDirectory": true
     }
   }
 }
