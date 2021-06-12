@@ -1,0 +1,29 @@
+body[data-theme^="light"] {
+  --color: #424242;
+  --accent-color: #9E9E9E;
+  --background-color: rgb(241, 240, 239);
+  --opaque-background: rgba(245, 245, 245, 0.2);
+  --opaque-color: rgba(66, 66, 66, 0.5);
+  --header-background: rgb(245, 244, 243);
+  --header-border: rgb(219, 219, 219);
+  --unfocused-color: rgb(173, 171, 171);
+  --unfocused-header-background: rgb(236, 235, 234);
+  --active-tab-color: rgb(45, 113, 237);
+  --active-hover-tab-color: rgb(19, 61, 167);
+  --tab-hover-background-color: rgb(231, 230, 229);
+}
+
+body[data-theme^="dark"] {
+  --color: #F5F5F5;
+  --accent-color: #BDBDBD;
+  --background-color: rgb(43, 41, 40);
+  --opaque-background: rgba(57, 55, 54, 0.2);
+  --opaque-color: rgba(238, 238, 238, 0.5);
+  --header-background: rgb(60, 60, 59);
+  --header-border: rgb(18, 18, 18);
+  --unfocused-color: rgb(116, 116, 116);
+  --unfocused-header-background: rgb(53, 51, 50);
+  --active-tab-color: rgb(102, 208, 250);
+  --active-hover-tab-color: rgb(147, 252, 253);
+  --tab-hover-background-color: rgb(74, 73, 72)
+}
