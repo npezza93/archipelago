@@ -20,7 +20,6 @@ export default class Session {
     this.currentProfile = new CurrentProfile()
     this.id = Math.random()
     this.subscriptions = new CompositeDisposable()
-    this.title = ''
     this.ptyId = ipc.callMain('pty-create', {sessionId: this.id, sessionWindowId: activeWindow().id})
     this.fitAddon = new FitAddon()
     this.webglAddon = new WebglAddon()
@@ -32,10 +31,6 @@ export default class Session {
     autoBind(this)
 
     this.bindListeners()
-  }
-
-  get className() {
-    return 'Session'
   }
 
   get keymaps() {
@@ -59,17 +54,19 @@ export default class Session {
       this.currentProfile.xtermSettings.reduce((settings, property) => {
         settings[property] = this.currentProfile.get(property)
         return settings
-      }, {windows: this.isWindows()})
+      }, {})
     )
-  }
-
-  isWindows() {
-    return ['Windows', 'Win16', 'Win32', 'WinCE'].includes(navigator.platform)
   }
 
   applySettingModifiers(defaultSettings) {
     const {background} = defaultSettings.theme
     defaultSettings.allowTransparency = this.allowTransparency(background)
+    defaultSettings.cursorWidth = 2
+    defaultSettings.fontWeightBold = "bold"
+    defaultSettings.lineHeight = 1
+    defaultSettings.letterSpacing = "0"
+    defaultSettings.bellStyle = "sound"
+    defaultSettings.tabStopWidth = 8
 
     return defaultSettings
   }
@@ -173,19 +170,6 @@ export default class Session {
     }))
   }
 
-  setTitle(title) {
-    this.title = title
-  }
-
-  resetBlink() {
-    debouncer(() => {
-      if (this.currentProfile.get('cursorBlink')) {
-        this.xterm.setOption('cursorBlink', false)
-        this.xterm.setOption('cursorBlink', true)
-      }
-    }, {wait: 50})()
-  }
-
   copySelection() {
     if (this.currentProfile.get('copyOnSelect') && this.xterm.getSelection()) {
       clipboard.writeText(this.xterm.getSelection())
@@ -194,10 +178,6 @@ export default class Session {
 
   onFocus(callback) {
     return this.xterm._core.onFocus(callback)
-  }
-
-  onTitle(callback) {
-    return this.xterm.onTitleChange(callback)
   }
 
   onExit(callback) {
@@ -250,9 +230,7 @@ export default class Session {
     this.subscriptions.add(this.onData(data => {
       ipc.send(`pty-write-${this.id}`, data)
     }))
-    this.subscriptions.add(this.onTitle(this.setTitle))
     this.subscriptions.add(this.onFocus(this.fit))
-    this.subscriptions.add(this.onFocus(this.resetBlink))
     this.subscriptions.add(this.onSelection(this.copySelection))
     this.subscriptions.add(new Disposable(ipc.answerMain('active-profile-changed', this.onActiveProfileChange)))
     this.subscriptions.add(new Disposable(ipc.answerMain('setting-changed', this.onSettingChanged)))

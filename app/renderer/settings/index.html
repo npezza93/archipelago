@@ -34,91 +34,83 @@
       </div>
     </header>
 
-    <section id="text">
+    <section id="text" class="hidden">
       <div>
-        Cursor Style
+        <h4 class="px-15 my-15">Cursor</h4>
 
-        <div class="flex flex-row">
-          <label for="cursorStyle-block">
-            <input type="radio" id="cursorStyle-block" name="cursorStyle" value="block">
-            <span></span>
-            <span>Block</span>
-          </label>
+        <div class="flex flex-row justify-between px-15">
+          <div class="flex flex-row gap-10">
+            <label for="cursorStyle-block" class="flex flex-row align-center gap-10">
+              <input type="radio" id="cursorStyle-block" name="cursorStyle" value="block">
+              <span></span>
+              <span>Block</span>
+            </label>
 
-          <label for="cursorStyle-underline">
-            <input type="radio" id="cursorStyle-underline" name="cursorStyle" value="underline">
-            <span></span>
-            <span>Underline</span>
-          </label>
+            <label for="cursorStyle-underline" class="flex flex-row align-center gap-10">
+              <input type="radio" id="cursorStyle-underline" name="cursorStyle" value="underline">
+              <span></span>
+              <span>Underline</span>
+            </label>
 
-          <label for="cursorStyle-bar">
-            <input type="radio" id="cursorStyle-bar" name="cursorStyle" value="bar">
-            <span></span>
-            <span>Bar</span>
+            <label for="cursorStyle-bar" class="flex flex-row align-center gap-10">
+              <input type="radio" id="cursorStyle-bar" name="cursorStyle" value="bar">
+              <span></span>
+              <span>Bar</span>
+            </label>
+          </div>
+
+          <label class="flex flex-row align-center gap-10">
+            <input type="checkbox" name="cursorBlink">
+            <span>
+              <svg width="10px" height="9px" viewBox="0 0 12 11">
+                <polyline points="1 6.29411765 4.5 10 11 1"></polyline>
+              </svg>
+            </span>
+            <span>Blink Cursor</span>
           </label>
         </div>
       </div>
 
-      <label>
-        Bar cursor width
+      <div class="my-15">
+        <h4 class="px-15 my-15">Font</h4>
 
-        <input type="number" name="cursorWidth" value="" min=0>
-      </label>
+        <div class="flex flex-row px-15 gap-10">
+          <label class="w-270" data-controller="fonts">
+            <select class="w-270" name="fontFamily"></select>
+          </label>
 
-      <label class="flex flex-row">
-        <input type="checkbox" name="cursorBlink">
-        <span>
-          <svg width="12px" height="11px" viewBox="0 0 12 11">
-            <polyline points="1 6.29411765 4.5 10 11 1"></polyline>
-          </svg>
-        </span>
-        <span>Blink Cursor</span>
-      </label>
+          <select name="fontWeight" size="1">
+            <option value="normal">Normal</option>
+            <option value="bold">Bold</option>
+            <option value="bolder">Bolder</option>
+            <option value="lighter">Lighter</option>
+            <option value="100">100</option>
+            <option value="200">200</option>
+            <option value="300">300</option>
+            <option value="400">400</option>
+            <option value="500">500</option>
+            <option value="600">600</option>
+            <option value="700">700</option>
+            <option value="800">800</option>
+            <option value="900">900</option>
+          </select>
 
-      <label data-controller="fonts">
-        Font Family
+          <input type="number" name="fontSize" value="" min=1 max=99>
+        </div>
 
-        <select name="fontFamily"></select>
-      </label>
-
-      <label>
-        Font Size
-
-        <input type="number" name="fontSize" value="" min=0>
-      </label>
-
-      <label>
-        Font Weight
-
-        <select name="fontWeight" size="1">
-          <option value="normal">Normal</option>
-          <option value="bold">Bold</option>
-          <option value="bolder">Bolder</option>
-          <option value="lighter">Lighter</option>
-          <option value="100">100</option>
-          <option value="200">200</option>
-          <option value="300">300</option>
-          <option value="400">400</option>
-          <option value="500">500</option>
-          <option value="600">600</option>
-          <option value="700">700</option>
-          <option value="800">800</option>
-          <option value="900">900</option>
-        </select>
-      </label>
-
-      <label class="flex flex-row">
-        <input type="checkbox" name="ligatures">
-        <span>
-          <svg width="12px" height="11px" viewBox="0 0 12 11">
-            <polyline points="1 6.29411765 4.5 10 11 1"></polyline>
-          </svg>
-        </span>
-        <span>Ligatures</span>
-      </label>
+        <label class="flex flex-row align-center gap-10 px-15 my-15">
+          <input type="checkbox" name="ligatures">
+          <span>
+            <svg width="10px" height="9px" viewBox="0 0 12 11">
+              <polyline points="1 6.29411765 4.5 10 11 1"></polyline>
+            </svg>
+          </span>
+          <span>Ligatures</span>
+        </label>
+      </div>
     </section>
 
-    <section id="shell">
+    <section id="shell" class="hidden">
       <label>
         Shell to run
 
@@ -135,12 +127,6 @@
         Scrollback
 
         <input type="number" name="scrollback" value="" min=0>
-      </label>
-
-      <label>
-        Tab stop width
-
-        <input type="number" name="tabStopWidth" value="" min=0>
       </label>
 
       <label>
@@ -186,7 +172,7 @@
       </label>
     </section>
 
-    <section id="theme">
+    <section id="theme" class="hidden">
       <label>
         Cursor
 

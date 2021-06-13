@@ -1,10 +1,15 @@
-body, body[data-theme^="light"] {
-  --color: #424242;
-  --background-color: #F5F5F5;
+@media (prefers-color-scheme: light) {
+  body {
+    --color: #424242;
+    --background-color: #F5F5F5;
+  }
 }
-body[data-theme^="dark"] {
-  --color: #F5F5F5;
-  --background-color: #393736;
+
+@media (prefers-color-scheme: dark) {
+  body {
+    --color: #F5F5F5;
+    --background-color: #393736;
+  }
 }
 
 .title {

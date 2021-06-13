@@ -38,8 +38,6 @@ const settingChanged = ({property, value}) => {
 
 resetCssSettings();
 session.attach(document.querySelector('archipelago-terminal'));
-session.fit();
-session.xterm.focus();
 
 window.addEventListener('resize', fit);
 ipc.on('close-via-menu', close);

@@ -24,7 +24,6 @@ html, body {
   -webkit-font-smoothing: antialiased;
   margin: 0;
   overflow-y: hidden;
-  height: 100%;
   background-color: var(--background-color);
 }
 
@@ -45,4 +44,27 @@ html, body {
 }
 .justify-center {
   justify-content: center;
+}
+.gap-10 {
+  gap: 10px;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.px-15 {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.my-15 {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+h4 {
+  color: var(--color);
+}
+.w-270 {
+  width: 270px;
+}
+input:focus, textarea:focus, select:focus{
+  outline: none;
 }

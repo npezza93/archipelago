@@ -1,4 +1,5 @@
 import { Controller } from 'stimulus';
+import {ipcRenderer as ipc} from 'electron-better-ipc';
 
 export default class extends Controller {
   connect() {
@@ -21,6 +22,10 @@ export default class extends Controller {
 
     if (section) {
       section.classList.remove('hidden');
+      ipc.callMain('resize', {
+        width: document.body.offsetWidth,
+        height: document.body.offsetHeight
+      });
     }
   }
 }

@@ -2,12 +2,12 @@ input[type="checkbox"] + span {
   position: relative;
   display: block;
   float: left;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   border-radius: 4px;
-  background-color: #606062;
-  background-image: linear-gradient(#474749, #606062);
-  box-shadow: inset 0 1px 1px rgba(255,255,255,0.15), inset 0 -1px 1px rgba(0,0,0,0.15);
+  background-color: var(--radio-top-gradient);
+  background-image: linear-gradient(var(--radio-top-gradient), var(--radio-bottom-gradient));
+  box-shadow: inset 0 var(--radio-box-shadow-top) 1px rgba(255,255,255,0.15), inset 0 var(--radio-box-shadow-bottom) 1px rgba(0,0,0,0.23);
   transition: all 0.15s ease;
 }
 
@@ -29,23 +29,24 @@ input[type="radio"] + span {
   position: relative;
   display: block;
   float: left;
-  width: 18px;
-  height: 18px;
+  width: 15px;
+  height: 15px;
   border-radius: 10px;
-  background-color: #606062;
-  background-image: linear-gradient(#474749, #606062);
-  box-shadow: inset 0 1px 1px rgba(255,255,255,0.15), inset 0 -1px 1px rgba(0,0,0,0.15);
+  background-color: var(--radio-top-gradient);
+  background-image: linear-gradient(var(--radio-top-gradient), var(--radio-bottom-gradient));
+  box-shadow: inset 0 var(--radio-box-shadow-top) 1px rgba(255,255,255,0.15), inset 0 var(--radio-box-shadow-bottom) 1px rgba(0,0,0,0.23);
   transition: all 0.15s ease;
+  border: 1px solid var(--radio-border-color);
 }
 
 input[type="radio"] + span:after {
   content: "";
   position: absolute;
   display: block;
-  top: 6px;
-  left: 6px;
-  width: 6px;
-  height: 6px;
+  top: 4px;
+  left: 4px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: #fff;
   opacity: 0;
@@ -75,4 +76,27 @@ input[type="checkbox"]:checked + span {
 input[type="checkbox"]:checked + span svg {
   stroke-dashoffset: 0;
   transition: all 0.15s ease;
+}
+
+select {
+  border: none;
+  background-color: var(--select-background-color);
+  color: var(--color);
+  border-radius: 6px;
+  padding: 2px 3px;
+  border-top: 1px solid var(--select-border-top-color);
+  border-bottom: 1px solid var(--select-border-bottom-color);
+  border-left: 1px solid var(--select-border-top-color);
+  border-right: 1px solid var(--select-border-top-color);
+  box-shadow: 0 1px 0 0 var(--select-box-shadow-color);
+}
+
+input[type="text"], input[type="number"] {
+  background-color: var(--text-input-background);
+  border-top: 1px solid var(--text-input-border-top-color);
+  border-left: 1px solid var(--text-input-border-top-color);
+  border-right: 1px solid var(--text-input-border-top-color);
+  border-bottom: 1px solid var(--text-input-border-bottom-color);
+  color: var(--color);
+  border-radius: 1px;
 }
