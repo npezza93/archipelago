@@ -43,10 +43,10 @@ input[type="radio"] + span:after {
   content: "";
   position: absolute;
   display: block;
-  top: 4px;
-  left: 4px;
-  width: 7px;
-  height: 7px;
+  top: 5px;
+  left: 5px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
   background: #fff;
   opacity: 0;
@@ -99,4 +99,12 @@ input[type="text"], input[type="number"] {
   border-bottom: 1px solid var(--text-input-border-bottom-color);
   color: var(--color);
   border-radius: 1px;
+}
+
+input[type="color"] {
+  padding: 0;
+  border: 0;
+  background: none;
+  height: 28px;
+  width: 28px;
 }

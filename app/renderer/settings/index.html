@@ -111,73 +111,235 @@
     </section>
 
     <section id="shell" class="hidden">
-      <label>
-        Shell to run
+      <div class="flex flex-col">
+        <h4 class="px-15 my-15">Command</h4>
 
-        <input type="text" name="shell" value="">
-      </label>
+        <div class="flex flex-row gap-10 px-15 justify-between">
+          <label class="flex flex-row gap-10">
+            Command to run
 
-      <label>
-        Shell Arguments
+            <input type="text" name="shell" value="">
+          </label>
 
-        <input type="text" name="shellArgs" value="">
-      </label>
+          <label class="flex flex-row gap-10">
+            Arguments
 
-      <label>
-        Scrollback
+            <input type="text" name="shellArgs" value="">
+          </label>
+        </div>
+      </div>
 
-        <input type="number" name="scrollback" value="" min=0>
-      </label>
+      <div class="flex flex-col my-15">
+        <h4 class="px-15 my-15">Scrollback</h4>
 
-      <label>
-        Padding
+        <div class="flex flex-row gap-10 px-15 justify-between">
+          <label class="flex flex-row gap-10">
+            Lines
 
-        <input type="text" name="padding">
-      </label>
+            <input type="number" name="scrollback" value="" min=0>
+          </label>
+        </div>
+      </div>
 
-      <label>
-        Copy on Select
+      <div class="flex flex-col">
+        <h4 class="px-15 my-15">Window</h4>
 
-        <input type="checkbox" name="copyOnSelect">
-      </label>
+        <div class="flex flex-row gap-10 px-15 justify-between">
+          <label class="flex flex-row gap-10">
+            Padding
 
-      <label>
-        Option is Meta
+            <input type="text" name="padding">
+          </label>
+        </div>
+      </div>
 
-        <input type="checkbox" name="macOptionIsMeta">
-      </label>
+      <div class="flex flex-row justify-between gap-10 my-15">
+        <div class="flex flex-row gap-10">
+          <div class="flex flex-col">
+            <h4 class="px-15">Selection</h4>
 
-      <label>
-        Right Click Selects Word
+            <div class="flex flex-col gap-10">
+              <label class="flex flex-row align-center gap-10 px-15">
+                <input type="checkbox" name="copyOnSelect">
+                <span>
+                  <svg width="10px" height="9px" viewBox="0 0 12 11">
+                    <polyline points="1 6.29411765 4.5 10 11 1"></polyline>
+                  </svg>
+                </span>
+                <span>Copy on select</span>
+              </label>
 
-        <input type="checkbox" name="rightClickSelectsWord">
-      </label>
+              <label class="flex flex-row align-center gap-10 px-15">
+                <input type="checkbox" name="rightClickSelectsWord">
+                <span>
+                  <svg width="10px" height="9px" viewBox="0 0 12 11">
+                    <polyline points="1 6.29411765 4.5 10 11 1"></polyline>
+                  </svg>
+                </span>
+                <span>Right click selects word</span>
+              </label>
 
-      <label>
-        Use flow control
+              <label class="flex flex-row align-center gap-10 px-15">
+                <input type="checkbox" name="macOptionClickForcesSelection">
+                <span>
+                  <svg width="10px" height="9px" viewBox="0 0 12 11">
+                    <polyline points="1 6.29411765 4.5 10 11 1"></polyline>
+                  </svg>
+                </span>
+                <span>Click forces selection</span>
+              </label>
+            </div>
+          </div>
+        </div>
 
-        <input type="checkbox" name="useFlowControl">
-      </label>
+        <div class="flex flex-col">
+          <h4 class="px-15">Other</h4>
 
-      <label>
-        Click forces selection
+          <div class="flex flex-col gap-10">
+            <label class="flex flex-row align-center gap-10 px-15">
+              <input type="checkbox" name="macOptionIsMeta">
+              <span>
+                <svg width="10px" height="9px" viewBox="0 0 12 11">
+                  <polyline points="1 6.29411765 4.5 10 11 1"></polyline>
+                </svg>
+              </span>
+              <span>Option is Meta</span>
+            </label>
 
-        <input type="checkbox" name="macOptionClickForcesSelection">
-      </label>
-
-      <label>
-        Bell sound
-
-        <input type="text" name="bellSound" value="">
-      </label>
+            <label class="flex flex-row align-center gap-10 px-15">
+              <input type="checkbox" name="useFlowControl">
+              <span>
+                <svg width="10px" height="9px" viewBox="0 0 12 11">
+                  <polyline points="1 6.29411765 4.5 10 11 1"></polyline>
+                </svg>
+              </span>
+              <span>Use flow control</span>
+            </label>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section id="theme" class="hidden">
-      <label>
-        Cursor
+      <div class="flex flex-row justify-between pb-15">
+        <div class="flex flex-col">
+          <h4 class="px-15 my-15">ANSI</h4>
 
-        <input type="color" name="cursor" value="">
-      </label>
+          <div class="flex flex-col gap-10 px-15 justify-between">
+            <div class="flex flex-row align-center gap-10">
+              <div class="w-75">Black</div>
+
+              <input type="color" name="theme.black" value="">
+              <input type="color" name="theme.brightBlack" value="">
+            </div>
+
+            <div class="flex flex-row align-center gap-10">
+              <div class="w-75">White</div>
+
+              <input type="color" name="theme.white" value="">
+              <input type="color" name="theme.brightWhite" value="">
+            </div>
+
+            <div class="flex flex-row align-center gap-10">
+              <div class="w-75">Red</div>
+
+              <input type="color" name="theme.red" value="">
+              <input type="color" name="theme.brightRed" value="">
+            </div>
+
+            <div class="flex flex-row align-center gap-10">
+              <div class="w-75">Green</div>
+
+              <input type="color" name="theme.green" value="">
+              <input type="color" name="theme.brightGreen" value="">
+            </div>
+
+            <div class="flex flex-row align-center gap-10">
+              <div class="w-75">Yellow</div>
+
+              <input type="color" name="theme.yellow" value="">
+              <input type="color" name="theme.brightYellow" value="">
+            </div>
+
+            <div class="flex flex-row align-center gap-10">
+              <div class="w-75">Magenta</div>
+
+              <input type="color" name="theme.magenta" value="">
+              <input type="color" name="theme.brightMagenta" value="">
+            </div>
+
+            <div class="flex flex-row align-center gap-10">
+              <div class="w-75">Cyan</div>
+
+              <input type="color" name="theme.cyan" value="">
+              <input type="color" name="theme.brightCyan" value="">
+            </div>
+
+            <div class="flex flex-row align-center gap-10">
+              <div class="w-75">Blue</div>
+
+              <input type="color" name="theme.blue" value="">
+              <input type="color" name="theme.brightBlue" value="">
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col">
+          <div class="flex flex-col">
+            <h4 class="px-15 my-15">Cursor</h4>
+
+            <div class="flex flex-row gap-10 px-15 justify-between">
+              <label class="flex flex-row align-center gap-10">
+                <div class="w-75">Color</div>
+
+                <input type="color" name="theme.cursor" value="">
+              </label>
+
+              <label class="flex flex-row align-center gap-10">
+                <div class="w-75">Accent</div>
+
+                <input type="color" name="theme.cursorAccent" value="">
+              </label>
+            </div>
+          </div>
+
+          <div class="flex flex-col">
+           <h4 class="px-15 my-15">Selection</h4>
+
+            <div class="flex flex-row gap-10 px-15 justify-between">
+              <label class="flex flex-row align-center gap-10">
+                <div class="w-75">Color</div>
+
+                <input type="color" name="theme.selection" value="">
+              </label>
+
+              <label class="flex flex-col align-center gap-10">
+                <input type="range" name="theme.selection" value="" min=0 max=1 step=0.01>
+
+                <div class="w-75">Opacity</div>
+              </label>
+            </div>
+          </div>
+
+          <div class="flex flex-col">
+           <h4 class="px-15 my-15">Window</h4>
+
+            <div class="flex flex-row gap-10 px-15 justify-between">
+              <label class="flex flex-row align-center gap-10">
+                <div class="w-100">Foreground</div>
+
+                <input type="color" name="theme.foreground" value="">
+              </label>
+
+              <label class="flex flex-row align-center gap-10">
+                <div class="w-100">Background</div>
+
+                <input type="color" name="theme.background" value="">
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 	</body>
   <script>

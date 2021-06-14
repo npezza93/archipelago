@@ -14,6 +14,7 @@ import {WebLinksAddon} from 'xterm-addon-web-links'
 import {WebglAddon} from 'xterm-addon-webgl'
 import {LigaturesAddon} from 'xterm-addon-ligatures'
 import CurrentProfile from '../utils/current-profile'
+import bellSound from './bell-sound'
 
 export default class Session {
   constructor() {
@@ -67,6 +68,7 @@ export default class Session {
     defaultSettings.letterSpacing = "0"
     defaultSettings.bellStyle = "sound"
     defaultSettings.tabStopWidth = 8
+    defaultSettings.bellSound = bellSound
 
     return defaultSettings
   }

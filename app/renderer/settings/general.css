@@ -25,6 +25,7 @@ html, body {
   margin: 0;
   overflow-y: hidden;
   background-color: var(--background-color);
+  user-select: none;
 }
 
 .hidden {
@@ -55,6 +56,9 @@ html, body {
   padding-left: 15px;
   padding-right: 15px;
 }
+.pb-15 {
+  padding-bottom: 15px;
+}
 .my-15 {
   margin-top: 15px;
   margin-bottom: 15px;
@@ -65,6 +69,15 @@ h4 {
 .w-270 {
   width: 270px;
 }
+.w-75 {
+  width: 75px;
+}
+.w-100 {
+  width: 100px;
+}
 input:focus, textarea:focus, select:focus{
   outline: none;
+}
+section {
+  color: var(--color);
 }
