@@ -125,7 +125,7 @@
           "shellArgs": {
             "type": "string",
             "title": "Shell Arguments (comma separated)",
-            "default": "--login",
+            "default": "",
             "settings": {
               "title": "shell"
             }
