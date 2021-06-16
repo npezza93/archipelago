@@ -14,7 +14,7 @@ export default class Pty {
 
     this.pty = spawn(
       this.shell,
-      this.profileManager.get('shellArgs').split(','),
+      this.profileManager.get('shellArgs').split(',').filter(x => !!x),
       this.sessionArgs
     )
   }
