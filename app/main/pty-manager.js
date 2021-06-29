@@ -22,13 +22,10 @@ export default profileManager => {
     })
   }
 
-  let preppedPty = create()
-
   const disposeOfCreate = ipc.answerRenderer('pty-create', async ({sessionId, sessionWindowId}) => {
-    const pty = await preppedPty
+    const pty = await create()
     ptys[pty.id] = pty
     pty.created(sessionId, sessionWindowId)
-    preppedPty = create()
 
     return pty.id
   })

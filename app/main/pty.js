@@ -27,12 +27,7 @@ export default class Pty {
     return {
       name: 'xterm-256color',
       cwd: process.env.HOME,
-      env: {
-        LANG: (api.app.getLocale() || '') + '.UTF-8',
-        TERM: 'xterm-256color',
-        COLORTERM: 'truecolor',
-        ...process.env
-      }
+      env: { TERM: 'xterm-256color', COLORTERM: 'truecolor', ...process.env }
     }
   }
 
@@ -101,7 +96,7 @@ export default class Pty {
         this.sessionWindow.webContents.send(`pty-data-${this.sessionId}`, this.bufferedData)
         this.bufferedData = ''
         this.bufferTimeout = null
-      }, {wait: 10})()
+      }, {wait: 3})()
     }
   }
 }
