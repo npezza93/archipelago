@@ -1,7 +1,6 @@
-import {api, platform} from 'electron-util'
+import {api} from 'electron-util'
 import about from '../windows/about'
 import settings from '../windows/settings'
-import {accelerators} from '../utils'
 
 export default {
   label: api.app.name,
@@ -16,22 +15,17 @@ export default {
     },
     {type: 'separator'},
     {
-      label: 'Settings',
-      accelerator: accelerators.settings,
+      label: 'Preferences',
+      accelerator: "Cmd+,",
       click: settings.toggle
     },
     {type: 'separator'},
-    ...platform({
-      macos: [
-        {role: 'services', submenu: []},
-        {type: 'separator'},
-        {role: 'hide'},
-        {role: 'hideothers'},
-        {role: 'unhide'},
-        {type: 'separator'}
-      ],
-      default: []
-    }),
-    {role: 'quit', accelerator: accelerators.quitApp}
+    {role: 'services', submenu: []},
+    {type: 'separator'},
+    {role: 'hide'},
+    {role: 'hideothers'},
+    {role: 'unhide'},
+    {type: 'separator'},
+    {role: 'quit', accelerator: "Cmd+Q"}
   ]
 }

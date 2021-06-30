@@ -1,4 +1,5 @@
 import {darkMode} from 'electron-util'
+import {ipcMain as ipc} from 'electron-better-ipc'
 import {makeWindow} from '../utils'
 
 let settingsWindow = null
@@ -11,12 +12,21 @@ const windowOptions = {
     contextIsolation: false
   }
 }
+ipc.answerRenderer('resize', ({width, height}) => {
+  if (settingsWindow) {
+    settingsWindow.setSize(width, height, true);
+  }
+});
 
 export default {
   toggle() {
     if (settingsWindow === null || settingsWindow.isDestroyed()) {
       settingsWindow = makeWindow('settings', windowOptions)
-      settingsWindow.title = 'Settings'
+      settingsWindow.setResizable(false);
+      settingsWindow.setMaximizable(false);
+      settingsWindow.setMinimizable(false);
+      settingsWindow.setFullScreenable(false);
+      settingsWindow.title = 'Settings';
     } else {
       settingsWindow.focus()
     }

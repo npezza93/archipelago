@@ -2,9 +2,6 @@ import {BrowserWindow, app} from 'electron'
 import {is, platform} from 'electron-util'
 import Color from 'color'
 import {ipcMain as ipc} from 'electron-better-ipc'
-import darwinAccelerators from './accelerators/darwin.json'
-import linuxAccelerators from './accelerators/linux.json'
-import windowsAccelerators from './accelerators/windows.json'
 
 export const argbBackground = (profileManager, property) => {
   const color = new Color(profileManager.get(property))
@@ -25,8 +22,7 @@ export const makeWindow = (name, options) => {
     webPreferences: {
       contextIsolation: false,
       nodeIntegration: true,
-      enableRemoteModule: true,
-      webviewTag: true
+      enableRemoteModule: true
     }
   }, options))
 
@@ -58,22 +54,6 @@ export const makeWindow = (name, options) => {
   return newWindow
 }
 
-export const accelerators = platform({
-  macos: darwinAccelerators,
-  linux: linuxAccelerators,
-  windows: windowsAccelerators
-})
-
 const loadUrl = (browserWindow, anchor) => {
-  let url
-
-  if (is.development && process.env.ELECTRON_WEBPACK_WDS_PORT) {
-    url = `http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}#${anchor}`
-  } else if (is.development && !process.env.ELECTRON_WEBPACK_WDS_PORT) {
-    url = `file://${__dirname}/../renderer/index.html#${anchor}`
-  } else {
-    url = `file:///${__dirname}/index.html#${anchor}`
-  }
-
-  browserWindow.loadURL(url)
+  browserWindow.loadURL(`file://${__dirname}/../renderer/${anchor}/index.html`)
 }

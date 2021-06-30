@@ -1,19 +1,18 @@
 import about from './menus/about'
-import shell from './menus/shell'
+import file from './menus/file'
 import edit from './menus/edit'
 import view from './menus/view'
 import profiles from './menus/profiles'
-import windowMenu from './menus/window'
 import help from './menus/help'
 
 export default (createWindow, profileManager) => {
   return [
     about,
-    shell(createWindow, profileManager),
+    file(createWindow),
     edit,
     view,
     profiles(profileManager),
-    windowMenu,
+    {role: 'windowMenu'},
     help
   ]
 }

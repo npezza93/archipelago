@@ -3,7 +3,6 @@ import {ipcRenderer as ipc} from 'electron-better-ipc'
 import React from 'react'
 import {darkMode} from 'electron-util'
 import {Disposable} from 'event-kit'
-import TrafficLights from '../traffic-lights.jsx'
 import Component from '../utils/component.jsx'
 import CurrentProfile from '../utils/current-profile'
 import HamburgerMenu from './hamburger-menu.jsx'
@@ -15,7 +14,7 @@ import './styles.css'
 export default class Settings extends Component {
   render() {
     return <div id="settings" data-theme={this.theme}>
-      <div id="titlebar"><TrafficLights /></div>
+      <div id="titlebar"></div>
       <HamburgerMenu toggleProfilesDrawer={this.toggleProfilesDrawer}/>
       <OpenConfig pref={this.currentProfile.pref} />
       <ProfilesDrawer

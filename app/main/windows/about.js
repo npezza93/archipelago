@@ -12,6 +12,10 @@ export default {
   toggle() {
     if (aboutWindow === null || aboutWindow.isDestroyed()) {
       aboutWindow = makeWindow('about', windowOptions)
+      aboutWindow.setResizable(false);
+      aboutWindow.setMaximizable(false);
+      aboutWindow.setMinimizable(false);
+      aboutWindow.setFullScreenable(false);
       aboutWindow.title = 'About'
     } else {
       aboutWindow.focus()
