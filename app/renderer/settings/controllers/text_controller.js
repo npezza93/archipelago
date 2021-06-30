@@ -1,0 +1,8 @@
+import { Controller } from 'stimulus';
+import {ipcRenderer as ipc} from 'electron-better-ipc';
+
+export default class extends Controller {
+  connect() {
+    this.element.value = currentProfile.get(this.element.name)
+  }
+}

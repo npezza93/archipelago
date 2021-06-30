@@ -11,6 +11,13 @@ export default class extends Controller {
           options += `<option value="${font}">${font}</option>`;
         });
         this.element.querySelector('select').innerHTML = options;
+
+        const currentValue = currentProfile.get(this.element.querySelector('select').name)
+        const element = this.element.querySelector(`option[value='${currentValue}']`)
+
+        if (element) {
+          element.selected = true
+        }
       })
       .catch(err => console.log(err));
   }
