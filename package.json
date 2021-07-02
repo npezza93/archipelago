@@ -90,7 +90,7 @@
   },
   "devDependencies": {
     "chai": "^4.3.4",
-    "electron": "^13.0.0",
+    "electron": "^13.1.5",
     "electron-builder": "^22.11.5",
     "electron-mocha": "^10.0.0",
     "electron-notarize": "^1.0.0",
