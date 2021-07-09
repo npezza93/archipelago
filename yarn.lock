@@ -457,9 +457,9 @@
   integrity sha512-se3yX7UHv5Bscf8f1ERKvQOD6sTyycH3hdaoozvaLxgUiY5lIGEeH37AD0G0Qi9kPqihPn0HOfd2yaIEN9VwEg==
 
 "@types/node@^14.6.2":
-  version "14.17.4"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.17.4.tgz#218712242446fc868d0e007af29a4408c7765bc0"
-  integrity sha512-8kQ3+wKGRNN0ghtEn7EGps/B8CzuBz1nXZEIGGLP2GnwbqYn4dbTs7k+VKLTq1HvZLRCIDtN3Snx1Ege8B7L5A==
+  version "14.17.5"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.17.5.tgz#b59daf6a7ffa461b5648456ca59050ba8e40ed54"
+  integrity sha512-bjqH2cX/O33jXT/UmReo2pM7DIJREPMnarixbQ57DOOzzFaI6D2+IcwaJQaJpv0M1E9TIhPCYVxrkcityLjlqA==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
@@ -1591,7 +1591,7 @@ css-value@^0.0.1:
   dependencies:
     mimic-fn "^3.0.0"
 
-debug@4, debug@4.3.1, debug@^4.0.1, debug@^4.1.0, debug@^4.1.1, debug@^4.3.1:
+debug@4, debug@4.3.1, debug@^4.0.1, debug@^4.3.1:
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.1.tgz#f0d229c505e0c6d8c49ac553d1b13dc183f6b2ee"
   integrity sha512-doEwdvm4PCeK4K3RQN2ZC2BYUBaxwLARCqZmMjtF8a51J2Rb0xpVloFRnCODwqjpwnAoao4pelN8l3RJdv3gRQ==
@@ -1612,7 +1612,7 @@ debug@^3.2.7:
   dependencies:
     ms "^2.1.1"
 
-debug@^4.3.2:
+debug@^4.1.0, debug@^4.1.1, debug@^4.3.2:
   version "4.3.2"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.2.tgz#f0a49c18ac8779e31d4a0c6029dfb76873c7428b"
   integrity sha512-mOp8wKcvj7XxC78zLgw/ZA+6TSgkoE2C/ienthhRD298T7UNwAg9diBpLRxC0mOezLl4B0xV7M0cCO6P/O0Xhw==
@@ -1876,9 +1876,9 @@ ejs@^3.1.6:
     jake "^10.6.1"
 
 electron-better-ipc@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/electron-better-ipc/-/electron-better-ipc-2.0.0.tgz#2194ad02321122975cc792fb1e154b496a303ca9"
-  integrity sha512-/JZ29aFs5NRf5int7n4qaUEctUxMlhjcZrkIhi2L82XTro1uV898/v3uiJgXxwjjsifdqjlQnz0XRViZPRsLrw==
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/electron-better-ipc/-/electron-better-ipc-2.0.1.tgz#982a4468e814f9f19308c7865a148c6dca5e218a"
+  integrity sha512-S/h2vjQjev9FVicGnZeuP2wH/ycO9pOv63JGaTjYB2m5JcKDuXHAM713YmnmDC+VVXP7mh1Y9rtxi6BoNK7YJA==
   dependencies:
     serialize-error "^8.1.0"
 
@@ -1996,9 +1996,9 @@ electron-window@^0.8.0:
     is-electron-renderer "^2.0.0"
 
 electron@^13.0.0:
-  version "13.1.4"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-13.1.4.tgz#6d20d932a0651c3cba9f09a3d08cbaf5b69aa84b"
-  integrity sha512-4qhRZbRvGqHmMWsCG/kRVF4X8VIq9Nujgm+gXZLBSpiR6uUtMHy7ViBTQZl1PGf6O9Ppxhpr9Yz+k6Um9WoP3Q==
+  version "13.1.6"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-13.1.6.tgz#6ecaf969255d62ce82cc0b5c948bf26e7dfb489b"
+  integrity sha512-XiB55/JTaQpDFQrD9pulYnOGwaWeMyRIub5ispvoE2bWBvM5zVMLptwMLb0m3KTMrfSkzhedZvOu7fwYvR7L7Q==
   dependencies:
     "@electron/get" "^1.0.1"
     "@types/node" "^14.6.2"
@@ -6126,9 +6126,9 @@ xterm-addon-fit@^0.5.0:
   integrity sha512-DsS9fqhXHacEmsPxBJZvfj2la30Iz9xk+UKjhQgnYNkrUIN5CYLbw7WEfz117c7+S86S/tpHPfvNxJsF5/G8wQ==
 
 xterm-addon-ligatures@^0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/xterm-addon-ligatures/-/xterm-addon-ligatures-0.5.0.tgz#08cd4dd3bcd3c4faa657a1995a5a8a6a6c39c496"
-  integrity sha512-1HFeEReL2yfw1oz7iZHE09ipWOA23Pg7yRAgDnuKeWkuItKRZZ9SbKXn8saviAkHYX/s6HgADVwPjRY8m2lyZA==
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/xterm-addon-ligatures/-/xterm-addon-ligatures-0.5.1.tgz#40ff69c43b6406aaf130fdfe9a43ca4eac49f892"
+  integrity sha512-L70vyVAapDvBBti1bqFTUQOd6R6LH5qKzqZ76sERKkf75+u++sylqflCdwT8zmorK6zxcc3vq4+I4GDYawgYrQ==
   dependencies:
     font-finder "^1.1.0"
     font-ligatures "^1.4.0"
