@@ -4,6 +4,21 @@ import {ipcRenderer as ipc} from 'electron-better-ipc';
 
 export default class extends Controller {
   connect() {
-    this.element.value = Color(currentProfile.get(this.element.name)).alpha()
+    ipc.answerMain('active-profile-changed', this.setValue.bind(this))
+    this.setValue()
+  }
+
+  setValue() {
+    this.element.value = this.currentColor.alpha()
+  }
+
+  change(event) {
+    let color = this.currentColor.alpha(event.target.value)
+
+    ipc.callMain('change-setting', {property: event.target.name, value: color.rgb().string()})
+  }
+
+  get currentColor() {
+    return Color(currentProfile.get(this.element.name))
   }
 }

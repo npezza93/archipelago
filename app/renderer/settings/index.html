@@ -41,26 +41,26 @@
         <div class="flex flex-row justify-between px-15">
           <div class="flex flex-row gap-10" data-controller="radio" data-radio-name-value="cursorStyle">
             <label for="cursorStyle-block" class="flex flex-row align-center gap-10">
-              <input type="radio" id="cursorStyle-block" name="cursorStyle" value="block">
+              <input type="radio" id="cursorStyle-block" name="cursorStyle" value="block" data-action="radio#change">
               <span></span>
               <span>Block</span>
             </label>
 
             <label for="cursorStyle-underline" class="flex flex-row align-center gap-10">
-              <input type="radio" id="cursorStyle-underline" name="cursorStyle" value="underline">
+              <input type="radio" id="cursorStyle-underline" name="cursorStyle" value="underline" data-action="radio#change">
               <span></span>
               <span>Underline</span>
             </label>
 
             <label for="cursorStyle-bar" class="flex flex-row align-center gap-10">
-              <input type="radio" id="cursorStyle-bar" name="cursorStyle" value="bar">
+              <input type="radio" id="cursorStyle-bar" name="cursorStyle" value="bar" data-action="radio#change">
               <span></span>
               <span>Bar</span>
             </label>
           </div>
 
           <label class="flex flex-row align-center gap-10" data-controller="checkbox">
-            <input type="checkbox" name="cursorBlink" data-checkbox-target="input">
+            <input type="checkbox" name="cursorBlink" data-checkbox-target="input" data-action="checkbox#change">
             <span>
               <svg width="10px" height="9px" viewBox="0 0 12 11">
                 <polyline points="1 6.29411765 4.5 10 11 1"></polyline>
@@ -76,10 +76,10 @@
 
         <div class="flex flex-row px-15 gap-10">
           <label class="w-270" data-controller="fonts">
-            <select class="w-270" name="fontFamily" data-controller="select"></select>
+            <select class="w-270" name="fontFamily" data-controller="select" data-action="select#change"></select>
           </label>
 
-          <select name="fontWeight" size="1" data-controller="select">
+          <select name="fontWeight" size="1" data-controller="select" data-action="select#change">
             <option value="normal">Normal</option>
             <option value="bold">Bold</option>
             <option value="bolder">Bolder</option>
@@ -95,11 +95,11 @@
             <option value="900">900</option>
           </select>
 
-          <input type="number" name="fontSize" value="" min=1 max=99 data-controller="text">
+          <input type="number" name="fontSize" value="" min=1 max=99 data-controller="text" data-action="text#change">
         </div>
 
         <label class="flex flex-row align-center gap-10 px-15 my-15" data-controller="checkbox">
-          <input type="checkbox" name="ligatures" data-checkbox-target="input">
+          <input type="checkbox" name="ligatures" data-checkbox-target="input" data-action="checkbox#change">
           <span>
             <svg width="10px" height="9px" viewBox="0 0 12 11">
               <polyline points="1 6.29411765 4.5 10 11 1"></polyline>
@@ -118,13 +118,13 @@
           <label class="flex flex-row gap-10">
             Command to run
 
-            <input type="text" name="shell" value="" data-controller="text">
+            <input type="text" name="shell" value="" data-controller="text" data-action="text#change">
           </label>
 
           <label class="flex flex-row gap-10">
             Arguments
 
-            <input type="text" name="shellArgs" value="" data-controller="text">
+            <input type="text" name="shellArgs" value="" data-controller="text" data-action="text#change">
           </label>
         </div>
       </div>
@@ -136,7 +136,7 @@
           <label class="flex flex-row gap-10">
             Lines
 
-            <input type="number" name="scrollback" value="" min=0 data-controller="text">
+            <input type="number" name="scrollback" value="" min=0 data-controller="text" data-action="text#change">
           </label>
         </div>
       </div>
@@ -148,7 +148,7 @@
           <label class="flex flex-row gap-10">
             Padding
 
-            <input type="text" name="padding" data-controller="text">
+            <input type="text" name="padding" data-controller="text" data-action="text#change">
           </label>
         </div>
       </div>
@@ -160,7 +160,7 @@
 
             <div class="flex flex-col gap-10">
               <label class="flex flex-row align-center gap-10 px-15" data-controller="checkbox">
-                <input type="checkbox" name="copyOnSelect" data-checkbox-target="input">
+                <input type="checkbox" name="copyOnSelect" data-checkbox-target="input" data-action="checkbox#change">
                 <span>
                   <svg width="10px" height="9px" viewBox="0 0 12 11">
                     <polyline points="1 6.29411765 4.5 10 11 1"></polyline>
@@ -170,7 +170,7 @@
               </label>
 
               <label class="flex flex-row align-center gap-10 px-15" data-controller="checkbox">
-                <input type="checkbox" name="rightClickSelectsWord" data-checkbox-target="input">
+                <input type="checkbox" name="rightClickSelectsWord" data-checkbox-target="input" data-action="checkbox#change">
                 <span>
                   <svg width="10px" height="9px" viewBox="0 0 12 11">
                     <polyline points="1 6.29411765 4.5 10 11 1"></polyline>
@@ -180,7 +180,7 @@
               </label>
 
               <label class="flex flex-row align-center gap-10 px-15" data-controller="checkbox">
-                <input type="checkbox" name="macOptionClickForcesSelection" data-checkbox-target="input">
+                <input type="checkbox" name="macOptionClickForcesSelection" data-checkbox-target="input" data-action="checkbox#change">
                 <span>
                   <svg width="10px" height="9px" viewBox="0 0 12 11">
                     <polyline points="1 6.29411765 4.5 10 11 1"></polyline>
@@ -197,7 +197,7 @@
 
           <div class="flex flex-col gap-10">
             <label class="flex flex-row align-center gap-10 px-15" data-controller="checkbox">
-              <input type="checkbox" name="macOptionIsMeta" data-checkbox-target="input">
+              <input type="checkbox" name="macOptionIsMeta" data-checkbox-target="input" data-action="checkbox#change">
               <span>
                 <svg width="10px" height="9px" viewBox="0 0 12 11">
                   <polyline points="1 6.29411765 4.5 10 11 1"></polyline>
@@ -207,7 +207,7 @@
             </label>
 
             <label class="flex flex-row align-center gap-10 px-15" data-controller="checkbox">
-              <input type="checkbox" name="useFlowControl" data-checkbox-target="input">
+              <input type="checkbox" name="useFlowControl" data-checkbox-target="input" data-action="checkbox#change">
               <span>
                 <svg width="10px" height="9px" viewBox="0 0 12 11">
                   <polyline points="1 6.29411765 4.5 10 11 1"></polyline>
@@ -227,59 +227,59 @@
 
           <div class="flex flex-col gap-10 px-15 justify-between">
             <div class="flex flex-row align-center gap-10">
-              <div class="w-75">Black</div>
+              <div class="w-100">Black</div>
 
-              <input type="color" name="theme.black" value="" data-controller="color">
-              <input type="color" name="theme.brightBlack" value="" data-controller="color">
+              <input type="color" name="theme.black" value="" data-controller="color" data-action="color#change">
+              <input type="color" name="theme.brightBlack" value="" data-controller="color" data-action="color#change">
             </div>
 
             <div class="flex flex-row align-center gap-10">
-              <div class="w-75">White</div>
+              <div class="w-100">White</div>
 
-              <input type="color" name="theme.white" value="" data-controller="color">
-              <input type="color" name="theme.brightWhite" value="" data-controller="color">
+              <input type="color" name="theme.white" value="" data-controller="color" data-action="color#change">
+              <input type="color" name="theme.brightWhite" value="" data-controller="color" data-action="color#change">
             </div>
 
             <div class="flex flex-row align-center gap-10">
-              <div class="w-75">Red</div>
+              <div class="w-100">Red</div>
 
-              <input type="color" name="theme.red" value="" data-controller="color">
-              <input type="color" name="theme.brightRed" value="" data-controller="color">
+              <input type="color" name="theme.red" value="" data-controller="color" data-action="color#change">
+              <input type="color" name="theme.brightRed" value="" data-controller="color" data-action="color#change">
             </div>
 
             <div class="flex flex-row align-center gap-10">
-              <div class="w-75">Green</div>
+              <div class="w-100">Green</div>
 
-              <input type="color" name="theme.green" value="" data-controller="color">
-              <input type="color" name="theme.brightGreen" value="" data-controller="color">
+              <input type="color" name="theme.green" value="" data-controller="color" data-action="color#change">
+              <input type="color" name="theme.brightGreen" value="" data-controller="color" data-action="color#change">
             </div>
 
             <div class="flex flex-row align-center gap-10">
-              <div class="w-75">Yellow</div>
+              <div class="w-100">Yellow</div>
 
-              <input type="color" name="theme.yellow" value="" data-controller="color">
-              <input type="color" name="theme.brightYellow" value="" data-controller="color">
+              <input type="color" name="theme.yellow" value="" data-controller="color" data-action="color#change">
+              <input type="color" name="theme.brightYellow" value="" data-controller="color" data-action="color#change">
             </div>
 
             <div class="flex flex-row align-center gap-10">
-              <div class="w-75">Magenta</div>
+              <div class="w-100">Magenta</div>
 
-              <input type="color" name="theme.magenta" value="" data-controller="color">
-              <input type="color" name="theme.brightMagenta" value="" data-controller="color">
+              <input type="color" name="theme.magenta" value="" data-controller="color" data-action="color#change">
+              <input type="color" name="theme.brightMagenta" value="" data-controller="color" data-action="color#change">
             </div>
 
             <div class="flex flex-row align-center gap-10">
-              <div class="w-75">Cyan</div>
+              <div class="w-100">Cyan</div>
 
-              <input type="color" name="theme.cyan" value="" data-controller="color">
-              <input type="color" name="theme.brightCyan" value="" data-controller="color">
+              <input type="color" name="theme.cyan" value="" data-controller="color" data-action="color#change">
+              <input type="color" name="theme.brightCyan" value="" data-controller="color" data-action="color#change">
             </div>
 
             <div class="flex flex-row align-center gap-10">
-              <div class="w-75">Blue</div>
+              <div class="w-100">Blue</div>
 
-              <input type="color" name="theme.blue" value="" data-controller="color">
-              <input type="color" name="theme.brightBlue" value="" data-controller="color">
+              <input type="color" name="theme.blue" value="" data-controller="color" data-action="color#change">
+              <input type="color" name="theme.brightBlue" value="" data-controller="color" data-action="color#change">
             </div>
           </div>
         </div>
@@ -290,15 +290,15 @@
 
             <div class="flex flex-row gap-10 px-15 justify-between">
               <label class="flex flex-row align-center gap-10">
-                <div class="w-75">Color</div>
+                <div class="w-100">Color</div>
 
-                <input type="color" name="theme.cursor" value="" data-controller="color">
+                <input type="color" name="theme.cursor" value="" data-controller="color" data-action="color#change">
               </label>
 
               <label class="flex flex-row align-center gap-10">
-                <div class="w-75">Accent</div>
+                <div class="w-100">Accent</div>
 
-                <input type="color" name="theme.cursorAccent" value="" data-controller="color">
+                <input type="color" name="theme.cursorAccent" value="" data-controller="color" data-action="color#change">
               </label>
             </div>
           </div>
@@ -308,15 +308,15 @@
 
             <div class="flex flex-row gap-10 px-15 justify-between">
               <label class="flex flex-row align-center gap-10">
-                <div class="w-75">Color</div>
+                <div class="w-100">Color</div>
 
-                <input type="color" name="theme.selection" value="" data-controller="color">
+                <input type="color" name="theme.selection" value="" data-controller="color" data-action="color#change">
               </label>
 
               <label class="flex flex-col align-center gap-10">
-                <input type="range" name="theme.selection" value="" min=0 max=1 step=0.01 data-controller="opacity">
+                <input type="range" name="theme.selection" value="" min=0 max=1 step=0.01 data-controller="opacity" data-action="opacity#change">
 
-                <div class="w-75">Opacity</div>
+                <div class="w-100 text-center">Opacity</div>
               </label>
             </div>
           </div>
@@ -328,13 +328,21 @@
               <label class="flex flex-row align-center gap-10">
                 <div class="w-100">Foreground</div>
 
-                <input type="color" name="theme.foreground" value="" data-controller="color">
+                <input type="color" name="theme.foreground" value="" data-controller="color" data-action="color#change">
               </label>
+            </div>
 
+            <div class="flex flex-row gap-10 px-15 justify-between my-15">
               <label class="flex flex-row align-center gap-10">
                 <div class="w-100">Background</div>
 
-                <input type="color" name="theme.background" value="" data-controller="color">
+                <input type="color" name="theme.background" value="" data-controller="color" data-action="color#change">
+              </label>
+
+              <label class="flex flex-col align-center gap-10">
+                <input type="range" name="theme.background" value="" min=0 max=1 step=0.01 data-controller="opacity" data-action="opacity#change">
+
+                <div class="w-100 text-center">Opacity</div>
               </label>
             </div>
           </div>
