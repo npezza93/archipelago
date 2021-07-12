@@ -8,7 +8,7 @@ export default class extends Controller {
   }
 
   setValue() {
-    this.element.value = currentProfile.get(this.element.name)
+    this.element.value = currentProfile.get(this.element.name) || ""
   }
 
   change(event) {
