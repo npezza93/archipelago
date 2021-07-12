@@ -183,3 +183,14 @@ button.cancel:active + button.ok {
   background: rgb(88, 85, 85);
   border-top: 1px solid rgb(108, 105, 105);
 }
+
+#key-recorder {
+  background-color: var(--text-input-background);
+  border: 1px solid var(--color);
+  color: var(--color);
+  border-radius: 1px;
+  text-align: center;
+}
+#key-recorder.recording {
+  background-image: linear-gradient(rgb(47, 106, 222), rgb(42, 94, 198));
+}
