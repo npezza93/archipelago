@@ -110,3 +110,76 @@ section {
   width: 60%;
 }
 
+
+#keybindings {
+  height: 300px;
+}
+#keybindings article {
+  background: var(--text-input-background);
+  border: 1px solid var(--text-input-border-bottom-color);
+  border-radius: 5px;
+  height: 80%;
+}
+#keybindings article > div {
+  display: flex;
+  flex-direction: row;
+  margin: 2px 0;
+  border-radius: 5px;
+  padding-left: 7px;
+  padding-bottom: 2px;
+}
+
+#keybindings div.active[data-controller="keybinding"] {
+  background: var(--selection-background);
+}
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.4);
+}
+.backdrop .modal {
+  background-color: var(--background-color);
+  width: 300px;
+  height: 125px;
+  position: fixed;
+  top: calc(50% - 62px);
+  left: calc(50% - 150px);
+  border-radius: 7px;
+  border: 1px solid var(--text-input-border-bottom-color);
+}
+.backdrop .footer {
+  gap: 15px;
+  margin-right: 15px;
+  margin-bottom: 15px;
+}
+button.ok {
+  border: none;
+  color: var(--color);
+  border-radius: 6px;
+  padding: 2px 20px;
+  background-image: linear-gradient(rgb(47, 106, 222), rgb(42, 94, 198));
+  border-top: 1px solid rgb(81, 132, 227);
+}
+button.ok:active {
+  background-image: linear-gradient(rgb(69, 146, 223), rgb(77, 159, 235));
+  border-top: 1px solid rgb(102, 176, 240);
+}
+button.cancel {
+  border: none;
+  color: var(--color);
+  border-radius: 6px;
+  padding: 2px 15px;
+  background: rgb(88, 85, 85);
+  border-top: 1px solid rgb(108, 105, 105);
+}
+button.cancel:active {
+  background-image: linear-gradient(rgb(69, 146, 223), rgb(77, 159, 235));
+  border-top: 1px solid rgb(102, 176, 240);
+}
+button.cancel:active + button.ok {
+  background: rgb(88, 85, 85);
+  border-top: 1px solid rgb(108, 105, 105);
+}

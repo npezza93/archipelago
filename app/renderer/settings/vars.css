@@ -61,5 +61,7 @@
     --text-input-background: rgb(60, 60, 60);
     --text-input-border-top-color: rgb(64, 64, 64);
     --text-input-border-bottom-color: rgb(76, 76, 76);
+
+    --selection-background: rgb(33, 89, 201);
   }
 }

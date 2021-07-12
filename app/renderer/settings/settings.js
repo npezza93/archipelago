@@ -14,6 +14,9 @@ import SelectController from './controllers/select_controller';
 import TextController from './controllers/text_controller';
 import ColorController from './controllers/color_controller';
 import OpacityController from './controllers/opacity_controller';
+import KeybindingsController from './controllers/keybindings_controller';
+import KeybindingController from './controllers/keybinding_controller';
+import KeybindingCapturerController from './controllers/keybinding_capturer_controller';
 
 window.currentProfile = new CurrentProfile()
 const application = Application.start()
@@ -26,6 +29,9 @@ application.register('select', SelectController)
 application.register('text', TextController)
 application.register('color', ColorController)
 application.register('opacity', OpacityController)
+application.register('keybindings', KeybindingsController)
+application.register('keybinding', KeybindingController)
+application.register('keybinding-capturer', KeybindingCapturerController)
 
 ipc.on('close-via-menu', window.close);
 ipc.answerMain('close', window.close);
