@@ -325,6 +325,20 @@
            <h4 class="px-15 my-15">Window</h4>
 
             <div class="flex flex-row gap-10 px-15 justify-between">
+              <label class="flex flex-row align-center gap-10 w-full">
+                <div class="w-100">Vibrancy</div>
+
+                <select name="vibrancy" size="1" data-controller="select" data-action="select#change" class="flex-1">
+                  <option value="">None</option>
+                  <option value="light">Light</option>
+                  <option value="medium-light">Medium Light</option>
+                  <option value="dark">Dark</option>
+                  <option value="ultra-dark">Ultra Dark</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="flex flex-row gap-10 px-15 justify-between mt-15">
               <label class="flex flex-row align-center gap-10">
                 <div class="w-100">Foreground</div>
 
@@ -332,7 +346,7 @@
               </label>
             </div>
 
-            <div class="flex flex-row gap-10 px-15 justify-between my-15">
+            <div class="flex flex-row gap-10 px-15 justify-between mt-15">
               <label class="flex flex-row align-center gap-10">
                 <div class="w-100">Background</div>
 
