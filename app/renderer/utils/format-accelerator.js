@@ -1,4 +1,4 @@
-import {platform} from 'electron-util'
+import {platform} from 'electron-util';
 
 const MODIFIERS = {
   command: '\u2318',
@@ -10,11 +10,7 @@ const MODIFIERS = {
   ctrl: '\u2303',
   shift: '\u21E7',
   alt: '\u2325',
-  plus: '='
-}
+  plus: '=',
+};
 
-export default accelerator => {
-  return (accelerator || '').split('-').map(key => {
-    return MODIFIERS[key.toLowerCase()] || key
-  }).join('+')
-}
+export default accelerator => (accelerator || '').split('-').map(key => MODIFIERS[key.toLowerCase()] || key).join('+');

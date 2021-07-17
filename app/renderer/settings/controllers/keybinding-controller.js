@@ -1,19 +1,20 @@
-import { Controller } from 'stimulus'
-import {ipcRenderer as ipc} from 'electron-better-ipc'
+/* global document */
 
-import formatAccelerator from '../../utils/format-accelerator'
+import {Controller} from 'stimulus';
+
+import formatAccelerator from '../../utils/format-accelerator';
 
 export default class extends Controller {
   static values = { keystroke: String, command: String, index: Number }
 
-  select(event) {
+  select() {
     document.querySelectorAll('#keybindings article > div').forEach(row => {
-      row.classList.remove('active')
-    })
-    this.element.classList.add('active')
+      row.classList.remove('active');
+    });
+    this.element.classList.add('active');
   }
 
-  edit(event) {
+  edit() {
     document.body.insertAdjacentHTML('beforeend', `<div class="backdrop" data-controller='keybinding-capturer' data-keybinding-capturer-index-value=${this.indexValue}>
       <div class='modal'>
         <div class='flex flex-col h-full w-full'>
@@ -27,6 +28,6 @@ export default class extends Controller {
           </div>
         </div>
       </div>
-    </div>`)
+    </div>`);
   }
 }

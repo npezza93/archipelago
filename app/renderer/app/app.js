@@ -1,10 +1,10 @@
 /* global window, document */
 
-import {ipcRenderer as ipc} from 'electron-better-ipc'
-import debouncer from 'debounce-fn'
-import {Disposable, CompositeDisposable} from 'event-kit'
-import Session from './session'
-import CurrentProfile from '../utils/current-profile'
+import {ipcRenderer as ipc} from 'electron-better-ipc';
+import debouncer from 'debounce-fn';
+import {Disposable, CompositeDisposable} from 'event-kit';
+import CurrentProfile from '../utils/current-profile';
+import Session from './session';
 
 const session = new Session();
 const currentProfile = new CurrentProfile();
@@ -13,26 +13,28 @@ const subscriptions = new CompositeDisposable();
 const styleProperties = {
   'theme.background': '--background-color',
   tabBorderColor: '--tab-border-color',
-  padding: '--terminal-padding'
-}
+  padding: '--terminal-padding',
+};
 const resetCssSettings = () => {
   for (const property in styleProperties) {
     document.documentElement.style.setProperty(
       styleProperties[property],
-      currentProfile.get(property)
-    )
+      currentProfile.get(property),
+    );
   }
-}
+};
+
 const fit = () => debouncer(session.fit.bind(session), {wait: 50})();
 
 const close = async () => {
-  await session.kill()
+  await session.kill();
 
-  window.close()
+  window.close();
 };
+
 const settingChanged = ({property, value}) => {
   if (property in styleProperties) {
-    document.documentElement.style.setProperty(styleProperties[property], value)
+    document.documentElement.style.setProperty(styleProperties[property], value);
   }
 };
 
@@ -40,7 +42,7 @@ resetCssSettings();
 
 ipc.answerMain('showing', () => {
   session.attach(document.querySelector('archipelago-terminal'));
-})
+});
 
 window.addEventListener('resize', fit);
 ipc.on('close-via-menu', close);

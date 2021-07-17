@@ -1,23 +1,23 @@
-import {api} from 'electron-util'
-import about from '../windows/about'
-import settings from '../windows/settings'
+import {api} from 'electron-util';
+import about from '../windows/about';
+import settings from '../windows/settings';
 
 export default {
   label: api.app.name,
   submenu: [
     {
       label: 'About Archipelago',
-      click: about.toggle
+      click: about.toggle,
     },
     {
       label: `Version ${api.app.getVersion()}`,
-      enabled: false
+      enabled: false,
     },
     {type: 'separator'},
     {
       label: 'Preferences',
-      accelerator: "Cmd+,",
-      click: settings.toggle
+      accelerator: 'Cmd+,',
+      click: settings.toggle,
     },
     {type: 'separator'},
     {role: 'services', submenu: []},
@@ -26,6 +26,6 @@ export default {
     {role: 'hideothers'},
     {role: 'unhide'},
     {type: 'separator'},
-    {role: 'quit', accelerator: "Cmd+Q"}
-  ]
-}
+    {role: 'quit', accelerator: 'Cmd+Q'},
+  ],
+};
