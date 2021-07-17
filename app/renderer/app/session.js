@@ -6,7 +6,6 @@ import {CompositeDisposable, Disposable} from 'event-kit'
 import {Terminal} from 'xterm'
 import unescape from 'unescape-js'
 import keystrokeForKeyboardEvent from 'keystroke-for-keyboard-event'
-import autoBind from 'auto-bind'
 import Color from 'color'
 import {FitAddon} from 'xterm-addon-fit'
 import {WebLinksAddon} from 'xterm-addon-web-links'
@@ -28,7 +27,6 @@ export default class Session {
     this.xterm.loadAddon(this.fitAddon)
 
     this.resetKeymaps()
-    autoBind(this)
 
     this.bindListeners()
   }
@@ -222,18 +220,18 @@ export default class Session {
     this.webLinksAddon = new WebLinksAddon((event, uri) => shell.openExternal(uri))
 
     this.xterm.loadAddon(this.webLinksAddon)
-    this.xterm.attachCustomKeyEventHandler(this.keybindingHandler)
+    this.xterm.attachCustomKeyEventHandler(this.keybindingHandler.bind(this))
 
-    ipc.on(`pty-data-${this.id}`, this.writePtyData)
+    ipc.on(`pty-data-${this.id}`, this.writePtyData.bind(this))
     this.subscriptions.add(new Disposable(() => {
-      ipc.removeListener(`pty-data-${this.id}`, this.writePtyData)
+      ipc.removeListener(`pty-data-${this.id}`, this.writePtyData.bind(this))
     }))
     this.subscriptions.add(this.onData(data => {
       ipc.send(`pty-write-${this.id}`, data)
     }))
-    this.subscriptions.add(this.onFocus(this.fit))
-    this.subscriptions.add(this.onSelection(this.copySelection))
-    this.subscriptions.add(new Disposable(ipc.answerMain('active-profile-changed', this.onActiveProfileChange)))
-    this.subscriptions.add(new Disposable(ipc.answerMain('setting-changed', this.onSettingChanged)))
+    this.subscriptions.add(this.onFocus(this.fit.bind(this)))
+    this.subscriptions.add(this.onSelection(this.copySelection.bind(this)))
+    this.subscriptions.add(new Disposable(ipc.answerMain('active-profile-changed', this.onActiveProfileChange.bind(this))))
+    this.subscriptions.add(new Disposable(ipc.answerMain('setting-changed', this.onSettingChanged.bind(this))))
   }
 }

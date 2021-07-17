@@ -23,7 +23,7 @@ const resetCssSettings = () => {
     )
   }
 }
-const fit = () => debouncer(session.fit, {wait: 50})();
+const fit = () => debouncer(session.fit.bind(session), {wait: 50})();
 
 const close = async () => {
   await session.kill()
