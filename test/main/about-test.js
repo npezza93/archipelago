@@ -20,7 +20,7 @@ describe('About', function () {
       path: electron,
       verbose: true,
       env: {PAGE: 'about'},
-      args: [path.join(__dirname, '../../dist/main/main.js')]
+      args: [path.join(__dirname, '../../app/main/esm.js')]
     })
     return this.app.start()
   })

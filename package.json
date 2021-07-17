@@ -5,11 +5,11 @@
   "main": "app/main/esm.js",
   "scripts": {
     "postinstall": " ./node_modules/.bin/electron-builder install-app-deps",
-    "test": "yarn compile && ./node_modules/.bin/mocha test/main/about-test.js test/main/main-test.js test/main/settings-test.js",
+    "test": "./node_modules/.bin/mocha test/main/about-test.js test/main/main-test.js test/main/settings-test.js",
     "start": "./node_modules/.bin/electron .",
     "lint": "./node_modules/.bin/xo --ignore app/renderer/index.js",
     "pack": "./node_modules/.bin/electron-builder --dir",
-    "dist": "yarn compile &&  ./node_modules/.bin/electron-builder --publish onTagOrDraft"
+    "dist": "./node_modules/.bin/electron-builder --publish onTagOrDraft"
   },
   "xo": {
     "space": true,

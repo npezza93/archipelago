@@ -29,7 +29,7 @@ const resetAppMenu = () =>
   )
 
 const createWindow = () => {
-  const win = makeWindow("app", {
+  const win = makeWindow(process.env.PAGE || "app", {
     width: 1000,
     backgroundColor: argbBackground(profileManager, 'theme.background'),
     vibrancy: profileManager.get('vibrancy')

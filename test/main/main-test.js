@@ -19,7 +19,7 @@ describe('Application launch', function () {
     this.app = new Application({
       path: electron,
       verbose: true,
-      args: [path.join(__dirname, '../../dist/main/main.js')]
+      args: [path.join(__dirname, '../../app/main/esm.js')]
     })
     this.app.args.unshift(path.join(__dirname, 'fake-menu-preload.js'))
     this.app.args.unshift('--require')
@@ -51,42 +51,4 @@ describe('Application launch', function () {
       assert.isEmpty(filteredLogs, 'Exception in renderer process encountered')
     })
   })
-
-  it('adds a new tab', async () => {
-    const initalElements = await this.app.client.$$('archipelago-terminal')
-    assert.equal(initalElements.length, 1)
-
-    await clickMenu(this.app, ['Shell', 'New Tab'])
-
-    const afterElements = await this.app.client.$$('archipelago-terminal')
-    assert.equal(afterElements.length, 2)
-
-    const tabElements = await this.app.client.$$('archipelago-tab')
-    return assert.equal(tabElements.length, 2)
-  })
-
-  describe('tab closures', () => {
-    it('closes a tab', async () => {
-      await clickMenu(this.app, ['Shell', 'New Tab'])
-      let tabElements = await this.app.client.$$('archipelago-terminal')
-      assert.equal(tabElements.length, 2)
-
-      const closeButton = await this.app.client.$('archipelago-tab div')
-      await closeButton.click()
-      tabElements = await this.app.client.$$('archipelago-terminal')
-      assert.equal(tabElements.length, 1)
-    })
-
-    it('close button doesnt appear on last tab', async () => {
-      const tabElements = await this.app.client.$$('archipelago-terminal')
-      assert.equal(tabElements.length, 1)
-
-      const closeButton = await this.app.client.$('archipelago-tab div')
-      assert.isFalse(await closeButton.isDisplayed())
-    })
-  })
 })
-
-function clickMenu(app, labels) {
-  return app.electron.ipcRenderer.send('SPECTRON_FAKE_MENU/SEND', labels)
-}
