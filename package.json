@@ -7,19 +7,12 @@
     "postinstall": " ./node_modules/.bin/electron-builder install-app-deps",
     "test": "./node_modules/.bin/mocha test/main/about-test.js test/main/main-test.js test/main/settings-test.js",
     "start": "./node_modules/.bin/electron .",
-    "lint": "./node_modules/.bin/xo --ignore app/renderer/index.js",
+    "lint": "./node_modules/.bin/xo --ignore *.jsx --ignore esm.js",
     "pack": "./node_modules/.bin/electron-builder --dir",
     "dist": "./node_modules/.bin/electron-builder --publish onTagOrDraft"
   },
   "xo": {
     "space": true,
-    "semicolon": false,
-    "plugins": [
-      "react"
-    ],
-    "extends": [
-      "plugin:react/recommended"
-    ],
     "rules": {
       "prefer-const": 0,
       "unicorn/import-style": 0,
@@ -95,7 +88,7 @@
     "electron-notarize": "^1.0.0",
     "mocha": "^8.4.0",
     "spectron": "^15.0.0",
-    "xo": "^0.40.2"
+    "xo": "^0.42.0"
   },
   "build": {
     "productName": "Archipelago",
