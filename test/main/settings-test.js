@@ -44,7 +44,7 @@ describe('Settings', function () {
   }));
 
   it('renders settings', async () => {
-    const element = await this.app.client.$('#settings');
-    assert.isTrue(await element.isExisting());
+    const elements = await this.app.client.$$('body > section');
+    assert.equal(elements.length, 4);
   });
 });

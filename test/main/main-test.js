@@ -38,7 +38,7 @@ describe('Application launch', function () {
   }));
 
   it('renders the app', async () => {
-    const element = await this.app.client.$('archipelago-app');
+    const element = await this.app.client.$('archipelago-terminal');
     assert.isTrue(await element.isExisting());
   });
 
