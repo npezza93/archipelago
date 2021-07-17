@@ -18,8 +18,8 @@ export default class extends Controller {
       <div class='modal'>
         <div class='flex flex-col h-full w-full'>
           <div class='flex-1 flex flex-col w-full align-center gap-10 mt-15'>
-            <div id='key-recorder' class='w-60p' value='${this.keystrokeValue}' data-keybinding-capturer-target='keystroke' data-action='click->keybinding-capturer#startCapture'>${formatAccelerator(this.keystrokeValue)}</div>
-            <input type="text" name="command" value="${this.commandValue}" autofocus class='w-60p' data-keybinding-capturer-target='command'>
+            <div id='key-recorder' class='w-60p' value='${this.keystrokeValue}' data-keybinding-capturer-target='keystroke' data-action='click->keybinding-capturer#startCapture'>${formatAccelerator(this.keystrokeValue) || 'Click to set'}</div>
+            <input type="text" name="command" value="${this.commandValue || ''}" autofocus class='w-60p' data-keybinding-capturer-target='command'>
           </div>
           <div class='footer flex flex-row justify-end'>
             <button class='cancel' data-action='keybinding-capturer#close'>Cancel</button>

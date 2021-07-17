@@ -365,9 +365,13 @@
     </section>
 
     <section id="keybindings" class="hidden" data-controller="keybindings">
-      <div class="flex flex-row justify-center h-full">
-        <article class="w-400 my-15 py-5 px-15">
+      <div class="flex flex-col align-center h-full">
+        <article class="w-400 mt-15 py-5 px-15">
         </article>
+        <div class="keybinding-actions flex flex-row" data-controller="keybinding-actions">
+          <div class="plus" data-action="click->keybinding-actions#create">+</div>
+          <div class="minus" data-action="click->keybinding-actions#destroy">-</div>
+        </div>
       </div>
     </section>
 	</body>

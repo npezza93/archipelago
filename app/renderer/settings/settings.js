@@ -17,6 +17,7 @@ import OpacityController from './controllers/opacity_controller';
 import KeybindingsController from './controllers/keybindings_controller';
 import KeybindingController from './controllers/keybinding_controller';
 import KeybindingCapturerController from './controllers/keybinding_capturer_controller';
+import KeybindingActionsController from './controllers/keybinding_actions_controller';
 
 require('electron').ipcRenderer.setMaxListeners(50)
 window.currentProfile = new CurrentProfile()
@@ -33,6 +34,7 @@ application.register('opacity', OpacityController)
 application.register('keybindings', KeybindingsController)
 application.register('keybinding', KeybindingController)
 application.register('keybinding-capturer', KeybindingCapturerController)
+application.register('keybinding-actions', KeybindingActionsController)
 
 ipc.on('close-via-menu', window.close);
 ipc.answerMain('close', window.close);

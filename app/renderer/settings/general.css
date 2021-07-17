@@ -194,3 +194,23 @@ button.cancel:active + button.ok {
 #key-recorder.recording {
   background-image: linear-gradient(rgb(47, 106, 222), rgb(42, 94, 198));
 }
+
+.keybinding-actions {
+  width: 430px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.keybinding-actions .plus, .keybinding-actions .minus {
+  padding: 2px 8px;
+  background-color: var(--text-input-background);
+  border-top: 1px solid var(--text-input-border-bottom-color);
+  border-left: 1px solid var(--text-input-border-bottom-color);
+  border-bottom: 1px solid var(--text-input-border-bottom-color);
+}
+.keybinding-actions .minus {
+  border-right: 1px solid var(--text-input-border-bottom-color);
+}
+.keybinding-actions .plus:active, .keybinding-actions .minus:active {
+  background-color: rgb(99, 99, 99);
+}
