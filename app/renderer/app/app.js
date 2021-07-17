@@ -37,7 +37,10 @@ const settingChanged = ({property, value}) => {
 };
 
 resetCssSettings();
-session.attach(document.querySelector('archipelago-terminal'));
+
+ipc.answerMain('showing', () => {
+  session.attach(document.querySelector('archipelago-terminal'));
+})
 
 window.addEventListener('resize', fit);
 ipc.on('close-via-menu', close);

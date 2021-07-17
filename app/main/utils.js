@@ -43,7 +43,10 @@ export const makeWindow = (name, options) => {
     }
   })
 
-  newWindow.once('ready-to-show', newWindow.show)
+  newWindow.once('ready-to-show', () => {
+    newWindow.show()
+    ipc.callRenderer(newWindow, 'showing')
+  })
 
   newWindow.webContents.once('did-finish-load', () => {
     if (newWindow.title) {
