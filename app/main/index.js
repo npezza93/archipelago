@@ -1,7 +1,6 @@
-import {nativeTheme, app, Menu} from 'electron';
+import {app, Menu} from 'electron';
 import {is} from 'electron-util';
 import {CompositeDisposable, Disposable} from 'event-kit';
-import {ipcMain as ipc} from 'electron-better-ipc';
 import contextMenu from 'electron-context-menu';
 import {pref} from './config-file';
 import ProfileManager from './profile-manager';
@@ -78,13 +77,3 @@ subscriptions.add(profileManager.onDidChange('vibrancy', value =>
 
 subscriptions.add(profileManager.onDidChange('name', resetAppMenu));
 subscriptions.add(profileManager.onActiveProfileChange(resetAppMenu));
-subscriptions.add(new Disposable(
-  ipc.answerRenderer('open-hamburger-menu', args => Menu.getApplicationMenu().popup(args)),
-));
-
-const darkModeChange = () => ipc.sendToRenderers('dark-mode-changed');
-
-nativeTheme.on('updated', darkModeChange);
-subscriptions.add(new Disposable(() => {
-  nativeTheme.removeListener('updated', darkModeChange);
-}));

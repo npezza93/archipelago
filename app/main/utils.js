@@ -28,14 +28,6 @@ export const makeWindow = (name, options) => {
 
   loadUrl(newWindow, name);
 
-  newWindow.once('close', event => {
-    event.preventDefault();
-    ipc.callRenderer(newWindow, 'close').then(() => {
-      newWindow.hide();
-      newWindow.destroy();
-    });
-  });
-
   app.on('before-quit', () => {
     if ((newWindow !== null) && !newWindow.isDestroyed()) {
       newWindow.removeAllListeners('close');
@@ -47,12 +39,6 @@ export const makeWindow = (name, options) => {
     newWindow.show();
     newWindow.focus();
     ipc.callRenderer(newWindow, 'showing');
-  });
-
-  newWindow.webContents.once('did-finish-load', () => {
-    if (newWindow.title) {
-      newWindow.setTitle(newWindow.title);
-    }
   });
 
   return newWindow;

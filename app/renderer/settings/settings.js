@@ -37,7 +37,6 @@ app.register('keybinding-capturer', KeybindingCapturerController);
 app.register('keybinding-actions', KeybindingActionsController);
 
 ipc.on('close-via-menu', window.close);
-ipc.answerMain('close', window.close);
 
 window.addEventListener('blur', () => document.body.dataset.focus = 'false');
 window.addEventListener('focus', () => document.body.dataset.focus = 'true');
