@@ -18,6 +18,7 @@ import KeybindingsController from './controllers/keybindings_controller';
 import KeybindingController from './controllers/keybinding_controller';
 import KeybindingCapturerController from './controllers/keybinding_capturer_controller';
 
+require('electron').ipcRenderer.setMaxListeners(50)
 window.currentProfile = new CurrentProfile()
 const application = Application.start()
 
