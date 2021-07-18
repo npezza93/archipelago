@@ -115,15 +115,6 @@
               "title": "shell"
             }
           },
-          "useFlowControl": {
-            "type": "boolean",
-            "title": "Use flow control",
-            "default": false,
-            "scope": "xterm",
-            "settings": {
-              "title": "shell"
-            }
-          },
           "macOptionClickForcesSelection": {
             "title": "Mac - Click forces selection",
             "type": "boolean",
