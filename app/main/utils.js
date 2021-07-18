@@ -38,6 +38,9 @@ export const makeWindow = (name, options) => {
   newWindow.once('ready-to-show', () => {
     newWindow.show();
     newWindow.focus();
+  });
+
+  newWindow.once('show', () => {
     ipc.callRenderer(newWindow, 'showing');
   });
 
