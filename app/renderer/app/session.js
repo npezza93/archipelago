@@ -90,10 +90,7 @@ export default class Session {
         this.xterm.loadAddon(this.webglAddon);
       }
 
-      if (this.currentProfile.get('ligatures')) {
-        this.xterm.loadAddon(this.ligaturesAddon);
-      }
-
+      this.xterm.loadAddon(this.ligaturesAddon);
       this.bindScrollListener();
       this.xterm.focus();
       return;
