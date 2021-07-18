@@ -150,6 +150,11 @@ section {
   border-radius: 7px;
   border: 1px solid var(--text-input-border-bottom-color);
 }
+.backdrop[data-controller="profile-capturer"] .modal {
+  height: 100px;
+  top: calc(50% - 50px);
+}
+
 .backdrop .footer {
   gap: 15px;
   margin-right: 15px;
@@ -195,22 +200,44 @@ button.cancel:active + button.ok {
   background-image: linear-gradient(rgb(47, 106, 222), rgb(42, 94, 198));
 }
 
-.keybinding-actions {
+.keybinding-actions, .profile-actions {
   width: 430px;
   margin-top: 5px;
   margin-bottom: 15px;
 }
 
-.keybinding-actions .plus, .keybinding-actions .minus {
+.keybinding-actions .plus, .keybinding-actions .minus, .profile-actions .plus, .profile-actions .minus {
   padding: 2px 8px;
   background-color: var(--text-input-background);
   border-top: 1px solid var(--text-input-border-bottom-color);
   border-left: 1px solid var(--text-input-border-bottom-color);
   border-bottom: 1px solid var(--text-input-border-bottom-color);
 }
-.keybinding-actions .minus {
+.keybinding-actions .minus, .profile-actions .minus {
   border-right: 1px solid var(--text-input-border-bottom-color);
 }
-.keybinding-actions .plus:active, .keybinding-actions .minus:active {
+.keybinding-actions .plus:active, .keybinding-actions .minus:active,
+.profile-actions .plus:active, .profile-actions .minus:active {
   background-color: rgb(99, 99, 99);
+}
+
+#profiles {
+  height: 300px;
+}
+#profiles article {
+  background: var(--text-input-background);
+  border: 1px solid var(--text-input-border-bottom-color);
+  border-radius: 5px;
+  height: 80%;
+}
+#profiles article > div {
+  display: flex;
+  flex-direction: row;
+  margin: 2px 0;
+  border-radius: 5px;
+  padding-left: 7px;
+  padding-bottom: 2px;
+}
+#profiles div.active[data-controller="profile"] {
+  background: var(--selection-background);
 }

@@ -27,4 +27,8 @@ export default class CurrentProfile {
   get xtermSettings() {
     return Object.keys(this.allProperties).filter(property => this.allProperties[property].scope === 'xterm');
   }
+
+  findProfile(id) {
+    return this.allProfiles.find(profile => profile.id === id);
+  }
 }

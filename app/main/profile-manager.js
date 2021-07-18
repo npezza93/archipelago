@@ -149,6 +149,9 @@ export default class ProfileManager {
     this.addIpcSubscription(
       ipc.answerRenderer('set-profile-name', ({id, name}) => {
         this.find(id).name = name;
+        for (const window of BrowserWindow.getAllWindows()) {
+          ipc.callRenderer(window, 'profile-name-changed');
+        }
       }),
     );
     this.addIpcSubscription(
@@ -172,6 +175,10 @@ export default class ProfileManager {
         }
 
         this.find(id).destroy();
+
+        for (const window of BrowserWindow.getAllWindows()) {
+          ipc.callRenderer(window, 'profile-removed');
+        }
 
         return {profiles: this.rawProfiles, activeProfileId: this.activeProfile().id};
       }),
