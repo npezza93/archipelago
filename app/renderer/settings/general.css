@@ -129,8 +129,10 @@ section {
   padding-bottom: 2px;
 }
 
-#keybindings div.active[data-controller="keybinding"] {
+#keybindings div.active[data-controller="keybinding"],
+#profiles div.active[data-controller="profile"] {
   background: var(--selection-background);
+  color: var(--selection-text-color);
 }
 .backdrop {
   position: fixed;
@@ -162,42 +164,111 @@ section {
 }
 button.ok {
   border: none;
-  color: var(--color);
+  color: var(--selection-text-color);
   border-radius: 6px;
   padding: 2px 20px;
-  background-image: linear-gradient(rgb(47, 106, 222), rgb(42, 94, 198));
-  border-top: 1px solid rgb(81, 132, 227);
+  background-image: var(--modal-active-button-background);
 }
-button.ok:active {
-  background-image: linear-gradient(rgb(69, 146, 223), rgb(77, 159, 235));
-  border-top: 1px solid rgb(102, 176, 240);
+@media (prefers-color-scheme: dark) {
+  button.ok {
+    border-top: 1px solid rgb(81, 132, 227);
+  }
+}
+@media (prefers-color-scheme: light) {
+  button.ok {
+    border-top: 1px solid rgb(245, 248, 255);
+    border-bottom: 1px solid rgb(222, 234, 254);
+  }
+}
+@media (prefers-color-scheme: dark) {
+  button.ok:active {
+    background-image: linear-gradient(rgb(69, 146, 223), rgb(77, 159, 235));
+    border-top: 1px solid rgb(102, 176, 240);
+  }
+}
+@media (prefers-color-scheme: light) {
+  button.ok:active {
+    background-image: linear-gradient(rgb(20, 125, 235), rgb(0, 102, 235));
+    border-top: 1px solid rgb(242, 248, 255);
+    border-bottom: 1px solid rgb(215, 234, 255);
+  }
 }
 button.cancel {
   border: none;
   color: var(--color);
   border-radius: 6px;
   padding: 2px 15px;
-  background: rgb(88, 85, 85);
-  border-top: 1px solid rgb(108, 105, 105);
+  background: var(--modal-inactive-button-background);
 }
-button.cancel:active {
-  background-image: linear-gradient(rgb(69, 146, 223), rgb(77, 159, 235));
-  border-top: 1px solid rgb(102, 176, 240);
+@media (prefers-color-scheme: dark) {
+  button.cancel {
+    border-top: 1px solid rgb(108, 105, 105);
+  }
 }
-button.cancel:active + button.ok {
-  background: rgb(88, 85, 85);
-  border-top: 1px solid rgb(108, 105, 105);
+@media (prefers-color-scheme: light) {
+  button.cancel {
+    border-top: 1px solid rgb(238, 238, 238);
+    border-bottom: 1px solid rgb(212, 212, 212);
+    border-left: 1px solid rgb(232, 232, 232);
+    border-right: 1px solid rgb(232, 232, 232);
+  }
+}
+@media (prefers-color-scheme: dark) {
+  button.cancel:active {
+    background-image: linear-gradient(rgb(69, 146, 223), rgb(77, 159, 235));
+    border-top: 1px solid rgb(102, 176, 240);
+  }
+}
+@media (prefers-color-scheme: light) {
+  button.cancel:active {
+    background-image: linear-gradient(rgb(20, 125, 235), rgb(0, 102, 235));
+    border-top: 1px solid rgb(242, 248, 255);
+    border-bottom: 1px solid rgb(215, 234, 255);
+    color: #FFFFFF;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  button.cancel:active + button.ok {
+    background: rgb(88, 85, 85);
+    border-top: 1px solid rgb(108, 105, 105);
+  }
+}
+@media (prefers-color-scheme: light) {
+  button.cancel:active + button.ok {
+    background: #FFFFFF;
+    color: var(--color);
+    border-top: 1px solid rgb(238, 238, 238);
+    border-bottom: 1px solid rgb(212, 212, 212);
+    border-left: 1px solid rgb(232, 232, 232);
+    border-right: 1px solid rgb(232, 232, 232);
+  }
 }
 
-#key-recorder {
-  background-color: var(--text-input-background);
-  border: 1px solid var(--color);
-  color: var(--color);
-  border-radius: 1px;
-  text-align: center;
+@media (prefers-color-scheme: dark) {
+  #key-recorder {
+    background-color: var(--text-input-background);
+    border: 1px solid var(--color);
+    color: var(--color);
+    border-radius: 1px;
+    text-align: center;
+  }
+  #key-recorder.recording {
+    background-image: linear-gradient(rgb(47, 106, 222), rgb(42, 94, 198));
+  }
 }
-#key-recorder.recording {
-  background-image: linear-gradient(rgb(47, 106, 222), rgb(42, 94, 198));
+@media (prefers-color-scheme: light) {
+  #key-recorder {
+    background-color: var(--text-input-background);
+    border: 1px solid var(--color);
+    color: var(--color);
+    border-radius: 1px;
+    text-align: center;
+  }
+  #key-recorder.recording {
+    background-image: var(--modal-active-button-background);
+    color: #FFFFFF;
+    border: 1px solid var(--text-input-border-bottom-color);
+  }
 }
 
 .keybinding-actions, .profile-actions {
@@ -237,7 +308,4 @@ button.cancel:active + button.ok {
   border-radius: 5px;
   padding-left: 7px;
   padding-bottom: 2px;
-}
-#profiles div.active[data-controller="profile"] {
-  background: var(--selection-background);
 }

@@ -28,6 +28,12 @@
     --text-input-background: rgb(255, 255, 255);
     --text-input-border-top-color: rgb(232, 232, 232);
     --text-input-border-bottom-color: rgb(214, 214, 214);
+
+    --selection-background: rgb(38, 99, 217);
+    --selection-text-color: #ffffff;
+
+    --modal-active-button-background: linear-gradient(rgb(71, 145, 247), rgb(49, 123, 246));
+    --modal-inactive-button-background: #FFFFFF;
   }
 }
 
@@ -63,5 +69,9 @@
     --text-input-border-bottom-color: rgb(76, 76, 76);
 
     --selection-background: rgb(33, 89, 201);
+    --selection-text-color: #F5F5F5;
+
+    --modal-active-button-background: linear-gradient(rgb(47, 106, 222), rgb(42, 94, 198));
+    --modal-inactive-button-background: rgb(88, 85, 85);
   }
 }
