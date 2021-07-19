@@ -16,6 +16,9 @@ export default class extends Controller {
   }
 
   destroy() {
-    ipc.callMain('remove-profile', currentProfile.activeProfileId)
+    const answer = confirm("Are you sure?");
+    if (answer) {
+      ipc.callMain('remove-profile', currentProfile.activeProfileId)
+    }
   }
 }

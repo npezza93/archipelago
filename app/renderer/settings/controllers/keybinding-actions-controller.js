@@ -18,9 +18,12 @@ export default class extends Controller {
     const activeItem = document.querySelector('[data-controller="keybinding"].active');
 
     if (activeItem) {
-      delete currentBindings[activeItem.dataset.keybindingIndexValue];
-      currentBindings = currentBindings.filter(item => item);
-      ipc.callMain('change-setting', {property: 'keybindings', value: currentBindings});
+      const answer = confirm("Are you sure?");
+      if (answer) {
+        delete currentBindings[activeItem.dataset.keybindingIndexValue];
+        currentBindings = currentBindings.filter(item => item);
+        ipc.callMain('change-setting', {property: 'keybindings', value: currentBindings});
+      }
     }
   }
 }
