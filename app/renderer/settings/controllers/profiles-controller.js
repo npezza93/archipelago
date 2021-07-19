@@ -14,10 +14,10 @@ export default class extends Controller {
 
   setValue() {
     const article = this.element.querySelector('article');
-    const active = currentProfile.activeProfileId - 1
+    const active = currentProfile.activeProfileId - 1;
     article.innerHTML = '';
 
-    currentProfile.allProfiles.forEach((profile) => {
+    currentProfile.allProfiles.forEach(profile => {
       article.insertAdjacentHTML('beforeend', `<div data-controller='profile' data-action='click->profile#select dblclick->profile#edit' data-profile-name-value=${profile.name} data-profile-id-value=${profile.id}>
         <div>${profile.name || 'New Profile'}</div>
       </div>`);

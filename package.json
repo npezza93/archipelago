@@ -14,6 +14,8 @@
   "xo": {
     "space": true,
     "rules": {
+      "no-return-assign": 0,
+      "no-alert": 0,
       "prefer-const": 0,
       "unicorn/import-style": 0,
       "react/prop-types": 0,

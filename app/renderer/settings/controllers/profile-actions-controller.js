@@ -1,4 +1,4 @@
-/* global document, currentProfile */
+/* global currentProfile, confirm */
 
 import {Controller} from 'stimulus';
 import {ipcRenderer as ipc} from 'electron-better-ipc';
@@ -6,19 +6,19 @@ import ProfileController from './profile-controller';
 
 export default class extends Controller {
   create() {
-    ipc.callMain('create-profile').then(({profiles, activeProfileId}) => {
+    ipc.callMain('create-profile').then(() => {
       const capturer = new ProfileController();
-      capturer.idValue = currentProfile.get('id')
-      capturer.nameValue = currentProfile.get('name')
+      capturer.idValue = currentProfile.get('id');
+      capturer.nameValue = currentProfile.get('name');
 
       capturer.edit();
-    })
+    });
   }
 
   destroy() {
-    const answer = confirm("Are you sure?");
+    const answer = confirm('Are you sure?');
     if (answer) {
-      ipc.callMain('remove-profile', currentProfile.activeProfileId)
+      ipc.callMain('remove-profile', currentProfile.activeProfileId);
     }
   }
 }

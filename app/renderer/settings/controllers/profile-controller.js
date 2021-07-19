@@ -11,7 +11,7 @@ export default class extends Controller {
       row.classList.remove('active');
     });
     this.element.classList.add('active');
-    ipc.callMain('set-active-profile', this.idValue)
+    ipc.callMain('set-active-profile', this.idValue);
   }
 
   edit() {

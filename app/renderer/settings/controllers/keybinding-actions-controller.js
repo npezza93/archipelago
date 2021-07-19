@@ -1,4 +1,4 @@
-/* global document, currentProfile */
+/* global document, currentProfile, confirm */
 
 import {Controller} from 'stimulus';
 import {ipcRenderer as ipc} from 'electron-better-ipc';
@@ -18,7 +18,7 @@ export default class extends Controller {
     const activeItem = document.querySelector('[data-controller="keybinding"].active');
 
     if (activeItem) {
-      const answer = confirm("Are you sure?");
+      const answer = confirm('Are you sure?');
       if (answer) {
         delete currentBindings[activeItem.dataset.keybindingIndexValue];
         currentBindings = currentBindings.filter(item => item);

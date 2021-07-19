@@ -1,5 +1,3 @@
-/* global document, currentProfile */
-
 import {Controller} from 'stimulus';
 import {ipcRenderer as ipc} from 'electron-better-ipc';
 
@@ -16,7 +14,7 @@ export default class extends Controller {
   }
 
   save() {
-    ipc.callMain('set-profile-name', {id: this.idValue, name: this.nameTarget.value})
+    ipc.callMain('set-profile-name', {id: this.idValue, name: this.nameTarget.value});
 
     this.close();
   }
