@@ -7,35 +7,8 @@
     "postinstall": " ./node_modules/.bin/electron-builder install-app-deps",
     "test": "./node_modules/.bin/mocha test/main/about-test.js test/main/main-test.js test/main/settings-test.js",
     "start": "./node_modules/.bin/electron .",
-    "lint": "./node_modules/.bin/xo --ignore *.jsx --ignore esm.js",
     "pack": "./node_modules/.bin/electron-builder --dir",
     "dist": "./node_modules/.bin/electron-builder --publish onTagOrDraft"
-  },
-  "xo": {
-    "space": true,
-    "rules": {
-      "no-return-assign": 0,
-      "no-alert": 0,
-      "prefer-const": 0,
-      "unicorn/import-style": 0,
-      "react/prop-types": 0,
-      "unicorn/prefer-ternary": 0,
-      "guard-for-in": 0,
-      "import/no-unassigned-import": 0,
-      "import/extensions": 0,
-      "unicorn/no-fn-reference-in-iterator": 0,
-      "no-setter-return": 0,
-      "import/no-anonymous-default-export": 0,
-      "unicorn/no-reduce": 0,
-      "node/no-path-concat": 0,
-      "node/file-extension-in-import": 0,
-      "unicorn/no-array-for-each": 0,
-      "unicorn/no-array-callback-reference": 0,
-      "unicorn/no-array-reduce": 0,
-      "unicorn/explicit-length-check": 0,
-      "unicorn/prefer-module": 0,
-      "unicorn/prefer-node-protocol": 0
-    }
   },
   "repository": {
     "type": "git",
@@ -89,8 +62,7 @@
     "electron-mocha": "^10.0.0",
     "electron-notarize": "^1.0.0",
     "mocha": "^9.0.2",
-    "spectron": "^15.0.0",
-    "xo": "^0.42.0"
+    "spectron": "^15.0.0"
   },
   "build": {
     "productName": "Archipelago",
