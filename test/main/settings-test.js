@@ -45,6 +45,6 @@ describe('Settings', function () {
 
   it('renders settings', async () => {
     const elements = await this.app.client.$$('body > section');
-    assert.equal(elements.length, 4);
+    assert.equal(elements.length, 5);
   });
 });
