@@ -12,5 +12,5 @@ export default (createWindow, profileManager) => [
   view,
   profiles(profileManager),
   {role: 'windowMenu'},
-  help,
+  help(profileManager),
 ];

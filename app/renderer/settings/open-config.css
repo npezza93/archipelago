@@ -1,8 +1,0 @@
-open-config {
-  position: absolute;
-  top: 46px;
-  color: var(--color);
-  right: 32px;
-  cursor: pointer;
-  z-index: 12;
-}
