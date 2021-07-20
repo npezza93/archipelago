@@ -93,7 +93,7 @@ export default class Pty {
         this.sessionWindow.webContents.send(`pty-data-${this.sessionId}`, this.bufferedData);
         this.bufferedData = '';
         this.bufferTimeout = null;
-      }, {wait: 1})();
+      }, {wait: 2})();
     }
   }
 }
