@@ -1,6 +1,6 @@
 import {is} from 'electron-util';
 
-let devMenus;
+let devMenus = [];
 if (is.development) {
   devMenus = [
     {role: 'reload', accelerator: 'Cmd+R'},
