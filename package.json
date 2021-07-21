@@ -91,7 +91,7 @@
       ]
     },
     "dmg": {
-      "icon": "build/icon-green.icns",
+      "icon": "build/icon.icns",
       "iconSize": 130,
       "contents": [
         {
