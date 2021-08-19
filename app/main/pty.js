@@ -2,7 +2,7 @@ import {BrowserWindow} from 'electron';
 import {ipcMain as ipc} from 'electron-better-ipc';
 import {spawn} from 'node-pty';
 import {Disposable} from 'event-kit';
-import debouncer from 'debounce-fn';
+import { debounce } from 'throttle-debounce';
 
 export default class Pty {
   constructor(profileManager) {
@@ -89,11 +89,11 @@ export default class Pty {
   bufferData(data) {
     this.bufferedData += data;
     if (!this.bufferTimeout) {
-      this.bufferTimeout = debouncer(() => {
+      this.bufferTimeout = debounce(2, false, () => {
         this.sessionWindow.webContents.send(`pty-data-${this.sessionId}`, this.bufferedData);
         this.bufferedData = '';
         this.bufferTimeout = null;
-      }, {wait: 2})();
+      })();
     }
   }
 }

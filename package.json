@@ -35,7 +35,6 @@
   "license": "MIT",
   "dependencies": {
     "color": "^4.0.1",
-    "debounce-fn": "< 5.0",
     "electron-better-ipc": "^2.0.0",
     "electron-context-menu": "^3.1.0",
     "electron-util": "^0.17.0",
@@ -46,6 +45,7 @@
     "node-pty": "0.10.1",
     "pref": "^3.1.0",
     "stimulus": "^2.0.0",
+    "throttle-debounce": "^3.0.1",
     "unescape-js": "^1.1.0",
     "update-electron-app": "^2.0.1",
     "xterm": "^4.14.0-beta.21",
