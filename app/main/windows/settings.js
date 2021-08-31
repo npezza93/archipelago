@@ -1,10 +1,10 @@
-import {darkMode} from 'electron-util';
+import {nativeTheme} from 'electron';
 import {ipcMain as ipc} from 'electron-better-ipc';
 import {makeWindow} from '../utils';
 
 let settingsWindow = null;
 const windowOptions = {
-  backgroundColor: darkMode.isEnabled ? '#393736' : '#F5F5F5',
+  backgroundColor: nativeTheme.shouldUseDarkColors ? '#393736' : '#F5F5F5',
   webPreferences: {
     experimentalFeatures: true,
     enableRemoteModule: true,

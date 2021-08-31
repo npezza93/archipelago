@@ -1,10 +1,8 @@
-import {platform} from 'electron-util';
-
 const MODIFIERS = {
   command: '\u2318',
   cmd: '\u2318',
-  commandorcontrol: platform({macos: '\u2318', default: '\u2303'}),
-  cmdorctrl: platform({macos: '\u2318', default: '\u2303'}),
+  commandorcontrol: '\u2318',
+  cmdorctrl: '\u2318',
   super: '\u2318',
   control: '\u2303',
   ctrl: '\u2303',

@@ -1,7 +1,7 @@
-import {is} from 'electron-util';
+import {app} from 'electron';
 
 let devMenus = [];
-if (is.development) {
+if (!app.isPackaged) {
   devMenus = [
     {role: 'reload', accelerator: 'Cmd+R'},
     {role: 'forcereload', accelerator: 'Cmd+Shift+R'},

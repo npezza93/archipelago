@@ -1,11 +1,11 @@
-import {darkMode} from 'electron-util';
+import {nativeTheme} from 'electron';
 import {makeWindow} from '../utils';
 
 let aboutWindow = null;
 const windowOptions = {
   width: 300,
   height: 500,
-  backgroundColor: darkMode.isEnabled ? '#393736' : '#F5F5F5',
+  backgroundColor: nativeTheme.shouldUseDarkColors ? '#393736' : '#F5F5F5',
 };
 
 export default {

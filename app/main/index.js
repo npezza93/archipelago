@@ -1,5 +1,4 @@
 import {app, Menu} from 'electron';
-import {is} from 'electron-util';
 import {CompositeDisposable, Disposable} from 'event-kit';
 import contextMenu from 'electron-context-menu';
 import {pref} from './config-file';
@@ -7,8 +6,11 @@ import ProfileManager from './profile-manager';
 import template from './app-menu';
 import ptyManager from './pty-manager';
 import {argbBackground, makeWindow} from './utils';
+import {initialize} from '@electron/remote/main';
 
-if (!is.development) {
+initialize()
+
+if (app.isPackaged) {
   require('update-electron-app')();
 }
 

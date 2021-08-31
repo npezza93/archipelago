@@ -31,7 +31,7 @@
     global-agent "^2.0.2"
     global-tunnel-ng "^2.7.1"
 
-"@electron/remote@^1.1.0":
+"@electron/remote@^1.1.0", "@electron/remote@^1.2.1":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@electron/remote/-/remote-1.2.1.tgz#665b9fc2c6a60f9e5039bf235e2c60ccd0242c32"
   integrity sha512-yKh60I8KjezQkZqeuN5Nu2O/Z72+tgNgzvAa8QQPLtQbsrCOaeIWdXZQqierz4jQ5jzTNUk6KIcK3V2kFeaxaQ==
@@ -1184,11 +1184,6 @@ electron-is-dev@^0.3.0:
   resolved "https://registry.yarnpkg.com/electron-is-dev/-/electron-is-dev-0.3.0.tgz#14e6fda5c68e9e4ecbeff9ccf037cbd7c05c5afe"
   integrity sha1-FOb9pcaOnk7L7/nM8DfL18BcWv4=
 
-electron-is-dev@^1.1.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/electron-is-dev/-/electron-is-dev-1.2.0.tgz#2e5cea0a1b3ccf1c86f577cee77363ef55deb05e"
-  integrity sha512-R1oD5gMBPS7PVU8gJwH6CtT0e6VSoD0+SzSnYpNm+dBkcijgA+K7VAMHDfnRq/lkKPZArpzplTW6jfiMYosdzw==
-
 electron-is-dev@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/electron-is-dev/-/electron-is-dev-2.0.0.tgz#833487a069b8dad21425c67a19847d9064ab19bd"
@@ -1227,14 +1222,6 @@ electron-publish@22.11.7:
     fs-extra "^10.0.0"
     lazy-val "^1.0.5"
     mime "^2.5.2"
-
-electron-util@^0.17.2:
-  version "0.17.2"
-  resolved "https://registry.yarnpkg.com/electron-util/-/electron-util-0.17.2.tgz#6b0fe798ae0154585e7e0e96a707bfeae592be05"
-  integrity sha512-4Kg/aZxJ2BZklgyfH86px/D2GyROPyIcnAZar+7KiNmKI2I5l09pwQTP7V95zM3FVhgDQwV9iuJta5dyEvuWAw==
-  dependencies:
-    electron-is-dev "^1.1.0"
-    new-github-issue-url "^0.2.1"
 
 electron-window@^0.8.0:
   version "0.8.1"
@@ -2305,11 +2292,6 @@ nanoid@3.1.23:
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.1.23.tgz#f744086ce7c2bc47ee0a8472574d5c78e4183a81"
   integrity sha512-FiB0kzdP0FFVGDKlRLEQ1BgDzU87dy5NnzjeW9YZNt+/c3+q82EQDUwniSAUxp/F0gFNI1ZhKU1FqYsMuqZVnw==
 
-new-github-issue-url@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/new-github-issue-url/-/new-github-issue-url-0.2.1.tgz#e17be1f665a92de465926603e44b9f8685630c1d"
-  integrity sha512-md4cGoxuT4T4d/HDOXbrUHkTKrp/vp+m3aOA7XXVYwNsUNMK49g3SQicTSeV5GIz/5QVGAeYRAOlyp9OvlgsYA==
-
 node-addon-api@^1.6.3:
   version "1.7.2"
   resolved "https://registry.yarnpkg.com/node-addon-api/-/node-addon-api-1.7.2.tgz#3df30b95720b53c24e59948b49532b662444f54d"
@@ -2504,11 +2486,12 @@ plist@^3.0.1:
     xmlbuilder "^9.0.7"
     xmldom "^0.6.0"
 
-pref@^3.1.0:
-  version "3.1.6"
-  resolved "https://registry.yarnpkg.com/pref/-/pref-3.1.6.tgz#b4243071a238228c20d99cc4c55155416205ae71"
-  integrity sha512-6gBWwvhsubtDprHpjt/VeL9GXQzmQTNCP+jCrKAbwoOkvHNZ0C4NUhWoDaB8pwNS2xIicJ2E26KT5e3VmYpAFw==
+pref@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/pref/-/pref-4.0.1.tgz#c98638ecbc8d3722b0e71bc7908b1089e5939246"
+  integrity sha512-6GNkMaXomtytiotqycsssZFMuRqQn7ySidGb1w1U0OrxxsmUbWo+SYHn2knNcno4y4ouCC52gtsTSl/GPGD4Hg==
   dependencies:
+    "@electron/remote" "^1.2.1"
     ajv "^6.5.3"
     color "^3.1.0"
     dot-prop "^4.2.0"

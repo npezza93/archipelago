@@ -1,5 +1,4 @@
 import {BrowserWindow, app} from 'electron';
-import {is} from 'electron-util';
 import Color from 'color';
 import {ipcMain as ipc} from 'electron-better-ipc';
 
@@ -18,7 +17,7 @@ export const makeWindow = (name, options) => {
     height: 600,
     show: false,
     titleBarStyle: 'hiddenInset',
-    frame: is.macos,
+    frame: true,
     webPreferences: {
       contextIsolation: false,
       nodeIntegration: true,

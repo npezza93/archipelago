@@ -1,7 +1,7 @@
 /* global document */
 import {clipboard, shell} from 'electron';
 import {ipcRenderer as ipc} from 'electron-better-ipc';
-import {activeWindow} from 'electron-util';
+import {getCurrentWindow} from '@electron/remote';
 import {CompositeDisposable, Disposable} from 'event-kit';
 import {Terminal} from 'xterm';
 import unescape from 'unescape-js';
@@ -19,7 +19,7 @@ export default class Session {
     this.currentProfile = new CurrentProfile();
     this.id = Math.random();
     this.subscriptions = new CompositeDisposable();
-    this.ptyId = ipc.callMain('pty-create', {sessionId: this.id, sessionWindowId: activeWindow().id});
+    this.ptyId = ipc.callMain('pty-create', {sessionId: this.id, sessionWindowId: getCurrentWindow().id});
     this.fitAddon = new FitAddon();
     this.webglAddon = new WebglAddon();
     this.xterm = new Terminal(this.settings());

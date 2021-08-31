@@ -1,16 +1,16 @@
-import {api} from 'electron-util';
+import {app} from 'electron';
 import about from '../windows/about';
 import settings from '../windows/settings';
 
 export default {
-  label: api.app.name,
+  label: app.name,
   submenu: [
     {
       label: 'About Archipelago',
       click: about.toggle,
     },
     {
-      label: `Version ${api.app.getVersion()}`,
+      label: `Version ${app.getVersion()}`,
       enabled: false,
     },
     {type: 'separator'},
