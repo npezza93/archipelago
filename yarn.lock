@@ -1243,10 +1243,10 @@ electron-window@^0.8.0:
   dependencies:
     is-electron-renderer "^2.0.0"
 
-electron@^13.2.2:
-  version "13.2.2"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-13.2.2.tgz#332d91891d0db4f9a1d22d4d0bc3b500e59dc051"
-  integrity sha512-thGq2YaZqQWK1HexRghxdb26a8hA7ZSebukUSHlnHrY9+Sx9rW7e3uEHbibk/seRXVoXO76HndjKdHyObP9/Kw==
+electron@^14.0.0:
+  version "14.0.0"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-14.0.0.tgz#a096484bfbf71d87fc0fa85a943a7869d6b9bf94"
+  integrity sha512-O6EI7L1BPIrTpEIFefjjmdbmSn9LtE4mmrv4dfpV4Mqaa8uKuNYQogwZPEvSwaBexb69eb1LQ25n+f+kBcjiRQ==
   dependencies:
     "@electron/get" "^1.0.1"
     "@types/node" "^14.6.2"
@@ -3409,10 +3409,10 @@ xterm-addon-webgl@^0.12.0-beta.10:
   resolved "https://registry.yarnpkg.com/xterm-addon-webgl/-/xterm-addon-webgl-0.12.0-beta.10.tgz#ba23287043da8172f4f9e53babb620f54ad36189"
   integrity sha512-mzMOAqgM95FAgzcVzCH/Q0NfN0CTMHVDWCCFyg4B5ZcsuRiQKqQQw0HS+5uOQDtoZEDl2BqGFby7pGpENWGjZQ==
 
-xterm@^4.14.0-beta.23:
-  version "4.14.0-beta.23"
-  resolved "https://registry.yarnpkg.com/xterm/-/xterm-4.14.0-beta.23.tgz#0d6651e250df16757f38bf01c7f714e1a71532aa"
-  integrity sha512-jG+Y87kVoblPa+BVyMey1mnFjqDrORhgK+wxT9ITxzjXcwz9H/Xz6/JNNfXBrhlGmaR3KQZWC/ZrtqkkAbtO1g==
+xterm@^4.14.0-beta.26:
+  version "4.14.0-beta.26"
+  resolved "https://registry.yarnpkg.com/xterm/-/xterm-4.14.0-beta.26.tgz#6cc94ff10a6dbd0b54cc23314d56ea12e5cd9c57"
+  integrity sha512-jN+xe6KhiB3Pyq3u4QQfNIU2K+H9230mdjJ4JE63kMc5B0h0+GFYrme9MN4IqOR/XtH8DyT0+CUeUm7FoTVaVg==
 
 y18n@^5.0.5:
   version "5.0.8"
