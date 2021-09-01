@@ -49,7 +49,7 @@
     "unescape-js": "^1.1.0",
     "update-electron-app": "^2.0.1",
     "xterm": "^4.14.0-beta.30",
-    "xterm-addon-fit": "^0.6.0-beta.2",
+    "xterm-addon-fit": "^0.6.0-beta.3",
     "xterm-addon-ligatures": "^0.5.0-beta.1",
     "xterm-addon-web-links": "^0.5.0-beta.7",
     "xterm-addon-webgl": "^0.12.0-beta.10"
