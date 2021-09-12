@@ -3393,9 +3393,9 @@ xterm-addon-webgl@^0.12.0-beta.13:
   integrity sha512-oPQHkFcuCB+x60wilGXFS+viZbOGNFijmuHEWehCUcLFQP5Mph0/6qXLZjgn47728QvCxU7HnXPqcD7JSxe0Tg==
 
 xterm@^4.14.0:
-  version "4.14.0"
-  resolved "https://registry.yarnpkg.com/xterm/-/xterm-4.14.0.tgz#5722a4048ea65d77b36c7d805f90490f7f60950f"
-  integrity sha512-7MT4Ky1H47Eiieubw7xkUzTvEzE4WeX3HSbmR3kSByX0ckQRRUGY5SIIhVIbrMUl/rqElnnav2gUZt8rtqAmQw==
+  version "4.14.1"
+  resolved "https://registry.yarnpkg.com/xterm/-/xterm-4.14.1.tgz#6884cb8fb3b83353b1a98139ea23daedf8e35796"
+  integrity sha512-jgzNg5BuGPwq5/M4dGnmbghZvHx2jaj+9crSEt15bV34Za49VziBmCu7zIy88zUKKiGTxeo7aVzirFSJArIMFw==
 
 y18n@^5.0.5:
   version "5.0.8"
