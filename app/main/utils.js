@@ -1,6 +1,7 @@
 import {BrowserWindow, app} from 'electron';
 import Color from 'color';
 import {ipcMain as ipc} from 'electron-better-ipc';
+import {enable} from '@electron/remote/main';
 
 export const argbBackground = (profileManager, property) => {
   const color = new Color(profileManager.get(property));
@@ -21,9 +22,9 @@ export const makeWindow = (name, options) => {
     webPreferences: {
       contextIsolation: false,
       nodeIntegration: true,
-      enableRemoteModule: true,
     },
   }, options));
+  enable(newWindow.webContents)
 
   loadUrl(newWindow, name);
 
