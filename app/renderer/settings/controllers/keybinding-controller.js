@@ -1,6 +1,6 @@
 /* global document */
 
-import {Controller} from 'stimulus';
+import {Controller} from '@hotwired/stimulus';
 
 import formatAccelerator from '../../utils/format-accelerator';
 

@@ -1,6 +1,6 @@
 /* global document, currentProfile, confirm */
 
-import {Controller} from 'stimulus';
+import {Controller} from '@hotwired/stimulus';
 import {ipcRenderer as ipc} from 'electron-better-ipc';
 import KeybindingController from './keybinding-controller';
 

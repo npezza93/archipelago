@@ -1,6 +1,6 @@
 /* global document, currentProfile */
 
-import {Controller} from 'stimulus';
+import {Controller} from '@hotwired/stimulus';
 import {ipcRenderer as ipc} from 'electron-better-ipc';
 import formatAccelerator from '../../utils/format-accelerator';
 

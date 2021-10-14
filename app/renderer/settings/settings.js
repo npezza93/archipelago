@@ -1,7 +1,7 @@
 /* global window, document */
 
 import {ipcRenderer as ipc} from 'electron-better-ipc';
-import {Application} from 'stimulus';
+import {Application} from '@hotwired/stimulus';
 
 import CurrentProfile from '../utils/current-profile';
 

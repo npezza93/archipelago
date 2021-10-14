@@ -1,6 +1,6 @@
 /* global document */
 
-import {Controller} from 'stimulus';
+import {Controller} from '@hotwired/stimulus';
 import {ipcRenderer as ipc} from 'electron-better-ipc';
 
 export default class extends Controller {

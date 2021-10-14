@@ -1,6 +1,6 @@
 /* global currentProfile, confirm */
 
-import {Controller} from 'stimulus';
+import {Controller} from '@hotwired/stimulus';
 import {ipcRenderer as ipc} from 'electron-better-ipc';
 import ProfileController from './profile-controller';
 

@@ -1,6 +1,6 @@
 /* global currentProfile */
 
-import {Controller} from 'stimulus';
+import {Controller} from '@hotwired/stimulus';
 import fontList from 'font-list';
 
 export default class extends Controller {
