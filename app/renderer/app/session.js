@@ -185,6 +185,10 @@ export default class Session {
     });
   }
 
+  onBinary(callback) {
+    return this.xterm.onBinary(callback);
+  }
+
   onData(callback) {
     return this.xterm.onData(callback);
   }
@@ -226,6 +230,9 @@ export default class Session {
       ipc.removeListener(`pty-data-${this.id}`, this.writePtyData.bind(this));
     }));
     this.subscriptions.add(this.onData(data => {
+      ipc.send(`pty-write-${this.id}`, data);
+    }));
+    this.subscriptions.add(this.onBinary(data => {
       ipc.send(`pty-write-${this.id}`, data);
     }));
     this.subscriptions.add(this.onFocus(this.fit.bind(this)));
