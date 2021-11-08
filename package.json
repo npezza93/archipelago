@@ -41,7 +41,7 @@
     "electron-context-menu": "^3.1.0",
     "esm": "^3.2.25",
     "event-kit": "^2.5.0",
-    "font-list": "^1.4.0",
+    "font-list": "^1.4.2",
     "keystroke-for-keyboard-event": "^1.0.0",
     "node-pty": "0.10.1",
     "pref": "^4.0.1",
