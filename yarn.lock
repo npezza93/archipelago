@@ -3415,33 +3415,33 @@ xmlbuilder@^9.0.7:
   resolved "https://registry.yarnpkg.com/xmlbuilder/-/xmlbuilder-9.0.7.tgz#132ee63d2ec5565c557e20f4c22df9aca686b10d"
   integrity sha1-Ey7mPS7FVlxVfiD0wi35rKaGsQ0=
 
-xterm-addon-fit@^0.6.0-beta.4:
+xterm-addon-fit@^0.6.0-beta.6:
   version "0.6.0-beta.6"
   resolved "https://registry.yarnpkg.com/xterm-addon-fit/-/xterm-addon-fit-0.6.0-beta.6.tgz#3b37505fdd6c4760e10a5f91eaba27f1a74764c2"
   integrity sha512-YijrevnbG0ns8utdn8e5h26/ruG6qNyGK9hJ+5QBLhlbkxEJqx8/oWT0ASi7jZ+Xi8XFvElJGqK4Z0aMCHZpKg==
 
-xterm-addon-ligatures@^0.5.0-beta.1:
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/xterm-addon-ligatures/-/xterm-addon-ligatures-0.5.1.tgz#40ff69c43b6406aaf130fdfe9a43ca4eac49f892"
-  integrity sha512-L70vyVAapDvBBti1bqFTUQOd6R6LH5qKzqZ76sERKkf75+u++sylqflCdwT8zmorK6zxcc3vq4+I4GDYawgYrQ==
+xterm-addon-ligatures@^0.6.0-beta.3:
+  version "0.6.0-beta.3"
+  resolved "https://registry.yarnpkg.com/xterm-addon-ligatures/-/xterm-addon-ligatures-0.6.0-beta.3.tgz#b8b3780947031ec5239b329f4422a179d5708f8b"
+  integrity sha512-CU+si3CNFoUsaBHMhxVVLn0zZks/MY8wKjwTvf1IZmYrDo2TfCB3RSHIvFgb2SxzM80NeeF1LePjpyQ4CFOtpw==
   dependencies:
     font-finder "^1.1.0"
     font-ligatures "^1.4.0"
 
-xterm-addon-web-links@^0.5.0-beta.8:
+xterm-addon-web-links@^0.5.0-beta.9:
   version "0.5.0-beta.9"
   resolved "https://registry.yarnpkg.com/xterm-addon-web-links/-/xterm-addon-web-links-0.5.0-beta.9.tgz#74134c903403c8505eb23e2b1456a584b0c083f6"
   integrity sha512-MMysK/Jt8PehZxPt/RbOv6r8bKX98ohHvVujG8viLLRCKkrhJBCyejlUnnBdXaD8jscWeZp8BoA2ANYk9rG3ow==
 
-xterm-addon-webgl@^0.12.0-beta.15:
+xterm-addon-webgl@^0.12.0-beta.16:
   version "0.12.0-beta.16"
   resolved "https://registry.yarnpkg.com/xterm-addon-webgl/-/xterm-addon-webgl-0.12.0-beta.16.tgz#63a0f1f5be9e66286e035448e2011e3065769ad5"
   integrity sha512-g6v3RegOhSsD9Zt8ArWBMNT30QyPUlIWEIvP/xLHAluUZ1S5sDjFyZDB0nJAyn9MwQozJpwb0ylYO1nznN/TzA==
 
-xterm@^4.14.0:
-  version "4.15.0"
-  resolved "https://registry.yarnpkg.com/xterm/-/xterm-4.15.0.tgz#e52038507eba7e0d36d47f81e29fe548c82b9561"
-  integrity sha512-Ik1GoSq1yqKZQ2LF37RPS01kX9t4TP8gpamUYblD09yvWX5mEYuMK4CcqH6+plgiNEZduhTz/UrcaWs97gOlOw==
+xterm@^4.16.0-beta.4:
+  version "4.16.0-beta.4"
+  resolved "https://registry.yarnpkg.com/xterm/-/xterm-4.16.0-beta.4.tgz#89a8a9fedb390f1fdfd8771ebfb84137ab131a01"
+  integrity sha512-cvz9xa/L/CvjtNyLWVTV7+mS68v1jiPWOhFs5zWnPc6nMGrMoc6bXXnGTgNBqKhAjPJ7ZDAdbP+sodBxgq7Icg==
 
 y18n@^5.0.5:
   version "5.0.8"
