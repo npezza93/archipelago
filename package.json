@@ -43,7 +43,7 @@
     "event-kit": "^2.5.0",
     "font-list": "^1.4.2",
     "keystroke-for-keyboard-event": "^1.0.0",
-    "node-pty": "0.11.0-beta13",
+    "node-pty": "0.11.0-beta14",
     "pref": "^4.0.1",
     "throttle-debounce": "^3.0.1",
     "unescape-js": "^1.1.0",
