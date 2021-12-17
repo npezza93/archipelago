@@ -1456,10 +1456,10 @@ font-ligatures@^1.4.0:
     lru-cache "^6.0.0"
     opentype.js "^0.8.0"
 
-font-list@^1.4.2:
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/font-list/-/font-list-1.4.2.tgz#9f06ae1e8aeef02be83374776dc21e8b900bcf8d"
-  integrity sha512-vPekA+sinAymEkNHwnOse0D75phwNvH/E0z/mJSgGoCBVKy+rLZzd3HziYVwlII34bb0ZYOKBbM36s2bfCaR1A==
+font-list@^1.4.3:
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/font-list/-/font-list-1.4.3.tgz#802db0d10424170c05c34f7bedda1fbdef729e8c"
+  integrity sha512-5UEtK0bPrkrN3pUVoE9EVme0N3LJYVs5NJubmcxZVyAydlE7sjdGajD6XrEHu44TnQdBP+s2B1dA7qWcOm1qhw==
 
 form-data@^4.0.0:
   version "4.0.0"
