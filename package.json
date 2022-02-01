@@ -55,7 +55,7 @@
     "xterm-addon-webgl": "^0.12.0-beta.21"
   },
   "devDependencies": {
-    "chai": "^4.3.4",
+    "chai": "^4.3.6",
     "electron": "^17.0.0",
     "electron-builder": "^22.14.5",
     "electron-mocha": "^10.0.0",
