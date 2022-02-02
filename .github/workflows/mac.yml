@@ -3,6 +3,24 @@ name: mac
 on: [push]
 
 jobs:
+  test:
+    runs-on: macos-11
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: '16.x'
+    - uses: actions/cache@v1
+      with:
+        path: ~/.cache/yarn
+        key: ${{ runner.os }}-yarn-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+        restore-keys: |
+          ${{ runner.os }}-yarn-
+    - name: Install
+      run: yarn --link-duplicates --pure-lockfile --ignore-engines
+    - name: Test
+      run: yarn test
   build:
     runs-on: macos-11
     steps:
@@ -10,7 +28,7 @@ jobs:
     - name: Set up Node
       uses: actions/setup-node@v1
       with:
-        node-version: '14.x'
+        node-version: '16.x'
     - uses: actions/cache@v1
       with:
         path: ~/.cache/yarn
