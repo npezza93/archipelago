@@ -3428,10 +3428,10 @@ xterm-addon-ligatures@^0.6.0-beta.7:
     font-finder "^1.1.0"
     font-ligatures "^1.4.1"
 
-xterm-addon-web-links@^0.6.0-beta.4:
-  version "0.6.0-beta.4"
-  resolved "https://registry.yarnpkg.com/xterm-addon-web-links/-/xterm-addon-web-links-0.6.0-beta.4.tgz#84d0e7d819cad7c1a5239772192ade8262e3dc2b"
-  integrity sha512-nyypDH5/UGgtusUvPDSovGXWx0ZXA2bfwr0g6FwZZBStYqfUEUhEsrdtPNnHWLmJCF6noHMx8YWKfVhM6zVg2Q==
+xterm-addon-web-links@^0.6.0-beta.5:
+  version "0.6.0-beta.5"
+  resolved "https://registry.yarnpkg.com/xterm-addon-web-links/-/xterm-addon-web-links-0.6.0-beta.5.tgz#19ea228d40fe0bad416379a2260be651ab5bce8d"
+  integrity sha512-ygBdwYddpxT6gfljvYDHvulJwoKziMxf+HUAWE/9/Q1kOlxs5DF+vC9RUClxAgRRp8XDB9qIvMcjpMJGlA99+Q==
 
 xterm-addon-webgl@^0.12.0-beta.21:
   version "0.12.0-beta.21"
