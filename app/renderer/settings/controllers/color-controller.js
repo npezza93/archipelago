@@ -1,6 +1,6 @@
 /* global currentProfile */
 
-import color from 'color';
+import Color from 'color';
 import {Controller} from '@hotwired/stimulus';
 import {ipcRenderer as ipc} from 'electron-better-ipc';
 
@@ -14,8 +14,8 @@ export default class extends Controller {
     this.element.value = this.currentColor.hex();
   }
 
-  change(event) {
-    let color = color(event.target.value);
+  changed(event) {
+    let color = Color(event.target.value);
     const alpha = this.currentColor.alpha();
     if (alpha < 1) {
       color = color.alpha(alpha);
@@ -25,6 +25,6 @@ export default class extends Controller {
   }
 
   get currentColor() {
-    return color(currentProfile.get(this.element.name));
+    return Color(currentProfile.get(this.element.name));
   }
 }
