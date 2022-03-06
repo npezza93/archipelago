@@ -34,7 +34,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@electron/remote": "^2.0.4",
+    "@electron/remote": "^2.0.5",
     "@hotwired/stimulus": "^3.0.0",
     "color": "^4.2.1",
     "electron-better-ipc": "^2.0.0",
