@@ -51,7 +51,7 @@
     "xterm": "^4.18.0",
     "xterm-addon-fit": "^0.6.0-beta.8",
     "xterm-addon-ligatures": "^0.6.0-beta.10",
-    "xterm-addon-web-links": "^0.6.0-beta.6",
+    "xterm-addon-web-links": "^0.6.0-beta.7",
     "xterm-addon-webgl": "^0.12.0-beta.24"
   },
   "devDependencies": {
