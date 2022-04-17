@@ -7,11 +7,6 @@ jobs:
     runs-on: macos-11
     steps:
     - uses: actions/checkout@v1
-    - name: "Install npmrc"
-      env:
-        GITHUB_TOKEN: ${{secrets.GH_PACKAGE_REGISTRY_TOKEN}}
-      run: |
-        echo "@npezza93:registry=https://npm.pkg.github.com/\n//npm.pkg.github.com/:_authToken=$GITHUB_TOKEN" > .npmrc
     - name: Set up Node
       uses: actions/setup-node@v1
       with:
@@ -23,6 +18,13 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-yarn-
     - name: Install
-      run: yarn --link-duplicates --pure-lockfile --ignore-engines
+      env:
+        GITHUB_TOKEN: ${{secrets.GH_PACKAGE_REGISTRY_TOKEN}}
+      run: |
+        echo "@npezza93:registry=https://npm.pkg.github.com/\n" >> .npmrc
+        echo "//npm.pkg.github.com/:_authToken=$GITHUB_TOKEN" >> .npmrc
+        cat .npmrc
+        yarn --link-duplicates --pure-lockfile --ignore-engines
+
     - name: Test
       run: yarn test
