@@ -10,6 +10,7 @@ jobs:
     - name: "Install npmrc"
       run: |
         echo "@npezza93:registry=https://npm.pkg.github.com/\n//npm.pkg.github.com/:_authToken=$GH_TOKEN" > .npmrc
+        cat .npmrc
     - name: Set up Node
       uses: actions/setup-node@v1
       with:
