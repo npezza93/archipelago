@@ -18,7 +18,12 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-yarn-
     - name: Install
-      run: yarn --link-duplicates --pure-lockfile --ignore-engines
+      env:
+        GITHUB_TOKEN: ${{secrets.GH_TOKEN}}
+      run: |
+        echo "@npezza93:registry=https://npm.pkg.github.com/" >> .npmrc
+        echo "//npm.pkg.github.com/:_authToken=$GITHUB_TOKEN" >> .npmrc
+        yarn --link-duplicates --pure-lockfile --ignore-engines
     - name: Build
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}

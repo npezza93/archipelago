@@ -1,7 +1,7 @@
 /* global describe, beforeEach, afterEach, it */
 
 const path = require('path');
-const {Application} = require('spectron');
+const {Application} = require('@npezza93/spectron');
 const {assert} = require('chai');
 
 let electron = './node_modules/electron/dist/';
