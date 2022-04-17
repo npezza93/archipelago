@@ -19,7 +19,7 @@ jobs:
           ${{ runner.os }}-yarn-
     - name: Install
       env:
-        GITHUB_TOKEN: ${{secrets.GH_TOKEN}}
+        GITHUB_TOKEN: ${{secrets.GH_PACKAGE_REGISTRY_TOKEN}}
       run: |
         echo "@npezza93:registry=https://npm.pkg.github.com/" >> .npmrc
         echo "//npm.pkg.github.com/:_authToken=$GITHUB_TOKEN" >> .npmrc
