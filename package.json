@@ -32,6 +32,9 @@
   "bugs": {
     "url": "https://github.com/npezza93/archipelago/issues"
   },
+  "resolutions": {
+    "@electron/universal": "^1.2.1"
+  },
   "license": "MIT",
   "dependencies": {
     "@electron/remote": "^2.0.8",
