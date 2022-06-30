@@ -51,7 +51,7 @@
     "throttle-debounce": "^5.0.0",
     "unescape-js": "^1.1.0",
     "update-electron-app": "^2.0.1",
-    "xterm": "^4.18.0",
+    "xterm": "^4.19.0",
     "xterm-addon-fit": "^0.6.0-beta.11",
     "xterm-addon-ligatures": "^0.6.0-beta.14",
     "xterm-addon-web-links": "^0.6.0",
