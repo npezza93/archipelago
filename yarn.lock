@@ -46,10 +46,10 @@
   resolved "https://registry.yarnpkg.com/@electron/remote/-/remote-2.0.8.tgz#85ff321f0490222993207106e2f720273bb1a5c3"
   integrity sha512-P10v3+iFCIvEPeYzTWWGwwHmqWnjoh8RYnbtZAb3RlQefy4guagzIwcWtfftABIfm6JJTNQf4WPSKWZOpLmHXw==
 
-"@electron/universal@1.2.1", "@electron/universal@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@electron/universal/-/universal-1.2.1.tgz#3c2c4ff37063a4e9ab1e6ff57db0bc619bc82339"
-  integrity sha512-7323HyMh7KBAl/nPDppdLsC87G6RwRU02dy5FPeGB1eS7rUePh55+WNWiDPLhFQqqVPHzh77M69uhmoT8XnwMQ==
+"@electron/universal@1.2.1", "@electron/universal@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@electron/universal/-/universal-1.3.0.tgz#5854e41cf5bac03f4a78b9282358661fd0a66d4e"
+  integrity sha512-6SAIlMZZRj1qpe3z3qhMWf3fmqhAdzferiQ5kpspCI9sH1GjkzRXY0RLaz0ktHtYonOj9XMpXNkhDy7QQagQEg==
   dependencies:
     "@malept/cross-spawn-promise" "^1.1.0"
     asar "^3.1.0"
@@ -81,14 +81,14 @@
     lodash "^4.17.15"
     tmp-promise "^3.0.2"
 
-"@npezza93/spectron@20.0.0":
-  version "20.0.0"
-  resolved "https://npm.pkg.github.com/download/@npezza93/spectron/20.0.0/0315ad094bdad493a7ec5894433b0f0ed8a4e721dd8b7e12c235ab42b9ff11db#0075602b7ac5ff4df472167c38baabd0f57e79c5"
-  integrity sha512-iIlDAvdD9X6ZpD2t9F43e8vX3b2u92Ww9zX7JSvQN9OFU0dxw+cFxeI/9fQeeHFWRRBUzdEEbjiTLMOQT5onwA==
+"@npezza93/spectron@21.0.0":
+  version "21.0.0"
+  resolved "https://npm.pkg.github.com/download/@npezza93/spectron/21.0.0/4a294a289142546e1ae4f40aff5548420e347f1ce61e1edb8c80c8384fb8f7be#ec2e34ba0ef94c8f76a425d1a0ce0d4d1960bb08"
+  integrity sha512-01TwKS0Y1oiDxgUpq8AyK1PZtWFJCs6XT4rYLE8dWM1Xcjs2JjmSUS6tbZuwcoZSLOQ5LhyYifw0QmhemeiY7A==
   dependencies:
     "@electron/remote" "2.0.4"
     dev-null "^0.1.1"
-    electron-chromedriver "18.0.0"
+    electron-chromedriver "19.0.0"
     got "^11.8.0"
     split "^1.0.1"
     webdriverio "7.16.13"
@@ -1183,10 +1183,10 @@ electron-builder@^23.1.0:
     update-notifier "^5.1.0"
     yargs "^17.0.1"
 
-electron-chromedriver@18.0.0:
-  version "18.0.0"
-  resolved "https://registry.yarnpkg.com/electron-chromedriver/-/electron-chromedriver-18.0.0.tgz#97026e43ce5d345868c8fe28becce0b0702c8ae7"
-  integrity sha512-FPhNFRXYI3YRpd0EFRcWV1IltlI88aEcQOeDn/gHYYZgFrwDEHWDIo2o1Sbb9H76QlKYs0JAHFowz+rp/Wsj3A==
+electron-chromedriver@19.0.0:
+  version "19.0.0"
+  resolved "https://registry.yarnpkg.com/electron-chromedriver/-/electron-chromedriver-19.0.0.tgz#dce6f53e97406552477d6a55317450500fb03498"
+  integrity sha512-y9OR4hqInuZwApGUCnKeKyEp8of6CvX2+g1qrC2SinR8Z56gZWGPBjWd2yb4nfwhoJ6imC1n4r4Ncti2Lksdyw==
   dependencies:
     "@electron/get" "^1.12.4"
     extract-zip "^2.0.0"
@@ -3464,20 +3464,20 @@ xterm-addon-ligatures@^0.6.0-beta.14:
     font-finder "^1.1.0"
     font-ligatures "^1.4.1"
 
-xterm-addon-web-links@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/xterm-addon-web-links/-/xterm-addon-web-links-0.6.0.tgz#0296cb6c99588847894670d998c9ea6a6aeb26ee"
-  integrity sha512-H6XzjWWZu8FBo+fnYpxdPk9w5M6drbsvwPEJZGRS38MihiQaVFpKlCMKdfRgDbKGE530tw1yH54rhpZfHgt2/A==
+xterm-addon-web-links@^0.7.0-beta.1:
+  version "0.7.0-beta.1"
+  resolved "https://registry.yarnpkg.com/xterm-addon-web-links/-/xterm-addon-web-links-0.7.0-beta.1.tgz#70e731327f78943509ad16e7233ac0d5ee067842"
+  integrity sha512-e+mHAoNNktYMvM/EwgfyQ4I2//Wg+Vu20N19PGQP++6rPRWCRr+TSQyxZFVG/m1eK4BwVkD4aUdwe/mb8qAcrg==
 
-xterm-addon-webgl@^0.12.0:
-  version "0.12.0"
-  resolved "https://registry.yarnpkg.com/xterm-addon-webgl/-/xterm-addon-webgl-0.12.0.tgz#2fba8d31890a122adafa1c2fb945482e2ae12973"
-  integrity sha512-3P5ihdjPnxH6Wrvqjki9UD+duoVrp1fvnO/pSpXP2F1L2GwY6TDNExgj8Yg141vMCNgQbcVqmsTLYEYZxjY92A==
+xterm-addon-webgl@^0.13.0-beta.3:
+  version "0.13.0-beta.3"
+  resolved "https://registry.yarnpkg.com/xterm-addon-webgl/-/xterm-addon-webgl-0.13.0-beta.3.tgz#2b456c3105238e64b40a30787d6335f5f6f85abb"
+  integrity sha512-DFGcXAolA0VTsOLIKcORxUOp/FTJdD/YiRzKVLARjgOycwVRKvW2L5Tge8Z7ysZ16sKfnV2vCXyonXYfUWozXw==
 
-xterm@^4.19.0:
-  version "4.19.0"
-  resolved "https://registry.yarnpkg.com/xterm/-/xterm-4.19.0.tgz#c0f9d09cd61de1d658f43ca75f992197add9ef6d"
-  integrity sha512-c3Cp4eOVsYY5Q839dR5IejghRPpxciGmLWWaP9g+ppfMeBChMeLa1DCA+pmX/jyDZ+zxFOmlJL/82qVdayVoGQ==
+xterm@^4.20.0-beta.6:
+  version "4.20.0-beta.6"
+  resolved "https://registry.yarnpkg.com/xterm/-/xterm-4.20.0-beta.6.tgz#3ed87ba383a5cf44284098278f714df7113e3e3c"
+  integrity sha512-xJd6vyOuYo4Ht/hTY3DyXGIj0U6kHjr2vWQ1lRmearo3t7QKf7uqOAAfTLeWt/g1P8qe/r0DnsNTeag6vI9RVw==
 
 y18n@^5.0.5:
   version "5.0.8"
