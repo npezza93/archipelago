@@ -48,7 +48,7 @@
     "keystroke-for-keyboard-event": "^1.0.0",
     "node-pty": "0.11.0-beta20",
     "pref": "^4.0.1",
-    "throttle-debounce": "^5.0.0",
+    "throttle-debounce": "^4.0.1",
     "unescape-js": "^1.1.0",
     "update-electron-app": "^2.0.1",
     "xterm": "^4.20.0-beta.6",
