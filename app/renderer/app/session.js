@@ -65,7 +65,6 @@ export default class Session {
     defaultSettings.letterSpacing = '0';
     defaultSettings.bellStyle = 'sound';
     defaultSettings.tabStopWidth = 8;
-    defaultSettings.customGlyphs = false;
     defaultSettings.bellSound = bellSound;
 
     return defaultSettings;
