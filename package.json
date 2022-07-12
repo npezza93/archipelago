@@ -1,6 +1,6 @@
 {
   "name": "Archipelago",
-  "version": "4.2.1",
+  "version": "4.2.2",
   "description": "Archipelago is an open-source terminal emulator built on web technology",
   "main": "app/main/esm.js",
   "scripts": {
