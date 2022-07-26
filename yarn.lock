@@ -3451,10 +3451,10 @@ xmlbuilder@^9.0.7:
   resolved "https://registry.yarnpkg.com/xmlbuilder/-/xmlbuilder-9.0.7.tgz#132ee63d2ec5565c557e20f4c22df9aca686b10d"
   integrity sha1-Ey7mPS7FVlxVfiD0wi35rKaGsQ0=
 
-xterm-addon-fit@^0.6.0-beta.13:
-  version "0.6.0-beta.13"
-  resolved "https://registry.yarnpkg.com/xterm-addon-fit/-/xterm-addon-fit-0.6.0-beta.13.tgz#93890174c37356d0e4c8aea0f2c090e107945ee4"
-  integrity sha512-KjRSd7p9XDpztAaecm/Y1pdOrInx2J4fJ8r7OHuQ9t+TUD7UQcxRrJDEsSjiPCXobpYvvJW5NgPHHdGpuScU1Q==
+xterm-addon-fit@^0.6.0-beta.14:
+  version "0.6.0-beta.14"
+  resolved "https://registry.yarnpkg.com/xterm-addon-fit/-/xterm-addon-fit-0.6.0-beta.14.tgz#24d4ed2a3f755daa8c0f94ffa7e7b6d7a2984f3b"
+  integrity sha512-LYyCY7u4cfJAecQdTFVaYrGC7nUq597BhhGFrkrdjhW2Xg7nihDr0Xr8k2961FBUvRbDJULD4WSfPXcN/spzHw==
 
 xterm-addon-ligatures@^0.6.0-beta.14:
   version "0.6.0-beta.14"
