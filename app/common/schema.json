@@ -107,6 +107,14 @@
               "title": "shell"
             }
           },
+          "hideContextMenu": {
+            "type": "boolean",
+            "default": true,
+            "scope": "xterm",
+            "settings": {
+              "title": "shell"
+            }
+          },
           "rightClickSelectsWord": {
             "type": "boolean",
             "default": true,

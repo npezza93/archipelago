@@ -35,10 +35,12 @@ const createWindow = () => {
     backgroundColor: argbBackground(profileManager, 'theme.background'),
     vibrancy: profileManager.get('vibrancy'),
   });
-  contextMenu({
-    window: win,
-    shouldShowMenu: (event, parameters) => parameters.isEditable,
-  });
+  if (!profileManager.get('hideContextMenu')) {
+    contextMenu({
+      window: win,
+      shouldShowMenu: (event, parameters) => parameters.isEditable,
+    });
+  }
 
   windows.push(win);
 };
