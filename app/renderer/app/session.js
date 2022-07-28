@@ -10,6 +10,7 @@ import Color from 'color';
 import {FitAddon} from 'xterm-addon-fit';
 import {WebLinksAddon} from 'xterm-addon-web-links';
 import {WebglAddon} from 'xterm-addon-webgl';
+import {CanvasAddon} from 'xterm-addon-canvas';
 import {LigaturesAddon} from 'xterm-addon-ligatures';
 import CurrentProfile from '../utils/current-profile';
 import bellSound from './bell-sound';
@@ -22,6 +23,7 @@ export default class Session {
     this.ptyId = ipc.callMain('pty-create', {sessionId: this.id, sessionWindowId: getCurrentWindow().id});
     this.fitAddon = new FitAddon();
     this.webglAddon = new WebglAddon();
+    this.canvasAddon = new CanvasAddon();
     this.xterm = new Terminal(this.settings());
     this.ligaturesAddon = new LigaturesAddon();
     this.xterm.loadAddon(this.fitAddon);
@@ -66,6 +68,7 @@ export default class Session {
     defaultSettings.bellStyle = 'sound';
     defaultSettings.tabStopWidth = 8;
     defaultSettings.bellSound = bellSound;
+    defaultSettings.allowProposedApi = true;
 
     return defaultSettings;
   }
@@ -88,6 +91,8 @@ export default class Session {
       this.xterm.open(this._xtermElement);
       if (this.currentProfile.get('experimentalWebglRenderer')) {
         this.xterm.loadAddon(this.webglAddon);
+      } else {
+        this.xterm.loadAddon(this.canvasAddon);
       }
 
       if (this.currentProfile.get('ligatures')) {
