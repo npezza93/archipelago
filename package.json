@@ -51,12 +51,12 @@
     "throttle-debounce": "^4.0.1",
     "unescape-js": "^1.1.0",
     "update-electron-app": "^2.0.1",
-    "xterm": "^5.0.0-beta.23",
-    "xterm-addon-canvas": "^0.2.0-beta.9",
+    "xterm": "^5.0.0-beta.25",
+    "xterm-addon-canvas": "^0.2.0-beta.11",
     "xterm-addon-fit": "^0.6.0-beta.14",
     "xterm-addon-ligatures": "^0.6.0-beta.18",
     "xterm-addon-web-links": "^0.7.0-beta.3",
-    "xterm-addon-webgl": "^0.13.0-beta.21"
+    "xterm-addon-webgl": "^0.13.0-beta.23"
   },
   "devDependencies": {
     "@npezza93/spectron": "21.0.0",
