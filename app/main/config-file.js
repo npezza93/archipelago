@@ -8,6 +8,26 @@ const pref = () => new Pref({
   schema,
   watch: false,
   migrations: {
+    '5.0.0-beta1': store => {
+      (store.store.profiles || []).forEach((profile, index) => {
+        const background = store.get(`profiles.${index}.theme.selection`)
+
+        if (background) {
+          store.set(`profiles.${index}.theme.selectionBackground`, background);
+          store.delete(`profiles.${index}.theme.selection`);
+        }
+      })
+    },
+    '5.0.0': store => {
+      (store.store.profiles || []).forEach((profile, index) => {
+        const background = store.get(`profiles.${index}.theme.selection`)
+
+        if (background) {
+          store.set(`profiles.${index}.theme.selectionBackground`, background);
+          store.delete(`profiles.${index}.theme.selection`);
+        }
+      })
+    },
     '3.0.0': store => {
       const filePath = join(homedir(), '.archipelago.json');
       if (fs.existsSync(filePath)) {

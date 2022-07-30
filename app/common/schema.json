@@ -159,7 +159,7 @@
             "scope": "xterm",
             "settings": {"title": "theme"},
             "properties": {
-              "selection": {
+              "selectionBackground": {
                 "type": "string",
                 "color": true,
                 "default": "rgba(151, 151, 155, 0.2)",
