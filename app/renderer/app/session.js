@@ -65,9 +65,7 @@ export default class Session {
     defaultSettings.fontWeightBold = 'bold';
     defaultSettings.lineHeight = 1;
     defaultSettings.letterSpacing = '0';
-    defaultSettings.bellStyle = 'sound';
     defaultSettings.tabStopWidth = 8;
-    defaultSettings.bellSound = bellSound;
     defaultSettings.allowProposedApi = true;
 
     return defaultSettings;
@@ -193,6 +191,10 @@ export default class Session {
     });
   }
 
+  onBell(callback) {
+    return this.xterm.onBell(callback);
+  }
+
   onBinary(callback) {
     return this.xterm.onBinary(callback);
   }
@@ -243,6 +245,7 @@ export default class Session {
     this.subscriptions.add(this.onBinary(data => {
       ipc.send(`pty-write-${this.id}`, data);
     }));
+    this.subscriptions.add(this.onBell(() => bellSound.play()));
     this.subscriptions.add(this.onFocus(this.fit.bind(this)));
     this.subscriptions.add(this.onSelection(this.copySelection.bind(this)));
     this.subscriptions.add(new Disposable(ipc.answerMain('active-profile-changed', this.onActiveProfileChange.bind(this))));
