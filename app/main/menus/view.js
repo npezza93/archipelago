@@ -1,13 +1,13 @@
 import {app} from 'electron';
 
 let devMenus = [];
-if (!app.isPackaged) {
+// if (!app.isPackaged) {
   devMenus = [
     {role: 'reload', accelerator: 'Cmd+R'},
     {role: 'forcereload', accelerator: 'Cmd+Shift+R'},
     {role: 'toggledevtools', accelerator: 'Cmd+Alt+I'},
   ];
-}
+// }
 
 export default {
   label: 'View',

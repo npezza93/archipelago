@@ -67,6 +67,7 @@ export default class Session {
     defaultSettings.letterSpacing = '0';
     defaultSettings.tabStopWidth = 8;
     defaultSettings.allowProposedApi = true;
+    defaultSettings.logLevel = 'debug'
 
     return defaultSettings;
   }
