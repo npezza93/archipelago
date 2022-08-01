@@ -56,7 +56,7 @@
     "xterm-addon-fit": "^0.6.0-beta.14",
     "xterm-addon-ligatures": "^0.6.0-beta.18",
     "xterm-addon-web-links": "^0.7.0-beta.3",
-    "xterm-addon-webgl": "^0.13.0-beta.30"
+    "xterm-addon-webgl": "^0.13.0-beta.32"
   },
   "devDependencies": {
     "@npezza93/spectron": "21.0.0",
