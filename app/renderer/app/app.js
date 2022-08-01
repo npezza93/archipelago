@@ -1,7 +1,7 @@
 /* global window, document */
 
 import {ipcRenderer as ipc} from 'electron-better-ipc';
-import { debounce } from 'throttle-debounce';
+import debounce from '../../common/debounce';
 import {Disposable, CompositeDisposable} from 'event-kit';
 import CurrentProfile from '../utils/current-profile';
 import Session from './session';
@@ -24,7 +24,7 @@ const resetCssSettings = () => {
   }
 };
 
-const fit = () => debounce(50, session.fit.bind(session))();
+const fit = () => debounce(session.fit.bind(session), 50)();
 
 const close = async () => {
   await session.kill();
