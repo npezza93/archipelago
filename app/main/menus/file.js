@@ -12,7 +12,9 @@ export default createWindow => ({
       accelerator: 'Cmd+W',
       click(item, focusedWindow) {
         if (focusedWindow) {
-          focusedWindow.webContents.send('close-via-menu');
+          const ipc = require('electron-better-ipc').ipcMain;
+
+          ipc.callRenderer(focusedWindow, 'close-via-menu')
         }
       },
     },

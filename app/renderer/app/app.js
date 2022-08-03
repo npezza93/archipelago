@@ -45,8 +45,7 @@ ipc.answerMain('showing', () => {
 });
 
 window.addEventListener('resize', fit);
-ipc.on('close-via-menu', close);
-subscriptions.add(new Disposable(() => ipc.removeListener('close-via-menu', close)));
+subscriptions.add(new Disposable(ipc.answerMain('close-via-menu', close)));
 subscriptions.add(new Disposable(ipc.answerMain('setting-changed', settingChanged)));
 subscriptions.add(new Disposable(ipc.answerMain('active-profile-changed', resetCssSettings)));
 subscriptions.add(session.onExit(close));

@@ -1,12 +1,20 @@
-import {nativeTheme} from 'electron';
+import {nativeTheme, app} from 'electron';
 import {makeWindow} from '../utils';
+import {ipcMain as ipc} from 'electron-better-ipc';
+import {join} from 'path';
 
 let aboutWindow = null;
 const windowOptions = {
   width: 300,
   height: 500,
   backgroundColor: nativeTheme.shouldUseDarkColors ? '#393736' : '#F5F5F5',
+  webPreferences: {
+    preload: join(__dirname, "../preload/about.js")
+  }
 };
+ipc.answerRenderer('version', () => {
+  return app.getVersion()
+});
 
 export default {
   toggle() {

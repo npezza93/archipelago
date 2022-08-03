@@ -2,6 +2,7 @@ import {BrowserWindow, app} from 'electron';
 import Color from 'color';
 import {ipcMain as ipc} from 'electron-better-ipc';
 import {enable} from '@electron/remote/main';
+import {join} from 'path';
 
 export const argbBackground = (profileManager, property) => {
   const color = new Color(profileManager.get(property));

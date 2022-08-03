@@ -45,7 +45,7 @@ app.register('profile', ProfileController);
 app.register('profile-capturer', ProfileCapturerController);
 app.register('profile-actions', ProfileActionsController);
 
-ipc.on('close-via-menu', window.close);
+ipc.answerMain('close-via-menu', window.close);
 
 window.addEventListener('blur', () => document.body.dataset.focus = 'false');
 window.addEventListener('focus', () => document.body.dataset.focus = 'true');
