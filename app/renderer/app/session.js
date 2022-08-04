@@ -231,9 +231,9 @@ export default class Session {
   }
 
   bindListeners() {
-    // this.webLinksAddon = new WebLinksAddon((event, uri) => shell.openExternal(uri));
+    this.webLinksAddon = new WebLinksAddon((event, uri) => shell.openExternal(uri));
 
-    // this.xterm.loadAddon(this.webLinksAddon);
+    this.xterm.loadAddon(this.webLinksAddon);
     this.xterm.attachCustomKeyEventHandler(this.keybindingHandler.bind(this));
 
     ipc.on(`pty-data-${this.id}`, this.writePtyData.bind(this));
