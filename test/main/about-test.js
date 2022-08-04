@@ -4,13 +4,7 @@ const path = require('path');
 const {Application} = require('@npezza93/spectron');
 const {assert} = require('chai');
 
-let electron = './node_modules/electron/dist/';
-
-electron = {
-  darwin: electron + 'Electron.app/Contents/MacOS/Electron',
-  linux: electron + 'electron',
-  win32: electron,
-}[process.platform];
+let electron = './node_modules/electron/dist/Electron.app/Contents/MacOS/Electron'
 
 describe('About', function () {
   this.timeout(10_000);

@@ -7,6 +7,7 @@ import template from './app-menu';
 import ptyManager from './pty-manager';
 import {argbBackground, makeWindow} from './utils';
 import {initialize} from '@electron/remote/main';
+import about from './windows/about';
 
 initialize()
 
@@ -30,19 +31,23 @@ const resetAppMenu = () =>
   );
 
 const createWindow = () => {
-  const win = makeWindow(process.env.PAGE || 'app', {
-    width: 1000,
-    backgroundColor: argbBackground(profileManager, 'theme.background'),
-    vibrancy: profileManager.get('vibrancy'),
-  });
-  if (!profileManager.get('hideContextMenu')) {
-    contextMenu({
-      window: win,
-      shouldShowMenu: (event, parameters) => parameters.isEditable,
+  if (process.env.PAGE === "about") {
+    about.toggle()
+  } else {
+    const win = makeWindow(process.env.PAGE || 'app', {
+      width: 1000,
+      backgroundColor: argbBackground(profileManager, 'theme.background'),
+      vibrancy: profileManager.get('vibrancy'),
     });
-  }
+    if (!profileManager.get('hideContextMenu')) {
+      contextMenu({
+        window: win,
+        shouldShowMenu: (event, parameters) => parameters.isEditable,
+      });
+    }
 
-  windows.push(win);
+    windows.push(win);
+  }
 };
 
 app.on('ready', () => {
