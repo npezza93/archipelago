@@ -12,9 +12,8 @@ const windowOptions = {
     preload: join(__dirname, "../preload/about.js")
   }
 };
-ipc.answerRenderer('version', () => {
-  return app.getVersion()
-});
+
+ipc.answerRenderer('version', app.getVersion)
 
 export default {
   toggle() {
