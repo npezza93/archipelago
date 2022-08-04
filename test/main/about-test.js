@@ -36,7 +36,7 @@ describe('About', function () {
   }));
 
   it('displays the current app version', async () => {
-    const currentVersion = await this.app.electron.remote.app.getVersion();
+    const currentVersion = await this.app.electron.ipc.callMain("version")
     const element = await this.app.client.$('#version');
     await element.waitForDisplayed();
     const text = await element.getText();
