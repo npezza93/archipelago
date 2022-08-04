@@ -1,7 +1,9 @@
-import {nativeTheme, app} from 'electron';
+import {nativeTheme} from 'electron';
 import {makeWindow} from '../utils';
 import {ipcMain as ipc} from 'electron-better-ipc';
 import {join} from 'path';
+
+const {version} = require("../../../package.json");
 
 let aboutWindow = null;
 const windowOptions = {
@@ -13,7 +15,7 @@ const windowOptions = {
   }
 };
 
-ipc.answerRenderer('version', app.getVersion)
+ipc.answerRenderer('version', () => version)
 
 export default {
   toggle() {
