@@ -110,8 +110,8 @@ export default class Session {
   }
 
   resetTheme() {
-    this.xterm.setOption('allowTransparency', this.settings().allowTransparency);
-    this.xterm.setOption('theme', this.settings().theme);
+    this.xterm.options.allowTransparency = this.settings().allowTransparency;
+    this.xterm.options.theme = this.settings().theme;
   }
 
   async kill() {
@@ -210,7 +210,7 @@ export default class Session {
 
   onSettingChanged({property, value}) {
     if (this.currentProfile.xtermSettings.includes(property)) {
-      this.xterm.setOption(property, value);
+      this.xterm.options[property] = value;
     } else if (property === 'keybindings') {
       this.resetKeymaps();
     } else if (property.startsWith('theme.')) {
@@ -220,9 +220,9 @@ export default class Session {
 
   onActiveProfileChange() {
     this.resetKeymaps();
-    this.xterm.setOption('allowTransparency', this.settings().allowTransparency);
+    this.xterm.options.allowTransparency = this.settings().allowTransparency;
     for (const property in this.settings()) {
-      this.xterm.setOption(property, this.settings()[property]);
+      this.xterm.options[property] = this.settings()[property];
     }
   }
 
