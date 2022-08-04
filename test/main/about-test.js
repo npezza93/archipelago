@@ -3,6 +3,7 @@
 const path = require('path');
 const {Application} = require('@npezza93/spectron');
 const {assert} = require('chai');
+const json = require("../../package.json");
 
 let electron = './node_modules/electron/dist/Electron.app/Contents/MacOS/Electron'
 
@@ -36,11 +37,10 @@ describe('About', function () {
   }));
 
   it('displays the current app version', async () => {
-    const currentVersion = await this.app.electron.ipc.callMain("version")
     const element = await this.app.client.$('#version');
     await element.waitForDisplayed();
     const text = await element.getText();
 
-    assert.equal(text, `v${currentVersion}`);
+    assert.equal(text, `v${json.version}`);
   });
 });
