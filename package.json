@@ -60,7 +60,7 @@
   "devDependencies": {
     "@npezza93/spectron": "21.0.0",
     "chai": "^4.3.4",
-    "electron": "^19.0.10",
+    "electron": "^20.0.2",
     "electron-builder": "^23.3.0",
     "electron-mocha": "^11.0.2",
     "electron-notarize": "^1.2.1",
