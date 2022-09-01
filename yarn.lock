@@ -3503,10 +3503,10 @@ xterm-addon-webgl@^0.13.0-beta.35:
   resolved "https://registry.yarnpkg.com/xterm-addon-webgl/-/xterm-addon-webgl-0.13.0-beta.35.tgz#98b5dc102583120de25c7c6e0f35cd34ab6bef98"
   integrity sha512-powgeb3ifEZK7zWwLJuE8YRz/Z0UzDrrVA9NTx9mH7+vWxrGt9ZgroychoeCqZBvKMofiUM5vlf1oWdSmsMfzw==
 
-xterm@^5.0.0-beta.35:
-  version "5.0.0-beta.35"
-  resolved "https://registry.yarnpkg.com/xterm/-/xterm-5.0.0-beta.35.tgz#3bbf5780c98aaaa6476e7590dff1d8f5014fce9d"
-  integrity sha512-tzJTel1E/FmB0VQDb44xApVB+ln+BifIbHD4V9x9Z3D9m1cMmPHy8J8efdILkn1TxXGlCl7VC35nG122Qq5exw==
+xterm@^5.0.0-beta.51:
+  version "5.0.0-beta.51"
+  resolved "https://registry.yarnpkg.com/xterm/-/xterm-5.0.0-beta.51.tgz#9edb3315be936fd8a96974990a9cdbe81b7ad63a"
+  integrity sha512-TEn+l31irho9JtXsacpxlhf5jeB/JbGC69GYbz0Nvo9jXxisAReeB7iP1JktuKtPw/SGAIikl3jtRnJbANWJ8Q==
 
 y18n@^5.0.5:
   version "5.0.8"
