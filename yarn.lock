@@ -3480,10 +3480,10 @@ xterm-addon-canvas@^0.2.0-beta.17:
   resolved "https://registry.yarnpkg.com/xterm-addon-canvas/-/xterm-addon-canvas-0.2.0-beta.17.tgz#e84a86530b20bd3edcce16b4566f346cd186ab4d"
   integrity sha512-2ukPdCA92VTFYQRE56ylzvI3cfaQYDWd/Mc4jlEItI6sV/EA5RnUbbP+2sFIx0JlmHK6nVYXXNY2p6QRB7MRew==
 
-xterm-addon-fit@^0.6.0-beta.16:
-  version "0.6.0-beta.16"
-  resolved "https://registry.yarnpkg.com/xterm-addon-fit/-/xterm-addon-fit-0.6.0-beta.16.tgz#329cacadf7a1a5445f0c4783e1f19a259663d5a7"
-  integrity sha512-qmF3INSglBrG239T12Ul7VgTZzHeIrJ4tWYbnT/wmaV4xcjzHPHsVVoU+74yO4I2nZnwhrjaGoIwHh3cnOeU6g==
+xterm-addon-fit@^0.6.0-beta.17:
+  version "0.6.0-beta.17"
+  resolved "https://registry.yarnpkg.com/xterm-addon-fit/-/xterm-addon-fit-0.6.0-beta.17.tgz#78d76c099a78f773250e6243d11b74c260f60e32"
+  integrity sha512-R0irkbOh1OSmN6KG7hc2jKsPFHGzkz5uu69Ua46G/OUT7a99n7XxibcZxoV0VVe9SE4FkRu/eH9WF5Fiti5L+w==
 
 xterm-addon-ligatures@^0.6.0-beta.23:
   version "0.6.0-beta.23"
