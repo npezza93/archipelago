@@ -54,7 +54,7 @@
     "xterm-addon-canvas": "^0.2.0-beta.24",
     "xterm-addon-fit": "^0.6.0-beta.17",
     "xterm-addon-ligatures": "^0.6.0-beta.23",
-    "xterm-addon-web-links": "^0.7.0-beta.6",
+    "xterm-addon-web-links": "^0.8.0-beta.1",
     "xterm-addon-webgl": "^0.13.0-beta.53"
   },
   "devDependencies": {
