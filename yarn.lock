@@ -3485,10 +3485,10 @@ xterm-addon-fit@^0.6.0-beta.17:
   resolved "https://registry.yarnpkg.com/xterm-addon-fit/-/xterm-addon-fit-0.6.0-beta.17.tgz#78d76c099a78f773250e6243d11b74c260f60e32"
   integrity sha512-R0irkbOh1OSmN6KG7hc2jKsPFHGzkz5uu69Ua46G/OUT7a99n7XxibcZxoV0VVe9SE4FkRu/eH9WF5Fiti5L+w==
 
-xterm-addon-ligatures@^0.6.0-beta.23:
-  version "0.6.0-beta.23"
-  resolved "https://registry.yarnpkg.com/xterm-addon-ligatures/-/xterm-addon-ligatures-0.6.0-beta.23.tgz#e71b9e2f165883dbff6e17c82e3f39f1e902f6db"
-  integrity sha512-Hom+MBfRE0PxuvZ2C5qdRhTAmBvCYem3AiIbRMraz/kQeBR9O3ZJl4DbEhuXNwrmU9d5A8eUllLJuqNvnlYSbw==
+xterm-addon-ligatures@^0.7.0-beta.1:
+  version "0.7.0-beta.1"
+  resolved "https://registry.yarnpkg.com/xterm-addon-ligatures/-/xterm-addon-ligatures-0.7.0-beta.1.tgz#f9a47f7005eaa0e09ce72be9871d5475903972ea"
+  integrity sha512-Pqb7Dzw55DTsgaCJgohLblfYYn/3JMGhoDxSXRxz0fmOx5AATja4Hax+yBSRqIwdk9xF7449fOGPz9usl3v+xQ==
   dependencies:
     font-finder "^1.1.0"
     font-ligatures "^1.4.1"
