@@ -24,6 +24,13 @@ jobs:
         echo "@npezza93:registry=https://npm.pkg.github.com/" >> .npmrc
         echo "//npm.pkg.github.com/:_authToken=$GITHUB_TOKEN" >> .npmrc
         yarn --link-duplicates --pure-lockfile --ignore-engines
+    - name: Set up secret file
+      env:
+        CSC_LINK: ${{ secrets.CSC_LINK }}
+        CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
+      run: |
+        echo $CSC_LINK >> secrets.txt
+        echo $CSC_KEY_PASSWORD >> secrets.txt
     - name: Build
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
