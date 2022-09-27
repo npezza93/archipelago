@@ -31,4 +31,5 @@ jobs:
         CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
         APPLE_ID: ${{ secrets.APPLE_ID }}
         APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
-      run: yarn dist
+      run: |
+        # yarn electron-packager . Archipelago --platform=darwin --arch=arm64 --icon=build/icon.icns --overwrite --out=dist
