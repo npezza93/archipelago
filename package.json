@@ -47,7 +47,7 @@
     "event-kit": "^2.5.0",
     "font-list": "^1.4.5",
     "@npezza93/keystroke-for-keyboard-event": "^1.2.1",
-    "node-pty": "0.11.0-beta21",
+    "node-pty": "0.11.0-beta23",
     "pref": "^4.0.1",
     "unescape-js": "^1.1.0",
     "update-electron-app": "^2.0.1",

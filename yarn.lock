@@ -2787,10 +2787,10 @@ node-gyp@^9.0.0:
     tar "^6.1.2"
     which "^2.0.2"
 
-node-pty@0.11.0-beta21:
-  version "0.11.0-beta21"
-  resolved "https://registry.yarnpkg.com/node-pty/-/node-pty-0.11.0-beta21.tgz#86e499687991c4927e387d94e2179ce1472243a5"
-  integrity sha512-m5oSAm5TaywoRCH6UIUbB+o1w7OAo6TxNcOFFT7V2AeAkEkCeIf88pkBBBjSifb0GGtEfxCYKrqJUnYxFXZlbg==
+node-pty@0.11.0-beta23:
+  version "0.11.0-beta23"
+  resolved "https://registry.yarnpkg.com/node-pty/-/node-pty-0.11.0-beta23.tgz#f590c5953077708f177b78e1b617bb21e02d5713"
+  integrity sha512-V0bDAZK0sPGExY1WCyiMj0T47bsfX0nnf5L7PCFu3RWung19VvXaOMn+Y8MTbdAmIYv+zlJkPEpZ0isd4sxDYA==
   dependencies:
     nan "^2.14.0"
 
