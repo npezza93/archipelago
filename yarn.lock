@@ -15,7 +15,7 @@
     ajv "^6.12.0"
     ajv-keywords "^3.4.1"
 
-"@electron/get@^1.12.4", "@electron/get@^1.14.1":
+"@electron/get@^1.14.1":
   version "1.14.1"
   resolved "https://registry.yarnpkg.com/@electron/get/-/get-1.14.1.tgz#16ba75f02dffb74c23965e72d617adc721d27f40"
   integrity sha512-BrZYyL/6m0ZXz/lDxy/nlVhQz+WF+iPS6qXolEU8atw7h6v1aYkjwJZ63m+bJMBTxDE66X+r2tPS4a/8C82sZw==
@@ -24,6 +24,22 @@
     env-paths "^2.2.0"
     fs-extra "^8.1.0"
     got "^9.6.0"
+    progress "^2.0.3"
+    semver "^6.2.0"
+    sumchecker "^3.0.1"
+  optionalDependencies:
+    global-agent "^3.0.0"
+    global-tunnel-ng "^2.7.1"
+
+"@electron/get@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@electron/get/-/get-2.0.1.tgz#d960dd4bdbeb44613af7c196231e376ef4c48a6f"
+  integrity sha512-8nmTGC/3/6IaEfeTcQwtJdjLA/L3sb0XQJUv9x3ZfM0pfmKvkSdelbT4pgF3dpCQOvSmJ97kYAvFltikVjfepA==
+  dependencies:
+    debug "^4.1.1"
+    env-paths "^2.2.0"
+    fs-extra "^8.1.0"
+    got "^11.8.5"
     progress "^2.0.3"
     semver "^6.2.0"
     sumchecker "^3.0.1"
@@ -108,14 +124,14 @@
   dependencies:
     "@npezza93/keyboard-layout" "^2.0.19"
 
-"@npezza93/spectron@21.0.0":
-  version "21.0.0"
-  resolved "https://npm.pkg.github.com/download/@npezza93/spectron/21.0.0/ec2e34ba0ef94c8f76a425d1a0ce0d4d1960bb08#ec2e34ba0ef94c8f76a425d1a0ce0d4d1960bb08"
-  integrity sha512-01TwKS0Y1oiDxgUpq8AyK1PZtWFJCs6XT4rYLE8dWM1Xcjs2JjmSUS6tbZuwcoZSLOQ5LhyYifw0QmhemeiY7A==
+"@npezza93/spectron@^22.0.0":
+  version "22.0.0"
+  resolved "https://npm.pkg.github.com/download/@npezza93/spectron/22.0.0/d4314fcf0b82b0edb60b0bd9ac00e1cd189b5c00#d4314fcf0b82b0edb60b0bd9ac00e1cd189b5c00"
+  integrity sha512-NjnMr1rCYLG2bY9XoUxpIo6e8kKRUB7hbSowdpch4zdaoUbNdnxbF1k+5fX+VbTfNgjkXYwMqF6IuduJyhFrzw==
   dependencies:
     "@electron/remote" "2.0.4"
     dev-null "^0.1.1"
-    electron-chromedriver "19.0.0"
+    electron-chromedriver "21.0.0"
     got "^11.8.0"
     split "^1.0.1"
     webdriverio "7.16.13"
@@ -1344,12 +1360,12 @@ electron-builder@^23.3.0:
     update-notifier "^5.1.0"
     yargs "^17.0.1"
 
-electron-chromedriver@19.0.0:
-  version "19.0.0"
-  resolved "https://registry.yarnpkg.com/electron-chromedriver/-/electron-chromedriver-19.0.0.tgz#dce6f53e97406552477d6a55317450500fb03498"
-  integrity sha512-y9OR4hqInuZwApGUCnKeKyEp8of6CvX2+g1qrC2SinR8Z56gZWGPBjWd2yb4nfwhoJ6imC1n4r4Ncti2Lksdyw==
+electron-chromedriver@21.0.0:
+  version "21.0.0"
+  resolved "https://registry.yarnpkg.com/electron-chromedriver/-/electron-chromedriver-21.0.0.tgz#834c4b6ce4ea1de4d4e89f64c03a6230762c6b8a"
+  integrity sha512-5TtPD1kOjvnIcJaEDWReMhHNMAcA4JpjmPA8jyyaCubzm22si0Xf0Uhw3KEgUO3Xq26otk/+TGEGV/nUvGZxPQ==
   dependencies:
-    "@electron/get" "^1.12.4"
+    "@electron/get" "^2.0.1"
     extract-zip "^2.0.0"
 
 electron-context-menu@^3.3.0:
@@ -1853,7 +1869,7 @@ globalthis@^1.0.1:
   dependencies:
     define-properties "^1.1.3"
 
-got@^11.0.2, got@^11.7.0, got@^11.8.0, got@^11.8.1:
+got@^11.0.2, got@^11.7.0, got@^11.8.0, got@^11.8.1, got@^11.8.5:
   version "11.8.5"
   resolved "https://registry.yarnpkg.com/got/-/got-11.8.5.tgz#ce77d045136de56e8f024bebb82ea349bc730046"
   integrity sha512-o0Je4NvQObAuZPHLFoRSkdG2lTgtcynqymzg2Vupdx6PorhaT5MCbIyXG6d4D94kk8ZG57QeosgdiqfJWhEhlQ==

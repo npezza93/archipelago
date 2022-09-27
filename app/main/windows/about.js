@@ -11,6 +11,7 @@ const windowOptions = {
   height: 500,
   backgroundColor: nativeTheme.shouldUseDarkColors ? '#393736' : '#F5F5F5',
   webPreferences: {
+    sandbox: false,
     preload: join(__dirname, "../preload/about.js")
   }
 };
