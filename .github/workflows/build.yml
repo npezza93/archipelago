@@ -31,13 +31,8 @@ jobs:
       run: |
         export CERTIFICATE_P12=cert.p12;
         echo $CSC_LINK | base64 --decode > $CERTIFICATE_P12;
-        export KEYCHAIN=build.keychain;
-        security create-keychain -p archipelago $KEYCHAIN;
-        security default-keychain -s $KEYCHAIN;
-        security unlock-keychain -p archipelago $KEYCHAIN;
-        security import $CERTIFICATE_P12 -k $KEYCHAIN -P $CSC_KEY_PASSWORD -T /usr/bin/codesign 2>&1 >/dev/null;
+        security import $CERTIFICATE_P12 -P $CSC_KEY_PASSWORD -T /usr/bin/codesign 2>&1 >/dev/null;
         rm $CERTIFICATE_P12;
-        security set-key-partition-list -S apple-tool:,apple: -s -k travis $KEYCHAIN
         security find-identity -v -p codesigning
     - name: Build
       env:
