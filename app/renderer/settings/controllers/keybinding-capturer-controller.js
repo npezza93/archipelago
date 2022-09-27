@@ -2,7 +2,7 @@
 
 import {Controller} from '@hotwired/stimulus';
 import {ipcRenderer as ipc} from 'electron-better-ipc';
-import keystrokeForKeyboardEvent from 'keystroke-for-keyboard-event';
+import keystrokeForKeyboardEvent from '@npezza93/keystroke-for-keyboard-event';
 
 import formatAccelerator from '../../utils/format-accelerator';
 

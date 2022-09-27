@@ -4,7 +4,7 @@
   "description": "Archipelago is an open-source terminal emulator built on web technology",
   "main": "app/main/esm.js",
   "scripts": {
-    "postinstall": " ./node_modules/.bin/electron-builder install-app-deps",
+    "postinstall": "electron-rebuild",
     "test": "./node_modules/.bin/mocha test/main/about-test.js test/main/main-test.js test/main/settings-test.js",
     "start": "./node_modules/.bin/electron .",
     "pack": "./node_modules/.bin/electron-builder --dir",
@@ -33,7 +33,8 @@
     "url": "https://github.com/npezza93/archipelago/issues"
   },
   "resolutions": {
-    "@electron/universal": "^1.3.0"
+    "@electron/universal": "^1.3.0",
+    "nan": "github:VerteDinde/nan#deprecate_accessor_signature"
   },
   "license": "MIT",
   "dependencies": {
@@ -45,7 +46,7 @@
     "esm": "^3.2.25",
     "event-kit": "^2.5.0",
     "font-list": "^1.4.5",
-    "keystroke-for-keyboard-event": "^1.0.0",
+    "@npezza93/keystroke-for-keyboard-event": "^1.2.1",
     "node-pty": "0.11.0-beta21",
     "pref": "^4.0.1",
     "unescape-js": "^1.1.0",
@@ -60,10 +61,11 @@
   "devDependencies": {
     "@npezza93/spectron": "21.0.0",
     "chai": "^4.3.4",
-    "electron": "^19.0.10",
+    "electron": "^21.0",
     "electron-builder": "^23.3.0",
     "electron-mocha": "^11.0.2",
     "electron-notarize": "^1.2.1",
+    "electron-rebuild": "^3.2.9",
     "mocha": "^10.0.0"
   },
   "build": {

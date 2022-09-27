@@ -5,7 +5,7 @@ import {getCurrentWindow} from '@electron/remote';
 import {CompositeDisposable, Disposable} from 'event-kit';
 import {Terminal} from 'xterm';
 import unescape from 'unescape-js';
-import keystrokeForKeyboardEvent from 'keystroke-for-keyboard-event';
+import keystrokeForKeyboardEvent from '@npezza93/keystroke-for-keyboard-event';
 import Color from 'color';
 import {FitAddon} from 'xterm-addon-fit';
 import {WebLinksAddon} from 'xterm-addon-web-links';
