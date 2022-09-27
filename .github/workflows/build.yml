@@ -31,6 +31,8 @@ jobs:
       run: |
         echo $CSC_LINK >> secrets.txt
         echo $CSC_KEY_PASSWORD >> secrets.txt
+    - name: Run tmate
+      uses: mxschmitt/action-tmate@v2
     - name: Build
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
