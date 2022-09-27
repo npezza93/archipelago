@@ -50,12 +50,12 @@
     "pref": "^4.0.1",
     "unescape-js": "^1.1.0",
     "update-electron-app": "^2.0.1",
-    "xterm": "^5.0.0-beta.57",
-    "xterm-addon-canvas": "^0.2.0-beta.24",
-    "xterm-addon-fit": "^0.6.0-beta.17",
-    "xterm-addon-ligatures": "^0.6.0-beta.23",
-    "xterm-addon-web-links": "^0.7.0-beta.6",
-    "xterm-addon-webgl": "^0.13.0-beta.53"
+    "xterm": "^5.1.0-beta.13",
+    "xterm-addon-canvas": "^0.3.0-beta.1",
+    "xterm-addon-fit": "^0.7.0-beta.1",
+    "xterm-addon-ligatures": "^0.7.0-beta.1",
+    "xterm-addon-web-links": "^0.8.0-beta.1",
+    "xterm-addon-webgl": "^0.14.0-beta.8"
   },
   "devDependencies": {
     "@npezza93/spectron": "21.0.0",
