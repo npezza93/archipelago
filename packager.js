@@ -33,7 +33,7 @@ packager({
       notarize({
         appPath: `${pathName}/Archipelago.app`,
         appleId: process.env["APPLE_ID"],
-        appleIdPassword: process.env["APPLE_PASSWORD"]
+        appleIdPassword: process.env["APPLE_PASSWORD"],
         appBundleId: "dev.archipelago",
       }).then(() => {
           console.log(`Notarized ${pathName}`)
