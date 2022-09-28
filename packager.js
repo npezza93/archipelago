@@ -7,9 +7,8 @@ packager({
   name: "Archipelago",
   platform: "darwin",
   arch: ["arm64", "x64"],
-  icon: "build/icon.icns",
+  icon: `${process.cwd()}/build/icon.icns`,
   overwrite: true,
-  out: "dist",
   prune: true,
   afterCopy: [(buildPath, electronVersion, platform, arch, callback) => {
     rebuild({ buildPath, electronVersion, arch })
@@ -29,8 +28,9 @@ packager({
   }
 }).then((files) => {
     files.forEach((pathName) => {
-      const file = pathName.split("/")[1]
+      const file = pathName.split("/").pop()
       console.log(`zipping ${pathName}`)
-      execSync(`cd ${pathName} && rm -f ${file}.zip && zip -r --symlinks ${file}.zip Archipelago.app && mv ${file}.zip ../ && cd -`)
+      const cmd = `cd ${pathName} && rm -f ${file}.zip && zip -r --symlinks ${file}.zip Archipelago.app && mv ${file}.zip ../ && cd -`
+      execSync(cmd, {stdio: 'inherit'})
     })
   })
