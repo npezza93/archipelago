@@ -22,6 +22,7 @@ jobs:
       with:
         node-version: '16'
         cache: 'yarn'
+    - run: yarn install --frozen-lockfile
     - name: Setup signing
       env:
         CSC_LINK: ${{ secrets.CSC_LINK }}
