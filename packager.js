@@ -16,10 +16,10 @@ packager({
     'entitlements-inherit': 'build/entitlements.mac.inherit.plist',
     'signature-flags': 'library'
   },
-  // osxNotarize: {
-  //   appleId: process.env["APPLE_ID"],
-  //   appleIdPassword: process.env["APPLE_PASSWORD"]
-  // }
+  osxNotarize: {
+    appleId: process.env["APPLE_ID"],
+    appleIdPassword: process.env["APPLE_PASSWORD"]
+  }
 }).then((files) => {
     files.forEach((file) => {
       console.log(`zipping ${file}`)
