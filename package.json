@@ -7,8 +7,7 @@
     "postinstall": "electron-rebuild",
     "test": "./node_modules/.bin/mocha test/main/about-test.js test/main/main-test.js test/main/settings-test.js",
     "start": "./node_modules/.bin/electron .",
-    "pack": "./node_modules/.bin/electron-builder --dir",
-    "dist": "./node_modules/.bin/electron-builder --publish onTagOrDraft"
+    "dist": "node packager.js"
   },
   "repository": {
     "type": "git",
@@ -67,52 +66,5 @@
     "electron-packager": "^16.0.0",
     "electron-rebuild": "^3.2.9",
     "mocha": "^10.0.0"
-  },
-  "build": {
-    "productName": "Archipelago",
-    "appId": "dev.archipelago",
-    "afterSign": "./after-sign-hook.js",
-    "mac": {
-      "category": "public.app-category.developer-tools",
-      "extendInfo": {
-        "NSRequiresAquaSystemAppearance": false
-      },
-      "type": "distribution",
-      "hardenedRuntime": true,
-      "entitlements": "./build/entitlements.mac.inherit.plist",
-      "target": [
-        {
-          "target": "dmg",
-          "arch": [
-            "x64",
-            "arm64"
-          ]
-        },
-        {
-          "target": "zip",
-          "arch": [
-            "x64",
-            "arm64"
-          ]
-        }
-      ]
-    },
-    "dmg": {
-      "icon": "build/icon.icns",
-      "iconSize": 130,
-      "contents": [
-        {
-          "x": 110,
-          "y": 200,
-          "type": "file"
-        },
-        {
-          "x": 400,
-          "y": 200,
-          "type": "link",
-          "path": "/Applications"
-        }
-      ]
-    }
   }
 }
