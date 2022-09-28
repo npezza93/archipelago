@@ -6,7 +6,7 @@ packager({
   dir: process.cwd(),
   name: "Archipelago",
   platform: "darwin",
-  arch: "x64",
+  arch: "arm64",
   icon: `${process.cwd()}/build/icon.icns`,
   overwrite: true,
   asar: false,
