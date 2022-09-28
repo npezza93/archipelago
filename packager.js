@@ -18,8 +18,8 @@ packager({
   osxSign: {
     identity: 'Developer ID Application: Nick Pezza (4K4322K3MA)',
     'hardened-runtime': true,
-    entitlements: 'build/entitlements.mac.inherit.plist',
-    'entitlements-inherit': 'build/entitlements.mac.inherit.plist',
+    entitlements: `${process.cwd()}/build/entitlements.mac.inherit.plist`,
+    'entitlements-inherit': `${process.cwd()}/build/entitlements.mac.inherit.plist`,
     'signature-flags': 'library'
   },
   osxNotarize: {
