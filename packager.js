@@ -9,17 +9,16 @@ packager({
   arch: ["arm64", "x64"],
   icon: `${process.cwd()}/build/icon.icns`,
   overwrite: true,
-  prune: true,
-  afterCopy: [(buildPath, electronVersion, platform, arch, callback) => {
-    rebuild({ buildPath, electronVersion, arch })
-      .then(() => callback())
-      .catch((error) => callback(error));
+  asar: false,
+  afterCopy: [async (buildPath, electronVersion, platform, arch, callback) => {
+    await rebuild({ buildPath, electronVersion, arch })
+    callback()
   }],
   osxSign: {
     identity: 'Developer ID Application: Nick Pezza (4K4322K3MA)',
     'hardened-runtime': true,
-    entitlements: `${process.cwd()}/build/entitlements.mac.inherit.plist`,
-    'entitlements-inherit': `${process.cwd()}/build/entitlements.mac.inherit.plist`,
+    entitlements: `${process.cwd()}/entitlements.plist`,
+    'entitlements-inherit': `${process.cwd()}/entitlements.plist`,
     'signature-flags': 'library'
   },
   osxNotarize: {

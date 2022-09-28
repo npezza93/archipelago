@@ -50,8 +50,9 @@ jobs:
         APPLE_ID: ${{ secrets.APPLE_ID }}
         APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
       run: |
-        yarn make --arch x64
-        yarn make --arch arm64
+        # yarn make --arch x64
+        # yarn make --arch arm64
+        yarn dist
     - name: Release
       uses: softprops/action-gh-release@v1
       env:
@@ -61,5 +62,5 @@ jobs:
         tag_name: ${{ env.ARCHIPELAGO_VERSION }}
         token: ${{ env.GITHUB_TOKEN }}
         files: |
-          out/make/zip/darwin/arm64/Archipelago-darwin-arm64-5.0.0-beta8.zip
-          out/make/zip/darwin/x64/Archipelago-darwin-x64-5.0.0-beta8.zip
+          Archipelago-darwin-x64.zip
+          Archipelago-darwin-arm64.zip
