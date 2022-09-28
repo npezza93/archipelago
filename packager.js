@@ -36,12 +36,12 @@ packager({
         appleIdPassword: process.env["APPLE_PASSWORD"]
         appBundleId: "dev.archipelago",
       }).then(() => {
-        console.log(`Notarized ${pathName}`)
+          console.log(`Notarized ${pathName}`)
 
-        const file = pathName.split("/").pop()
-        console.log(`Zipping ${pathName}`)
-        const cmd = `cd ${pathName} && rm -f ${file}.zip && zip -r --symlinks ${file}.zip Archipelago.app && mv ${file}.zip ../ && cd -`
-        execSync(cmd, {stdio: 'inherit'})
-      })
+          const file = pathName.split("/").pop()
+          console.log(`Zipping ${pathName}`)
+          const cmd = `cd ${pathName} && rm -f ${file}.zip && zip -r --symlinks ${file}.zip Archipelago.app && mv ${file}.zip ../ && cd -`
+          execSync(cmd, {stdio: 'inherit'})
+        })
     })
   })
