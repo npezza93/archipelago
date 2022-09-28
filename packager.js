@@ -30,6 +30,6 @@ packager({
       const file = pathName.split("/").pop()
       console.log(`zipping ${pathName}`)
       const cmd = `cd ${pathName} && rm -f ${file}.zip && zip -r --symlinks ${file}.zip Archipelago.app && mv ${file}.zip ../ && cd -`
-      execSync(cmd, {stdio: 'inherit'})
+      // execSync(cmd, {stdio: 'inherit'})
     })
   })
