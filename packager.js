@@ -11,9 +11,9 @@ packager({
   overwrite: true,
   prune: true,
   afterCopy: [(buildPath, electronVersion, platform, arch, callback) => {
-    rebuild({ buildPath, electronVersion, arch })
-      .then(() => callback())
-      .catch((error) => callback(error));
+    // rebuild({ buildPath, electronVersion, arch })
+    //   .then(() => callback())
+    //   .catch((error) => callback(error));
   }],
   osxSign: {
     identity: 'Developer ID Application: Nick Pezza (4K4322K3MA)',
