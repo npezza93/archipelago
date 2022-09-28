@@ -1,8 +1,8 @@
 const packager = require('electron-packager')
 const {execSync} = require('child_process')
 const {rebuild} = require('electron-rebuild')
-const { sign } = require('@electron/osx-sign')
-const { notarize } = require('electron-notarize');
+// const { sign } = require('@electron/osx-sign')
+// const { notarize } = require('electron-notarize');
 
 packager({
   dir: process.cwd(),
