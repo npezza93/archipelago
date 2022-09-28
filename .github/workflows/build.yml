@@ -45,6 +45,10 @@ jobs:
         echo "ARCHIPELAGO_VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
         echo "version is: ${GITHUB_REF#refs/tags/}"
     - name: Setup tmate session
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        APPLE_ID: ${{ secrets.APPLE_ID }}
+        APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
       uses: mxschmitt/action-tmate@v3
     - name: Build
       env:
