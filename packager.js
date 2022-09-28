@@ -1,5 +1,6 @@
 const packager = require('electron-packager')
-const {exec} = require('child_process')
+const {execSync} = require('child_process')
+const {rebuild} = require('electron-rebuild')
 
 packager({
   dir: process.cwd(),
@@ -9,6 +10,11 @@ packager({
   icon: "build/icon.icns",
   overwrite: true,
   out: "dist",
+  afterCopy: [(buildPath, electronVersion, platform, arch, callback) => {
+    rebuild({ buildPath, electronVersion, arch })
+      .then(() => callback())
+      .catch((error) => callback(error));
+  }],
   osxSign: {
     identity: 'Developer ID Application: Nick Pezza (4K4322K3MA)',
     'hardened-runtime': true,
@@ -21,8 +27,9 @@ packager({
     appleIdPassword: process.env["APPLE_PASSWORD"]
   }
 }).then((files) => {
-    files.forEach((file) => {
-      console.log(`zipping ${file}`)
-      exec(`rm ${file}.zip; zip -r --symlinks ${file}.zip ${file}/Archipelago.app`)
+    files.forEach((pathName) => {
+      const file = pathName.split("/")[1]
+      console.log(`zipping ${pathName}`)
+      execSync(`cd ${pathName} && rm -f ${file}.zip && zip -r --symlinks ${file}.zip Archipelago.app && mv ${file}.zip ../ && cd -`)
     })
   })
