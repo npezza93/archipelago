@@ -60,6 +60,7 @@
     "xterm-addon-webgl": "^0.14.0-beta.8"
   },
   "devDependencies": {
+    "@electron/osx-sign": "^1.0.1",
     "@npezza93/spectron": "^22.0.0",
     "chai": "^4.3.4",
     "electron": "^21.0",
