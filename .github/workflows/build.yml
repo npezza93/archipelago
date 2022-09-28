@@ -11,23 +11,17 @@ jobs:
     runs-on: macos-12
     steps:
     - uses: actions/checkout@v1
-    - name: Set up Node
-      uses: actions/setup-node@v1
-      with:
-        node-version: '16.x'
-    - uses: actions/cache@v1
-      with:
-        path: ~/.cache/yarn
-        key: ${{ runner.os }}-yarn-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
-        restore-keys: |
-          ${{ runner.os }}-yarn-
-    - name: Install
+    - name: Setup npmrc
       env:
         GITHUB_TOKEN: ${{secrets.GH_PACKAGE_REGISTRY_TOKEN}}
       run: |
         echo "@npezza93:registry=https://npm.pkg.github.com/" >> .npmrc
         echo "//npm.pkg.github.com/:_authToken=$GITHUB_TOKEN" >> .npmrc
-        yarn --link-duplicates --pure-lockfile --ignore-engines
+    - name: Set up Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+        cache: 'yarn'
     - name: Setup signing
       env:
         CSC_LINK: ${{ secrets.CSC_LINK }}
