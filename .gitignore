@@ -7,3 +7,4 @@ dist
 *.tgz
 *.log
 .DS_Store
+Archipelago-darwin-*
