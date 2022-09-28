@@ -15,16 +15,7 @@ packager({
   afterCopy: [async (buildPath, electronVersion, platform, arch, callback) => {
     await rebuild({ buildPath, electronVersion, arch })
     callback()
-  }],
-  // osxSign: {
-  //   entitlements: `${process.cwd()}/entitlements.plist`,
-  //   'entitlements-inherit': `${process.cwd()}/entitlements.plist`,
-  //   'signature-flags': 'library'
-  // },
-  // osxNotarize: {
-  //   appleId: process.env["APPLE_ID"],
-  //   appleIdPassword: process.env["APPLE_PASSWORD"]
-  // }
+  }]
 }).then((files) => {
     files.forEach((pathName) => {
       console.log(`\nSigning ${pathName}`)
@@ -38,9 +29,19 @@ packager({
 
       console.log(`Signed ${pathName}`)
 
-      const file = pathName.split("/").pop()
-      console.log(`Zipping ${pathName}`)
-      const cmd = `cd ${pathName} && rm -f ${file}.zip && zip -r --symlinks ${file}.zip Archipelago.app && mv ${file}.zip ../ && cd -`
-      execSync(cmd, {stdio: 'inherit'})
+      console.log(`Notarizing ${pathName}`)
+      notarize({
+        appPath: `${pathName}/Archipelago.app`,
+        appleId: process.env["APPLE_ID"],
+        appleIdPassword: process.env["APPLE_PASSWORD"]
+        appBundleId: "dev.archipelago",
+      }).then(() => {
+        console.log(`Notarized ${pathName}`)
+
+        const file = pathName.split("/").pop()
+        console.log(`Zipping ${pathName}`)
+        const cmd = `cd ${pathName} && rm -f ${file}.zip && zip -r --symlinks ${file}.zip Archipelago.app && mv ${file}.zip ../ && cd -`
+        execSync(cmd, {stdio: 'inherit'})
+      })
     })
   })
