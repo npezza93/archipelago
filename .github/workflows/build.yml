@@ -44,12 +44,12 @@ jobs:
         # See: https://github.community/t5/GitHub-Actions/How-to-get-just-the-tag-name/m-p/32167/highlight/true#M1027
         echo "ARCHIPELAGO_VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
         echo "version is: ${GITHUB_REF#refs/tags/}"
-    - name: Setup tmate session
-      env:
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        APPLE_ID: ${{ secrets.APPLE_ID }}
-        APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
-      uses: mxschmitt/action-tmate@v3
+    # - name: Setup tmate session
+    #   env:
+    #     GH_TOKEN: ${{ secrets.GH_TOKEN }}
+    #     APPLE_ID: ${{ secrets.APPLE_ID }}
+    #     APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
+    #   uses: mxschmitt/action-tmate@v3
     - name: Build
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
