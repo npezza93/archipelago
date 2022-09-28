@@ -35,7 +35,8 @@
   },
   "resolutions": {
     "@electron/universal": "^1.3.0",
-    "nan": "github:VerteDinde/nan#deprecate_accessor_signature"
+    "nan": "github:VerteDinde/nan#deprecate_accessor_signature",
+    "@electron/osx-sign": "github:skirsdeda/electron-osx-sign#deep_sign"
   },
   "license": "MIT",
   "dependencies": {

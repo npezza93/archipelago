@@ -1,9 +1,9 @@
 name: build
 
-on:
-  push:
-    tags:
-      - '**'
+on: [push]
+  # push:
+  #   tags:
+  #     - '**'
 
 jobs:
   build:
@@ -59,14 +59,14 @@ jobs:
         # yarn make --arch x64
         # yarn make --arch arm64
         yarn dist
-    - name: Release
-      uses: softprops/action-gh-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-      with:
-        draft: true
-        tag_name: ${{ env.ARCHIPELAGO_VERSION }}
-        token: ${{ env.GITHUB_TOKEN }}
-        files: |
-          Archipelago-darwin-x64.zip
-          Archipelago-darwin-arm64.zip
+    # - name: Release
+    #   uses: softprops/action-gh-release@v1
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+    #   with:
+    #     draft: true
+    #     tag_name: ${{ env.ARCHIPELAGO_VERSION }}
+    #     token: ${{ env.GITHUB_TOKEN }}
+    #     files: |
+    #       Archipelago-darwin-x64.zip
+    #       Archipelago-darwin-arm64.zip
