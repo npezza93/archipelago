@@ -10,6 +10,7 @@ packager({
   icon: "build/icon.icns",
   overwrite: true,
   out: "dist",
+  prune: true,
   afterCopy: [(buildPath, electronVersion, platform, arch, callback) => {
     rebuild({ buildPath, electronVersion, arch })
       .then(() => callback())
