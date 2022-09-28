@@ -26,11 +26,17 @@ jobs:
       env:
         CSC_LINK: ${{ secrets.CSC_LINK }}
         CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
+        KEYCHAIN: password
       run: |
         export CERTIFICATE_P12=cert.p12;
         echo $CSC_LINK | base64 --decode > $CERTIFICATE_P12;
-        security import $CERTIFICATE_P12 -P $CSC_KEY_PASSWORD -T /usr/bin/codesign 2>&1 >/dev/null;
+        security create-keychain -p archipelago $KEYCHAIN;
+        security default-keychain -s $KEYCHAIN;
+        security unlock-keychain -p archipelago $KEYCHAIN;
+        security import $CERTIFICATE_P12 -k $KEYCHAIN -P $CSC_KEY_PASSWORD -T /usr/bin/codesign 2>&1 >/dev/null;
         rm $CERTIFICATE_P12;
+        security set-key-partition-list -S apple-tool:,apple: -s -k archipelago $KEYCHAIN
+        security find-identity -v -p codesigning
     - name: Get the release version from the tag
       run: |
         # Apparently, this is the right way to get a tag name. Really?
