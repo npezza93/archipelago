@@ -1,6 +1,8 @@
 name: build
 
-on: [push]
+on:
+  release:
+    types: [created]
 
 jobs:
   build:
@@ -33,11 +35,19 @@ jobs:
         echo $CSC_LINK | base64 --decode > $CERTIFICATE_P12;
         security import $CERTIFICATE_P12 -P $CSC_KEY_PASSWORD -T /usr/bin/codesign 2>&1 >/dev/null;
         rm $CERTIFICATE_P12;
-        security find-identity -v -p codesigning
-    - name: Build
-      env:
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        APPLE_ID: ${{ secrets.APPLE_ID }}
-        APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
+    - name: Create artifacts directory
+      run: mkdir artifacts
+    - name: Get the release version from the tag
       run: |
-      # yarn electron-packager . Archipelago --platform=darwin --arch=arm64 --icon=build/icon.icns --overwrite --out=dist
+        # Apparently, this is the right way to get a tag name. Really?
+        #
+        # See: https://github.community/t5/GitHub-Actions/How-to-get-just-the-tag-name/m-p/32167/highlight/true#M1027
+        echo "ARCHIPELAGO_VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+        echo "version is: ${{ env.ARCHIPELAGO_VERSION }}"
+    # - name: Build
+    #   env:
+    #     GH_TOKEN: ${{ secrets.GH_TOKEN }}
+    #     APPLE_ID: ${{ secrets.APPLE_ID }}
+    #     APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
+    #   run: |
+    #     node packager.js
