@@ -1,9 +1,9 @@
 name: build
 
-on: [push]
-  # push:
-  #   tags:
-  #     - '**'
+on:
+  push:
+    tags:
+      - '**'
 
 jobs:
   build:
@@ -22,51 +22,11 @@ jobs:
         node-version: '16'
         cache: 'yarn'
     - run: yarn install --frozen-lockfile
-    - name: Setup signing
-      env:
-        CSC_LINK: ${{ secrets.CSC_LINK }}
-        CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
-        KEYCHAIN: password
-      run: |
-        export CERTIFICATE_P12=cert.p12;
-        echo $CSC_LINK | base64 --decode > $CERTIFICATE_P12;
-        security create-keychain -p archipelago $KEYCHAIN;
-        security default-keychain -s $KEYCHAIN;
-        security unlock-keychain -p archipelago $KEYCHAIN;
-        security import $CERTIFICATE_P12 -k $KEYCHAIN -P $CSC_KEY_PASSWORD -T /usr/bin/codesign 2>&1 >/dev/null;
-        rm $CERTIFICATE_P12;
-        security set-key-partition-list -S apple-tool:,apple: -s -k archipelago $KEYCHAIN
-        security find-identity -v -p codesigning
-    - name: Get the release version from the tag
-      run: |
-        # Apparently, this is the right way to get a tag name. Really?
-        #
-        # See: https://github.community/t5/GitHub-Actions/How-to-get-just-the-tag-name/m-p/32167/highlight/true#M1027
-        echo "ARCHIPELAGO_VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
-        echo "version is: ${GITHUB_REF#refs/tags/}"
-    # - name: Setup tmate session
-    #   env:
-    #     GH_TOKEN: ${{ secrets.GH_TOKEN }}
-    #     APPLE_ID: ${{ secrets.APPLE_ID }}
-    #     APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
-    #   uses: mxschmitt/action-tmate@v3
     - name: Build
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        CSC_LINK: ${{ secrets.CSC_LINK }}
+        CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
         APPLE_ID: ${{ secrets.APPLE_ID }}
         APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
-      run: |
-        # yarn make --arch x64
-        # yarn make --arch arm64
-        yarn dist
-    # - name: Release
-    #   uses: softprops/action-gh-release@v1
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-    #   with:
-    #     draft: true
-    #     tag_name: ${{ env.ARCHIPELAGO_VERSION }}
-    #     token: ${{ env.GITHUB_TOKEN }}
-    #     files: |
-    #       Archipelago-darwin-x64.zip
-    #       Archipelago-darwin-arm64.zip
+      run: yarn dist

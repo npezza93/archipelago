@@ -4,12 +4,11 @@
   "description": "Archipelago is an open-source terminal emulator built on web technology",
   "main": "app/main/esm.js",
   "scripts": {
-    "postinstall": "electron-rebuild",
+    "postinstall": "./node_modules/.bin/electron-builder install-app-deps",
     "test": "./node_modules/.bin/mocha test/main/about-test.js test/main/main-test.js test/main/settings-test.js",
     "start": "./node_modules/.bin/electron .",
-    "dist": "node packager.js",
-    "package": "electron-forge package",
-    "make": "electron-forge make"
+    "pack": "./node_modules/.bin/electron-builder --dir",
+    "dist": "./node_modules/.bin/electron-builder --publish onTagOrDraft"
   },
   "repository": {
     "type": "git",
@@ -35,8 +34,7 @@
   },
   "resolutions": {
     "@electron/universal": "^1.3.0",
-    "nan": "github:VerteDinde/nan#deprecate_accessor_signature",
-    "@electron/osx-sign": "github:skirsdeda/electron-osx-sign#deep_sign"
+    "nan": "github:VerteDinde/nan#deprecate_accessor_signature"
   },
   "license": "MIT",
   "dependencies": {
@@ -61,17 +59,31 @@
     "xterm-addon-webgl": "^0.14.0-beta.8"
   },
   "devDependencies": {
-    "@electron/osx-sign": "^1.0.1",
     "@npezza93/spectron": "^22.0.0",
     "chai": "^4.3.4",
     "electron": "^21.0",
+    "electron-builder": "^23.3.3",
     "electron-mocha": "^11.0.2",
-    "electron-osx-sign": "^0.6.0",
-    "electron-packager": "^16.0.0",
-    "electron-rebuild": "^3.2.9",
     "mocha": "^10.0.0"
   },
-  "config": {
-    "forge": "./forge.config.js"
+  "build": {
+    "productName": "Archipelago",
+    "appId": "dev.archipelago",
+    "afterSign": "./after-sign-hook.js",
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "extendInfo": {
+        "NSRequiresAquaSystemAppearance": false
+      },
+      "type": "distribution",
+      "hardenedRuntime": true,
+      "entitlements": "./entitlements.plist",
+      "target": [
+        {
+          "target": "zip",
+          "arch": ["x64", "arm64"]
+        }
+      ]
+    }
   }
 }
