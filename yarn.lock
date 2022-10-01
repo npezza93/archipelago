@@ -112,6 +112,13 @@
   dependencies:
     "@npezza93/keyboard-layout" "^2.0.19"
 
+"@npezza93/node-pty@0.11.0":
+  version "0.11.0"
+  resolved "https://npm.pkg.github.com/download/@npezza93/node-pty/0.11.0/8d5cc6fa045372d8f601bcaac3cd49490f313de8#8d5cc6fa045372d8f601bcaac3cd49490f313de8"
+  integrity sha512-1Lqi+a8oto5c3iepAEeFcZwnAgGIAWxJ+gbyHGixEACQryULDPUH1k2/VPRkl9rhE+s1O0gbRkofk+LbQccA5Q==
+  dependencies:
+    nan "^2.14.0"
+
 "@npezza93/spectron@^22.0.0":
   version "22.0.0"
   resolved "https://npm.pkg.github.com/download/@npezza93/spectron/22.0.0/d4314fcf0b82b0edb60b0bd9ac00e1cd189b5c00#d4314fcf0b82b0edb60b0bd9ac00e1cd189b5c00"
@@ -2417,13 +2424,6 @@ node-fetch@2.6.7:
   integrity sha512-ZjMPFEfVx5j+y2yF35Kzx5sF7kDzxuDj6ziH4FFbOp87zKDZNx8yExJIb05OGF4Nlt9IHFIMBkRl41VdvcNdbQ==
   dependencies:
     whatwg-url "^5.0.0"
-
-node-pty@0.11.0-beta23:
-  version "0.11.0-beta23"
-  resolved "https://registry.yarnpkg.com/node-pty/-/node-pty-0.11.0-beta23.tgz#f590c5953077708f177b78e1b617bb21e02d5713"
-  integrity sha512-V0bDAZK0sPGExY1WCyiMj0T47bsfX0nnf5L7PCFu3RWung19VvXaOMn+Y8MTbdAmIYv+zlJkPEpZ0isd4sxDYA==
-  dependencies:
-    nan "^2.14.0"
 
 normalize-path@^3.0.0, normalize-path@~3.0.0:
   version "3.0.0"
