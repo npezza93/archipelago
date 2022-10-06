@@ -67,7 +67,7 @@ export default class Session {
     defaultSettings.letterSpacing = '0';
     defaultSettings.tabStopWidth = 8;
     defaultSettings.allowProposedApi = true;
-    defaultSettings.logLevel = 'debug'
+    // defaultSettings.logLevel = 'debug'
 
     return defaultSettings;
   }
@@ -99,6 +99,7 @@ export default class Session {
       }
 
       this.bindScrollListener();
+      this.fit();
       this.xterm.focus();
       return;
     }
@@ -247,7 +248,6 @@ export default class Session {
       ipc.send(`pty-write-${this.id}`, data);
     }));
     this.subscriptions.add(this.onBell(() => bellSound.play()));
-    this.subscriptions.add(this.onFocus(this.fit.bind(this)));
     this.subscriptions.add(this.onSelection(this.copySelection.bind(this)));
     this.subscriptions.add(new Disposable(ipc.answerMain('active-profile-changed', this.onActiveProfileChange.bind(this))));
     this.subscriptions.add(new Disposable(ipc.answerMain('setting-changed', this.onSettingChanged.bind(this))));
