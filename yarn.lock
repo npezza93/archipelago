@@ -220,14 +220,14 @@
   integrity sha512-iiUgKzV9AuaEkZqkOLDIvlQiL6ltuZd9tGcW3gwpnX8JbuiuhFlEGmmFXEXkN50Cvq7Os88IY2v0dkDqXYWVgA==
 
 "@types/node@*":
-  version "18.8.3"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.8.3.tgz#ce750ab4017effa51aed6a7230651778d54e327c"
-  integrity sha512-0os9vz6BpGwxGe9LOhgP/ncvYN5Tx1fNcd2TM3rD/aCGBkysb+ZWpXEocG24h6ZzOi13+VB8HndAQFezsSOw1w==
+  version "18.8.5"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.8.5.tgz#6a31f820c1077c3f8ce44f9e203e68a176e8f59e"
+  integrity sha512-Bq7G3AErwe5A/Zki5fdD3O6+0zDChhg671NfPjtIcbtzDNZTv4NPKMRFr7gtYPG7y+B8uTiNK4Ngd9T0FTar6Q==
 
 "@types/node@^16.11.26":
-  version "16.11.64"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.11.64.tgz#9171f327298b619e2c52238b120c19056415d820"
-  integrity sha512-z5hPTlVFzNwtJ2LNozTpJcD1Cu44c4LNuzaq1mwxmiHWQh2ULdR6Vjwo1UGldzRpzL0yUEdZddnfqGW2G70z6Q==
+  version "16.11.65"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.11.65.tgz#59500b86af757d6fcabd3dec32fecb6e357d7a45"
+  integrity sha512-Vfz7wGMOr4jbQGiQHVJm8VjeQwM9Ya7mHe9LtQ264/Epf5n1KiZShOFqk++nBzw6a/ubgYdB9Od7P+MH/LjoWw==
 
 "@types/node@^17.0.4":
   version "17.0.45"
@@ -1256,9 +1256,9 @@ electron-window@^0.8.0:
     is-electron-renderer "^2.0.0"
 
 electron@^21.0:
-  version "21.1.0"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-21.1.0.tgz#7272dfe1a5d6a00fd58d17b26215e541b6ff10dd"
-  integrity sha512-CM5VZpZPtAoPgTPcmEbRaZWXlxGuD5a5DTeAwm0F0F6/k6R3HZAi8vZnE77gwuHK/Qqcinw4/MAbiCwAKh2W+g==
+  version "21.1.1"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-21.1.1.tgz#3ee427e31cccafbce45bebd32f2a8eba9e3399ca"
+  integrity sha512-EM2hvRJtiS3n54yx25Z0Qv54t3LGG+WjUHf1AOl+PKjQj+fmXnjIgVeIF9pM21kP1BTcyjrgvN6Sff0A45OB6A==
   dependencies:
     "@electron/get" "^1.14.1"
     "@types/node" "^16.11.26"
@@ -3214,9 +3214,9 @@ xmlbuilder@>=11.0.1, xmlbuilder@^15.1.1:
   integrity sha512-yMqGBqtXyeN1e3TGYvgNgDVZ3j84W4cwkOXQswghol6APgZWaff9lnbvN7MHYJOiXsvGPXtjTYJEiC9J2wv9Eg==
 
 xterm-addon-canvas@^0.3.0-beta.2:
-  version "0.3.0-beta.13"
-  resolved "https://registry.yarnpkg.com/xterm-addon-canvas/-/xterm-addon-canvas-0.3.0-beta.13.tgz#6fd23f4c8d4d013a540cb8ff1e4965ff6bf248b5"
-  integrity sha512-gNl2wG5zv5AttbTs1OgMRFcARs/dt0k2snFpMmrnaTKlgpi3S0k+Sh3C4nbdMuqbCZd+n7gtpAYP+F6ZXC1pdA==
+  version "0.3.0-beta.18"
+  resolved "https://registry.yarnpkg.com/xterm-addon-canvas/-/xterm-addon-canvas-0.3.0-beta.18.tgz#b8c27693ab1ed282d6cce961e03d431e4e25e96a"
+  integrity sha512-0HUptjmZtlH6IqQPtSu9r7yJKPoif4dVv0hSk5m80N5oXFg0I6xlYIRtKAyV/gHZPBxOK2GXzCA4i0P4armUtw==
 
 xterm-addon-fit@^0.7.0-beta.1:
   version "0.7.0-beta.1"
@@ -3242,9 +3242,9 @@ xterm-addon-webgl@^0.14.0-beta.24:
   integrity sha512-80cvTLbCvJJ6kHmftcENgszzSlfFVdaDpiwnaTPLAAWGCoYDaU9ubQwwjKiRDFtMPolop+ZEqhs4pOxtTbruSA==
 
 xterm@^5.1.0-beta.35:
-  version "5.1.0-beta.35"
-  resolved "https://registry.yarnpkg.com/xterm/-/xterm-5.1.0-beta.35.tgz#c1f8248fcaa188e110e65e419f5eff946f138766"
-  integrity sha512-I5p7BwHObaAbkoOyJNwKNlmytEtAoQmR4xvYDBb5Ci4q4MM6bGtCvDnXKccOVRE787F0y4Ip6ZRJ0M1+Q+6z2w==
+  version "5.1.0-beta.37"
+  resolved "https://registry.yarnpkg.com/xterm/-/xterm-5.1.0-beta.37.tgz#6a294d134eb5bd6860e2804b7674fd0c94bdcb41"
+  integrity sha512-qG63IOVLqfcSVU1IBdzEI1Ap1/NcvfewdT3FlK5qQaAN53y/tg1dMOQbql6id8TZJs4Olwfm9KF6J4YbPmSQxA==
 
 y18n@^5.0.5:
   version "5.0.8"
