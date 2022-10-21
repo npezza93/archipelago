@@ -64,7 +64,7 @@
     "electron": "^21.0",
     "electron-builder": "^23.3.3",
     "electron-mocha": "^11.0.2",
-    "electron-notarize": "^1.2.1",
+    "electron-notarize": "^1.2.2",
     "mocha": "^10.0.0"
   },
   "build": {
