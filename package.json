@@ -38,7 +38,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@electron/remote": "^2.0.8",
+    "@electron/remote": "^2.0.9",
     "@hotwired/stimulus": "^3.1.0",
     "@npezza93/keystroke-for-keyboard-event": "^1.2.1",
     "@npezza93/node-pty": "0.11.0",
