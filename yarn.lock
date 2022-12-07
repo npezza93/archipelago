@@ -130,14 +130,14 @@
   dependencies:
     nan "^2.14.0"
 
-"@npezza93/spectron@^22.0.0":
-  version "22.0.0"
-  resolved "https://npm.pkg.github.com/download/@npezza93/spectron/22.0.0/d4314fcf0b82b0edb60b0bd9ac00e1cd189b5c00#d4314fcf0b82b0edb60b0bd9ac00e1cd189b5c00"
-  integrity sha512-NjnMr1rCYLG2bY9XoUxpIo6e8kKRUB7hbSowdpch4zdaoUbNdnxbF1k+5fX+VbTfNgjkXYwMqF6IuduJyhFrzw==
+"@npezza93/spectron@^23.0.0":
+  version "23.0.0"
+  resolved "https://npm.pkg.github.com/download/@npezza93/spectron/23.0.0/59ae2eef361f0a95f2dd5ec2632f868a309ac691#59ae2eef361f0a95f2dd5ec2632f868a309ac691"
+  integrity sha512-YkBXSdUWDzpkMIl6GSBTr1EGEZRxCfD3QWBHgjVcGWxQ4E/uhipuOTOMeM6qtCs/+oGcLg0gthvnLKH3NCSfuw==
   dependencies:
     "@electron/remote" "2.0.4"
     dev-null "^0.1.1"
-    electron-chromedriver "21.0.0"
+    electron-chromedriver "22.0.0"
     got "^11.8.0"
     split "^1.0.1"
     webdriverio "7.16.13"
@@ -1110,10 +1110,10 @@ electron-builder@^23.3.3:
     simple-update-notifier "^1.0.7"
     yargs "^17.5.1"
 
-electron-chromedriver@21.0.0:
-  version "21.0.0"
-  resolved "https://registry.yarnpkg.com/electron-chromedriver/-/electron-chromedriver-21.0.0.tgz#834c4b6ce4ea1de4d4e89f64c03a6230762c6b8a"
-  integrity sha512-5TtPD1kOjvnIcJaEDWReMhHNMAcA4JpjmPA8jyyaCubzm22si0Xf0Uhw3KEgUO3Xq26otk/+TGEGV/nUvGZxPQ==
+electron-chromedriver@22.0.0:
+  version "22.0.0"
+  resolved "https://registry.yarnpkg.com/electron-chromedriver/-/electron-chromedriver-22.0.0.tgz#4602b3b01a6b114532548623e64e78671d78a9b2"
+  integrity sha512-wmdwgm8DhINdLLhQpCC7PkSI114DNhpnnzjIlso7jahxImxfDGMSFaIBj6t4b7wfNCqHHr609O4CxUOpDuEMcA==
   dependencies:
     "@electron/get" "^2.0.1"
     extract-zip "^2.0.0"
