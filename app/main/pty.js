@@ -8,8 +8,6 @@ export default class Pty {
   constructor(profileManager) {
     this.id = Math.random();
     this.profileManager = profileManager;
-    this.bufferedData = '';
-    this.bufferTimeout = null;
 
     this.pty = spawn(
       this.shell,
@@ -49,7 +47,7 @@ export default class Pty {
     this.pty.onExit(() => {
       this.sessionWindow.webContents.send(`pty-exit-${this.sessionId}`);
     });
-    this.pty.onData(data => this.bufferData(data));
+    this.pty.onData(data => this.sessionWindow.webContents.send(`pty-data-${this.sessionId}`, data));
   }
 
   onExit(callback) {
@@ -84,16 +82,5 @@ export default class Pty {
 
   handleResize(event, {cols, rows}) {
     this.resize(cols, rows);
-  }
-
-  bufferData(data) {
-    this.bufferedData += data;
-    if (!this.bufferTimeout) {
-      this.bufferTimeout = debounce(() => {
-        this.sessionWindow.webContents.send(`pty-data-${this.sessionId}`, this.bufferedData);
-        this.bufferedData = '';
-        this.bufferTimeout = null;
-      }, 2)();
-    }
   }
 }
