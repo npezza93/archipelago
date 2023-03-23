@@ -212,14 +212,14 @@
   integrity sha512-iiUgKzV9AuaEkZqkOLDIvlQiL6ltuZd9tGcW3gwpnX8JbuiuhFlEGmmFXEXkN50Cvq7Os88IY2v0dkDqXYWVgA==
 
 "@types/node@*":
-  version "18.11.18"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.11.18.tgz#8dfb97f0da23c2293e554c5a50d61ef134d7697f"
-  integrity sha512-DHQpWGjyQKSHj3ebjFI/wRKcqQcdR+MoFBygntYOZytCqNfkd2ZC4ARDJ2DQqhjH5p85Nnd3jhUJIXrszFX/JA==
+  version "18.15.5"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.15.5.tgz#3af577099a99c61479149b716183e70b5239324a"
+  integrity sha512-Ark2WDjjZO7GmvsyFFf81MXuGTA/d6oP38anyxWOL6EREyBKAxKoFHwBhaZxCfLRLpO8JgVXwqOwSwa7jRcjew==
 
 "@types/node@^16.11.26":
-  version "16.18.11"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.18.11.tgz#cbb15c12ca7c16c85a72b6bdc4d4b01151bb3cae"
-  integrity sha512-3oJbGBUWuS6ahSnEq1eN2XrCyf4YsWI8OyCvo7c64zQJNplk3mO84t53o8lfTk+2ji59g5ycfc6qQ3fdHliHuA==
+  version "16.18.18"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.18.18.tgz#06cb0eeb5a0175d26d99b7acf4db613ca30cb07f"
+  integrity sha512-fwGw1uvQAzabxL1pyoknPlJIF2t7+K90uTqynleKRx24n3lYcxWa3+KByLhgkF8GEAK2c7hC8Ki0RkNM5H15jQ==
 
 "@types/node@^17.0.4":
   version "17.0.45"
@@ -954,9 +954,9 @@ defer-to-connect@^2.0.0:
   integrity sha512-4tvttepXG1VaYGrRibk5EwJd1t4udunSOVMdLSAL6mId1ix438oPwPZMALY41FCijukO1L0twNcGsdzS7dHgDg==
 
 define-properties@^1.1.3:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/define-properties/-/define-properties-1.1.4.tgz#0b14d7bd7fbeb2f3572c3a7eda80ea5d57fb05b1"
-  integrity sha512-uckOqKcfaVvtBdsVkdPv3XjveQJsNQqmhXgRi8uhvWWuPYZCNlzT8qAyblUgNoXdHdjMTzAqeGjAoli8f+bzPA==
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/define-properties/-/define-properties-1.2.0.tgz#52988570670c9eacedd8064f4a990f2405849bd5"
+  integrity sha512-xvqAVKGfT1+UAvPwKTVw/njhdQ8ZhXK4lI0bCIuCMrp2up9nPnaDftrLtmpTazqd1o+UY4zgzU+avtMbDP+ldA==
   dependencies:
     has-property-descriptors "^1.0.0"
     object-keys "^1.1.1"
@@ -1192,9 +1192,9 @@ electron-window@^0.8.0:
     is-electron-renderer "^2.0.0"
 
 electron@^22.0:
-  version "22.2.0"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-22.2.0.tgz#1aa321415d8b8021a4b0807641f0ad56028feaf5"
-  integrity sha512-puRZSF2vWJ4pz3oetL5Td8LcuivTWz3MoAk/gjImHSN1B/2VJNEQlw1jGdkte+ppid2craOswE2lmCOZ7SwF1g==
+  version "22.3.3"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-22.3.3.tgz#eab84cfcfde2f3d5848ba5f9849b49f84d8d3a4c"
+  integrity sha512-+ZJDVfyhw7J2A46/kGKscktIhzOisTeJKrUBJLXa7PTB+U+cwyoxCBIaIOnDsdicBCX4nAc1mo6YMQjQQdAmgw==
   dependencies:
     "@electron/get" "^2.0.0"
     "@types/node" "^16.11.26"
@@ -1575,10 +1575,15 @@ got@^11.8.5:
     p-cancelable "^2.0.0"
     responselike "^2.0.0"
 
-graceful-fs@^4.1.11, graceful-fs@^4.1.6, graceful-fs@^4.2.0:
+graceful-fs@^4.1.11:
   version "4.2.10"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.10.tgz#147d3a006da4ca3ce14728c7aefc287c367d7a6c"
   integrity sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==
+
+graceful-fs@^4.1.6, graceful-fs@^4.2.0:
+  version "4.2.11"
+  resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.11.tgz#4183e4e8bf08bb6e05bbb2f7d2e0c8f712ca40e3"
+  integrity sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==
 
 grapheme-splitter@^1.0.2:
   version "1.0.4"
@@ -3086,9 +3091,9 @@ xmlbuilder@>=11.0.1, xmlbuilder@^15.1.1:
   integrity sha512-yMqGBqtXyeN1e3TGYvgNgDVZ3j84W4cwkOXQswghol6APgZWaff9lnbvN7MHYJOiXsvGPXtjTYJEiC9J2wv9Eg==
 
 xterm-addon-canvas@^0.4.0-beta.1:
-  version "0.4.0-beta.7"
-  resolved "https://registry.yarnpkg.com/xterm-addon-canvas/-/xterm-addon-canvas-0.4.0-beta.7.tgz#ae365d8e10c900292186529f70f7f275ac94b3d5"
-  integrity sha512-r1hbQTsulI49orR5G3qWrJCwn2dKsEUCrgj6xsmgXuTeoUcGfed6lly+MvYlL3P8aPrxS2fC2TEzSM0Au4SX+w==
+  version "0.4.0-beta.8"
+  resolved "https://registry.yarnpkg.com/xterm-addon-canvas/-/xterm-addon-canvas-0.4.0-beta.8.tgz#58980d7c673b5d3f58ef6a1e175091a2ff950f56"
+  integrity sha512-Q3pnmo7qiNYfFHN/Jpijn92TyFPu6qlhQKCOFT9DqPGgzt9pftJZJIY59HhuQhwFybqxSqj7waMYA+F0FZ7ZtQ==
 
 xterm-addon-fit@^0.7.0:
   version "0.7.0"
@@ -3109,14 +3114,14 @@ xterm-addon-web-links@^0.9.0-beta.1:
   integrity sha512-h9hr4KZI2XYUuuxgRtR8Cd9Pj3nzR+kts55bsuiY7eW5Wsm4Bo/YUmnaYR0XiCaw3I2gl9E6oZ70vJle0ZBnrQ==
 
 xterm-addon-webgl@^0.15.0-beta.1:
-  version "0.15.0-beta.6"
-  resolved "https://registry.yarnpkg.com/xterm-addon-webgl/-/xterm-addon-webgl-0.15.0-beta.6.tgz#a99233349b9eaec31df798a312906fe73fb3dc33"
-  integrity sha512-PMEkAT4UFL4Ei222uiHPMdVG3fRQAfS5JuZl9FfRVw0V4qMKHvZxBrZELytVfSgLNGBuPu2z7feeZIFEWQGlhA==
+  version "0.15.0-beta.7"
+  resolved "https://registry.yarnpkg.com/xterm-addon-webgl/-/xterm-addon-webgl-0.15.0-beta.7.tgz#ab247b499f61e8eebff92e08ec5ca999d87e06af"
+  integrity sha512-7WCI/D6uFNp3y9TeTsbSo1h7gCy4h/yP2lWn8ZEjCaiGvO11DbKMq17fbiwaR3YmGWXoRKkcLaNIiqxFnjKO4w==
 
 xterm@^5.2.0-beta.1:
-  version "5.2.0-beta.26"
-  resolved "https://registry.yarnpkg.com/xterm/-/xterm-5.2.0-beta.26.tgz#9b45e481e10ce6c21b34cb36f7c2b2006ec7a136"
-  integrity sha512-+jp492Ein/xO+nGjZz0CwAYeyUAK5LoH7N1U5w3HGVjYMLZu/Y/Ql5FO+ax/QrrM3Ob+Rw2JNrTuhMQmIZMIMg==
+  version "5.2.0-beta.31"
+  resolved "https://registry.yarnpkg.com/xterm/-/xterm-5.2.0-beta.31.tgz#38815d2539e49bb67956108e81e15a0367dd71a3"
+  integrity sha512-caUKKy0BdKCFVp2h/sfs0eFsOB/h1NkPA/S1RGkH93kxG950omL7LBMROCo5Q9pVuz5VjqypCBG4IqqN60ldjg==
 
 y18n@^5.0.5:
   version "5.0.8"
