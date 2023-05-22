@@ -4,3 +4,7 @@ callMain("version").then((version) => {
   document.querySelector('#version').textContent = `v${version}`;
 });
 answerMain('close-via-menu', window.close);
+
+document.addEventListener('mousedown', (e) => {
+  electron.setOffset([e.clientX, e.clientY]);
+})
