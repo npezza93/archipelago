@@ -8,8 +8,8 @@
 		<link rel="stylesheet" href="./header.css">
 		<link rel="stylesheet" href="./choices.css">
 	</head>
-	<body data-controller="tabs">
-    <header>
+  <body data-controller="tabs drag-header">
+    <header data-action="mousedown->drag-header#dragging">
       <h1>Preferences</h1>
       <div class="heading-bar">
         <div class="heading" data-action="click->tabs#change" data-value="text">

@@ -1,6 +1,8 @@
 /* global window, document */
 
 import {ipcRenderer as ipc} from 'electron-better-ipc';
+import mouseConstructor from 'osx-mouse';
+import {getCurrentWindow} from '@electron/remote';
 import debounce from '../../common/debounce';
 import {Disposable, CompositeDisposable} from 'event-kit';
 import CurrentProfile from '../utils/current-profile';
@@ -42,6 +44,30 @@ resetCssSettings();
 
 ipc.answerMain('showing', () => {
   session.attach(document.querySelector('archipelago-terminal'));
+  const mouse = mouseConstructor();
+  let offset = null;
+  let dragging = false;
+
+  document.addEventListener('mousedown', (e) => {
+    if (dragging || (!dragging && e.clientY <= 35)) {
+      dragging = true;
+      offset = [e.clientX, e.clientY];
+    }
+  })
+
+  mouse.on('left-drag', (x, y) => {
+    if (!offset) return
+
+    x = Math.round(x - offset[0])
+    y = Math.round(y - offset[1])
+
+    getCurrentWindow().setPosition(x + 0, y + 0)
+  })
+
+  mouse.on('left-up', () => {
+    offset = null;
+    dragging = false;
+  });
 });
 
 window.addEventListener('resize', fit);
@@ -53,5 +79,6 @@ subscriptions.add(session.onExit(close));
 window.addEventListener('beforeunload', () => {
   subscriptions.dispose();
   session.kill();
+  mouse.destroy();
   window.removeEventListener('resize', fit);
 });

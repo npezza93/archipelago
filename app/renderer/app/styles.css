@@ -66,8 +66,6 @@ archipelago-terminal, archipelago-terminal .wrapper {
 }
 
 header {
-  -webkit-user-select: none;
-  -webkit-app-region: drag;
   position: fixed;
   top: 0;
   left: 0;

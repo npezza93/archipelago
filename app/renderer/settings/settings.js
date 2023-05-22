@@ -5,6 +5,7 @@ import {Application} from '@hotwired/stimulus';
 
 import CurrentProfile from '../utils/current-profile';
 
+import DragHeaderController from './controllers/drag-header-controller';
 import TabsController from './controllers/tabs-controller';
 import FontsController from './controllers/fonts-controller';
 import RadioController from './controllers/radio-controller';
@@ -28,6 +29,7 @@ require('electron').ipcRenderer.setMaxListeners(50);
 window.currentProfile = new CurrentProfile();
 const app = Application.start();
 
+app.register('drag-header', DragHeaderController);
 app.register('tabs', TabsController);
 app.register('fonts', FontsController);
 app.register('radio', RadioController);
