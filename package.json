@@ -63,7 +63,7 @@
     "@npezza93/spectron": "^24.0.0",
     "chai": "^4.3.4",
     "electron": "^24.3",
-    "electron-builder": "^23.3.3",
+    "electron-builder": "^24.4.0",
     "electron-mocha": "^11.0.2",
     "electron-notarize": "^1.2.1",
     "mocha": "^10.0.0"
