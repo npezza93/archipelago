@@ -6,7 +6,7 @@
   <p align="center">
     Archipelago is an open-source terminal emulator built on web technology.
     <br>
-    <a href="https://archipelago-terminal.herokuapp.com/download">Download now!</a>
+    <a href="https://github.com/npezza93/archipelago/releases/download/v5.1.0/Archipelago-5.1.0-arm64-mac.zip">Download now!</a>
   </p>
 </p>
 
