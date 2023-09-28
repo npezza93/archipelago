@@ -4,9 +4,9 @@ on: [push]
 
 jobs:
   test:
-    runs-on: macos-12
+    runs-on: macos-13
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Setup npmrc
       env:
         GITHUB_TOKEN: ${{secrets.GH_PACKAGE_REGISTRY_TOKEN}}
@@ -16,7 +16,7 @@ jobs:
     - name: Set up Node
       uses: actions/setup-node@v3
       with:
-        node-version: '16'
+        node-version: '18'
         cache: 'yarn'
     - run: yarn install --frozen-lockfile
     - name: Test
