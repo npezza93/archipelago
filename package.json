@@ -33,12 +33,11 @@
     "url": "https://github.com/npezza93/archipelago/issues"
   },
   "resolutions": {
-    "@electron/universal": "^1.3.4",
-    "nan": "^2.17.0"
+    "@electron/universal": "^1.4.0"
   },
   "license": "MIT",
   "dependencies": {
-    "@electron/remote": "^2.0.8",
+    "@electron/remote": "^2.0.11",
     "@hotwired/stimulus": "^3.1.0",
     "@npezza93/keystroke-for-keyboard-event": "^1.2.1",
     "color": "^4.2.3",
@@ -47,22 +46,22 @@
     "esm": "^3.2.25",
     "event-kit": "^2.5.0",
     "font-list": "^1.4.5",
-    "node-pty": "0.11.0-beta32",
+    "node-pty": "^1.1.0-beta4",
     "osx-mouse": "^2.0.0",
     "pref": "^4.0.1",
     "unescape-js": "^1.1.0",
     "update-electron-app": "^2.0.1",
-    "xterm": "^5.2.0-beta.49",
-    "xterm-addon-canvas": "^0.4.0-beta.1",
-    "xterm-addon-fit": "^0.7.0",
-    "xterm-addon-ligatures": "^0.7.0-beta.1",
-    "xterm-addon-web-links": "^0.9.0-beta.1",
-    "xterm-addon-webgl": "^0.15.0-beta.1"
+    "xterm": "^5.4.0-beta.28",
+    "xterm-addon-canvas": "^0.6.0-beta.28",
+    "xterm-addon-fit": "^0.9.0-beta.28",
+    "xterm-addon-ligatures": "^0.8.0-beta.27",
+    "xterm-addon-web-links": "^0.10.0-beta.27",
+    "xterm-addon-webgl": "^0.17.0-beta.27"
   },
   "devDependencies": {
     "@npezza93/spectron": "^24.0.0",
     "chai": "^4.3.4",
-    "electron": "^24.3",
+    "electron": "^25.0",
     "electron-builder": "^23.3.3",
     "electron-mocha": "^11.0.2",
     "electron-notarize": "^1.2.1",
