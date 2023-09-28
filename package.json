@@ -59,7 +59,7 @@
     "xterm-addon-webgl": "^0.17.0-beta.27"
   },
   "devDependencies": {
-    "@npezza93/spectron": "^24.0.0",
+    "@npezza93/spectron": "^25.0.0",
     "chai": "^4.3.4",
     "electron": "^25.0",
     "electron-builder": "^23.3.3",

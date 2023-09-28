@@ -107,14 +107,14 @@
   dependencies:
     "@npezza93/keyboard-layout" "^2.0.19"
 
-"@npezza93/spectron@^24.0.0":
-  version "24.0.0"
-  resolved "https://npm.pkg.github.com/download/@npezza93/spectron/24.0.0/f00b0669c6504524331e2f20be4268b35ec20902#f00b0669c6504524331e2f20be4268b35ec20902"
-  integrity sha512-I6PGpac4O3+DBfyxkK0HNMvSr3Gxf+uTSADDW0lGFANy0fOrQ8PtVE1fNzkrbhkjEYAO9IDQYGX9XXbUynCCTw==
+"@npezza93/spectron@^25.0.0":
+  version "25.0.0"
+  resolved "https://npm.pkg.github.com/download/@npezza93/spectron/25.0.0/3901abd3c744d28c8b62eef2e8a326888d55bcdb#3901abd3c744d28c8b62eef2e8a326888d55bcdb"
+  integrity sha512-cn/Z2icSlcN68dxdcdnZxNmaLVaFK4tgo/gqim68NEWUAmG9UfgqKfeOj3ZdNB9PaYjA4YR6iE8lqckW+FuEdA==
   dependencies:
     "@electron/remote" "2.0.4"
     dev-null "^0.1.1"
-    electron-chromedriver "24.0.0"
+    electron-chromedriver "^25.0"
     got "^11.8.0"
     split "^1.0.1"
     webdriverio "7.16.13"
@@ -1088,10 +1088,10 @@ electron-builder@^23.3.3:
     simple-update-notifier "^1.0.7"
     yargs "^17.5.1"
 
-electron-chromedriver@24.0.0:
-  version "24.0.0"
-  resolved "https://registry.yarnpkg.com/electron-chromedriver/-/electron-chromedriver-24.0.0.tgz#cbff68664cc2b79339eb485081740c2551fe68c6"
-  integrity sha512-fmSWOX7H1MzIbuDfJbdpnoCsqcy5XKiPYKpnAIFg3FpXZ/G1BMVh6mg+VhrVol8jTmQUXEAsssq75VYbgDI9Ew==
+electron-chromedriver@^25.0:
+  version "25.8.3"
+  resolved "https://registry.yarnpkg.com/electron-chromedriver/-/electron-chromedriver-25.8.3.tgz#8312f14296023120674e88486ed3fc96c6fcb421"
+  integrity sha512-yGMagDHcPJJa9G/btGSB0oKDDy4yANHWyv/mrcsgDXnkUjTexmm+Q6juYC9kA7GtUKI2XIs6cvY1QRJJicyUPg==
   dependencies:
     "@electron/get" "^2.0.1"
     extract-zip "^2.0.0"
