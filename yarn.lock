@@ -1112,10 +1112,10 @@ electron-is-dev@^2.0.0:
   resolved "https://registry.yarnpkg.com/electron-is-dev/-/electron-is-dev-2.0.0.tgz#833487a069b8dad21425c67a19847d9064ab19bd"
   integrity sha512-3X99K852Yoqu9AcW50qz3ibYBWY79/pBhlMCab8ToEWS48R0T9tyxRiQhwylE7zQdXrMnx2JKqUJyMPmt5FBqA==
 
-electron-mocha@^12.0.1:
-  version "12.0.1"
-  resolved "https://registry.yarnpkg.com/electron-mocha/-/electron-mocha-12.0.1.tgz#7418070734c5bd4b8a7825d7bf0dc6d734b38356"
-  integrity sha512-0XjvrLVfnudbHnR6gDUVvC0ljJHVsN7GVzUFo28pQLUQPKGdZzyPwW6G+xaVnOhFLlNrpKs+TmbtIS+4+gbyfw==
+electron-mocha@^12.1.0:
+  version "12.1.0"
+  resolved "https://registry.yarnpkg.com/electron-mocha/-/electron-mocha-12.1.0.tgz#a10e9bb57bee466f98021fd082f77a01cf483c09"
+  integrity sha512-9ZIvyHGbet4ZtvF2NYYjGm7/yPljnTxbHo8psVX/HQAFPp9vZE0mCNWlzwE42keq/42gBW6W40MtKmgn1v42hQ==
   dependencies:
     ansi-colors "^4.1.1"
     electron-window "^0.8.0"
