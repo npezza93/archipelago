@@ -46,7 +46,7 @@
     "esm": "^3.2.25",
     "event-kit": "^2.5.0",
     "font-list": "^1.4.5",
-    "node-pty": "^1.1.0-beta4",
+    "node-pty": "^1.1.0-beta5",
     "osx-mouse": "^2.0.0",
     "pref": "^4.0.1",
     "unescape-js": "^1.1.0",
