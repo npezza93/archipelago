@@ -1,0 +1,597 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		011B14412ADE1664000822F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011B14402ADE1664000822F4 /* AppDelegate.swift */; };
+		011B14432ADE1664000822F4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011B14422ADE1664000822F4 /* ViewController.swift */; };
+		011B14452ADE1664000822F4 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011B14442ADE1664000822F4 /* Document.swift */; };
+		011B14472ADE1665000822F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 011B14462ADE1665000822F4 /* Assets.xcassets */; };
+		011B144A2ADE1665000822F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 011B14482ADE1665000822F4 /* Main.storyboard */; };
+		011B14562ADE1665000822F4 /* archipelago2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011B14552ADE1665000822F4 /* archipelago2Tests.swift */; };
+		011B14602ADE1665000822F4 /* archipelago2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011B145F2ADE1665000822F4 /* archipelago2UITests.swift */; };
+		011B14622ADE1665000822F4 /* archipelago2UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011B14612ADE1665000822F4 /* archipelago2UITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		011B14522ADE1665000822F4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 011B14352ADE1664000822F4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 011B143C2ADE1664000822F4;
+			remoteInfo = archipelago2;
+		};
+		011B145C2ADE1665000822F4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 011B14352ADE1664000822F4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 011B143C2ADE1664000822F4;
+			remoteInfo = archipelago2;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		011B143D2ADE1664000822F4 /* archipelago2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = archipelago2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		011B14402ADE1664000822F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		011B14422ADE1664000822F4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		011B14442ADE1664000822F4 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
+		011B14462ADE1665000822F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		011B14492ADE1665000822F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		011B144B2ADE1665000822F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		011B144C2ADE1665000822F4 /* archipelago2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = archipelago2.entitlements; sourceTree = "<group>"; };
+		011B14512ADE1665000822F4 /* archipelago2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = archipelago2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		011B14552ADE1665000822F4 /* archipelago2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = archipelago2Tests.swift; sourceTree = "<group>"; };
+		011B145B2ADE1665000822F4 /* archipelago2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = archipelago2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		011B145F2ADE1665000822F4 /* archipelago2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = archipelago2UITests.swift; sourceTree = "<group>"; };
+		011B14612ADE1665000822F4 /* archipelago2UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = archipelago2UITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		011B143A2ADE1664000822F4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		011B144E2ADE1665000822F4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		011B14582ADE1665000822F4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		011B14342ADE1664000822F4 = {
+			isa = PBXGroup;
+			children = (
+				011B143F2ADE1664000822F4 /* archipelago2 */,
+				011B14542ADE1665000822F4 /* archipelago2Tests */,
+				011B145E2ADE1665000822F4 /* archipelago2UITests */,
+				011B143E2ADE1664000822F4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		011B143E2ADE1664000822F4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				011B143D2ADE1664000822F4 /* archipelago2.app */,
+				011B14512ADE1665000822F4 /* archipelago2Tests.xctest */,
+				011B145B2ADE1665000822F4 /* archipelago2UITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		011B143F2ADE1664000822F4 /* archipelago2 */ = {
+			isa = PBXGroup;
+			children = (
+				011B14402ADE1664000822F4 /* AppDelegate.swift */,
+				011B14422ADE1664000822F4 /* ViewController.swift */,
+				011B14442ADE1664000822F4 /* Document.swift */,
+				011B14462ADE1665000822F4 /* Assets.xcassets */,
+				011B14482ADE1665000822F4 /* Main.storyboard */,
+				011B144B2ADE1665000822F4 /* Info.plist */,
+				011B144C2ADE1665000822F4 /* archipelago2.entitlements */,
+			);
+			path = archipelago2;
+			sourceTree = "<group>";
+		};
+		011B14542ADE1665000822F4 /* archipelago2Tests */ = {
+			isa = PBXGroup;
+			children = (
+				011B14552ADE1665000822F4 /* archipelago2Tests.swift */,
+			);
+			path = archipelago2Tests;
+			sourceTree = "<group>";
+		};
+		011B145E2ADE1665000822F4 /* archipelago2UITests */ = {
+			isa = PBXGroup;
+			children = (
+				011B145F2ADE1665000822F4 /* archipelago2UITests.swift */,
+				011B14612ADE1665000822F4 /* archipelago2UITestsLaunchTests.swift */,
+			);
+			path = archipelago2UITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		011B143C2ADE1664000822F4 /* archipelago2 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 011B14652ADE1665000822F4 /* Build configuration list for PBXNativeTarget "archipelago2" */;
+			buildPhases = (
+				011B14392ADE1664000822F4 /* Sources */,
+				011B143A2ADE1664000822F4 /* Frameworks */,
+				011B143B2ADE1664000822F4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = archipelago2;
+			productName = archipelago2;
+			productReference = 011B143D2ADE1664000822F4 /* archipelago2.app */;
+			productType = "com.apple.product-type.application";
+		};
+		011B14502ADE1665000822F4 /* archipelago2Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 011B14682ADE1665000822F4 /* Build configuration list for PBXNativeTarget "archipelago2Tests" */;
+			buildPhases = (
+				011B144D2ADE1665000822F4 /* Sources */,
+				011B144E2ADE1665000822F4 /* Frameworks */,
+				011B144F2ADE1665000822F4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				011B14532ADE1665000822F4 /* PBXTargetDependency */,
+			);
+			name = archipelago2Tests;
+			productName = archipelago2Tests;
+			productReference = 011B14512ADE1665000822F4 /* archipelago2Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		011B145A2ADE1665000822F4 /* archipelago2UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 011B146B2ADE1665000822F4 /* Build configuration list for PBXNativeTarget "archipelago2UITests" */;
+			buildPhases = (
+				011B14572ADE1665000822F4 /* Sources */,
+				011B14582ADE1665000822F4 /* Frameworks */,
+				011B14592ADE1665000822F4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				011B145D2ADE1665000822F4 /* PBXTargetDependency */,
+			);
+			name = archipelago2UITests;
+			productName = archipelago2UITests;
+			productReference = 011B145B2ADE1665000822F4 /* archipelago2UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		011B14352ADE1664000822F4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					011B143C2ADE1664000822F4 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+					011B14502ADE1665000822F4 = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = 011B143C2ADE1664000822F4;
+					};
+					011B145A2ADE1665000822F4 = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = 011B143C2ADE1664000822F4;
+					};
+				};
+			};
+			buildConfigurationList = 011B14382ADE1664000822F4 /* Build configuration list for PBXProject "archipelago2" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 011B14342ADE1664000822F4;
+			productRefGroup = 011B143E2ADE1664000822F4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				011B143C2ADE1664000822F4 /* archipelago2 */,
+				011B14502ADE1665000822F4 /* archipelago2Tests */,
+				011B145A2ADE1665000822F4 /* archipelago2UITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		011B143B2ADE1664000822F4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				011B14472ADE1665000822F4 /* Assets.xcassets in Resources */,
+				011B144A2ADE1665000822F4 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		011B144F2ADE1665000822F4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		011B14592ADE1665000822F4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		011B14392ADE1664000822F4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				011B14432ADE1664000822F4 /* ViewController.swift in Sources */,
+				011B14412ADE1664000822F4 /* AppDelegate.swift in Sources */,
+				011B14452ADE1664000822F4 /* Document.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		011B144D2ADE1665000822F4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				011B14562ADE1665000822F4 /* archipelago2Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		011B14572ADE1665000822F4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				011B14602ADE1665000822F4 /* archipelago2UITests.swift in Sources */,
+				011B14622ADE1665000822F4 /* archipelago2UITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		011B14532ADE1665000822F4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 011B143C2ADE1664000822F4 /* archipelago2 */;
+			targetProxy = 011B14522ADE1665000822F4 /* PBXContainerItemProxy */;
+		};
+		011B145D2ADE1665000822F4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 011B143C2ADE1664000822F4 /* archipelago2 */;
+			targetProxy = 011B145C2ADE1665000822F4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		011B14482ADE1665000822F4 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				011B14492ADE1665000822F4 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		011B14632ADE1665000822F4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		011B14642ADE1665000822F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		011B14662ADE1665000822F4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = archipelago2/archipelago2.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4K4322K3MA;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = archipelago2/Info.plist;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = co.pezza.archipelago2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		011B14672ADE1665000822F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = archipelago2/archipelago2.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4K4322K3MA;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = archipelago2/Info.plist;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = co.pezza.archipelago2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		011B14692ADE1665000822F4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4K4322K3MA;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = co.pezza.archipelago2Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/archipelago2.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/archipelago2";
+			};
+			name = Debug;
+		};
+		011B146A2ADE1665000822F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4K4322K3MA;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = co.pezza.archipelago2Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/archipelago2.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/archipelago2";
+			};
+			name = Release;
+		};
+		011B146C2ADE1665000822F4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4K4322K3MA;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = co.pezza.archipelago2UITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = archipelago2;
+			};
+			name = Debug;
+		};
+		011B146D2ADE1665000822F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4K4322K3MA;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = co.pezza.archipelago2UITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = archipelago2;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		011B14382ADE1664000822F4 /* Build configuration list for PBXProject "archipelago2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				011B14632ADE1665000822F4 /* Debug */,
+				011B14642ADE1665000822F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		011B14652ADE1665000822F4 /* Build configuration list for PBXNativeTarget "archipelago2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				011B14662ADE1665000822F4 /* Debug */,
+				011B14672ADE1665000822F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		011B14682ADE1665000822F4 /* Build configuration list for PBXNativeTarget "archipelago2Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				011B14692ADE1665000822F4 /* Debug */,
+				011B146A2ADE1665000822F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		011B146B2ADE1665000822F4 /* Build configuration list for PBXNativeTarget "archipelago2UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				011B146C2ADE1665000822F4 /* Debug */,
+				011B146D2ADE1665000822F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 011B14352ADE1664000822F4 /* Project object */;
+}
