@@ -1,0 +1,35 @@
+{
+  "name": "Archipelago",
+  "version": "6.0.0",
+  "description": "Archipelago is an open-source terminal emulator",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/npezza93/archipelago.git"
+  },
+  "keywords": [
+    "archipelago",
+    "terminal",
+    "xterm"
+  ],
+  "author": {
+    "name": "Nick Pezza",
+    "email": "pezza@hey.com"
+  },
+  "homepage": "https://github.com/npezza93/archipelago",
+  "bugs": {
+    "url": "https://github.com/npezza93/archipelago/issues"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@hotwired/stimulus": "^3.1.0",
+    "@hotwired/strada": "^1.0.0-beta1",
+    "color": "^4.2.3",
+    "event-kit": "^2.5.3",
+    "unescape-js": "^1.1.0",
+    "xterm": "^5.4.0-beta.28",
+    "xterm-addon-fit": "^0.9.0-beta.28",
+    "xterm-addon-ligatures": "^0.8.0-beta.27",
+    "xterm-addon-web-links": "^0.10.0-beta.27",
+    "xterm-addon-webgl": "^0.17.0-beta.27"
+  }
+}
