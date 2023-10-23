@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		01108D8E2ADE2ADB00603FBF /* Strada in Frameworks */ = {isa = PBXBuildFile; productRef = 01108D8D2ADE2ADB00603FBF /* Strada */; };
-		01108D922ADE2F5600603FBF /* application-done.js in Resources */ = {isa = PBXBuildFile; fileRef = 01108D912ADE2F5600603FBF /* application-done.js */; };
+		01108D922ADE2F5600603FBF /* application.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 01108D912ADE2F5600603FBF /* application.min.js */; };
 		01108D942AE0AE8D00603FBF /* WKWebViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01108D932AE0AE8D00603FBF /* WKWebViewConfiguration.swift */; };
 		01108D962AE4C23E00603FBF /* Pty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01108D952AE4C23E00603FBF /* Pty.swift */; };
 		011B14412ADE1664000822F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011B14402ADE1664000822F4 /* AppDelegate.swift */; };
@@ -46,7 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		01108D912ADE2F5600603FBF /* application-done.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = "application-done.js"; path = "archipelago2/WebView/application-done.js"; sourceTree = SOURCE_ROOT; };
+		01108D912ADE2F5600603FBF /* application.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = application.min.js; path = archipelago2/WebView/application.min.js; sourceTree = SOURCE_ROOT; };
 		01108D932AE0AE8D00603FBF /* WKWebViewConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKWebViewConfiguration.swift; sourceTree = "<group>"; };
 		01108D952AE4C23E00603FBF /* Pty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pty.swift; sourceTree = "<group>"; };
 		011B143D2ADE1664000822F4 /* archipelago2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = archipelago2.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -167,7 +167,7 @@
 		0166EE5A2AE55C6500061485 /* WebView */ = {
 			isa = PBXGroup;
 			children = (
-				01108D912ADE2F5600603FBF /* application-done.js */,
+				01108D912ADE2F5600603FBF /* application.min.js */,
 				011B14742ADE17BD000822F4 /* index.html */,
 				0166EE5B2AE56F8C00061485 /* index.css */,
 				0166EE5F2AE70D5F00061485 /* about.html */,
@@ -286,7 +286,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01108D922ADE2F5600603FBF /* application-done.js in Resources */,
+				01108D922ADE2F5600603FBF /* application.min.js in Resources */,
 				011B14772ADE1A7A000822F4 /* Main.storyboard in Resources */,
 				011B14752ADE17BD000822F4 /* index.html in Resources */,
 				0166EE622AE70DD800061485 /* about.css in Resources */,
