@@ -19,13 +19,11 @@
 		011B14562ADE1665000822F4 /* archipelago2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011B14552ADE1665000822F4 /* archipelago2Tests.swift */; };
 		011B14602ADE1665000822F4 /* archipelago2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011B145F2ADE1665000822F4 /* archipelago2UITests.swift */; };
 		011B14622ADE1665000822F4 /* archipelago2UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011B14612ADE1665000822F4 /* archipelago2UITestsLaunchTests.swift */; };
-		011B146F2ADE1774000822F4 /* Terminal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011B146E2ADE1774000822F4 /* Terminal.swift */; };
-		011B14712ADE178E000822F4 /* PtyDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011B14702ADE178E000822F4 /* PtyDelegate.swift */; };
-		011B14732ADE17A6000822F4 /* PtyHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011B14722ADE17A6000822F4 /* PtyHelpers.swift */; };
 		011B14752ADE17BD000822F4 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 011B14742ADE17BD000822F4 /* index.html */; };
 		011B14772ADE1A7A000822F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 011B14762ADE1A7A000822F4 /* Main.storyboard */; };
 		011B14B42ADE23BB000822F4 /* BridgeComponent+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011B14B32ADE23BB000822F4 /* BridgeComponent+App.swift */; };
 		011B14B62ADE23EF000822F4 /* TerminalComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011B14B52ADE23EF000822F4 /* TerminalComponent.swift */; };
+		0166EE5C2AE56F8C00061485 /* styles.css in Resources */ = {isa = PBXBuildFile; fileRef = 0166EE5B2AE56F8C00061485 /* styles.css */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,8 +44,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		01108D8F2ADE2F4C00603FBF /* node_modules */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = node_modules; sourceTree = SOURCE_ROOT; };
-		01108D912ADE2F5600603FBF /* application-done.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "application-done.js"; sourceTree = SOURCE_ROOT; };
+		01108D8F2ADE2F4C00603FBF /* node_modules */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = folder; name = node_modules; path = archipelago2/WebView/node_modules; sourceTree = SOURCE_ROOT; };
+		01108D912ADE2F5600603FBF /* application-done.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = "application-done.js"; path = "archipelago2/WebView/application-done.js"; sourceTree = SOURCE_ROOT; };
 		01108D932AE0AE8D00603FBF /* WKWebViewConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKWebViewConfiguration.swift; sourceTree = "<group>"; };
 		01108D952AE4C23E00603FBF /* Pty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pty.swift; sourceTree = "<group>"; };
 		011B143D2ADE1664000822F4 /* archipelago2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = archipelago2.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,13 +60,12 @@
 		011B145B2ADE1665000822F4 /* archipelago2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = archipelago2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		011B145F2ADE1665000822F4 /* archipelago2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = archipelago2UITests.swift; sourceTree = "<group>"; };
 		011B14612ADE1665000822F4 /* archipelago2UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = archipelago2UITestsLaunchTests.swift; sourceTree = "<group>"; };
-		011B146E2ADE1774000822F4 /* Terminal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Terminal.swift; sourceTree = "<group>"; };
-		011B14702ADE178E000822F4 /* PtyDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PtyDelegate.swift; sourceTree = "<group>"; };
-		011B14722ADE17A6000822F4 /* PtyHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PtyHelpers.swift; sourceTree = "<group>"; };
 		011B14742ADE17BD000822F4 /* index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		011B14762ADE1A7A000822F4 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		011B14B32ADE23BB000822F4 /* BridgeComponent+App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BridgeComponent+App.swift"; sourceTree = "<group>"; };
 		011B14B52ADE23EF000822F4 /* TerminalComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalComponent.swift; sourceTree = "<group>"; };
+		0166EE592AE55B4C00061485 /* archipelago2Release.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = archipelago2Release.entitlements; sourceTree = "<group>"; };
+		0166EE5B2AE56F8C00061485 /* styles.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = styles.css; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +117,8 @@
 		011B143F2ADE1664000822F4 /* archipelago2 */ = {
 			isa = PBXGroup;
 			children = (
+				0166EE5A2AE55C6500061485 /* WebView */,
+				0166EE592AE55B4C00061485 /* archipelago2Release.entitlements */,
 				011B14B22ADE23A7000822F4 /* Strada */,
 				011B14402ADE1664000822F4 /* AppDelegate.swift */,
 				011B14422ADE1664000822F4 /* ViewController.swift */,
@@ -127,13 +126,7 @@
 				011B14462ADE1665000822F4 /* Assets.xcassets */,
 				011B144B2ADE1665000822F4 /* Info.plist */,
 				011B144C2ADE1665000822F4 /* archipelago2.entitlements */,
-				011B146E2ADE1774000822F4 /* Terminal.swift */,
-				011B14702ADE178E000822F4 /* PtyDelegate.swift */,
-				011B14722ADE17A6000822F4 /* PtyHelpers.swift */,
-				011B14742ADE17BD000822F4 /* index.html */,
-				01108D912ADE2F5600603FBF /* application-done.js */,
 				011B14762ADE1A7A000822F4 /* Main.storyboard */,
-				01108D8F2ADE2F4C00603FBF /* node_modules */,
 				01108D932AE0AE8D00603FBF /* WKWebViewConfiguration.swift */,
 				01108D952AE4C23E00603FBF /* Pty.swift */,
 			);
@@ -164,6 +157,17 @@
 				011B14B52ADE23EF000822F4 /* TerminalComponent.swift */,
 			);
 			path = Strada;
+			sourceTree = "<group>";
+		};
+		0166EE5A2AE55C6500061485 /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				01108D912ADE2F5600603FBF /* application-done.js */,
+				01108D8F2ADE2F4C00603FBF /* node_modules */,
+				011B14742ADE17BD000822F4 /* index.html */,
+				0166EE5B2AE56F8C00061485 /* styles.css */,
+			);
+			path = WebView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -279,6 +283,7 @@
 				01108D922ADE2F5600603FBF /* application-done.js in Resources */,
 				011B14772ADE1A7A000822F4 /* Main.storyboard in Resources */,
 				011B14752ADE17BD000822F4 /* index.html in Resources */,
+				0166EE5C2AE56F8C00061485 /* styles.css in Resources */,
 				01108D902ADE2F4C00603FBF /* node_modules in Resources */,
 				011B14472ADE1665000822F4 /* Assets.xcassets in Resources */,
 			);
@@ -306,13 +311,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				011B14432ADE1664000822F4 /* ViewController.swift in Sources */,
-				011B146F2ADE1774000822F4 /* Terminal.swift in Sources */,
 				011B14412ADE1664000822F4 /* AppDelegate.swift in Sources */,
-				011B14732ADE17A6000822F4 /* PtyHelpers.swift in Sources */,
 				01108D942AE0AE8D00603FBF /* WKWebViewConfiguration.swift in Sources */,
 				01108D962AE4C23E00603FBF /* Pty.swift in Sources */,
 				011B14B62ADE23EF000822F4 /* TerminalComponent.swift in Sources */,
-				011B14712ADE178E000822F4 /* PtyDelegate.swift in Sources */,
 				011B14452ADE1664000822F4 /* Document.swift in Sources */,
 				011B14B42ADE23BB000822F4 /* BridgeComponent+App.swift in Sources */,
 			);
@@ -502,7 +504,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = archipelago2/archipelago2.entitlements;
+				CODE_SIGN_ENTITLEMENTS = archipelago2/archipelago2Release.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;

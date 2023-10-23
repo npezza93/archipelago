@@ -13822,17 +13822,18 @@ class terminal_controller_default extends BridgeComponent {
     this.xterm = new import_xterm.Terminal({});
     window.xterm = this.xterm;
     this.xterm.loadAddon(this.fitAddon);
+    document.documentElement.style.setProperty("--background-color", "black");
     this.attach();
-    this.send("connect", { cols: this.xterm.cols, rows: this.xterm.rows }, ({ data }) => {
+    this.send("connect", {}, ({ data }) => {
       const binaryString = atob(data.data);
       const len = binaryString.length;
       const bytes = new Uint8Array(len);
       for (let i = 0;i < len; i++) {
         bytes[i] = binaryString.charCodeAt(i);
       }
-      console.log(bytes);
       this.xterm.write(bytes);
     });
+    this.send("resize", { cols: this.xterm.cols, rows: this.xterm.rows });
   }
   disconnect() {
     this.send("disconnect");

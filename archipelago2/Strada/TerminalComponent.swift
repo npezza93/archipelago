@@ -12,13 +12,15 @@ final class TerminalComponent: BridgeComponent {
 
     switch event {
     case .connect:
-      handleConnectEvent(message: message)
+      handleConnectEvent()
     case .disconnect:
       self.terminal?.kill()
     case .write:
       handleWriteEvent(message: message)
     case .binary:
       handleBinaryEvent(message: message)
+    case .resize:
+      handleResizeEvent(message: message)
     }
   }
 
@@ -27,13 +29,9 @@ final class TerminalComponent: BridgeComponent {
 
   // MARK: Private
 
-  private func handleConnectEvent(message: Message) {
-    guard let data: ConnectMessageData = message.data() else { return }
-
-    self.terminal = Pty() { data in
-        print(data)
-    }
-    terminal.spawn(cols: data.cols, rows: data.rows)
+  private func handleConnectEvent() {
+    self.terminal = Pty(onDataReceived: dataReceived)
+    terminal.spawn()
   }
 
   private func handleWriteEvent(message: Message) {
@@ -45,11 +43,14 @@ final class TerminalComponent: BridgeComponent {
     }
   }
 
-  private func handleBinaryEvent(message: Message) {
-    guard let data: MessageData = message.data() else { return }
+  private func handleResizeEvent(message: Message) {
+    guard let data: ResizeMessageData = message.data() else { return }
+
+    self.terminal.setSize(cols: data.cols, rows: data.rows)
   }
 
-  func processTerminated(_ source: Terminal, exitCode: Int32?) {
+  private func handleBinaryEvent(message: Message) {
+    guard let data: MessageData = message.data() else { return }
   }
 
   func dataReceived(data: String) {
@@ -71,6 +72,7 @@ extension TerminalComponent {
     case disconnect
     case write
     case binary
+    case resize
   }
 }
 
@@ -81,7 +83,7 @@ extension TerminalComponent {
     let data: String
   }
 
-  fileprivate struct ConnectMessageData: Decodable {
+  fileprivate struct ResizeMessageData: Decodable {
     let cols: UInt16
     let rows: UInt16
   }
