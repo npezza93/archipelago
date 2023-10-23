@@ -5,7 +5,6 @@ import Color from 'color';
 import {FitAddon} from 'xterm-addon-fit';
 import {WebLinksAddon} from 'xterm-addon-web-links';
 import {WebglAddon} from 'xterm-addon-webgl';
-import {CanvasAddon} from 'xterm-addon-canvas';
 // import {LigaturesAddon} from 'xterm-addon-ligatures';
 import bellSound from '../bell-sound';
 import { BridgeComponent } from "@hotwired/strada"
