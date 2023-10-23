@@ -23,7 +23,10 @@
 		011B14772ADE1A7A000822F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 011B14762ADE1A7A000822F4 /* Main.storyboard */; };
 		011B14B42ADE23BB000822F4 /* BridgeComponent+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011B14B32ADE23BB000822F4 /* BridgeComponent+App.swift */; };
 		011B14B62ADE23EF000822F4 /* TerminalComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011B14B52ADE23EF000822F4 /* TerminalComponent.swift */; };
-		0166EE5C2AE56F8C00061485 /* styles.css in Resources */ = {isa = PBXBuildFile; fileRef = 0166EE5B2AE56F8C00061485 /* styles.css */; };
+		0166EE5C2AE56F8C00061485 /* index.css in Resources */ = {isa = PBXBuildFile; fileRef = 0166EE5B2AE56F8C00061485 /* index.css */; };
+		0166EE5E2AE625FF00061485 /* AboutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0166EE5D2AE625FF00061485 /* AboutController.swift */; };
+		0166EE602AE70D5F00061485 /* about.html in Resources */ = {isa = PBXBuildFile; fileRef = 0166EE5F2AE70D5F00061485 /* about.html */; };
+		0166EE622AE70DD800061485 /* about.css in Resources */ = {isa = PBXBuildFile; fileRef = 0166EE612AE70DD800061485 /* about.css */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,7 +68,10 @@
 		011B14B32ADE23BB000822F4 /* BridgeComponent+App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BridgeComponent+App.swift"; sourceTree = "<group>"; };
 		011B14B52ADE23EF000822F4 /* TerminalComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalComponent.swift; sourceTree = "<group>"; };
 		0166EE592AE55B4C00061485 /* archipelago2Release.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = archipelago2Release.entitlements; sourceTree = "<group>"; };
-		0166EE5B2AE56F8C00061485 /* styles.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = styles.css; sourceTree = "<group>"; };
+		0166EE5B2AE56F8C00061485 /* index.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = index.css; sourceTree = "<group>"; };
+		0166EE5D2AE625FF00061485 /* AboutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutController.swift; sourceTree = "<group>"; };
+		0166EE5F2AE70D5F00061485 /* about.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = about.html; sourceTree = "<group>"; };
+		0166EE612AE70DD800061485 /* about.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = about.css; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +135,7 @@
 				011B14762ADE1A7A000822F4 /* Main.storyboard */,
 				01108D932AE0AE8D00603FBF /* WKWebViewConfiguration.swift */,
 				01108D952AE4C23E00603FBF /* Pty.swift */,
+				0166EE5D2AE625FF00061485 /* AboutController.swift */,
 			);
 			path = archipelago2;
 			sourceTree = "<group>";
@@ -165,7 +172,9 @@
 				01108D912ADE2F5600603FBF /* application-done.js */,
 				01108D8F2ADE2F4C00603FBF /* node_modules */,
 				011B14742ADE17BD000822F4 /* index.html */,
-				0166EE5B2AE56F8C00061485 /* styles.css */,
+				0166EE5B2AE56F8C00061485 /* index.css */,
+				0166EE5F2AE70D5F00061485 /* about.html */,
+				0166EE612AE70DD800061485 /* about.css */,
 			);
 			path = WebView;
 			sourceTree = "<group>";
@@ -283,7 +292,9 @@
 				01108D922ADE2F5600603FBF /* application-done.js in Resources */,
 				011B14772ADE1A7A000822F4 /* Main.storyboard in Resources */,
 				011B14752ADE17BD000822F4 /* index.html in Resources */,
-				0166EE5C2AE56F8C00061485 /* styles.css in Resources */,
+				0166EE622AE70DD800061485 /* about.css in Resources */,
+				0166EE5C2AE56F8C00061485 /* index.css in Resources */,
+				0166EE602AE70D5F00061485 /* about.html in Resources */,
 				01108D902ADE2F4C00603FBF /* node_modules in Resources */,
 				011B14472ADE1665000822F4 /* Assets.xcassets in Resources */,
 			);
@@ -317,6 +328,7 @@
 				011B14B62ADE23EF000822F4 /* TerminalComponent.swift in Sources */,
 				011B14452ADE1664000822F4 /* Document.swift in Sources */,
 				011B14B42ADE23BB000822F4 /* BridgeComponent+App.swift in Sources */,
+				0166EE5E2AE625FF00061485 /* AboutController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,7 +491,7 @@
 				CODE_SIGN_ENTITLEMENTS = archipelago2/archipelago2.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1.0.0;
 				DEVELOPMENT_TEAM = 4K4322K3MA;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -507,7 +519,7 @@
 				CODE_SIGN_ENTITLEMENTS = archipelago2/archipelago2Release.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1.0.0;
 				DEVELOPMENT_TEAM = 4K4322K3MA;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
