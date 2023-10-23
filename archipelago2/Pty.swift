@@ -6,6 +6,7 @@ class Pty {
   var slave: FileHandle?
   var master: FileHandle
   var masterFD: Int32
+  var slaveFD: Int32
 
   public init(onDataReceived: @escaping (String) -> Void) {
     self.process = Process()
@@ -17,13 +18,14 @@ class Pty {
     grantpt(masterFD)
     unlockpt(masterFD)
 
-    self.master = FileHandle.init(fileDescriptor: masterFD)
+    self.master = FileHandle(fileDescriptor: masterFD)
     let slavePath = String.init(cString: ptsname(masterFD))
+    self.slaveFD = open(slavePath, O_RDWR | O_NOCTTY)
     self.slave = FileHandle.init(forUpdatingAtPath: slavePath)
 
-    self.process.standardOutput = self.slave
-    self.process.standardInput = self.slave
-    self.process.standardError = self.slave
+    self.process.standardOutput = FileHandle(fileDescriptor: slaveFD, closeOnDealloc: true)
+    self.process.standardInput = FileHandle(fileDescriptor: slaveFD, closeOnDealloc: true)
+    self.process.standardError = FileHandle(fileDescriptor: slaveFD, closeOnDealloc: true)
 
     self.master.readabilityHandler = { handle in
       let data = handle.availableData
@@ -47,6 +49,7 @@ class Pty {
 
   public func spawn() {
     try! self.process.run()
+    tcsetpgrp(self.slaveFD, self.process.processIdentifier)
   }
 
   public func kill() {
@@ -67,21 +70,20 @@ class Pty {
   func setTermiosSettings() {
     var raw: termios = termios()
 
-    tcgetattr(self.masterFD, &raw)
-    raw.c_iflag = UInt(ICRNL) | UInt(IXON) | UInt(IXANY) | UInt(IMAXBEL) | UInt(BRKINT)
-    raw.c_iflag |= UInt(IUTF8)
+    tcgetattr(self.slaveFD, &raw)
+    raw.c_iflag =
+      UInt(ICRNL) | UInt(IXON) | UInt(IXANY) | UInt(IMAXBEL) | UInt(BRKINT) | UInt(IUTF8)
     raw.c_oflag = UInt(OPOST) | UInt(ONLCR)
     raw.c_cflag = UInt(CREAD) | UInt(CS8) | UInt(HUPCL)
     raw.c_lflag =
       UInt(ICANON) | UInt(ISIG) | UInt(IEXTEN) | UInt(ECHO) | UInt(ECHOE) | UInt(ECHOK)
       | UInt(ECHOKE) | UInt(ECHOCTL)
-    raw.c_lflag &= ~UInt(ECHO)  // Turn off ECHO
-    raw.c_lflag &= ~UInt(ICANON)
 
-    var ccArray = Array(UnsafeBufferPointer(start: &raw.c_cc.0, count: 20))
+    // var ccArray = Array(UnsafeBufferPointer(start: &raw.c_cc.0, count: 20))
+    var ccArray: [Int8] = Array(repeating: 0, count: 20)
     ccArray[Int(VEOF)] = 4
-    ccArray[Int(VEOL)] = 0xff
-    ccArray[Int(VEOL2)] = 0xff
+    ccArray[Int(VEOL)] = -1
+    ccArray[Int(VEOL2)] = -1
     ccArray[Int(VERASE)] = 0x7f
     ccArray[Int(VWERASE)] = 23
     ccArray[Int(VKILL)] = 21
@@ -100,8 +102,9 @@ class Pty {
 
     memcpy(&raw.c_cc, ccArray, MemoryLayout.size(ofValue: raw.c_cc))
 
-    cfsetspeed(&raw, UInt(B9600))
+    cfsetispeed(&raw, UInt(B38400))
+    cfsetospeed(&raw, UInt(B38400))
 
-    tcsetattr(self.masterFD, TCSAFLUSH, &raw)
+    tcsetattr(self.slaveFD, TCSAFLUSH, &raw)
   }
 }
