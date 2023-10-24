@@ -18,6 +18,7 @@ header h1 {
   justify-content: center;
   align-items: center;
   margin: 0;
+  cursor: default;
 }
 svg {
   fill: var(--color);

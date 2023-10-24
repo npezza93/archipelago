@@ -4,7 +4,8 @@ import Strada
 extension BridgeComponent {
   static var allTypes: [BridgeComponent.Type] {
     [
-      TerminalComponent.self
+      TerminalComponent.self,
+      TabsComponent.self,
     ]
   }
 }
