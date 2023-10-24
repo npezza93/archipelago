@@ -23,7 +23,11 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
+                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW">
+                                            <connections>
+                                                <segue destination="E5Y-Pp-Ht3" kind="show" id="wAP-gV-KH4"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
                                         <menuItem title="Services" id="NMo-om-nkz">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -259,6 +263,44 @@
                 <customObject id="2mM-fB-YkT" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-727" y="1112"/>
+        </scene>
+        <!--SettingsWindow Controller-->
+        <scene sceneID="avj-2a-wv9">
+            <objects>
+                <windowController id="E5Y-Pp-Ht3" userLabel="SettingsWindow Controller" sceneMemberID="viewController">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="f7b-Tf-aoX">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" fullSizeContentView="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="202" y="257" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1470" height="919"/>
+                        <view key="contentView" id="tCz-ad-ZtD">
+                            <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </view>
+                        <connections>
+                            <outlet property="delegate" destination="E5Y-Pp-Ht3" id="gW2-5H-dnf"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="N3B-G0-wbx" kind="relationship" relationship="window.shadowedContentViewController" id="JBR-eu-q4q"/>
+                    </connections>
+                </windowController>
+                <customObject id="rF6-EU-JFR" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1197" y="-278"/>
+        </scene>
+        <!--Settings Controller-->
+        <scene sceneID="rl1-cG-ELB">
+            <objects>
+                <viewController id="N3B-G0-wbx" customClass="SettingsController" customModule="archipelago2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="HOv-hY-xC6">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="6Qj-8Z-dxd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1197" y="158"/>
         </scene>
     </scenes>
 </document>

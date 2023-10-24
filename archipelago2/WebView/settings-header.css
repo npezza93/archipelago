@@ -1,0 +1,92 @@
+header {
+  width: 100%;
+  height: 95px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--header-background);
+  border-bottom: 1px solid var(--header-border);
+}
+header h1 {
+  width: 100%;
+  color: var(--color);
+  height: 30px;
+  font-size: 15px;
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+svg {
+  fill: var(--color);
+}
+svg line, svg rect, svg circle, svg .background-stroke {
+  stroke: var(--header-background);
+}
+header h3 {
+  color: var(--color);
+  font-size: 15px;
+  font-weight: 400;
+  margin: 0;
+}
+header .heading-bar {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  margin-top: 5px;
+}
+header .heading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3px 15px;
+  padding-bottom: 6px;
+  border-radius: 5px;
+  cursor: default;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+}
+label {
+  color: var(--color);
+}
+
+header .heading:hover, header .heading.active {
+  background: var(--tab-hover-background-color);
+}
+.heading:hover svg line, .heading:hover svg rect, .heading:hover svg circle, .heading:hover svg .background-stroke,
+.heading.active svg line, .heading.active svg rect, .heading.active svg circle, .heading.active svg .background-stroke {
+  stroke: var(--tab-hover-background-color);
+}
+
+header .heading.active h3 {
+  color: var(--active-tab-color);
+}
+header .heading.active:hover h3 {
+  color: var(--active-hover-tab-color);
+}
+header .heading.active svg {
+  fill: var(--active-tab-color);
+}
+header .heading.active:hover svg {
+  fill: var(--active-hover-tab-color);
+}
+
+body[data-focus^="false"] header h1, body[data-focus^="false"] header h3, body[data-focus^="false"] header .heading.active h3 {
+  color: var(--unfocused-color);
+}
+body[data-focus^="false"] header svg line, body[data-focus^="false"] header svg rect,
+body[data-focus^="false"] header svg circle, body[data-focus^="false"] header svg .background-stroke {
+  stroke: var(--unfocused-header-background);
+}
+body[data-focus^="false"] header svg, body[data-focus^="false"] header .heading.active svg {
+  fill: var(--unfocused-color);
+}
+body[data-focus^="false"] header {
+  background-color: var(--unfocused-header-background);
+}

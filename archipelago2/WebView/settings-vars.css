@@ -1,0 +1,77 @@
+@media (prefers-color-scheme: light) {
+  body {
+    --color: #424242;
+    --accent-color: #9E9E9E;
+    --background-color: rgb(241, 240, 239);
+    --opaque-background: rgba(245, 245, 245, 0.2);
+    --opaque-color: rgba(66, 66, 66, 0.5);
+    --header-background: rgb(245, 244, 243);
+    --header-border: rgb(219, 219, 219);
+    --unfocused-color: rgb(173, 171, 171);
+    --unfocused-header-background: rgb(236, 235, 234);
+    --active-tab-color: rgb(45, 113, 237);
+    --active-hover-tab-color: rgb(19, 61, 167);
+    --tab-hover-background-color: rgb(231, 230, 229);
+
+    --select-background-color: rgb(255, 255, 255);
+    --select-border-top-color: rgb(212, 212, 212);
+    --select-border-bottom-color: rgb(189, 189, 189);
+    --select-border-side-color: rgb(207, 207, 207);
+    --select-box-shadow-color: rgb(221, 221, 221);
+
+    --radio-top-gradient: rgb(255, 255, 255);
+    --radio-bottom-gradient: rgb(255, 255, 255);
+    --radio-border-color: rgb(241, 240, 239);
+    --radio-box-shadow-top: -1px;
+    --radio-box-shadow-bottom: 1px;
+
+    --text-input-background: rgb(255, 255, 255);
+    --text-input-border-top-color: rgb(232, 232, 232);
+    --text-input-border-bottom-color: rgb(214, 214, 214);
+
+    --selection-background: rgb(38, 99, 217);
+    --selection-text-color: #ffffff;
+
+    --modal-active-button-background: linear-gradient(rgb(71, 145, 247), rgb(49, 123, 246));
+    --modal-inactive-button-background: #FFFFFF;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    --color: #F5F5F5;
+    --accent-color: #BDBDBD;
+    --background-color: rgb(43, 41, 40);
+    --opaque-background: rgba(57, 55, 54, 0.2);
+    --opaque-color: rgba(238, 238, 238, 0.5);
+    --header-background: rgb(60, 60, 59);
+    --header-border: rgb(18, 18, 18);
+    --unfocused-color: rgb(116, 116, 116);
+    --unfocused-header-background: rgb(53, 51, 50);
+    --active-tab-color: rgb(102, 208, 250);
+    --active-hover-tab-color: rgb(147, 252, 253);
+    --tab-hover-background-color: rgb(74, 73, 72);
+
+    --select-background-color: rgb(92, 92, 91);
+    --select-border-top-color: rgb(111, 111, 110);
+    --select-border-bottom-color: rgb(31, 31, 31);
+    --select-border-side-color: rgb(34, 34, 33);
+    --select-box-shadow-color: rgb(36, 36, 35);
+
+    --radio-top-gradient: rgb(70, 70, 70);
+    --radio-bottom-gradient: rgb(97, 97, 96);
+    --radio-border-color: rgb(35, 35, 34);
+    --radio-box-shadow-top: 1px;
+    --radio-box-shadow-bottom: -1px;
+
+    --text-input-background: rgb(60, 60, 60);
+    --text-input-border-top-color: rgb(64, 64, 64);
+    --text-input-border-bottom-color: rgb(76, 76, 76);
+
+    --selection-background: rgb(33, 89, 201);
+    --selection-text-color: #F5F5F5;
+
+    --modal-active-button-background: linear-gradient(rgb(47, 106, 222), rgb(42, 94, 198));
+    --modal-inactive-button-background: rgb(88, 85, 85);
+  }
+}

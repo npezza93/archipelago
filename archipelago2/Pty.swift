@@ -79,7 +79,6 @@ class Pty {
       UInt(ICANON) | UInt(ISIG) | UInt(IEXTEN) | UInt(ECHO) | UInt(ECHOE) | UInt(ECHOK)
       | UInt(ECHOKE) | UInt(ECHOCTL)
 
-    // var ccArray = Array(UnsafeBufferPointer(start: &raw.c_cc.0, count: 20))
     var ccArray: [Int8] = Array(repeating: 0, count: 20)
     ccArray[Int(VEOF)] = 4
     ccArray[Int(VEOL)] = -1
