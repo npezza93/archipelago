@@ -25,6 +25,8 @@ class ViewController: NSViewController, WKUIDelegate, NSWindowDelegate, BridgeDe
     webView = WKWebView(
       frame: CGRect(x: 0, y: 0, width: 800, height: 600), configuration: .appConfiguration)
 
+    webView.setValue(false, forKey: "drawsBackground")
+
     webView.uiDelegate = self
     webView.navigationDelegate = self
     #if DEBUG
