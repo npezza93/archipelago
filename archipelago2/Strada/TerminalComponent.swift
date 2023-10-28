@@ -13,6 +13,8 @@ final class TerminalComponent: BridgeComponent {
     switch event {
     case .connect:
       handleConnectEvent()
+    case .data:
+      handleDataEvent()
     case .disconnect:
       self.terminal?.kill()
     case .write:
@@ -24,12 +26,15 @@ final class TerminalComponent: BridgeComponent {
     }
   }
 
-  func sendData(_ message: String) {
+  private func handleConnectEvent() {
+    let message = Message(
+      id: "connect", component: "terminal", event: "connect",
+      metadata: Message.Metadata(url: ""),
+      jsonData: App.preferenceFile.activeProfileJSON())
+    reply(with: message)
   }
 
-  // MARK: Private
-
-  private func handleConnectEvent() {
+  private func handleDataEvent() {
     self.terminal = Pty(onDataReceived: dataReceived)
     terminal.spawn()
   }
@@ -53,12 +58,13 @@ final class TerminalComponent: BridgeComponent {
     guard let data: MessageData = message.data() else { return }
   }
 
-  func dataReceived(data: String) {
+  private func dataReceived(data: Data) {
+    let uint8Array: [UInt8] = Array(data)
     let json = """
-          {"data":"\(data)"}
+          {"data":"\(uint8Array)"}
       """
     let message = Message(
-      id: "1", component: "data-bridge", event: "connect", metadata: Message.Metadata(url: ""),
+      id: "data", component: "terminal", event: "data", metadata: Message.Metadata(url: ""),
       jsonData: json)
     reply(with: message)
   }
@@ -69,6 +75,7 @@ final class TerminalComponent: BridgeComponent {
 extension TerminalComponent {
   fileprivate enum Event: String {
     case connect
+    case data
     case disconnect
     case write
     case binary

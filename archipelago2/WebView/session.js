@@ -1,107 +1,10 @@
-/* global document */
-import {CompositeDisposable, Disposable} from 'event-kit';
-import {Terminal} from 'xterm';
-import unescape from 'unescape-js';
-// import keystrokeForKeyboardEvent from '@npezza93/keystroke-for-keyboard-event';
-import Color from 'color';
-import {FitAddon} from 'xterm-addon-fit';
-import {WebLinksAddon} from 'xterm-addon-web-links';
-import {WebglAddon} from 'xterm-addon-webgl';
-import {CanvasAddon} from 'xterm-addon-canvas';
-// import {LigaturesAddon} from 'xterm-addon-ligatures';
-// import CurrentProfile from '../utils/current-profile';
-import bellSound from './bell-sound';
-
 export default class Session {
   constructor() {
-    this.subscriptions = new CompositeDisposable();
-    this.fitAddon = new FitAddon();
-    this.webglAddon = new WebglAddon();
-    this.canvasAddon = new CanvasAddon();
-    this.xterm = new Terminal(this.settings());
-    // this.ligaturesAddon = new LigaturesAddon();
-    this.xterm.loadAddon(this.fitAddon);
-
-    // this.resetKeymaps();
+    this.currentProfile = new CurrentProfile();
+    this.id = Math.random();
+    this.ptyId = ipc.callMain('pty-create', {sessionId: this.id, sessionWindowId: getCurrentWindow().id});
 
     this.bindListeners();
-  }
-
-  get keymaps() {
-    if (this._keymaps === undefined) {
-      this.resetKeymaps();
-    }
-
-    return this._keymaps;
-  }
-
-  resetKeymaps() {
-    this._keymaps
-      = this.currentProfile.get('keybindings').reduce((result, item) => {
-        result[item.keystroke] = unescape(item.command);
-        return result;
-      }, {});
-  }
-
-  settings() {
-    return this.applySettingModifiers(
-      this.currentProfile.xtermSettings.reduce((settings, property) => {
-        settings[property] = this.currentProfile.get(property);
-        return settings;
-      }, {}),
-    );
-  }
-
-  applySettingModifiers(defaultSettings) {
-    const {background} = defaultSettings.theme;
-    defaultSettings.allowTransparency = this.allowTransparency(background);
-    defaultSettings.cursorWidth = 2;
-    defaultSettings.fontWeightBold = 'bold';
-    defaultSettings.lineHeight = 1;
-    defaultSettings.letterSpacing = '0';
-    defaultSettings.tabStopWidth = 8;
-    defaultSettings.allowProposedApi = true;
-    // defaultSettings.logLevel = 'debug'
-
-    return defaultSettings;
-  }
-
-  attach(container) {
-    // The container did not change, do nothing
-    if (this._container === container) {
-      return;
-    }
-
-    // Attach has not occured yet
-    if (!this._wrapperElement) {
-      this._container = container;
-      this._wrapperElement = document.createElement('div');
-      this._wrapperElement.classList = 'wrapper';
-      this._xtermElement = document.createElement('div');
-      this._xtermElement.classList = 'wrapper';
-      this._wrapperElement.append(this._xtermElement);
-      this._container.append(this._wrapperElement);
-      this.xterm.open(this._xtermElement);
-      if (this.currentProfile.get('experimentalWebglRenderer')) {
-        this.xterm.loadAddon(this.webglAddon);
-      } else {
-        this.xterm.loadAddon(this.canvasAddon);
-      }
-
-      if (this.currentProfile.get('ligatures')) {
-        this.xterm.loadAddon(this.ligaturesAddon);
-      }
-
-      this.bindScrollListener();
-      this.fit();
-      this.xterm.focus();
-      return;
-    }
-
-    this._wrapperElement.remove();
-    this._container = container;
-    this._container.append(this._wrapperElement);
-    this.xterm.focus();
   }
 
   resetTheme() {
@@ -109,81 +12,11 @@ export default class Session {
     this.xterm.options.theme = this.settings().theme;
   }
 
-  async kill() {
-    this.subscriptions.dispose();
-
-    if (this.xterm) {
-      this.xterm.dispose();
-    } // Use safe nav
-
-    if (this._wrapperElement) {
-      this._wrapperElement.remove();
-      this._wrapperElement = null;
-    }
-
-    const ptyId = await this.ptyId;
-    this.xterm = null;
-
-    await ipc.send(`pty-kill-${ptyId}`);
-  }
-
-  fit() {
-    this.fitAddon.fit();
-    ipc.send(`pty-resize-${this.id}`, {cols: this.xterm.cols, rows: this.xterm.rows});
-  }
-
-  allowTransparency(background) {
-    const color = new Color(background);
-    let allowTransparency;
-
-    allowTransparency = color.alpha() !== 1;
-
-    return allowTransparency;
-  }
-
-  keybindingHandler(event) {
-    let caught = false;
-    const mapping = this.keymaps[keystrokeForKeyboardEvent(event)];
-
-    if (mapping) {
-      ipc.send(`pty-write-${this.id}`, mapping);
-      caught = true;
-    }
-
-    return !caught;
-  }
-
-  copySelection() {
-    if (this.currentProfile.get('copyOnSelect') && this.xterm.getSelection()) {
-      clipboard.writeText(this.xterm.getSelection());
-    }
-  }
-
-  onFocus(callback) {
-    return this.xterm._core.onFocus(callback);
-  }
-
   onExit(callback) {
     ipc.on(`pty-exit-${this.id}`, callback);
     return new Disposable(() => {
       ipc.removeListener(`pty-exit-${this.id}`, callback);
     });
-  }
-
-  onBell(callback) {
-    return this.xterm.onBell(callback);
-  }
-
-  onBinary(callback) {
-    return this.xterm.onBinary(callback);
-  }
-
-  onData(callback) {
-    return this.xterm.onData(callback);
-  }
-
-  onSelection(callback) {
-    return this.xterm.onSelectionChange(callback);
   }
 
   onSettingChanged({property, value}) {
@@ -204,29 +37,8 @@ export default class Session {
     }
   }
 
-  writePtyData(event, data) {
-    this.xterm.write(data);
-  }
-
   bindListeners() {
-    // this.webLinksAddon = new WebLinksAddon((event, uri) => shell.openExternal(uri));
-
-    // this.xterm.loadAddon(this.webLinksAddon);
-    // this.xterm.attachCustomKeyEventHandler(this.keybindingHandler.bind(this));
-//
-    ipc.on(`pty-data-${this.id}`, this.writePtyData.bind(this));
-    this.subscriptions.add(new Disposable(() => {
-      ipc.removeListener(`pty-data-${this.id}`, this.writePtyData.bind(this));
-    }));
-    this.subscriptions.add(this.onData(data => {
-      ipc.send(`pty-write-${this.id}`, data);
-    }));
-    this.subscriptions.add(this.onBinary(data => {
-      ipc.send(`pty-write-${this.id}`, data);
-    }));
-    this.subscriptions.add(this.onBell(() => bellSound.play()));
-    // this.subscriptions.add(this.onSelection(this.copySelection.bind(this)));
-    // this.subscriptions.add(new Disposable(ipc.answerMain('active-profile-changed', this.onActiveProfileChange.bind(this))));
-    // this.subscriptions.add(new Disposable(ipc.answerMain('setting-changed', this.onSettingChanged.bind(this))));
+    this.subscriptions.add(new Disposable(ipc.answerMain('active-profile-changed', this.onActiveProfileChange.bind(this))));
+    this.subscriptions.add(new Disposable(ipc.answerMain('setting-changed', this.onSettingChanged.bind(this))));
   }
 }

@@ -8,19 +8,35 @@ class Pty {
   var masterFD: Int32
   var slaveFD: Int32
 
-  public init(onDataReceived: @escaping (String) -> Void) {
+  public init(onDataReceived: @escaping (Data) -> Void) {
     self.process = Process()
-    process.launchPath = "/usr/bin/env"
-    process.arguments = ["/bin/zsh"]
+    process.launchPath = App.activeProfile().shell
+    process.arguments = App.activeProfile().parsedShellArgs()
 
     self.masterFD = posix_openpt(O_RDWR | O_NOCTTY)
 
-    grantpt(masterFD)
-    unlockpt(masterFD)
+    if self.masterFD == -1 {
+      fatalError("posix_openpt failed: \(String(cString: strerror(errno)))")
+    }
+
+    if grantpt(masterFD) == -1 {
+      fatalError("grantpt failed: \(String(cString: strerror(errno)))")
+    }
+
+    if unlockpt(masterFD) == -1 {
+      fatalError("unlockpt failed: \(String(cString: strerror(errno)))")
+    }
 
     self.master = FileHandle(fileDescriptor: masterFD)
-    let slavePath = String.init(cString: ptsname(masterFD))
+    guard let slavePath = String(cString: ptsname(masterFD), encoding: .utf8) else {
+      fatalError("Failed to get slave path")
+    }
+
     self.slaveFD = open(slavePath, O_RDWR | O_NOCTTY)
+    if self.slaveFD == -1 {
+      fatalError("open failed for \(slavePath): \(String(cString: strerror(errno)))")
+    }
+
     self.slave = FileHandle.init(forUpdatingAtPath: slavePath)
 
     self.process.standardOutput = FileHandle(fileDescriptor: slaveFD, closeOnDealloc: true)
@@ -30,7 +46,7 @@ class Pty {
     self.master.readabilityHandler = { handle in
       let data = handle.availableData
       if !data.isEmpty {
-        onDataReceived(data.base64EncodedString())
+        onDataReceived(data)
       }
     }
 
@@ -39,8 +55,6 @@ class Pty {
     env["LANG"] = "en-US.UTF-8"
     env["TERM"] = "screen-256color"
     self.process.environment = env
-
-    self.setTermiosSettings()
   }
 
   public func send(data: Data) {
@@ -65,45 +79,5 @@ class Pty {
     size.ws_row = rows
 
     _ = ioctl(self.masterFD, TIOCSWINSZ, &size)
-  }
-
-  func setTermiosSettings() {
-    var raw: termios = termios()
-
-    tcgetattr(self.slaveFD, &raw)
-    raw.c_iflag =
-      UInt(ICRNL) | UInt(IXON) | UInt(IXANY) | UInt(IMAXBEL) | UInt(BRKINT) | UInt(IUTF8)
-    raw.c_oflag = UInt(OPOST) | UInt(ONLCR)
-    raw.c_cflag = UInt(CREAD) | UInt(CS8) | UInt(HUPCL)
-    raw.c_lflag =
-      UInt(ICANON) | UInt(ISIG) | UInt(IEXTEN) | UInt(ECHO) | UInt(ECHOE) | UInt(ECHOK)
-      | UInt(ECHOKE) | UInt(ECHOCTL)
-
-    var ccArray: [Int8] = Array(repeating: 0, count: 20)
-    ccArray[Int(VEOF)] = 4
-    ccArray[Int(VEOL)] = -1
-    ccArray[Int(VEOL2)] = -1
-    ccArray[Int(VERASE)] = 0x7f
-    ccArray[Int(VWERASE)] = 23
-    ccArray[Int(VKILL)] = 21
-    ccArray[Int(VREPRINT)] = 18
-    ccArray[Int(VINTR)] = 3
-    ccArray[Int(VQUIT)] = 0x1c
-    ccArray[Int(VSUSP)] = 26
-    ccArray[Int(VSTART)] = 17
-    ccArray[Int(VSTOP)] = 19
-    ccArray[Int(VLNEXT)] = 22
-    ccArray[Int(VDISCARD)] = 15
-    ccArray[Int(VMIN)] = 1
-    ccArray[Int(VTIME)] = 0
-    ccArray[Int(VDSUSP)] = 25
-    ccArray[Int(VSTATUS)] = 20
-
-    memcpy(&raw.c_cc, ccArray, MemoryLayout.size(ofValue: raw.c_cc))
-
-    cfsetispeed(&raw, UInt(B38400))
-    cfsetospeed(&raw, UInt(B38400))
-
-    tcsetattr(self.slaveFD, TCSAFLUSH, &raw)
   }
 }

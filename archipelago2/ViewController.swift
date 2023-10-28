@@ -25,6 +25,8 @@ class ViewController: NSViewController, WKUIDelegate, NSWindowDelegate, BridgeDe
     webView = WKWebView(
       frame: CGRect(x: 0, y: 0, width: 800, height: 600), configuration: .appConfiguration)
 
+    webView.configuration.preferences.setValue(true, forKey: "developerExtrasEnabled")
+
     webView.setValue(false, forKey: "drawsBackground")
 
     webView.uiDelegate = self
@@ -75,5 +77,15 @@ extension ViewController: WKNavigationDelegate {
   }
 
   func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+  }
+
+  func webView(
+    _ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration,
+    for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures
+  ) -> WKWebView? {
+    if let url = navigationAction.request.url {
+      NSWorkspace.shared.open(url)
+    }
+    return nil
   }
 }

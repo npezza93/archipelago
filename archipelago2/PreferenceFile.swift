@@ -40,8 +40,7 @@ class PreferenceFile {
       let jsonData = try JSONEncoder().encode(activeProfile())
 
       if let jsonString = String(data: jsonData, encoding: .utf8) {
-        return jsonString.replacingOccurrences(of: "\\", with: "\\\\")
-          .replacingOccurrences(of: "\"", with: "\\\"")
+        return jsonString
       } else {
         return ""
       }
@@ -68,6 +67,6 @@ class PreferenceFile {
       for: .applicationSupportDirectory, in: .userDomainMask
     ).first!
 
-    return appSupportDir.appendingPathComponent("Archipelago/config.json")
+    return appSupportDir.appendingPathComponent("Archipelago/config.dev.json")
   }
 }

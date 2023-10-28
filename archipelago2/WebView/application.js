@@ -1,5 +1,9 @@
 import {Application} from "@hotwired/stimulus"
-import "@hotwired/strada"
+import Bridge from "./bridge"
+
+const webBridge = new Bridge()
+window.Strada = { web: webBridge }
+webBridge.start()
 
 import TerminalController from "./controllers/terminal_controller"
 

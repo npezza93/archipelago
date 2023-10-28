@@ -23,7 +23,7 @@ struct Config: Codable {
     var name: String
     var cursorBlink: Bool
     var cursorStyle: String
-    var shell: String?
+    var shell: String
     var shellArgs: String
     var scrollback: UInt32
     var padding: String
@@ -65,7 +65,7 @@ struct Config: Codable {
       name: String = "New Profile",
       cursorBlink: Bool = false,
       cursorStyle: String = "block",
-      shell: String? = nil,
+      shell: String = ProcessInfo.processInfo.environment["SHELL"] ?? "/bin/bash",
       shellArgs: String = "",
       scrollback: UInt32 = 4000,
       padding: String = "5px 0 10px 15px",
@@ -154,6 +154,13 @@ struct Config: Codable {
       self.keybindings =
         try container.decodeIfPresent([Keybinding].self, forKey: .keybindings)
         ?? defaultProfile.keybindings
+    }
+
+    func parsedShellArgs() -> [String] {
+      shellArgs
+        .split(separator: ",")
+        .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+        .filter { !$0.isEmpty }
     }
 
     struct Theme: Codable {
