@@ -5,6 +5,7 @@ import Color from 'color';
 import {FitAddon} from 'xterm-addon-fit';
 import {WebLinksAddon} from 'xterm-addon-web-links';
 import {WebglAddon} from 'xterm-addon-webgl';
+import {CanvasAddon} from 'xterm-addon-canvas';
 // import {LigaturesAddon} from 'xterm-addon-ligatures';
 import bellSound from '../bell-sound';
 import { BridgeComponent } from "@hotwired/strada"
@@ -21,6 +22,7 @@ export default class extends BridgeComponent {
     super.connect()
     this.fitAddon = new FitAddon();
     this.webglAddon = new WebglAddon();
+    this.canvasAddon = new CanvasAddon();
     this.send("connect", {}, ({data}) => {
       this.profile = data
 
@@ -67,6 +69,7 @@ export default class extends BridgeComponent {
       this.element.append(this._wrapperElement);
       this.xterm.open(this._xtermElement);
       this.xterm.loadAddon(this.webglAddon);
+      // this.xterm.loadAddon(this.canvasAddon);
 
       this.bindListeners();
       this.fit();
@@ -117,7 +120,7 @@ export default class extends BridgeComponent {
   }
 
   xtermSettings() {
-    return ['fontSize', 'fontWeight', 'cursorStyle',
+    return ['fontFamily', 'fontSize', 'fontWeight', 'cursorStyle',
       'cursorBlink', 'scrollback', 'macOptionIsMeta', 'hideContextMenu',
       'rightClickSelectsWord', 'macOptionClickForcesSelection', 'theme']
   }

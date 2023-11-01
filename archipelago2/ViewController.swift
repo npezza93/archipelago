@@ -27,6 +27,10 @@ class ViewController: NSViewController, WKUIDelegate, NSWindowDelegate, BridgeDe
 
     webView.configuration.preferences.setValue(true, forKey: "developerExtrasEnabled")
 
+    let script = WKUserScript(
+      source: monospsaceFontStylesheet(), injectionTime: .atDocumentStart, forMainFrameOnly: true)
+    webView.configuration.userContentController.addUserScript(script)
+
     webView.setValue(false, forKey: "drawsBackground")
 
     webView.uiDelegate = self
@@ -61,6 +65,35 @@ class ViewController: NSViewController, WKUIDelegate, NSWindowDelegate, BridgeDe
 
   func windowWillClose(_ notification: Notification) {
     bridgeDelegate.onViewWillDisappear()
+  }
+
+  private func monospsaceFontStylesheet() -> String {
+    var stylesheet = ""
+
+    for (fontName, fontPath) in App.fonts {
+      if let fontData = try? Data(contentsOf: URL(fileURLWithPath: fontPath)) {
+        let base64FontData = fontData.base64EncodedString()
+        let cssFontFace = """
+          @font-face {
+              font-family: '\(fontName)';
+              src: url(data:font/truetype;base64,\(base64FontData));
+          }
+          """
+        stylesheet += cssFontFace + "\n\n"
+      }
+    }
+
+    // Escape newlines and single quotes for JavaScript
+    let escapedStylesheet = stylesheet.replacingOccurrences(of: "\n", with: "\\n")
+      .replacingOccurrences(of: "'", with: "\\'")
+
+    return """
+      document.addEventListener('DOMContentLoaded', () => {
+          var style = document.createElement('style');
+          style.innerHTML = '\(escapedStylesheet)';
+          document.head.appendChild(style);
+      });
+      """
   }
 }
 
