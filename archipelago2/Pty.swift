@@ -53,12 +53,27 @@ class Pty {
     var env = ProcessInfo.processInfo.environment
     env["COLORTERM"] = "truecolor"
     env["LANG"] = "en-US.UTF-8"
-    env["TERM"] = "screen-256color"
+    env["TERM"] = "xterm-256color"
     self.process.environment = env
   }
 
   public func send(data: Data) {
-    self.master.write(data)
+    let byteArray = [UInt8](data)
+
+    let arraySlice: ArraySlice<UInt8> = byteArray[byteArray.startIndex..<byteArray.endIndex]
+
+    arraySlice.withUnsafeBytes { ptr in
+      let ddata = DispatchData(bytes: ptr)
+
+      DispatchIO.write(
+        toFileDescriptor: masterFD, data: ddata,
+        runningHandlerOn: DispatchQueue.global(qos: .userInitiated),
+        handler: { dd, errno in
+          if errno != 0 {
+            print("Error writing data to the child, errno=\(errno)")
+          }
+        })
+    }
   }
 
   public func spawn() {
@@ -79,5 +94,63 @@ class Pty {
     size.ws_row = rows
 
     _ = ioctl(self.masterFD, TIOCSWINSZ, &size)
+  }
+
+  public func fork(andExec: String, args: [String], env: [String]) -> (pid: pid_t, masterFd: Int32)?
+  {
+    var master: Int32 = 0
+    var winsize = winsize()
+
+    let pid = forkpty(&master, nil, nil, &winsize)
+    if pid < 0 {
+      return nil
+    }
+    if pid == 0 {
+      withArrayOfCStrings(
+        args,
+        { pargs in
+          withArrayOfCStrings(
+            env,
+            { penv in
+              let _ = execve(andExec, pargs, penv)
+            })
+        })
+    }
+    return (pid, master)
+  }
+
+  private func scan<
+    S: Sequence, U
+  >(_ seq: S, _ initial: U, _ combine: (U, S.Element) -> U) -> [U] {
+    var result: [U] = []
+    result.reserveCapacity(seq.underestimatedCount)
+    var runningResult = initial
+    for element in seq {
+      runningResult = combine(runningResult, element)
+      result.append(runningResult)
+    }
+    return result
+  }
+
+  private func withArrayOfCStrings<R>(
+    _ args: [String], _ body: ([UnsafeMutablePointer<CChar>?]) -> R
+  ) -> R {
+    let argsCounts = Array(args.map { $0.utf8.count + 1 })
+    let argsOffsets = [0] + scan(argsCounts, 0, +)
+    let argsBufferSize = argsOffsets.last!
+    var argsBuffer: [UInt8] = []
+    argsBuffer.reserveCapacity(argsBufferSize)
+    for arg in args {
+      argsBuffer.append(contentsOf: arg.utf8)
+      argsBuffer.append(0)
+    }
+    return argsBuffer.withUnsafeMutableBufferPointer {
+      (argsBuffer) in
+      let ptr = UnsafeMutableRawPointer(argsBuffer.baseAddress!).bindMemory(
+        to: CChar.self, capacity: argsBuffer.count)
+      var cStrings: [UnsafeMutablePointer<CChar>?] = argsOffsets.map { ptr + $0 }
+      cStrings[cStrings.count - 1] = nil
+      return body(cStrings)
+    }
   }
 }
