@@ -157,7 +157,8 @@ struct Config: Codable {
     }
 
     func parsedShellArgs() -> [String] {
-      shellArgs
+      [shell]
+        + shellArgs
         .split(separator: ",")
         .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
         .filter { !$0.isEmpty }

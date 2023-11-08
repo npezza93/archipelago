@@ -35,7 +35,7 @@ final class TerminalComponent: BridgeComponent {
   }
 
   private func handleDataEvent() {
-    self.terminal = Pty(onDataReceived: dataReceived)
+    self.terminal = Pty(onDataReceived: dataReceived, onProcessTerminated: closeWindow)
     terminal.spawn()
   }
 
@@ -55,7 +55,7 @@ final class TerminalComponent: BridgeComponent {
   }
 
   private func handleBinaryEvent(message: Message) {
-    guard let data: MessageData = message.data() else { return }
+    //guard let data: MessageData = message.data() else { return }
   }
 
   private func dataReceived(data: Data) {
@@ -67,6 +67,10 @@ final class TerminalComponent: BridgeComponent {
       id: "data", component: "terminal", event: "data", metadata: Message.Metadata(url: ""),
       jsonData: json)
     reply(with: message)
+  }
+
+  private func closeWindow() {
+    delegate.webView?.window?.close()
   }
 }
 
