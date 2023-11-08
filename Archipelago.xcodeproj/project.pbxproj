@@ -63,16 +63,16 @@
 		01108D912ADE2F5600603FBF /* application.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = application.min.js; path = archipelago2/WebView/application.min.js; sourceTree = SOURCE_ROOT; };
 		01108D932AE0AE8D00603FBF /* WKWebViewConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKWebViewConfiguration.swift; sourceTree = "<group>"; };
 		01108D952AE4C23E00603FBF /* Pty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pty.swift; sourceTree = "<group>"; };
-		011B143D2ADE1664000822F4 /* archipelago2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = archipelago2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		011B143D2ADE1664000822F4 /* Archipelago.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Archipelago.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		011B14402ADE1664000822F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		011B14422ADE1664000822F4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		011B14442ADE1664000822F4 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		011B14462ADE1665000822F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		011B144B2ADE1665000822F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		011B144C2ADE1665000822F4 /* archipelago2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = archipelago2.entitlements; sourceTree = "<group>"; };
-		011B14512ADE1665000822F4 /* archipelago2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = archipelago2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		011B14512ADE1665000822F4 /* ArchipelagoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ArchipelagoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		011B14552ADE1665000822F4 /* archipelago2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = archipelago2Tests.swift; sourceTree = "<group>"; };
-		011B145B2ADE1665000822F4 /* archipelago2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = archipelago2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		011B145B2ADE1665000822F4 /* ArchipelagoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ArchipelagoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		011B145F2ADE1665000822F4 /* archipelago2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = archipelago2UITests.swift; sourceTree = "<group>"; };
 		011B14612ADE1665000822F4 /* archipelago2UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = archipelago2UITestsLaunchTests.swift; sourceTree = "<group>"; };
 		011B14742ADE17BD000822F4 /* index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
@@ -139,9 +139,9 @@
 		011B143E2ADE1664000822F4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				011B143D2ADE1664000822F4 /* archipelago2.app */,
-				011B14512ADE1665000822F4 /* archipelago2Tests.xctest */,
-				011B145B2ADE1665000822F4 /* archipelago2UITests.xctest */,
+				011B143D2ADE1664000822F4 /* Archipelago.app */,
+				011B14512ADE1665000822F4 /* ArchipelagoTests.xctest */,
+				011B145B2ADE1665000822F4 /* ArchipelagoUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -221,9 +221,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		011B143C2ADE1664000822F4 /* archipelago2 */ = {
+		011B143C2ADE1664000822F4 /* Archipelago */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 011B14652ADE1665000822F4 /* Build configuration list for PBXNativeTarget "archipelago2" */;
+			buildConfigurationList = 011B14652ADE1665000822F4 /* Build configuration list for PBXNativeTarget "Archipelago" */;
 			buildPhases = (
 				011B14392ADE1664000822F4 /* Sources */,
 				011B143A2ADE1664000822F4 /* Frameworks */,
@@ -233,17 +233,17 @@
 			);
 			dependencies = (
 			);
-			name = archipelago2;
+			name = Archipelago;
 			packageProductDependencies = (
 				01108D8D2ADE2ADB00603FBF /* Strada */,
 			);
 			productName = archipelago2;
-			productReference = 011B143D2ADE1664000822F4 /* archipelago2.app */;
+			productReference = 011B143D2ADE1664000822F4 /* Archipelago.app */;
 			productType = "com.apple.product-type.application";
 		};
-		011B14502ADE1665000822F4 /* archipelago2Tests */ = {
+		011B14502ADE1665000822F4 /* ArchipelagoTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 011B14682ADE1665000822F4 /* Build configuration list for PBXNativeTarget "archipelago2Tests" */;
+			buildConfigurationList = 011B14682ADE1665000822F4 /* Build configuration list for PBXNativeTarget "ArchipelagoTests" */;
 			buildPhases = (
 				011B144D2ADE1665000822F4 /* Sources */,
 				011B144E2ADE1665000822F4 /* Frameworks */,
@@ -254,14 +254,14 @@
 			dependencies = (
 				011B14532ADE1665000822F4 /* PBXTargetDependency */,
 			);
-			name = archipelago2Tests;
+			name = ArchipelagoTests;
 			productName = archipelago2Tests;
-			productReference = 011B14512ADE1665000822F4 /* archipelago2Tests.xctest */;
+			productReference = 011B14512ADE1665000822F4 /* ArchipelagoTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		011B145A2ADE1665000822F4 /* archipelago2UITests */ = {
+		011B145A2ADE1665000822F4 /* ArchipelagoUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 011B146B2ADE1665000822F4 /* Build configuration list for PBXNativeTarget "archipelago2UITests" */;
+			buildConfigurationList = 011B146B2ADE1665000822F4 /* Build configuration list for PBXNativeTarget "ArchipelagoUITests" */;
 			buildPhases = (
 				011B14572ADE1665000822F4 /* Sources */,
 				011B14582ADE1665000822F4 /* Frameworks */,
@@ -272,9 +272,9 @@
 			dependencies = (
 				011B145D2ADE1665000822F4 /* PBXTargetDependency */,
 			);
-			name = archipelago2UITests;
+			name = ArchipelagoUITests;
 			productName = archipelago2UITests;
-			productReference = 011B145B2ADE1665000822F4 /* archipelago2UITests.xctest */;
+			productReference = 011B145B2ADE1665000822F4 /* ArchipelagoUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -300,7 +300,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 011B14382ADE1664000822F4 /* Build configuration list for PBXProject "archipelago2" */;
+			buildConfigurationList = 011B14382ADE1664000822F4 /* Build configuration list for PBXProject "Archipelago" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -316,9 +316,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				011B143C2ADE1664000822F4 /* archipelago2 */,
-				011B14502ADE1665000822F4 /* archipelago2Tests */,
-				011B145A2ADE1665000822F4 /* archipelago2UITests */,
+				011B143C2ADE1664000822F4 /* Archipelago */,
+				011B14502ADE1665000822F4 /* ArchipelagoTests */,
+				011B145A2ADE1665000822F4 /* ArchipelagoUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -406,12 +406,12 @@
 /* Begin PBXTargetDependency section */
 		011B14532ADE1665000822F4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 011B143C2ADE1664000822F4 /* archipelago2 */;
+			target = 011B143C2ADE1664000822F4 /* Archipelago */;
 			targetProxy = 011B14522ADE1665000822F4 /* PBXContainerItemProxy */;
 		};
 		011B145D2ADE1665000822F4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 011B143C2ADE1664000822F4 /* archipelago2 */;
+			target = 011B143C2ADE1664000822F4 /* Archipelago */;
 			targetProxy = 011B145C2ADE1665000822F4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -606,7 +606,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/archipelago2.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/archipelago2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Archipelago.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Archipelago";
 			};
 			name = Debug;
 		};
@@ -625,7 +625,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/archipelago2.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/archipelago2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Archipelago.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Archipelago";
 			};
 			name = Release;
 		};
@@ -666,7 +666,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		011B14382ADE1664000822F4 /* Build configuration list for PBXProject "archipelago2" */ = {
+		011B14382ADE1664000822F4 /* Build configuration list for PBXProject "Archipelago" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				011B14632ADE1665000822F4 /* Debug */,
@@ -675,7 +675,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		011B14652ADE1665000822F4 /* Build configuration list for PBXNativeTarget "archipelago2" */ = {
+		011B14652ADE1665000822F4 /* Build configuration list for PBXNativeTarget "Archipelago" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				011B14662ADE1665000822F4 /* Debug */,
@@ -684,7 +684,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		011B14682ADE1665000822F4 /* Build configuration list for PBXNativeTarget "archipelago2Tests" */ = {
+		011B14682ADE1665000822F4 /* Build configuration list for PBXNativeTarget "ArchipelagoTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				011B14692ADE1665000822F4 /* Debug */,
@@ -693,7 +693,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		011B146B2ADE1665000822F4 /* Build configuration list for PBXNativeTarget "archipelago2UITests" */ = {
+		011B146B2ADE1665000822F4 /* Build configuration list for PBXNativeTarget "ArchipelagoUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				011B146C2ADE1665000822F4 /* Debug */,
