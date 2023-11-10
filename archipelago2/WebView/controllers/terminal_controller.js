@@ -35,6 +35,15 @@ export default class extends BridgeComponent {
       this.attach()
     })
 
+    this.send("settingChanged", {}, ({data}) => {
+      if (this.xtermSettings().includes(data.property)) {
+        this.xterm.options[data.property] = data.value;
+      } else if (data.property === 'keybindings') {
+        // this.resetKeymaps();
+      // } else if (property.startsWith('theme.')) {
+        // this.resetTheme();
+      }
+    })
   }
 
   disconnect() {
@@ -170,7 +179,6 @@ export default class extends BridgeComponent {
 
     return !caught;
   }
-
 
   bindListeners() {
     const scrollbarFadeEffect = () => {

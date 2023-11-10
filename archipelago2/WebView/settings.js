@@ -1,12 +1,9 @@
 import {Application} from "@hotwired/stimulus"
 import "@hotwired/strada"
 
-// import CurrentProfile from '../utils/current-profile';
-
-// import DragHeaderController from './controllers/drag-header-controller';
 import TabsController from './controllers/tabs_controller';
 // import FontsController from './controllers/fonts-controller';
-// import RadioController from './controllers/radio-controller';
+import RadioController from './controllers/radio_controller';
 // import CheckboxController from './controllers/checkbox-controller';
 // import SelectController from './controllers/select-controller';
 // import TextController from './controllers/text-controller';
@@ -29,10 +26,9 @@ const application    = Application.start()
 application.debug    = false
 window.Stimulus      = application
 
-// app.register('drag-header', DragHeaderController);
-Stimulus.register('tabs', TabsController)
+application.register('tabs', TabsController)
 // app.register('fonts', FontsController);
-// app.register('radio', RadioController);
+application.register('radio', RadioController);
 // app.register('checkbox', CheckboxController);
 // app.register('select', SelectController);
 // app.register('text', TextController);

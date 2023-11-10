@@ -31,6 +31,7 @@ final class TerminalComponent: BridgeComponent {
       id: "connect", component: "terminal", event: "connect",
       metadata: Message.Metadata(url: ""),
       jsonData: App.preferenceFile.activeProfileJSON())
+    App.preferenceFile.onChange(listener: onSettingChanged)
     reply(with: message)
   }
 
@@ -72,6 +73,16 @@ final class TerminalComponent: BridgeComponent {
   private func closeWindow() {
     delegate.webView?.window?.close()
   }
+  
+  private func onSettingChanged(property: String, value: Any) {
+    let json = """
+          {"property":"\(property)","value":"\(value)"}
+      """
+    let message = Message(
+      id: "settingChanged", component: "terminal", event: "settingChanged", metadata: Message.Metadata(url: ""),
+      jsonData: json)
+    reply(with: message)
+  }
 }
 
 // MARK: Events
@@ -98,5 +109,4 @@ extension TerminalComponent {
     let cols: UInt16
     let rows: UInt16
   }
-
 }

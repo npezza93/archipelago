@@ -40,6 +40,7 @@
 		0166EE7C2AE9C16100061485 /* NSColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0166EE7B2AE9C16100061485 /* NSColor.swift */; };
 		0166EE7E2AE9C20700061485 /* TerminalWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0166EE7D2AE9C20700061485 /* TerminalWindowController.swift */; };
 		0195E7722AE9E5E1003EDDD2 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0195E7712AE9E5E1003EDDD2 /* App.swift */; };
+		01F2D62F2AFC85F9001DCD2C /* RadioComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F2D62E2AFC85F9001DCD2C /* RadioComponent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +99,7 @@
 		0166EE7B2AE9C16100061485 /* NSColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSColor.swift; sourceTree = "<group>"; };
 		0166EE7D2AE9C20700061485 /* TerminalWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalWindowController.swift; sourceTree = "<group>"; };
 		0195E7712AE9E5E1003EDDD2 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		01F2D62E2AFC85F9001DCD2C /* RadioComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioComponent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +197,7 @@
 			children = (
 				011B14B32ADE23BB000822F4 /* BridgeComponent+App.swift */,
 				011B14B52ADE23EF000822F4 /* TerminalComponent.swift */,
+				01F2D62E2AFC85F9001DCD2C /* RadioComponent.swift */,
 				0166EE742AE7507C00061485 /* TabsComponent.swift */,
 			);
 			path = Strada;
@@ -371,6 +374,7 @@
 				0166EE662AE73FC700061485 /* DraggingView.swift in Sources */,
 				0166EE7C2AE9C16100061485 /* NSColor.swift in Sources */,
 				0195E7722AE9E5E1003EDDD2 /* App.swift in Sources */,
+				01F2D62F2AFC85F9001DCD2C /* RadioComponent.swift in Sources */,
 				01108D942AE0AE8D00603FBF /* WKWebViewConfiguration.swift in Sources */,
 				01108D962AE4C23E00603FBF /* Pty.swift in Sources */,
 				0166EE7A2AE8AD1100061485 /* Config.swift in Sources */,
@@ -541,10 +545,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = archipelago2/archipelago2.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1.0.0;
-				DEVELOPMENT_TEAM = 4K4322K3MA;
+				CURRENT_PROJECT_VERSION = 6.0.0;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = archipelago2/Info.plist;
@@ -555,9 +561,10 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = co.pezza.archipelago2;
+				MARKETING_VERSION = 6.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.archipelago;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -569,10 +576,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = archipelago2/archipelago2Release.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1.0.0;
-				DEVELOPMENT_TEAM = 4K4322K3MA;
+				CURRENT_PROJECT_VERSION = 6.0.0;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = archipelago2/Info.plist;
@@ -583,9 +592,10 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = co.pezza.archipelago2;
+				MARKETING_VERSION = 6.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.archipelago;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};

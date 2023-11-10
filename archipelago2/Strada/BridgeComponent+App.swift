@@ -6,6 +6,7 @@ extension BridgeComponent {
     [
       TerminalComponent.self,
       TabsComponent.self,
+      RadioComponent.self,
     ]
   }
 }
