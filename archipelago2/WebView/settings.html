@@ -85,21 +85,23 @@
             <select class="w-270" name="fontFamily" data-controller="select" data-action="select#change"></select>
           </label>
 
-          <select name="fontWeight" size="1" data-controller="select" data-action="select#change">
-            <option value="normal">Normal</option>
-            <option value="bold">Bold</option>
-            <option value="bolder">Bolder</option>
-            <option value="lighter">Lighter</option>
-            <option value="100">100</option>
-            <option value="200">200</option>
-            <option value="300">300</option>
-            <option value="400">400</option>
-            <option value="500">500</option>
-            <option value="600">600</option>
-            <option value="700">700</option>
-            <option value="800">800</option>
-            <option value="900">900</option>
-          </select>
+          <label>
+            <select name="fontWeight" size="1" data-controller="select" data-action="select#change">
+              <option value="normal">Normal</option>
+              <option value="bold">Bold</option>
+              <option value="bolder">Bolder</option>
+              <option value="lighter">Lighter</option>
+              <option value="100">100</option>
+              <option value="200">200</option>
+              <option value="300">300</option>
+              <option value="400">400</option>
+              <option value="500">500</option>
+              <option value="600">600</option>
+              <option value="700">700</option>
+              <option value="800">800</option>
+              <option value="900">900</option>
+            </select>
+          </label>
 
           <input type="number" name="fontSize" value="" min=1 max=99 data-controller="text" data-action="text#change">
         </div>
@@ -112,15 +114,15 @@
 
         <div class="flex flex-row gap-10 px-15 justify-between">
           <label class="flex flex-row gap-10">
-            Command to run
+            <div>Executable</div>
 
-            <input type="text" name="shell" value="" data-controller="text" data-action="text#change">
+            <input class="w-175" type="text" name="shell" value="" data-controller="text" data-action="text#change">
           </label>
 
           <label class="flex flex-row gap-10">
-            Arguments
+            <div>Arguments</div>
 
-            <input type="text" name="shellArgs" value="" data-controller="text" data-action="text#change">
+            <input class="w-175" type="text" name="shellArgs" value="" data-controller="text" data-action="text#change">
           </label>
         </div>
       </div>
@@ -132,7 +134,7 @@
           <label class="flex flex-row gap-10">
             Lines
 
-            <input type="number" name="scrollback" value="" min=0 data-controller="text" data-action="text#change">
+            <input class="w-175" type="number" name="scrollback" value="" min=0 data-controller="text" data-action="text#change">
           </label>
         </div>
       </div>

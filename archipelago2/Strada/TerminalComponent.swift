@@ -75,9 +75,17 @@ final class TerminalComponent: BridgeComponent {
   }
 
   private func onSettingChanged(property: String, value: Any) {
-    let json = """
-          {"property":"\(property)","value":"\(value)"}
-      """
+    var json = ""
+    if property.starts(with: /theme\./) {
+      json = """
+            {"property":"\(property)","value":\(value)}
+        """
+    } else {
+      json = """
+            {"property":"\(property)","value":"\(value)"}
+        """
+    }
+
     let message = Message(
       id: "settingChanged", component: "terminal", event: "settingChanged",
       metadata: Message.Metadata(url: ""),

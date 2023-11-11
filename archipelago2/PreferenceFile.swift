@@ -79,6 +79,48 @@ class PreferenceFile {
       profile.scrollback = value as! UInt32
     case "padding":
       profile.padding = value as! String
+    case "theme.selectionBackground":
+      profile.theme.selectionBackground = value as! String
+    case "theme.foreground":
+      profile.theme.foreground = value as! String
+    case "theme.background":
+      profile.theme.background = value as! String
+    case "theme.black":
+      profile.theme.black = value as! String
+    case "theme.red":
+      profile.theme.red = value as! String
+    case "theme.brightRed":
+      profile.theme.brightRed = value as! String
+    case "theme.green":
+      profile.theme.green = value as! String
+    case "theme.brightGreen":
+      profile.theme.brightGreen = value as! String
+    case "theme.yellow":
+      profile.theme.yellow = value as! String
+    case "theme.brightYellow":
+      profile.theme.brightYellow = value as! String
+    case "theme.magenta":
+      profile.theme.magenta = value as! String
+    case "theme.brightMagenta":
+      profile.theme.brightMagenta = value as! String
+    case "theme.cyan":
+      profile.theme.cyan = value as! String
+    case "theme.brightCyan":
+      profile.theme.brightCyan = value as! String
+    case "theme.blue":
+      profile.theme.blue = value as! String
+    case "theme.brightBlue":
+      profile.theme.brightBlue = value as! String
+    case "theme.white":
+      profile.theme.white = value as! String
+    case "theme.brightWhite":
+      profile.theme.brightWhite = value as! String
+    case "theme.brightBlack":
+      profile.theme.brightBlack = value as! String
+    case "theme.cursorAccent":
+      profile.theme.cursorAccent = value as! String
+    case "theme.cursor":
+      profile.theme.cursor = value as! String
     default:
       fatalError("property not found")
     }
@@ -86,7 +128,11 @@ class PreferenceFile {
     self.config.profiles[activeProfileIndex()] = profile
     save()
     for listener in changeListeners {
-      listener(property, value)
+      if property.starts(with: /theme\./) {
+        listener(property, activeProfileJSON())
+      } else {
+        listener(property, value)
+      }
     }
   }
 

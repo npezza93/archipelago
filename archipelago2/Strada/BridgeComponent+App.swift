@@ -11,6 +11,7 @@ extension BridgeComponent {
       SelectComponent.self,
       CheckboxComponent.self,
       TextComponent.self,
+      ColorComponent.self,
     ]
   }
 }

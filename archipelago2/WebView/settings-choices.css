@@ -82,13 +82,29 @@ select {
   border: none;
   background-color: var(--select-background-color);
   color: var(--color);
-  border-radius: 6px;
-  padding: 2px 3px;
+  border-radius: 3px;
+  padding: 2px 17px 2px 10px;
+  height: 30px;
   border-top: 1px solid var(--select-border-top-color);
-  border-bottom: 1px solid var(--select-border-bottom-color);
   border-left: 1px solid var(--select-border-top-color);
   border-right: 1px solid var(--select-border-top-color);
-  box-shadow: 0 1px 0 0 var(--select-box-shadow-color);
+  -webkit-appearance:none;
+}
+
+
+select {
+  /* background-position: 98% 50%; */
+  /* background-size: 8px; */
+  /* position: relative; */
+}
+label:has(select) {
+  position: relative;
+}
+label:has(select)::after {
+  content: "▾";
+  position: absolute;
+  top: 6px;
+  right: 10px;
 }
 
 input[type="text"], input[type="number"] {
@@ -96,9 +112,10 @@ input[type="text"], input[type="number"] {
   border-top: 1px solid var(--text-input-border-top-color);
   border-left: 1px solid var(--text-input-border-top-color);
   border-right: 1px solid var(--text-input-border-top-color);
-  border-bottom: 1px solid var(--text-input-border-bottom-color);
+  border-bottom: 0px solid var(--text-input-border-bottom-color);
   color: var(--color);
-  border-radius: 1px;
+  border-radius: 3px;
+  padding-left: 7px;
 }
 
 input[type="color"] {

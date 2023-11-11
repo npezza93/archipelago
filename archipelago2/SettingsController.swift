@@ -16,7 +16,7 @@ class SettingsController: NSViewController, WKUIDelegate, NSWindowDelegate, Brid
 
   override func loadView() {
     webView = WKWebView(
-      frame: CGRect(x: 0, y: 0, width: 600, height: 600), configuration: .appConfiguration)
+      frame: CGRect(x: 0, y: 0, width: 650, height: 600), configuration: .appConfiguration)
 
     webView.uiDelegate = self
     #if DEBUG

@@ -40,8 +40,11 @@ export default class extends BridgeComponent {
         this.xterm.options[data.property] = data.value;
       } else if (data.property === 'keybindings') {
         // this.resetKeymaps();
-      // } else if (property.startsWith('theme.')) {
-        // this.resetTheme();
+      } else if (data.property.startsWith('theme.')) {
+        this.profile = data.value
+
+        this.xterm.options.allowTransparency = this.settings().allowTransparency;
+        this.xterm.options.theme = this.settings().theme;
       }
     })
   }

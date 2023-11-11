@@ -44,6 +44,7 @@
 		01EC782E2AFEE1DF00F62F97 /* SelectComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EC782D2AFEE1DF00F62F97 /* SelectComponent.swift */; };
 		01EC78302AFEF1BB00F62F97 /* CheckboxComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EC782F2AFEF1BB00F62F97 /* CheckboxComponent.swift */; };
 		01EC78322AFEF98400F62F97 /* TextComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EC78312AFEF98400F62F97 /* TextComponent.swift */; };
+		01EC78342AFF360C00F62F97 /* ColorComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EC78332AFF360C00F62F97 /* ColorComponent.swift */; };
 		01F2D62F2AFC85F9001DCD2C /* RadioComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F2D62E2AFC85F9001DCD2C /* RadioComponent.swift */; };
 /* End PBXBuildFile section */
 
@@ -107,6 +108,7 @@
 		01EC782D2AFEE1DF00F62F97 /* SelectComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectComponent.swift; sourceTree = "<group>"; };
 		01EC782F2AFEF1BB00F62F97 /* CheckboxComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxComponent.swift; sourceTree = "<group>"; };
 		01EC78312AFEF98400F62F97 /* TextComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextComponent.swift; sourceTree = "<group>"; };
+		01EC78332AFF360C00F62F97 /* ColorComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorComponent.swift; sourceTree = "<group>"; };
 		01F2D62E2AFC85F9001DCD2C /* RadioComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioComponent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -205,6 +207,7 @@
 			children = (
 				011B14B32ADE23BB000822F4 /* BridgeComponent+App.swift */,
 				011B14B52ADE23EF000822F4 /* TerminalComponent.swift */,
+				01EC78332AFF360C00F62F97 /* ColorComponent.swift */,
 				01F2D62E2AFC85F9001DCD2C /* RadioComponent.swift */,
 				01EC78312AFEF98400F62F97 /* TextComponent.swift */,
 				01EC782D2AFEE1DF00F62F97 /* SelectComponent.swift */,
@@ -381,6 +384,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0166EE642AE73F7600061485 /* SettingsController.swift in Sources */,
+				01EC78342AFF360C00F62F97 /* ColorComponent.swift in Sources */,
 				011B14432ADE1664000822F4 /* ViewController.swift in Sources */,
 				011B14412ADE1664000822F4 /* AppDelegate.swift in Sources */,
 				01EC782E2AFEE1DF00F62F97 /* SelectComponent.swift in Sources */,

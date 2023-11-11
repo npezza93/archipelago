@@ -7,7 +7,7 @@ import RadioController from './controllers/radio_controller';
 import SelectController from './controllers/select_controller';
 import CheckboxController from './controllers/checkbox_controller';
 import TextController from './controllers/text_controller';
-// import ColorController from './controllers/color-controller';
+import ColorController from './controllers/color_controller';
 // import OpacityController from './controllers/opacity-controller';
 // import KeybindingsController from './controllers/keybindings-controller';
 // import KeybindingController from './controllers/keybinding-controller';
@@ -43,8 +43,7 @@ application.register('radio', withOverriddenSend(RadioController))
 application.register('select', withOverriddenSend(SelectController))
 application.register('checkbox', withOverriddenSend(CheckboxController))
 application.register('text', withOverriddenSend(TextController))
-
-// app.register('color', ColorController);
+application.register('color', withOverriddenSend(ColorController))
 // app.register('opacity', OpacityController);
 // app.register('keybindings', KeybindingsController);
 // app.register('keybinding', KeybindingController);
