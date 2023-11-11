@@ -1,11 +1,10 @@
 import { BridgeComponent } from "@hotwired/strada"
 
 export default class extends BridgeComponent {
-  static component = "radio"
-  static values = { name: String }
+  static component = "text"
 
   connect() {
-    // ipc.answerMain('active-profile-changed', this.setValue.bind(this))
+    // ipc.answerMain('active-profile-changed', this.setValue.bind(this));
     super.connect()
     this.send("connect", {}, ({data}) => {
       this.setValue(data)
@@ -13,10 +12,7 @@ export default class extends BridgeComponent {
   }
 
   setValue(profile) {
-    const currentValue = profile[this.nameValue]
-    const element = this.element.querySelector(`[value=${currentValue}]`)
-
-    element.checked = true
+    this.element.value = profile[this.element.name] || ''
   }
 
   change(event) {

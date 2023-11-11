@@ -2,11 +2,11 @@ import {Application} from "@hotwired/stimulus"
 import "@hotwired/strada"
 
 import TabsController from './controllers/tabs_controller';
-// import FontsController from './controllers/fonts-controller';
+import FontsController from './controllers/fonts_controller';
 import RadioController from './controllers/radio_controller';
-// import CheckboxController from './controllers/checkbox-controller';
-// import SelectController from './controllers/select-controller';
-// import TextController from './controllers/text-controller';
+import SelectController from './controllers/select_controller';
+import CheckboxController from './controllers/checkbox_controller';
+import TextController from './controllers/text_controller';
 // import ColorController from './controllers/color-controller';
 // import OpacityController from './controllers/opacity-controller';
 // import KeybindingsController from './controllers/keybindings-controller';
@@ -18,20 +18,32 @@ import RadioController from './controllers/radio_controller';
 // import ProfileController from './controllers/profile-controller';
 // import ProfileCapturerController from './controllers/profile-capturer-controller';
 // import ProfileActionsController from './controllers/profile-actions-controller';
-//
-// require('electron').ipcRenderer.setMaxListeners(50);
 
-// window.currentProfile = new CurrentProfile();
 const application    = Application.start()
 application.debug    = false
 window.Stimulus      = application
 
-application.register('tabs', TabsController)
-// app.register('fonts', FontsController);
-application.register('radio', RadioController);
-// app.register('checkbox', CheckboxController);
-// app.register('select', SelectController);
-// app.register('text', TextController);
+function withOverriddenSend(BaseClass) {
+  return class extends BaseClass {
+    send(event, data = {}, callback) {
+      data.metadata = { url: "archipelago-1" }
+
+      const message = { component: this.component, event, data, callback }
+      const messageId = this.bridge.send(message)
+      if (callback) {
+        this.pendingMessageCallbacks.push(messageId)
+      }
+    }
+  }
+}
+
+application.register('tabs', withOverriddenSend(TabsController))
+application.register('fonts', withOverriddenSend(FontsController))
+application.register('radio', withOverriddenSend(RadioController))
+application.register('select', withOverriddenSend(SelectController))
+application.register('checkbox', withOverriddenSend(CheckboxController))
+application.register('text', withOverriddenSend(TextController))
+
 // app.register('color', ColorController);
 // app.register('opacity', OpacityController);
 // app.register('keybindings', KeybindingsController);
@@ -42,8 +54,6 @@ application.register('radio', RadioController);
 // app.register('profile', ProfileController);
 // app.register('profile-capturer', ProfileCapturerController);
 // app.register('profile-actions', ProfileActionsController);
-//
-// ipc.answerMain('close-via-menu', window.close);
-//
+
 window.addEventListener('blur', () => document.body.dataset.focus = 'false');
 window.addEventListener('focus', () => document.body.dataset.focus = 'true');

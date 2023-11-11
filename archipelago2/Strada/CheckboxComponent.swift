@@ -1,8 +1,8 @@
 import Foundation
 import Strada
 
-final class RadioComponent: BridgeComponent {
-  override class var name: String { "radio" }
+final class CheckboxComponent: BridgeComponent {
+  override class var name: String { "checkbox" }
 
   override func onReceive(message: Message) {
     guard let event = Event(rawValue: message.event) else {
@@ -19,7 +19,7 @@ final class RadioComponent: BridgeComponent {
 
   private func handleConnectEvent(_ message: Message) {
     let message = Message(
-      id: message.id, component: "radio", event: "connect",
+      id: message.id, component: "checkbox", event: "connect",
       metadata: Message.Metadata(url: ""),
       jsonData: App.preferenceFile.activeProfileJSON())
     reply(with: message)
@@ -32,7 +32,7 @@ final class RadioComponent: BridgeComponent {
   }
 }
 
-extension RadioComponent {
+extension CheckboxComponent {
   fileprivate enum Event: String {
     case connect
     case change

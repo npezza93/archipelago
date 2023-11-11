@@ -1,8 +1,8 @@
 import Foundation
 import Strada
 
-final class RadioComponent: BridgeComponent {
-  override class var name: String { "radio" }
+final class FontsComponent: BridgeComponent {
+  override class var name: String { "fonts" }
 
   override func onReceive(message: Message) {
     guard let event = Event(rawValue: message.event) else {
@@ -18,10 +18,14 @@ final class RadioComponent: BridgeComponent {
   }
 
   private func handleConnectEvent(_ message: Message) {
+    let json = """
+          {"profile":\(App.preferenceFile.activeProfileJSON()),"fonts":\(App.fonts.keys)}
+      """
+
     let message = Message(
-      id: message.id, component: "radio", event: "connect",
+      id: message.id, component: "fonts", event: "connect",
       metadata: Message.Metadata(url: ""),
-      jsonData: App.preferenceFile.activeProfileJSON())
+      jsonData: json)
     reply(with: message)
   }
 
@@ -32,7 +36,7 @@ final class RadioComponent: BridgeComponent {
   }
 }
 
-extension RadioComponent {
+extension FontsComponent {
   fileprivate enum Event: String {
     case connect
     case change

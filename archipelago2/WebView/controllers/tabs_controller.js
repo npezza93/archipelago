@@ -25,17 +25,4 @@ export default class extends BridgeComponent {
       })
     }
   }
-
-  send(event, data = {}, callback) {
-    // Include the url with each message, so the native app can
-    // ensure messages are delivered to the correct destination
-    data.metadata = { url: "archipelago-1" }
-
-    const message = { component: this.component, event, data, callback }
-    const messageId = this.bridge.send(message)
-    if (callback) {
-      // Track messages that we have callbacks for so we can clean up when disconnected
-      this.pendingMessageCallbacks.push(messageId)
-    }
-  }
 }

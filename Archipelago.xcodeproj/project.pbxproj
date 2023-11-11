@@ -40,6 +40,10 @@
 		0166EE7C2AE9C16100061485 /* NSColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0166EE7B2AE9C16100061485 /* NSColor.swift */; };
 		0166EE7E2AE9C20700061485 /* TerminalWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0166EE7D2AE9C20700061485 /* TerminalWindowController.swift */; };
 		0195E7722AE9E5E1003EDDD2 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0195E7712AE9E5E1003EDDD2 /* App.swift */; };
+		01EC782C2AFEC00800F62F97 /* FontsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EC782B2AFEC00800F62F97 /* FontsComponent.swift */; };
+		01EC782E2AFEE1DF00F62F97 /* SelectComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EC782D2AFEE1DF00F62F97 /* SelectComponent.swift */; };
+		01EC78302AFEF1BB00F62F97 /* CheckboxComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EC782F2AFEF1BB00F62F97 /* CheckboxComponent.swift */; };
+		01EC78322AFEF98400F62F97 /* TextComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EC78312AFEF98400F62F97 /* TextComponent.swift */; };
 		01F2D62F2AFC85F9001DCD2C /* RadioComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F2D62E2AFC85F9001DCD2C /* RadioComponent.swift */; };
 /* End PBXBuildFile section */
 
@@ -99,6 +103,10 @@
 		0166EE7B2AE9C16100061485 /* NSColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSColor.swift; sourceTree = "<group>"; };
 		0166EE7D2AE9C20700061485 /* TerminalWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalWindowController.swift; sourceTree = "<group>"; };
 		0195E7712AE9E5E1003EDDD2 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		01EC782B2AFEC00800F62F97 /* FontsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsComponent.swift; sourceTree = "<group>"; };
+		01EC782D2AFEE1DF00F62F97 /* SelectComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectComponent.swift; sourceTree = "<group>"; };
+		01EC782F2AFEF1BB00F62F97 /* CheckboxComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxComponent.swift; sourceTree = "<group>"; };
+		01EC78312AFEF98400F62F97 /* TextComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextComponent.swift; sourceTree = "<group>"; };
 		01F2D62E2AFC85F9001DCD2C /* RadioComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioComponent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -198,7 +206,11 @@
 				011B14B32ADE23BB000822F4 /* BridgeComponent+App.swift */,
 				011B14B52ADE23EF000822F4 /* TerminalComponent.swift */,
 				01F2D62E2AFC85F9001DCD2C /* RadioComponent.swift */,
+				01EC78312AFEF98400F62F97 /* TextComponent.swift */,
+				01EC782D2AFEE1DF00F62F97 /* SelectComponent.swift */,
+				01EC782B2AFEC00800F62F97 /* FontsComponent.swift */,
 				0166EE742AE7507C00061485 /* TabsComponent.swift */,
+				01EC782F2AFEF1BB00F62F97 /* CheckboxComponent.swift */,
 			);
 			path = Strada;
 			sourceTree = "<group>";
@@ -371,6 +383,7 @@
 				0166EE642AE73F7600061485 /* SettingsController.swift in Sources */,
 				011B14432ADE1664000822F4 /* ViewController.swift in Sources */,
 				011B14412ADE1664000822F4 /* AppDelegate.swift in Sources */,
+				01EC782E2AFEE1DF00F62F97 /* SelectComponent.swift in Sources */,
 				0166EE662AE73FC700061485 /* DraggingView.swift in Sources */,
 				0166EE7C2AE9C16100061485 /* NSColor.swift in Sources */,
 				0195E7722AE9E5E1003EDDD2 /* App.swift in Sources */,
@@ -379,9 +392,12 @@
 				01108D962AE4C23E00603FBF /* Pty.swift in Sources */,
 				0166EE7A2AE8AD1100061485 /* Config.swift in Sources */,
 				0166EE7E2AE9C20700061485 /* TerminalWindowController.swift in Sources */,
+				01EC78322AFEF98400F62F97 /* TextComponent.swift in Sources */,
 				0166EE782AE8961D00061485 /* PreferenceFile.swift in Sources */,
 				011B14B62ADE23EF000822F4 /* TerminalComponent.swift in Sources */,
 				011B14452ADE1664000822F4 /* Document.swift in Sources */,
+				01EC782C2AFEC00800F62F97 /* FontsComponent.swift in Sources */,
+				01EC78302AFEF1BB00F62F97 /* CheckboxComponent.swift in Sources */,
 				011B14B42ADE23BB000822F4 /* BridgeComponent+App.swift in Sources */,
 				0166EE752AE7507C00061485 /* TabsComponent.swift in Sources */,
 				0166EE5E2AE625FF00061485 /* AboutController.swift in Sources */,
