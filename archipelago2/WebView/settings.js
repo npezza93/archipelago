@@ -8,7 +8,6 @@ import SelectController from './controllers/select_controller';
 import CheckboxController from './controllers/checkbox_controller';
 import TextController from './controllers/text_controller';
 import ColorController from './controllers/color_controller';
-// import OpacityController from './controllers/opacity-controller';
 // import KeybindingsController from './controllers/keybindings-controller';
 // import KeybindingController from './controllers/keybinding-controller';
 // import KeybindingCapturerController from './controllers/keybinding-capturer-controller';
@@ -44,7 +43,6 @@ application.register('select', withOverriddenSend(SelectController))
 application.register('checkbox', withOverriddenSend(CheckboxController))
 application.register('text', withOverriddenSend(TextController))
 application.register('color', withOverriddenSend(ColorController))
-// app.register('opacity', OpacityController);
 // app.register('keybindings', KeybindingsController);
 // app.register('keybinding', KeybindingController);
 // app.register('keybinding-capturer', KeybindingCapturerController);

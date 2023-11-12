@@ -292,7 +292,7 @@
           </div>
         </div>
 
-        <div class="flex flex-col">
+        <div class="flex flex-col justify-between">
           <div class="flex flex-col">
             <h4 class="px-15 my-15">Cursor</h4>
 
@@ -319,12 +319,6 @@
                 <div class="w-100">Color</div>
 
                 <input type="color" name="theme.selectionBackground" value="" data-controller="color" data-action="color#changed">
-              </label>
-
-              <label class="flex flex-col align-center gap-10">
-                <input type="range" name="theme.selectionBackground" value="" min=0 max=1 step=0.01 data-controller="opacity" data-action="opacity#change">
-
-                <div class="w-100 text-center">Opacity</div>
               </label>
             </div>
           </div>
@@ -361,19 +355,11 @@
 
                 <input type="color" name="theme.foreground" value="" data-controller="color" data-action="color#changed">
               </label>
-            </div>
 
-            <div class="flex flex-row gap-10 px-15 justify-between mt-15">
               <label class="flex flex-row align-center gap-10">
                 <div class="w-100">Background</div>
 
                 <input type="color" name="theme.background" value="" data-controller="color" data-action="color#changed">
-              </label>
-
-              <label class="flex flex-col align-center gap-10">
-                <input type="range" name="theme.background" value="" min=0 max=1 step=0.01 data-controller="opacity" data-action="opacity#change">
-
-                <div class="w-100 text-center">Opacity</div>
               </label>
             </div>
           </div>

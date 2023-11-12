@@ -21,10 +21,6 @@ export default class extends BridgeComponent {
 
   changed(event) {
     let color = Color(event.target.value);
-    const alpha = this.currentColor.alpha();
-    if (alpha < 1) {
-      color = color.alpha(alpha);
-    }
     this.currentColor = color
 
     this.send("change", { property: event.target.name, value: color.rgb().string() })
