@@ -12,8 +12,8 @@ import ModalController from './controllers/modal_controller';
 import KeybindingsController from './controllers/keybindings_controller';
 import KeybindingController from './controllers/keybinding_controller';
 import KeybindingCapturerController from './controllers/keybinding_capturer_controller';
-// import KeybindingActionsController from './controllers/keybinding-actions-controller';
-//
+import KeybindingActionsController from './controllers/keybinding_actions_controller';
+
 // import ProfilesController from './controllers/profiles-controller';
 // import ProfileController from './controllers/profile-controller';
 // import ProfileCapturerController from './controllers/profile-capturer-controller';
@@ -48,7 +48,7 @@ application.register('modal', ModalController)
 application.register('keybindings', withOverriddenSend(KeybindingsController))
 application.register('keybinding', KeybindingController)
 application.register('keybinding-capturer', withOverriddenSend(KeybindingCapturerController))
-// app.register('keybinding-actions', KeybindingActionsController);
+application.register('keybinding-actions', withOverriddenSend(KeybindingActionsController))
 // app.register('profiles', ProfilesController);
 // app.register('profile', ProfileController);
 // app.register('profile-capturer', ProfileCapturerController);

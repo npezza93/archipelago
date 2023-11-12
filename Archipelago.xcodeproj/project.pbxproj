@@ -145,9 +145,9 @@
 		011B14342ADE1664000822F4 = {
 			isa = PBXGroup;
 			children = (
-				011B143F2ADE1664000822F4 /* archipelago2 */,
-				011B14542ADE1665000822F4 /* archipelago2Tests */,
-				011B145E2ADE1665000822F4 /* archipelago2UITests */,
+				011B143F2ADE1664000822F4 /* archipelago */,
+				011B14542ADE1665000822F4 /* archipelagoTests */,
+				011B145E2ADE1665000822F4 /* archipelagoUITests */,
 				011B143E2ADE1664000822F4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -162,7 +162,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		011B143F2ADE1664000822F4 /* archipelago2 */ = {
+		011B143F2ADE1664000822F4 /* archipelago */ = {
 			isa = PBXGroup;
 			children = (
 				0166EE5A2AE55C6500061485 /* WebView */,
@@ -186,24 +186,24 @@
 				0166EE7B2AE9C16100061485 /* NSColor.swift */,
 				0195E7712AE9E5E1003EDDD2 /* App.swift */,
 			);
-			path = archipelago2;
+			path = archipelago;
 			sourceTree = "<group>";
 		};
-		011B14542ADE1665000822F4 /* archipelago2Tests */ = {
+		011B14542ADE1665000822F4 /* archipelagoTests */ = {
 			isa = PBXGroup;
 			children = (
 				011B14552ADE1665000822F4 /* archipelago2Tests.swift */,
 			);
-			path = archipelago2Tests;
+			path = archipelagoTests;
 			sourceTree = "<group>";
 		};
-		011B145E2ADE1665000822F4 /* archipelago2UITests */ = {
+		011B145E2ADE1665000822F4 /* archipelagoUITests */ = {
 			isa = PBXGroup;
 			children = (
 				011B145F2ADE1665000822F4 /* archipelago2UITests.swift */,
 				011B14612ADE1665000822F4 /* archipelago2UITestsLaunchTests.swift */,
 			);
-			path = archipelago2UITests;
+			path = archipelagoUITests;
 			sourceTree = "<group>";
 		};
 		011B14B22ADE23A7000822F4 /* Strada */ = {
