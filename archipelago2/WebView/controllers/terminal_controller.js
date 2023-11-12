@@ -39,7 +39,9 @@ export default class extends BridgeComponent {
       if (this.xtermSettings().includes(data.property)) {
         this.xterm.options[data.property] = data.value;
       } else if (data.property === 'keybindings') {
-        // this.resetKeymaps();
+        this.profile = data.value
+
+        this.resetKeymaps();
       } else if (data.property.startsWith('theme.')) {
         this.profile = data.value
 

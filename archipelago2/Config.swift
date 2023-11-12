@@ -35,7 +35,7 @@ struct Config: Codable {
     var vibrancy: String?
     var ligatures: Bool
     var theme: Theme
-    var keybindings: [Keybinding]?
+    var keybindings: [Keybinding]
 
     enum FontSizeValue: Decodable {
       case int(UInt32)
@@ -98,7 +98,7 @@ struct Config: Codable {
       self.vibrancy = vibrancy
       self.ligatures = ligatures
       self.theme = theme
-      self.keybindings = keybindings
+      self.keybindings = keybindings ?? []
     }
 
     public init(from decoder: Decoder) throws {

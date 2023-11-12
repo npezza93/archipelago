@@ -121,6 +121,8 @@ class PreferenceFile {
       profile.theme.cursorAccent = value as! String
     case "theme.cursor":
       profile.theme.cursor = value as! String
+    case "keybindings":
+      profile.keybindings = value as! [Config.Profile.Keybinding]
     default:
       fatalError("property not found")
     }
@@ -128,7 +130,7 @@ class PreferenceFile {
     self.config.profiles[activeProfileIndex()] = profile
     save()
     for listener in changeListeners {
-      if property.starts(with: /theme\./) {
+      if property.starts(with: /theme\./) || property == "keybindings" {
         listener(property, activeProfileJSON())
       } else {
         listener(property, value)

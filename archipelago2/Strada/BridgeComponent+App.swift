@@ -12,6 +12,8 @@ extension BridgeComponent {
       CheckboxComponent.self,
       TextComponent.self,
       ColorComponent.self,
+      KeybindingsComponent.self,
+      KeybindingCapturerComponent.self,
     ]
   }
 }

@@ -76,7 +76,7 @@ final class TerminalComponent: BridgeComponent {
 
   private func onSettingChanged(property: String, value: Any) {
     var json = ""
-    if property.starts(with: /theme\./) {
+    if property.starts(with: /theme\./) || property == "keybindings" {
       json = """
             {"property":"\(property)","value":\(value)}
         """
@@ -86,11 +86,7 @@ final class TerminalComponent: BridgeComponent {
         """
     }
 
-    let message = Message(
-      id: "settingChanged", component: "terminal", event: "settingChanged",
-      metadata: Message.Metadata(url: ""),
-      jsonData: json)
-    reply(with: message)
+    reply(to: "settingChanged", with: json)
   }
 }
 

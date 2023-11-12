@@ -8,9 +8,10 @@ import SelectController from './controllers/select_controller';
 import CheckboxController from './controllers/checkbox_controller';
 import TextController from './controllers/text_controller';
 import ColorController from './controllers/color_controller';
-// import KeybindingsController from './controllers/keybindings-controller';
-// import KeybindingController from './controllers/keybinding-controller';
-// import KeybindingCapturerController from './controllers/keybinding-capturer-controller';
+import ModalController from './controllers/modal_controller';
+import KeybindingsController from './controllers/keybindings_controller';
+import KeybindingController from './controllers/keybinding_controller';
+import KeybindingCapturerController from './controllers/keybinding_capturer_controller';
 // import KeybindingActionsController from './controllers/keybinding-actions-controller';
 //
 // import ProfilesController from './controllers/profiles-controller';
@@ -43,9 +44,10 @@ application.register('select', withOverriddenSend(SelectController))
 application.register('checkbox', withOverriddenSend(CheckboxController))
 application.register('text', withOverriddenSend(TextController))
 application.register('color', withOverriddenSend(ColorController))
-// app.register('keybindings', KeybindingsController);
-// app.register('keybinding', KeybindingController);
-// app.register('keybinding-capturer', KeybindingCapturerController);
+application.register('modal', ModalController)
+application.register('keybindings', withOverriddenSend(KeybindingsController))
+application.register('keybinding', KeybindingController)
+application.register('keybinding-capturer', withOverriddenSend(KeybindingCapturerController))
 // app.register('keybinding-actions', KeybindingActionsController);
 // app.register('profiles', ProfilesController);
 // app.register('profile', ProfileController);
