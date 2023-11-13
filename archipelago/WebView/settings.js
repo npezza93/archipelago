@@ -14,28 +14,14 @@ import KeybindingController from './controllers/keybinding_controller';
 import KeybindingCapturerController from './controllers/keybinding_capturer_controller';
 import KeybindingActionsController from './controllers/keybinding_actions_controller';
 import ProfilesController from './controllers/profiles_controller';
+import ProfileController from './controllers/profile_controller';
+import ProfileCapturerController from './controllers/profile_capturer_controller';
 
-// import ProfileController from './controllers/profile-controller';
-// import ProfileCapturerController from './controllers/profile-capturer-controller';
 // import ProfileActionsController from './controllers/profile-actions-controller';
 
 const application    = Application.start()
 application.debug    = false
 window.Stimulus      = application
-
-function withOverriddenSend(BaseClass) {
-  return class extends BaseClass {
-    send(event, data = {}, callback) {
-      data.metadata = { url: "archipelago-1" }
-
-      const message = { component: this.component, event, data, callback }
-      const messageId = this.bridge.send(message)
-      if (callback) {
-        this.pendingMessageCallbacks.push(messageId)
-      }
-    }
-  }
-}
 
 application.register('tabs', withOverriddenSend(TabsController))
 application.register('fonts', withOverriddenSend(FontsController))
@@ -50,9 +36,24 @@ application.register('keybinding', KeybindingController)
 application.register('keybinding-capturer', withOverriddenSend(KeybindingCapturerController))
 application.register('keybinding-actions', withOverriddenSend(KeybindingActionsController))
 application.register('profiles', withOverriddenSend(ProfilesController))
-// app.register('profile', ProfileController);
-// app.register('profile-capturer', ProfileCapturerController);
+application.register('profile', ProfileController)
+application.register('profile-capturer', withOverriddenSend(ProfileCapturerController))
+
 // app.register('profile-actions', ProfileActionsController);
 
 window.addEventListener('blur', () => document.body.dataset.focus = 'false');
 window.addEventListener('focus', () => document.body.dataset.focus = 'true');
+
+function withOverriddenSend(BaseClass) {
+  return class extends BaseClass {
+    send(event, data = {}, callback) {
+      data.metadata = { url: "archipelago-1" }
+
+      const message = { component: this.component, event, data, callback }
+      const messageId = this.bridge.send(message)
+      if (callback) {
+        this.pendingMessageCallbacks.push(messageId)
+      }
+    }
+  }
+}

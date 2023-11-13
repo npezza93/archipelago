@@ -137,6 +137,7 @@ section {
   border-radius: 5px;
   padding-left: 7px;
   padding-bottom: 2px;
+  padding-top: 2px;
   cursor: pointer;
   -webkit-user-select: none;
 }
@@ -166,9 +167,8 @@ dialog::backdrop {
   -webkit-backdrop-filter: blur(3px);
   background-color: rgba(0, 0, 0, 0.4);
 }
-.backdrop[data-controller="profile-capturer"] .modal {
+dialog[data-controller*="profile-capturer"] {
   height: 100px;
-  top: calc(50% - 50px);
 }
 
 dialog .footer {
@@ -337,4 +337,7 @@ button.cancel {
   border-radius: 5px;
   padding-left: 7px;
   padding-bottom: 2px;
+  padding-top: 2px;
+  -webkit-user-select: none;
+  cursor: pointer;
 }

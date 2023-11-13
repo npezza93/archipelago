@@ -10,33 +10,27 @@ final class ProfilesComponent: BridgeComponent {
     }
 
     switch event {
-    case .connect:
-      handleConnectEvent(message)
+    case .change:
+      handleChangeEvent(message)
     }
   }
 
-  private func handleConnectEvent(_ message: Message) {
+  private func handleChangeEvent(_ message: Message) {
     let message = Message(
-      id: message.id, component: "profiles", event: "connect",
+      id: message.id, component: "profiles", event: "change",
       metadata: Message.Metadata(url: ""),
       jsonData: App.preferenceFile.asJson())
-    // App.preferenceFile.onChange(listener: onSettingChanged)
+    App.preferenceFile.onNameChange(listener: onNameChanged)
     reply(with: message)
   }
 
-  private func onSettingChanged(property: String, value: Any) {
-    if property == "keybindings" {
-      let json = """
-          {"property":"\(property)","value":\(value)}
-        """
-
-      reply(to: "keybindingsChanged", with: json)
-    }
+  private func onNameChanged(preferenceFile: String) {
+    reply(to: "change", with: preferenceFile)
   }
 }
 
 extension ProfilesComponent {
   fileprivate enum Event: String {
-    case connect
+    case change
   }
 }

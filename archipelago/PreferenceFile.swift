@@ -3,9 +3,11 @@ import Foundation
 class PreferenceFile {
   var config: Config
   var changeListeners: [(String, Any) -> Void]
+  var nameChangeListeners: [(String) -> Void]
 
   public init() {
     self.changeListeners = []
+    self.nameChangeListeners = []
     self.config = try! JSONDecoder().decode(Config.self, from: "{}".data(using: .utf8)!)
 
     ensureAppSupportDirectoryExists()
@@ -41,6 +43,17 @@ class PreferenceFile {
     let id = self.config.activeProfileId
 
     return self.config.profiles.firstIndex(where: { $0.id == id }) ?? 0
+  }
+
+  func updateName(id: UInt32, name: String) {
+    let index = self.config.profiles.firstIndex(where: { $0.id == id }) ?? 0
+    var profile = self.config.profiles[index]
+    profile.name = name
+    self.config.profiles[index] = profile
+    save()
+    for listener in nameChangeListeners {
+      listener(asJson())
+    }
   }
 
   func update(property: String, value: Any) {
@@ -170,6 +183,10 @@ class PreferenceFile {
 
   func onChange(listener: @escaping (String, Any) -> Void) {
     changeListeners.append(listener)
+  }
+
+  func onNameChange(listener: @escaping (String) -> Void) {
+    nameChangeListeners.append(listener)
   }
 
   private func ensureAppSupportDirectoryExists() {

@@ -43,6 +43,7 @@
 		01847B852B008FEE00BDB881 /* KeybindingCapturerComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01847B842B008FEE00BDB881 /* KeybindingCapturerComponent.swift */; };
 		01847B872B0174DD00BDB881 /* KeybindingActionsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01847B862B0174DD00BDB881 /* KeybindingActionsComponent.swift */; };
 		01847B892B01A32100BDB881 /* ProfilesComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01847B882B01A32100BDB881 /* ProfilesComponent.swift */; };
+		01847B8B2B01AC9B00BDB881 /* ProfileCapturerComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01847B8A2B01AC9B00BDB881 /* ProfileCapturerComponent.swift */; };
 		0195E7722AE9E5E1003EDDD2 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0195E7712AE9E5E1003EDDD2 /* App.swift */; };
 		01EC782C2AFEC00800F62F97 /* FontsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EC782B2AFEC00800F62F97 /* FontsComponent.swift */; };
 		01EC782E2AFEE1DF00F62F97 /* SelectComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EC782D2AFEE1DF00F62F97 /* SelectComponent.swift */; };
@@ -111,6 +112,7 @@
 		01847B842B008FEE00BDB881 /* KeybindingCapturerComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeybindingCapturerComponent.swift; sourceTree = "<group>"; };
 		01847B862B0174DD00BDB881 /* KeybindingActionsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeybindingActionsComponent.swift; sourceTree = "<group>"; };
 		01847B882B01A32100BDB881 /* ProfilesComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilesComponent.swift; sourceTree = "<group>"; };
+		01847B8A2B01AC9B00BDB881 /* ProfileCapturerComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCapturerComponent.swift; sourceTree = "<group>"; };
 		0195E7712AE9E5E1003EDDD2 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		01EC782B2AFEC00800F62F97 /* FontsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsComponent.swift; sourceTree = "<group>"; };
 		01EC782D2AFEE1DF00F62F97 /* SelectComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectComponent.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 				01847B882B01A32100BDB881 /* ProfilesComponent.swift */,
 				01EC782B2AFEC00800F62F97 /* FontsComponent.swift */,
 				01847B842B008FEE00BDB881 /* KeybindingCapturerComponent.swift */,
+				01847B8A2B01AC9B00BDB881 /* ProfileCapturerComponent.swift */,
 				01847B862B0174DD00BDB881 /* KeybindingActionsComponent.swift */,
 				01847B822B005DC300BDB881 /* KeybindingsComponent.swift */,
 				01F2D62E2AFC85F9001DCD2C /* RadioComponent.swift */,
@@ -411,6 +414,7 @@
 				0166EE7E2AE9C20700061485 /* TerminalWindowController.swift in Sources */,
 				01EC78322AFEF98400F62F97 /* TextComponent.swift in Sources */,
 				0166EE782AE8961D00061485 /* PreferenceFile.swift in Sources */,
+				01847B8B2B01AC9B00BDB881 /* ProfileCapturerComponent.swift in Sources */,
 				01847B832B005DC300BDB881 /* KeybindingsComponent.swift in Sources */,
 				011B14B62ADE23EF000822F4 /* TerminalComponent.swift in Sources */,
 				01847B852B008FEE00BDB881 /* KeybindingCapturerComponent.swift in Sources */,

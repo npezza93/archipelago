@@ -5,15 +5,11 @@ export default class extends BridgeComponent {
 
   connect() {
     // ipc.answerMain('active-profile-changed', this.setValue.bind(this));
-    // ipc.answerMain('profile-name-changed', this.setValue.bind(this));
     // ipc.answerMain('profile-removed', this.setValue.bind(this));
 
     super.connect()
-    this.send("connect", {}, ({data}) => {
+    this.send("change", {}, ({data}) => {
       this.setValue(data)
-    })
-    this.send("profilesChanged", {}, ({data}) => {
-      this.setValue(data.value)
     })
   }
 
@@ -22,7 +18,7 @@ export default class extends BridgeComponent {
     article.innerHTML = '';
 
     config.profiles.forEach(profile => {
-      article.insertAdjacentHTML('beforeend', `<div data-controller='profile' data-action='click->profile#select dblclick->profile#edit' data-profile-name-value=${profile.name} data-profile-id-value=${profile.id}>
+      article.insertAdjacentHTML('beforeend', `<div data-controller='profile' data-action='click->profile#select dblclick->profile#edit' data-profile-name-value='${profile.name}' data-profile-id-value=${profile.id}>
         <div>${profile.name || 'New Profile'}</div>
       </div>`);
     });
