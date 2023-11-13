@@ -15,6 +15,7 @@ extension BridgeComponent {
       KeybindingsComponent.self,
       KeybindingCapturerComponent.self,
       KeybindingActionsComponent.self,
+      ProfilesComponent.self,
     ]
   }
 }

@@ -13,8 +13,8 @@ import KeybindingsController from './controllers/keybindings_controller';
 import KeybindingController from './controllers/keybinding_controller';
 import KeybindingCapturerController from './controllers/keybinding_capturer_controller';
 import KeybindingActionsController from './controllers/keybinding_actions_controller';
+import ProfilesController from './controllers/profiles_controller';
 
-// import ProfilesController from './controllers/profiles-controller';
 // import ProfileController from './controllers/profile-controller';
 // import ProfileCapturerController from './controllers/profile-capturer-controller';
 // import ProfileActionsController from './controllers/profile-actions-controller';
@@ -49,7 +49,7 @@ application.register('keybindings', withOverriddenSend(KeybindingsController))
 application.register('keybinding', KeybindingController)
 application.register('keybinding-capturer', withOverriddenSend(KeybindingCapturerController))
 application.register('keybinding-actions', withOverriddenSend(KeybindingActionsController))
-// app.register('profiles', ProfilesController);
+application.register('profiles', withOverriddenSend(ProfilesController))
 // app.register('profile', ProfileController);
 // app.register('profile-capturer', ProfileCapturerController);
 // app.register('profile-actions', ProfileActionsController);

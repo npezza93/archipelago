@@ -153,6 +153,21 @@ class PreferenceFile {
     }
   }
 
+  func asJson() -> String {
+    do {
+      let jsonData = try JSONEncoder().encode(config)
+
+      if let jsonString = String(data: jsonData, encoding: .utf8) {
+        return jsonString
+      } else {
+        return ""
+      }
+
+    } catch {
+      return ""
+    }
+  }
+
   func onChange(listener: @escaping (String, Any) -> Void) {
     changeListeners.append(listener)
   }
