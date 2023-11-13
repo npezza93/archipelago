@@ -3,6 +3,7 @@ import Strada
 
 final class TerminalComponent: BridgeComponent {
   override class var name: String { "terminal" }
+  var changeListener: SettingChangeListenerWrapper?
   var terminal: Pty!
 
   override func onReceive(message: Message) {
@@ -26,12 +27,18 @@ final class TerminalComponent: BridgeComponent {
     }
   }
 
+  override func onViewWillDisappear() {
+    if let wrapper = self.changeListener {
+      App.preferenceFile.removeChange(wrapper: wrapper)
+    }
+  }
+
   private func handleConnectEvent() {
     let message = Message(
       id: "connect", component: "terminal", event: "connect",
       metadata: Message.Metadata(url: ""),
       jsonData: App.preferenceFile.activeProfileJSON())
-    App.preferenceFile.onChange(listener: onSettingChanged)
+    self.changeListener = App.preferenceFile.onChange(listener: onSettingChanged)
     reply(with: message)
   }
 

@@ -2,6 +2,7 @@ import Foundation
 import Strada
 
 final class ProfilesComponent: BridgeComponent {
+  var nameChangeListener: NameChangeListenerWrapper?
   override class var name: String { "profiles" }
 
   override func onReceive(message: Message) {
@@ -15,12 +16,18 @@ final class ProfilesComponent: BridgeComponent {
     }
   }
 
+  override func onViewWillDisappear() {
+    if let wrapper = self.nameChangeListener {
+      App.preferenceFile.removeNameChange(wrapper: wrapper)
+    }
+  }
+
   private func handleChangeEvent(_ message: Message) {
     let message = Message(
       id: message.id, component: "profiles", event: "change",
       metadata: Message.Metadata(url: ""),
       jsonData: App.preferenceFile.asJson())
-    App.preferenceFile.onNameChange(listener: onNameChanged)
+    self.nameChangeListener = App.preferenceFile.onNameChange(listener: onNameChanged)
     reply(with: message)
   }
 

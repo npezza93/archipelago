@@ -64,11 +64,7 @@
                                     <items>
                                         <menuItem title="New Window" keyEquivalent="n" id="dRJ-4n-Yzg"/>
                                         <menuItem isSeparatorItem="YES" id="WRV-NI-Exz"/>
-                                        <menuItem title="Close" keyEquivalent="w" id="Ruw-6m-B2m" userLabel="Close">
-                                            <connections>
-                                                <action selector="close:" target="Ady-hI-5gd" id="oA2-VV-Ori"/>
-                                            </connections>
-                                        </menuItem>
+                                        <menuItem title="Close" keyEquivalent="w" id="Ruw-6m-B2m" userLabel="Close"/>
                                     </items>
                                 </menu>
                             </menuItem>

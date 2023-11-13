@@ -2,8 +2,8 @@ import Foundation
 
 class PreferenceFile {
   var config: Config
-  var changeListeners: [(String, Any) -> Void]
-  var nameChangeListeners: [(String) -> Void]
+  var changeListeners: [SettingChangeListenerWrapper]
+  var nameChangeListeners: [NameChangeListenerWrapper]
 
   public init() {
     self.changeListeners = []
@@ -74,7 +74,7 @@ class PreferenceFile {
 
   private func notifyNameChangeListeners() {
     for listener in nameChangeListeners {
-      listener(asJson())
+      listener.listener(asJson())
     }
   }
 
@@ -175,9 +175,9 @@ class PreferenceFile {
     save()
     for listener in changeListeners {
       if property.starts(with: /theme\./) || property == "keybindings" {
-        listener(property, activeProfileJSON())
+        listener.listener(property, activeProfileJSON())
       } else {
-        listener(property, value)
+        listener.listener(property, value)
       }
     }
   }
@@ -212,12 +212,25 @@ class PreferenceFile {
     }
   }
 
-  func onChange(listener: @escaping (String, Any) -> Void) {
-    changeListeners.append(listener)
+  func onChange(listener: @escaping (String, Any) -> Void) -> SettingChangeListenerWrapper {
+    let wrapper = SettingChangeListenerWrapper(listener: listener)
+    changeListeners.append(wrapper)
+    return wrapper
+
   }
 
-  func onNameChange(listener: @escaping (String) -> Void) {
-    nameChangeListeners.append(listener)
+  func onNameChange(listener: @escaping (String) -> Void) -> NameChangeListenerWrapper {
+    let wrapper = NameChangeListenerWrapper(listener: listener)
+    nameChangeListeners.append(wrapper)
+    return wrapper
+  }
+
+  func removeChange(wrapper: SettingChangeListenerWrapper) {
+    self.changeListeners.removeAll { $0 === wrapper }
+  }
+
+  func removeNameChange(wrapper: NameChangeListenerWrapper) {
+    self.nameChangeListeners.removeAll { $0 === wrapper }
   }
 
   private func ensureAppSupportDirectoryExists() {
@@ -238,5 +251,21 @@ class PreferenceFile {
     ).first!
 
     return appSupportDir.appendingPathComponent("Archipelago/config.dev.json")
+  }
+}
+
+class NameChangeListenerWrapper {
+  let listener: (String) -> Void
+
+  init(listener: @escaping (String) -> Void) {
+    self.listener = listener
+  }
+}
+
+class SettingChangeListenerWrapper {
+  let listener: (String, Any) -> Void
+
+  init(listener: @escaping (String, Any) -> Void) {
+    self.listener = listener
   }
 }

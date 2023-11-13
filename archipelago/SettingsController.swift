@@ -18,10 +18,18 @@ class SettingsController: NSViewController, WKUIDelegate, NSWindowDelegate, Brid
     webView = WKWebView(
       frame: CGRect(x: 0, y: 0, width: 650, height: 600), configuration: .appConfiguration)
 
+    webView.configuration.preferences.setValue(true, forKey: "developerExtrasEnabled")
+
+    webView.setValue(false, forKey: "drawsBackground")
+
     webView.uiDelegate = self
+    webView.navigationDelegate = self
     #if DEBUG
       webView.isInspectable = true
     #endif
+    view = webView
+    Bridge.initialize(webView)
+
     let overlay = DraggingView(frame: CGRect(x: 0, y: 0, width: webView.frame.width, height: 30))
     overlay.wantsLayer = true
     overlay.layer?.backgroundColor = NSColor.clear.cgColor
@@ -45,6 +53,10 @@ class SettingsController: NSViewController, WKUIDelegate, NSWindowDelegate, Brid
     bridgeDelegate.onViewDidLoad()
   }
 
+  func windowWillClose(_ notification: Notification) {
+    bridgeDelegate.onViewWillDisappear()
+  }
+
   func webView(
     _ webView: WKWebView,
     runJavaScriptConfirmPanelWithMessage message: String,
@@ -59,5 +71,31 @@ class SettingsController: NSViewController, WKUIDelegate, NSWindowDelegate, Brid
     let action = alert.runModal()
 
     completionHandler(action == .alertFirstButtonReturn)
+  }
+}
+
+extension SettingsController: WKNavigationDelegate {
+  func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+    print("Failed navigation: \(error.localizedDescription)")
+  }
+
+  func webView(
+    _ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!,
+    withError error: Error
+  ) {
+    print("Failed provisional navigation: \(error.localizedDescription)")
+  }
+
+  func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+  }
+
+  func webView(
+    _ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration,
+    for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures
+  ) -> WKWebView? {
+    if let url = navigationAction.request.url {
+      NSWorkspace.shared.open(url)
+    }
+    return nil
   }
 }

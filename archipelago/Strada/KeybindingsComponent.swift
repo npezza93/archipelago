@@ -2,6 +2,7 @@ import Foundation
 import Strada
 
 final class KeybindingsComponent: BridgeComponent {
+  var changeListener: SettingChangeListenerWrapper?
   override class var name: String { "keybindings" }
 
   override func onReceive(message: Message) {
@@ -15,12 +16,18 @@ final class KeybindingsComponent: BridgeComponent {
     }
   }
 
+  override func onViewWillDisappear() {
+    if let wrapper = self.changeListener {
+      App.preferenceFile.removeChange(wrapper: wrapper)
+    }
+  }
+
   private func handleConnectEvent(_ message: Message) {
     let message = Message(
       id: message.id, component: "keybindings", event: "connect",
       metadata: Message.Metadata(url: ""),
       jsonData: App.preferenceFile.activeProfileJSON())
-    App.preferenceFile.onChange(listener: onSettingChanged)
+    self.changeListener = App.preferenceFile.onChange(listener: onSettingChanged)
     reply(with: message)
   }
 
