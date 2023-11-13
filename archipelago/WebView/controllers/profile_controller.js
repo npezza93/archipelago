@@ -1,14 +1,19 @@
-import {Controller} from '@hotwired/stimulus';
+import { BridgeComponent } from "@hotwired/strada"
 
-export default class extends Controller {
+export default class extends BridgeComponent {
+  static component = "profile"
   static values = { name: String, id: Number }
+
+  connect() {
+    super.connect()
+  }
 
   select() {
     document.querySelectorAll('#profiles article > div').forEach(row => {
       row.classList.remove('active');
     });
     this.element.classList.add('active');
-    // ipc.callMain('set-active-profile', this.idValue);
+    this.send("change", {id: this.idValue})
   }
 
   edit() {

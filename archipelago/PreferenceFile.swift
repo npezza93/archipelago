@@ -45,15 +45,46 @@ class PreferenceFile {
     return self.config.profiles.firstIndex(where: { $0.id == id }) ?? 0
   }
 
+  func createProfile() {
+    let profile: Config.Profile = self.config.profiles.max { $0.id < $1.id }!
+    let id: UInt32 = profile.id + 1
+    var newProfile = Config.Profile()
+    newProfile.id = id
+
+    self.config.profiles.append(newProfile)
+    self.config.activeProfileId = id
+    save()
+    notifyNameChangeListeners()
+  }
+
+  func destroyProfile() {
+    let currentId = activeProfile().id
+    let profiles = self.config.profiles.filter { $0.id != currentId }
+    config.profiles = profiles
+    config.activeProfileId = profiles[0].id
+    save()
+    notifyNameChangeListeners()
+  }
+
+  func updateActiveProfile(id: UInt32) {
+    config.activeProfileId = id
+    save()
+    notifyNameChangeListeners()
+  }
+
+  private func notifyNameChangeListeners() {
+    for listener in nameChangeListeners {
+      listener(asJson())
+    }
+  }
+
   func updateName(id: UInt32, name: String) {
     let index = self.config.profiles.firstIndex(where: { $0.id == id }) ?? 0
     var profile = self.config.profiles[index]
     profile.name = name
     self.config.profiles[index] = profile
     save()
-    for listener in nameChangeListeners {
-      listener(asJson())
-    }
+    notifyNameChangeListeners()
   }
 
   func update(property: String, value: Any) {

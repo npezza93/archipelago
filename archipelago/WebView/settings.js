@@ -16,8 +16,7 @@ import KeybindingActionsController from './controllers/keybinding_actions_contro
 import ProfilesController from './controllers/profiles_controller';
 import ProfileController from './controllers/profile_controller';
 import ProfileCapturerController from './controllers/profile_capturer_controller';
-
-// import ProfileActionsController from './controllers/profile-actions-controller';
+import ProfileActionsController from './controllers/profile_actions_controller';
 
 const application    = Application.start()
 application.debug    = false
@@ -36,10 +35,9 @@ application.register('keybinding', KeybindingController)
 application.register('keybinding-capturer', withOverriddenSend(KeybindingCapturerController))
 application.register('keybinding-actions', withOverriddenSend(KeybindingActionsController))
 application.register('profiles', withOverriddenSend(ProfilesController))
-application.register('profile', ProfileController)
+application.register('profile', withOverriddenSend(ProfileController))
 application.register('profile-capturer', withOverriddenSend(ProfileCapturerController))
-
-// app.register('profile-actions', ProfileActionsController);
+application.register('profile-actions', withOverriddenSend(ProfileActionsController))
 
 window.addEventListener('blur', () => document.body.dataset.focus = 'false');
 window.addEventListener('focus', () => document.body.dataset.focus = 'true');

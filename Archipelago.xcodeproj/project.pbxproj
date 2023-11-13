@@ -44,6 +44,8 @@
 		01847B872B0174DD00BDB881 /* KeybindingActionsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01847B862B0174DD00BDB881 /* KeybindingActionsComponent.swift */; };
 		01847B892B01A32100BDB881 /* ProfilesComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01847B882B01A32100BDB881 /* ProfilesComponent.swift */; };
 		01847B8B2B01AC9B00BDB881 /* ProfileCapturerComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01847B8A2B01AC9B00BDB881 /* ProfileCapturerComponent.swift */; };
+		01847B8D2B01C8C200BDB881 /* ProfileActionsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01847B8C2B01C8C200BDB881 /* ProfileActionsComponent.swift */; };
+		01847B8F2B01CDB900BDB881 /* ProfileComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01847B8E2B01CDB900BDB881 /* ProfileComponent.swift */; };
 		0195E7722AE9E5E1003EDDD2 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0195E7712AE9E5E1003EDDD2 /* App.swift */; };
 		01EC782C2AFEC00800F62F97 /* FontsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EC782B2AFEC00800F62F97 /* FontsComponent.swift */; };
 		01EC782E2AFEE1DF00F62F97 /* SelectComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EC782D2AFEE1DF00F62F97 /* SelectComponent.swift */; };
@@ -113,6 +115,8 @@
 		01847B862B0174DD00BDB881 /* KeybindingActionsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeybindingActionsComponent.swift; sourceTree = "<group>"; };
 		01847B882B01A32100BDB881 /* ProfilesComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilesComponent.swift; sourceTree = "<group>"; };
 		01847B8A2B01AC9B00BDB881 /* ProfileCapturerComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCapturerComponent.swift; sourceTree = "<group>"; };
+		01847B8C2B01C8C200BDB881 /* ProfileActionsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileActionsComponent.swift; sourceTree = "<group>"; };
+		01847B8E2B01CDB900BDB881 /* ProfileComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileComponent.swift; sourceTree = "<group>"; };
 		0195E7712AE9E5E1003EDDD2 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		01EC782B2AFEC00800F62F97 /* FontsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsComponent.swift; sourceTree = "<group>"; };
 		01EC782D2AFEE1DF00F62F97 /* SelectComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectComponent.swift; sourceTree = "<group>"; };
@@ -217,6 +221,8 @@
 			children = (
 				011B14B32ADE23BB000822F4 /* BridgeComponent+App.swift */,
 				01EC782F2AFEF1BB00F62F97 /* CheckboxComponent.swift */,
+				01847B8C2B01C8C200BDB881 /* ProfileActionsComponent.swift */,
+				01847B8E2B01CDB900BDB881 /* ProfileComponent.swift */,
 				01EC78332AFF360C00F62F97 /* ColorComponent.swift */,
 				01847B882B01A32100BDB881 /* ProfilesComponent.swift */,
 				01EC782B2AFEC00800F62F97 /* FontsComponent.swift */,
@@ -402,6 +408,7 @@
 				01EC78342AFF360C00F62F97 /* ColorComponent.swift in Sources */,
 				011B14432ADE1664000822F4 /* ViewController.swift in Sources */,
 				011B14412ADE1664000822F4 /* AppDelegate.swift in Sources */,
+				01847B8F2B01CDB900BDB881 /* ProfileComponent.swift in Sources */,
 				01EC782E2AFEE1DF00F62F97 /* SelectComponent.swift in Sources */,
 				0166EE662AE73FC700061485 /* DraggingView.swift in Sources */,
 				0166EE7C2AE9C16100061485 /* NSColor.swift in Sources */,
@@ -419,6 +426,7 @@
 				011B14B62ADE23EF000822F4 /* TerminalComponent.swift in Sources */,
 				01847B852B008FEE00BDB881 /* KeybindingCapturerComponent.swift in Sources */,
 				011B14452ADE1664000822F4 /* Document.swift in Sources */,
+				01847B8D2B01C8C200BDB881 /* ProfileActionsComponent.swift in Sources */,
 				01EC782C2AFEC00800F62F97 /* FontsComponent.swift in Sources */,
 				01EC78302AFEF1BB00F62F97 /* CheckboxComponent.swift in Sources */,
 				011B14B42ADE23BB000822F4 /* BridgeComponent+App.swift in Sources */,
