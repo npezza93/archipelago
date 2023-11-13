@@ -1,13 +1,6 @@
-//
-//  archipelago2UITestsLaunchTests.swift
-//  archipelago2UITests
-//
-//  Created by Nick Pezza on 10/16/23.
-//
-
 import XCTest
 
-final class archipelago2UITestsLaunchTests: XCTestCase {
+final class archipelagoUITestsLaunchTests: XCTestCase {
 
   override class var runsForEachTargetApplicationUIConfiguration: Bool {
     true

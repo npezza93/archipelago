@@ -1,13 +1,6 @@
-//
-//  archipelago2UITests.swift
-//  archipelago2UITests
-//
-//  Created by Nick Pezza on 10/16/23.
-//
-
 import XCTest
 
-final class archipelago2UITests: XCTestCase {
+final class archipelagoUITests: XCTestCase {
 
   override func setUpWithError() throws {
     // Put setup code here. This method is called before the invocation of each test method in the class.

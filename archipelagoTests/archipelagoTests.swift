@@ -1,15 +1,8 @@
-//
-//  archipelago2Tests.swift
-//  archipelago2Tests
-//
-//  Created by Nick Pezza on 10/16/23.
-//
-
 import XCTest
 
-@testable import archipelago2
+@testable import archipelago
 
-final class archipelago2Tests: XCTestCase {
+final class archipelagoTests: XCTestCase {
 
   override func setUpWithError() throws {
     // Put setup code here. This method is called before the invocation of each test method in the class.

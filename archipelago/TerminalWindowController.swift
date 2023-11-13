@@ -1,10 +1,3 @@
-//
-//  TerminalWindowController.swift
-//  archipelago2
-//
-//  Created by Nick Pezza on 10/25/23.
-//
-
 import Cocoa
 import Foundation
 

@@ -185,6 +185,8 @@ button.ok {
   font-family: "Menlo";
   font-size: 13px;
   letter-spacing: 0.5px;
+  -webkit-user-select: none;
+  cursor: pointer;
 }
 @media (prefers-color-scheme: dark) {
   button.ok {
@@ -218,6 +220,8 @@ button.cancel {
   background: var(--modal-inactive-button-background);
   font-family: "Menlo";
   font-size: 13px;
+  -webkit-user-select: none;
+  cursor: pointer;
 }
 @media (prefers-color-scheme: dark) {
   button.cancel {
@@ -306,6 +310,8 @@ button.cancel {
   border-top: 1px solid var(--text-input-border-bottom-color);
   border-left: 1px solid var(--text-input-border-bottom-color);
   border-bottom: 1px solid var(--text-input-border-bottom-color);
+  -webkit-user-select: none;
+  cursor: pointer;
 }
 .keybinding-actions .minus, .profile-actions .minus {
   border-right: 1px solid var(--text-input-border-bottom-color);

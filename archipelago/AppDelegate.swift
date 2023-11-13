@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  archipelago2
-//
-//  Created by Nick Pezza on 10/16/23.
-//
-
 import Cocoa
 import Strada
 

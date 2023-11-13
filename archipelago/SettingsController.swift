@@ -44,4 +44,20 @@ class SettingsController: NSViewController, WKUIDelegate, NSWindowDelegate, Brid
     self.webView.loadFileURL(self.url, allowingReadAccessTo: path)
     bridgeDelegate.onViewDidLoad()
   }
+
+  func webView(
+    _ webView: WKWebView,
+    runJavaScriptConfirmPanelWithMessage message: String,
+    initiatedByFrame frame: WKFrameInfo,
+    completionHandler: @escaping (Bool) -> Void
+  ) {
+    let alert = NSAlert()
+    alert.messageText = message
+    alert.addButton(withTitle: "OK")
+    alert.addButton(withTitle: "Cancel")
+
+    let action = alert.runModal()
+
+    completionHandler(action == .alertFirstButtonReturn)
+  }
 }

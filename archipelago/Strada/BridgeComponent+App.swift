@@ -14,6 +14,7 @@ extension BridgeComponent {
       ColorComponent.self,
       KeybindingsComponent.self,
       KeybindingCapturerComponent.self,
+      KeybindingActionsComponent.self,
     ]
   }
 }

@@ -15,9 +15,9 @@
 		011B14432ADE1664000822F4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011B14422ADE1664000822F4 /* ViewController.swift */; };
 		011B14452ADE1664000822F4 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011B14442ADE1664000822F4 /* Document.swift */; };
 		011B14472ADE1665000822F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 011B14462ADE1665000822F4 /* Assets.xcassets */; };
-		011B14562ADE1665000822F4 /* archipelago2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011B14552ADE1665000822F4 /* archipelago2Tests.swift */; };
-		011B14602ADE1665000822F4 /* archipelago2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011B145F2ADE1665000822F4 /* archipelago2UITests.swift */; };
-		011B14622ADE1665000822F4 /* archipelago2UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011B14612ADE1665000822F4 /* archipelago2UITestsLaunchTests.swift */; };
+		011B14562ADE1665000822F4 /* archipelagoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011B14552ADE1665000822F4 /* archipelagoTests.swift */; };
+		011B14602ADE1665000822F4 /* archipelagoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011B145F2ADE1665000822F4 /* archipelagoUITests.swift */; };
+		011B14622ADE1665000822F4 /* archipelagoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011B14612ADE1665000822F4 /* archipelagoUITestsLaunchTests.swift */; };
 		011B14752ADE17BD000822F4 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 011B14742ADE17BD000822F4 /* index.html */; };
 		011B14772ADE1A7A000822F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 011B14762ADE1A7A000822F4 /* Main.storyboard */; };
 		011B14B42ADE23BB000822F4 /* BridgeComponent+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011B14B32ADE23BB000822F4 /* BridgeComponent+App.swift */; };
@@ -41,6 +41,7 @@
 		0166EE7E2AE9C20700061485 /* TerminalWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0166EE7D2AE9C20700061485 /* TerminalWindowController.swift */; };
 		01847B832B005DC300BDB881 /* KeybindingsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01847B822B005DC300BDB881 /* KeybindingsComponent.swift */; };
 		01847B852B008FEE00BDB881 /* KeybindingCapturerComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01847B842B008FEE00BDB881 /* KeybindingCapturerComponent.swift */; };
+		01847B872B0174DD00BDB881 /* KeybindingActionsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01847B862B0174DD00BDB881 /* KeybindingActionsComponent.swift */; };
 		0195E7722AE9E5E1003EDDD2 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0195E7712AE9E5E1003EDDD2 /* App.swift */; };
 		01EC782C2AFEC00800F62F97 /* FontsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EC782B2AFEC00800F62F97 /* FontsComponent.swift */; };
 		01EC782E2AFEE1DF00F62F97 /* SelectComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EC782D2AFEE1DF00F62F97 /* SelectComponent.swift */; };
@@ -56,19 +57,19 @@
 			containerPortal = 011B14352ADE1664000822F4 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 011B143C2ADE1664000822F4;
-			remoteInfo = archipelago2;
+			remoteInfo = archipelago;
 		};
 		011B145C2ADE1665000822F4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 011B14352ADE1664000822F4 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 011B143C2ADE1664000822F4;
-			remoteInfo = archipelago2;
+			remoteInfo = archipelago;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		01108D912ADE2F5600603FBF /* application.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = application.min.js; path = archipelago2/WebView/application.min.js; sourceTree = SOURCE_ROOT; };
+		01108D912ADE2F5600603FBF /* application.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = application.min.js; path = archipelago/WebView/application.min.js; sourceTree = SOURCE_ROOT; };
 		01108D932AE0AE8D00603FBF /* WKWebViewConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKWebViewConfiguration.swift; sourceTree = "<group>"; };
 		01108D952AE4C23E00603FBF /* Pty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pty.swift; sourceTree = "<group>"; };
 		011B143D2ADE1664000822F4 /* Archipelago.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Archipelago.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,17 +78,17 @@
 		011B14442ADE1664000822F4 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		011B14462ADE1665000822F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		011B144B2ADE1665000822F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		011B144C2ADE1665000822F4 /* archipelago2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = archipelago2.entitlements; sourceTree = "<group>"; };
+		011B144C2ADE1665000822F4 /* archipelago.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = archipelago.entitlements; sourceTree = "<group>"; };
 		011B14512ADE1665000822F4 /* ArchipelagoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ArchipelagoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		011B14552ADE1665000822F4 /* archipelago2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = archipelago2Tests.swift; sourceTree = "<group>"; };
+		011B14552ADE1665000822F4 /* archipelagoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = archipelagoTests.swift; sourceTree = "<group>"; };
 		011B145B2ADE1665000822F4 /* ArchipelagoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ArchipelagoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		011B145F2ADE1665000822F4 /* archipelago2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = archipelago2UITests.swift; sourceTree = "<group>"; };
-		011B14612ADE1665000822F4 /* archipelago2UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = archipelago2UITestsLaunchTests.swift; sourceTree = "<group>"; };
+		011B145F2ADE1665000822F4 /* archipelagoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = archipelagoUITests.swift; sourceTree = "<group>"; };
+		011B14612ADE1665000822F4 /* archipelagoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = archipelagoUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		011B14742ADE17BD000822F4 /* index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		011B14762ADE1A7A000822F4 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		011B14B32ADE23BB000822F4 /* BridgeComponent+App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BridgeComponent+App.swift"; sourceTree = "<group>"; };
 		011B14B52ADE23EF000822F4 /* TerminalComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalComponent.swift; sourceTree = "<group>"; };
-		0166EE592AE55B4C00061485 /* archipelago2Release.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = archipelago2Release.entitlements; sourceTree = "<group>"; };
+		0166EE592AE55B4C00061485 /* archipelagoRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = archipelagoRelease.entitlements; sourceTree = "<group>"; };
 		0166EE5B2AE56F8C00061485 /* index.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = index.css; sourceTree = "<group>"; };
 		0166EE5D2AE625FF00061485 /* AboutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutController.swift; sourceTree = "<group>"; };
 		0166EE5F2AE70D5F00061485 /* about.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = about.html; sourceTree = "<group>"; };
@@ -107,6 +108,7 @@
 		0166EE7D2AE9C20700061485 /* TerminalWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalWindowController.swift; sourceTree = "<group>"; };
 		01847B822B005DC300BDB881 /* KeybindingsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeybindingsComponent.swift; sourceTree = "<group>"; };
 		01847B842B008FEE00BDB881 /* KeybindingCapturerComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeybindingCapturerComponent.swift; sourceTree = "<group>"; };
+		01847B862B0174DD00BDB881 /* KeybindingActionsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeybindingActionsComponent.swift; sourceTree = "<group>"; };
 		0195E7712AE9E5E1003EDDD2 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		01EC782B2AFEC00800F62F97 /* FontsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsComponent.swift; sourceTree = "<group>"; };
 		01EC782D2AFEE1DF00F62F97 /* SelectComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectComponent.swift; sourceTree = "<group>"; };
@@ -165,26 +167,26 @@
 		011B143F2ADE1664000822F4 /* archipelago */ = {
 			isa = PBXGroup;
 			children = (
-				0166EE5A2AE55C6500061485 /* WebView */,
-				0166EE592AE55B4C00061485 /* archipelago2Release.entitlements */,
-				011B14B22ADE23A7000822F4 /* Strada */,
-				011B14402ADE1664000822F4 /* AppDelegate.swift */,
-				011B14422ADE1664000822F4 /* ViewController.swift */,
-				0166EE7D2AE9C20700061485 /* TerminalWindowController.swift */,
-				011B14442ADE1664000822F4 /* Document.swift */,
-				011B14462ADE1665000822F4 /* Assets.xcassets */,
-				011B144B2ADE1665000822F4 /* Info.plist */,
-				011B144C2ADE1665000822F4 /* archipelago2.entitlements */,
-				011B14762ADE1A7A000822F4 /* Main.storyboard */,
-				01108D932AE0AE8D00603FBF /* WKWebViewConfiguration.swift */,
-				01108D952AE4C23E00603FBF /* Pty.swift */,
 				0166EE5D2AE625FF00061485 /* AboutController.swift */,
-				0166EE632AE73F7600061485 /* SettingsController.swift */,
-				0166EE652AE73FC700061485 /* DraggingView.swift */,
-				0166EE772AE8961D00061485 /* PreferenceFile.swift */,
-				0166EE792AE8AD1100061485 /* Config.swift */,
-				0166EE7B2AE9C16100061485 /* NSColor.swift */,
 				0195E7712AE9E5E1003EDDD2 /* App.swift */,
+				011B14402ADE1664000822F4 /* AppDelegate.swift */,
+				011B144C2ADE1665000822F4 /* archipelago.entitlements */,
+				0166EE592AE55B4C00061485 /* archipelagoRelease.entitlements */,
+				011B14462ADE1665000822F4 /* Assets.xcassets */,
+				0166EE792AE8AD1100061485 /* Config.swift */,
+				011B14442ADE1664000822F4 /* Document.swift */,
+				0166EE652AE73FC700061485 /* DraggingView.swift */,
+				011B144B2ADE1665000822F4 /* Info.plist */,
+				011B14762ADE1A7A000822F4 /* Main.storyboard */,
+				0166EE7B2AE9C16100061485 /* NSColor.swift */,
+				0166EE772AE8961D00061485 /* PreferenceFile.swift */,
+				01108D952AE4C23E00603FBF /* Pty.swift */,
+				0166EE632AE73F7600061485 /* SettingsController.swift */,
+				011B14B22ADE23A7000822F4 /* Strada */,
+				0166EE7D2AE9C20700061485 /* TerminalWindowController.swift */,
+				011B14422ADE1664000822F4 /* ViewController.swift */,
+				0166EE5A2AE55C6500061485 /* WebView */,
+				01108D932AE0AE8D00603FBF /* WKWebViewConfiguration.swift */,
 			);
 			path = archipelago;
 			sourceTree = "<group>";
@@ -192,7 +194,7 @@
 		011B14542ADE1665000822F4 /* archipelagoTests */ = {
 			isa = PBXGroup;
 			children = (
-				011B14552ADE1665000822F4 /* archipelago2Tests.swift */,
+				011B14552ADE1665000822F4 /* archipelagoTests.swift */,
 			);
 			path = archipelagoTests;
 			sourceTree = "<group>";
@@ -200,8 +202,8 @@
 		011B145E2ADE1665000822F4 /* archipelagoUITests */ = {
 			isa = PBXGroup;
 			children = (
-				011B145F2ADE1665000822F4 /* archipelago2UITests.swift */,
-				011B14612ADE1665000822F4 /* archipelago2UITestsLaunchTests.swift */,
+				011B145F2ADE1665000822F4 /* archipelagoUITests.swift */,
+				011B14612ADE1665000822F4 /* archipelagoUITestsLaunchTests.swift */,
 			);
 			path = archipelagoUITests;
 			sourceTree = "<group>";
@@ -210,16 +212,17 @@
 			isa = PBXGroup;
 			children = (
 				011B14B32ADE23BB000822F4 /* BridgeComponent+App.swift */,
-				011B14B52ADE23EF000822F4 /* TerminalComponent.swift */,
-				01847B822B005DC300BDB881 /* KeybindingsComponent.swift */,
-				01847B842B008FEE00BDB881 /* KeybindingCapturerComponent.swift */,
-				01EC78332AFF360C00F62F97 /* ColorComponent.swift */,
-				01F2D62E2AFC85F9001DCD2C /* RadioComponent.swift */,
-				01EC78312AFEF98400F62F97 /* TextComponent.swift */,
-				01EC782D2AFEE1DF00F62F97 /* SelectComponent.swift */,
-				01EC782B2AFEC00800F62F97 /* FontsComponent.swift */,
-				0166EE742AE7507C00061485 /* TabsComponent.swift */,
 				01EC782F2AFEF1BB00F62F97 /* CheckboxComponent.swift */,
+				01EC78332AFF360C00F62F97 /* ColorComponent.swift */,
+				01EC782B2AFEC00800F62F97 /* FontsComponent.swift */,
+				01847B842B008FEE00BDB881 /* KeybindingCapturerComponent.swift */,
+				01847B862B0174DD00BDB881 /* KeybindingActionsComponent.swift */,
+				01847B822B005DC300BDB881 /* KeybindingsComponent.swift */,
+				01F2D62E2AFC85F9001DCD2C /* RadioComponent.swift */,
+				01EC782D2AFEE1DF00F62F97 /* SelectComponent.swift */,
+				0166EE742AE7507C00061485 /* TabsComponent.swift */,
+				011B14B52ADE23EF000822F4 /* TerminalComponent.swift */,
+				01EC78312AFEF98400F62F97 /* TextComponent.swift */,
 			);
 			path = Strada;
 			sourceTree = "<group>";
@@ -227,17 +230,17 @@
 		0166EE5A2AE55C6500061485 /* WebView */ = {
 			isa = PBXGroup;
 			children = (
+				0166EE612AE70DD800061485 /* about.css */,
+				0166EE5F2AE70D5F00061485 /* about.html */,
+				01108D912ADE2F5600603FBF /* application.min.js */,
+				0166EE5B2AE56F8C00061485 /* index.css */,
+				011B14742ADE17BD000822F4 /* index.html */,
 				0166EE6D2AE7414D00061485 /* settings-choices.css */,
 				0166EE6C2AE7414D00061485 /* settings-general.css */,
 				0166EE6A2AE7414D00061485 /* settings-header.css */,
 				0166EE6B2AE7414D00061485 /* settings-vars.css */,
-				0166EE722AE74F3600061485 /* settings.min.js */,
-				01108D912ADE2F5600603FBF /* application.min.js */,
-				011B14742ADE17BD000822F4 /* index.html */,
-				0166EE5B2AE56F8C00061485 /* index.css */,
-				0166EE5F2AE70D5F00061485 /* about.html */,
-				0166EE612AE70DD800061485 /* about.css */,
 				0166EE672AE7405F00061485 /* settings.html */,
+				0166EE722AE74F3600061485 /* settings.min.js */,
 			);
 			path = WebView;
 			sourceTree = "<group>";
@@ -261,7 +264,7 @@
 			packageProductDependencies = (
 				01108D8D2ADE2ADB00603FBF /* Strada */,
 			);
-			productName = archipelago2;
+			productName = archipelago;
 			productReference = 011B143D2ADE1664000822F4 /* Archipelago.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -279,7 +282,7 @@
 				011B14532ADE1665000822F4 /* PBXTargetDependency */,
 			);
 			name = ArchipelagoTests;
-			productName = archipelago2Tests;
+			productName = archipelagoTests;
 			productReference = 011B14512ADE1665000822F4 /* ArchipelagoTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
@@ -297,7 +300,7 @@
 				011B145D2ADE1665000822F4 /* PBXTargetDependency */,
 			);
 			name = ArchipelagoUITests;
-			productName = archipelago2UITests;
+			productName = archipelagoUITests;
 			productReference = 011B145B2ADE1665000822F4 /* ArchipelagoUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
@@ -413,6 +416,7 @@
 				011B14B42ADE23BB000822F4 /* BridgeComponent+App.swift in Sources */,
 				0166EE752AE7507C00061485 /* TabsComponent.swift in Sources */,
 				0166EE5E2AE625FF00061485 /* AboutController.swift in Sources */,
+				01847B872B0174DD00BDB881 /* KeybindingActionsComponent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,7 +424,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				011B14562ADE1665000822F4 /* archipelago2Tests.swift in Sources */,
+				011B14562ADE1665000822F4 /* archipelagoTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,8 +432,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				011B14602ADE1665000822F4 /* archipelago2UITests.swift in Sources */,
-				011B14622ADE1665000822F4 /* archipelago2UITestsLaunchTests.swift in Sources */,
+				011B14602ADE1665000822F4 /* archipelagoUITests.swift in Sources */,
+				011B14622ADE1665000822F4 /* archipelagoUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -572,7 +576,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = archipelago2/archipelago2.entitlements;
+				CODE_SIGN_ENTITLEMENTS = archipelago/archipelago.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
@@ -581,7 +585,7 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = archipelago2/Info.plist;
+				INFOPLIST_FILE = archipelago/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -603,7 +607,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = archipelago2/archipelago2Release.entitlements;
+				CODE_SIGN_ENTITLEMENTS = archipelago/archipelagoRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
@@ -612,7 +616,7 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = archipelago2/Info.plist;
+				INFOPLIST_FILE = archipelago/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -640,7 +644,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = co.pezza.archipelago2Tests;
+				PRODUCT_BUNDLE_IDENTIFIER = co.pezza.archipelagoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -659,7 +663,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = co.pezza.archipelago2Tests;
+				PRODUCT_BUNDLE_IDENTIFIER = co.pezza.archipelagoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -676,11 +680,11 @@
 				DEVELOPMENT_TEAM = 4K4322K3MA;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = co.pezza.archipelago2UITests;
+				PRODUCT_BUNDLE_IDENTIFIER = co.pezza.archipelagoUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = archipelago2;
+				TEST_TARGET_NAME = archipelago;
 			};
 			name = Debug;
 		};
@@ -693,11 +697,11 @@
 				DEVELOPMENT_TEAM = 4K4322K3MA;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = co.pezza.archipelago2UITests;
+				PRODUCT_BUNDLE_IDENTIFIER = co.pezza.archipelagoUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = archipelago2;
+				TEST_TARGET_NAME = archipelago;
 			};
 			name = Release;
 		};

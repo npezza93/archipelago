@@ -23,7 +23,7 @@ export default class extends BridgeComponent {
     const activeItem = document.querySelector('[data-controller="keybinding"].active');
 
     if (activeItem) {
-      const answer = confirm('Are you sure?');
+      const answer = window.confirm('Are you sure you want to delete this keybinding?');
       if (answer) {
         delete this.keybindings[activeItem.dataset.keybindingIndexValue];
         this.keybindings = this.keybindings.filter(item => item);
