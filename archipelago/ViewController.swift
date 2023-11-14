@@ -61,30 +61,9 @@ class ViewController: NSViewController, WKUIDelegate, NSWindowDelegate, BridgeDe
   }
 
   private func monospsaceFontStylesheet() -> String {
-    var stylesheet = ""
-
-    for (fontName, fontPath) in App.fonts {
-      if let fontData = try? Data(contentsOf: URL(fileURLWithPath: fontPath)) {
-        let base64FontData = fontData.base64EncodedString()
-        let cssFontFace = """
-          @font-face {
-              font-family: '\(fontName)';
-              src: url(data:font/truetype;base64,\(base64FontData));
-          }
-          """
-        stylesheet += cssFontFace + "\n\n"
-      }
-    }
-
-    // Escape newlines and single quotes for JavaScript
-    let escapedStylesheet = stylesheet.replacingOccurrences(of: "\n", with: "\\n")
-      .replacingOccurrences(of: "'", with: "\\'")
-
     return """
       document.addEventListener('DOMContentLoaded', () => {
-          var style = document.createElement('style');
-          style.innerHTML = '\(escapedStylesheet)';
-          document.head.appendChild(style);
+          window.fonts = \(App.fonts.map { $0.as_json() })
       });
       """
   }

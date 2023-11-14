@@ -19,7 +19,7 @@ final class FontsComponent: BridgeComponent {
 
   private func handleConnectEvent(_ message: Message) {
     let json = """
-          {"profile":\(App.preferenceFile.activeProfileJSON()),"fonts":\(App.fonts.keys)}
+          {"profile":\(App.preferenceFile.activeProfileJSON()),"fonts":\(App.fonts.map { $0.name })}
       """
 
     let message = Message(

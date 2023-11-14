@@ -8,8 +8,8 @@ struct App {
     return preferenceFile.activeProfile()
   }
 
-  static var fonts: [String: String] = {
-    var fontDict: [String: String] = [:]
+  static var fonts: [Font] = {
+    var fontDict: [String: Font] = [:]
 
     let fontCollection = CTFontCollectionCreateFromAvailableFonts(nil)
     let matchingFonts: [CTFontDescriptor] =
@@ -22,11 +22,11 @@ struct App {
           || familyName.lowercased().contains("mono"),
           let url = CTFontDescriptorCopyAttribute(fontDescriptor, kCTFontURLAttribute) as? URL
         {
-          fontDict[familyName] = url.path
+          fontDict[familyName] = Font(name: familyName, path: url.path)
         }
       }
     }
 
-    return fontDict
+    return Array(fontDict.values)
   }()
 }
