@@ -10,36 +10,24 @@ final class KeybindingActionsComponent: BridgeComponent {
     }
 
     switch event {
-    case .connect:
-      handleConnectEvent(message)
     case .change:
       handleChangeEvent(message)
     }
   }
 
-  private func handleConnectEvent(_ message: Message) {
-    let message = Message(
-      id: message.id, component: "keybinding-actions", event: "connect",
-      metadata: Message.Metadata(url: ""),
-      jsonData: App.preferenceFile.activeProfileJSON())
-    reply(with: message)
-  }
-
   private func handleChangeEvent(_ message: Message) {
     guard let data: MessageData = message.data() else { return }
 
-    App.preferenceFile.update(property: data.property, value: data.value)
+    App.preferenceFile.destroyKeybinding(index: data.index)
   }
 }
 
 extension KeybindingActionsComponent {
   fileprivate enum Event: String {
-    case connect
     case change
   }
 
   fileprivate struct MessageData: Decodable {
-    let property: String
-    let value: [Config.Profile.Keybinding]
+    let index: Int
   }
 }

@@ -1,7 +1,7 @@
 import Foundation
 import Strada
 
-final class RadioComponent: BridgeComponent {
+final class RadioComponent: ProfileChanger {
   override class var name: String { "radio" }
 
   override func onReceive(message: Message) {
@@ -22,6 +22,7 @@ final class RadioComponent: BridgeComponent {
       id: message.id, component: "radio", event: "connect",
       metadata: Message.Metadata(url: ""),
       jsonData: App.preferenceFile.activeProfileJSON())
+    addListener(id: message.id)
     reply(with: message)
   }
 

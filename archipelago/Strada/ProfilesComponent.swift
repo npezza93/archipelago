@@ -2,8 +2,8 @@ import Foundation
 import Strada
 
 final class ProfilesComponent: BridgeComponent {
-  var nameChangeListener: NameChangeListenerWrapper?
   override class var name: String { "profiles" }
+  var nameChangeListener: NameChangeListenerWrapper?
 
   override func onReceive(message: Message) {
     guard let event = Event(rawValue: message.event) else {

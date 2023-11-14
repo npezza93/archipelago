@@ -3,7 +3,8 @@ import Strada
 
 final class TerminalComponent: BridgeComponent {
   override class var name: String { "terminal" }
-  var changeListener: SettingChangeListenerWrapper?
+  var settingChangeListener: SettingChangeListenerWrapper?
+  var profileChangeListeners: [ProfileChangeListenerWrapper]?
   var terminal: Pty!
 
   override func onReceive(message: Message) {
@@ -24,12 +25,17 @@ final class TerminalComponent: BridgeComponent {
       handleBinaryEvent(message: message)
     case .resize:
       handleResizeEvent(message: message)
+    case .profileChanged:
+      addProfileListener(id: message.id)
     }
   }
 
   override func onViewWillDisappear() {
-    if let wrapper = self.changeListener {
+    if let wrapper = self.settingChangeListener {
       App.preferenceFile.removeChange(wrapper: wrapper)
+    }
+    if let wrappers = self.profileChangeListeners {
+      wrappers.forEach { App.preferenceFile.removeProfileChange(wrapper: $0) }
     }
   }
 
@@ -38,7 +44,7 @@ final class TerminalComponent: BridgeComponent {
       id: "connect", component: "terminal", event: "connect",
       metadata: Message.Metadata(url: ""),
       jsonData: App.preferenceFile.activeProfileJSON())
-    self.changeListener = App.preferenceFile.onChange(listener: onSettingChanged)
+    self.settingChangeListener = App.preferenceFile.onChange(listener: onSettingChanged)
     reply(with: message)
   }
 
@@ -95,6 +101,29 @@ final class TerminalComponent: BridgeComponent {
 
     reply(to: "settingChanged", with: json)
   }
+
+  private func addProfileListener(id: String) {
+    if let wrappers = self.profileChangeListeners {
+      self.profileChangeListeners =
+        wrappers + [App.preferenceFile.onProfileChange(id: id, listener: onProfileChanged)]
+    } else {
+      self.profileChangeListeners = [
+        App.preferenceFile.onProfileChange(id: id, listener: onProfileChanged)
+      ]
+    }
+  }
+
+  private func onProfileChanged(profile: String) {
+    if let wrappers = self.profileChangeListeners {
+      wrappers.forEach {
+        let message = Message(
+          id: $0.id, component: type(of: self).name, event: "profileChanged",
+          metadata: Message.Metadata(url: ""),
+          jsonData: profile)
+        reply(with: message)
+      }
+    }
+  }
 }
 
 // MARK: Events
@@ -107,6 +136,7 @@ extension TerminalComponent {
     case write
     case binary
     case resize
+    case profileChanged
   }
 }
 

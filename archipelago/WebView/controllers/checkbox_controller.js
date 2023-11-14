@@ -5,7 +5,6 @@ export default class extends BridgeComponent {
   static targets = ['input']
 
   connect() {
-    // ipc.answerMain('active-profile-changed', this.setValue.bind(this));
     super.connect()
     this.send("connect", {}, ({data}) => {
       this.setValue(data)

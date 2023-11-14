@@ -1,7 +1,7 @@
 import Foundation
 import Strada
 
-final class SelectComponent: BridgeComponent {
+final class SelectComponent: ProfileChanger {
   override class var name: String { "select" }
 
   override func onReceive(message: Message) {
@@ -22,6 +22,7 @@ final class SelectComponent: BridgeComponent {
       id: message.id, component: "select", event: "connect",
       metadata: Message.Metadata(url: ""),
       jsonData: App.preferenceFile.activeProfileJSON())
+    addListener(id: message.id)
     reply(with: message)
   }
 

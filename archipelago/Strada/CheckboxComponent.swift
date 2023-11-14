@@ -1,7 +1,7 @@
 import Foundation
 import Strada
 
-final class CheckboxComponent: BridgeComponent {
+final class CheckboxComponent: ProfileChanger {
   override class var name: String { "checkbox" }
 
   override func onReceive(message: Message) {
@@ -22,6 +22,7 @@ final class CheckboxComponent: BridgeComponent {
       id: message.id, component: "checkbox", event: "connect",
       metadata: Message.Metadata(url: ""),
       jsonData: App.preferenceFile.activeProfileJSON())
+    addListener(id: message.id)
     reply(with: message)
   }
 

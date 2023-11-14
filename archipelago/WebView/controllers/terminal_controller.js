@@ -35,6 +35,17 @@ export default class extends BridgeComponent {
       this.attach()
     })
 
+    this.send("profileChanged", {}, ({data}) => {
+      this.profile = data
+      this.xterm.options.allowTransparency = this.settings().allowTransparency;
+      this.xtermSettings().forEach((property) => {
+        this.xterm.options[property] = data[property];
+      })
+      this.resetKeymaps();
+      document.documentElement.style.setProperty("--background-color", this.profile.theme.background);
+      document.documentElement.style.setProperty("--terminal-padding", this.profile.padding);
+    })
+
     this.send("settingChanged", {}, ({data}) => {
       if (this.xtermSettings().includes(data.property)) {
         this.xterm.options[data.property] = data.value;
@@ -42,11 +53,14 @@ export default class extends BridgeComponent {
         this.profile = data.value
 
         this.resetKeymaps();
+      } else if (data.property === 'padding') {
+        document.documentElement.style.setProperty("--terminal-padding", data.value);
       } else if (data.property.startsWith('theme.')) {
         this.profile = data.value
 
         this.xterm.options.allowTransparency = this.settings().allowTransparency;
         this.xterm.options.theme = this.settings().theme;
+        document.documentElement.style.setProperty("--background-color", this.settings().theme.background)
       }
     })
   }

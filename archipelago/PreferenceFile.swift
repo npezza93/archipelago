@@ -4,10 +4,12 @@ class PreferenceFile {
   var config: Config
   var changeListeners: [SettingChangeListenerWrapper]
   var nameChangeListeners: [NameChangeListenerWrapper]
+  var profileChangeListeners: [ProfileChangeListenerWrapper]
 
   public init() {
     self.changeListeners = []
     self.nameChangeListeners = []
+    self.profileChangeListeners = []
     self.config = try! JSONDecoder().decode(Config.self, from: "{}".data(using: .utf8)!)
 
     ensureAppSupportDirectoryExists()
@@ -66,10 +68,24 @@ class PreferenceFile {
     notifyNameChangeListeners()
   }
 
+  func destroyKeybinding(index: Int) {
+    var profile = self.config.profiles[activeProfileIndex()]
+    profile.keybindings.remove(at: index)
+
+    self.config.profiles[activeProfileIndex()] = profile
+    save()
+    for listener in changeListeners {
+      listener.listener("keybindings", activeProfileJSON())
+    }
+  }
+
   func updateActiveProfile(id: UInt32) {
     config.activeProfileId = id
     save()
     notifyNameChangeListeners()
+    for listener in profileChangeListeners {
+      listener.listener(activeProfileJSON())
+    }
   }
 
   private func notifyNameChangeListeners() {
@@ -225,12 +241,24 @@ class PreferenceFile {
     return wrapper
   }
 
+  func onProfileChange(id: String, listener: @escaping (String) -> Void)
+    -> ProfileChangeListenerWrapper
+  {
+    let wrapper = ProfileChangeListenerWrapper(id: id, listener: listener)
+    profileChangeListeners.append(wrapper)
+    return wrapper
+  }
+
   func removeChange(wrapper: SettingChangeListenerWrapper) {
     self.changeListeners.removeAll { $0 === wrapper }
   }
 
   func removeNameChange(wrapper: NameChangeListenerWrapper) {
     self.nameChangeListeners.removeAll { $0 === wrapper }
+  }
+
+  func removeProfileChange(wrapper: ProfileChangeListenerWrapper) {
+    self.profileChangeListeners.removeAll { $0 === wrapper }
   }
 
   private func ensureAppSupportDirectoryExists() {
@@ -266,6 +294,16 @@ class SettingChangeListenerWrapper {
   let listener: (String, Any) -> Void
 
   init(listener: @escaping (String, Any) -> Void) {
+    self.listener = listener
+  }
+}
+
+class ProfileChangeListenerWrapper {
+  let listener: (String) -> Void
+  let id: String
+
+  init(id: String, listener: @escaping (String) -> Void) {
+    self.id = id
     self.listener = listener
   }
 }

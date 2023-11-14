@@ -5,16 +5,12 @@ export default class extends BridgeComponent {
   static component = "keybinding-actions"
 
   connect() {
-    // ipc.answerMain('active-profile-changed', this.setValue.bind(this))
     super.connect()
-    this.send("connect", {}, ({data}) => {
-      this.keybindings = data.keybindings
-    })
   }
 
   create() {
     const capturer = new KeybindingController();
-    capturer.indexValue = this.keybindings.length;
+    capturer.indexValue = document.querySelectorAll('[data-controller="keybinding"]').length;
 
     capturer.edit();
   }
@@ -25,9 +21,7 @@ export default class extends BridgeComponent {
     if (activeItem) {
       const answer = window.confirm('Are you sure you want to delete this keybinding?');
       if (answer) {
-        delete this.keybindings[activeItem.dataset.keybindingIndexValue];
-        this.keybindings = this.keybindings.filter(item => item);
-        this.send("change", { property: "keybindings", value: this.keybindings })
+        this.send("change", { index: Number(activeItem.dataset.keybindingIndexValue) })
       }
     }
   }

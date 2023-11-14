@@ -1,7 +1,7 @@
 import Foundation
 import Strada
 
-final class ColorComponent: BridgeComponent {
+final class ColorComponent: ProfileChanger {
   override class var name: String { "color" }
 
   override func onReceive(message: Message) {
@@ -22,6 +22,7 @@ final class ColorComponent: BridgeComponent {
       id: message.id, component: "color", event: "connect",
       metadata: Message.Metadata(url: ""),
       jsonData: App.preferenceFile.activeProfileJSON())
+    addListener(id: message.id)
     reply(with: message)
   }
 
