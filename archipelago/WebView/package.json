@@ -21,11 +21,11 @@
   },
   "license": "MIT",
   "dependencies": {
+    "npezza93-font-ligatures": "^2.0",
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/strada": "^1.0.0-beta1",
     "xterm": "^5.4.0-beta.28",
     "xterm-addon-fit": "^0.9.0-beta.28",
-    "xterm-addon-ligatures": "^0.8.0-beta.27",
     "xterm-addon-web-links": "^0.10.0-beta.27",
     "xterm-addon-webgl": "^0.17.0-beta.27",
     "color": "^4.2.3",

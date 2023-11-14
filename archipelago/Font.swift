@@ -7,11 +7,16 @@ class Font: Codable {
   var base64: String
   var name: String
   var format: String
+  var raw: [UInt8]
 
   public init(name: String, path: String) {
     self.name = name
     self.path = path
-    self.base64 = try! Data(contentsOf: URL(fileURLWithPath: path)).base64EncodedString()
+
+    let data = try! Data(contentsOf: URL(fileURLWithPath: path))
+
+    self.base64 = data.base64EncodedString()
+    self.raw = [UInt8](data)
     if path.hasSuffix(".ttf") {
       self.format = "truetype"
     } else if path.hasSuffix(".otf") {

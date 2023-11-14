@@ -4,6 +4,7 @@ import debounce from '../debounce';
 import Color from 'color';
 import {FitAddon} from 'xterm-addon-fit';
 import {WebLinksAddon} from 'xterm-addon-web-links';
+import LigaturesAddon from '../LigaturesAddon';
 import {WebglAddon} from 'xterm-addon-webgl';
 import bellSound from '../bell-sound';
 import { BridgeComponent } from "@hotwired/strada"
@@ -20,6 +21,7 @@ export default class extends BridgeComponent {
     super.connect()
     this.fitAddon = new FitAddon();
     this.webglAddon = new WebglAddon();
+    this.ligaturesAddon = new LigaturesAddon();
     this.send("connect", {}, ({data}) => {
       this.profile = data
 
@@ -93,6 +95,7 @@ export default class extends BridgeComponent {
       this.element.append(this._wrapperElement);
       this.xterm.open(this._xtermElement);
       this.xterm.loadAddon(this.webglAddon);
+      this.xterm.loadAddon(this.ligaturesAddon);
 
       this.bindListeners();
       this.fit();
