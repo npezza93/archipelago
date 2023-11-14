@@ -1,12 +1,12 @@
-import Foundation
 import CoreText
+import Foundation
 
 class Font: Codable {
 
-    var path: String
-    var base64: String
-    var name: String
-    var format: String
+  var path: String
+  var base64: String
+  var name: String
+  var format: String
 
   public init(name: String, path: String) {
     self.name = name
