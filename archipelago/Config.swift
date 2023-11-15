@@ -125,6 +125,9 @@ struct Config: Codable {
         ?? defaultProfile.cursorStyle
       self.shell =
         try container.decodeIfPresent(String.self, forKey: .shell) ?? defaultProfile.shell
+      if self.shell.isEmpty {
+        self.shell = ProcessInfo.processInfo.environment["SHELL"] ?? "/bin/bash"
+      }
       self.shellArgs =
         try container.decodeIfPresent(String.self, forKey: .shellArgs) ?? defaultProfile.shellArgs
       self.scrollback =

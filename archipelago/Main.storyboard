@@ -58,19 +58,18 @@
                                     </items>
                                 </menu>
                             </menuItem>
-                            <menuItem title="Shell" id="5QF-Oa-p0T" userLabel="Shell">
+                            <menuItem title="Shell" id="Q3W-9D-4mu">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Shell" id="W48-6f-4Dl">
+                                <menu key="submenu" title="Shell" systemMenu="apple" autoenablesItems="NO" id="Ny4-XA-yMx">
                                     <items>
-                                        <menuItem title="New Window" keyEquivalent="n" id="dRJ-4n-Yzg"/>
-                                        <menuItem isSeparatorItem="YES" id="WRV-NI-Exz"/>
-                                        <menuItem title="Close" keyEquivalent="w" id="Ruw-6m-B2m" userLabel="Close"/>
+                                        <menuItem isSeparatorItem="YES" id="lRc-8U-2al"/>
+                                        <menuItem title="Close" keyEquivalent="w" id="d86-Ba-t2a" customClass="CloseMenuItem" customModule="Archipelago" customModuleProvider="target"/>
                                     </items>
                                 </menu>
                             </menuItem>
                             <menuItem title="Edit" id="e9M-5T-hlb">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Edit" id="CKa-dx-1Bp">
+                                <menu key="submenu" title="Edit" autoenablesItems="NO" id="CKa-dx-1Bp">
                                     <items>
                                         <menuItem title="Undo" keyEquivalent="z" id="2qY-RH-6ew">
                                             <connections>
