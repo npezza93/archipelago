@@ -130,13 +130,15 @@ class PreferenceFile {
     case "vibrancy":
       profile.vibrancy = value as? String
     case "fontSize":
-      profile.fontSize = value as! UInt32
+      let str = value as! String
+      profile.fontSize = UInt32(str)!
     case "shell":
       profile.shell = value as! String
     case "shellArgs":
       profile.shellArgs = value as! String
     case "scrollback":
-      profile.scrollback = value as! UInt32
+      let str = value as! String
+      profile.scrollback = UInt32(str)!
     case "padding":
       profile.padding = value as! String
     case "theme.selectionBackground":

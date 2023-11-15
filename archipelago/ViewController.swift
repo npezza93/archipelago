@@ -26,6 +26,11 @@ class ViewController: NSViewController, WKUIDelegate, NSWindowDelegate, BridgeDe
 
     webView.setValue(false, forKey: "drawsBackground")
 
+    let overlay = DraggingView(frame: CGRect(x: 0, y: 0, width: webView.frame.width, height: 30))
+    overlay.wantsLayer = true
+    overlay.layer?.backgroundColor = NSColor.clear.cgColor
+    webView.addSubview(overlay)
+
     webView.uiDelegate = self
     webView.navigationDelegate = self
     #if DEBUG
