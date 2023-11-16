@@ -282,12 +282,12 @@
 			isa = PBXGroup;
 			children = (
 				01847B982B055C6600BDB881 /* CloseMenuItem.swift */,
-				01847B9A2B05945700BDB881 /* VersionMenuItem.swift */,
+				01847BA02B05A08600BDB881 /* ExportSettingsMenuItem.swift */,
+				01FD74642B05A3B7005C240A /* ImportSettingsMenuItem.swift */,
 				01FD74662B05BB70005C240A /* NewWindowMenuItem.swift */,
 				01847B9C2B0596B600BDB881 /* ProfilesMenu.swift */,
 				01847B9E2B059D3400BDB881 /* ReportIssueMenuItem.swift */,
-				01847BA02B05A08600BDB881 /* ExportSettingsMenuItem.swift */,
-				01FD74642B05A3B7005C240A /* ImportSettingsMenuItem.swift */,
+				01847B9A2B05945700BDB881 /* VersionMenuItem.swift */,
 			);
 			path = MenuItems;
 			sourceTree = "<group>";
