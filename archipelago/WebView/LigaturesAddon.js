@@ -1,4 +1,4 @@
-import { loadBuffer } from "font-ligatures"
+import { loadBuffer } from "npezza93-font-ligatures"
 
 export default class {
   activate(terminal) {
