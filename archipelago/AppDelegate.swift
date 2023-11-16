@@ -33,4 +33,16 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     completionHandler(.banner)
   }
 
+  func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool
+  {
+    if !flag {
+      if let menuItem = NSApp.mainMenu?.item(withTitle: "Shell")?.submenu?.item(
+        withTitle: "New Window")
+      {
+        (menuItem as! NewWindowMenuItem).createWindowAction()
+      }
+    }
+    return true
+  }
+
 }

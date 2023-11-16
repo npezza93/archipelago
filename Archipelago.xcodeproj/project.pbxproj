@@ -38,7 +38,7 @@
 		0166EE782AE8961D00061485 /* PreferenceFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0166EE772AE8961D00061485 /* PreferenceFile.swift */; };
 		0166EE7A2AE8AD1100061485 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0166EE792AE8AD1100061485 /* Config.swift */; };
 		0166EE7C2AE9C16100061485 /* NSColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0166EE7B2AE9C16100061485 /* NSColor.swift */; };
-		0166EE7E2AE9C20700061485 /* TerminalWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0166EE7D2AE9C20700061485 /* TerminalWindowController.swift */; };
+		0166EE7E2AE9C20700061485 /* TerminalWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0166EE7D2AE9C20700061485 /* TerminalWindow.swift */; };
 		01847B832B005DC300BDB881 /* KeybindingsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01847B822B005DC300BDB881 /* KeybindingsComponent.swift */; };
 		01847B852B008FEE00BDB881 /* KeybindingCapturerComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01847B842B008FEE00BDB881 /* KeybindingCapturerComponent.swift */; };
 		01847B872B0174DD00BDB881 /* KeybindingActionsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01847B862B0174DD00BDB881 /* KeybindingActionsComponent.swift */; };
@@ -61,6 +61,7 @@
 		01EC78342AFF360C00F62F97 /* ColorComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EC78332AFF360C00F62F97 /* ColorComponent.swift */; };
 		01F2D62F2AFC85F9001DCD2C /* RadioComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F2D62E2AFC85F9001DCD2C /* RadioComponent.swift */; };
 		01FD74652B05A3B7005C240A /* ImportSettingsMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FD74642B05A3B7005C240A /* ImportSettingsMenuItem.swift */; };
+		01FD74672B05BB70005C240A /* NewWindowMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FD74662B05BB70005C240A /* NewWindowMenuItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,7 +118,7 @@
 		0166EE772AE8961D00061485 /* PreferenceFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceFile.swift; sourceTree = "<group>"; };
 		0166EE792AE8AD1100061485 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		0166EE7B2AE9C16100061485 /* NSColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSColor.swift; sourceTree = "<group>"; };
-		0166EE7D2AE9C20700061485 /* TerminalWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalWindowController.swift; sourceTree = "<group>"; };
+		0166EE7D2AE9C20700061485 /* TerminalWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalWindow.swift; sourceTree = "<group>"; };
 		01847B822B005DC300BDB881 /* KeybindingsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeybindingsComponent.swift; sourceTree = "<group>"; };
 		01847B842B008FEE00BDB881 /* KeybindingCapturerComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeybindingCapturerComponent.swift; sourceTree = "<group>"; };
 		01847B862B0174DD00BDB881 /* KeybindingActionsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeybindingActionsComponent.swift; sourceTree = "<group>"; };
@@ -140,6 +141,7 @@
 		01EC78332AFF360C00F62F97 /* ColorComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorComponent.swift; sourceTree = "<group>"; };
 		01F2D62E2AFC85F9001DCD2C /* RadioComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioComponent.swift; sourceTree = "<group>"; };
 		01FD74642B05A3B7005C240A /* ImportSettingsMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportSettingsMenuItem.swift; sourceTree = "<group>"; };
+		01FD74662B05BB70005C240A /* NewWindowMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWindowMenuItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,7 +211,7 @@
 				01108D952AE4C23E00603FBF /* Pty.swift */,
 				0166EE632AE73F7600061485 /* SettingsController.swift */,
 				011B14B22ADE23A7000822F4 /* Strada */,
-				0166EE7D2AE9C20700061485 /* TerminalWindowController.swift */,
+				0166EE7D2AE9C20700061485 /* TerminalWindow.swift */,
 				011B14422ADE1664000822F4 /* ViewController.swift */,
 				0166EE5A2AE55C6500061485 /* WebView */,
 				01108D932AE0AE8D00603FBF /* WKWebViewConfiguration.swift */,
@@ -281,6 +283,7 @@
 			children = (
 				01847B982B055C6600BDB881 /* CloseMenuItem.swift */,
 				01847B9A2B05945700BDB881 /* VersionMenuItem.swift */,
+				01FD74662B05BB70005C240A /* NewWindowMenuItem.swift */,
 				01847B9C2B0596B600BDB881 /* ProfilesMenu.swift */,
 				01847B9E2B059D3400BDB881 /* ReportIssueMenuItem.swift */,
 				01847BA02B05A08600BDB881 /* ExportSettingsMenuItem.swift */,
@@ -440,6 +443,7 @@
 				01EC78342AFF360C00F62F97 /* ColorComponent.swift in Sources */,
 				01847B9D2B0596B600BDB881 /* ProfilesMenu.swift in Sources */,
 				01847B9F2B059D3400BDB881 /* ReportIssueMenuItem.swift in Sources */,
+				01FD74672B05BB70005C240A /* NewWindowMenuItem.swift in Sources */,
 				011B14432ADE1664000822F4 /* ViewController.swift in Sources */,
 				011B14412ADE1664000822F4 /* AppDelegate.swift in Sources */,
 				01847B8F2B01CDB900BDB881 /* ProfileComponent.swift in Sources */,
@@ -455,7 +459,7 @@
 				01108D962AE4C23E00603FBF /* Pty.swift in Sources */,
 				01847B892B01A32100BDB881 /* ProfilesComponent.swift in Sources */,
 				0166EE7A2AE8AD1100061485 /* Config.swift in Sources */,
-				0166EE7E2AE9C20700061485 /* TerminalWindowController.swift in Sources */,
+				0166EE7E2AE9C20700061485 /* TerminalWindow.swift in Sources */,
 				01EC78322AFEF98400F62F97 /* TextComponent.swift in Sources */,
 				0166EE782AE8961D00061485 /* PreferenceFile.swift in Sources */,
 				01FD74652B05A3B7005C240A /* ImportSettingsMenuItem.swift in Sources */,

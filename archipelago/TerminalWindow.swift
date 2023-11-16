@@ -1,7 +1,7 @@
 import Cocoa
 import Foundation
 
-class TerminalWindowController: NSWindow {
+class TerminalWindow: NSWindow {
   override init(
     contentRect: NSRect, styleMask style: NSWindow.StyleMask,
     backing backingStoreType: NSWindow.BackingStoreType, defer flag: Bool

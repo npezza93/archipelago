@@ -62,7 +62,7 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Shell" systemMenu="apple" autoenablesItems="NO" id="Ny4-XA-yMx">
                                     <items>
-                                        <menuItem title="New Window" keyEquivalent="n" id="7dv-nZ-Dd7"/>
+                                        <menuItem title="New Window" keyEquivalent="n" id="7dv-nZ-Dd7" customClass="NewWindowMenuItem" customModule="Archipelago" customModuleProvider="target"/>
                                         <menuItem isSeparatorItem="YES" id="NWT-8E-eRq"/>
                                         <menuItem title="Import Settings" id="SVh-5Z-kLo" customClass="ImportSettingsMenuItem" customModule="Archipelago" customModuleProvider="target">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -208,8 +208,8 @@
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController storyboardIdentifier="I" id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="Terminal" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="IQv-IB-iLA" customClass="TerminalWindowController" customModule="Archipelago" customModuleProvider="target">
+                <windowController storyboardIdentifier="TerminalWindowController" id="B8D-0N-5wS" sceneMemberID="viewController">
+                    <window key="window" title="Terminal" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="IQv-IB-iLA" customClass="TerminalWindow" customModule="Archipelago" customModuleProvider="target">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
