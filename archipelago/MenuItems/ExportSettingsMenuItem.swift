@@ -27,6 +27,5 @@ class ExportSettingsMenuItem: NSMenuItem {
         try! App.preferenceFile.asJson().data(using: .utf8)?.write(to: url)
       }
     }
-
   }
 }

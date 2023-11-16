@@ -64,7 +64,7 @@
                                     <items>
                                         <menuItem title="New Window" keyEquivalent="n" id="7dv-nZ-Dd7"/>
                                         <menuItem isSeparatorItem="YES" id="NWT-8E-eRq"/>
-                                        <menuItem title="Import Settings" id="SVh-5Z-kLo">
+                                        <menuItem title="Import Settings" id="SVh-5Z-kLo" customClass="ImportSettingsMenuItem" customModule="Archipelago" customModuleProvider="target">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                         </menuItem>
                                         <menuItem title="Export Settings" id="Nks-UT-OYg" customClass="ExportSettingsMenuItem" customModule="Archipelago" customModuleProvider="target">

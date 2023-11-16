@@ -22,6 +22,15 @@ class PreferenceFile {
     }
   }
 
+  func importConfig(_ config: Config) {
+    self.config = config
+    save()
+    notifyNameChangeListeners()
+    for listener in profileChangeListeners {
+      listener.listener(activeProfileJSON())
+    }
+  }
+
   func save() {
     let encoder = JSONEncoder()
     encoder.outputFormatting = .prettyPrinted  // This makes the JSON output readable with whitespace. Remove if not needed.

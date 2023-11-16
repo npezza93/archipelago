@@ -60,6 +60,7 @@
 		01EC78322AFEF98400F62F97 /* TextComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EC78312AFEF98400F62F97 /* TextComponent.swift */; };
 		01EC78342AFF360C00F62F97 /* ColorComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EC78332AFF360C00F62F97 /* ColorComponent.swift */; };
 		01F2D62F2AFC85F9001DCD2C /* RadioComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F2D62E2AFC85F9001DCD2C /* RadioComponent.swift */; };
+		01FD74652B05A3B7005C240A /* ImportSettingsMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FD74642B05A3B7005C240A /* ImportSettingsMenuItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,6 +139,7 @@
 		01EC78312AFEF98400F62F97 /* TextComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextComponent.swift; sourceTree = "<group>"; };
 		01EC78332AFF360C00F62F97 /* ColorComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorComponent.swift; sourceTree = "<group>"; };
 		01F2D62E2AFC85F9001DCD2C /* RadioComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioComponent.swift; sourceTree = "<group>"; };
+		01FD74642B05A3B7005C240A /* ImportSettingsMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportSettingsMenuItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -282,6 +284,7 @@
 				01847B9C2B0596B600BDB881 /* ProfilesMenu.swift */,
 				01847B9E2B059D3400BDB881 /* ReportIssueMenuItem.swift */,
 				01847BA02B05A08600BDB881 /* ExportSettingsMenuItem.swift */,
+				01FD74642B05A3B7005C240A /* ImportSettingsMenuItem.swift */,
 			);
 			path = MenuItems;
 			sourceTree = "<group>";
@@ -455,6 +458,7 @@
 				0166EE7E2AE9C20700061485 /* TerminalWindowController.swift in Sources */,
 				01EC78322AFEF98400F62F97 /* TextComponent.swift in Sources */,
 				0166EE782AE8961D00061485 /* PreferenceFile.swift in Sources */,
+				01FD74652B05A3B7005C240A /* ImportSettingsMenuItem.swift in Sources */,
 				01847B8B2B01AC9B00BDB881 /* ProfileCapturerComponent.swift in Sources */,
 				01847B832B005DC300BDB881 /* KeybindingsComponent.swift in Sources */,
 				011B14B62ADE23EF000822F4 /* TerminalComponent.swift in Sources */,
