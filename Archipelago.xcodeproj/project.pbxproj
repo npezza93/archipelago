@@ -51,6 +51,7 @@
 		01847B992B055C6600BDB881 /* CloseMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01847B982B055C6600BDB881 /* CloseMenuItem.swift */; };
 		01847B9B2B05945700BDB881 /* VersionMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01847B9A2B05945700BDB881 /* VersionMenuItem.swift */; };
 		01847B9D2B0596B600BDB881 /* ProfilesMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01847B9C2B0596B600BDB881 /* ProfilesMenu.swift */; };
+		01847B9F2B059D3400BDB881 /* ReportIssueMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01847B9E2B059D3400BDB881 /* ReportIssueMenuItem.swift */; };
 		0195E7722AE9E5E1003EDDD2 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0195E7712AE9E5E1003EDDD2 /* App.swift */; };
 		01EC782C2AFEC00800F62F97 /* FontsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EC782B2AFEC00800F62F97 /* FontsComponent.swift */; };
 		01EC782E2AFEE1DF00F62F97 /* SelectComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EC782D2AFEE1DF00F62F97 /* SelectComponent.swift */; };
@@ -127,6 +128,7 @@
 		01847B982B055C6600BDB881 /* CloseMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseMenuItem.swift; sourceTree = "<group>"; };
 		01847B9A2B05945700BDB881 /* VersionMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionMenuItem.swift; sourceTree = "<group>"; };
 		01847B9C2B0596B600BDB881 /* ProfilesMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilesMenu.swift; sourceTree = "<group>"; };
+		01847B9E2B059D3400BDB881 /* ReportIssueMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportIssueMenuItem.swift; sourceTree = "<group>"; };
 		0195E7712AE9E5E1003EDDD2 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		01EC782B2AFEC00800F62F97 /* FontsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsComponent.swift; sourceTree = "<group>"; };
 		01EC782D2AFEE1DF00F62F97 /* SelectComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectComponent.swift; sourceTree = "<group>"; };
@@ -276,6 +278,7 @@
 				01847B982B055C6600BDB881 /* CloseMenuItem.swift */,
 				01847B9A2B05945700BDB881 /* VersionMenuItem.swift */,
 				01847B9C2B0596B600BDB881 /* ProfilesMenu.swift */,
+				01847B9E2B059D3400BDB881 /* ReportIssueMenuItem.swift */,
 			);
 			path = MenuItems;
 			sourceTree = "<group>";
@@ -430,6 +433,7 @@
 				0166EE642AE73F7600061485 /* SettingsController.swift in Sources */,
 				01EC78342AFF360C00F62F97 /* ColorComponent.swift in Sources */,
 				01847B9D2B0596B600BDB881 /* ProfilesMenu.swift in Sources */,
+				01847B9F2B059D3400BDB881 /* ReportIssueMenuItem.swift in Sources */,
 				011B14432ADE1664000822F4 /* ViewController.swift in Sources */,
 				011B14412ADE1664000822F4 /* AppDelegate.swift in Sources */,
 				01847B8F2B01CDB900BDB881 /* ProfileComponent.swift in Sources */,

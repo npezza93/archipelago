@@ -179,7 +179,7 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Help" systemMenu="help" id="F2S-fz-NVQ">
                                     <items>
-                                        <menuItem title="Report Issue" id="FKE-Sm-Kum">
+                                        <menuItem title="Report Issue" id="FKE-Sm-Kum" customClass="ReportIssueMenuItem" customModule="Archipelago" customModuleProvider="target">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                         </menuItem>
                                     </items>
