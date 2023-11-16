@@ -20,8 +20,6 @@ class ViewController: NSViewController, WKUIDelegate, NSWindowDelegate, BridgeDe
     webView = WKWebView(
       frame: CGRect(x: 0, y: 0, width: 800, height: 600), configuration: .appConfiguration)
 
-    webView.configuration.preferences.setValue(true, forKey: "developerExtrasEnabled")
-
     let script = WKUserScript(
       source: monospsaceFontStylesheet(), injectionTime: .atDocumentStart, forMainFrameOnly: true)
     webView.configuration.userContentController.addUserScript(script)
@@ -36,6 +34,7 @@ class ViewController: NSViewController, WKUIDelegate, NSWindowDelegate, BridgeDe
     webView.uiDelegate = self
     webView.navigationDelegate = self
     #if DEBUG
+      webView.configuration.preferences.setValue(true, forKey: "developerExtrasEnabled")
       webView.isInspectable = true
     #endif
     view = webView

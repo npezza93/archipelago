@@ -18,13 +18,12 @@ class SettingsController: NSViewController, WKUIDelegate, NSWindowDelegate, Brid
     webView = WKWebView(
       frame: CGRect(x: 0, y: 0, width: 650, height: 283), configuration: .appConfiguration)
 
-    webView.configuration.preferences.setValue(true, forKey: "developerExtrasEnabled")
-
     webView.setValue(false, forKey: "drawsBackground")
 
     webView.uiDelegate = self
     webView.navigationDelegate = self
     #if DEBUG
+      webView.configuration.preferences.setValue(true, forKey: "developerExtrasEnabled")
       webView.isInspectable = true
     #endif
     view = webView
