@@ -1163,10 +1163,10 @@ electron-window@^0.8.0:
   dependencies:
     is-electron-renderer "^2.0.0"
 
-electron@^25.0:
-  version "25.8.3"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-25.8.3.tgz#f92426042eecf3286db40fd84df9179bba168c12"
-  integrity sha512-BdcTIrhQIf6YgsihCXYh3DgKobtLaNcFb1B5C/5euepxxXQ7qmTWC6WgNUm+IntLOFEDQO926rvm2nhRdSN+Nw==
+electron@^27.1:
+  version "27.1.0"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-27.1.0.tgz#d759885e552d7d926526cfc433ab312796f74a9a"
+  integrity sha512-XPdJiO475QJ8cx59/goWNNWnlV0vab+Ut3occymos7VDxkHV5mFrlW6tcGi+M3bW6gBfwpJocWMng8tw542vww==
   dependencies:
     "@electron/get" "^2.0.0"
     "@types/node" "^18.11.18"
