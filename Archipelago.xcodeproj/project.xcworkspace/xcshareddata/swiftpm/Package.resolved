@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "strada-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/npezza93/strada-ios/",
+      "state" : {
+        "branch" : "main",
+        "revision" : "2d001fa7087737a3ce197d56ed810d6aebde59e1"
+      }
+    }
+  ],
+  "version" : 2
+}

@@ -1,0 +1,392 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Settings</title>
+		<link rel="stylesheet" href="./settings-vars.css">
+		<link rel="stylesheet" href="./settings-general.css">
+		<link rel="stylesheet" href="./settings-header.css">
+		<link rel="stylesheet" href="./settings-choices.css">
+    <script type="module" src="./settings.min.js"></script>
+	</head>
+  <body data-controller="tabs drag-header">
+    <header data-action="mousedown->drag-header#dragging">
+      <h1>Settings</h1>
+      <div class="heading-bar">
+        <div class="heading" data-action="click->tabs#change" data-value="text">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="-6 -6 24 24" width="24" height="24" preserveAspectRatio="xMinYMin" class="icon__icon"><path d="M12,1 L12,3 C12,3.55228475 11.5522847,4 11,4 C10.4477153,4 10,3.55228475 10,3 L10,2 L7,2 L7,10 L8,10 C8.55228475,10 9,10.4477153 9,11 C9,11.5522847 8.55228475,12 8,12 L4,12 C3.44771525,12 3,11.5522847 3,11 C3,10.4477153 3.44771525,10 4,10 L5,10 L5,2 L2,2 L2,3 C2,3.55228475 1.55228475,4 1,4 C0.44771525,4 0,3.55228475 0,3 L0,1 C0,0.44771525 0.44771525,0 1,0 L11,0 C11.5522847,0 12,0.44771525 12,1 Z"></path></svg>
+          <h3>Text</h3>
+        </div>
+
+        <div class="heading" data-action="click->tabs#change" data-value="shell">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -5 24 24" width="24" height="24" preserveAspectRatio="xMinYMin" class="icon__icon"><path d="M5.243 7.071l-4.95-4.95A1 1 0 1 1 1.707.707l5.657 5.657a1 1 0 0 1 0 1.414l-5.657 5.657a1 1 0 0 1-1.414-1.414l4.95-4.95zM6.929 12h8a1 1 0 0 1 0 2h-8a1 1 0 0 1 0-2z"></path></svg>
+          <h3>Shell</h3>
+        </div>
+
+        <div class="heading" data-action="click->tabs#change" data-value="theme">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-palette" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path class="background-stroke" d="M12 21a9 9 0 1 1 0 -18a9 8 0 0 1 9 8a4.5 4 0 0 1 -4.5 4h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25"></path><circle cx="7.5" cy="10.5" r=".5" fill="none"></circle><circle cx="12" cy="7.5" r=".5" fill="none"></circle><circle cx="16.5" cy="10.5" r=".5" fill="none"></circle></svg>
+          <h3>Theme</h3>
+        </div>
+
+        <div class="heading" data-action="click->tabs#change" data-value="keybindings">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -5 24 24" width="24" height="24" preserveAspectRatio="xMinYMin" class="icon__icon"><path d="M3 0h14a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3H3a3 3 0 0 1-3-3V3a3 3 0 0 1 3-3zm0 2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H3zm0 4h2v2H3V6zm0-3h2v2H3V3zm0 6h2v2H3V9zm3 0h8v2H6V9zm0-3h2v2H6V6zm0-3h2v2H6V3zm3 3h2v2H9V6zm0-3h2v2H9V3zm6 6h2v2h-2V9zm-3-3h2v2h-2V6zm0-3h2v2h-2V3zm3 0h2v5h-2V3z"></path></svg>
+          <h3>Keybindings</h3>
+        </div>
+
+        <div class="heading" data-action="click->tabs#change" data-value="profiles">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="-5 -2 24 24" width="24" height="24" preserveAspectRatio="xMinYMin" class="icon__icon"><path d="M3.534 10.07a1 1 0 1 1 .733 1.86A3.579 3.579 0 0 0 2 15.26V17a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1.647a3.658 3.658 0 0 0-2.356-3.419 1 1 0 1 1 .712-1.868A5.658 5.658 0 0 1 14 15.353V17a3 3 0 0 1-3 3H3a3 3 0 0 1-3-3v-1.74a5.579 5.579 0 0 1 3.534-5.19zM7 0a4 4 0 0 1 4 4v2a4 4 0 1 1-8 0V4a4 4 0 0 1 4-4zm0 2a2 2 0 0 0-2 2v2a2 2 0 1 0 4 0V4a2 2 0 0 0-2-2z"></path></svg>
+          <h3>Profiles</h3>
+        </div>
+      </div>
+    </header>
+
+    <section id="text" class="hidden">
+      <div>
+        <h4 class="px-15 my-15">Cursor</h4>
+
+        <div class="flex flex-row justify-between px-15">
+          <div class="flex flex-row gap-10" data-controller="radio" data-radio-name-value="cursorStyle">
+            <label for="cursorStyle-block" class="flex flex-row align-center gap-10">
+              <input type="radio" id="cursorStyle-block" name="cursorStyle" value="block" data-action="radio#change">
+              <span></span>
+              <span>Block</span>
+            </label>
+
+            <label for="cursorStyle-underline" class="flex flex-row align-center gap-10">
+              <input type="radio" id="cursorStyle-underline" name="cursorStyle" value="underline" data-action="radio#change">
+              <span></span>
+              <span>Underline</span>
+            </label>
+
+            <label for="cursorStyle-bar" class="flex flex-row align-center gap-10">
+              <input type="radio" id="cursorStyle-bar" name="cursorStyle" value="bar" data-action="radio#change">
+              <span></span>
+              <span>Bar</span>
+            </label>
+          </div>
+
+          <label class="flex flex-row align-center gap-10" data-controller="checkbox">
+            <input type="checkbox" name="cursorBlink" data-checkbox-target="input" data-action="checkbox#change">
+            <span>
+              <svg width="10px" height="9px" viewBox="0 0 12 11">
+                <polyline points="1 6.29411765 4.5 10 11 1"></polyline>
+              </svg>
+            </span>
+            <span>Blink Cursor</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="my-15">
+        <h4 class="px-15 my-15">Font</h4>
+
+        <div class="flex flex-row px-15 gap-10">
+          <label class="w-270" data-controller="fonts">
+            <select class="w-270" name="fontFamily" data-controller="select" data-action="select#change"></select>
+          </label>
+
+          <label>
+            <select name="fontWeight" size="1" data-controller="select" data-action="select#change">
+              <option value="normal">Normal</option>
+              <option value="bold">Bold</option>
+              <option value="bolder">Bolder</option>
+              <option value="lighter">Lighter</option>
+              <option value="100">100</option>
+              <option value="200">200</option>
+              <option value="300">300</option>
+              <option value="400">400</option>
+              <option value="500">500</option>
+              <option value="600">600</option>
+              <option value="700">700</option>
+              <option value="800">800</option>
+              <option value="900">900</option>
+            </select>
+          </label>
+
+          <input type="number" name="fontSize" value="" min=1 max=99 data-controller="text" data-action="text#change">
+        </div>
+      </div>
+    </section>
+
+    <section id="shell" class="hidden">
+      <div class="flex flex-col">
+        <h4 class="px-15 my-15">Command</h4>
+
+        <div class="flex flex-row gap-10 px-15 justify-between">
+          <label class="flex flex-row gap-10">
+            <div>Executable</div>
+
+            <input class="w-175" type="text" name="shell" value="" data-controller="text" data-action="text#change">
+          </label>
+
+          <label class="flex flex-row gap-10">
+            <div>Arguments</div>
+
+            <input class="w-175" type="text" name="shellArgs" value="" data-controller="text" data-action="text#change">
+          </label>
+        </div>
+      </div>
+
+      <div class="flex flex-col my-15">
+        <h4 class="px-15 my-15">Scrollback</h4>
+
+        <div class="flex flex-row gap-10 px-15 justify-between">
+          <label class="flex flex-row gap-10">
+            Lines
+
+            <input class="w-175" type="number" name="scrollback" value="" min=0 data-controller="text" data-action="text#change">
+          </label>
+        </div>
+      </div>
+
+      <div class="flex flex-col">
+        <h4 class="px-15 my-15">Window</h4>
+
+        <div class="flex flex-row gap-10 px-15 justify-between">
+          <label class="flex flex-row gap-10">
+            Padding
+
+            <input type="text" name="padding" data-controller="text" data-action="text#change">
+          </label>
+        </div>
+      </div>
+
+      <div class="flex flex-row justify-between gap-10 my-15">
+        <div class="flex flex-row gap-10">
+          <div class="flex flex-col">
+            <h4 class="px-15">Selection</h4>
+
+            <div class="flex flex-col gap-10">
+              <label class="flex flex-row align-center gap-10 px-15" data-controller="checkbox">
+                <input type="checkbox" name="copyOnSelect" data-checkbox-target="input" data-action="checkbox#change">
+                <span>
+                  <svg width="10px" height="9px" viewBox="0 0 12 11">
+                    <polyline points="1 6.29411765 4.5 10 11 1"></polyline>
+                  </svg>
+                </span>
+                <span>Copy on select</span>
+              </label>
+
+              <label class="flex flex-row align-center gap-10 px-15" data-controller="checkbox">
+                <input type="checkbox" name="rightClickSelectsWord" data-checkbox-target="input" data-action="checkbox#change">
+                <span>
+                  <svg width="10px" height="9px" viewBox="0 0 12 11">
+                    <polyline points="1 6.29411765 4.5 10 11 1"></polyline>
+                  </svg>
+                </span>
+                <span>Right click selects word</span>
+              </label>
+
+              <label class="flex flex-row align-center gap-10 px-15" data-controller="checkbox">
+                <input type="checkbox" name="hideContextMenu" data-checkbox-target="input" data-action="checkbox#change">
+                <span>
+                  <svg width="10px" height="9px" viewBox="0 0 12 11">
+                    <polyline points="1 6.29411765 4.5 10 11 1"></polyline>
+                  </svg>
+                </span>
+                <span>Hide right click context menu</span>
+              </label>
+
+              <label class="flex flex-row align-center gap-10 px-15" data-controller="checkbox">
+                <input type="checkbox" name="macOptionClickForcesSelection" data-checkbox-target="input" data-action="checkbox#change">
+                <span>
+                  <svg width="10px" height="9px" viewBox="0 0 12 11">
+                    <polyline points="1 6.29411765 4.5 10 11 1"></polyline>
+                  </svg>
+                </span>
+                <span>Click forces selection</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col">
+          <h4 class="px-15">Other</h4>
+
+          <div class="flex flex-col gap-10">
+            <label class="flex flex-row align-center gap-10 px-15" data-controller="checkbox">
+              <input type="checkbox" name="macOptionIsMeta" data-checkbox-target="input" data-action="checkbox#change">
+              <span>
+                <svg width="10px" height="9px" viewBox="0 0 12 11">
+                  <polyline points="1 6.29411765 4.5 10 11 1"></polyline>
+                </svg>
+              </span>
+              <span>Option is Meta</span>
+            </label>
+
+            <label class="flex flex-row align-center gap-10 px-15" data-controller="checkbox">
+              <input type="checkbox" name="ligatures" data-checkbox-target="input" data-action="checkbox#change">
+              <span>
+                <svg width="10px" height="9px" viewBox="0 0 12 11">
+                  <polyline points="1 6.29411765 4.5 10 11 1"></polyline>
+                </svg>
+              </span>
+              <span>Ligatures</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="theme" class="hidden">
+      <div class="flex flex-row justify-between pb-15">
+        <div class="flex flex-col">
+          <h4 class="px-15 my-15">ANSI</h4>
+
+          <div class="flex flex-col gap-10 px-15 justify-between">
+            <div class="flex flex-row align-center gap-10">
+              <div class="w-100">Black</div>
+
+              <input type="color" name="theme.black" value="" data-controller="color" data-action="color#changed">
+              <input type="color" name="theme.brightBlack" value="" data-controller="color" data-action="color#changed">
+            </div>
+
+            <div class="flex flex-row align-center gap-10">
+              <div class="w-100">White</div>
+
+              <input type="color" name="theme.white" value="" data-controller="color" data-action="color#changed">
+              <input type="color" name="theme.brightWhite" value="" data-controller="color" data-action="color#changed">
+            </div>
+
+            <div class="flex flex-row align-center gap-10">
+              <div class="w-100">Red</div>
+
+              <input type="color" name="theme.red" value="" data-controller="color" data-action="color#changed">
+              <input type="color" name="theme.brightRed" value="" data-controller="color" data-action="color#changed">
+            </div>
+
+            <div class="flex flex-row align-center gap-10">
+              <div class="w-100">Green</div>
+
+              <input type="color" name="theme.green" value="" data-controller="color" data-action="color#changed">
+              <input type="color" name="theme.brightGreen" value="" data-controller="color" data-action="color#changed">
+            </div>
+
+            <div class="flex flex-row align-center gap-10">
+              <div class="w-100">Yellow</div>
+
+              <input type="color" name="theme.yellow" value="" data-controller="color" data-action="color#changed">
+              <input type="color" name="theme.brightYellow" value="" data-controller="color" data-action="color#changed">
+            </div>
+
+            <div class="flex flex-row align-center gap-10">
+              <div class="w-100">Magenta</div>
+
+              <input type="color" name="theme.magenta" value="" data-controller="color" data-action="color#changed">
+              <input type="color" name="theme.brightMagenta" value="" data-controller="color" data-action="color#changed">
+            </div>
+
+            <div class="flex flex-row align-center gap-10">
+              <div class="w-100">Cyan</div>
+
+              <input type="color" name="theme.cyan" value="" data-controller="color" data-action="color#changed">
+              <input type="color" name="theme.brightCyan" value="" data-controller="color" data-action="color#changed">
+            </div>
+
+            <div class="flex flex-row align-center gap-10">
+              <div class="w-100">Blue</div>
+
+              <input type="color" name="theme.blue" value="" data-controller="color" data-action="color#changed">
+              <input type="color" name="theme.brightBlue" value="" data-controller="color" data-action="color#changed">
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col justify-between">
+          <div class="flex flex-col">
+            <h4 class="px-15 my-15">Cursor</h4>
+
+            <div class="flex flex-row gap-10 px-15 justify-between">
+              <label class="flex flex-row align-center gap-10">
+                <div class="w-100">Color</div>
+
+                <input type="color" name="theme.cursor" value="" data-controller="color" data-action="color#changed">
+              </label>
+
+              <label class="flex flex-row align-center gap-10">
+                <div class="w-100">Accent</div>
+
+                <input type="color" name="theme.cursorAccent" value="" data-controller="color" data-action="color#changed">
+              </label>
+            </div>
+          </div>
+
+          <div class="flex flex-col">
+           <h4 class="px-15 my-15">Selection</h4>
+
+            <div class="flex flex-row gap-10 px-15 justify-between">
+              <label class="flex flex-row align-center gap-10">
+                <div class="w-100">Color</div>
+
+                <input type="color" name="theme.selectionBackground" value="" data-controller="color" data-action="color#changed">
+              </label>
+            </div>
+          </div>
+
+          <div class="flex flex-col">
+           <h4 class="px-15 my-15">Window</h4>
+
+            <div class="flex flex-row gap-10 px-15 justify-between">
+              <label class="flex flex-row align-center gap-10 w-full">
+                <div class="w-100">Vibrancy</div>
+
+                <select name="vibrancy" size="1" data-controller="select" data-action="select#change" class="flex-1">
+                  <option value="">None</option>
+                  <option value="titlebar">TitleBar</option>
+                  <option value="menu">Menu</option>
+                  <option value="popover">Popover</option>
+                  <option value="sidebar">Sidebar</option>
+                  <option value="header">Header</option>
+                  <option value="sheet">Sheet</option>
+                  <option value="window">Window</option>
+                  <option value="hud">Hud</option>
+                  <option value="fullscreen-ui">Fullscreen UI</option>
+                  <option value="tooltip">Tooltip</option>
+                  <option value="content">Content</option>
+                  <option value="under-window">Under Window</option>
+                  <option value="under-page">Under Page</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="flex flex-row gap-10 px-15 justify-between mt-15">
+              <label class="flex flex-row align-center gap-10">
+                <div class="w-100">Foreground</div>
+
+                <input type="color" name="theme.foreground" value="" data-controller="color" data-action="color#changed">
+              </label>
+
+              <label class="flex flex-row align-center gap-10">
+                <div class="w-100">Background</div>
+
+                <input type="color" name="theme.background" value="" data-controller="color" data-action="color#changed">
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="keybindings" class="hidden" data-controller="keybindings">
+      <div class="flex flex-col align-center h-full">
+        <article class="w-400 mt-15 py-5 px-15">
+        </article>
+        <div class="keybinding-actions flex flex-row" data-controller="keybinding-actions">
+          <div class="plus" data-action="click->keybinding-actions#create">+</div>
+          <div class="minus" data-action="click->keybinding-actions#destroy">-</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="profiles" class="hidden" data-controller="profiles">
+      <div class="flex flex-col align-center h-full">
+        <article class="w-400 mt-15 py-5 px-15">
+        </article>
+        <div class="profile-actions flex flex-row" data-controller="profile-actions">
+          <div class="plus" data-action="click->profile-actions#create">+</div>
+          <div class="minus" data-action="click->profile-actions#destroy">-</div>
+        </div>
+      </div>
+    </section>
+	</body>
+</html>

@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22155"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Application-->
+        <scene sceneID="JPo-4y-FX3">
+            <objects>
+                <application id="hnw-xV-0zn" sceneMemberID="viewController">
+                    <menu key="mainMenu" title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
+                        <items>
+                            <menuItem title="Archipelago" id="1Xt-HY-uBw">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Archipelago" systemMenu="apple" id="uQy-DD-JDr">
+                                    <items>
+                                        <menuItem title="About Archipelago" id="5kV-Vb-QxS">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="Exp-CZ-Vem"/>
+                                                <segue destination="Awb-Vn-mCD" kind="show" id="dfn-7T-39A"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Version 6.0.0" enabled="NO" id="Otw-D9-ZRY" customClass="VersionMenuItem" customModule="Archipelago" customModuleProvider="target">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
+                                        <menuItem title="Settings" keyEquivalent="," id="BOF-NM-1cW">
+                                            <connections>
+                                                <segue destination="E5Y-Pp-Ht3" kind="show" id="wAP-gV-KH4"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
+                                        <menuItem title="Hide Archipelago" keyEquivalent="h" id="Olw-nP-bQN">
+                                            <connections>
+                                                <action selector="hide:" target="Ady-hI-5gd" id="PnN-Uc-m68"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Hide Others" keyEquivalent="h" id="Vdr-fp-XzO">
+                                            <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="hideOtherApplications:" target="Ady-hI-5gd" id="VT4-aY-XCT"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Show All" id="Kd2-mp-pUS">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="unhideAllApplications:" target="Ady-hI-5gd" id="Dhg-Le-xox"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="kCx-OE-vgT"/>
+                                        <menuItem title="Quit Archipelago" keyEquivalent="q" id="4sb-4s-VLi">
+                                            <connections>
+                                                <action selector="terminate:" target="Ady-hI-5gd" id="Te7-pn-YzF"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="Shell" id="Q3W-9D-4mu">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Shell" systemMenu="apple" autoenablesItems="NO" id="Ny4-XA-yMx">
+                                    <items>
+                                        <menuItem title="New Window" keyEquivalent="n" id="7dv-nZ-Dd7" customClass="NewWindowMenuItem" customModule="Archipelago" customModuleProvider="target"/>
+                                        <menuItem isSeparatorItem="YES" id="NWT-8E-eRq"/>
+                                        <menuItem title="Import Settings" id="SVh-5Z-kLo" customClass="ImportSettingsMenuItem" customModule="Archipelago" customModuleProvider="target">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                        <menuItem title="Export Settings" id="Nks-UT-OYg" customClass="ExportSettingsMenuItem" customModule="Archipelago" customModuleProvider="target">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="lRc-8U-2al"/>
+                                        <menuItem title="Close" keyEquivalent="w" id="d86-Ba-t2a" customClass="CloseMenuItem" customModule="Archipelago" customModuleProvider="target"/>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="Edit" id="e9M-5T-hlb">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Edit" autoenablesItems="NO" id="CKa-dx-1Bp">
+                                    <items>
+                                        <menuItem title="Undo" keyEquivalent="z" id="2qY-RH-6ew">
+                                            <connections>
+                                                <action selector="undo:" target="Ady-hI-5gd" id="tQU-Na-gfZ"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Redo" keyEquivalent="Z" id="iPo-Gy-8Cw">
+                                            <connections>
+                                                <action selector="redo:" target="Ady-hI-5gd" id="Oul-em-zwz"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="z5N-vp-wUS"/>
+                                        <menuItem title="Cut" keyEquivalent="x" id="4vr-Ta-IGF">
+                                            <connections>
+                                                <action selector="cut:" target="Ady-hI-5gd" id="Bte-py-UD2"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Copy" keyEquivalent="c" id="WQW-JB-9Zf">
+                                            <connections>
+                                                <action selector="copy:" target="Ady-hI-5gd" id="YO0-84-sSr"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Paste" keyEquivalent="v" id="FUm-kc-SnQ">
+                                            <connections>
+                                                <action selector="paste:" target="Ady-hI-5gd" id="N7f-6P-gyE"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Paste and Match Style" keyEquivalent="V" id="ydz-72-cD9">
+                                            <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="pasteAsPlainText:" target="Ady-hI-5gd" id="k6D-yK-qL0"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Delete" id="ptu-so-VEq">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="delete:" target="Ady-hI-5gd" id="sf3-Ri-xuu"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Select All" keyEquivalent="a" id="I7Y-cL-kGH">
+                                            <connections>
+                                                <action selector="selectAll:" target="Ady-hI-5gd" id="ude-OW-yTg"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="View" id="H8h-7b-M4v">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="View" id="HyV-fh-RgO">
+                                    <items>
+                                        <menuItem title="Actual Size" keyEquivalent="0" id="4J7-dP-txa">
+                                            <connections>
+                                                <action selector="zoomResetAction:" target="Ady-hI-5gd" id="c4u-Oh-zDL"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Zoom In" keyEquivalent="+" id="GgF-te-FGI">
+                                            <connections>
+                                                <action selector="zoomInAction:" target="Ady-hI-5gd" id="Xbj-e4-3KT"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Zoom Out" keyEquivalent="-" id="lDN-sd-2ng">
+                                            <connections>
+                                                <action selector="zoomOutAction:" target="Ady-hI-5gd" id="ADy-5W-FBO"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="Kde-aB-jN2"/>
+                                        <menuItem title="Enter Full Screen" keyEquivalent="f" id="dy6-6j-zcB">
+                                            <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="toggleFullScreen:" target="Ady-hI-5gd" id="mEu-Jt-ibg"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="Profiles" id="i8e-vm-Ddw">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Profiles" id="Zq4-tq-gzb" customClass="ProfilesMenu" customModule="Archipelago" customModuleProvider="target"/>
+                            </menuItem>
+                            <menuItem title="Window" id="aUF-d1-5bR">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Window" systemMenu="window" id="Td7-aD-5lo">
+                                    <items>
+                                        <menuItem title="Minimize" keyEquivalent="m" id="OY7-WF-poV">
+                                            <connections>
+                                                <action selector="performMiniaturize:" target="Ady-hI-5gd" id="VwT-WD-YPe"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Zoom" id="R4o-n2-Eq4">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="performZoom:" target="Ady-hI-5gd" id="DIl-cC-cCs"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="eu3-7i-yIM"/>
+                                        <menuItem title="Bring All to Front" id="LE2-aR-0XJ">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="arrangeInFront:" target="Ady-hI-5gd" id="DRN-fu-gQh"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="Help" id="wpr-3q-Mcd">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Help" systemMenu="help" id="F2S-fz-NVQ">
+                                    <items>
+                                        <menuItem title="Report Issue" id="FKE-Sm-Kum" customClass="ReportIssueMenuItem" customModule="Archipelago" customModuleProvider="target">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                        </items>
+                    </menu>
+                    <connections>
+                        <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
+                    </connections>
+                </application>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Archipelago" customModuleProvider="target"/>
+                <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
+                <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-27" y="-154"/>
+        </scene>
+        <!--Window Controller-->
+        <scene sceneID="R2V-B0-nI4">
+            <objects>
+                <windowController storyboardIdentifier="TerminalWindowController" id="B8D-0N-5wS" sceneMemberID="viewController">
+                    <window key="window" title="Terminal" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="IQv-IB-iLA" customClass="TerminalWindow" customModule="Archipelago" customModuleProvider="target">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+                        <connections>
+                            <outlet property="delegate" destination="B8D-0N-5wS" id="98r-iN-zZc"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="cq2-FE-JQM"/>
+                    </connections>
+                </windowController>
+                <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="75" y="250"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="hIz-AP-VOD">
+            <objects>
+                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="Archipelago" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="m2S-Jp-Qdl">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="75" y="655"/>
+        </scene>
+        <!--AboutController-->
+        <scene sceneID="sLc-kg-z9w">
+            <objects>
+                <windowController showSeguePresentationStyle="single" id="Awb-Vn-mCD" userLabel="AboutController" sceneMemberID="viewController">
+                    <window key="window" title="About" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="SLn-GN-7XM">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" fullSizeContentView="YES"/>
+                        <rect key="contentRect" x="202" y="257" width="300" height="500"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1470" height="919"/>
+                        <view key="contentView" id="x0i-JF-F6o">
+                            <rect key="frame" x="0.0" y="0.0" width="300" height="500"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </view>
+                        <connections>
+                            <outlet property="delegate" destination="Awb-Vn-mCD" id="s4c-rR-463"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="P7g-48-XWd" kind="relationship" relationship="window.shadowedContentViewController" id="uWe-8w-RBX"/>
+                    </connections>
+                </windowController>
+                <customObject id="epR-ZV-VNz" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-747" y="548"/>
+        </scene>
+        <!--About Controller-->
+        <scene sceneID="Evh-cz-kbi">
+            <objects>
+                <viewController id="P7g-48-XWd" customClass="AboutController" customModule="Archipelago" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="tKG-mG-mEO">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="500"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="2mM-fB-YkT" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-727" y="1112"/>
+        </scene>
+        <!--SettingsWindow Controller-->
+        <scene sceneID="avj-2a-wv9">
+            <objects>
+                <windowController showSeguePresentationStyle="single" id="E5Y-Pp-Ht3" userLabel="SettingsWindow Controller" sceneMemberID="viewController">
+                    <window key="window" title="Settings" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="f7b-Tf-aoX">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" fullSizeContentView="YES"/>
+                        <rect key="contentRect" x="416" y="355" width="650" height="283"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1470" height="919"/>
+                        <view key="contentView" id="tCz-ad-ZtD">
+                            <rect key="frame" x="0.0" y="0.0" width="650" height="283"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </view>
+                        <connections>
+                            <outlet property="delegate" destination="E5Y-Pp-Ht3" id="gW2-5H-dnf"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="N3B-G0-wbx" kind="relationship" relationship="window.shadowedContentViewController" id="JBR-eu-q4q"/>
+                    </connections>
+                </windowController>
+                <customObject id="rF6-EU-JFR" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1197" y="-278"/>
+        </scene>
+        <!--Settings Controller-->
+        <scene sceneID="rl1-cG-ELB">
+            <objects>
+                <viewController id="N3B-G0-wbx" customClass="SettingsController" customModule="Archipelago" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="HOv-hY-xC6">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="6Qj-8Z-dxd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1197" y="158"/>
+        </scene>
+    </scenes>
+</document>
