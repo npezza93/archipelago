@@ -1,3 +1,4 @@
+import Cocoa
 import Foundation
 
 class PreferenceFile {
@@ -89,6 +90,9 @@ class PreferenceFile {
   }
 
   private func notifyNameChangeListeners() {
+    if let submenu = NSApp.mainMenu?.item(withTitle: "Profiles")?.submenu {
+      (submenu as! ProfilesMenu).createMenuItems()
+    }
     for listener in nameChangeListeners {
       listener.listener(asJson())
     }

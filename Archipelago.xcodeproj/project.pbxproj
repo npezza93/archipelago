@@ -49,6 +49,8 @@
 		01847B912B02C6E100BDB881 /* ProfileChanger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01847B902B02C6E100BDB881 /* ProfileChanger.swift */; };
 		01847B932B02F6DC00BDB881 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01847B922B02F6DC00BDB881 /* Font.swift */; };
 		01847B992B055C6600BDB881 /* CloseMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01847B982B055C6600BDB881 /* CloseMenuItem.swift */; };
+		01847B9B2B05945700BDB881 /* VersionMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01847B9A2B05945700BDB881 /* VersionMenuItem.swift */; };
+		01847B9D2B0596B600BDB881 /* ProfilesMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01847B9C2B0596B600BDB881 /* ProfilesMenu.swift */; };
 		0195E7722AE9E5E1003EDDD2 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0195E7712AE9E5E1003EDDD2 /* App.swift */; };
 		01EC782C2AFEC00800F62F97 /* FontsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EC782B2AFEC00800F62F97 /* FontsComponent.swift */; };
 		01EC782E2AFEE1DF00F62F97 /* SelectComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EC782D2AFEE1DF00F62F97 /* SelectComponent.swift */; };
@@ -123,6 +125,8 @@
 		01847B902B02C6E100BDB881 /* ProfileChanger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileChanger.swift; sourceTree = "<group>"; };
 		01847B922B02F6DC00BDB881 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		01847B982B055C6600BDB881 /* CloseMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseMenuItem.swift; sourceTree = "<group>"; };
+		01847B9A2B05945700BDB881 /* VersionMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionMenuItem.swift; sourceTree = "<group>"; };
+		01847B9C2B0596B600BDB881 /* ProfilesMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilesMenu.swift; sourceTree = "<group>"; };
 		0195E7712AE9E5E1003EDDD2 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		01EC782B2AFEC00800F62F97 /* FontsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsComponent.swift; sourceTree = "<group>"; };
 		01EC782D2AFEE1DF00F62F97 /* SelectComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectComponent.swift; sourceTree = "<group>"; };
@@ -229,16 +233,16 @@
 			children = (
 				011B14B32ADE23BB000822F4 /* BridgeComponent+App.swift */,
 				01EC782F2AFEF1BB00F62F97 /* CheckboxComponent.swift */,
-				01847B902B02C6E100BDB881 /* ProfileChanger.swift */,
-				01847B8C2B01C8C200BDB881 /* ProfileActionsComponent.swift */,
-				01847B8E2B01CDB900BDB881 /* ProfileComponent.swift */,
 				01EC78332AFF360C00F62F97 /* ColorComponent.swift */,
-				01847B882B01A32100BDB881 /* ProfilesComponent.swift */,
 				01EC782B2AFEC00800F62F97 /* FontsComponent.swift */,
-				01847B842B008FEE00BDB881 /* KeybindingCapturerComponent.swift */,
-				01847B8A2B01AC9B00BDB881 /* ProfileCapturerComponent.swift */,
 				01847B862B0174DD00BDB881 /* KeybindingActionsComponent.swift */,
+				01847B842B008FEE00BDB881 /* KeybindingCapturerComponent.swift */,
 				01847B822B005DC300BDB881 /* KeybindingsComponent.swift */,
+				01847B8C2B01C8C200BDB881 /* ProfileActionsComponent.swift */,
+				01847B8A2B01AC9B00BDB881 /* ProfileCapturerComponent.swift */,
+				01847B902B02C6E100BDB881 /* ProfileChanger.swift */,
+				01847B8E2B01CDB900BDB881 /* ProfileComponent.swift */,
+				01847B882B01A32100BDB881 /* ProfilesComponent.swift */,
 				01F2D62E2AFC85F9001DCD2C /* RadioComponent.swift */,
 				01EC782D2AFEE1DF00F62F97 /* SelectComponent.swift */,
 				0166EE742AE7507C00061485 /* TabsComponent.swift */,
@@ -270,6 +274,8 @@
 			isa = PBXGroup;
 			children = (
 				01847B982B055C6600BDB881 /* CloseMenuItem.swift */,
+				01847B9A2B05945700BDB881 /* VersionMenuItem.swift */,
+				01847B9C2B0596B600BDB881 /* ProfilesMenu.swift */,
 			);
 			path = MenuItems;
 			sourceTree = "<group>";
@@ -423,6 +429,7 @@
 			files = (
 				0166EE642AE73F7600061485 /* SettingsController.swift in Sources */,
 				01EC78342AFF360C00F62F97 /* ColorComponent.swift in Sources */,
+				01847B9D2B0596B600BDB881 /* ProfilesMenu.swift in Sources */,
 				011B14432ADE1664000822F4 /* ViewController.swift in Sources */,
 				011B14412ADE1664000822F4 /* AppDelegate.swift in Sources */,
 				01847B8F2B01CDB900BDB881 /* ProfileComponent.swift in Sources */,
@@ -447,6 +454,7 @@
 				01847B852B008FEE00BDB881 /* KeybindingCapturerComponent.swift in Sources */,
 				011B14452ADE1664000822F4 /* Document.swift in Sources */,
 				01847B8D2B01C8C200BDB881 /* ProfileActionsComponent.swift in Sources */,
+				01847B9B2B05945700BDB881 /* VersionMenuItem.swift in Sources */,
 				01EC782C2AFEC00800F62F97 /* FontsComponent.swift in Sources */,
 				01EC78302AFEF1BB00F62F97 /* CheckboxComponent.swift in Sources */,
 				011B14B42ADE23BB000822F4 /* BridgeComponent+App.swift in Sources */,

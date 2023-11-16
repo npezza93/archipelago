@@ -22,7 +22,7 @@
                                                 <segue destination="Awb-Vn-mCD" kind="show" id="dfn-7T-39A"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Version 6.0.0" enabled="NO" id="Otw-D9-ZRY">
+                                        <menuItem title="Version 6.0.0" enabled="NO" id="Otw-D9-ZRY" customClass="VersionMenuItem" customModule="Archipelago" customModuleProvider="target">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
@@ -121,14 +121,34 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="View" id="HyV-fh-RgO">
                                     <items>
-                                        <menuItem title="Enter Full Screen" keyEquivalent="f" id="4J7-dP-txa">
+                                        <menuItem title="Actual Size" keyEquivalent="0" id="4J7-dP-txa">
+                                            <connections>
+                                                <action selector="zoomResetAction:" target="Ady-hI-5gd" id="c4u-Oh-zDL"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Zoom In" keyEquivalent="+" id="GgF-te-FGI">
+                                            <connections>
+                                                <action selector="zoomInAction:" target="Ady-hI-5gd" id="Xbj-e4-3KT"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Zoom Out" keyEquivalent="-" id="lDN-sd-2ng">
+                                            <connections>
+                                                <action selector="zoomOutAction:" target="Ady-hI-5gd" id="ADy-5W-FBO"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="Kde-aB-jN2"/>
+                                        <menuItem title="Enter Full Screen" keyEquivalent="f" id="dy6-6j-zcB">
                                             <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                             <connections>
-                                                <action selector="toggleFullScreen:" target="Ady-hI-5gd" id="dU3-MA-1Rq"/>
+                                                <action selector="toggleFullScreen:" target="Ady-hI-5gd" id="mEu-Jt-ibg"/>
                                             </connections>
                                         </menuItem>
                                     </items>
                                 </menu>
+                            </menuItem>
+                            <menuItem title="Profiles" id="i8e-vm-Ddw">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Profiles" id="Zq4-tq-gzb" customClass="ProfilesMenu" customModule="Archipelago" customModuleProvider="target"/>
                             </menuItem>
                             <menuItem title="Window" id="aUF-d1-5bR">
                                 <modifierMask key="keyEquivalentModifierMask"/>

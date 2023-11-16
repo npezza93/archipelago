@@ -1,6 +1,6 @@
 import Cocoa
 
-class CloseMenuItem: NSMenuItem {
+class VersionMenuItem: NSMenuItem {
 
   override init(title string: String, action selector: Selector?, keyEquivalent charCode: String) {
     super.init(title: string, action: selector, keyEquivalent: charCode)
@@ -14,10 +14,8 @@ class CloseMenuItem: NSMenuItem {
 
   private func commonInit() {
     self.target = self
-    self.action = #selector(closeActiveWindow)
-  }
-
-  @objc private func closeActiveWindow() {
-    NSApp.keyWindow?.close()
+    if let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") {
+      self.title = "Version \(version)"
+    }
   }
 }

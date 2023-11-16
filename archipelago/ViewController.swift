@@ -3,7 +3,9 @@ import Strada
 import WebKit
 
 class ViewController: NSViewController, WKUIDelegate, NSWindowDelegate, BridgeDestination {
-  var webView: WKWebView!
+  @IBOutlet var webView: WKWebView!
+  var currentZoomFactor: CGFloat = 1.0
+
   private lazy var url: URL = {
     URL(fileURLWithPath: Bundle.main.path(forResource: "index", ofType: "html")!)
   }()
@@ -55,12 +57,6 @@ class ViewController: NSViewController, WKUIDelegate, NSWindowDelegate, BridgeDe
     bridgeDelegate.onViewDidLoad()
   }
 
-  override var representedObject: Any? {
-    didSet {
-      // Update the view, if already loaded.
-    }
-  }
-
   func windowWillClose(_ notification: Notification) {
     bridgeDelegate.onViewWillDisappear()
   }
@@ -97,5 +93,30 @@ extension ViewController: WKNavigationDelegate {
       NSWorkspace.shared.open(url)
     }
     return nil
+  }
+}
+
+extension ViewController {
+  @IBAction func zoomInAction(_ sender: Any) {
+    currentZoomFactor += 0.1
+    zoomWebView(to: currentZoomFactor)
+  }
+
+  @IBAction func zoomOutAction(_ sender: Any) {
+    currentZoomFactor = max(currentZoomFactor - 0.1, 0.1)  // Prevents zooming out too much
+    zoomWebView(to: currentZoomFactor)
+  }
+
+  @IBAction func zoomResetAction(_ sender: Any) {
+    currentZoomFactor = 1.0
+    zoomWebView(to: currentZoomFactor)
+  }
+
+  private func zoomWebView(to zoomFactor: CGFloat) {
+    let javascript = """
+        document.body.style.zoom = '\(currentZoomFactor)'
+        window.dispatchEvent(new Event("resize"))
+      """
+    webView.evaluateJavaScript(javascript, completionHandler: nil)
   }
 }
