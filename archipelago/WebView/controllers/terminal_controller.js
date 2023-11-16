@@ -95,7 +95,9 @@ export default class extends BridgeComponent {
       this.element.append(this._wrapperElement);
       this.xterm.open(this._xtermElement);
       this.xterm.loadAddon(this.webglAddon);
-      this.xterm.loadAddon(this.ligaturesAddon);
+      if (this.profile.ligatures) {
+        this.xterm.loadAddon(this.ligaturesAddon);
+      }
 
       this.bindListeners();
       this.fit();

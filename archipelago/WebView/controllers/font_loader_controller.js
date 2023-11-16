@@ -2,7 +2,7 @@ import {Controller} from '@hotwired/stimulus'
 
 export default class extends Controller {
   connect() {
-    this.fonts = window.fonts.map(font => JSON.parse(font))
+    this.fonts = [JSON.parse(window.font)]
 
     let css = this.fonts.map((font) => {
       return `@font-face {

@@ -193,10 +193,8 @@
 		011B143F2ADE1664000822F4 /* archipelago */ = {
 			isa = PBXGroup;
 			children = (
-				01847B972B055C5700BDB881 /* MenuItems */,
 				0166EE5D2AE625FF00061485 /* AboutController.swift */,
 				0195E7712AE9E5E1003EDDD2 /* App.swift */,
-				01847B922B02F6DC00BDB881 /* Font.swift */,
 				011B14402ADE1664000822F4 /* AppDelegate.swift */,
 				011B144C2ADE1665000822F4 /* archipelago.entitlements */,
 				0166EE592AE55B4C00061485 /* archipelagoRelease.entitlements */,
@@ -204,8 +202,10 @@
 				0166EE792AE8AD1100061485 /* Config.swift */,
 				011B14442ADE1664000822F4 /* Document.swift */,
 				0166EE652AE73FC700061485 /* DraggingView.swift */,
+				01847B922B02F6DC00BDB881 /* Font.swift */,
 				011B144B2ADE1665000822F4 /* Info.plist */,
 				011B14762ADE1A7A000822F4 /* Main.storyboard */,
+				01847B972B055C5700BDB881 /* MenuItems */,
 				0166EE7B2AE9C16100061485 /* NSColor.swift */,
 				0166EE772AE8961D00061485 /* PreferenceFile.swift */,
 				01108D952AE4C23E00603FBF /* Pty.swift */,
