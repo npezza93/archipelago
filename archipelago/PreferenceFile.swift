@@ -221,7 +221,10 @@ class PreferenceFile {
 
   func asJson() -> String {
     do {
-      let jsonData = try JSONEncoder().encode(config)
+      let encoder = JSONEncoder()
+      encoder.outputFormatting = .prettyPrinted
+
+      let jsonData = try encoder.encode(config)
 
       if let jsonString = String(data: jsonData, encoding: .utf8) {
         return jsonString

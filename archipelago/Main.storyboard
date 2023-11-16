@@ -62,6 +62,14 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Shell" systemMenu="apple" autoenablesItems="NO" id="Ny4-XA-yMx">
                                     <items>
+                                        <menuItem title="New Window" keyEquivalent="n" id="7dv-nZ-Dd7"/>
+                                        <menuItem isSeparatorItem="YES" id="NWT-8E-eRq"/>
+                                        <menuItem title="Import Settings" id="SVh-5Z-kLo">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                        <menuItem title="Export Settings" id="Nks-UT-OYg" customClass="ExportSettingsMenuItem" customModule="Archipelago" customModuleProvider="target">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="lRc-8U-2al"/>
                                         <menuItem title="Close" keyEquivalent="w" id="d86-Ba-t2a" customClass="CloseMenuItem" customModule="Archipelago" customModuleProvider="target"/>
                                     </items>

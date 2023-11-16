@@ -52,6 +52,7 @@
 		01847B9B2B05945700BDB881 /* VersionMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01847B9A2B05945700BDB881 /* VersionMenuItem.swift */; };
 		01847B9D2B0596B600BDB881 /* ProfilesMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01847B9C2B0596B600BDB881 /* ProfilesMenu.swift */; };
 		01847B9F2B059D3400BDB881 /* ReportIssueMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01847B9E2B059D3400BDB881 /* ReportIssueMenuItem.swift */; };
+		01847BA12B05A08600BDB881 /* ExportSettingsMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01847BA02B05A08600BDB881 /* ExportSettingsMenuItem.swift */; };
 		0195E7722AE9E5E1003EDDD2 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0195E7712AE9E5E1003EDDD2 /* App.swift */; };
 		01EC782C2AFEC00800F62F97 /* FontsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EC782B2AFEC00800F62F97 /* FontsComponent.swift */; };
 		01EC782E2AFEE1DF00F62F97 /* SelectComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EC782D2AFEE1DF00F62F97 /* SelectComponent.swift */; };
@@ -129,6 +130,7 @@
 		01847B9A2B05945700BDB881 /* VersionMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionMenuItem.swift; sourceTree = "<group>"; };
 		01847B9C2B0596B600BDB881 /* ProfilesMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilesMenu.swift; sourceTree = "<group>"; };
 		01847B9E2B059D3400BDB881 /* ReportIssueMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportIssueMenuItem.swift; sourceTree = "<group>"; };
+		01847BA02B05A08600BDB881 /* ExportSettingsMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportSettingsMenuItem.swift; sourceTree = "<group>"; };
 		0195E7712AE9E5E1003EDDD2 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		01EC782B2AFEC00800F62F97 /* FontsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsComponent.swift; sourceTree = "<group>"; };
 		01EC782D2AFEE1DF00F62F97 /* SelectComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectComponent.swift; sourceTree = "<group>"; };
@@ -279,6 +281,7 @@
 				01847B9A2B05945700BDB881 /* VersionMenuItem.swift */,
 				01847B9C2B0596B600BDB881 /* ProfilesMenu.swift */,
 				01847B9E2B059D3400BDB881 /* ReportIssueMenuItem.swift */,
+				01847BA02B05A08600BDB881 /* ExportSettingsMenuItem.swift */,
 			);
 			path = MenuItems;
 			sourceTree = "<group>";
@@ -444,6 +447,7 @@
 				01847B932B02F6DC00BDB881 /* Font.swift in Sources */,
 				0195E7722AE9E5E1003EDDD2 /* App.swift in Sources */,
 				01F2D62F2AFC85F9001DCD2C /* RadioComponent.swift in Sources */,
+				01847BA12B05A08600BDB881 /* ExportSettingsMenuItem.swift in Sources */,
 				01108D942AE0AE8D00603FBF /* WKWebViewConfiguration.swift in Sources */,
 				01108D962AE4C23E00603FBF /* Pty.swift in Sources */,
 				01847B892B01A32100BDB881 /* ProfilesComponent.swift in Sources */,
