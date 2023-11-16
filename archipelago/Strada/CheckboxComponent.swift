@@ -41,6 +41,6 @@ extension CheckboxComponent {
 
   fileprivate struct MessageData: Decodable {
     let property: String
-    let value: String
+    let value: Bool
   }
 }

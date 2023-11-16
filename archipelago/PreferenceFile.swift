@@ -296,7 +296,11 @@ class PreferenceFile {
       for: .applicationSupportDirectory, in: .userDomainMask
     ).first!
 
-    return appSupportDir.appendingPathComponent("Archipelago/config.dev.json")
+    #if DEBUG
+      return appSupportDir.appendingPathComponent("Archipelago/config.dev.json")
+    #else
+      return appSupportDir.appendingPathComponent("Archipelago/config.json")
+    #endif
   }
 }
 
