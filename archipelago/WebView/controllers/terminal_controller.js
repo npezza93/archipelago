@@ -174,7 +174,7 @@ export default class extends BridgeComponent {
     const {background} = defaultSettings.theme;
     defaultSettings.allowTransparency = this.allowTransparency(background);
     defaultSettings.cursorWidth = 2;
-    defaultSettings.fontWeightBold = 'bold';
+    defaultSettings.fontWeightBold = '500';
     defaultSettings.lineHeight = 1;
     defaultSettings.letterSpacing = '0';
     defaultSettings.tabStopWidth = 8;
