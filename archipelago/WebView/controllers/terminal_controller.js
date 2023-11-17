@@ -62,6 +62,8 @@ export default class extends BridgeComponent {
         this.xterm.options.allowTransparency = this.settings().allowTransparency;
         this.xterm.options.theme = this.settings().theme;
         document.documentElement.style.setProperty("--background-color", this.settings().theme.background)
+      } else if (data.property == "hideContextMenu") {
+        this.profile.hideContextMenu = data.value == true || data.value == "true"
       }
     })
   }
@@ -73,6 +75,12 @@ export default class extends BridgeComponent {
     this._wrapperElement?.remove();
     this._wrapperElement = null;
     this.xterm = null;
+  }
+
+  onContextMenu(event) {
+    if (this.profile.hideContextMenu) {
+      event.preventDefault()
+    }
   }
 
   send(event, data = {}, callback) {
@@ -149,7 +157,7 @@ export default class extends BridgeComponent {
 
   xtermSettings() {
     return ['fontFamily', 'fontSize', 'fontWeight', 'cursorStyle',
-      'cursorBlink', 'scrollback', 'macOptionIsMeta', 'hideContextMenu',
+      'cursorBlink', 'scrollback', 'macOptionIsMeta',
       'rightClickSelectsWord', 'macOptionClickForcesSelection', 'theme']
   }
 
