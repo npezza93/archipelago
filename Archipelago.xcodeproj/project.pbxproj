@@ -63,6 +63,7 @@
 		01FD74652B05A3B7005C240A /* ImportSettingsMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FD74642B05A3B7005C240A /* ImportSettingsMenuItem.swift */; };
 		01FD74672B05BB70005C240A /* NewWindowMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FD74662B05BB70005C240A /* NewWindowMenuItem.swift */; };
 		01FD746B2B06BFB8005C240A /* FontLoaderComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FD746A2B06BFB8005C240A /* FontLoaderComponent.swift */; };
+		01FD746D2B06F4D7005C240A /* CheckForUpdatesMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FD746C2B06F4D7005C240A /* CheckForUpdatesMenuItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -144,6 +145,7 @@
 		01FD74642B05A3B7005C240A /* ImportSettingsMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportSettingsMenuItem.swift; sourceTree = "<group>"; };
 		01FD74662B05BB70005C240A /* NewWindowMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWindowMenuItem.swift; sourceTree = "<group>"; };
 		01FD746A2B06BFB8005C240A /* FontLoaderComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontLoaderComponent.swift; sourceTree = "<group>"; };
+		01FD746C2B06F4D7005C240A /* CheckForUpdatesMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckForUpdatesMenuItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -286,6 +288,7 @@
 			children = (
 				01847B982B055C6600BDB881 /* CloseMenuItem.swift */,
 				01847BA02B05A08600BDB881 /* ExportSettingsMenuItem.swift */,
+				01FD746C2B06F4D7005C240A /* CheckForUpdatesMenuItem.swift */,
 				01FD74642B05A3B7005C240A /* ImportSettingsMenuItem.swift */,
 				01FD74662B05BB70005C240A /* NewWindowMenuItem.swift */,
 				01847B9C2B0596B600BDB881 /* ProfilesMenu.swift */,
@@ -473,6 +476,7 @@
 				01847B852B008FEE00BDB881 /* KeybindingCapturerComponent.swift in Sources */,
 				011B14452ADE1664000822F4 /* Document.swift in Sources */,
 				01847B8D2B01C8C200BDB881 /* ProfileActionsComponent.swift in Sources */,
+				01FD746D2B06F4D7005C240A /* CheckForUpdatesMenuItem.swift in Sources */,
 				01847B9B2B05945700BDB881 /* VersionMenuItem.swift in Sources */,
 				01EC782C2AFEC00800F62F97 /* FontsComponent.swift in Sources */,
 				01EC78302AFEF1BB00F62F97 /* CheckboxComponent.swift in Sources */,

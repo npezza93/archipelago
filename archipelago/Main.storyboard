@@ -22,10 +22,14 @@
                                                 <segue destination="Awb-Vn-mCD" kind="show" id="dfn-7T-39A"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Version 6.0.0" enabled="NO" id="Otw-D9-ZRY" customClass="VersionMenuItem" customModule="Archipelago" customModuleProvider="target">
+                                        <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
+                                        <menuItem title="Check for Updates..." id="Otw-D9-ZRY" customClass="CheckForUpdatesMenuItem" customModule="Archipelago" customModuleProvider="target">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                         </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
+                                        <menuItem title="Version 6.0.0" enabled="NO" id="7cQ-Fv-KWx" customClass="VersionMenuItem" customModule="Archipelago" customModuleProvider="target">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="Vd7-6Z-GEh"/>
                                         <menuItem title="Settings" keyEquivalent="," id="BOF-NM-1cW">
                                             <connections>
                                                 <segue destination="E5Y-Pp-Ht3" kind="show" id="wAP-gV-KH4"/>
