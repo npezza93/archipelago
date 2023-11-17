@@ -30,7 +30,7 @@ class Font: Codable {
   }
 
   func fetchRaw() {
-    if (self.raw == nil) {
+    if self.raw == nil {
       let data = try! Data(contentsOf: URL(fileURLWithPath: path))
       self.raw = [UInt8](data)
       self.base64 = data.base64EncodedString()

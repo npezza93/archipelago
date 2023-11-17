@@ -32,7 +32,8 @@ final class FontLoaderComponent: BridgeComponent {
   }
 
   private func onSettingChanged(property: String, value: Any) {
-    if property == "fontFamily", let font = App.fonts.first(where: { $0.name == value as! String }) {
+    if property == "fontFamily", let font = App.fonts.first(where: { $0.name == value as! String })
+    {
       reply(to: "change", with: font.as_json())
     }
   }
@@ -50,7 +51,9 @@ final class FontLoaderComponent: BridgeComponent {
 
   private func onProfileChanged(profile: String) {
     if let wrappers = self.profileChangeListeners {
-      if let font = App.fonts.first(where: { $0.name == App.preferenceFile.activeProfile().fontFamily }) {
+      if let font = App.fonts.first(where: {
+        $0.name == App.preferenceFile.activeProfile().fontFamily
+      }) {
         wrappers.forEach {
           let message = Message(
             id: $0.id, component: type(of: self).name, event: "change",

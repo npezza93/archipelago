@@ -61,7 +61,9 @@ class ViewController: NSViewController, WKUIDelegate, NSWindowDelegate, BridgeDe
   }
 
   private func monospsaceFontStylesheet() -> String {
-    if let font = App.fonts.first(where: { $0.name == App.preferenceFile.activeProfile().fontFamily }) {
+    if let font = App.fonts.first(where: {
+      $0.name == App.preferenceFile.activeProfile().fontFamily
+    }) {
       return """
         document.addEventListener('DOMContentLoaded', () => {
             window.font = \(font.as_json())
