@@ -20,3 +20,4 @@ node_modules
 *.log
 .DS_Store
 dist/
+**/*.xcscheme

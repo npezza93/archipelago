@@ -15,9 +15,6 @@
 		011B14432ADE1664000822F4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011B14422ADE1664000822F4 /* ViewController.swift */; };
 		011B14452ADE1664000822F4 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011B14442ADE1664000822F4 /* Document.swift */; };
 		011B14472ADE1665000822F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 011B14462ADE1665000822F4 /* Assets.xcassets */; };
-		011B14562ADE1665000822F4 /* archipelagoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011B14552ADE1665000822F4 /* archipelagoTests.swift */; };
-		011B14602ADE1665000822F4 /* archipelagoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011B145F2ADE1665000822F4 /* archipelagoUITests.swift */; };
-		011B14622ADE1665000822F4 /* archipelagoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011B14612ADE1665000822F4 /* archipelagoUITestsLaunchTests.swift */; };
 		011B14752ADE17BD000822F4 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 011B14742ADE17BD000822F4 /* index.html */; };
 		011B14772ADE1A7A000822F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 011B14762ADE1A7A000822F4 /* Main.storyboard */; };
 		011B14B42ADE23BB000822F4 /* BridgeComponent+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011B14B32ADE23BB000822F4 /* BridgeComponent+App.swift */; };
@@ -95,10 +92,7 @@
 		011B144B2ADE1665000822F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		011B144C2ADE1665000822F4 /* archipelago.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = archipelago.entitlements; sourceTree = "<group>"; };
 		011B14512ADE1665000822F4 /* ArchipelagoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ArchipelagoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		011B14552ADE1665000822F4 /* archipelagoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = archipelagoTests.swift; sourceTree = "<group>"; };
 		011B145B2ADE1665000822F4 /* ArchipelagoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ArchipelagoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		011B145F2ADE1665000822F4 /* archipelagoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = archipelagoUITests.swift; sourceTree = "<group>"; };
-		011B14612ADE1665000822F4 /* archipelagoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = archipelagoUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		011B14742ADE17BD000822F4 /* index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		011B14762ADE1A7A000822F4 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		011B14B32ADE23BB000822F4 /* BridgeComponent+App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BridgeComponent+App.swift"; sourceTree = "<group>"; };
@@ -178,8 +172,6 @@
 			isa = PBXGroup;
 			children = (
 				011B143F2ADE1664000822F4 /* archipelago */,
-				011B14542ADE1665000822F4 /* archipelagoTests */,
-				011B145E2ADE1665000822F4 /* archipelagoUITests */,
 				011B143E2ADE1664000822F4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -223,29 +215,13 @@
 			path = archipelago;
 			sourceTree = "<group>";
 		};
-		011B14542ADE1665000822F4 /* archipelagoTests */ = {
-			isa = PBXGroup;
-			children = (
-				011B14552ADE1665000822F4 /* archipelagoTests.swift */,
-			);
-			path = archipelagoTests;
-			sourceTree = "<group>";
-		};
-		011B145E2ADE1665000822F4 /* archipelagoUITests */ = {
-			isa = PBXGroup;
-			children = (
-				011B145F2ADE1665000822F4 /* archipelagoUITests.swift */,
-				011B14612ADE1665000822F4 /* archipelagoUITestsLaunchTests.swift */,
-			);
-			path = archipelagoUITests;
-			sourceTree = "<group>";
-		};
 		011B14B22ADE23A7000822F4 /* Strada */ = {
 			isa = PBXGroup;
 			children = (
 				011B14B32ADE23BB000822F4 /* BridgeComponent+App.swift */,
 				01EC782F2AFEF1BB00F62F97 /* CheckboxComponent.swift */,
 				01EC78332AFF360C00F62F97 /* ColorComponent.swift */,
+				01FD746A2B06BFB8005C240A /* FontLoaderComponent.swift */,
 				01EC782B2AFEC00800F62F97 /* FontsComponent.swift */,
 				01847B862B0174DD00BDB881 /* KeybindingActionsComponent.swift */,
 				01847B842B008FEE00BDB881 /* KeybindingCapturerComponent.swift */,
@@ -260,7 +236,6 @@
 				0166EE742AE7507C00061485 /* TabsComponent.swift */,
 				011B14B52ADE23EF000822F4 /* TerminalComponent.swift */,
 				01EC78312AFEF98400F62F97 /* TextComponent.swift */,
-				01FD746A2B06BFB8005C240A /* FontLoaderComponent.swift */,
 			);
 			path = Strada;
 			sourceTree = "<group>";
@@ -286,9 +261,9 @@
 		01847B972B055C5700BDB881 /* MenuItems */ = {
 			isa = PBXGroup;
 			children = (
+				01FD746C2B06F4D7005C240A /* CheckForUpdatesMenuItem.swift */,
 				01847B982B055C6600BDB881 /* CloseMenuItem.swift */,
 				01847BA02B05A08600BDB881 /* ExportSettingsMenuItem.swift */,
-				01FD746C2B06F4D7005C240A /* CheckForUpdatesMenuItem.swift */,
 				01FD74642B05A3B7005C240A /* ImportSettingsMenuItem.swift */,
 				01FD74662B05BB70005C240A /* NewWindowMenuItem.swift */,
 				01847B9C2B0596B600BDB881 /* ProfilesMenu.swift */,
@@ -492,7 +467,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				011B14562ADE1665000822F4 /* archipelagoTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,8 +474,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				011B14602ADE1665000822F4 /* archipelagoUITests.swift in Sources */,
-				011B14622ADE1665000822F4 /* archipelagoUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -654,6 +626,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = archipelago/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Archipelago;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -685,6 +659,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = archipelago/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Archipelago;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;

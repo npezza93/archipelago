@@ -11,9 +11,11 @@ class AboutController: NSViewController, WKUIDelegate, NSWindowDelegate, WKNavig
     webView = WKWebView(
       frame: CGRect(x: 0, y: 0, width: 300, height: 500), configuration: .appConfiguration)
 
+    webView.setValue(false, forKey: "drawsBackground")
     webView.uiDelegate = self
     webView.navigationDelegate = self
     #if DEBUG
+      webView.configuration.preferences.setValue(true, forKey: "developerExtrasEnabled")
       webView.isInspectable = true
     #endif
     let overlay = DraggingView(frame: CGRect(x: 0, y: 0, width: webView.frame.width, height: 30))
@@ -22,6 +24,14 @@ class AboutController: NSViewController, WKUIDelegate, NSWindowDelegate, WKNavig
     webView.addSubview(overlay)
 
     view = webView
+
+    let visualEffectView = NSVisualEffectView()
+    visualEffectView.material = .popover
+    visualEffectView.blendingMode = .behindWindow
+    visualEffectView.state = .active
+    visualEffectView.frame = view.bounds  // Set the frame to cover the entire view
+    visualEffectView.autoresizingMask = [.width, .height]  // Ensure it resizes with the window
+    view.addSubview(visualEffectView, positioned: .below, relativeTo: webView)
   }
 
   override func viewWillAppear() {

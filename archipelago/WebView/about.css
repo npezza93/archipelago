@@ -1,14 +1,12 @@
 @media (prefers-color-scheme: light) {
   body {
     --color: #424242;
-    --background-color: #F5F5F5;
   }
 }
 
 @media (prefers-color-scheme: dark) {
   body {
     --color: #F5F5F5;
-    --background-color: #393736;
   }
 }
 
@@ -26,7 +24,6 @@ html, body {
   height: 100%;
   margin: 0;
   font-size: 15px;
-  background-color: var(--background-color);
   color: var(--color);
   display: flex;
   flex-direction: column;
