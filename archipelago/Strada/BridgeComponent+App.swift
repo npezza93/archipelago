@@ -19,6 +19,7 @@ extension BridgeComponent {
       ProfileCapturerComponent.self,
       ProfileActionsComponent.self,
       ProfileComponent.self,
+      FontLoaderComponent.self,
     ]
   }
 }

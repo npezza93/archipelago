@@ -62,6 +62,7 @@
 		01F2D62F2AFC85F9001DCD2C /* RadioComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F2D62E2AFC85F9001DCD2C /* RadioComponent.swift */; };
 		01FD74652B05A3B7005C240A /* ImportSettingsMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FD74642B05A3B7005C240A /* ImportSettingsMenuItem.swift */; };
 		01FD74672B05BB70005C240A /* NewWindowMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FD74662B05BB70005C240A /* NewWindowMenuItem.swift */; };
+		01FD746B2B06BFB8005C240A /* FontLoaderComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FD746A2B06BFB8005C240A /* FontLoaderComponent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,6 +143,7 @@
 		01F2D62E2AFC85F9001DCD2C /* RadioComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioComponent.swift; sourceTree = "<group>"; };
 		01FD74642B05A3B7005C240A /* ImportSettingsMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportSettingsMenuItem.swift; sourceTree = "<group>"; };
 		01FD74662B05BB70005C240A /* NewWindowMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWindowMenuItem.swift; sourceTree = "<group>"; };
+		01FD746A2B06BFB8005C240A /* FontLoaderComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontLoaderComponent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -256,6 +258,7 @@
 				0166EE742AE7507C00061485 /* TabsComponent.swift */,
 				011B14B52ADE23EF000822F4 /* TerminalComponent.swift */,
 				01EC78312AFEF98400F62F97 /* TextComponent.swift */,
+				01FD746A2B06BFB8005C240A /* FontLoaderComponent.swift */,
 			);
 			path = Strada;
 			sourceTree = "<group>";
@@ -477,6 +480,7 @@
 				0166EE752AE7507C00061485 /* TabsComponent.swift in Sources */,
 				0166EE5E2AE625FF00061485 /* AboutController.swift in Sources */,
 				01847B872B0174DD00BDB881 /* KeybindingActionsComponent.swift in Sources */,
+				01FD746B2B06BFB8005C240A /* FontLoaderComponent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
