@@ -2,16 +2,17 @@ import { BridgeComponent } from "@hotwired/strada"
 
 export default class extends BridgeComponent {
   static component = "font-loader"
+  static outlets = [ "terminal" ]
 
   connect() {
     super.connect()
-    this.fonts = []
+    window.fonts = []
 
     if (window.font) {
       this.loadFont(window.font)
     }
     this.send("change", {}, ({data}) => {
-      let existingFont = this.fonts.find((font) => font.name == data.name)
+      let existingFont = window.fonts.find((font) => font.name == data.name)
 
       if (!existingFont) {
         this.loadFont(data)
@@ -31,7 +32,9 @@ export default class extends BridgeComponent {
     style.innerHTML = css
     document.head.appendChild(style);
     document.body.insertAdjacentHTML('beforeend', inits)
-    this.fonts = [...this.fonts, font]
+    window.fonts = [...window.fonts, font]
+    window.font = font
+    setTimeout(() => this.terminalOutlet.resetFont(), 130)
   }
 
   send(event, data = {}, callback) {

@@ -83,6 +83,14 @@ export default class extends BridgeComponent {
     }
   }
 
+  resetFont() {
+    if (this.xterm) {
+      this.xterm.clearTextureAtlas()
+      this.xterm.refresh(0, this.xterm.rows - 1)
+      this.fit()
+    }
+  }
+
   send(event, data = {}, callback) {
     data.metadata = { url: "archipelago-1" }
 

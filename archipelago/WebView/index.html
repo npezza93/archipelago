@@ -7,7 +7,7 @@
     <script type="module" src="./application.min.js"></script>
   </head>
   <body>
-    <div data-controller="terminal" data-action="contextmenu@window->terminal#onContextMenu resize@window->terminal#fit"></div>
-    <div data-controller="font-loader" style="display:none"></div>
+    <div class="archipelago-terminal" data-controller="terminal" data-action="contextmenu@window->terminal#onContextMenu resize@window->terminal#fit"></div>
+    <div data-controller="font-loader" data-font-loader-terminal-outlet=".archipelago-terminal" style="display:none"></div>
   </body>
 </html>
