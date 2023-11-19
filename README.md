@@ -1,6 +1,9 @@
 <p align="center">
-  <a href="https://github.com/npezza93/archipelago">
+  <a href="https://github.com/npezza93/archipelago#gh-light-mode-only">
     <img src="https://raw.githubusercontent.com/npezza93/archipelago/master/.github/logo-light.svg#gh-light-mode-only" width="350">
+  </a>
+
+  <a href="https://github.com/npezza93/archipelago#gh-dark-mode-only">
     <img src="https://raw.githubusercontent.com/npezza93/archipelago/master/.github/logo-dark.svg#gh-dark-mode-only" width="350">
   </a>
 
@@ -12,8 +15,6 @@
 </p>
 
 ## Why?
-
-![GitHub-Mark-Light](https://raw.githubusercontent.com/npezza93/archipelago/master/.github/logo-light.svg)![GitHub-Mark-Dark](https://raw.githubusercontent.com/npezza93/archipelago/master/.github/logo-dark.svg)
 
 Archipelago is inspired by [Hyper](https://github.com/zeit/hyper). I
 started using Hyper as my default terminal while it was in beta and into
