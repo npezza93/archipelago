@@ -11,6 +11,9 @@
   </p>
 </p>
 
+![GitHub-Mark-Light](https://raw.githubusercontent.com/npezza93/archipelago/master/.github/logo-light.svg | width=350)
+![GitHub-Mark-Dark](https://raw.githubusercontent.com/npezza93/archipelago/master/.github/logo-dark.svg | width=350)
+
 ## Why?
 
 Archipelago is inspired by [Hyper](https://github.com/zeit/hyper). I
