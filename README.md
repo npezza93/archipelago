@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/npezza93/archipelago">
-    <img src="https://raw.githubusercontent.com/npezza93/archipelago/master/.github/logo.png" width="350">
+    <img src="https://raw.githubusercontent.com/npezza93/archipelago/master/.github/logo.svg" width="350">
   </a>
 
   <p align="center">
