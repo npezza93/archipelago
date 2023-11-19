@@ -1,7 +1,9 @@
-![GitHub-Mark-Light](https://raw.githubusercontent.com/npezza93/archipelago/master/.github/logo-light.svg | width=350)
-![GitHub-Mark-Dark](https://raw.githubusercontent.com/npezza93/archipelago/master/.github/logo-dark.svg | width=350)
-
 <p align="center">
+  <a href="https://github.com/npezza93/archipelago">
+    <img src="https://raw.githubusercontent.com/npezza93/archipelago/master/.github/logo-light.svg#gh-light-mode-only" width="350">
+    <img src="https://raw.githubusercontent.com/npezza93/archipelago/master/.github/logo-dark.svg#gh-dark-mode-only" width="350">
+  </a>
+
   <p align="center">
     Archipelago is an open-source terminal emulator built on web technology.
     <br>
