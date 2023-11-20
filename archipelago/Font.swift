@@ -1,46 +1,53 @@
 import CoreText
 import Foundation
 
-class Font: Codable {
+class Font {
 
-  var path: String
+  var paths: [String]
   var name: String
-  var format: String
 
-  var raw: [UInt8]?
-  var base64: String?
-
-  public init(name: String, path: String) {
+  public init(name: String) {
     self.name = name
-    self.path = path
+    self.paths = []
+  }
+
+  func addPath(_ path: String) {
+    self.paths.append(path)
+  }
+
+  func format() -> String {
+    let path = findPath()
 
     if path.hasSuffix(".ttf") {
-      self.format = "truetype"
+      return "truetype"
     } else if path.hasSuffix(".otf") {
-      self.format = "opentype"
+      return "opentype"
     } else if path.hasSuffix(".ttc") {
-      self.format = "collection"
+      return "collection"
     } else if path.hasSuffix(".woff") {
-      self.format = "woff"
+      return "woff"
     } else if path.hasSuffix(".woff2") {
-      self.format = "woff2"
+      return "woff2"
     } else {
-      self.format = "truetype"
+      return "truetype"
     }
   }
 
-  func fetchRaw() {
-    if self.raw == nil {
-      let data = try! Data(contentsOf: URL(fileURLWithPath: path))
-      self.raw = [UInt8](data)
-      self.base64 = data.base64EncodedString()
-    }
+  func findPath() -> String {
+    paths.filter { !$0.lowercased().contains("italic") && !$0.lowercased().contains("bold") }
+      .first { $0.lowercased().contains("regular") } ?? paths[0]
   }
 
   func as_json() -> String {
     do {
-      self.fetchRaw()
-      let jsonData = try JSONEncoder().encode(self)
+      let data = try! Data(contentsOf: URL(fileURLWithPath: findPath()))
+
+      let json = FontJson(
+        name: name, path: findPath(), raw: [UInt8](data),
+        base64: data.base64EncodedString()
+      )
+
+      let jsonData = try JSONEncoder().encode(json)
 
       if let jsonString = String(data: jsonData, encoding: .utf8) {
         return jsonString
@@ -51,4 +58,11 @@ class Font: Codable {
       return ""
     }
   }
+}
+
+struct FontJson: Codable {
+  var name: String
+  var path: String
+  var raw: [UInt8]
+  var base64: String
 }

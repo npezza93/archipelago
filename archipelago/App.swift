@@ -17,13 +17,13 @@ struct App {
 
     for fontDescriptor in matchingFonts {
       let font = CTFontCreateWithFontDescriptor(fontDescriptor, 0, nil)
-      if let familyName = CTFontCopyFamilyName(font) as String? {
-        if CTFontGetSymbolicTraits(font).contains(.traitMonoSpace)
+      if let familyName = CTFontCopyFamilyName(font) as String?,
+        CTFontGetSymbolicTraits(font).contains(.traitMonoSpace)
           || familyName.lowercased().contains("mono"),
-          let url = CTFontDescriptorCopyAttribute(fontDescriptor, kCTFontURLAttribute) as? URL
-        {
-          fontDict[familyName] = Font(name: familyName, path: url.path)
-        }
+        let url = CTFontDescriptorCopyAttribute(fontDescriptor, kCTFontURLAttribute) as? URL
+      {
+        fontDict[familyName] = fontDict[familyName] ?? Font(name: familyName)
+        fontDict[familyName]?.addPath(url.path)
       }
     }
 
