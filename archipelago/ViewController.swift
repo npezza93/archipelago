@@ -31,13 +31,21 @@ class ViewController: NSViewController, WKUIDelegate, NSWindowDelegate, BridgeDe
     overlay.layer?.backgroundColor = NSColor.clear.cgColor
     webView.addSubview(overlay)
 
+    self.view = webView
+
+    let blurView = NSVisualEffectView(frame: NSRect(x: 0, y: 0, width: 800, height: 600))
+    blurView.blendingMode = .behindWindow
+    blurView.material = NSVisualEffectView.Material.fullScreenUI
+    blurView.state = .active
+    blurView.autoresizingMask = [.width, .height]
+    view.addSubview(blurView, positioned: .below, relativeTo: webView)
+
     webView.uiDelegate = self
     webView.navigationDelegate = self
     #if DEBUG
       webView.configuration.preferences.setValue(true, forKey: "developerExtrasEnabled")
       webView.isInspectable = true
     #endif
-    view = webView
     Bridge.initialize(webView)
   }
 

@@ -32,7 +32,6 @@ struct Config: Codable {
     var hideContextMenu: Bool
     var rightClickSelectsWord: Bool
     var macOptionClickForcesSelection: Bool
-    var vibrancy: String?
     var ligatures: Bool
     var theme: Theme
     var keybindings: [Keybinding]
@@ -74,7 +73,6 @@ struct Config: Codable {
       hideContextMenu: Bool = true,
       rightClickSelectsWord: Bool = true,
       macOptionClickForcesSelection: Bool = true,
-      vibrancy: String? = nil,
       ligatures: Bool = false,
       theme: Theme = Theme(),
       keybindings: [Keybinding]? = nil
@@ -95,7 +93,6 @@ struct Config: Codable {
       self.hideContextMenu = hideContextMenu
       self.rightClickSelectsWord = rightClickSelectsWord
       self.macOptionClickForcesSelection = macOptionClickForcesSelection
-      self.vibrancy = vibrancy
       self.ligatures = ligatures
       self.theme = theme
       self.keybindings = keybindings ?? []
@@ -149,8 +146,6 @@ struct Config: Codable {
       self.macOptionClickForcesSelection =
         try container.decodeIfPresent(Bool.self, forKey: .macOptionClickForcesSelection)
         ?? defaultProfile.macOptionClickForcesSelection
-      self.vibrancy =
-        try container.decodeIfPresent(String.self, forKey: .vibrancy) ?? defaultProfile.vibrancy
       self.ligatures =
         try container.decodeIfPresent(Bool.self, forKey: .ligatures) ?? defaultProfile.ligatures
       self.theme = try container.decodeIfPresent(Theme.self, forKey: .theme) ?? defaultProfile.theme

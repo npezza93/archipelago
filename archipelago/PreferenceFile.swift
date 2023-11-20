@@ -140,8 +140,6 @@ class PreferenceFile {
       profile.macOptionIsMeta = value as! Bool
     case "ligatures":
       profile.ligatures = value as! Bool
-    case "vibrancy":
-      profile.vibrancy = value as? String
     case "fontSize":
       let str = value as! String
       profile.fontSize = UInt32(str)!

@@ -1,14 +1,14 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>Settings</title>
-		<link rel="stylesheet" href="./settings-vars.css">
-		<link rel="stylesheet" href="./settings-general.css">
-		<link rel="stylesheet" href="./settings-header.css">
-		<link rel="stylesheet" href="./settings-choices.css">
+  <head>
+    <meta charset="utf-8">
+    <title>Settings</title>
+    <link rel="stylesheet" href="./settings-vars.css">
+    <link rel="stylesheet" href="./settings-general.css">
+    <link rel="stylesheet" href="./settings-header.css">
+    <link rel="stylesheet" href="./settings-choices.css">
     <script type="module" src="./settings.min.js"></script>
-	</head>
+  </head>
   <body data-controller="tabs drag-header">
     <header data-action="mousedown->drag-header#dragging">
       <h1>Settings</h1>
@@ -312,7 +312,7 @@
           </div>
 
           <div class="flex flex-col">
-           <h4 class="px-15 my-15">Selection</h4>
+            <h4 class="px-15 my-15">Selection</h4>
 
             <div class="flex flex-row gap-10 px-15 justify-between">
               <label class="flex flex-row align-center gap-10">
@@ -324,31 +324,7 @@
           </div>
 
           <div class="flex flex-col">
-           <h4 class="px-15 my-15">Window</h4>
-
-            <div class="flex flex-row gap-10 px-15 justify-between">
-              <label class="flex flex-row align-center gap-10 w-full">
-                <div class="w-100">Vibrancy</div>
-
-                <select name="vibrancy" size="1" data-controller="select" data-action="select#change" class="flex-1">
-                  <option value="">None</option>
-                  <option value="titlebar">TitleBar</option>
-                  <option value="menu">Menu</option>
-                  <option value="popover">Popover</option>
-                  <option value="sidebar">Sidebar</option>
-                  <option value="header">Header</option>
-                  <option value="sheet">Sheet</option>
-                  <option value="window">Window</option>
-                  <option value="hud">Hud</option>
-                  <option value="fullscreen-ui">Fullscreen UI</option>
-                  <option value="tooltip">Tooltip</option>
-                  <option value="content">Content</option>
-                  <option value="under-window">Under Window</option>
-                  <option value="under-page">Under Page</option>
-                </select>
-              </label>
-            </div>
-
+            <h4 class="px-15 my-15">Window</h4>
             <div class="flex flex-row gap-10 px-15 justify-between mt-15">
               <label class="flex flex-row align-center gap-10">
                 <div class="w-100">Foreground</div>
@@ -388,5 +364,5 @@
         </div>
       </div>
     </section>
-	</body>
+  </body>
 </html>
