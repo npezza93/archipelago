@@ -4,7 +4,10 @@ import WebKit
 
 class ViewController: NSViewController, WKUIDelegate, NSWindowDelegate, BridgeDestination {
   @IBOutlet var webView: WKWebView!
+  var vibrantView: NSVisualEffectView?
   var currentZoomFactor: CGFloat = 1.0
+  var settingChangeListener: SettingChangeListenerWrapper?
+  var profileChangeListener: ProfileChangeListenerWrapper?
 
   private lazy var url: URL = {
     URL(fileURLWithPath: Bundle.main.path(forResource: "index", ofType: "html")!)
@@ -33,12 +36,13 @@ class ViewController: NSViewController, WKUIDelegate, NSWindowDelegate, BridgeDe
 
     self.view = webView
 
-    let blurView = NSVisualEffectView(frame: NSRect(x: 0, y: 0, width: 800, height: 600))
-    blurView.blendingMode = .behindWindow
-    blurView.material = NSVisualEffectView.Material.fullScreenUI
-    blurView.state = .active
-    blurView.autoresizingMask = [.width, .height]
-    view.addSubview(blurView, positioned: .below, relativeTo: webView)
+    let vibrantView = NSVisualEffectView(frame: NSRect(x: 0, y: 0, width: 800, height: 600))
+    vibrantView.blendingMode = .behindWindow
+    vibrantView.material = NSVisualEffectView.Material.fullScreenUI
+    vibrantView.state = .active
+    vibrantView.autoresizingMask = [.width, .height]
+    self.vibrantView = vibrantView
+    self.toggleVibrantView()
 
     webView.uiDelegate = self
     webView.navigationDelegate = self
@@ -47,6 +51,26 @@ class ViewController: NSViewController, WKUIDelegate, NSWindowDelegate, BridgeDe
       webView.isInspectable = true
     #endif
     Bridge.initialize(webView)
+    self.settingChangeListener = App.preferenceFile.onChange(listener: {
+      (key: String, value: Any) in
+      self.toggleVibrantView()
+    })
+    self.profileChangeListener = App.preferenceFile.onProfileChange(
+      id: UUID().uuidString,
+      listener: { (profile: String) in
+        self.toggleVibrantView()
+      })
+  }
+
+  func toggleVibrantView() {
+    vibrantView?.removeFromSuperview()
+
+    let background = NSColor(string: App.preferenceFile.activeProfile().theme.background)?
+      .alphaComponent
+
+    if let vibrant = vibrantView, (background ?? 1.0) < 1.0 {
+      view.addSubview(vibrant, positioned: .below, relativeTo: webView)
+    }
   }
 
   override func viewWillAppear() {
@@ -66,6 +90,12 @@ class ViewController: NSViewController, WKUIDelegate, NSWindowDelegate, BridgeDe
 
   func windowWillClose(_ notification: Notification) {
     bridgeDelegate.onViewWillDisappear()
+    if let wrapper = self.settingChangeListener {
+      App.preferenceFile.removeChange(wrapper: wrapper)
+    }
+    if let wrapper = self.profileChangeListener {
+      App.preferenceFile.removeProfileChange(wrapper: wrapper)
+    }
   }
 
   private func monospsaceFontStylesheet() -> String {

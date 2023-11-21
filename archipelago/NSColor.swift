@@ -30,17 +30,19 @@ extension NSColor {
     }
 
     // RGB or RGBA string
-    let components = string.trimmingCharacters(in: CharacterSet(charactersIn: "rgb(a)"))
+    let raw_components = string.trimmingCharacters(in: CharacterSet(charactersIn: "rgb(a)"))
       .components(separatedBy: ",")
       .compactMap {
-        CGFloat((Double($0.trimmingCharacters(in: .whitespacesAndNewlines)) ?? 0.0) / 255.0)
+        CGFloat((Double($0.trimmingCharacters(in: .whitespacesAndNewlines)) ?? 0.0))
       }
+    let components = raw_components.compactMap { CGFloat($0 / 255.0) }
 
     switch components.count {
     case 3:
       self.init(red: components[0], green: components[1], blue: components[2], alpha: 1.0)
     case 4:
-      self.init(red: components[0], green: components[1], blue: components[2], alpha: components[3])
+      self.init(
+        red: components[0], green: components[1], blue: components[2], alpha: raw_components[3])
     default:
       return nil
     }
