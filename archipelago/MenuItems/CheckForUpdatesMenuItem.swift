@@ -43,7 +43,6 @@ class CheckForUpdatesMenuItem: NSMenuItem {
             let prerelease = $0["prerelease"] as! UInt
             let tagName = $0["tag_name"] as! String
 
-            return true
             return prerelease == 0 && Version(tagName) > currentVersion as! Version
           }.sorted {
             Version($0["tag_name"] as! String) > Version($1["tag_name"] as! String)
