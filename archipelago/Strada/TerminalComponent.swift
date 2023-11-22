@@ -21,8 +21,6 @@ final class TerminalComponent: BridgeComponent {
       self.terminal?.kill()
     case .write:
       handleWriteEvent(message: message)
-    case .binary:
-      handleBinaryEvent(message: message)
     case .resize:
       handleResizeEvent(message: message)
     case .profileChanged:
@@ -66,10 +64,6 @@ final class TerminalComponent: BridgeComponent {
     guard let data: ResizeMessageData = message.data() else { return }
 
     self.terminal.setSize(cols: data.cols, rows: data.rows)
-  }
-
-  private func handleBinaryEvent(message: Message) {
-    //guard let data: MessageData = message.data() else { return }
   }
 
   private func dataReceived(data: Data) {
@@ -134,7 +128,6 @@ extension TerminalComponent {
     case data
     case disconnect
     case write
-    case binary
     case resize
     case profileChanged
   }
