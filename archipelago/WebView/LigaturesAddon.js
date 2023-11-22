@@ -24,8 +24,13 @@ export default class {
         this.looking = true
         let font = window.fonts.find((font) => font.name == termFont) || window.font
         if (!font.ligatures) {
-          let uint8Array = new Uint8Array(font.raw);
-          font.ligatures = loadBuffer(uint8Array.buffer, { cacheSize: 100000 })
+          const binaryString = atob(font.raw)
+          let bytes = new Uint8Array(binaryString.length)
+          for (let i = 0; i < binaryString.length; i++) {
+              bytes[i] = binaryString.charCodeAt(i)
+          }
+
+          font.ligatures = loadBuffer(bytes.buffer, { cacheSize: 100000 })
         }
         this.font = font
         this._terminal.refresh(0, this._terminal.rows - 1)

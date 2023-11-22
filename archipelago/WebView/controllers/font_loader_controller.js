@@ -17,8 +17,13 @@ export default class extends BridgeComponent {
   }
 
   async loadFont(font) {
-    let uint8Array = new Uint8Array(font.raw);
-    const fontFace = new FontFace(font.name, uint8Array.buffer);
+    const binaryString = atob(font.raw)
+    let bytes = new Uint8Array(binaryString.length)
+    for (let i = 0; i < binaryString.length; i++) {
+        bytes[i] = binaryString.charCodeAt(i)
+    }
+
+    const fontFace = new FontFace(font.name, bytes.buffer);
 
     if (!document.fonts.has(fontFace)) {
       await fontFace.load()

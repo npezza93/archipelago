@@ -29,7 +29,7 @@ class Font {
       } else {
         let data = try! Data(contentsOf: URL(fileURLWithPath: findPath()))
 
-        let jsonData = try JSONEncoder().encode(FontJson(name: name, raw: [UInt8](data)))
+        let jsonData = try JSONEncoder().encode(["name": name, "raw": data.base64EncodedString()])
         if let jsonString = String(data: jsonData, encoding: .utf8) {
           self.json = jsonString
           return jsonString
@@ -43,9 +43,4 @@ class Font {
       return ""
     }
   }
-}
-
-struct FontJson: Codable {
-  var name: String
-  var raw: [UInt8]
 }
