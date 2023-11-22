@@ -28,12 +28,9 @@ force me to restart.
 At the time Hyper was using [Hterm](https://github.com/chromium/hterm)
 which was the culprit of all my issues, so I found the
 [Xterm.js](https://xtermjs.org/) project which solved all these problems
-and I started making Archipelago. Archipelago works on macOS, Linux, and
-Windows, supports theming which can be saved to a profile, pane splitting,
-system tests, and much more. Visit [archipelago.dev](https://archipelago.dev)
-to see more gifs!
+and I started making Archipelago.
 
-![Screenshot](https://raw.githubusercontent.com/npezza93/archipelago/master/.github/screenshot.gif)
+![Screenshot](https://raw.githubusercontent.com/npezza93/archipelago/master/.github/screenshot.png)
 
 ## Get Archipelago
 
@@ -57,7 +54,8 @@ Bug reports and pull requests are welcome on [GitHub](https://github.com/npezza9
 
 Regardless of the platform you are working on, you will need to have Yarn installed. If you have never installed Yarn before, you can find out how [here](https://yarnpkg.com/en/docs/install).
 
-Clone the repo then run `yarn && yarn start` in your console.
+Clone the repo then run `cd archipelago/WebView; bun install` in your console.
+Then open the app in Xcode.
 
 ## License
 
