@@ -65,6 +65,7 @@ export default class extends BridgeComponent {
       } else if (data.property == "hideContextMenu") {
         this.profile.hideContextMenu = data.value == true || data.value == "true"
       }
+      this.fit()
     })
   }
 
@@ -78,7 +79,7 @@ export default class extends BridgeComponent {
   }
 
   onContextMenu(event) {
-    if (this.profile.hideContextMenu) {
+    if (this.profile?.hideContextMenu) {
       event.preventDefault()
     }
   }

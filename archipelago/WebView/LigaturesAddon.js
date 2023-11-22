@@ -22,14 +22,13 @@ export default class {
 
       if (!this.looking && termFont && this.font?.name !== termFont) {
         this.looking = true
-        let font = window.font
+        let font = window.fonts.find((font) => font.name == termFont) || window.font
         if (!font.ligatures) {
           let uint8Array = new Uint8Array(font.raw);
           font.ligatures = loadBuffer(uint8Array.buffer, { cacheSize: 100000 })
         }
         this.font = font
         this._terminal.refresh(0, this._terminal.rows - 1)
-        this._terminal.clearTextureAtlas()
         this.looking = false
       }
 

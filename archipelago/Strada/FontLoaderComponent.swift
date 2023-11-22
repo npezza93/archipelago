@@ -5,6 +5,7 @@ final class FontLoaderComponent: BridgeComponent {
   override class var name: String { "font-loader" }
   var settingChangeListener: SettingChangeListenerWrapper?
   var profileChangeListeners: [ProfileChangeListenerWrapper]?
+  var loadedFonts: [String: Set<String>] = [:]
 
   override func onReceive(message: Message) {
     guard let event = Event(rawValue: message.event) else {
@@ -12,8 +13,8 @@ final class FontLoaderComponent: BridgeComponent {
     }
 
     switch event {
-    case .change:
-      handleChangeEvent(message)
+    case .load:
+      handleLoadEvent(message)
     }
   }
 
@@ -26,15 +27,22 @@ final class FontLoaderComponent: BridgeComponent {
     }
   }
 
-  private func handleChangeEvent(_ message: Message) {
+  private func handleLoadEvent(_ message: Message) {
+    loadedFonts[message.id] = Set([App.preferenceFile.activeProfile().fontFamily])
+
     addProfileListener(id: message.id)
     self.settingChangeListener = App.preferenceFile.onChange(listener: onSettingChanged)
   }
 
   private func onSettingChanged(property: String, value: Any) {
-    if property == "fontFamily", let font = App.fonts.first(where: { $0.name == value as! String })
+    if property == "fontFamily",
+      let font = App.fonts.first(where: { $0.name == value as! String })
     {
-      reply(to: "change", with: font.as_json())
+      guard let message = receivedMessage(for: "load") else { return }
+      if !loadedFonts[message.id]!.contains(font.name) {
+        reply(to: "load", with: font.as_json())
+        loadedFonts[message.id]!.insert(font.name)
+      }
     }
   }
 
@@ -55,11 +63,14 @@ final class FontLoaderComponent: BridgeComponent {
         $0.name == App.preferenceFile.activeProfile().fontFamily
       }) {
         wrappers.forEach {
-          let message = Message(
-            id: $0.id, component: type(of: self).name, event: "change",
-            metadata: Message.Metadata(url: ""),
-            jsonData: font.as_json())
-          reply(with: message)
+          if !loadedFonts[$0.id]!.contains(font.name) {
+            let message = Message(
+              id: $0.id, component: type(of: self).name, event: "load",
+              metadata: Message.Metadata(url: ""),
+              jsonData: font.as_json())
+            reply(with: message)
+            loadedFonts[message.id]!.insert(font.name)
+          }
         }
       }
     }
@@ -68,6 +79,6 @@ final class FontLoaderComponent: BridgeComponent {
 
 extension FontLoaderComponent {
   fileprivate enum Event: String {
-    case change
+    case load
   }
 }

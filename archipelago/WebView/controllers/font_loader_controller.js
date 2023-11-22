@@ -11,30 +11,23 @@ export default class extends BridgeComponent {
     if (window.font) {
       this.loadFont(window.font)
     }
-    this.send("change", {}, ({data}) => {
-      let existingFont = window.fonts.find((font) => font.name == data.name)
-
-      if (!existingFont) {
-        this.loadFont(data)
-      }
+    this.send("load", {}, ({data}) => {
+      this.loadFont(data)
     })
   }
 
-  loadFont(font) {
-    let css = `@font-face {
-      font-family: '${font.name}';
-      src: url('data:font/${font.format};base64,${font.base64}');
-    }`
+  async loadFont(font) {
+    let uint8Array = new Uint8Array(font.raw);
+    const fontFace = new FontFace(font.name, uint8Array.buffer);
 
-    let inits = `<div style="position:fixed;top:100000px;left:1000000px;font-family:'${font.name}'">${font.name}</div>`
+    if (!document.fonts.has(fontFace)) {
+      await fontFace.load()
+      document.fonts.add(fontFace)
+      window.fonts = [...window.fonts, font]
+    }
 
-    let style = document.createElement('style');
-    style.innerHTML = css
-    document.head.appendChild(style);
-    document.body.insertAdjacentHTML('beforeend', inits)
-    window.fonts = [...window.fonts, font]
     window.font = font
-    setTimeout(() => this.terminalOutlet.resetFont(), 130)
+    requestAnimationFrame(() => this.terminalOutlet.resetFont())
   }
 
   send(event, data = {}, callback) {
