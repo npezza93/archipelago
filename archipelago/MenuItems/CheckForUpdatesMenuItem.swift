@@ -1,6 +1,7 @@
 import Cocoa
 import Foundation
 import UserNotifications
+import ZIPFoundation
 
 class CheckForUpdatesMenuItem: NSMenuItem {
   override init(title string: String, action selector: Selector?, keyEquivalent charCode: String) {
@@ -16,12 +17,14 @@ class CheckForUpdatesMenuItem: NSMenuItem {
   private func commonInit() {
     self.target = self
     self.action = #selector(checkForUpdateAction)
+    #if !DEBUG
+      perform(#selector(checkForUpdateAction), with: false, afterDelay: 5)
+    #endif
   }
 
-  @objc private func checkForUpdateAction() {
+  @objc private func checkForUpdateAction(_ clicked: Bool = true) {
     let url = URL(string: "https://api.github.com/repos/npezza93/archipelago/releases?per_page=100")
     let task = URLSession.shared.dataTask(with: url!) { data, response, error in
-      // Check for errors and unwrap data safely
       if let error = error {
         print("Error: \(error)")
         return
@@ -34,286 +37,96 @@ class CheckForUpdatesMenuItem: NSMenuItem {
       do {
         if var currentVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") {
           currentVersion = Version("\(currentVersion)")
-          //currentVersion = Version("4.1.0")
-          let releases = try JSONDecoder().decode([Release].self, from: data)
-          let viableReleases = releases.filter {
-            !$0.prerelease && Version($0.tagName) > currentVersion as! Version
-          }
-          let sorted = viableReleases.sorted { Version($0.tagName) > Version($1.tagName) }
-          if sorted.isEmpty {
-            let content = UNMutableNotificationContent()
-            content.title = "Up to date!"
+          let releases =
+            try! JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed) as! [Any]
+          let viableReleases = releases.map { $0 as! [String: Any] }.filter {
+            let prerelease = $0["prerelease"] as! UInt
+            let tagName = $0["tag_name"] as! String
 
-            let request = UNNotificationRequest(
-              identifier: UUID().uuidString, content: content, trigger: nil)
-            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+            return true
+            return prerelease == 0 && Version(tagName) > currentVersion as! Version
+          }.sorted {
+            Version($0["tag_name"] as! String) > Version($1["tag_name"] as! String)
+          }
+
+          if viableReleases.isEmpty {
+            self.up_to_date(clicked)
           } else {
-            print(sorted[0])
+            let asset = (viableReleases[0]["assets"] as! [Any]).map { $0 as! [String: Any] }.first {
+              ($0["name"] as! String).lowercased() == "archipelago.zip"
+            }
+            if let asset = asset {
+              self.download_and_install(viableReleases[0], asset)
+            }
           }
         }
-      } catch {
-        print("JSON Decoding Error: \(error)")
       }
     }
 
     task.resume()
   }
-}
 
-public struct Release: Codable {
-  public let id: Int
-  public let url: URL
-  public let htmlURL: URL
-  public let assetsURL: URL
-  public let tarballURL: URL?
-  public let zipballURL: URL?
-  public let nodeId: String
-  public let tagName: String
-  public let commitish: String
-  public let name: String
-  public let body: String
-  public let draft: Bool
-  public let prerelease: Bool
-  public let createdAt: String
-  public let publishedAt: String?
-  public let author: User
+  private func up_to_date(_ clicked: Bool) {
+    if clicked {
+      let content = UNMutableNotificationContent()
+      content.title = "Up to date!"
 
-  public init(
-    id: Int,
-    url: URL,
-    htmlURL: URL,
-    assetsURL: URL,
-    tarballURL: URL?,
-    zipballURL: URL?,
-    nodeId: String,
-    tagName: String,
-    commitish: String,
-    name: String,
-    body: String,
-    draft: Bool,
-    prerelease: Bool,
-    createdAt: String,
-    publishedAt: String?,
-    author: User
-  ) {
-    self.id = id
-    self.url = url
-    self.htmlURL = htmlURL
-    self.assetsURL = assetsURL
-    self.tarballURL = tarballURL
-    self.zipballURL = zipballURL
-    self.nodeId = nodeId
-    self.tagName = tagName
-    self.commitish = commitish
-    self.name = name
-    self.body = body
-    self.draft = draft
-    self.prerelease = prerelease
-    self.createdAt = createdAt
-    self.publishedAt = publishedAt
-    self.author = author
+      let request = UNNotificationRequest(
+        identifier: UUID().uuidString, content: content, trigger: nil)
+      UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+    } else {
+      perform(#selector(checkForUpdateAction), with: false, afterDelay: 3600)
+    }
   }
 
-  enum CodingKeys: String, CodingKey {
-    case id, url, name, body, draft, prerelease, author
+  private func download_and_install(_ release: [String: Any], _ asset: [String: Any]) {
+    self.download(asset["browser_download_url"] as! String) {
+      DispatchQueue.main.async {
+        let alert = NSAlert()
+        alert.messageText = release["tag_name"] as! String
+        alert.informativeText =
+          "A new version has been downloaded. Restart the application to apply the update."
+        alert.addButton(withTitle: "Restart")
+        alert.addButton(withTitle: "Later")
+        let response = alert.runModal()
+        switch response {
+        case .alertFirstButtonReturn:
+          let process = Process()
+          let scriptPath = Bundle.main.path(forResource: "updater", ofType: "sh")
 
-    case htmlURL = "html_url"
-    case assetsURL = "assets_url"
-    case tarballURL = "tarball_url"
-    case zipballURL = "zipball_url"
-    case nodeId = "node_id"
-    case tagName = "tag_name"
-    case commitish = "target_commitish"
-    case createdAt = "created_at"
-    case publishedAt = "published_at"
-  }
-}
+          process.executableURL = URL(fileURLWithPath: scriptPath!)
 
-open class User: Codable {
-  open internal(set) var id: Int
-  open var login: String?
-  open var avatarURL: String?
-  open var gravatarID: String?
-  open var type: String?
-  open var name: String?
-  open var company: String?
-  open var blog: String?
-  open var location: String?
-  open var email: String?
-  open var numberOfPublicRepos: Int?
-  open var numberOfPublicGists: Int?
-  open var numberOfPrivateRepos: Int?
-  open var nodeID: String?
-  open var url: String?
-  open var htmlURL: String?
-  open var followersURL: String?
-  open var followingURL: String?
-  open var gistsURL: String?
-  open var starredURL: String?
-  open var subscriptionsURL: String?
-  open var reposURL: String?
-  open var eventsURL: String?
-  open var receivedEventsURL: String?
-  open var siteAdmin: Bool?
-  open var hireable: Bool?
-  open var bio: String?
-  open var twitterUsername: String?
-  open var numberOfFollowers: Int?
-  open var numberOfFollowing: Int?
-  open var createdAt: String?
-  open var updatedAt: Date?
-  open var numberOfPrivateGists: Int?
-  open var numberOfOwnPrivateRepos: Int?
-  open var amountDiskUsage: Int?
-  open var numberOfCollaborators: Int?
-  open var twoFactorAuthenticationEnabled: Bool?
-  open var subscriptionPlan: Plan?
-
-  public init(
-    id: Int = -1,
-    login: String? = nil,
-    avatarURL: String? = nil,
-    gravatarID: String? = nil,
-    type: String? = nil,
-    name: String? = nil,
-    company: String? = nil,
-    blog: String? = nil,
-    location: String? = nil,
-    email: String? = nil,
-    numberOfPublicRepos: Int? = nil,
-    numberOfPublicGists: Int? = nil,
-    numberOfPrivateRepos: Int? = nil,
-    nodeID: String? = nil,
-    url: String? = nil,
-    htmlURL: String? = nil,
-    followersURL: String? = nil,
-    followingURL: String? = nil,
-    gistsURL: String? = nil,
-    starredURL: String? = nil,
-    subscriptionsURL: String? = nil,
-    reposURL: String? = nil,
-    eventsURL: String? = nil,
-    receivedEventsURL: String? = nil,
-    siteAdmin: Bool? = nil,
-    hireable: Bool? = nil,
-    bio: String? = nil,
-    twitterUsername: String? = nil,
-    numberOfFollowers: Int? = nil,
-    numberOfFollowing: Int? = nil,
-    createdAt: String? = nil,
-    updatedAt: Date? = nil,
-    numberOfPrivateGists: Int? = nil,
-    numberOfOwnPrivateRepos: Int? = nil,
-    amountDiskUsage: Int? = nil,
-    numberOfCollaborators: Int? = nil,
-    twoFactorAuthenticationEnabled: Bool? = nil,
-    subscriptionPlan: Plan? = nil
-  ) {
-    self.id = id
-    self.login = login
-    self.avatarURL = avatarURL
-    self.gravatarID = gravatarID
-    self.type = type
-    self.name = name
-    self.company = company
-    self.blog = blog
-    self.location = location
-    self.email = email
-    self.numberOfPublicRepos = numberOfPublicRepos
-    self.numberOfPublicGists = numberOfPublicGists
-    self.numberOfPrivateRepos = numberOfPrivateRepos
-    self.nodeID = nodeID
-    self.url = url
-    self.htmlURL = htmlURL
-    self.followersURL = followersURL
-    self.followingURL = followingURL
-    self.gistsURL = gistsURL
-    self.starredURL = starredURL
-    self.subscriptionsURL = subscriptionsURL
-    self.reposURL = reposURL
-    self.eventsURL = eventsURL
-    self.receivedEventsURL = receivedEventsURL
-    self.siteAdmin = siteAdmin
-    self.hireable = hireable
-    self.bio = bio
-    self.twitterUsername = twitterUsername
-    self.numberOfFollowers = numberOfFollowers
-    self.numberOfFollowing = numberOfFollowing
-    self.createdAt = createdAt
-    self.updatedAt = updatedAt
-    self.numberOfPrivateGists = numberOfPrivateGists
-    self.numberOfOwnPrivateRepos = numberOfOwnPrivateRepos
-    self.amountDiskUsage = amountDiskUsage
-    self.numberOfCollaborators = numberOfCollaborators
-    self.twoFactorAuthenticationEnabled = twoFactorAuthenticationEnabled
-    self.subscriptionPlan = subscriptionPlan
+          try! process.run()
+        default:
+          break
+        }
+      }
+    }
   }
 
-  enum CodingKeys: String, CodingKey {
-    case id
-    case login
-    case avatarURL = "avatar_url"
-    case gravatarID = "gravatar_id"
-    case type
-    case name
-    case company
-    case blog
-    case location
-    case email
-    case numberOfPublicRepos = "public_repos"
-    case numberOfPublicGists = "public_gists"
-    case numberOfPrivateRepos = "total_private_repos"
-    case nodeID = "node_id"
-    case url
-    case htmlURL = "html_url"
-    case followersURL = "followers_url"
-    case followingURL = "following_url"
-    case gistsURL = "gists_url"
-    case starredURL = "starred_url"
-    case subscriptionsURL = "subscriptions_url"
-    case reposURL = "repos_url"
-    case eventsURL = "events_url"
-    case receivedEventsURL = "received_events_url"
-    case siteAdmin = "site_admin"
-    case hireable
-    case bio
-    case twitterUsername = "twitter_username"
-    case numberOfFollowers = "followers"
-    case numberOfFollowing = "following"
-    case createdAt = "created_at"
-    case updatedAt = "updated_at"
-    case numberOfPrivateGists = "private_gists"
-    case numberOfOwnPrivateRepos = "owned_private_repos"
-    case amountDiskUsage = "disk_usage"
-    case numberOfCollaborators = "collaborators"
-    case twoFactorAuthenticationEnabled = "two_factor_authentication"
-    case subscriptionPlan = "plan"
-  }
-}
+  private func download(_ url: String, completion: @escaping () -> Void) {
+    let destinationDir = FileManager.default.urls(
+      for: .applicationSupportDirectory, in: .userDomainMask
+    ).first!.appendingPathComponent("Archipelago")
+    let zip = destinationDir.appendingPathComponent("archipelago-next.zip")
 
-open class Plan: Codable {
-  open var name: String?
-  open var space: Int?
-  open var numberOfCollaborators: Int?
-  open var numberOfPrivateRepos: Int?
+    let task = URLSession.shared.downloadTask(with: URL(string: url)!) {
+      location, response, error in
+      guard let location = location, error == nil else { return }
 
-  public init(
-    name: String? = nil,
-    space: Int? = nil,
-    numberOfCollaborators: Int? = nil,
-    numberOfPrivateRepos: Int? = nil
-  ) {
-    self.name = name
-    self.space = space
-    self.numberOfCollaborators = numberOfCollaborators
-    self.numberOfPrivateRepos = numberOfPrivateRepos
-  }
+      if FileManager.default.fileExists(atPath: zip.path) {
+        try! FileManager.default.removeItem(at: zip)
+      }
+      try! FileManager.default.moveItem(at: location, to: zip)
+      try! FileManager.default.removeItem(
+        at: destinationDir.appendingPathComponent("Archipelago.app"))
+      try! FileManager.default.unzipItem(at: zip, to: destinationDir)
+      try! FileManager.default.removeItem(at: zip)
+      completion()
+    }
 
-  enum CodingKeys: String, CodingKey {
-    case name
-    case space
-    case numberOfCollaborators = "collaborators"
-    case numberOfPrivateRepos = "private_repos"
+    task.resume()
+
   }
 }
 
@@ -346,6 +159,11 @@ class Version: Comparable {
 
     self.major = Int(parts[0])!
     self.minor = Int(parts[1])!
-    self.patch = Int(parts[2])!
+
+    if let index = parts[2].firstIndex(of: "-") {
+      self.patch = Int(String(parts[2][..<index]))!
+    } else {
+      self.patch = Int(parts[2])!
+    }
   }
 }

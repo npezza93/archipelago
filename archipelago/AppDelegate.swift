@@ -4,6 +4,23 @@ import UserNotifications
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDelegate {
+  func applicationWillFinishLaunching(_ aNotification: Notification) {
+    let app = FileManager.default.urls(
+      for: .applicationSupportDirectory, in: .userDomainMask
+    ).first!.appendingPathComponent("Archipelago/Archipelago.app")
+
+    #if !DEBUG
+      if FileManager.default.fileExists(atPath: app.path) {
+        let process = Process()
+        let scriptPath = Bundle.main.path(forResource: "updater", ofType: "sh")
+
+        process.executableURL = URL(fileURLWithPath: scriptPath!)
+
+        try! process.run()
+      }
+    #endif
+  }
+
   func applicationDidFinishLaunching(_ aNotification: Notification) {
     UNUserNotificationCenter.current().requestAuthorization(options: [.alert]) { granted, error in
       if let error = error {

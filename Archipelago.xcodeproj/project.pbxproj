@@ -51,6 +51,8 @@
 		01847B9F2B059D3400BDB881 /* ReportIssueMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01847B9E2B059D3400BDB881 /* ReportIssueMenuItem.swift */; };
 		01847BA12B05A08600BDB881 /* ExportSettingsMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01847BA02B05A08600BDB881 /* ExportSettingsMenuItem.swift */; };
 		0195E7722AE9E5E1003EDDD2 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0195E7712AE9E5E1003EDDD2 /* App.swift */; };
+		01B3061C2B0E9C68005230B5 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 01B3061B2B0E9C68005230B5 /* ZIPFoundation */; };
+		01B3061E2B0E9F5C005230B5 /* updater.sh in Resources */ = {isa = PBXBuildFile; fileRef = 01B3061D2B0E9F5C005230B5 /* updater.sh */; };
 		01EC782C2AFEC00800F62F97 /* FontsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EC782B2AFEC00800F62F97 /* FontsComponent.swift */; };
 		01EC782E2AFEE1DF00F62F97 /* SelectComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EC782D2AFEE1DF00F62F97 /* SelectComponent.swift */; };
 		01EC78302AFEF1BB00F62F97 /* CheckboxComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EC782F2AFEF1BB00F62F97 /* CheckboxComponent.swift */; };
@@ -130,6 +132,7 @@
 		01847B9E2B059D3400BDB881 /* ReportIssueMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportIssueMenuItem.swift; sourceTree = "<group>"; };
 		01847BA02B05A08600BDB881 /* ExportSettingsMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportSettingsMenuItem.swift; sourceTree = "<group>"; };
 		0195E7712AE9E5E1003EDDD2 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		01B3061D2B0E9F5C005230B5 /* updater.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = updater.sh; sourceTree = "<group>"; };
 		01EC782B2AFEC00800F62F97 /* FontsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsComponent.swift; sourceTree = "<group>"; };
 		01EC782D2AFEE1DF00F62F97 /* SelectComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectComponent.swift; sourceTree = "<group>"; };
 		01EC782F2AFEF1BB00F62F97 /* CheckboxComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxComponent.swift; sourceTree = "<group>"; };
@@ -148,6 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				01108D8E2ADE2ADB00603FBF /* Strada in Frameworks */,
+				01B3061C2B0E9C68005230B5 /* ZIPFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,6 +202,7 @@
 				0166EE792AE8AD1100061485 /* Config.swift */,
 				011B14442ADE1664000822F4 /* Document.swift */,
 				0166EE652AE73FC700061485 /* DraggingView.swift */,
+				01B3061D2B0E9F5C005230B5 /* updater.sh */,
 				01847B922B02F6DC00BDB881 /* Font.swift */,
 				011B144B2ADE1665000822F4 /* Info.plist */,
 				011B14762ADE1A7A000822F4 /* Main.storyboard */,
@@ -291,6 +296,7 @@
 			name = Archipelago;
 			packageProductDependencies = (
 				01108D8D2ADE2ADB00603FBF /* Strada */,
+				01B3061B2B0E9C68005230B5 /* ZIPFoundation */,
 			);
 			productName = archipelago;
 			productReference = 011B143D2ADE1664000822F4 /* Archipelago.app */;
@@ -366,6 +372,7 @@
 			mainGroup = 011B14342ADE1664000822F4;
 			packageReferences = (
 				01108D8C2ADE2ADB00603FBF /* XCRemoteSwiftPackageReference "strada-ios" */,
+				01B3061A2B0E9C68005230B5 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
 			);
 			productRefGroup = 011B143E2ADE1664000822F4 /* Products */;
 			projectDirPath = "";
@@ -389,6 +396,7 @@
 				0166EE6F2AE7414D00061485 /* settings-vars.css in Resources */,
 				0166EE682AE7405F00061485 /* settings.html in Resources */,
 				011B14772ADE1A7A000822F4 /* Main.storyboard in Resources */,
+				01B3061E2B0E9F5C005230B5 /* updater.sh in Resources */,
 				011B14752ADE17BD000822F4 /* index.html in Resources */,
 				0166EE622AE70DD800061485 /* about.css in Resources */,
 				0166EE5C2AE56F8C00061485 /* index.css in Resources */,
@@ -799,6 +807,14 @@
 				kind = branch;
 			};
 		};
+		01B3061A2B0E9C68005230B5 /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/weichsel/ZIPFoundation";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.17;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -806,6 +822,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 01108D8C2ADE2ADB00603FBF /* XCRemoteSwiftPackageReference "strada-ios" */;
 			productName = Strada;
+		};
+		01B3061B2B0E9C68005230B5 /* ZIPFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 01B3061A2B0E9C68005230B5 /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
+			productName = ZIPFoundation;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
