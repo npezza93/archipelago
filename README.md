@@ -1,10 +1,10 @@
 <p align="center">
   <a href="https://github.com/npezza93/archipelago#gh-light-mode-only">
-    <img src="https://raw.githubusercontent.com/npezza93/archipelago/master/.github/logo-light.svg#gh-light-mode-only" width="350">
+    <img src="https://raw.githubusercontent.com/npezza93/archipelago/main/.github/logo-light.svg#gh-light-mode-only" width="350">
   </a>
 
   <a href="https://github.com/npezza93/archipelago#gh-dark-mode-only">
-    <img src="https://raw.githubusercontent.com/npezza93/archipelago/master/.github/logo-dark.svg#gh-dark-mode-only" width="350">
+    <img src="https://raw.githubusercontent.com/npezza93/archipelago/main/.github/logo-dark.svg#gh-dark-mode-only" width="350">
   </a>
 
   <p align="center">
@@ -30,7 +30,7 @@ which was the culprit of all my issues, so I found the
 [Xterm.js](https://xtermjs.org/) project which solved all these problems
 and I started making Archipelago.
 
-![Screenshot](https://raw.githubusercontent.com/npezza93/archipelago/master/.github/screenshot.png)
+![Screenshot](https://raw.githubusercontent.com/npezza93/archipelago/main/.github/screenshot.png)
 
 ## Get Archipelago
 
