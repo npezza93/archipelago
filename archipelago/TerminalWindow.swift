@@ -9,8 +9,5 @@ class TerminalWindow: NSWindow {
     super.init(contentRect: contentRect, styleMask: style, backing: backingStoreType, defer: flag)
 
     self.backgroundColor = NSColor(string: App.activeProfile().theme.background)
-
-    self.isOpaque = false
-    self.alphaValue = 0.98
   }
 }
