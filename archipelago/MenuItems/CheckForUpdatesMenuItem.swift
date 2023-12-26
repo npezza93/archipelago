@@ -117,8 +117,12 @@ class CheckForUpdatesMenuItem: NSMenuItem {
         try! FileManager.default.removeItem(at: zip)
       }
       try! FileManager.default.moveItem(at: location, to: zip)
-      try! FileManager.default.removeItem(
-        at: destinationDir.appendingPathComponent("Archipelago.app"))
+      do {
+        try FileManager.default.removeItem(
+          at: destinationDir.appendingPathComponent("Archipelago.app"))
+      } catch let error as NSError {
+        print("Error: \(error.domain)")
+      }
       try! FileManager.default.unzipItem(at: zip, to: destinationDir)
       try! FileManager.default.removeItem(at: zip)
       completion()
