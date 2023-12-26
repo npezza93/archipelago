@@ -57,6 +57,14 @@ Regardless of the platform you are working on, you will need to have Yarn instal
 Clone the repo then run `cd archipelago/WebView; bun install` in your console.
 Then open the app in Xcode.
 
+## Releasing
+
+- Create archive in Xcode with new version
+- Export notarized app to dist/
+- Create release in GitHub for new version
+- create zip file (`ditto -c -k --keepParent dist/Archipelago.app
+  dist/Archipelago.zip`)
+
 ## License
 
 Archipelago is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
