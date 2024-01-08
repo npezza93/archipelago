@@ -17,9 +17,9 @@ class CheckForUpdatesMenuItem: NSMenuItem {
   private func commonInit() {
     self.target = self
     self.action = #selector(checkForUpdateAction)
-    #if !DEBUG
-      perform(#selector(checkForUpdateAction), with: false, afterDelay: 5)
-    #endif
+    // #if !DEBUG
+    // perform(#selector(checkForUpdateAction), with: false, afterDelay: 5)
+    // #endif
   }
 
   @objc private func checkForUpdateAction(_ clicked: Bool = true) {
