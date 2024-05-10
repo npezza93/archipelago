@@ -45,7 +45,7 @@ window.addEventListener('focus', () => document.body.dataset.focus = 'true');
 function withOverriddenSend(BaseClass) {
   return class extends BaseClass {
     send(event, data = {}, callback) {
-      data.metadata = { url: "archipelago-1" }
+      data.metadata = { url: window.location.href }
 
       const message = { component: this.component, event, data, callback }
       const messageId = this.bridge.send(message)

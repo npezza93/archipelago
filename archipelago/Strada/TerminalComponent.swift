@@ -74,7 +74,8 @@ final class TerminalComponent: BridgeComponent {
     let message = Message(
       id: "data", component: "terminal", event: "data", metadata: Message.Metadata(url: ""),
       jsonData: json)
-    reply(with: message)
+
+    Task { try await reply(with: message) }
   }
 
   private func closeWindow() {

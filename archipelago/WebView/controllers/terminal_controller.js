@@ -93,7 +93,7 @@ export default class extends BridgeComponent {
   }
 
   send(event, data = {}, callback) {
-    data.metadata = { url: "archipelago-1" }
+    data.metadata = { url: window.location.href }
 
     const message = { component: this.component, event, data, callback }
     const messageId = this.bridge.send(message)
