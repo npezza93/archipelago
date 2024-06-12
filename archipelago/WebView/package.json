@@ -21,13 +21,13 @@
   },
   "license": "MIT",
   "dependencies": {
-    "npezza93-font-ligatures": "^2.0",
+    "npezza93-font-ligatures": "^2.0.3",
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/strada": "^1.0.0-beta1",
-    "@xterm/xterm": "^5.6.0-beta.5",
-    "@xterm/addon-fit": "^0.11.0-beta.5",
-    "@xterm/addon-web-links": "^0.12.0-beta.5",
-    "@xterm/addon-webgl": "^0.19.0-beta.5",
+    "@xterm/xterm": "^5.6.0-beta.21",
+    "@xterm/addon-fit": "^0.11.0-beta.21",
+    "@xterm/addon-web-links": "^0.12.0-beta.21",
+    "@xterm/addon-webgl": "^0.19.0-beta.21",
     "color": "^4.2.3",
     "dot-prop": "^8.0.2",
     "unescape-js": "^1.1.4"
