@@ -1,6 +1,6 @@
 import Cocoa
 import Strada
-import WebKit
+@preconcurrency import WebKit
 
 class SettingsController: NSViewController, WKUIDelegate, NSWindowDelegate, BridgeDestination {
   var webView: WKWebView!
