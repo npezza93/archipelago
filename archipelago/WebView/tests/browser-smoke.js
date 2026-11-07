@@ -39,7 +39,10 @@ const profile = {
     brightCyan: '#55ffff',
     brightWhite: '#ffffff',
   },
-  keybindings: [{ keystroke: 'ctrl-k', command: '\\x0b' }],
+  keybindings: [
+    { keystroke: 'ctrl-k', command: '\\x0b' },
+    { keystroke: 'cmd-j', command: '\\x01' },
+  ],
 }
 ;(async () => {
   const engineName = process.argv[2] || 'chromium'
@@ -155,6 +158,71 @@ const profile = {
         .join('')
     )
     assert.equal(data, 'echo hello\r\x03')
+    // Native Command shortcuts must retain their default action and never
+    // reach the PTY, including keyup after Command itself has been released.
+    const commandShortcuts = await page.evaluate(() => {
+      tc.terminal.write('\x1b[>3u') // Enable Kitty release reports.
+      const before = messages.filter((m) => m.event === 'write').length
+      const shortcuts = [
+        [',', 'Comma'],
+        ['n', 'KeyN'],
+        ['w', 'KeyW'],
+        ['q', 'KeyQ'],
+        ['c', 'KeyC'],
+        ['v', 'KeyV'],
+        ['x', 'KeyX'],
+      ].map(([key, code]) => {
+        const down = new KeyboardEvent('keydown', {
+          key,
+          code,
+          metaKey: true,
+          bubbles: true,
+          cancelable: true,
+        })
+        const up = new KeyboardEvent('keyup', {
+          key,
+          code,
+          metaKey: false,
+          bubbles: true,
+          cancelable: true,
+        })
+        tc.terminal.textarea.dispatchEvent(down)
+        tc.terminal.textarea.dispatchEvent(up)
+        return { key, prevented: down.defaultPrevented }
+      })
+      tc.terminal.write('\x1b[<u')
+      return {
+        shortcuts,
+        writes: messages.filter((m) => m.event === 'write').length - before,
+      }
+    })
+    assert(
+      commandShortcuts.shortcuts.every(({ prevented }) => !prevented),
+      JSON.stringify(commandShortcuts)
+    )
+    assert.equal(commandShortcuts.writes, 0)
+    // Explicit profile keybindings continue to take precedence over defaults.
+    const customCommand = await page.evaluate(() => {
+      const before = messages.filter((m) => m.event === 'write').length
+      const down = new KeyboardEvent('keydown', {
+        key: 'j',
+        code: 'KeyJ',
+        metaKey: true,
+        bubbles: true,
+        cancelable: true,
+      })
+      tc.terminal.textarea.dispatchEvent(down)
+      tc.terminal.textarea.dispatchEvent(
+        new KeyboardEvent('keyup', { key: 'j', code: 'KeyJ', bubbles: true })
+      )
+      const writes = messages.filter((m) => m.event === 'write').slice(before)
+      return {
+        prevented: down.defaultPrevented,
+        data: writes.map((m) => m.data.data),
+      }
+    })
+    assert.equal(customCommand.prevented, true)
+    assert.deepEqual(customCommand.data, ['\x01'])
     await page.keyboard.press('Control+k')
     assert.equal(
       await page.evaluate(

@@ -384,17 +384,22 @@ export default class GhosttyTerminal {
   }
 
   bindInput() {
-    const mappedKeys = new Set()
+    const handledKeys = new Set()
     this.on(this.textarea, 'keydown', (event) => {
       if (event.isComposing || event.key === 'Process' || event.key === 'Dead')
         return
       if (this.callbacks.onKey(event)) {
-        mappedKeys.add(event.code)
+        handledKeys.add(event.code)
         event.preventDefault()
         return
       }
-      if (event.metaKey && ['c', 'v', 'x'].includes(event.key.toLowerCase()))
+      // Unbound Command shortcuts belong to the native menu/responder chain.
+      // Encoding them can turn Cmd+, into a literal comma, and preventing
+      // their default action keeps WKWebView from opening Settings, etc.
+      if (event.metaKey) {
+        handledKeys.add(event.code)
         return
+      }
       if (
         event.altKey &&
         [...event.key].length === 1 &&
@@ -415,7 +420,8 @@ export default class GhosttyTerminal {
       event.preventDefault()
     })
     this.on(this.textarea, 'keyup', (event) => {
-      if (mappedKeys.delete(event.code)) return
+      // Suppress releases too, even if Command was released before this key.
+      if (handledKeys.delete(event.code)) return
       if (
         event.isComposing ||
         event.metaKey ||
