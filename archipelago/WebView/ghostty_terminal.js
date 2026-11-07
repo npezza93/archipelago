@@ -1,5 +1,6 @@
 import Color from 'color'
 import { GhosttyVT } from './libghostty'
+import WheelScroll, { repeatBytes } from './wheel_scroll'
 
 const rgb = (color) => `rgb(${color.r}, ${color.g}, ${color.b})`
 const paletteNames = [
@@ -518,26 +519,44 @@ export default class GhosttyTerminal {
       if ((event.metaKey || event.ctrlKey) && !this.vt.selectionText())
         this.openLink(event)
     })
+    const wheelScroll = new WheelScroll()
     this.on(
       this.element,
       'wheel',
       (event) => {
         event.preventDefault()
-        const delta =
-          event.deltaMode === 1 ? event.deltaY : event.deltaY / this.cellHeight
-        if (this.vt.get('MOUSE_TRACKING') && !event.shiftKey) {
-          this.mouseReport(event, 'PRESS', event.deltaY < 0 ? 4 : 5)
-        } else if (this.vt.get('ACTIVE_SCREEN') === 1 && this.vt.mode(1007)) {
-          const key = delta < 0 ? 'ArrowUp' : 'ArrowDown'
-          this.send(this.vt.key({ code: key, key }))
+        const tracking = this.vt.get('MOUSE_TRACKING')
+        const mouse =
+          tracking &&
+          !event.shiftKey &&
+          !(event.altKey && this.settings.macOptionClickForcesSelection)
+        const alternate =
+          !tracking &&
+          !event.shiftKey &&
+          this.vt.get('ACTIVE_SCREEN') === 1 &&
+          this.vt.mode(1007)
+        const destination = mouse
+          ? 'mouse'
+          : alternate
+            ? 'alternate'
+            : 'viewport'
+        const lines = wheelScroll.lines(
+          event,
+          this.cellHeight,
+          this.vt.rows,
+          destination
+        )
+        if (!lines) return
+        if (mouse) {
+          this.mouseReport(event, 'PRESS', lines < 0 ? 4 : 5, Math.abs(lines))
+        } else if (alternate) {
+          const key = lines < 0 ? 'ArrowUp' : 'ArrowDown'
+          this.send(
+            repeatBytes(this.vt.key({ code: key, key }), Math.abs(lines))
+          )
         } else {
-          this.wheelRemainder = (this.wheelRemainder || 0) + delta
-          const lines = Math.trunc(this.wheelRemainder)
-          if (lines) {
-            this.vt.scroll('DELTA', lines)
-            this.wheelRemainder -= lines
-            this.scheduleRender()
-          }
+          this.vt.scroll('DELTA', lines)
+          this.scheduleRender()
         }
       },
       { passive: false }
@@ -596,7 +615,7 @@ export default class GhosttyTerminal {
     }
   }
 
-  mouseReport(event, action, button) {
+  mouseReport(event, action, button, count = 1) {
     if (
       !this.vt.get('MOUSE_TRACKING') ||
       event.shiftKey ||
@@ -605,18 +624,17 @@ export default class GhosttyTerminal {
       return false
     const { x, y } = this.position(event)
     const buttonMap = [1, 3, 2]
-    this.callbacks.onData(
-      this.vt.mouse(
-        action,
-        button ?? buttonMap[event.button],
-        x,
-        y,
-        mods(event),
-        this.cellWidth,
-        this.cellHeight,
-        event.buttons
-      )
+    const report = this.vt.mouse(
+      action,
+      button ?? buttonMap[event.button],
+      x,
+      y,
+      mods(event),
+      this.cellWidth,
+      this.cellHeight,
+      event.buttons
     )
+    if (report.length) this.callbacks.onData(repeatBytes(report, count))
     return true
   }
 

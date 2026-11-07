@@ -118,6 +118,79 @@ import profile from './fixtures/profile'
         .join('')
     )
     assert.equal(data, 'echo hello\r\x03')
+    const scrolling = await page.evaluate(() => {
+      const t = tc.terminal
+      const wheel = (deltaY, deltaMode = 0, shiftKey = false) => {
+        const before = messages.filter((m) => m.event === 'write').length
+        t.element.dispatchEvent(
+          new WheelEvent('wheel', {
+            deltaY,
+            deltaMode,
+            shiftKey,
+            bubbles: true,
+            cancelable: true,
+          })
+        )
+        const writes = messages.filter((m) => m.event === 'write').slice(before)
+        return {
+          writes: writes.length,
+          data: writes
+            .map((m) => new TextDecoder().decode(new Uint8Array(m.data.bytes)))
+            .join(''),
+        }
+      }
+      // tmux requests mouse tracking; one terminal wheel report represents
+      // one scroll step, so large deltas must produce multiple reports.
+      t.write('\x1b[?1000h\x1b[?1006h')
+      const pixels = wheel(t.cellHeight * 5)
+      const up = wheel(-t.cellHeight * 3)
+      const fractions = [
+        wheel(t.cellHeight / 4),
+        wheel(t.cellHeight / 4),
+        wheel(t.cellHeight / 2),
+      ]
+      const lines = wheel(3, 1)
+      const page = wheel(1, 2)
+      const zero = wheel(0, 2)
+      const shifted = wheel(3, 1, true)
+      t.write('\x1b[?1000l\x1b[?1006l\x1b[?1049h\x1b[?1007h\x1b[?1h')
+      const alternate = wheel(3, 1)
+      t.write('\x1b[?1049l\x1b[?1007l\x1b[?1l')
+      return {
+        pixels,
+        up,
+        fractions,
+        lines,
+        page,
+        zero,
+        shifted,
+        alternate,
+        rows: t.vt.rows,
+      }
+    })
+    assert.equal((scrolling.pixels.data.match(/\x1b\[<65;/g) || []).length, 5)
+    assert.equal(
+      scrolling.pixels.writes,
+      1,
+      'Batch wheel reports into one bridge write'
+    )
+    assert.equal((scrolling.up.data.match(/\x1b\[<64;/g) || []).length, 3)
+    assert.deepEqual(
+      scrolling.fractions.map((event) => event.writes),
+      [0, 0, 1]
+    )
+    assert.equal((scrolling.lines.data.match(/\x1b\[<65;/g) || []).length, 3)
+    assert.equal(
+      (scrolling.page.data.match(/\x1b\[<65;/g) || []).length,
+      scrolling.rows
+    )
+    assert.equal(scrolling.zero.writes, 0)
+    assert.equal(
+      scrolling.shifted.writes,
+      0,
+      'Shift-wheel bypasses application mouse reporting'
+    )
+    assert.equal(scrolling.alternate.data, '\x1bOB'.repeat(3))
     // Native Command shortcuts must retain their default action and never
     // reach the PTY, including keyup after Command itself has been released.
     const commandShortcuts = await page.evaluate(() => {
