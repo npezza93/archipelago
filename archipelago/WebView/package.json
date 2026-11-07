@@ -31,7 +31,8 @@
   "scripts": {
     "build": "bun build.js",
     "test": "bun test",
-    "test:browser": "bun tests/browser-smoke.js"
+    "test:browser": "bun tests/browser-smoke.js",
+    "test:ligatures": "bun tests/ligatures-smoke.js"
   },
   "devDependencies": {
     "playwright": "^1.65.0"
