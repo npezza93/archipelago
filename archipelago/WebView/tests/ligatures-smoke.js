@@ -31,17 +31,17 @@ try {
   })
   await page.addInitScript(
     ({ profile, font }) => {
-      // Match ViewController.monospsaceFontStylesheet: the native script only
-      // makes the initial font available at DOMContentLoaded.
-      document.addEventListener('DOMContentLoaded', () => {
-        window.font = font
-      })
       document.addEventListener('web-bridge:ready', () =>
         Strada.web.setAdapter({
           platform: 'ios',
           supportedComponents: ['terminal', 'font-loader'],
           supportsComponent: () => true,
           receive(message) {
+            if (message.event === 'load')
+              setTimeout(
+                () => Strada.web.receive({ id: message.id, data: font }),
+                0
+              )
             if (message.event === 'connect')
               setTimeout(
                 () =>
@@ -185,19 +185,16 @@ try {
     0,
     'Ligatures should render at the default font size too'
   )
-  const loadedFaces = await page.evaluate(async () => {
+  const loadedFaces = await page.evaluate(async (font) => {
     const loader = Stimulus.getControllerForElementAndIdentifier(
       document.querySelector('[data-controller="font-loader"]'),
       'font-loader'
     )
-    await Promise.all([
-      loader.loadFont(window.font),
-      loader.loadFont(window.font),
-    ])
+    await Promise.all([loader.loadFont(font), loader.loadFont(font)])
     return [...document.fonts].filter(
       (face) => face.family === 'JetBrains Mono'
     ).length
-  })
+  }, font)
   assert.equal(
     loadedFaces,
     1,
@@ -234,7 +231,7 @@ try {
   assert.deepEqual(errors, [])
   console.log(
     engineName,
-    'JetBrains Mono font injection and ligature pixel checks passed'
+    'JetBrains Mono font bridge and ligature pixel checks passed'
   )
 } finally {
   await browser.close()

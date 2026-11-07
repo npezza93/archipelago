@@ -3,16 +3,16 @@
 const encoder = new TextEncoder()
 const decoder = new TextDecoder()
 const primitives = {
-  bool: [1, 'Uint8'],
-  u8: [1, 'Uint8'],
-  u16: [2, 'Uint16'],
-  u32: [4, 'Uint32'],
-  i32: [4, 'Int32'],
-  u64: [8, 'BigUint64'],
-  i64: [8, 'BigInt64'],
-  f32: [4, 'Float32'],
-  f64: [8, 'Float64'],
-  pointer: [4, 'Uint32'],
+  bool: 'Uint8',
+  u8: 'Uint8',
+  u16: 'Uint16',
+  u32: 'Uint32',
+  i32: 'Int32',
+  u64: 'BigUint64',
+  i64: 'BigInt64',
+  f32: 'Float32',
+  f64: 'Float64',
+  pointer: 'Uint32',
 }
 
 // A tiny typed WASM import/export wrapper makes a JS callback callable through
@@ -149,7 +149,7 @@ export class GhosttyVT {
     if (info?.kind === 'enum' || info?.kind === 'packed')
       return this.read(info.underlying, ptr)
     if (!primitives[name]) return undefined // arrays are read explicitly when needed
-    const result = this.view()[`get${primitives[name][1]}`](ptr, true)
+    const result = this.view()[`get${primitives[name]}`](ptr, true)
     return name === 'bool' ? !!result : result
   }
 
@@ -163,7 +163,7 @@ export class GhosttyVT {
     } else if (info?.kind === 'enum' || info?.kind === 'packed') {
       this.put(info.underlying, ptr, values)
     } else {
-      this.view()[`set${primitives[name][1]}`](
+      this.view()[`set${primitives[name]}`](
         ptr,
         name === 'u64' || name === 'i64' ? BigInt(values) : Number(values),
         true

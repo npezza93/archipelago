@@ -23,10 +23,6 @@ class ViewController: NSViewController, WKUIDelegate, NSWindowDelegate, BridgeDe
     webView = WKWebView(
       frame: CGRect(x: 0, y: 0, width: 800, height: 600), configuration: .appConfiguration)
 
-    let script = WKUserScript(
-      source: monospsaceFontStylesheet(), injectionTime: .atDocumentStart, forMainFrameOnly: true)
-    webView.configuration.userContentController.addUserScript(script)
-
     webView.setValue(false, forKey: "drawsBackground")
 
     let overlay = DraggingView(frame: CGRect(x: 0, y: 0, width: webView.frame.width, height: 30))
@@ -95,20 +91,6 @@ class ViewController: NSViewController, WKUIDelegate, NSWindowDelegate, BridgeDe
     }
     if let wrapper = self.profileChangeListener {
       App.preferenceFile.removeProfileChange(wrapper: wrapper)
-    }
-  }
-
-  private func monospsaceFontStylesheet() -> String {
-    if let font = App.fonts.first(where: {
-      $0.name == App.preferenceFile.activeProfile().fontFamily
-    }) {
-      return """
-        document.addEventListener('DOMContentLoaded', () => {
-            window.font = \(font.as_json())
-        });
-        """
-    } else {
-      return ""
     }
   }
 }
