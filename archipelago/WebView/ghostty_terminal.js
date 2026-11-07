@@ -80,6 +80,14 @@ export default class GhosttyTerminal {
 
   updateSettings(settings) {
     this.settings = settings
+    // Explicitly enable contextual programming ligatures rather than relying
+    // on the canvas engine's automatic font shaping policy.
+    this.canvas.style.fontVariantLigatures = settings.ligatures
+      ? 'normal'
+      : 'none'
+    this.canvas.style.fontFeatureSettings = settings.ligatures
+      ? '"calt" 1, "liga" 1'
+      : '"calt" 0, "liga" 0'
     const color = (value) => {
       const [r, g, b] = Color(value).rgb().array()
       return { r: Math.round(r), g: Math.round(g), b: Math.round(b) }
@@ -204,6 +212,10 @@ export default class GhosttyTerminal {
   draw({ rows, colors, cursor }) {
     const ctx = this.context
     const { theme, fontSize, fontFamily, fontWeight, ligatures } = this.settings
+    // Setting canvas dimensions resets context state, so restore the shaping
+    // policy on every draw (also works with older engines via the CSS above).
+    ctx.textRendering = ligatures ? 'optimizeLegibility' : 'optimizeSpeed'
+    ctx.fontKerning = ligatures ? 'normal' : 'none'
     const defaultBG = rgb(colors.background)
     const profileBG = rgb({
       r: Math.round(Color(theme.background).red()),

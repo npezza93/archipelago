@@ -131,6 +131,17 @@ try {
     0,
     'JetBrains Mono should render as a shaped text run'
   )
+  // Do not rely on the engine's default shaping policy: WebKit versions and
+  // inherited canvas styles can select the speed-oriented drawing path.
+  await page.evaluate(() => {
+    tc.terminal.context.textRendering = 'optimizeSpeed'
+    tc.terminal.draw(tc.terminal.lastFrame)
+  })
+  assert.equal(
+    (await pixels()).differing,
+    0,
+    'The renderer must explicitly enable ligature shaping'
+  )
   await page.evaluate(() =>
     Strada.web.receive({
       id: 'settingChanged',
