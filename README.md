@@ -86,10 +86,10 @@ The browser checks cover WASM initialization, PTY subscription and initial size,
 keyboard input, live profile changes, resizing, and teardown. Run the native app
 on macOS to validate the Swift PTY and WKWebView integration as well.
 The ligature checks use a bundled JetBrains Mono font to reproduce native font
-injection timing and compare rendered pixels with ligatures enabled and disabled.
+injection timing and verify always-on ligatures, including profiles that saved the old setting as disabled.
 
 The canvas renderer supports text, ANSI colors, grapheme clusters, selection,
-scrollback, font ligatures, and cursor styles. Ctrl/Cmd-click opens plain URLs
+scrollback, always-on font ligatures, and cursor styles. Ctrl/Cmd-click opens plain URLs
 and OSC 8 hyperlinks. Kitty image rendering is not implemented; image storage is
 disabled when the module supports it.
 

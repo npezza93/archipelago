@@ -51,7 +51,7 @@ try {
                       ...profile,
                       fontFamily: font.name,
                       fontSize: 20,
-                      ligatures: true,
+                      ligatures: false, // Legacy profiles must no longer disable shaping.
                     },
                   }),
                 0
@@ -79,8 +79,8 @@ try {
   await page.waitForFunction(
     () => tc.terminal.lastFrame?.rows[0][0].text === '!'
   )
-  const pixels = () =>
-    page.evaluate(() => {
+  const pixels = (joined = true) =>
+    page.evaluate((joined) => {
       const t = tc.terminal
       const text = '!= -> === !== => <= >= <=>'
       const reference = document.createElement('canvas')
@@ -91,7 +91,7 @@ try {
       ctx.font = `${t.settings.fontWeight} ${t.settings.fontSize}px ${t.settings.fontFamily}`
       ctx.fillStyle = t.settings.theme.foreground
       ctx.textRendering = 'optimizeLegibility'
-      if (t.settings.ligatures) ctx.fillText(text, 0, t.baseline)
+      if (joined) ctx.fillText(text, 0, t.baseline)
       else
         [...text].forEach((char, i) => {
           ctx.save()
@@ -124,7 +124,7 @@ try {
         hash,
         text: t.lastFrame.rows[0].map((cell) => cell.text).join(''),
       }
-    })
+    }, joined)
   const enabled = await pixels()
   assert.equal(
     enabled.differing,
@@ -142,45 +142,22 @@ try {
     0,
     'The renderer must explicitly enable ligature shaping'
   )
-  await page.evaluate(() =>
-    Strada.web.receive({
-      id: 'settingChanged',
-      data: { property: 'ligatures', value: 'false' },
-    })
-  )
-  await page.waitForFunction(
-    () =>
-      tc.terminal.settings.ligatures === false && !tc.terminal.animationFrame
-  )
-  const disabled = await pixels()
-  assert.equal(
-    disabled.differing,
-    0,
-    'Disabling ligatures should render separate characters'
-  )
+  const unshaped = await pixels(false)
   assert.notEqual(
-    disabled.hash,
-    enabled.hash,
-    'Ligatures must visibly change the rendered pixels'
+    unshaped.differing,
+    0,
+    'Always-on rendering must differ from separate glyphs'
   )
-  assert.equal(
-    disabled.text,
-    enabled.text,
-    'Changing shaping must not change terminal contents'
-  )
-  await page.evaluate(() =>
-    Strada.web.receive({
-      id: 'settingChanged',
-      data: { property: 'ligatures', value: 'true' },
-    })
-  )
-  await page.waitForFunction(
-    () => tc.terminal.settings.ligatures === true && !tc.terminal.animationFrame
-  )
+  await page.evaluate(() => {
+    const next = { ...tc.profile }
+    delete next.ligatures
+    Strada.web.receive({ id: 'profileChanged', data: next })
+  })
+  await page.waitForFunction(() => !tc.terminal.animationFrame)
   assert.equal(
     (await pixels()).hash,
     enabled.hash,
-    'Re-enabling ligatures should restore shaped glyphs'
+    'Profiles without the retired preference must retain ligatures'
   )
   // Resizing resets the canvas state; the loaded font and shaping must survive.
   await page.setViewportSize({ width: 1000, height: 650 })

@@ -13,7 +13,6 @@ const booleanSettings = [
   'macOptionClickForcesSelection',
   'copyOnSelect',
   'hideContextMenu',
-  'ligatures',
 ]
 
 export default class extends BridgeComponent {
@@ -106,6 +105,8 @@ export default class extends BridgeComponent {
 
   settings() {
     const settings = { ...this.profile }
+    // Ignore this retired preference in profiles saved by older versions.
+    delete settings.ligatures
     for (const key of booleanSettings)
       settings[key] = settings[key] === true || settings[key] === 'true'
     settings.fontSize = Number(settings.fontSize)

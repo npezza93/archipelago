@@ -11,7 +11,6 @@ export default {
   padding: '5px 0 10px 15px',
   copyOnSelect: false,
   hideContextMenu: true,
-  ligatures: false,
   theme: {
     foreground: '#dddddd',
     background: '#202020',
