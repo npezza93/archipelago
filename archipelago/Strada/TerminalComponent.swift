@@ -16,9 +16,10 @@ final class TerminalComponent: BridgeComponent {
     case .connect:
       handleConnectEvent()
     case .data:
-      handleDataEvent()
+      handleDataEvent(message: message)
     case .disconnect:
       self.terminal?.kill()
+      self.terminal = nil
     case .write:
       handleWriteEvent(message: message)
     case .resize:
@@ -46,24 +47,26 @@ final class TerminalComponent: BridgeComponent {
     reply(with: message)
   }
 
-  private func handleDataEvent() {
+  private func handleDataEvent(message: Message) {
+    guard self.terminal == nil else { return }
+    let size: ResizeMessageData? = message.data()
     self.terminal = Pty(onDataReceived: dataReceived, onProcessTerminated: closeWindow)
-    terminal.spawn()
+    terminal.spawn(cols: size?.cols ?? 80, rows: size?.rows ?? 24)
   }
 
   private func handleWriteEvent(message: Message) {
     guard let data: MessageData = message.data() else { return }
-    if let data = data.data.data(using: .utf8) {
-      self.terminal.send(data: data)
-    } else {
-      print("bad conversion")
+    if let bytes = data.bytes {
+      self.terminal?.send(data: Data(bytes))
+    } else if let text = data.data, let bytes = text.data(using: .utf8) {
+      self.terminal?.send(data: bytes)
     }
   }
 
   private func handleResizeEvent(message: Message) {
     guard let data: ResizeMessageData = message.data() else { return }
 
-    self.terminal.setSize(cols: data.cols, rows: data.rows)
+    self.terminal?.setSize(cols: data.cols, rows: data.rows)
   }
 
   private func dataReceived(data: Data) {
@@ -138,7 +141,8 @@ extension TerminalComponent {
 
 extension TerminalComponent {
   fileprivate struct MessageData: Decodable {
-    let data: String
+    let data: String?
+    let bytes: [UInt8]?
   }
 
   fileprivate struct ResizeMessageData: Decodable {
