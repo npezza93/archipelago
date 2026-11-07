@@ -223,6 +223,101 @@ const profile = {
     })
     assert.equal(customCommand.prevented, true)
     assert.deepEqual(customCommand.data, ['\x01'])
+    const optionBindings = await page.evaluate(() => {
+      Strada.web.receive({
+        id: 'settingChanged',
+        data: {
+          property: 'keybindings',
+          value: {
+            ...testProfile,
+            macOptionIsMeta: false,
+            keybindings: [
+              ...testProfile.keybindings,
+              { keystroke: 'alt-a', command: 'OptionA' },
+              { keystroke: 'alt-e', command: 'OptionE' },
+              { keystroke: 'alt-left', command: 'LeftWord' },
+              { keystroke: 'alt-shift-right', command: 'SelectWord' },
+            ],
+          },
+        },
+      })
+      const before = messages.filter((m) => m.event === 'write').length
+      const prevented = [
+        { key: 'å', code: 'KeyA' },
+        { key: 'Dead', code: 'KeyE' },
+        { key: 'ArrowLeft', code: 'ArrowLeft' },
+        { key: 'ArrowRight', code: 'ArrowRight', shiftKey: true },
+      ].map((key) => {
+        const down = new KeyboardEvent('keydown', {
+          ...key,
+          altKey: true,
+          bubbles: true,
+          cancelable: true,
+        })
+        tc.terminal.textarea.dispatchEvent(down)
+        tc.terminal.textarea.dispatchEvent(
+          new KeyboardEvent('keyup', { ...key, bubbles: true })
+        )
+        return down.defaultPrevented
+      })
+      return {
+        prevented,
+        writes: messages
+          .filter((m) => m.event === 'write')
+          .slice(before)
+          .map((m) => m.data.data),
+      }
+    })
+    assert.deepEqual(optionBindings.prevented, [true, true, true, true])
+    assert.deepEqual(optionBindings.writes, [
+      'OptionA',
+      'OptionE',
+      'LeftWord',
+      'SelectWord',
+    ])
+    const changedProfile = await page.evaluate(() => {
+      Strada.web.receive({
+        id: 'profileChanged',
+        data: {
+          ...testProfile,
+          keybindings: [
+            ...testProfile.keybindings,
+            { keystroke: 'alt-a', command: 'ProfileA' },
+          ],
+        },
+      })
+      tc.terminal.textarea.dispatchEvent(
+        new KeyboardEvent('keydown', {
+          key: 'å',
+          code: 'KeyA',
+          altKey: true,
+          bubbles: true,
+          cancelable: true,
+        })
+      )
+      tc.terminal.textarea.dispatchEvent(
+        new KeyboardEvent('keyup', { key: 'a', code: 'KeyA', bubbles: true })
+      )
+      const before = messages.filter((m) => m.event === 'write').length
+      const unbound = new KeyboardEvent('keydown', {
+        key: 'Dead',
+        code: 'KeyE',
+        altKey: true,
+        bubbles: true,
+        cancelable: true,
+      })
+      tc.terminal.textarea.dispatchEvent(unbound)
+      return {
+        command: messages.filter((m) => m.event === 'write').at(-1).data.data,
+        prevented: unbound.defaultPrevented,
+        writes: messages.filter((m) => m.event === 'write').length - before,
+      }
+    })
+    assert.deepEqual(changedProfile, {
+      command: 'ProfileA',
+      prevented: false,
+      writes: 0,
+    })
     await page.keyboard.press('Control+k')
     assert.equal(
       await page.evaluate(

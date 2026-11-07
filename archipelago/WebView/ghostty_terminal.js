@@ -386,13 +386,16 @@ export default class GhosttyTerminal {
   bindInput() {
     const handledKeys = new Set()
     this.on(this.textarea, 'keydown', (event) => {
-      if (event.isComposing || event.key === 'Process' || event.key === 'Dead')
-        return
+      if (event.isComposing || event.key === 'Process') return
+      handledKeys.delete(event.code)
       if (this.callbacks.onKey(event)) {
         handledKeys.add(event.code)
         event.preventDefault()
         return
       }
+      // Option+E/N/etc. produce dead keys on macOS. Match configured bindings
+      // first; leave unbound dead keys to the browser's composition handling.
+      if (event.key === 'Dead') return
       // Unbound Command shortcuts belong to the native menu/responder chain.
       // Encoding them can turn Cmd+, into a literal comma, and preventing
       // their default action keeps WKWebView from opening Settings, etc.
