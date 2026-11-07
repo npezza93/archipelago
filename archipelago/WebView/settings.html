@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./settings-general.css">
     <link rel="stylesheet" href="./settings-header.css">
     <link rel="stylesheet" href="./settings-choices.css">
-    <script type="module" src="./settings.min.js"></script>
+    <script defer src="./settings.min.js"></script>
   </head>
   <body data-controller="tabs drag-header">
     <header data-action="mousedown->drag-header#dragging">
@@ -212,16 +212,6 @@
                 </svg>
               </span>
               <span>Option is Meta</span>
-            </label>
-
-            <label class="flex flex-row align-center gap-10 px-15" data-controller="checkbox">
-              <input type="checkbox" name="ligatures" data-checkbox-target="input" data-action="checkbox#change">
-              <span>
-                <svg width="10px" height="9px" viewBox="0 0 12 11">
-                  <polyline points="1 6.29411765 4.5 10 11 1"></polyline>
-                </svg>
-              </span>
-              <span>Ligatures</span>
             </label>
           </div>
         </div>

@@ -52,10 +52,46 @@ Bug reports and pull requests are welcome on [GitHub](https://github.com/npezza9
 
 ## Development
 
-Regardless of the platform you are working on, you will need to have Yarn installed. If you have never installed Yarn before, you can find out how [here](https://yarnpkg.com/en/docs/install).
+Install [Bun](https://bun.sh), then build the bundled web resources:
 
-Clone the repo then run `cd archipelago/WebView; bun install` in your console.
-Then open the app in Xcode.
+```sh
+cd archipelago/WebView
+bun install --frozen-lockfile
+bun run build
+bun test
+```
+
+Open the app in Xcode to build and run the macOS application. Generated
+`application.min.js` and `settings.min.js` are committed because Xcode bundles
+them directly.
+
+Archipelago uses the official **libghostty-vt 1.0.0 WebAssembly** release with a
+direct JavaScript binding to its stable C API. The WASM bytes are embedded in
+the application script so WKWebView can initialize from `file://` while offline.
+Artifact provenance, signature verification, and update instructions are in
+[WebView/vendor](archipelago/WebView/vendor/README.md).
+
+For browser integration checks against the bundled application and a simulated
+native bridge:
+
+```sh
+bunx playwright install chromium webkit
+bun run test:browser
+bun run test:browser webkit
+bun run test:ligatures
+bun run test:ligatures webkit
+```
+
+The browser checks cover WASM initialization, PTY subscription and initial size,
+keyboard input, live profile changes, resizing, and teardown. Run the native app
+on macOS to validate the Swift PTY and WKWebView integration as well.
+The ligature checks use a bundled JetBrains Mono font to reproduce native font
+delivery through the bridge and verify always-on ligatures, including profiles that saved the old setting as disabled.
+
+The canvas renderer supports text, ANSI colors, grapheme clusters, selection,
+scrollback, always-on font ligatures, and cursor styles. Ctrl/Cmd-click opens plain URLs
+and OSC 8 hyperlinks. Kitty image rendering is not implemented; image storage is
+disabled when the module supports it.
 
 ## Releasing
 

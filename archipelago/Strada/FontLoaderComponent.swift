@@ -28,22 +28,16 @@ final class FontLoaderComponent: BridgeComponent {
   }
 
   private func handleLoadEvent(_ message: Message) {
-    loadedFonts[message.id] = Set([App.preferenceFile.activeProfile().fontFamily])
+    loadedFonts[message.id] = []
 
     addProfileListener(id: message.id)
     self.settingChangeListener = App.preferenceFile.onChange(listener: onSettingChanged)
+    sendFont(id: message.id)
   }
 
   private func onSettingChanged(property: String, value: Any) {
-    if property == "fontFamily",
-      let font = App.fonts.first(where: { $0.name == value as! String })
-    {
-      guard let message = receivedMessage(for: "load") else { return }
-      if !loadedFonts[message.id]!.contains(font.name) {
-        reply(to: "load", with: font.as_json())
-        loadedFonts[message.id]!.insert(font.name)
-      }
-    }
+    guard property == "fontFamily", let message = receivedMessage(for: "load") else { return }
+    sendFont(id: message.id)
   }
 
   private func addProfileListener(id: String) {
@@ -58,22 +52,19 @@ final class FontLoaderComponent: BridgeComponent {
   }
 
   private func onProfileChanged(profile: String) {
-    if let wrappers = self.profileChangeListeners {
-      if let font = App.fonts.first(where: {
-        $0.name == App.preferenceFile.activeProfile().fontFamily
-      }) {
-        wrappers.forEach {
-          if !loadedFonts[$0.id]!.contains(font.name) {
-            let message = Message(
-              id: $0.id, component: type(of: self).name, event: "load",
-              metadata: Message.Metadata(url: ""),
-              jsonData: font.as_json())
-            reply(with: message)
-            loadedFonts[message.id]!.insert(font.name)
-          }
-        }
-      }
-    }
+    profileChangeListeners?.forEach { sendFont(id: $0.id) }
+  }
+
+  private func sendFont(id: String) {
+    guard let font = App.fonts.first(where: {
+      $0.name == App.preferenceFile.activeProfile().fontFamily
+    }), !loadedFonts[id, default: []].contains(font.name) else { return }
+
+    let message = Message(
+      id: id, component: type(of: self).name, event: "load",
+      metadata: Message.Metadata(url: ""), jsonData: font.as_json())
+    reply(with: message)
+    loadedFonts[id, default: []].insert(font.name)
   }
 }
 

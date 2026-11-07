@@ -24,7 +24,7 @@ class Pty {
     self.slave?.write(data)
   }
 
-  public func spawn() {
+  public func spawn(cols: UInt16 = 80, rows: UInt16 = 24) {
     let fileManager = FileManager.default
     let homeDirectory = fileManager.homeDirectoryForCurrentUser
     fileManager.changeCurrentDirectoryPath(homeDirectory.path)
@@ -32,7 +32,7 @@ class Pty {
     guard
       let (pid, slaveFD) = fork(
         andExec: App.activeProfile().shell, args: App.activeProfile().parsedShellArgs(),
-        env: getEnvironment())
+        env: getEnvironment(), cols: cols, rows: rows)
     else { fatalError("failed to create shell") }
 
     self.childMonitor = DispatchSource.makeProcessSource(
@@ -80,11 +80,13 @@ class Pty {
     return env.map { key, value in "\(key)=\(value)" }
   }
 
-  private func fork(andExec: String, args: [String], env: [String]) -> (
+  private func fork(andExec: String, args: [String], env: [String], cols: UInt16, rows: UInt16) -> (
     pid: pid_t, masterFd: Int32
   )? {
     var master: Int32 = 0
     var winsize = winsize()
+    winsize.ws_col = cols
+    winsize.ws_row = rows
 
     let pid = forkpty(&master, nil, nil, &winsize)
     if pid < 0 {

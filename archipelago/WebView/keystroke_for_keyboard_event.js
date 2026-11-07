@@ -1,4 +1,4 @@
-const currentKeymaps = require('./current_keymaps')
+import currentKeymaps from './current_keymaps'
 const MODIFIERS = new Set(['ctrl', 'alt', 'shift', 'cmd'])
 const KEY_NAMES_BY_KEYBOARD_EVENT_CODE = {
   Space: 'space',
