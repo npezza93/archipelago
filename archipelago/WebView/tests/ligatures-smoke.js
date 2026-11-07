@@ -185,7 +185,13 @@ try {
   // Resizing resets the canvas state; the loaded font and shaping must survive.
   await page.setViewportSize({ width: 1000, height: 650 })
   await page.waitForFunction(
-    () => tc.terminal.element.clientWidth > 950 && !tc.terminal.animationFrame
+    () =>
+      tc.terminal.element.clientWidth > 950 &&
+      tc.terminal.vt.cols ===
+        Math.floor(
+          (tc.terminal.element.clientWidth - 12) / tc.terminal.cellWidth
+        ) &&
+      !tc.terminal.animationFrame
   )
   assert.equal((await pixels()).differing, 0)
   await page.evaluate(() =>
@@ -219,6 +225,34 @@ try {
     loadedFaces,
     1,
     'Repeated native font messages must reuse the loaded face'
+  )
+  await page.evaluate(() => {
+    Strada.web.receive({
+      id: 'settingChanged',
+      data: { property: 'fontSize', value: '17' },
+    })
+    tc.terminal.write('\x1b[2J\x1b[H\x1b[7m' + ' '.repeat(20) + '\x1b[0m')
+  })
+  await page.waitForFunction(
+    () => tc.terminal.settings.fontSize === 17 && !tc.terminal.animationFrame
+  )
+  const highlight = await page.evaluate(() => {
+    const t = tc.terminal
+    const pixels = t.context.getImageData(
+      0,
+      Math.floor((t.cellHeight * t.dpr) / 2),
+      Math.floor(20 * t.cellWidth * t.dpr),
+      1
+    ).data
+    let minimumAlpha = 255
+    for (let i = 3; i < pixels.length; i += 4)
+      minimumAlpha = Math.min(minimumAlpha, pixels[i])
+    return { minimumAlpha, cellWidth: t.cellWidth }
+  })
+  assert.equal(
+    highlight.minimumAlpha,
+    255,
+    'Highlighted rows must not have translucent seams between cells'
   )
   assert.deepEqual(errors, [])
   console.log(

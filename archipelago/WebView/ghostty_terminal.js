@@ -250,18 +250,23 @@ export default class GhosttyTerminal {
     }
     rows.forEach((cells, y) => {
       // Paint all backgrounds first so wide glyphs and ligatures stay intact.
-      cells.forEach((cell, x) => {
-        const { bg } = appearance(cell)
-        if (bg) {
-          ctx.fillStyle = bg
-          ctx.fillRect(
-            x * this.cellWidth,
-            y * this.cellHeight,
-            this.cellWidth * (cell.wide === 1 ? 2 : 1),
-            this.cellHeight
-          )
-        }
-      })
+      // Separate fractional-width rectangles leave antialiased seams in
+      // inverse-video highlights and selection backgrounds. Merge matching
+      // colors and snap shared boundaries to physical pixels.
+      const snap = (value) => Math.round(value * this.dpr) / this.dpr
+      for (let x = 0; x < cells.length; x++) {
+        const { bg } = appearance(cells[x])
+        if (!bg) continue
+        let end = x + 1
+        while (end < cells.length && appearance(cells[end]).bg === bg) end++
+        const left = snap(x * this.cellWidth)
+        const right = snap(end * this.cellWidth)
+        const top = snap(y * this.cellHeight)
+        const bottom = snap((y + 1) * this.cellHeight)
+        ctx.fillStyle = bg
+        ctx.fillRect(left, top, right - left, bottom - top)
+        x = end - 1
+      }
       for (let x = 0; x < cells.length; x++) {
         const cell = cells[x]
         if (cell.wide >= 2 || !cell.text) continue
